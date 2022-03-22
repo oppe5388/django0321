@@ -1,0 +1,13 @@
+div.accordion-container > ul {
+    display: none;
+}
+
+div.open > ul {
+    display: block;
+}
+
+a.accordion-button {
+    color: #1967D2;
+    cursor: pointer;
+    font-size: 14px;
+}

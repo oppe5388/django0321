@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% load bootstrap4 %}
+{% block content %}
+    <h1 class="h3 text-gray-800 flex-grow-1">おしらせの{{ object|yesno:'更新,作成'}}</h1>
+
+    <form method="POST" enctype="multipart/form-data" action="{% url 'myinfo:add_post' %}" class="form-group">
+        {% csrf_token %}
+        {% bootstrap_form form layout='horizontal' %}
+
+        <h2>添付ファイル</h2>
+        {{ formset.management_form }}
+        {% for file_form in formset %}
+            {{ file_form.as_p }}
+            <hr>
+        {% endfor %}
+
+        <div class="btn-toolbar">
+            <div class="btn-group">
+                <a href='JavaScript:history.back()' class="mx-5 btn btn-secondary">
+                <i class="fas fa-chevron-left"></i> 戻る</a>
+            </div>
+
+            <div class="btn-group ml-auto" margin-left=auto;>
+            <button type="submit" class="submit btn btn-primary">
+            <i class="fas fa-check"></i> {{ object|yesno:'更新する（元に戻せません）,作成'}}</button>
+            </div>
+        </div>
+    </form>
+
+    <div>
+        
+    </div>
+{% endblock %}

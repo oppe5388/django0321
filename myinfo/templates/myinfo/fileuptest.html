@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+{% load bootstrap4 %}
+{% block content %}
+    <h1 class="h3 text-gray-800 flex-grow-1">ファイルUpテスト</h1>
+
+    <form method="POST" enctype="multipart/form-data" action="{% url 'myinfo:fileuptest' %}" class="form-group">
+        {% csrf_token %}
+
+        {{ form.title }}
+        {{ form.pdf_file }}
+
+        <div class="btn-group ml-auto" margin-left=auto;>
+            <button type="submit" class="submit btn btn-primary">
+            <i class="fas fa-check"></i> UP</button>
+        </div>
+    </form>
+
+    <div>
+        
+    </div>
+{% endblock %}
+

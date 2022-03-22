@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <h1 class="h3 text-gray-800 flex-grow-1">おしらせの削除</h1>
+    {% comment %} <p>'{{ object.title }}'を削除してよろしいですか？</p> {% endcomment %}
+
+    <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <div class="font-weight-bold text-primary lead">{{ information.title }}</div>
+        </div>
+        <div class="card-body">
+            <div class="small">
+            <i class="fas fa-paper-plane mr-1"></i>{{ information.to_flag }}
+            <i class="fas fa-user-edit ml-3 mr-1"></i>{{ information.user }}
+            {{ information.created_at }}
+            <i class="fas fa-folder-open mr-1"></i>{{ information.category }}
+            </div>            
+            
+            <hr>
+            <div>{{ information.body | safe }}</div>
+        </div>
+    </div>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        
+        <div class="btn-toolbar">
+            <div class="btn-group">
+                <a href='JavaScript:history.back()' class="btn btn-secondary">
+                <i class="fas fa-chevron-left"></i> 戻る</a>
+            </div>
+
+            <div class="btn-group ml-auto" margin-left=auto;>
+            <button type="submit" class="submit btn btn-danger">
+            <i class="fas fa-trash-alt"></i> 削除する（元に戻せません）</button>
+            </div>
+        </div>
+    </form>
+
+
+
+{% endblock %}

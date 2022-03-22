@@ -1,0 +1,108 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+{% if messages %}
+		{% for message in messages %}
+			<div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+		{% endfor %}
+{% endif %}
+
+<div class="small mb-2">
+{{ information.created_at }}　
+<i class="fas fa-folder-open mr-1"></i>{{ information.category }}　
+<i class="fas fa-user-edit mr-1"></i>{{ information.user.last_name }}
+</div>
+
+    <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <div class="font-weight-bold text-primary lead">{{ information.title }}</div>
+
+            {% if request.user.id == information.user.id %}
+                <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                        aria-labelledby="dropdownMenuLink">
+                        <div class="dropdown-header">action:</div>
+                        <a class="dropdown-item" href="{% url 'myinfo:update' information.pk %}">
+                        {% comment %} <a class="dropdown-item" href="{% url 'myinfo:update_post' information.pk %}"> {% endcomment %}
+                            <i class="fas fa-edit"></i>
+                            編集
+                        </a>
+                        <a class="dropdown-item" href="{% url 'myinfo:delete' information.pk %}">
+                            <i class="fas fa-trash-alt"></i>
+                            削除
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+
+        </div>
+        <div class="card-body">
+
+            {% comment %} ↓attachmentモデル逆参照 {% endcomment %}
+            {% for each_attachments in information.info_attach.all %}
+                {% if '.png' in each_attachments.file_path|stringformat:"s" or '.jpg' in each_attachments.file_path|stringformat:"s" %}
+                    <img src = /media/{{ each_attachments.file_path }} />
+                {% endif %}
+                <i class="fas fa-file"></i>
+                <a href="{{ each_attachments.file_path.url }}" target="_blank">
+                {% comment %} {{ each_attachments.file_path }} {% endcomment %}
+                {{ each_attachments.file_name }}
+                </a>
+                <hr>
+            {% endfor %}
+
+            <div>{{ information.body | safe }}</div>
+        </div>
+    </div>
+
+
+    <!-- その日記に紐づいたコメントを取り出す -->
+    <p class="m-0">コメント</p>
+    
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="small">
+                {% for infocomments in information.infocomments_set.all %}
+                    {{ infocomments.comment }}
+                    <i class="fas fa-user-edit ml-3 mr-1"></i>{{ infocomments.user }}
+                    {{ infocomments.created_at }}
+                    <hr>
+                {% empty %}
+                        <p>コメントはありません</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+    <!-- コメントフォーム -->
+    {% if user.is_authenticated %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            <textarea name="text" id="com"  class="form-control"></textarea>
+
+            <div class="d-flex my-3">
+                <div class="ml-auto">
+                <button type="submit" class="submit btn btn-primary">
+                    <i class="fas fa-check"></i> コメントする</button>
+
+                {% comment %} <a class="submit btn btn-primary" href="{% url 'myinfo:comment_post' information.pk %}" role="button">
+                    <i class="fas fa-check"></i> コメントする {% endcomment %}
+                </a>
+            </div>
+            </div>
+        </form>
+    {% else %}
+        <p>コメントを書く場合、ログインしてください</p>
+    {% endif %}
+
+    <hr>
+
+
+    <a href="{% url 'myinfo:index' %}" class="btn btn-secondary">一覧</a>
+{% endblock %}

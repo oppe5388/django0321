@@ -1,0 +1,25 @@
+{% extends '../layout.html' %}
+{% load bootstrap4 %}
+{% block content %}
+ <h1>Login</h1>
+ <section class="common-form">
+    {% if form.errors %}
+        <p class="error-msg">Your username and password didn't match.</p>
+    {% endif %}
+        
+    {% if next %}
+        <p class="error-msg">Please login with an account that has access.</p>
+    {% else %}
+        <p class="error-msg">Please login to see this page.</p>
+    {% endif %}
+
+    <form action='{% url "login" %}' method='post'>
+        {% csrf_token %}
+        <input type='hidden' name='next' value='{{ next }}'/>
+        {# {{ form.as_p }} #}
+        {% bootstrap_form form layout='horizontal' %}
+        <button type='submit' class="submit btn btn-primary">Login</button>
+    </form>
+ </section>
+
+{% endblock %}

@@ -1,0 +1,146 @@
+{% extends 'layout.html' %}
+{% load bootstrap4 %}
+{% block content %}
+
+<div class="container-fluid">
+    <!-- Content Row -->
+    <div class="d-flex flex-row">
+        <!-- First Column -->
+        <div class="col-lg-8">
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-file-invoice-dollar"></i> 到着〆と送金日</h6>
+                </div>
+            {% comment %} {% for money in moneytrans %}
+                <div id="copyTarget1">〜{{ money.deadline|date:"n/j(D)" }}到着　→　{{ money.transfer|date:"n/j(D)" }}送金</div>
+            {% endfor %} {% endcomment %}
+
+            {% comment %} コピーするために、こちらにも表示
+            →display noneだと機能しないので、仕方なくこちらのみ表示に {% endcomment %}
+<textarea id="copyTarget1" rows="4" cols="40" class="card-body border-0" readonly>{% for money in moneytrans %}
+〜{{ money.deadline|date:"n/j(D)" }}到着　→　{{ money.transfer|date:"n/j(D)" }}送金{% endfor %}</textarea>
+
+            </div>
+        </div>
+
+        <!-- Second Column -->
+        <div class="col-lg-2 d-flex align-items-end mb-4">
+            <button onclick="copyToClipboard1()" class="btn btn-outline-primary mr-1 p-1">
+                <i class="fas fa-copy"> Copy</i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Content Row -->
+    <div class="d-flex flex-row">
+        <!-- First Column -->
+        <div class="col-lg-8">
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-file-invoice-dollar"></i> 過去の送金日</h6>
+                </div>
+
+
+                {% if past_sched %}
+                    {% comment %} <div>登録日：{{ input_date }}</div>
+                    <div>↓</div>
+                    <div>承認日：{{ past_sched.fix }}</div>
+                    <div>↓</div>
+                    <div>送金日：{{ past_sched.transfer }}</div> {% endcomment %}
+
+                    {% comment %} コピーするために、こちらにも表示
+                    →display noneだと機能しないので、仕方なくこちらのみ表示に {% endcomment %}
+<textarea id="copyTarget2" rows="5" cols="40" class="card-body border-0" readonly>登録日：{{ input_date|date:"Y-m-d(D)" }}
+↓
+承認日：{{ past_sched.fix|date:"Y-m-d(D)" }}
+↓
+送金日：{{ past_sched.transfer|date:"Y-m-d(D)" }}</textarea>
+
+                    
+
+                {% else %}
+                    <div class="card-body">
+                        <label class="mb-2">解約登録日（または発行キャンセル登録日）を選択してください</label>
+                        <form action='{% url "mysched:mysched" %}' method='get'>
+                            {% comment %} <input type="date"> {% endcomment %}
+                            {{ moneyForm.input_date }}
+                            <input type="submit" class="btn btn-outline-primary mr-1 p-1" value="表示">
+                        </form>
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+
+        <!-- Second Column -->
+        {% if past_sched %}
+            <div class="col-lg-2 d-flex align-items-end mb-4">
+                <button onclick="copyToClipboard2()" class="btn btn-outline-primary mr-1 p-1">
+                    <i class="fas fa-copy"> Copy</i>
+                </button>
+            </div>
+        {% endif %}
+
+    </div>
+
+    {% if past_sched %}
+    <div class="col-lg-8">
+        <a href="{% url 'mysched:mysched' %}" class="btn btn-outline-secondary p-1 mr-2">
+        <i class="fas fa-arrow-circle-left"></i> やり直す</a>
+    </div>
+    {% endif %}
+
+</div>
+
+
+
+<script>
+    function copyToClipboard1() {
+        // コピー対象をJavaScript上で変数として定義する
+        var copyTarget1 = document.getElementById("copyTarget1");
+
+        // コピー対象のテキストを選択する
+        copyTarget1.select();
+
+        // 選択しているテキストをクリップボードにコピーする
+        document.execCommand("Copy");
+
+        // コピーをお知らせする
+        alert("コピーしました : " + copyTarget1.value);
+    }
+
+    function copyToClipboard2() {
+        // コピー対象をJavaScript上で変数として定義する
+        var copyTarget2 = document.getElementById("copyTarget2");
+
+        // コピー対象のテキストを選択する
+        copyTarget2.select();
+
+        // 選択しているテキストをクリップボードにコピーする
+        document.execCommand("Copy");
+
+        // コピーをお知らせする
+        alert("コピーしました : " + copyTarget2.value);
+    }
+
+    //↓textareaの行数を自動調整するのを、使えるように出来ていない
+
+    //textareaの要素を取得
+    let textarea = document.getElementById('copyTarget1');
+    //textareaのデフォルトの要素の高さを取得
+    let clientHeight = textarea.clientHeight;
+
+    //textareaのinputイベント
+    textarea.addEventListener('input', ()=>{
+        //textareaの要素の高さを設定（rows属性で行を指定するなら「px」ではなく「auto」で良いかも！）
+        textarea.style.height = clientHeight + 'px';
+        //textareaの入力内容の高さを取得
+        let scrollHeight = textarea.scrollHeight;
+        //textareaの高さに入力内容の高さを設定
+        textarea.style.height = scrollHeight + 'px';
+    });
+
+</script>
+{% endblock %}

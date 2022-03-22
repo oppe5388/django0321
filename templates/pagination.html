@@ -1,0 +1,55 @@
+<!--
+ is_paginatedは表示結果がページ分割されているかどうかを示すブール値
+ オブジェクトの個数が paginate_by と等しいか
+ それ以下の場合には False にセットされる
+-->
+{% if is_paginated %}
+  <!-- 左右の中央に配置 -->
+  <ul class="pagination" style="justify-content:center">
+    <!--
+     前ページへのリンク
+     Page.has_previous: 前のページがある場合に True を返します
+    -->
+    {% if page_obj.has_previous %}
+    <li class="page-item">
+      <a class="page-link"
+        href="?page={{ page_obj.previous_page_number }}"
+        aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    {% endif %}
+    <!--
+     ページ数の表示
+     paginator.page_range: [1, 2, 3, 4] のように、 1 から始まるページ番号
+    -->
+    {% for num in paginator.page_range %}
+      <!--
+       ページ番号が存在しない場合
+       Page.number: 1から数えたページ番号
+      -->
+      {% if page_obj.number == num %}
+        <li class="page-item active">
+          <span class="page-link">{{ num }}</span>
+        </li>
+        {% else %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+    <!--
+     次ページへのリンク
+     Page.next_page_number: 次のページがある場合にTrueを返す
+     -->
+    {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link"
+           href="?page={{ page_obj.next_page_number }}"
+           aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    {% endif %}
+  </ul>
+{% endif %}

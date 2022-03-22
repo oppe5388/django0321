@@ -1,0 +1,58 @@
+version: '3.7'
+services:
+  nginx:
+    build: ./nginx
+    container_name: nginx222
+    volumes:
+      # - static_volume:/code/static
+      - ./static:/code/static
+      - media_volume:/code/media
+    ports:
+      - 1317:80
+    depends_on:
+      - django
+    environment:
+      - TZ=Asia/Tokyo
+
+
+  django:
+    build: .
+    container_name: django222
+    volumes:
+      # - ./:/code:cached
+      - ./:/code:consistent
+      # - static_volume:/code/static
+      - ./static:/code/static
+      - media_volume:/code/media
+    expose:
+      - '8000'
+    # command: uwsgi --socket :8001 --module mysite.wsgi
+    # command: python3 manage.py runserver 0.0.0.0:8000
+    command: gunicorn mysite.wsgi:application --bind 0.0.0.0:8000
+    depends_on:
+      - db
+    env_file:
+      - ./.env.dev
+    environment:
+      - TZ=Asia/Tokyo
+
+  db:
+    # image: postgres:latest
+    image: postgres
+    container_name: db222
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    expose:
+      - '5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=db
+      - TZ=Asia/Tokyo
+    env_file:
+      - ./.env.dev
+
+volumes:
+    db-data:
+    # static_volume:
+    media_volume:

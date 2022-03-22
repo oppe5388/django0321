@@ -1,0 +1,8 @@
+*.log
+*.pyc
+__pycache
+.DS_Store
+/media/uploads/
+
+# .env.dev
+# .env.prod

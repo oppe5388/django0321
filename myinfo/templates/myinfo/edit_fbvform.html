@@ -1,0 +1,78 @@
+{% extends 'layout.html' %}
+{% load bootstrap4 %}
+{% block content %}
+{% load static %}
+
+    <h1 class="h3 text-gray-800 flex-grow-1">おしらせの編集</h1>
+
+    <form method="POST" enctype="multipart/form-data" action="{% url 'myinfo:update' information.id %}" class="form-group">
+        {% csrf_token %}
+
+        <div class="mb-3">{{ form.category }}</div>
+        <div class="mb-3">{{ form.title }}</div>
+        <div class="mb-3">{{ form.body }}</div>
+        {% if form.errors %}
+			<div class="alert alert-warning" role="alert">{{ form.errors }}</div>
+        {% endif %}
+
+        {% comment %} {{ form.pdf_file1 }} {% endcomment %}
+
+        {% comment %} {% for each_notifi in information.info_notifi.all %}
+            {{ each_notifi.user }}<br>
+        {% endfor %} {% endcomment %}
+
+        {% comment %} <div>通知先</div>
+        <div class="mb-3">{{ form.tags }}</div> {% endcomment %}
+        <div hidden>{{ form.tags }}</div> 
+
+        {% comment %} {% for each_notifi in notification %}
+            <div>{{ each_notifi.user }}</div>
+        {% endfor %} {% endcomment %}
+
+        <!-- 添付済みファイル -->
+        {% comment %} {% for each_attach in information.info_attach.all %} {% endcomment %}
+        {% for each_attach in attachment %}
+            <div class="py-2 d-flex flex-row align-items-center">
+                <a class="nav-link card border-left-info p-0" href="/media/{{ each_attach.file_path }}" role="button" target="_blank">
+                    <div class="card-body">
+                        <i class="fas fa-external-link-alt"></i>
+                        {% comment %} {{ each_attach.file_path }} {% endcomment %}
+                        {{ each_attach.file_name }}
+                        {% if '.png' in each_attach.file_path|stringformat:"s" or '.jpg' in each_attach.file_path|stringformat:"s" %}
+                            <img src="/media/{{ each_attach.file_path }}" height="50">
+                        {% endif %}
+                    </div>
+                </a>
+            <a class="nav-link btn btn-danger ml-3 p-2" href="{% url 'myinfo:attach_delete' each_attach.pk %}" role="button">
+                <i class="fas fa-trash-alt"></i>
+            </a>
+            </div>
+        {% endfor %}
+
+
+        <!-- 添付ファイル追加  -->
+        <div class="mb-3"><input type="file" name="pdf_file1"></div>
+        <div class="mb-3"><input type="file" name="pdf_file2"></div>
+        <div class="mb-3"><input type="file" name="pdf_file3"></div>
+
+        <hr>
+        
+        <div class="btn-toolbar">
+            <div class="btn-group">
+                <a href='JavaScript:history.back()' class="btn btn-secondary">
+                <i class="fas fa-chevron-left"></i> 戻る</a>
+            </div>
+
+            <div class="btn-group ml-auto" margin-left=auto;>
+            <button type="submit" class="submit btn btn-primary">
+            <i class="fas fa-check"></i> 更新する（元に戻せません）</button>
+            </div>
+        </div>
+
+    </form>
+
+    <div>
+        
+    </div>
+{% endblock %}
+

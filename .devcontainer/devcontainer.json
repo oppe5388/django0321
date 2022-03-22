@@ -1,0 +1,14 @@
+{
+	"name": "AnythingOK",
+	"dockerComposeFile": "../docker-compose.yml",
+	// "dockerComposeFile": "../docker-compose.prod.yml",
+	"forwardPorts": [8000],
+	"service": "django",
+	"workspaceFolder": "/code",
+	"overrideCommand": false,
+  	//指定しないとコンテナ再生成で拡張機能が消える
+	"extensions": [
+		"mhutchie.git-graph",
+		"batisteo.vscode-django"
+	]
+}
