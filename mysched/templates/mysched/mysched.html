@@ -6,11 +6,11 @@
     <!-- Content Row -->
     <div class="d-flex flex-row">
         <!-- First Column -->
-        <div class="col-lg-8">
+        <div class="col-md-12">
 
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-file-invoice-dollar"></i> 到着〆と送金日</h6>
+                    <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-file-invoice-dollar"></i> 到着〆と送金予定日</h6>
                 </div>
             {% comment %} {% for money in moneytrans %}
                 <div id="copyTarget1">〜{{ money.deadline|date:"n/j(D)" }}到着　→　{{ money.transfer|date:"n/j(D)" }}送金</div>
@@ -18,32 +18,31 @@
 
             {% comment %} コピーするために、こちらにも表示
             →display noneだと機能しないので、仕方なくこちらのみ表示に {% endcomment %}
-<textarea id="copyTarget1" rows="4" cols="40" class="card-body border-0" readonly>{% for money in moneytrans %}
+                <div class="card-body">
+<textarea id="copyTarget1" rows="4" cols="28" class="card-body border-0 p-0" readonly>{% for money in moneytrans %}
 〜{{ money.deadline|date:"n/j(D)" }}到着　→　{{ money.transfer|date:"n/j(D)" }}送金{% endfor %}</textarea>
 
+                    <button onclick="copyToClipboard1()" class="btn btn-outline-primary mr-1 p-1">
+                        <i class="fas fa-copy"> Copy</i>
+                    </button>
+                </div>
             </div>
-        </div>
-
-        <!-- Second Column -->
-        <div class="col-lg-2 d-flex align-items-end mb-4">
-            <button onclick="copyToClipboard1()" class="btn btn-outline-primary mr-1 p-1">
-                <i class="fas fa-copy"> Copy</i>
-            </button>
         </div>
     </div>
 
     <!-- Content Row -->
     <div class="d-flex flex-row">
         <!-- First Column -->
-        <div class="col-lg-8">
+        <div class="col-md-12">
 
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-file-invoice-dollar"></i> 過去の送金日</h6>
+                    <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-file-invoice-dollar"></i> 送金日検索</h6>
                 </div>
 
                 <div class="card-body">
-                    <label class="mb-2">解約登録日（または発行キャンセル登録日）を選択してください</label>
+                    <label class="text-primary">登録日（解約・発行キャンセル・相殺）を選択</label>
+                    <div class="mb-2 small text-secondary">{{ first_date|date:"Y-m-d(D)" }}〜検索OK</div>
                     <form action='{% url "mysched:mysched" %}' method='get'>
                         {% comment %} <input type="date"> {% endcomment %}
                         {{ moneyForm.input_date }}
@@ -60,25 +59,39 @@
 
                     {% comment %} コピーするために、こちらにも表示
                     →display noneだと機能しないので、仕方なくこちらのみ表示に {% endcomment %}
-<textarea id="copyTarget2" rows="5" cols="40" class="card-body border-0" readonly>登録日：{{ input_date|date:"Y-m-d(D)" }}
+                <div class="card-body pt-0">
+                    <div class="text-primary mb-2">解約・発行キャンセル</div>
+                        <div class="col-lg-8 flex-row mb-2">
+                    
+<textarea id="copyTarget2" rows="5" cols="28" class="card-body border-0 p-0" readonly>登録日：{{ input_date|date:"Y-m-d(D)" }}
 ↓
 承認日：{{ past_sched.fix|date:"Y-m-d(D)" }}
 ↓
 送金日：{{ past_sched.transfer|date:"Y-m-d(D)" }}</textarea>
 
-                {% endif %}
+                            <button onclick="copyToClipboard2()" class="btn btn-outline-primary p-1">
+                                <i class="fas fa-copy"> Copy</i>
+                            </button>
+                        </div>
+                    
+                    <div class="text-primary mb-2">相殺</div>
 
+                        <div class="col-lg-8 flex-row">
+
+
+<textarea id="copyTarget3" rows="3" cols="28" class="card-body border-0 p-0" readonly>登録日＝承認日：{{ input_date|date:"Y-m-d(D)" }}
+↓
+送金日：{{ setoff_sched.transfer|date:"Y-m-d(D)" }}</textarea>
+
+                            <button onclick="copyToClipboard3()" class="btn btn-outline-primary p-1">
+                                <i class="fas fa-copy"> Copy</i>
+                            </button>
+                        </div>
+
+                    </div>
+                {% endif %}
             </div>
         </div>
-
-        <!-- Second Column -->
-        {% if past_sched %}
-            <div class="col-lg-2 d-flex align-items-end mb-4">
-                <button onclick="copyToClipboard2()" class="btn btn-outline-primary mr-1 p-1">
-                    <i class="fas fa-copy"> Copy</i>
-                </button>
-            </div>
-        {% endif %}
 
     </div>
 
@@ -98,7 +111,7 @@
         document.execCommand("Copy");
 
         // コピーをお知らせする
-        alert("コピーしました : " + copyTarget1.value);
+        alert("コピーしました : \n" + copyTarget1.value);
     }
 
     function copyToClipboard2() {
@@ -112,8 +125,24 @@
         document.execCommand("Copy");
 
         // コピーをお知らせする
-        alert("コピーしました : " + copyTarget2.value);
+        alert("コピーしました : \n" + copyTarget2.value);
     }
+
+    function copyToClipboard3() {
+        // コピー対象をJavaScript上で変数として定義する
+        var copyTarget3 = document.getElementById("copyTarget3");
+
+        // コピー対象のテキストを選択する
+        copyTarget3.select();
+
+        // 選択しているテキストをクリップボードにコピーする
+        document.execCommand("Copy");
+
+        // コピーをお知らせする
+        alert("コピーしました : \n" + copyTarget3.value);
+    }
+
+
 
     //↓textareaの行数を自動調整するのを、使えるように出来ていない
 

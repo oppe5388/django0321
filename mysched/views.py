@@ -27,16 +27,25 @@ def mysched(request):
     moneytrans = MoneyTrans.objects.filter(deadline__gte=date.today()).order_by('deadline')
     context['moneytrans'] = moneytrans
 
+    #該当なし対処のため、1つ目の日付取得
+    first_set = MoneyTrans.objects.order_by('entry').first()
+    first_date = first_set.entry
+    context['first_date'] = first_date
+
     #登録日をカレンダーで選択→表示用
     if moneyForm.is_valid():
         input_date = moneyForm.cleaned_data['input_date']
-        # request.session['form_data'] = request.GET
-        
-        if input_date:
-            #入力日以降のクエリセットの1つ目
+
+        # if input_date:
+        if input_date >= first_date:
+            #entryが入力日以降のクエリセットの1つ目
             past_sched = MoneyTrans.objects.filter(entry__gte=input_date).order_by('entry').first()
             context['past_sched'] = past_sched
             context['input_date'] = input_date
+
+            #setoffが入力日以降のクエリセットの1つ目
+            setoff_sched = MoneyTrans.objects.filter(setoff__gte=input_date).order_by('entry').first()
+            context['setoff_sched'] = setoff_sched
 
     return render(request, "mysched/mysched.html", context)
 
