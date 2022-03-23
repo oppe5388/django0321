@@ -7,8 +7,20 @@ from datetime import date, datetime
 
 def mysched(request):
     moneyForm = MoneyForm(request.GET)
+
+    # #GETの日付を取得
+    # try:
+    #     input_date = request.GET["input_date"]
+
+    #     # フォームを規定値で初期化（取得した日付を表示用に入れる）
+    #     moneyForm = MoneyForm(initial={
+    #         'input_date': input_date,
+    #     })
+    # except:
+    #     pass
+
     context = {
-        'moneyForm': MoneyForm,
+        'moneyForm': moneyForm,
     }
 
     #到着期日が今日以降のデータすべて表示用

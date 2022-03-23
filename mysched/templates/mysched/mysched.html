@@ -42,6 +42,14 @@
                     <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-file-invoice-dollar"></i> 過去の送金日</h6>
                 </div>
 
+                <div class="card-body">
+                    <label class="mb-2">解約登録日（または発行キャンセル登録日）を選択してください</label>
+                    <form action='{% url "mysched:mysched" %}' method='get'>
+                        {% comment %} <input type="date"> {% endcomment %}
+                        {{ moneyForm.input_date }}
+                        <input type="submit" class="btn btn-outline-primary mr-1 p-1" value="表示">
+                    </form>
+                </div>
 
                 {% if past_sched %}
                     {% comment %} <div>登録日：{{ input_date }}</div>
@@ -58,17 +66,6 @@
 ↓
 送金日：{{ past_sched.transfer|date:"Y-m-d(D)" }}</textarea>
 
-                    
-
-                {% else %}
-                    <div class="card-body">
-                        <label class="mb-2">解約登録日（または発行キャンセル登録日）を選択してください</label>
-                        <form action='{% url "mysched:mysched" %}' method='get'>
-                            {% comment %} <input type="date"> {% endcomment %}
-                            {{ moneyForm.input_date }}
-                            <input type="submit" class="btn btn-outline-primary mr-1 p-1" value="表示">
-                        </form>
-                    </div>
                 {% endif %}
 
             </div>
@@ -84,13 +81,6 @@
         {% endif %}
 
     </div>
-
-    {% if past_sched %}
-    <div class="col-lg-8">
-        <a href="{% url 'mysched:mysched' %}" class="btn btn-outline-secondary p-1 mr-2">
-        <i class="fas fa-arrow-circle-left"></i> やり直す</a>
-    </div>
-    {% endif %}
 
 </div>
 

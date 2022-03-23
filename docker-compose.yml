@@ -19,8 +19,8 @@ services:
     build: .
     container_name: django222
     volumes:
-      # - ./:/code:cached
-      - ./:/code:consistent
+      - ./:/code:cached
+      # - ./:/code:consistent
       # - static_volume:/code/static
       - ./static:/code/static
       - media_volume:/code/media
