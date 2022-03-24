@@ -48,7 +48,8 @@
     </div>
     {% endif %}
     
-    {% if user.is_authenticated %}
+    {% comment %} {% if user.is_authenticated %} {% endcomment %}
+    {% if user.is_staff %}
         <div class="ml-auto">
             {% comment %} <a href="{% url 'myinfo:create' %}" class="btn btn-primary"><i class="fas fa-plus"></i> 汎用ビュー</a> {% endcomment %}
             {% comment %} <a href="{% url 'myinfo:add_form' %}" class="btn btn-primary">summernote</a> {% endcomment %}
