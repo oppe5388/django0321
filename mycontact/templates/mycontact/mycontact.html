@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+{% load bootstrap4 %}
+{% block content %}
+
+<table id="example" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Position</th>
+            <th>Office</th>
+            <th>Start date</th>
+            <th>Salary</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Position</th>
+            <th>Office</th>
+            <th>Start date</th>
+            <th>Salary</th>
+        </tr>
+    </tfoot>
+</table>
+
+
+
+<script>
+    $(document).ready(function() {
+        var oTable = $('.datatable').dataTable({
+            // ...
+            "processing": true,
+            "serverSide": true,
+            "ajax": "contacts" // 上で作成したエンドポイント
+        });
+        // ...
+    });
+</script>
+{% endblock %}

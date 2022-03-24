@@ -9,3 +9,4 @@ django-imagekit==4.1.0
 Pillow==8.4.0
 psycopg2-binary
 gunicorn
+django-datatables-view
