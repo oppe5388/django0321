@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script>
+    <script src="{% static "ddv_example_testmodel.js" %}"></script>
+    <script type="text/javascript">
+        var TESTMODEL_LIST_JSON_URL = '{% url "contact_list_json" %}';
+        // translations for datatables
+
+        {% comment %} var dt_language = {
+            "emptyTable":     "{% trans "No data available in table" %}",
+            "info":           "{% trans "Showing _START_ to _END_ of _TOTAL_ entries" %}",
+            "infoEmpty":      "{% trans "Showing 0 to 0 of 0 entries" %}",
+            "infoFiltered":   "{% trans "(filtered from _MAX_ total entries)" %}",
+            "infoPostFix":    "",
+            "thousands":      ",",
+            "lengthMenu":     "{% trans "Show _MENU_ entries" %}",
+            "loadingRecords": "{% trans "Loading..." %}",
+            "processing":     "{% trans "Processing..." %}",
+            "search":         "{% trans "Search:" %}",
+            "zeroRecords":    "{% trans "No matching records found" %}",
+            "paginate": {
+                "first":      "{% trans "First" %}",
+                "last":       "{% trans "Last" %}",
+                "next":       "{% trans "Next" %}",
+                "previous":   "{% trans "Previous" %}"
+            },
+            "aria": {
+                "sortAscending":  "{% trans ": activate to sort column ascending" %}",
+                "sortDescending": "{% trans ": activate to sort column descending" %}"
+            }
+        } {% endcomment %}
+    </script>
+{% endblock %}
+
+{% block content %}
+    <table class="datatable">
+        <thead>
+            <th>{{ contacts.name }}</th>
+            <th>{{ contacts.name }}</th>
+            <th>{{ contacts.name }}</th>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+{% endblock %}

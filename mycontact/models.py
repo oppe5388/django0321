@@ -10,7 +10,7 @@ class Contacts(models.Model):
     job = models.CharField(max_length=1000, verbose_name="対応内容詳細")
     tel = models.CharField(max_length=100, verbose_name="TEL")
     hours = models.CharField(max_length=100, verbose_name="営業時間")
-    searchwords = models.CharField(max_length=500, verbose_name="営業時間")
+    searchwords = models.CharField(max_length=500, verbose_name="検索ワード")
 
     def __str__(self):
         return self.name
