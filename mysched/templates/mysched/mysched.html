@@ -19,7 +19,7 @@
             {% comment %} コピーするために、こちらにも表示
             →display noneだと機能しないので、仕方なくこちらのみ表示に {% endcomment %}
                 <div class="card-body">
-<textarea id="copyTarget1" rows="4" class="card-body col-lg-7 border-0 p-0 ml-2" readonly>{% for money in moneytrans %}
+<textarea id="copyTarget1" rows="5" class="card-body col-lg-7 border-0 p-0 ml-2" readonly>{% for money in moneytrans %}
 〜{{ money.deadline|date:"n/j(D)" }}到着　→　{{ money.transfer|date:"n/j(D)" }}送金{% endfor %}</textarea>
 
                     <button onclick="copyToClipboard1()" class="btn btn-outline-primary mr-1 p-1">
