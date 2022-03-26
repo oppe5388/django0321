@@ -22,6 +22,7 @@ $(document).ready(function() {
         processing: true,
         serverSide: true,
         stateSave: true,
-        ajax: TESTMODEL_LIST_JSON_URL
+        // ajax: TESTMODEL_LIST_JSON_URL
+        ajax: "/myconatact/data",
     });
 });
