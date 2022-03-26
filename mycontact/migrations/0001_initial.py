@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('job', models.CharField(max_length=1000, verbose_name='対応内容詳細')),
                 ('tel', models.CharField(max_length=100, verbose_name='TEL')),
                 ('hours', models.CharField(max_length=100, verbose_name='営業時間')),
-                ('searchwords', models.CharField(max_length=500, verbose_name='営業時間')),
+                ('searchwords', models.CharField(max_length=500, verbose_name='検索ワード')),
             ],
             options={
                 'verbose_name_plural': '問い合わせ先',

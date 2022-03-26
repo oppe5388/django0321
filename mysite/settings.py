@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # 'bootstrap_toolkit',
     'mysched',
     'mycontact',
+    'sample',
 ]
 
 MIDDLEWARE = [

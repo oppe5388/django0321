@@ -17,6 +17,7 @@ urlpatterns = [
 
     path('mysched/', include('mysched.urls')),
     path('mycontact/', include('mycontact.urls')),
+    path('sample/', include('sample.urls')),
 ]
 
 
