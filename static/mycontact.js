@@ -11,7 +11,7 @@ $(document).ready(function () {
         // https://datatables.net/examples/server_side/simple.html
         processing: true,
         serverSide: true,
-        ajax: "/myconatact/data",
+        ajax: "./contacts",
 
         // dom: 検索フィールド等の各種ウィジェットの配置
         // https://datatables.net/reference/option/dom
@@ -23,7 +23,7 @@ $(document).ready(function () {
 
         // pageLength: pageLengthの初期値
         // https://datatables.net/reference/option/pageLength
-        pageLength: 10,
+        pageLength: 50,
 
         // language: 表示メッセージのローカライズ
         // https://datatables.net/reference/option/language
@@ -87,41 +87,41 @@ $(document).ready(function () {
             },
             {
                 // 2列目
-                title: "都道府県",
+                title: "相手",
             },
             {
                 // 3列目
-                title: "自治体名",
+                title: "窓口",
             },
             {
                 // 4列目
-                title: "ふりがな",
+                title: "概要",
             },
             {
                 // 5列目
-                title: "郵便番号",
+                title: "対応内容詳細",
             },
             {
                 // 6列目
-                title: "住所",
+                title: "TEL",
                 // googleマップへのリンク
                 // http://www.shurey.com/html/googlemaps.html
-                render: function (data, type, row) {
-                    return '<a target="_blank" href="https://maps.google.co.jp/maps?q=' + row[1] + data + '">' + data + '</a>';
-                },
+                // render: function (data, type, row) {
+                //     return '<a target="_blank" href="https://maps.google.co.jp/maps?q=' + row[1] + data + '">' + data + '</a>';
+                // },
             },
             {
                 // 7列目
-                title: "電話番号",
+                title: "営業時間",
                 // ハイパーリンク追加のサンプル
-                render: function (data) {
-                    let telno = data.replace(/\-/g, '');
-                    return '<a href="tel:' + telno + '">' + data + '</a>';
-                },
+                // render: function (data) {
+                //     let telno = data.replace(/\-/g, '');
+                //     return '<a href="tel:' + telno + '">' + data + '</a>';
+                // },
             },
             {
                 // 8列目
-                title: "コード",
+                title: "検索ワード",
             },
         ],
     });
@@ -164,42 +164,4 @@ $(document).ready(function () {
         $('#selected').html(selected.join(','))
     })
 
-    // 印刷・Excel・CSVボタン クリック
-    $('.report').on('click', function () {
-
-        if (selected.length == 0) {
-            alert('先にデータを選択してください。');
-            return false;
-        }
-
-        // 隠しフォームに選択したidを格納し、各機能のWebAPIに送信する
-        let form = $("#form")[0];
-        $("*[name=id_list]").val(selected.join('_'))
-        form.method = 'GET';
-
-        // GETクエリの長さ制限に注意。このコードは大量件数の選択に配慮していません。
-        // https://support.microsoft.com/ja-jp/help/208427/maximum-url-length-is-2-083-characters-in-internet-explorer
-
-        // ボタンのidで処理判定
-        switch (this.id) {
-            case
-            'print':
-                // 印刷のみ別ウィンドウを開く
-                window.open('', 'new_window');
-                form.action = 'print';
-                form.target = 'new_window';
-                form.submit();
-                break;
-            case
-            'excel':
-                form.action = 'excel';
-                form.submit();
-                break;
-            case
-            'csv':
-                form.action = 'csv';
-                form.submit();
-                break;
-        }
-    })
 });
