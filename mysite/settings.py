@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'mysched',
     'mycontact',
     'sample',
+    'myreport',
 ]
 
 MIDDLEWARE = [
