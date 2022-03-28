@@ -1,0 +1,72 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+{% if messages %}
+		{% for message in messages %}
+			<div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+		{% endfor %}
+{% endif %}
+
+<div class="small mb-2">
+{{ report.updated_at }}　
+<i class="fas fa-user-edit mr-1"></i>{{ report.user.last_name }}
+</div>
+
+    <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <div class="font-weight-bold text-primary lead">{{ report.day }}</div>
+
+        </div>
+        <div class="card-body">
+
+            <!-- ↓attachmentモデル逆参照 -->
+            {% comment %} {% for each_attachments in report..info_attach.all %}
+                {% if '.png' in each_attachments.file_path|stringformat:"s" or '.jpg' in each_attachments.file_path|stringformat:"s" %}
+                    <img src = /media/{{ each_attachments.file_path }} />
+                {% endif %}
+                <i class="fas fa-file"></i>
+                <a href="{{ each_attachments.file_path.url }}" target="_blank">
+                {{ each_attachments.file_name }}
+                </a>
+                <hr>
+            {% endfor %} {% endcomment %}
+
+            <div>{{ report.body1 | safe }}</div>
+        </div>
+    </div>
+
+
+    {% comment %} <!-- その日記に紐づいたコメントを取り出す -->
+    <p class="m-0">コメント</p>
+    
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="small">
+                {% for infocomments in report..infocomments_set.all %}
+                    {{ infocomments.comment }}
+                    <i class="fas fa-user-edit ml-3 mr-1"></i>{{ infocomments.user }}
+                    {{ infocomments.created_at }}
+                    <hr>
+                {% empty %}
+                        <p>コメントはありません</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div> {% endcomment %}
+
+    <hr>
+    
+    
+
+    <div class="btn-toolbar">
+        <div class="btn-group ">
+            <a href="{% url 'myreport:index' %}" class="btn btn-secondary">一覧</a>
+        </div>
+
+        <div class="btn-group ml-auto" margin-left=auto;>
+            <a href="{% url 'myreport:update' report.pk %}" class="btn btn-secondary"><i class="fas fa-edit"></i> 編集</a>
+        </div>
+    </div>
+
+{% endblock %}

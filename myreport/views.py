@@ -1,139 +1,89 @@
 from django.shortcuts import render, redirect, get_object_or_404, redirect
-from django.http import HttpResponse, Http404 # 追記
+from django.http import HttpResponse, Http404
 
-from django.views import generic
-from .models import DailyReport, ReadStates
-from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.exceptions import PermissionDenied
+from .models import DailyReport, CheckStates
+from .forms import DailyReportForm, DailyReportEditForm, CheckForm, SearchForm
 
-from .forms import InformationForm, FileFormset, InfoCommentsForm, InformationEditForm
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Q
 
 from django.contrib import messages
 from accounts.models import User
 
 from django.utils import timezone
 
+from django.contrib.auth.decorators import login_required
 
-#関数ビューで通知の中間テーブルCreateを作ってみる
+#Create
+@login_required
 def add_fbvform(request):
     if request.method == "POST":
-        form = InformationForm(request.POST, request.FILES)
+        form = DailyReportForm(request.POST)
 
         if form.is_valid(): 
             obj = form.save(commit=False)
             obj.user = request.user
-            obj.created_at = timezone.datetime.now()
+            # obj.created_at = timezone.datetime.now()
             obj.save()
 
-            if 'pdf_file1' in request.FILES:
-                instance = Attachments(file_path=request.FILES['pdf_file1'] , information=obj)
-                instance.save()
-
-            if 'pdf_file2' in request.FILES:
-                instance = Attachments(file_path=request.FILES['pdf_file2'] , information=obj)
-                instance.save()
-
-            return redirect('myinfo:index')
+            return redirect('myreport:index')
 
     else:
-        form = InformationForm
+        form = DailyReportForm
 
-    return render(request, 'myinfo/add_fbvform.html', {'form': form })
+    return render(request, 'myreport/add_fbvform.html', {'form': form })
 
 
-#Detail関数ビュー
+#Update
+@login_required
+def edit_fbvform(request, pk, *args, **kwargs):
+
+    report = get_object_or_404(DailyReport, pk=pk)
+    
+    if request.method == 'POST':
+        form = DailyReportEditForm(request.POST, instance=report)
+
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.user = request.user
+            obj.save()
+
+            # request.session['form_data'] = request.POST
+
+            messages.success(request, '更新しました！')
+            return redirect('myreport:detail', pk=pk)
+
+    else:
+
+        form = DailyReportEditForm(instance=report)
+
+        context ={
+            'form': form,
+            'report':report,
+        }
+
+    return render(request, 'myreport/edit_fbvform.html', context)
+
+
+#Detail
+@login_required
 def detail_fbvform(request, pk):
-    template_name = "myinfo/information_detail.html"
+    template_name = "myreport/report_detail.html"
 
     try:
-        information = Information.objects.get(pk=pk)
-    except Information.DoesNotExist:
-        raise Http404("Information does not exist")
+        report = DailyReport.objects.get(pk=pk)
+    except DailyReport.DoesNotExist:
+        raise Http404("DailyReport does not exist")
 
-    #コメント入力時
-    if request.method == 'POST':
-
-        # 投稿されたコメントをデータベースに保存
-        if request.POST["text"] != "":
-            InfoComments.objects.create(
-                comment=request.POST["text"],
-                information=information,
-                user = request.user
-                )
-        else:
-            messages.warning(request, 'コメント欄は未入力です')
-
-    
-    #通知表示用（有無だけ）
-    if request.user.id is not None:
-        notifi_exis =  Notifications.objects.filter(user=request.user).exists()
-
-        context = {
-            "information":information,
-            'notifi_exis':notifi_exis,
-        }
-
-        #既読にする（中間テーブルから削除する）
-        read_exis = ReadStates.objects.filter(user=request.user, information=pk).exists()
-        if read_exis == True:
-            ReadStates.objects.filter(user=request.user, information=pk).delete()
-
-    else:
-        context = {
-            "information":information,
-        }
-
-
+    context = {
+        "report":report,
+    }
 
     return render(request,template_name,context)
 
 
-#Update関数ビューつくる
-def edit_fbvform(request, pk, *args, **kwargs):
-
-    information = get_object_or_404(Information, pk=pk)
-
-    #外部キーなので_set.all()でなくrelated_nameで
-    read_states = information.info_read.all()
-    
-    if request.method == 'POST':
-        form = InformationEditForm(request.POST, request.FILES, instance=information)
-
-        if form.is_valid(): 
-            obj = form.save(commit=False)
-            obj.user = request.user
-            obj.save()
-
-            #添付ファイル3つ
-            if 'pdf_file1' in request.FILES:
-                instance = Attachments(file_path=request.FILES['pdf_file1'] , information=obj)
-                instance.save()
-            if 'pdf_file2' in request.FILES:
-                instance = Attachments(file_path=request.FILES['pdf_file2'] , information=obj)
-                instance.save()
-
-            request.session['form_data'] = request.POST
-
-            messages.success(request, '更新しました！')
-            return redirect('myinfo:detail', pk=pk)
-
-    else:
-
-        form = InformationEditForm(instance=information)
-
-        context ={
-            'form': form,
-            'information':information,
-        }
-
-    return render(request, 'myinfo/edit_fbvform.html', context)
-    
-
 #使用中のidndex
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .forms import SearchForm
-from django.db.models import Q
+@login_required
 def report_list(request):
 
     #検索
@@ -144,30 +94,27 @@ def report_list(request):
     }
 
     if searchForm.is_valid():
-        queryset = Information.objects.all()
+        queryset = DailyReport.objects.all()
         keyword = searchForm.cleaned_data['keyword']
         if keyword:
             keyword = keyword.split()
             for k in keyword:
                 queryset = queryset.filter(
-                        Q(title__icontains=k) | 
-                        Q(body__icontains=k)
+                        Q(body1__icontains=k) | 
+                        Q(body2__icontains=k) | 
+                        Q(body3__icontains=k) | 
+                        Q(body4__icontains=k) | 
+                        Q(body5__icontains=k) | 
+                        Q(body6__icontains=k)
                     ).order_by('-id')#
 
-            context['informations'] = queryset
+            context['dailyreports'] = queryset
     else:
         searchForm = SearchForm()
         reports = DailyReport.objects.all().order_by('-id')
         page_obj = paginate_queryset(request, reports, 10)#ページネーション用
         context['page_obj'] = page_obj
-        context['informations'] = page_obj.object_list
-
-
-    #通知（有無だけ）
-    if request.user.id is not None:
-        notifi_exis =  Notifications.objects.filter(user=request.user).exists()
-
-        context['notifi_exis'] = notifi_exis
+        context['dailyreports'] = page_obj.object_list
 
     return render(request, 'myreport/report_list.html', context)
 

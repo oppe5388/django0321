@@ -5,7 +5,7 @@ from import_export.resources import ModelResource
 from import_export.admin import ImportExportModelAdmin
 from import_export.formats import base_formats
     
-class DailyReport(ModelResource):
+class DailyReportResource(ModelResource):
     # field名とcsvの列名が異なる場合はここで指定する。
 
     class Meta:
@@ -14,8 +14,8 @@ class DailyReport(ModelResource):
         import_id_fields = ['day']
 
 #お知らせインポート、エクスポート
-class MoneyTransAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+class DailyReportAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('day', 'user')
-    resource_class = MoneyTransResource
+    resource_class = DailyReportResource
 
 admin.site.register(DailyReport, DailyReportAdmin)

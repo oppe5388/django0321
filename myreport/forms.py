@@ -6,10 +6,27 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from accounts.models import User
 
 #登録（変更も同じフォームを使う）
-class DailyReport(LoginRequiredMixin, forms.ModelForm):
+class DailyReportForm(LoginRequiredMixin, forms.ModelForm):
 
     class Meta:
-        model = Information
+        model = DailyReport
+        fields = '__all__'
+
+
+#変更・更新は別→使わない？
+class DailyReportEditForm(LoginRequiredMixin, forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field in self.fields.values():
+            if 'class' in field.widget.attrs:
+                field.widget.attrs['class'] += ' form-control'
+            else:
+                field.widget.attrs['class'] = 'form-control'
+
+    class Meta:
+        model = DailyReport
         fields = '__all__'
 
 
@@ -19,16 +36,8 @@ class SearchForm(forms.Form):
 
 
 #既読チェックボックス
-class ReadForm(forms.Form):
+class CheckForm(forms.Form):
     chk1 =forms.BooleanField()
     chk2 =forms.BooleanField()
     chk3 =forms.BooleanField()
     chk4 =forms.BooleanField()
-        
-
-#変更・更新は別→使わない？
-class DailyReportEditForm(LoginRequiredMixin, forms.ModelForm):
-
-    class Meta:
-        model = Information
-        fields = '__all__'
