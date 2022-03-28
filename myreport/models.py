@@ -7,13 +7,13 @@ from accounts.models import User
 class DailyReport(models.Model):
     day = models.DateField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    body1 = models.TextField(null=True)
-    body2 = models.TextField(null=True)
-    body3 = models.TextField(null=True)
-    body4 = models.TextField(null=True)
-    body5 = models.TextField(null=True)
-    body6 = models.TextField(null=True)
-    updated_at = models.DateTimeField(auto_now=True, null=True)
+    body1 = models.TextField(blank=True, null=True)
+    body2 = models.TextField(blank=True, null=True)
+    body3 = models.TextField(blank=True, null=True)
+    body4 = models.TextField(blank=True, null=True)
+    body5 = models.TextField(blank=True, null=True)
+    body6 = models.TextField(blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
     def __str__(self):
         return self.day.strftime("%Y/%m/%d")

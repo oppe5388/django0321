@@ -38,10 +38,10 @@ def add_fbvform(request):
 @login_required
 def edit_fbvform(request, pk, *args, **kwargs):
 
-    report = get_object_or_404(DailyReport, pk=pk)
-    
+    dailyreport = get_object_or_404(DailyReport, pk=pk)
+
     if request.method == 'POST':
-        form = DailyReportEditForm(request.POST, instance=report)
+        form = DailyReportEditForm(request.POST, instance=dailyreport)
 
         if form.is_valid():
             obj = form.save(commit=False)
@@ -55,15 +55,33 @@ def edit_fbvform(request, pk, *args, **kwargs):
 
     else:
 
-        form = DailyReportEditForm(instance=report)
+        form = DailyReportEditForm(instance=dailyreport)
 
         context ={
             'form': form,
-            'report':report,
+            'dailyreport':dailyreport,
         }
 
     return render(request, 'myreport/edit_fbvform.html', context)
 
+def book_edit(request, book_id=None):
+    """書籍の編集"""
+    # return HttpResponse('書籍の編集')
+    if book_id:   # book_id が指定されている (修正時)
+        book = get_object_or_404(Book, pk=book_id)
+    else:         # book_id が指定されていない (追加時)
+        book = Book()
+
+    if request.method == 'POST':
+        form = BookForm(request.POST, instance=book)  # POST された request データからフォームを作成
+        if form.is_valid():    # フォームのバリデーション
+            book = form.save(commit=False)
+            book.save()
+            return redirect('cms:book_list')
+    else:    # GET の時
+        form = BookForm(instance=book)  # book インスタンスからフォームを作成
+
+    return render(request, 'cms/book_edit.html', dict(form=form, book_id=book_id))
 
 #Detail
 @login_required
