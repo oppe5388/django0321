@@ -20,8 +20,14 @@ class DailyReportAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
 admin.site.register(DailyReport, DailyReportAdmin)
 
-#コメント欄
+#LDチェック
 class CheckStatesAdmin(admin.ModelAdmin):
     list_display = ('user', 'report')
 
 admin.site.register(CheckStates, CheckStatesAdmin)
+
+#既読
+class ReportReadAdmin(admin.ModelAdmin):
+    list_display = ('user', 'report')
+
+admin.site.register(ReportRead, ReportReadAdmin)

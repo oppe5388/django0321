@@ -37,15 +37,23 @@
 
                 <!-- タイトル -->
                 <h6 class="m-0 font-weight-bold text-primary mr-auto">
-                    {% comment %} <!-- 見る側が未読だったら -->
-                    {% for unread in unread_set %}
-                        {% if information == unread.information and request.user.id == unread.user.id %}
-                        <div class="badge badge-info">未読</div>
+                    <!-- 見る側が未読だったら -->
+                    {% for read in read_set %}
+                        {% if report == read.report and request.user.id == read.user.id %}
+                        <div class="badge badge-warning">未読</div>
                         {% endif %}
-                    {% endfor %} {% endcomment %}
+                    {% endfor %}
 
                     <a href="{% url 'myreport:detail' report.pk %}">{{ report.day }}</a>
                 </h6>
+
+
+                <!-- LD既読表示-->
+                {% for chk in check_set %}
+                    {% if report == chk.report %}
+                        <div class="badge badge-success"><i class="fas fa-check"></i> {{ chk.user.last_name }}</div>
+                    {% endif %}
+                {% endfor %}
 
             </div>
             <!-- Card Body -->

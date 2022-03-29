@@ -25,10 +25,21 @@ class DailyReport(models.Model):
 class CheckStates(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     report = models.ForeignKey(DailyReport, on_delete=models.CASCADE, related_name='report_check')
-    checked = models.BooleanField()
+    # checked = models.BooleanField()
 
     def __str__(self):
         return str(self.user)
 
     class Meta:
         verbose_name_plural = "LDチェック"
+
+
+class ReportRead(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    report = models.ForeignKey(DailyReport, on_delete=models.CASCADE, related_name='report_read')
+
+    def __str__(self):
+        return str(self.user)
+
+    class Meta:
+        verbose_name_plural = "既読"

@@ -5,7 +5,7 @@
 {% if request.user.id <= 4 %}
     <div class="d-flex my-3">
         <div class="ml-auto">
-            <a href="{% url 'myreport:add_check' %}" class="btn btn-success btn-icon-split btn-sm">
+            <a href="{% url 'myreport:add_check' report.pk %}" class="btn btn-success btn-icon-split btn-sm">
                 <span class="icon text-white-50">
                     <i class="fas fa-check"></i>
                 </span>
@@ -45,22 +45,22 @@
                 </a>
                 <hr>
             {% endfor %} {% endcomment %}
-            <label class="text-primary">Ⅰ.本日の研修内容</label>
+            <label class="text-primary small">Ⅰ.本日の研修内容</label>
             <div>{{ report.body1 | linebreaksbr}}</div>
             <hr>
-            <label class="text-primary">Ⅱ.前回までの研修内容から、本日プラスされた知識は何ですか？</label>
+            <label class="text-primary small">Ⅱ.前回までの研修内容から、本日プラスされた知識は何ですか？</label>
             <div>{{ report.body2| linebreaksbr}}</div>
             <hr>
-            <label class="text-primary">Ⅲ.本日の研修内容でわかりにくかったことはありますか？</label>
+            <label class="text-primary small">Ⅲ.本日の研修内容でわかりにくかったことはありますか？</label>
             <div>{{ report.body3 | linebreaksbr}}</div>
             <hr>
-            <label class="text-primary">Ⅳ.これまでの研修を振り返って、苦手な内容や、もう一度勉強したいこと等があれば記入してください</label>
+            <label class="text-primary small">Ⅳ.これまでの研修を振り返って、苦手な内容や、もう一度勉強したいこと等があれば記入してください</label>
             <div>{{ report.body4 | linebreaksbr}}</div>
             <hr>
-            <label class="text-primary">Ⅴ.前回、(Ⅵ)で設定した目標に対して、達成できたことを記入してください（どんなに小さなことでも構いません）</label>
+            <label class="text-primary small">Ⅴ.前回、(Ⅵ)で設定した目標に対して、達成できたことを記入してください（どんなに小さなことでも構いません）</label>
             <div>{{ report.body5 | linebreaksbr}}</div>
             <hr>
-            <label class="text-primary">Ⅵ.次回の研修に臨むにあたっての目標を設定してください</label>
+            <label class="text-primary small">Ⅵ.次回の研修に臨むにあたっての目標を設定してください</label>
             <div>{{ report.body6 | linebreaksbr}}</div>
 
             
