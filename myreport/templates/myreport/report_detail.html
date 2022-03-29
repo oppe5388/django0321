@@ -1,6 +1,20 @@
 {% extends 'layout.html' %}
 {% block content %}
 
+<!-- LDのみ表示 -->
+{% if request.user.id <= 4 %}
+    <div class="d-flex my-3">
+        <div class="ml-auto">
+            <a href="{% url 'myreport:add_check' %}" class="btn btn-success btn-icon-split btn-sm">
+                <span class="icon text-white-50">
+                    <i class="fas fa-check"></i>
+                </span>
+                <span class="text">{{ user.last_name }}さん、見たらクリック</span>
+            </a>
+        </div>
+    </div>
+{% endif %}
+
 {% if messages %}
 		{% for message in messages %}
 			<div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
@@ -74,8 +88,6 @@
 
     <hr>
     
-    
-
     <div class="btn-toolbar">
         <div class="btn-group ">
             <a href="{% url 'myreport:index' %}" class="btn btn-secondary">一覧</a>

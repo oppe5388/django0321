@@ -19,3 +19,9 @@ class DailyReportAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = DailyReportResource
 
 admin.site.register(DailyReport, DailyReportAdmin)
+
+#コメント欄
+class CheckStatesAdmin(admin.ModelAdmin):
+    list_display = ('user', 'report')
+
+admin.site.register(CheckStates, CheckStatesAdmin)

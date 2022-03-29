@@ -9,4 +9,6 @@ urlpatterns = [
     path('add_fbvform', views.add_fbvform, name='add_fbvform'),   # FBVでCreate
     path('<int:pk>/', views.detail_fbvform, name='detail'),# FBVでDetail
     path('<int:pk>/update/', views.edit_fbvform, name='update'),# FBVでUpdate
+    
+    path('add_check', views.add_check, name='add_check'),#LDチェック関数呼び出し
 ]

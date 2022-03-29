@@ -128,3 +128,13 @@ def paginate_queryset(request, queryset, count):
     except EmptyPage:
         page_obj = paginator.page(paginator.num_pages)
     return page_obj
+
+
+#LDチェックのCreate
+@login_required
+def add_check(request, pk, *args, **kwargs):
+    user_instance = request.user
+    dailyreport = get_object_or_404(DailyReport, pk=pk)
+    CheckStates.objects.create(user=user_instance, report=dailyreport)
+
+    return redirect(request.META['HTTP_REFERER'])#元のページに戻る
