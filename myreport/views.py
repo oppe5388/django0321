@@ -23,7 +23,6 @@ def add_fbvform(request):
         if form.is_valid(): 
             obj = form.save(commit=False)
             obj.user = request.user
-            # obj.created_at = timezone.datetime.now()
             obj.save()
 
             return redirect('myreport:index')
@@ -47,8 +46,6 @@ def edit_fbvform(request, pk, *args, **kwargs):
             obj = form.save(commit=False)
             obj.user = request.user
             obj.save()
-
-            # request.session['form_data'] = request.POST
 
             messages.success(request, '更新しました！')
             return redirect('myreport:detail', pk=pk)

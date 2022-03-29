@@ -1,17 +1,25 @@
 {% extends 'layout.html' %}
 {% load bootstrap4 %}
 {% block content %}
-    <h1 class="h3 text-gray-800 flex-grow-1">日報の{{ object|yesno:'更新,入力'}}</h1>
+    <h1 class="h3 text-gray-800 flex-grow-1">日報の{{ dailyreport|yesno:'編集,入力'}}</h1>
 
-    {% if object %}
+    {% if dailyreport %}
         <form method="POST" enctype="multipart/form-data" action="{% url 'myreport:update' dailyreport.id %}" class="form-group">
     {% else %}
         <form method="POST" enctype="multipart/form-data" action="{% url 'myreport:add_fbvform' %}" class="form-group">
     {% endif %}
     
         {% csrf_token %}
+
+        {% for field in form %}
+            {{ field.label }}
+            {{ field }}
+            {% if field.errors %}
+                <div class="alert alert-warning" role="alert">{{ field.errors }}</div>
+            {% endif %}
+        {% endfor %}
         
-        {{ form.day.label }}
+        {% comment %} {{ form.day.label }}
         {{ form.day }}
         {{ form.user }}
         {{ form.body1.label }}
@@ -29,24 +37,8 @@
         
         {% if form.errors %}
             <div class="alert alert-warning" role="alert">{{ form.errors }}</div>
-        {% endif %}
-        
-
-        {% comment %} {% for field in form %}
-        <div class="field">
-            {{ field.label_tag }}
-            {{ field.text }}
-            {{ field }}
-            {% if field.help_text %}
-                <span class="helptext">{{ field.help_text }}</span>
-            {% endif %}
-            {% if field.errors %}
-                <div class="alert alert-warning" role="alert">{{ field.errors }}</div>
-            {% endif %}
-
-        </div>
-        {% endfor %} {% endcomment %}
-    
+        {% endif %} {% endcomment %}
+            
         <hr>
 
         <div class="btn-toolbar">
@@ -57,7 +49,7 @@
 
             <div class="btn-group ml-auto" margin-left=auto;>
             <button type="submit" class="submit btn btn-primary">
-            <i class="fas fa-check"></i> {{ object|yesno:'更新する（元に戻せません）,確定'}}</button>
+            <i class="fas fa-check"></i> {{ dailyreport|yesno:'更新する（元に戻せません）,確定'}}</button>
             </div>
         </div>
 
