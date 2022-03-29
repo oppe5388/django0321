@@ -77,6 +77,19 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>管理サイト</span></a>
             </li>
+
+            <!-- LDか新人のみ表示 -->
+            {% if request.user.id == 13 or request.user.id <= 4 %}
+                <!-- Divider -->
+                <hr class="sidebar-divider d-none d-md-block">
+                <li class="nav-item">
+                    <a class="nav-link" href='{% url 'myreport:index' %}'>
+                        <i class="fas fa-book"></i>
+                        <span>研修日報</span></a>
+                </li>
+            {% endif %}
+
+
             {% comment %} <!-- Divider -->
             <hr class="sidebar-divider">
 

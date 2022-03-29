@@ -3,18 +3,29 @@
 {% block content %}
     <h1 class="h3 text-gray-800 flex-grow-1">日報の{{ object|yesno:'更新,入力'}}</h1>
 
+    {% if object %}
+        <form method="POST" enctype="multipart/form-data" action="{% url 'myreport:update' dailyreport.id %}" class="form-group">
+    {% else %}
+        <form method="POST" enctype="multipart/form-data" action="{% url 'myreport:add_fbvform' %}" class="form-group">
+    {% endif %}
     
-    <form method="POST" enctype="multipart/form-data" action="{% url 'myreport:add_fbvform' %}" class="form-group">
         {% csrf_token %}
-
-        {{ form.day }}
         
+        {{ form.day.label }}
+        {{ form.day }}
+        {{ form.user }}
+        {{ form.body1.label }}
         {{ form.body1 }}
-        <div class="mb-3">{{ form.body2 }}</div>
-        <div class="mb-3">{{ form.body3 }}</div>
-        <div class="mb-3">{{ form.body4 }}</div>
-        <div class="mb-3">{{ form.body5 }}</div>
-        <div class="mb-3">{{ form.body6 }}</div>
+        {{ form.body2.label }}
+        {{ form.body2 }}
+        {{ form.body3.label }}
+        {{ form.body3 }}
+        {{ form.body4.label }}
+        {{ form.body4 }}
+        {{ form.body5.label }}
+        {{ form.body5 }}
+        {{ form.body6.label }}
+        {{ form.body6 }}
         
         {% if form.errors %}
             <div class="alert alert-warning" role="alert">{{ form.errors }}</div>

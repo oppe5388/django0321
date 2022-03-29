@@ -33,7 +33,7 @@
         <!-- Dropdown Card Example -->
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
 
                 <!-- タイトル -->
                 <h6 class="m-0 font-weight-bold text-primary mr-auto">
@@ -49,12 +49,8 @@
 
             </div>
             <!-- Card Body -->
-            <div class="card-body">
-                <div class="small">{{ information.updated_at|date:"Y-m-j" }}　
-                    <i class="fas fa-user-edit mr-1"></i>{{ report.user.last_name }}</div>
-                <div>
-                {{ report.body1 | striptags | truncatechars_html:50}}
-                </div>
+            <div class="card-body py-2">
+                {{ report.body1| linebreaksbr| truncatechars_html:50}}
             </div>
         </div>
 

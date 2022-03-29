@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404, redirect
 from django.http import HttpResponse, Http404
 
 from .models import DailyReport, CheckStates
-from .forms import DailyReportForm, DailyReportEditForm, CheckForm, SearchForm
+from .forms import DailyReportForm, CheckForm, SearchForm #,DailyReportEditForm, 
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
@@ -41,7 +41,7 @@ def edit_fbvform(request, pk, *args, **kwargs):
     dailyreport = get_object_or_404(DailyReport, pk=pk)
 
     if request.method == 'POST':
-        form = DailyReportEditForm(request.POST, instance=dailyreport)
+        form = DailyReportForm(request.POST, instance=dailyreport)
 
         if form.is_valid():
             obj = form.save(commit=False)
@@ -55,14 +55,15 @@ def edit_fbvform(request, pk, *args, **kwargs):
 
     else:
 
-        form = DailyReportEditForm(instance=dailyreport)
+        form = DailyReportForm(instance=dailyreport)
 
         context ={
             'form': form,
             'dailyreport':dailyreport,
         }
 
-    return render(request, 'myreport/edit_fbvform.html', context)
+    # return render(request, 'myreport/edit_fbvform.html', context)
+    return render(request, 'myreport/add_fbvform.html', context)
 
 
 #Detail
