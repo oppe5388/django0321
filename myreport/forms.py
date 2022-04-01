@@ -58,11 +58,3 @@ class DailyReportForm(LoginRequiredMixin, forms.ModelForm):
 #検索
 class SearchForm(forms.Form):
     keyword = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class':'form-control'}))
-
-
-#既読チェックボックス
-class CheckForm(forms.Form):
-    chk1 =forms.BooleanField()
-    chk2 =forms.BooleanField()
-    chk3 =forms.BooleanField()
-    chk4 =forms.BooleanField()

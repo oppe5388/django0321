@@ -6,7 +6,7 @@ from datetime import date, datetime
 
 #カレンダー選択→表示用
 class MoneyForm(LoginRequiredMixin, forms.Form):
-    input_date = forms.DateField(widget=forms.DateInput(attrs={'type':'date'}))
+    input_date = forms.DateField(widget=forms.DateInput(attrs={'type':'date', 'class':'form-control form-control-user', 'TextMode':'Search'}))
 
     # def __init__(self, *args, **kwargs):
     #         super().__init__(*args, **kwargs)

@@ -42,11 +42,15 @@
 
                 <div class="card-body">
                     <label class="text-primary">登録日（解約・発行キャンセル・相殺）を選択</label>
-                    <div class="mb-2 ml-2 small text-secondary">{{ first_date|date:"Y-m-d(D)" }}〜検索OK</div>
-                    <form action='{% url "mysched:mysched" %}' method='get'>
-                        {% comment %} <input type="date"> {% endcomment %}
-                        <div class="mb-2 ml-2">{{ moneyForm.input_date }}
-                        <input type="submit" class="btn btn-outline-primary mr-1 p-1" value="表示"></div>
+                    <div class="mb-2 ml-2 small text-secondary">{{ first_date|date:"Y-m-d(D)" }}〜{{ last_date|date:"Y-m-d(D)" }}検索OK</div>
+
+                    <form class="d-none d-sm-inline-block form-inline mr-auto" action='{% url "mysched:mysched" %}' method='get'>
+                        <div class="input-group mb-2 ml-2">
+                            {{ moneyForm.input_date }}
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit"><i class="fas fa-search fa-sm"></i></button>
+                            </div>
+                        </div>
                     </form>
                 </div>
 

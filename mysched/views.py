@@ -32,6 +32,11 @@ def mysched(request):
     first_date = first_set.entry
     context['first_date'] = first_date
 
+    #検索最終日のために、最後の日付取得
+    last_set = MoneyTrans.objects.order_by('entry').last()
+    last_date = last_set.entry
+    context['last_date'] = last_date
+
     #登録日をカレンダーで選択→表示用
     if moneyForm.is_valid():
         input_date = moneyForm.cleaned_data['input_date']
