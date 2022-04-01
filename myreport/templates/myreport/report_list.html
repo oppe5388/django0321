@@ -11,7 +11,7 @@
     <div class="d-flex my-3">
     {% if searchForm %}
     <div class="my-box mr-auto">
-        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100" action='{% url "myreport:index" %}' method='get'>
+        <form class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0" action='{% url "myreport:index" %}' method='get'>
             <div class="input-group">
                 {{ searchForm.keyword }}
                 <div class="input-group-append">
@@ -21,7 +21,7 @@
                 </div>
             </div>
         </form>
-        <a href="{% url 'myreport:index' %}" class="btn btn-secondary ml-3 py-1"><i class="fas fa-backspace"></i></a>
+        <a href="{% url 'myreport:index' %}" class="btn btn-secondary ml-3 py-1 px-2"><i class="fas fa-backspace"></i></a>
     </div>
     {% endif %}
     

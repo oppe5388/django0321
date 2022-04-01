@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404, redirect
 from django.http import HttpResponse, Http404
 
 from .models import DailyReport, CheckStates, ReportRead
-from .forms import DailyReportForm, CheckForm, SearchForm #,DailyReportEditForm, 
+from .forms import DailyReportForm, SearchForm #,DailyReportEditForm, 
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
