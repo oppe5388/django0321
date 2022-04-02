@@ -170,9 +170,9 @@
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
-                        <li class="text-gray-600 d-flex align-items-center">
+                        <li class="text-gray-600 d-flex align-items-center small">
                             {% if user.is_authenticated %}
-                                    <div>こんにちは、{{ user.last_name }}さん</div>
+                                    <div class="d-none d-sm-inline-block">こんにちは、{{ user.last_name }}さん</div>
                                     <a href='{% url "logout" %}' class="nav-link">
                                         <i class="fas fa-sign-out-alt"></i>
                                     </a>

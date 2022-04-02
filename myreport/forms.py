@@ -57,4 +57,4 @@ class DailyReportForm(LoginRequiredMixin, forms.ModelForm):
 
 #検索
 class SearchForm(forms.Form):
-    keyword = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class':'form-control'}))
+    keyword = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder':'Search for...', 'class':'form-control'}))

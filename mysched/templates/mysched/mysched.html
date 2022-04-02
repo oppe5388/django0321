@@ -48,7 +48,7 @@
                     <label class="text-primary">登録日（解約・発行キャンセル・相殺）を選択</label>
                     <div class="mb-2 ml-2 small text-secondary">{{ first_date|date:"Y-m-d(D)" }}〜{{ last_date|date:"Y-m-d(D)" }}検索OK</div>
 
-                    <form class="d-none d-sm-inline-block form-inline mr-auto" action='{% url "mysched:mysched" %}' method='get'>
+                    <form class="d-sm-inline-block form-inline mr-auto" action='{% url "mysched:mysched" %}' method='get'>
                         <div class="input-group mb-2 ml-2">
                             {{ moneyForm.input_date }}
                             <div class="input-group-append">
@@ -96,7 +96,9 @@
 </div>
 
 
+{% endblock %}
 
+{% block extra_foot %}
 <script>
     function copyToClipboard1() {
         // コピー対象をJavaScript上で変数として定義する
@@ -160,4 +162,6 @@
     });
 
 </script>
+
+
 {% endblock %}
