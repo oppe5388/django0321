@@ -1,7 +1,12 @@
 {% extends 'layout.html' %}
-{% load bootstrap4 %}
+{% block title %}おしらせ{% endblock %}
+{% block topbar %}
+<a class="nav-link" href='{% url "myinfo:index" %}'>
+    <i class="fas fa-broadcast-tower"></i> おしらせ</a>
+{% endblock %}
+
 {% block content %}
-    <h1 class="h3 text-gray-800 flex-grow-1">おしらせの{{ object|yesno:'更新,作成'}}</h1>
+    <!-- <h1 class="h3 text-gray-800 flex-grow-1">おしらせの{{ object|yesno:'更新,作成'}}</h1> -->
 
     <form method="POST" enctype="multipart/form-data" action="{% url 'myinfo:add_fbvform' %}" class="form-group">
         {% csrf_token %}

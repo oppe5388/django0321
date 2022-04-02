@@ -14,9 +14,10 @@ class MoneyTransResource(ModelResource):
         # import_order = ('id', 'transfer', 'deadline', 'entry', 'fix', 'setoff')
         import_id_fields = ['transfer']
 
-#お知らせインポート、エクスポート
+#送金スケジュールインポート、エクスポート
 class MoneyTransAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('id', 'transfer', 'deadline', 'entry', 'fix', 'setoff')
     resource_class = MoneyTransResource
+    formats = [base_formats.XLSX]
 
 admin.site.register(MoneyTrans, MoneyTransAdmin)

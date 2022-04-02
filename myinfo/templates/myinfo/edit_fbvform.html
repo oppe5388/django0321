@@ -1,9 +1,13 @@
 {% extends 'layout.html' %}
-{% load bootstrap4 %}
-{% block content %}
-{% load static %}
+{% block title %}おしらせ{% endblock %}
+{% block topbar %}
+<a class="nav-link" href='{% url "myinfo:index" %}'>
+    <i class="fas fa-broadcast-tower"></i> おしらせ</a>
+{% endblock %}
 
-    <h1 class="h3 text-gray-800 flex-grow-1">おしらせの編集</h1>
+{% block content %}
+
+    <!-- <h1 class="h3 text-gray-800 flex-grow-1">おしらせの編集</h1> -->
 
     <form method="POST" enctype="multipart/form-data" action="{% url 'myinfo:update' information.id %}" class="form-group">
         {% csrf_token %}

@@ -1,6 +1,12 @@
 {% extends 'layout.html' %}
+{% block title %}おしらせ{% endblock %}
+{% block topbar %}
+<a class="nav-link" href='{% url "myinfo:index" %}'>
+    <i class="fas fa-broadcast-tower"></i> おしらせ</a>
+{% endblock %}
+
 {% block content %}
-    <h1 class="h3 text-gray-800 flex-grow-1">おしらせの削除</h1>
+    <!-- <h1 class="h3 text-gray-800 flex-grow-1">おしらせの削除</h1> -->
     {% comment %} <p>'{{ object.title }}'を削除してよろしいですか？</p> {% endcomment %}
 
     <div class="card shadow mb-4">

@@ -1,11 +1,13 @@
 {% extends 'layout.html' %}
-{% load bootstrap4 %}
+{% block topbar %}
+<a class="nav-link" href='/mycontact/'>
+    <i class="fas fa-phone"></i> 窓口一覧</a>
+{% endblock %}
 
 {% load static %}
 
 {% block extra_head %}
     <!-- Bootstrap CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css" rel="stylesheet">
     <style>

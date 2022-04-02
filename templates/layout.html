@@ -1,4 +1,5 @@
 {% load static %}
+{% load bootstrap4 %}
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -11,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>VCC</title>
+    <title>VCC | {% block title %}{% endblock %}</title>
 
     <!-- Custom fonts for this template-->
     <!-- <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> -->
@@ -54,40 +55,46 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link" href='{% url "myinfo:index" %}'>
-                    <i class="fas fa-broadcast-tower"></i>
-                    <span>おしらせ</span></a>
-            </li>
-            
-            <li class="nav-item">
-                <a class="nav-link" href='{% url "mysched:mysched" %}'>
-                    <i class="fas fa-calendar-alt"></i>
-                    <span>スケジュール</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href='/mycontact/'>
-                    <i class="fas fa-phone"></i>
-                    <span>窓口一覧</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href='{% url 'admin:index' %}'>
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>管理サイト</span></a>
-            </li>
-
-            <!-- LDか新人のみ表示 -->
-            {% if request.user.id == 13 or request.user.id <= 4 %}
-                <!-- Divider -->
-                <hr class="sidebar-divider d-none d-md-block">
-                <li class="nav-item">
-                    <a class="nav-link" href='{% url 'myreport:index' %}'>
-                        <i class="fas fa-book"></i>
-                        <span>研修日報</span></a>
+            {% comment %} {% with request.resolver_match.url_name as url_name %} {% endcomment %}
+            {% with request.resolver_match.app_name as app_name %}
+                <li class="nav-item {% if app_name == 'myinfo' %}active{% endif %}">
+                    <a class="nav-link" href='{% url "myinfo:index" %}'>
+                        <i class="fas fa-broadcast-tower"></i>
+                        <span>おしらせ</span></a>
                 </li>
-            {% endif %}
+                
+                <li class="nav-item {% if app_name == 'mysched' %}active{% endif %}">
+                    <a class="nav-link" href='{% url "mysched:mysched" %}'>
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>スケジュール</span></a>
+                </li>
+    
+                <li class="nav-item {% if app_name == 'mycontact' %}active{% endif %}">
+                    <a class="nav-link" href='/mycontact/'>
+                        <i class="fas fa-phone"></i>
+                        <span>窓口一覧</span></a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link" href='{% url 'admin:index' %}'>
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>管理サイト</span></a>
+                </li>
+
+                <!-- LDか新人のみ表示 -->
+                {% if request.user.id == 13 or request.user.id <= 4 %}
+                    <!-- Divider -->
+                    <hr class="sidebar-divider d-none d-md-block">
+                    <li class="nav-item {% if app_name == 'myreport' %}active{% endif %}">
+                        <a class="nav-link" href='{% url 'myreport:index' %}'>
+                            <i class="fas fa-book"></i>
+                            <span>研修日報</span></a>
+                    </li>
+                {% endif %}
+
+            {% endwith %}
+
+
 
 
             {% comment %} <!-- Divider -->
@@ -139,6 +146,12 @@
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
+
+                    <!-- Topbar -->
+                    <div class="h4 text-gray-800 d-sm-inline-block mr-auto ml-md-3 my-md-0">
+                    {% block topbar %}
+                    {% endblock %}
+                    </div>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">

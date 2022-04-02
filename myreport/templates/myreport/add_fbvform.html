@@ -1,7 +1,11 @@
 {% extends 'layout.html' %}
-{% load bootstrap4 %}
+{% block topbar %}
+<a class="nav-link" href='{% url 'myreport:index' %}'>
+    <i class="fas fa-book"></i> 研修日報</a>
+{% endblock %}
+
 {% block content %}
-    <h1 class="h3 text-gray-800 flex-grow-1">日報の{{ dailyreport|yesno:'編集,入力'}}</h1>
+    <!-- <h1 class="h3 text-gray-800 flex-grow-1">日報の{{ dailyreport|yesno:'編集,入力'}}</h1> -->
 
     {% if dailyreport %}
         <form method="POST" enctype="multipart/form-data" action="{% url 'myreport:update' dailyreport.id %}" class="form-group">

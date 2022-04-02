@@ -1,4 +1,10 @@
 {% extends 'layout.html' %}
+{% block title %}おしらせ{% endblock %}
+{% block topbar %}
+<a class="nav-link" href='{% url "myinfo:index" %}'>
+    <i class="fas fa-broadcast-tower"></i> おしらせ</a>
+{% endblock %}
+
 {% block content %}
 
 {% if messages %}

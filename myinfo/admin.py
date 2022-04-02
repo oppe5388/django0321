@@ -35,7 +35,7 @@ class InformationResource(ModelResource):
 class InformationAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('id', 'title', 'user', 'body', 'created_at')  
     resource_class = InformationResource
-    # formats = [base_formats.CSV]
+    formats = [base_formats.XLSX]
 
 admin.site.register(Information, InformationAdmin)
 
