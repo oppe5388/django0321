@@ -1,4 +1,19 @@
 {% extends 'layout.html' %}
+{% load static %}
+
+{% block extra_head %}
+<!-- カレンダー表示用 #テンプレートに渡しているフォームの変数名を「.」の前に書く-->
+{% comment %} <link rel="stylesheet" type="text/css" href="{% static 'admin/css/base.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/forms.css' %}"/>
+<script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
+{{ moneyForm.media }}
+<script type="text/javascript" src="{% static 'admin/js/core.js' %}"></script>
+<script type="text/javascript" src="{% static 'admin/js/admin/RelatedObjectLookups.js' %}"></script> {% endcomment %}
+
+<!-- jqueryカレンダー -->
+{% comment %} <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> {% endcomment %}
+{% endblock %}
+
 {% block topbar %}
 <a class="nav-link" href='{% url "mysched:mysched" %}'>
     <i class="fas fa-calendar-alt"></i> スケジュール</a>
@@ -51,6 +66,7 @@
                     <form class="d-sm-inline-block form-inline mr-auto" action='{% url "mysched:mysched" %}' method='get'>
                         <div class="input-group mb-2 ml-2">
                             {{ moneyForm.input_date }}
+                             <!-- JSでchangeイベントにしたためボタン非表示→戻した -->
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit"><i class="fas fa-search fa-sm"></i></button>
                             </div>
@@ -99,7 +115,35 @@
 {% endblock %}
 
 {% block extra_foot %}
+
+<!-- jqueryカレンダー -->
+{% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script>
+    $(function () {
+        // 日付は、年-月-日 の形式でお願いする。
+        let dateFormat = 'yy-mm-dd';
+        $(".datepicker").datepicker({
+            dateFormat: dateFormat,
+            changeMonth: true,
+            changeYear: true,
+        });
+    });
+</script> {% endcomment %}
+
+<script>
+
+
+    // 日付変更イベント→月移動で実行されてしまうので、中止。jqueryカレンダーだと逆に実行されない
+    {% comment %} function inputChange(event){
+        // console.log(event.currentTarget.value);
+        var url = "{% url 'mysched:mysched' %}";
+        document.location.href = url + "?input_date=" + event.currentTarget.value;
+    }
+
+    let text = document.getElementById('input_date');
+    text.addEventListener('input', inputChange); {% endcomment %}
+
+
     function copyToClipboard1() {
         // コピー対象をJavaScript上で変数として定義する
         var copyTarget1 = document.getElementById("copyTarget1");

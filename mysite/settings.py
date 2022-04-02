@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'mycontact',
     'sample',
     'myreport',
+    # 'bootstrap_datepicker_plus',
 ]
 
 MIDDLEWARE = [
