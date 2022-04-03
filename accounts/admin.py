@@ -11,6 +11,8 @@ class UserResource(ModelResource):
         model = User
 
 class UserAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ('id', 'username', 'last_login', 'last_name', 'is_active', 'is_staff')
+    ordering = ('id', )
     resource_class = UserResource
     formats = [base_formats.CSV]
     
