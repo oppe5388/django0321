@@ -1,19 +1,6 @@
 {% extends 'layout.html' %}
 {% load static %}
 
-{% block extra_head %}
-<!-- カレンダー表示用 #テンプレートに渡しているフォームの変数名を「.」の前に書く-->
-{% comment %} <link rel="stylesheet" type="text/css" href="{% static 'admin/css/base.css' %}"/>
-<link rel="stylesheet" type="text/css" href="{% static 'admin/css/forms.css' %}"/>
-<script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
-{{ moneyForm.media }}
-<script type="text/javascript" src="{% static 'admin/js/core.js' %}"></script>
-<script type="text/javascript" src="{% static 'admin/js/admin/RelatedObjectLookups.js' %}"></script> {% endcomment %}
-
-<!-- jqueryカレンダー -->
-{% comment %} <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> {% endcomment %}
-{% endblock %}
-
 {% block title %}スケジュール{% endblock %}
 {% block topbar %}
 <a class="nav-link" href='{% url "mysched:mysched" %}'>
@@ -31,18 +18,13 @@
             <div class="card shadow mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center">
                     <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-file-invoice-dollar"></i> 到着〆と送金予定日</h6>
-                    　<a href="{% url "mysched:fixdisp" %}" class="btn small m-0 p-0">
-                        <i class="fas fa-exchange-alt"></i> 承認日表示</a>
+                    　<a href="{% url "mysched:mysched" %}" class="btn small m-0 p-0">
+                        <i class="fas fa-exchange-alt"></i> 承認日なし</a>
                 </div>
-            {% comment %} {% for money in moneytrans %}
-                <div id="copyTarget1">〜{{ money.deadline|date:"n/j(D)" }}到着　→　{{ money.transfer|date:"n/j(D)" }}送金</div>
-            {% endfor %} {% endcomment %}
 
-            {% comment %} コピーするために、こちらにも表示
-            →display noneだと機能しないので、仕方なくこちらのみ表示に {% endcomment %}
                 <div class="card-body">
-<textarea id="copyTarget1" rows="5" class="card-body col-lg-6 border-0 p-0 ml-2" readonly>{% for money in moneytrans %}
-〜{{ money.deadline|date:"m-d(D)" }}着 → {{ money.transfer|date:"m-d(D)" }}送金{% endfor %}</textarea>
+<textarea id="copyTarget1" rows="5" class="card-body col-lg-8 border-0 p-0 ml-2" readonly>{% for money in moneytrans %}
+〜{{ money.deadline|date:"m-d(D)" }}着 → {{ money.fix|date:"m-d(D)" }}承認 → {{ money.transfer|date:"m-d(D)" }}送金{% endfor %}</textarea>
 
                     <button onclick="copyToClipboard1()" class="btn btn-outline-primary mr-1 p-1">
                         <i class="fas fa-copy"> Copy</i>
@@ -66,7 +48,7 @@
                     <label class="text-primary">登録日（解約・発行キャンセル・相殺）を選択</label>
                     <div class="mb-2 ml-2 small text-secondary">{{ first_date|date:"Y-m-d(D)" }}〜{{ last_date|date:"Y-m-d(D)" }}検索OK</div>
 
-                    <form class="d-sm-inline-block form-inline mr-auto" action='{% url "mysched:mysched" %}' method='get'>
+                    <form class="d-sm-inline-block form-inline mr-auto" action='{% url "mysched:fixdisp" %}' method='get'>
                         <div class="input-group mb-2 ml-2">
                             {{ moneyForm.input_date }}
                              <!-- JSでchangeイベントにしたためボタン非表示→戻した -->
@@ -83,14 +65,6 @@
                 {% endif %}
                 
                 {% if past_sched %}
-                    {% comment %} <div>登録日：{{ input_date }}</div>
-                    <div>↓</div>
-                    <div>承認日：{{ past_sched.fix }}</div>
-                    <div>↓</div>
-                    <div>送金日：{{ past_sched.transfer }}</div> {% endcomment %}
-
-                    {% comment %} コピーするために、こちらにも表示
-                    →display noneだと機能しないので、仕方なくこちらのみ表示に {% endcomment %}
                 <div class="card-body pt-0">
                     <div class="text-primary">解約・発行キャンセル</div>
                     <div class="mb-2 ml-2 small text-secondary">キャンセル後の再申込は、承認日の翌日から可と案内</div>
@@ -124,33 +98,7 @@
 
 {% block extra_foot %}
 
-<!-- jqueryカレンダー -->
-{% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script>
-    $(function () {
-        // 日付は、年-月-日 の形式でお願いする。
-        let dateFormat = 'yy-mm-dd';
-        $(".datepicker").datepicker({
-            dateFormat: dateFormat,
-            changeMonth: true,
-            changeYear: true,
-        });
-    });
-</script> {% endcomment %}
-
-<script>
-
-
-    // 日付変更イベント→月移動で実行されてしまうので、中止。jqueryカレンダーだと逆に実行されない
-    {% comment %} function inputChange(event){
-        // console.log(event.currentTarget.value);
-        var url = "{% url 'mysched:mysched' %}";
-        document.location.href = url + "?input_date=" + event.currentTarget.value;
-    }
-
-    let text = document.getElementById('input_date');
-    text.addEventListener('input', inputChange); {% endcomment %}
-
 
     function copyToClipboard1() {
         // コピー対象をJavaScript上で変数として定義する
@@ -193,25 +141,6 @@
         // コピーをお知らせする
         alert("コピーしました : \n" + copyTarget3.value);
     }
-
-
-
-    //↓textareaの行数を自動調整するのを、使えるように出来ていない
-
-    //textareaの要素を取得
-    let textarea = document.getElementById('copyTarget1');
-    //textareaのデフォルトの要素の高さを取得
-    let clientHeight = textarea.clientHeight;
-
-    //textareaのinputイベント
-    textarea.addEventListener('input', ()=>{
-        //textareaの要素の高さを設定（rows属性で行を指定するなら「px」ではなく「auto」で良いかも！）
-        textarea.style.height = clientHeight + 'px';
-        //textareaの入力内容の高さを取得
-        let scrollHeight = textarea.scrollHeight;
-        //textareaの高さに入力内容の高さを設定
-        textarea.style.height = scrollHeight + 'px';
-    });
 
 </script>
 
