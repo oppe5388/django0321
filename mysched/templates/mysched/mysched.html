@@ -74,7 +74,12 @@
                         </div>
                     </form>
                 </div>
-
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+                
                 {% if past_sched %}
                     {% comment %} <div>登録日：{{ input_date }}</div>
                     <div>↓</div>

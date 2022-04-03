@@ -1,4 +1,5 @@
-Django==3.0.4
+# Django==3.0.4
+Django==3.2.12
 psycopg2==2.8.4
 # uwsgi==2.0.18
 django-bootstrap4==21.1

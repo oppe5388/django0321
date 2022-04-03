@@ -3,21 +3,11 @@ from django.http import HttpResponse, Http404
 from .models import MoneyTrans
 from .forms import MoneyForm
 from datetime import date, datetime
+from django.contrib import messages
 
 
 def mysched(request):
     moneyForm = MoneyForm(request.GET)
-
-    # #GETの日付を取得
-    # try:
-    #     input_date = request.GET["input_date"]
-
-    #     # フォームを規定値で初期化（取得した日付を表示用に入れる）
-    #     moneyForm = MoneyForm(initial={
-    #         'input_date': input_date,
-    #     })
-    # except:
-    #     pass
 
     context = {
         'moneyForm': moneyForm,
@@ -42,7 +32,7 @@ def mysched(request):
         input_date = moneyForm.cleaned_data['input_date']
 
         # if input_date:
-        if input_date >= first_date:
+        if input_date >= first_date and input_date <= last_date:
             #entryが入力日以降のクエリセットの1つ目
             past_sched = MoneyTrans.objects.filter(entry__gte=input_date).order_by('entry').first()
             context['past_sched'] = past_sched
@@ -51,7 +41,9 @@ def mysched(request):
             #setoffが入力日以降のクエリセットの1つ目
             setoff_sched = MoneyTrans.objects.filter(setoff__gte=input_date).order_by('entry').first()
             context['setoff_sched'] = setoff_sched
-
+        else:
+            messages.warning(request, '対象外の日付です。')
+            
     return render(request, "mysched/mysched.html", context)
 
 
