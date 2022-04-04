@@ -88,6 +88,7 @@ $(document).ready(function () {
             {
                 // 2列目
                 title: "相手",
+                // visible: false,
             },
             {
                 // 3列目
@@ -100,10 +101,19 @@ $(document).ready(function () {
             {
                 // 5列目
                 title: "対応内容詳細",
+                // 改行コードをbrへ置換で反映する
+                render: function (data) {
+                    let kaigyo = data.replace(/\r?\n/g, '<br>');
+                    return kaigyo;
+                },
             },
             {
                 // 6列目
                 title: "TEL",
+                render: function (data) {
+                    let kaigyo = data.replace(/\r?\n/g, '<br>');
+                    return kaigyo;
+                },
                 // googleマップへのリンク
                 // http://www.shurey.com/html/googlemaps.html
                 // render: function (data, type, row) {
@@ -113,6 +123,10 @@ $(document).ready(function () {
             {
                 // 7列目
                 title: "営業時間",
+                render: function (data) {
+                    let kaigyo = data.replace(/\r?\n/g, '<br>');
+                    return kaigyo;
+                },
                 // ハイパーリンク追加のサンプル
                 // render: function (data) {
                 //     let telno = data.replace(/\-/g, '');
@@ -122,8 +136,10 @@ $(document).ready(function () {
             {
                 // 8列目
                 title: "検索ワード",
+                visible: false, // これでもサーチ対象のままになる
             },
         ],
+
     });
 
 
