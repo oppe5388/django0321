@@ -9,89 +9,82 @@
 
 {% block content %}
 
-<div class="container-fluid">
-    <!-- Content Row -->
-    <div class="d-flex flex-row">
-        <!-- First Column -->
-        <div class="col-md-12">
-
-            <div class="card shadow mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center">
-                    <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-file-invoice-dollar"></i> 到着〆と送金予定日</h6>
-                    　<a href="{% url "mysched:mysched" %}" class="btn small m-0 p-0">
-                        <i class="fas fa-exchange-alt"></i> 承認日なし</a>
-                </div>
-
-                <div class="card-body">
-<textarea id="copyTarget1" rows="5" class="card-body col-lg-8 border-0 p-0 ml-2" readonly>{% for money in moneytrans %}
-〜{{ money.deadline|date:"m-d(D)" }}着 → {{ money.fix|date:"m-d(D)" }}承認 → {{ money.transfer|date:"m-d(D)" }}送金{% endfor %}</textarea>
-
-                    <button onclick="copyToClipboard1()" class="btn btn-outline-primary mr-1 p-1">
-                        <i class="fas fa-copy"> Copy</i>
-                    </button>
-                </div>
-            </div>
-        </div>
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex flex-row align-items-center">
+        <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-file-invoice-dollar"></i> 到着〆と送金予定日</h6>
+        　<a href="{% url "mysched:mysched" %}" class="btn small m-0 p-0">
+            <i class="fas fa-exchange-alt"></i> 承認日なし</a>
     </div>
 
-    <!-- Content Row -->
-    <div class="d-flex flex-row">
-        <!-- First Column -->
-        <div class="col-md-12">
+    <div class="card-body">
+<textarea id="copyTarget1" rows="5" class="col-sm-12 border-0 p-0 ml-2" readonly>{% for money in moneytrans %}
+〜{{ money.deadline|date:"m-d(D)" }}着 → {{ money.fix|date:"m-d(D)" }}承認 → {{ money.transfer|date:"m-d(D)" }}送金{% endfor %}</textarea>
+        <div class="ml-2">
+            <button onclick="copyToClipboard1()" class="btn btn-outline-primary mr-1 p-1">
+                <i class="fas fa-copy"></i>
+                <span class="small"> Copy</span>
+            </button>
+        </div>
+    </div>
+</div>
 
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-file-invoice-dollar"></i> 送金日検索</h6>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-file-invoice-dollar"></i> 送金日検索</h6>
+    </div>
+
+    <div class="card-body">
+        <label class="text-primary">登録日（解約・発行キャンセル・相殺）を選択</label>
+        <div class="mb-2 ml-2 small text-secondary">{{ first_date|date:"Y-m-d(D)" }}〜{{ last_date|date:"Y-m-d(D)" }}検索OK</div>
+
+        <form class="d-sm-inline-block form-inline mr-auto" action='{% url "mysched:fixdisp" %}' method='get'>
+            <div class="input-group mb-2 ml-2">
+                {{ moneyForm.input_date }}
+                    <!-- JSでchangeイベントにしたためボタン非表示→戻した -->
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit"><i class="fas fa-search fa-sm"></i></button>
                 </div>
-
-                <div class="card-body">
-                    <label class="text-primary">登録日（解約・発行キャンセル・相殺）を選択</label>
-                    <div class="mb-2 ml-2 small text-secondary">{{ first_date|date:"Y-m-d(D)" }}〜{{ last_date|date:"Y-m-d(D)" }}検索OK</div>
-
-                    <form class="d-sm-inline-block form-inline mr-auto" action='{% url "mysched:fixdisp" %}' method='get'>
-                        <div class="input-group mb-2 ml-2">
-                            {{ moneyForm.input_date }}
-                             <!-- JSでchangeイベントにしたためボタン非表示→戻した -->
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit"><i class="fas fa-search fa-sm"></i></button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                {% if messages %}
-                    {% for message in messages %}
-                        <div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
-                    {% endfor %}
-                {% endif %}
-                
-                {% if past_sched %}
-                <div class="card-body pt-0">
-                    <div class="text-primary">解約・発行キャンセル</div>
-                    <div class="mb-2 ml-2 small text-secondary">キャンセル後の再申込は、承認日の翌日から可と案内</div>
-<textarea id="copyTarget2" rows="5" class="card-body col-lg-7 border-0 p-0 mb-3 ml-2" readonly>登録日：{{ input_date|date:"Y-m-d(D)" }}
+            </div>
+        </form>
+    </div>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    
+    {% if past_sched %}
+    <div class="card-body pt-0">
+        <div class="text-primary">解約・発行キャンセル</div>
+        <div class="mb-2 ml-2 small text-secondary">キャンセル後の再申込は、承認日の翌日から可と案内</div>
+<textarea id="copyTarget2" rows="5" class="col-sm-12 border-0 p-0 ml-2" readonly>登録日：{{ input_date|date:"Y-m-d(D)" }}
 ↓
 承認日：{{ past_sched.fix|date:"Y-m-d(D)" }}
 ↓
 送金日：{{ past_sched.transfer|date:"Y-m-d(D)" }}</textarea>
-                            <button onclick="copyToClipboard2()" class="btn btn-outline-primary p-1 mb-4">
-                                <i class="fas fa-copy"> Copy</i>
-                            </button>
-                    
-                    <div class="text-primary mb-2">相殺</div>
-<textarea id="copyTarget3" rows="3" cols="28" class="card-body col-lg-7 border-0 p-0 ml-2" readonly>登録(承認)日：{{ input_date|date:"Y-m-d(D)" }}
+        <div class="ml-2">
+            <button onclick="copyToClipboard2()" class="btn btn-outline-primary mr-1 p-1">
+                <i class="fas fa-copy"></i>
+                <span class="small"> Copy</span>
+            </button>
+        </div>
+        <hr>
+
+        <div class="text-primary mb-2">相殺</div>
+<textarea id="copyTarget3" rows="3" cols="28" class="col-sm-12 border-0 p-0 ml-2" readonly>登録(承認)日：{{ input_date|date:"Y-m-d(D)" }}
 ↓
 送金日：{{ setoff_sched.transfer|date:"Y-m-d(D)" }}</textarea>
-                            <button onclick="copyToClipboard3()" class="btn btn-outline-primary p-1">
-                                <i class="fas fa-copy"> Copy</i>
-                            </button>
-                    </div>
-                {% endif %}
+            <div class="ml-2">
+                <button onclick="copyToClipboard3()" class="btn btn-outline-primary mr-1 p-1">
+                    <i class="fas fa-copy"></i>
+                    <span class="small"> Copy</span>
+                </button>
             </div>
         </div>
-
-    </div>
-
+    {% endif %}
 </div>
+
 
 
 {% endblock %}
