@@ -92,23 +92,14 @@ $(document).ready(function () {
             },
             {
                 // 3列目
-                title: "窓口",
+                title: "業務",
             },
             {
                 // 4列目
-                title: "概要",
+                title: "窓口",
             },
             {
                 // 5列目
-                title: "対応内容詳細",
-                // 改行コードをbrへ置換で反映する
-                render: function (data) {
-                    let kaigyo = data.replace(/\r?\n/g, '<br>');
-                    return kaigyo;
-                },
-            },
-            {
-                // 6列目
                 title: "TEL",
                 render: function (data) {
                     let kaigyo = data.replace(/\r?\n/g, '<br>');
@@ -121,8 +112,8 @@ $(document).ready(function () {
                 // },
             },
             {
-                // 7列目
-                title: "営業時間",
+                // 6列目
+                title: "時間",
                 render: function (data) {
                     let kaigyo = data.replace(/\r?\n/g, '<br>');
                     return kaigyo;
@@ -132,6 +123,15 @@ $(document).ready(function () {
                 //     let telno = data.replace(/\-/g, '');
                 //     return '<a href="tel:' + telno + '">' + data + '</a>';
                 // },
+            },
+            {
+                // 7列目
+                title: "詳細",
+                // 改行コードをbrへ置換で反映する
+                render: function (data) {
+                    let kaigyo = data.replace(/\r?\n/g, '<br>');
+                    return kaigyo;
+                },
             },
             {
                 // 8列目
