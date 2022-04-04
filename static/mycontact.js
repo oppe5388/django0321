@@ -7,6 +7,7 @@ $(document).ready(function () {
     // https://datatables.net/reference/index
     let table = $('#datatable').DataTable({
 
+        autoWidth: false,
         // Server-side processing:Ajaxモードの設定
         // https://datatables.net/examples/server_side/simple.html
         processing: true,
@@ -81,6 +82,7 @@ $(document).ready(function () {
                 title: "&nbsp;",
                 className: 'select-checkbox',
                 searchable: false,
+                width: "1%",
                 render: function () {
                     return "";
                 },
@@ -88,15 +90,18 @@ $(document).ready(function () {
             {
                 // 2列目
                 title: "相手",
+                width: "1%",
                 // visible: false,
             },
             {
                 // 3列目
                 title: "業務",
+                width: "1%",
             },
             {
                 // 4列目
                 title: "窓口",
+                width: "1%",
             },
             {
                 // 5列目

@@ -12,7 +12,7 @@ class ContactsResource(ModelResource):
         model = Contacts
         skip_unchanged = True
         # import_order = ('id', 'transfer', 'deadline', 'entry', 'fix', 'setoff')
-        import_id_fields = ['name']
+        import_id_fields = ['id']
 
 #インポート、エクスポート
 class ContactsAdmin(ImportExportModelAdmin, admin.ModelAdmin):
