@@ -18,5 +18,6 @@ class ContactsResource(ModelResource):
 class ContactsAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('incoming', 'name', 'title', 'job', 'tel', 'hours', 'searchwords')
     resource_class = ContactsResource
+    formats = [base_formats.XLSX]
 
 admin.site.register(Contacts, ContactsAdmin)

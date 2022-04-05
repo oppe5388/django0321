@@ -7,13 +7,13 @@ $(document).ready(function () {
     // https://datatables.net/reference/index
     let table = $('#datatable').DataTable({
 
-        autoWidth: false,
+        // autoWidth: false,
         // Server-side processing:Ajaxモードの設定
         // https://datatables.net/examples/server_side/simple.html
         processing: true,
         serverSide: true,
         ajax: "./contacts",
-
+        
         // dom: 検索フィールド等の各種ウィジェットの配置
         // https://datatables.net/reference/option/dom
         // dom: 'lfrtip',
@@ -82,7 +82,8 @@ $(document).ready(function () {
                 title: "&nbsp;",
                 className: 'select-checkbox',
                 searchable: false,
-                width: "1%",
+                // width: "1%",
+                visible: false,
                 render: function () {
                     return "";
                 },
@@ -90,26 +91,30 @@ $(document).ready(function () {
             {
                 // 2列目
                 title: "相手",
-                width: "1%",
+                width: "10%",
+                className: "all",
                 // visible: false,
             },
             {
                 // 3列目
-                title: "業務",
-                width: "1%",
-            },
-            {
-                // 4列目
                 title: "窓口",
-                width: "1%",
-            },
-            {
-                // 5列目
-                title: "TEL",
+                className: " all",
+                width: "5%",
                 render: function (data) {
                     let kaigyo = data.replace(/\r?\n/g, '<br>');
                     return kaigyo;
                 },
+            },
+            {
+                // 4列目
+                title: "TEL",
+                // className: " all",
+                width: "5%",
+                render: function (data) {
+                    let kaigyo = data.replace(/\r?\n/g, '<br>');
+                    return kaigyo;
+                },
+
                 // googleマップへのリンク
                 // http://www.shurey.com/html/googlemaps.html
                 // render: function (data, type, row) {
@@ -117,7 +122,7 @@ $(document).ready(function () {
                 // },
             },
             {
-                // 6列目
+                // 5列目
                 title: "時間",
                 render: function (data) {
                     let kaigyo = data.replace(/\r?\n/g, '<br>');
@@ -128,6 +133,15 @@ $(document).ready(function () {
                 //     let telno = data.replace(/\-/g, '');
                 //     return '<a href="tel:' + telno + '">' + data + '</a>';
                 // },
+            },
+            {
+                // 6列目
+                title: "業務",
+                // width: "20%",
+                render: function (data) {
+                    let kaigyo = data.replace(/\r?\n/g, '<br>');
+                    return kaigyo;
+                },
             },
             {
                 // 7列目
@@ -145,6 +159,32 @@ $(document).ready(function () {
             },
         ],
 
+        // responsive: {
+        //     breakpoints: [
+        //       {name: '相手', width: 10},
+        //       {name: '業務', width: 10},
+        //       {name: '窓口', width: 10},
+        //       {name: 'TEL', width: 10},
+        //       {name: '時間', width: 10},
+        //       {name: '詳細', width: 10},
+        //     ]
+        // },
+
+        // 列の表示非表示ボタン
+        // dom: 'Bfrtip',
+        // buttons: [
+        //     'colvis'
+        // ],
+
+        // レスポンシブ部分全て表示
+        responsive: {
+            details: {
+                display: $.fn.dataTable.Responsive.display.childRowImmediate,
+                type: 'none',
+                target: ''
+            }
+        },
+        
     });
 
 
