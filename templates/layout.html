@@ -257,8 +257,12 @@
     <script src="{% static 'SBadmin2_origin/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="{% static 'SBadmin2_origin/js/sb-admin-2.min.js' %}"></script>
+    {% comment %} <script src="{% static 'SBadmin2_origin/js/sb-admin-2.min.js' %}"></script> {% endcomment %}
+    <script src="{% static 'SBadmin2_origin/js/sb-admin-2.js' %}"></script>
 
+    <script type="text/javascript">
+
+    </script>
 {% block extra_foot %}{% endblock %}
 
 </body>

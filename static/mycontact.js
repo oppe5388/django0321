@@ -7,6 +7,7 @@ $(document).ready(function () {
     // https://datatables.net/reference/index
     let table = $('#datatable').DataTable({
 
+        // scrollX: true,
         // autoWidth: false,
         // Server-side processing:Ajaxモードの設定
         // https://datatables.net/examples/server_side/simple.html
@@ -21,10 +22,11 @@ $(document).ready(function () {
         // lengthMenu: １ページに表示させる件数のリスト
         // https://datatables.net/reference/option/lengthMenu
         lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "全件"]],
+        lengthChange: false,
 
         // pageLength: pageLengthの初期値
         // https://datatables.net/reference/option/pageLength
-        pageLength: 50,
+        pageLength: 100,
 
         // language: 表示メッセージのローカライズ
         // https://datatables.net/reference/option/language
@@ -80,9 +82,8 @@ $(document).ready(function () {
             {
                 // 1列目(id)
                 title: "&nbsp;",
-                className: 'select-checkbox',
+                // className: 'select-checkbox',
                 searchable: false,
-                // width: "1%",
                 visible: false,
                 render: function () {
                     return "";
@@ -91,15 +92,25 @@ $(document).ready(function () {
             {
                 // 2列目
                 title: "相手",
-                width: "10%",
-                className: "all",
+                // className: "all",
                 // visible: false,
+                render: function (data) {
+                    let result;
+                    if (data == "販社") {
+                        result = data.replace("販社", '<div class="card border-left-info">&nbsp;販社</div>');
+                    } else if (data == "顧客") {
+                        result = data.replace("顧客", '<div class="card border-left-warning">&nbsp;顧客</div>');
+                    } else {
+                        result = data;
+                    }
+                    return result;
+                },
             },
             {
                 // 3列目
                 title: "窓口",
-                className: " all",
-                width: "5%",
+                // className: " all",
+                className: 'control',
                 render: function (data) {
                     let kaigyo = data.replace(/\r?\n/g, '<br>');
                     return kaigyo;
@@ -109,7 +120,6 @@ $(document).ready(function () {
                 // 4列目
                 title: "TEL",
                 // className: " all",
-                width: "5%",
                 render: function (data) {
                     let kaigyo = data.replace(/\r?\n/g, '<br>');
                     return kaigyo;
@@ -135,20 +145,21 @@ $(document).ready(function () {
                 // },
             },
             {
-                // 6列目
+                // 6列目：業務
                 title: "業務",
-                // width: "20%",
                 render: function (data) {
-                    let kaigyo = data.replace(/\r?\n/g, '<br>');
+                    let aaa = '<br>' + data;
+                    let kaigyo = aaa.replace(/\r?\n/g, '<br>');
                     return kaigyo;
                 },
             },
             {
-                // 7列目
+                // 7列目：詳細
                 title: "詳細",
                 // 改行コードをbrへ置換で反映する
                 render: function (data) {
-                    let kaigyo = data.replace(/\r?\n/g, '<br>');
+                    let aaa = '<br>' + data;
+                    let kaigyo = aaa.replace(/\r?\n/g, '<br>');
                     return kaigyo;
                 },
             },
@@ -158,17 +169,6 @@ $(document).ready(function () {
                 visible: false, // これでもサーチ対象のままになる
             },
         ],
-
-        // responsive: {
-        //     breakpoints: [
-        //       {name: '相手', width: 10},
-        //       {name: '業務', width: 10},
-        //       {name: '窓口', width: 10},
-        //       {name: 'TEL', width: 10},
-        //       {name: '時間', width: 10},
-        //       {name: '詳細', width: 10},
-        //     ]
-        // },
 
         // 列の表示非表示ボタン
         // dom: 'Bfrtip',
@@ -191,38 +191,38 @@ $(document).ready(function () {
     // server-side利用時は拡張機能の選択(Select)が使えないので、DataTables公式の
     // サンプルコードを元に選択処理を自作する。
     // https://datatables.net/examples/server_side/select_rows.html
-    $('#datatable tbody').on('click', 'tr', function () {
+    // $('#datatable tbody').on('click', 'tr', function () {
 
-        let id = $(this).attr('data-id');
-        let index = $.inArray(id, selected);
+    //     let id = $(this).attr('data-id');
+    //     let index = $.inArray(id, selected);
 
-        if (index === -1) {
+    //     if (index === -1) {
 
-            selected.push(id);
-            selected.sort(function (a, b) {
-                return a - b
-            });
-            $(this).addClass('selected');
-        } else {
-            selected.splice(index, 1);
-            $(this).removeClass('selected');
-        }
-        $('#selected').html(selected.join(','));
-    });
+    //         selected.push(id);
+    //         selected.sort(function (a, b) {
+    //             return a - b
+    //         });
+    //         $(this).addClass('selected');
+    //     } else {
+    //         selected.splice(index, 1);
+    //         $(this).removeClass('selected');
+    //     }
+    //     $('#selected').html(selected.join(','));
+    // });
 
     // サンプル：クリックしたレコードのデータを取得
     // data()でセル、行、表示中のテーブル全体のデータを取得可能
     // https://datatables.net/reference/api/row().data()
 
-    $('#datatable tbody').on('click', 'tr', function () {
-        console.log(table.row(this).data());
-    });
+    // $('#datatable tbody').on('click', 'tr', function () {
+    //     console.log(table.row(this).data());
+    // });
 
     // 全選択を解除
-    $('#clear').on('click', function () {
-        selected = [];
-        $('#datatable tr').removeClass('selected');
-        $('#selected').html(selected.join(','))
-    })
+    // $('#clear').on('click', function () {
+    //     selected = [];
+    //     $('#datatable tr').removeClass('selected');
+    //     $('#selected').html(selected.join(','))
+    // })
 
 });
