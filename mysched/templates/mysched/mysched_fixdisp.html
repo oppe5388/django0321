@@ -12,7 +12,7 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex flex-row align-items-center">
         <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-file-invoice-dollar"></i> 到着〆と送金予定日</h6>
-        　<a href="{% url "mysched:mysched" %}" class="btn small m-0 p-0">
+        　<a href="{% url "mysched:mysched" %}" class="btn btn-info py-0 ml-3">
             <i class="fas fa-exchange-alt"></i> 承認日なし</a>
     </div>
 
@@ -20,7 +20,7 @@
 <textarea id="copyTarget1" rows="5" class="col-sm-12 border-0 p-0 ml-2" readonly>{% for money in moneytrans %}
 〜{{ money.deadline|date:"m-d(D)" }}着 → {{ money.fix|date:"m-d(D)" }}承認 → {{ money.transfer|date:"m-d(D)" }}送金{% endfor %}</textarea>
         <div class="ml-2">
-            <button onclick="copyToClipboard1()" class="btn btn-outline-primary mr-1 p-1">
+            <button onclick="copyToClipboard('copyTarget1')" class="btn btn-outline-primary mr-1 p-1">
                 <i class="fas fa-copy"></i>
                 <span class="small"> Copy</span>
             </button>
@@ -64,7 +64,7 @@
 ↓
 送金日：{{ past_sched.transfer|date:"Y-m-d(D)" }}</textarea>
         <div class="ml-2">
-            <button onclick="copyToClipboard2()" class="btn btn-outline-primary mr-1 p-1">
+            <button onclick="copyToClipboard('copyTarget2')" class="btn btn-outline-primary mr-1 p-1">
                 <i class="fas fa-copy"></i>
                 <span class="small"> Copy</span>
             </button>
@@ -76,7 +76,7 @@
 ↓
 送金日：{{ setoff_sched.transfer|date:"Y-m-d(D)" }}</textarea>
             <div class="ml-2">
-                <button onclick="copyToClipboard3()" class="btn btn-outline-primary mr-1 p-1">
+                <button onclick="copyToClipboard('copyTarget3')" class="btn btn-outline-primary mr-1 p-1">
                     <i class="fas fa-copy"></i>
                     <span class="small"> Copy</span>
                 </button>
@@ -93,46 +93,18 @@
 
 <script>
 
-    function copyToClipboard1() {
+    function copyToClipboard(id) {
         // コピー対象をJavaScript上で変数として定義する
-        var copyTarget1 = document.getElementById("copyTarget1");
+        var copyTarget = document.getElementById(id);
 
         // コピー対象のテキストを選択する
-        copyTarget1.select();
+        copyTarget.select();
 
         // 選択しているテキストをクリップボードにコピーする
         document.execCommand("Copy");
 
         // コピーをお知らせする
-        alert("コピーしました : \n" + copyTarget1.value);
-    }
-
-    function copyToClipboard2() {
-        // コピー対象をJavaScript上で変数として定義する
-        var copyTarget2 = document.getElementById("copyTarget2");
-
-        // コピー対象のテキストを選択する
-        copyTarget2.select();
-
-        // 選択しているテキストをクリップボードにコピーする
-        document.execCommand("Copy");
-
-        // コピーをお知らせする
-        alert("コピーしました : \n" + copyTarget2.value);
-    }
-
-    function copyToClipboard3() {
-        // コピー対象をJavaScript上で変数として定義する
-        var copyTarget3 = document.getElementById("copyTarget3");
-
-        // コピー対象のテキストを選択する
-        copyTarget3.select();
-
-        // 選択しているテキストをクリップボードにコピーする
-        document.execCommand("Copy");
-
-        // コピーをお知らせする
-        alert("コピーしました : \n" + copyTarget3.value);
+        alert("コピーしました : \n" + copyTarget.value);
     }
 
 </script>
