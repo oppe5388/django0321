@@ -1,6 +1,14 @@
 {% extends 'layout.html' %}
 {% load static %}
 
+{% block extra_head %}
+<style>
+    textarea {
+        color: #5a5c69;
+    }
+</style>
+{% endblock %}
+
 {% block title %}スケジュール{% endblock %}
 {% block topbar %}
 <a class="nav-link" href='{% url "mysched:mysched" %}'>
