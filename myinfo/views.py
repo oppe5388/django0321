@@ -299,7 +299,7 @@ def information_list(request):
     else:
         searchForm = SearchForm()
         informations = Information.objects.all().order_by('-id')
-        page_obj = paginate_queryset(request, informations, 10)#ページネーション用
+        page_obj = paginate_queryset(request, informations, 20)#ページネーション用
         context['page_obj'] = page_obj
         context['informations'] = page_obj.object_list
 
@@ -414,21 +414,6 @@ def post_export(request):
     return response
 
 
-#ファイルUpテスト 
-from .forms import UploadFileForm
-from django.http import HttpResponseRedirect
- 
-def upload_file(request):
-    if request.method == 'POST':
-        form = UploadFileForm(request.POST, request.FILES)
-        if form.is_valid():
-            handle_uploaded_file(request.FILES['pdf_file'])
-            # return HttpResponseRedirect('/success/url/')
-            return redirect('myinfo:index')
-    else:
-        form = UploadFileForm()
-    return render(request, 'myinfo/fileuptest.html', {'form': form})
- 
 import os
 UPLOAD_DIR = os.path.dirname(os.path.abspath(__file__)) + '/uploads/'  # アップロードしたファイルを保存するディレクトリ
 #同じファイル名は上書き保存されてしまうけど

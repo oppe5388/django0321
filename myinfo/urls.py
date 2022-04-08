@@ -20,8 +20,6 @@ urlpatterns = [
 
     # path('create_comment', views.create_comment, name='create_comment'),   # コメントポスト
 
-    path('fileuptest', views.upload_file, name='fileuptest'),#`ファイルUPテスト用`
-
     path('', views.information_list, name='index'),   # FBVで一覧
     path('add_fbvform', views.add_fbvform, name='add_fbvform'),   # FBVでCreate
     path('<int:pk>/', views.detail_fbvform, name='detail'),# FBVでDetail
