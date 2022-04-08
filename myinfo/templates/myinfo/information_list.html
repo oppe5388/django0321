@@ -83,24 +83,15 @@
                     <!-- 見る側が未読だったら -->
                     {% for unread in unread_set %}
                         {% if information == unread.information and request.user.id == unread.user.id %}
-                        <div class="badge badge-info">未読</div>
+                        <a href="{% url 'myinfo:read_delete' information.pk %}" class="btn-info badge mr-2">
+                            <i class="fas fa-check"></i> 既読にする
+                        </a>
                         {% endif %}
                     {% endfor %}
 
                     <a href="{% url 'myinfo:detail' information.pk %}">{{ information.title }}</a>
 
                 </h6>
-
-                <!-- 既読管理：ひとまず未読があったら表示-->
-                {% comment %} {% if user.is_superuser %} {% endcomment %}
-                {% if request.user.is_staff %}
-                    {% for unread in unread_set %}
-                        {% if information == unread.information %}
-                            <div class="badge badge-warning">{{ unread.user.last_name }}</div>
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
-
 
                 <!-- 右側メニュー -->
                 {% if request.user.id == information.user.id %}
@@ -151,6 +142,19 @@
             </div>
             <!-- Card Body -->
             <div class="card-body">
+
+                <!-- 既読管理：ひとまず未読があったら表示-->
+                {% comment %} {% if user.is_superuser %} {% endcomment %}
+                {% if request.user.is_staff %}
+                    <span>
+                    {% for unread in unread_set %}
+                        {% if information == unread.information %}
+                            <div class="badge badge-warning">{{ unread.user.last_name }}</div>
+                        {% endif %}
+                    {% endfor %}
+                    </span>
+                {% endif %}
+
                 <div class="small">{{ information.created_at|date:"Y-m-d" }}　
                     <i class="fas fa-user-edit mr-1"></i>{{ information.user.last_name }}</div>
                 <div>{{ information.filefield }}</div>

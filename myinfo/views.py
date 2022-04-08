@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404, redirect
-from django.http import HttpResponse, Http404 # 追記
+from django.http import HttpResponse, Http404
 
 from django.views import generic
 from .models import Information, InfoCategory, Attachments, Notifications, ReadStates, InfoComments
@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 
-from .forms import InformationForm, FileFormset, InfoCommentsForm, InformationEditForm
+from .forms import InformationForm, InformationEditForm
 
 from django.contrib import messages
 
@@ -15,9 +15,8 @@ from django.contrib import messages
 # from django.contrib.auth import get_user_model
 from accounts.models import User
 
-
-
 from django.utils import timezone
+import os
 
 
 #関数ビューで通知の中間テーブルCreateを作ってみる
@@ -88,12 +87,6 @@ def detail_fbvform(request, pk):
 
     #コメント入力時
     if request.method == 'POST':
-        # form = InfoCommentsForm(request.POST)  # POSTデータをフォームに保存する→これ出来ない
-        # if form.is_valid():
-        #     comment_obj = form.save(commit=False)
-        #     comment_obj.user = request.user
-        #     comment_obj.information = information
-        #     comment_obj.save()
 
         # 投稿されたコメントをデータベースに保存
         if request.POST["text"] != "":
@@ -104,7 +97,6 @@ def detail_fbvform(request, pk):
                 )
         else:
             messages.warning(request, 'コメント欄は未入力です')
-
     
     #通知表示用（有無だけ）
     if request.user.id is not None:
@@ -125,8 +117,6 @@ def detail_fbvform(request, pk):
             "information":information,
         }
 
-
-
     return render(request,template_name,context)
 
 
@@ -135,23 +125,10 @@ def edit_fbvform(request, pk, *args, **kwargs):
 
     information = get_object_or_404(Information, pk=pk)
 
-    #添付と通知と既読を取得
-    # attachments = Attachments.objects.filter(information_id__exact=pk).all()
-    # notifications = Notifications.objects.filter(information_id__exact=pk).all()
-    # readStates = ReadStates.objects.filter(information_id__exact=pk).all()
-
     #外部キーなので_set.all()でなくrelated_nameで
     attachments = information.info_attach.all()
     notifications = information.info_notifi.all()
     read_states = information.info_read.all()
-
-    # unread_member = read_states.values_list('user', flat=True)
-    # notifi_member = notifications.values_list('user', flat=True)
-    # # read_member = notifi_member.difference(unread_member)
-
-    # read_lst = []
-
-
     
     if request.method == 'POST':
         form = InformationEditForm(request.POST, request.FILES, instance=information)
@@ -190,12 +167,6 @@ def edit_fbvform(request, pk, *args, **kwargs):
     else:
     # 一覧表示からの遷移や、確認画面から戻った時
 
-        # # セッションにデータがあればそれを使う →tagsリスト入れてとforms.errorが出る
-        # if 'form_data' in request.session:
-        #     form = InformationEditForm(request.session.get('form_data'))
-        # else:
-        #     form = InformationEditForm(instance=information)
-
         form = InformationEditForm(instance=information)
 
         context ={
@@ -208,64 +179,7 @@ def edit_fbvform(request, pk, *args, **kwargs):
         }
 
     return render(request, 'myinfo/edit_fbvform.html', context)
-    
 
-
-
-#インラインフォームセットでattachmentモデルに登録
-def add_post(request):
-    form = InformationForm(request.POST or None)
-    context = {'form': form}
-    if request.method == 'POST' and form.is_valid():
-        post = form.save(commit=False)
-        post.user = request.user
-        formset = FileFormset(request.POST, files=request.FILES, instance=post)  # 今回はファイルなのでrequest.FILESが必要
-        if formset.is_valid():
-            post.save()
-            formset.save()
-            messages.success(request, '登録しました！')
-            return redirect('myinfo:index')
-
-        # エラーメッセージつきのformsetをテンプレートへ渡すため、contextに格納
-        else:
-            context['formset'] = formset
-
-    # GETのとき
-    else:
-        # 空のformsetをテンプレートへ渡す
-        context['formset'] = FileFormset()
-
-    return render(request, 'myinfo/add_postform.html', context)
-
-
-#インラインフォームセットのUpdateView
-def update_post(request, pk):
-    post = get_object_or_404(Information, pk=pk)
-    form = InformationForm(request.POST or None, instance=post)
-    formset = FileFormset(request.POST or None, files=request.FILES or None, instance=post)
-    if request.method == 'POST' and form.is_valid() and formset.is_valid():
-        form.save()
-        formset.save()
-        messages.success(request, '更新しました！')
-        # 編集ページを再度表示→DeatalViewにした
-        # return redirect('myinfo:update_post', pk=pk)
-        return redirect('myinfo:detail', pk=pk)
-
-    context = {
-        'form': form,
-        'formset': formset
-    }
-
-    return render(request, 'myinfo/update_postform.html', context)
-
-
-#未使用のindex
-class IndexView(generic.ListView):
-    model = Information
-    paginate_by = 3
-
-    def get_queryset(self):
-        return Information.objects.order_by('-created_at')
 
 #使用中のidndex
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -333,31 +247,6 @@ def paginate_queryset(request, queryset, count):
     return page_obj
 
 
-# class DetailView(generic.DetailView):
-#     model = Information
-
-# class CreateView(LoginRequiredMixin, generic.edit.CreateView):
-#     model = Information
-#     # fields = ['category', 'title', 'body', 'to_flag'] #'__all__'
-#     form_class = InformationForm
-
-#     def form_valid(self, form):
-#         form.instance.user = self.request.user
-#         messages.success(self.request, "作成しました")
-#         return super(CreateView, self).form_valid(form)
-
-
-# class UpdateView(LoginRequiredMixin, generic.edit.UpdateView):
-#     model = Information
-#     # fields = ['category', 'title', 'body', 'to_flag'] #'__all__'
-#     form_class = InformationForm
-
-#     def dispatch(self, request, *args, **kwargs):
-#         obj =self.get_object()
-#         if obj.user != self.request.user:
-#             raise PermissionDenied('You do not have permission to edit.')
-#         return super(UpdateView, self).dispatch(request, *args, **kwargs)
-
 class DeleteView(LoginRequiredMixin, generic.edit.DeleteView):
     model = Information
     success_url = reverse_lazy('myinfo:index')
@@ -370,51 +259,6 @@ class DeleteView(LoginRequiredMixin, generic.edit.DeleteView):
         return redirect(self.get_success_url())
 
 
-#使わないけど、テスト
-from django.views.generic.edit import FormView
-from . import forms
-class aaa(generic.edit.FormView):
-    form_class = forms.TextForm
-    template_name = "formview_test.html"
-
-    # フォームの入力にエラーが無かった場合に呼ばれます
-    def form_valid(self, form):
-        # form.cleaned_dataにフォームの入力内容が入っています
-        data = form.cleaned_data
-        text = data["text"]
-        search = data["search"]
-        replace = data["replace"]
-        
-        # ここで変換
-        new_text = text.replace(search, replace)
-        
-        # テンプレートに渡す
-        ctxt = self.get_context_data(new_text=new_text, form=form)
-        return self.render_to_response(ctxt)
-
-
-import csv
-import io
-def post_export(request):
-    # response = HttpResponse(content_type='text/csv')
-    response = HttpResponse(content_type='text/csv; charset=CP932')#Excelで開く用
-    response['Content-Disposition'] = 'attachment; filename="posts.csv"'
-    # HttpResponseオブジェクトはファイルっぽいオブジェクトなので、csv.writerにそのまま渡せます。
-    writer = csv.writer(response)
-    for information in Information.objects.all():
-        # writer.writerow([information.pk, information.title])
-        writer.writerow([
-            information.pk,
-            information.user,
-            information.category,
-            information.title,
-            information.body,
-            information.created_at
-            ])
-    return response
-
-
-import os
 UPLOAD_DIR = os.path.dirname(os.path.abspath(__file__)) + '/uploads/'  # アップロードしたファイルを保存するディレクトリ
 #同じファイル名は上書き保存されてしまうけど
 def handle_uploaded_file(f):
@@ -435,13 +279,10 @@ def attach_delete(request, pk):
     Attachments.objects.filter(pk=pk).delete()
     return redirect(request.META['HTTP_REFERER'])#元のページに戻る
 
-# #コメント投稿
-# def comment_post(request, pk):
-#     form = InfoCommentsForm(request.POST)
-#     if form.is_valid():
-#         comment_obj = form.save(commit=False)
-#         comment_obj.user = request.user
-#         comment_obj.information = information.pk
-#         comment_obj.save()
-
-#     return redirect(request.META['HTTP_REFERER'])#元のページに戻る
+#listからの既読削除
+def read_delete(request, pk):
+    #既読にする（中間テーブルから削除する）
+    read_exis = ReadStates.objects.filter(user=request.user, information=pk).exists()
+    if read_exis == True:
+        ReadStates.objects.filter(user=request.user, information=pk).delete()
+    return redirect(request.META['HTTP_REFERER'])#元のページに戻る

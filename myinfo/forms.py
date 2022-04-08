@@ -66,13 +66,6 @@ class InfoCommentsForm(forms.ModelForm):
         fields = ('comment',)
 
 
-#インラインフレームセット（未使用）
-FileFormset = forms.inlineformset_factory(
-    Information, Attachments, fields='__all__',#exclude('user',),の方がよいのか？
-    extra=3, max_num=10, can_delete=True
-)
-
-
 #変更・更新は別で用意か・・
 class InformationEditForm(LoginRequiredMixin, forms.ModelForm):
 
@@ -119,28 +112,6 @@ class InformationEditForm(LoginRequiredMixin, forms.ModelForm):
 
         #↑のフィールドのラッピングやめて、ここにカテゴリ等1つずつ書く
 
-
-
-#FormViewのテスト用
-class TextForm(forms.Form):
-    text = forms.CharField()
-    search = forms.CharField()
-    replace = forms.CharField()
-# class TextForm(forms.Form):
-#     text = forms.CharField(label="", widget=widget_textarea)
-#     search = forms.CharField(label="検索", widget=widget_textinput)
-#     replace = forms.CharField(label="置換", widget=widget_textinput)
-    
-#     # 自動的に呼ばれます。エラーを発生させると簡単に表示できます
-#     def clean(self):
-#         # djangoもともとのバリデーションを実行してデータを取得
-#         data = super().clean()
-#         text = data["text"]
-#         if len(text) <= 5:    
-#             raise ValidationError("テキストが短すぎます。")
-            
-#         # 最後は必ずデータ全体を返します
-#         return data
 
 class UploadFileForm(forms.Form):
     title = forms.CharField(max_length=50)
