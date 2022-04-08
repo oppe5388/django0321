@@ -93,6 +93,9 @@
 
                 </h6>
 
+                <div class="small mr-2">{{ information.created_at|date:"Y-m-d" }}　
+                    <i class="fas fa-user-edit mr-1"></i>{{ information.user.last_name }}</div>
+
                 <!-- 右側メニュー -->
                 {% if request.user.id == information.user.id %}
                     <div class="dropdown no-arrow">
@@ -146,17 +149,17 @@
                 <!-- 既読管理：ひとまず未読があったら表示-->
                 {% comment %} {% if user.is_superuser %} {% endcomment %}
                 {% if request.user.is_staff %}
-                    <span>
+                    <div class="mb-2">
                     {% for unread in unread_set %}
                         {% if information == unread.information %}
                             <div class="badge badge-warning">{{ unread.user.last_name }}</div>
                         {% endif %}
                     {% endfor %}
-                    </span>
+                    </div>
                 {% endif %}
 
-                <div class="small">{{ information.created_at|date:"Y-m-d" }}　
-                    <i class="fas fa-user-edit mr-1"></i>{{ information.user.last_name }}</div>
+                {% comment %} <div class="small mb-1">{{ information.created_at|date:"Y-m-d" }}　
+                    <i class="fas fa-user-edit mr-1"></i>{{ information.user.last_name }}</div> {% endcomment %}
                 <div>{{ information.filefield }}</div>
                 <div>
                 {% comment %} {{ information.body | striptags | truncatechars_html:50}} {% endcomment %}
