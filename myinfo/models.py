@@ -8,6 +8,8 @@ import os
 #添付ファイル
 from django.core.validators import FileExtensionValidator
 
+from tinymce import models as tinymce_models
+
 
 class InfoCategory(models.Model):
     name = models.CharField(max_length=100, null=True, verbose_name="カテゴリ名")
@@ -27,7 +29,8 @@ class Information(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(InfoCategory, null=True, on_delete=models.PROTECT)
     title = models.CharField(max_length=100)
-    body = models.TextField()
+    # body = models.TextField()
+    body = tinymce_models.HTMLField()
     to_flag = models.CharField(max_length=100, null=True, blank=True)
     # created_at = models.DateTimeField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=False)#impot-exportで任意にするため

@@ -39,6 +39,9 @@
     <!-- 自作の上書き用css -->
     {% comment %} <link href="{% static 'style.css' %}" rel="stylesheet"> {% endcomment %}
 
+    <!-- django-tinymce -->
+    {{ form.media }}
+
     {% block extra_head %}{% endblock %}
 </head>
 

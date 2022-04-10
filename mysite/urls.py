@@ -6,6 +6,8 @@ from . import settings
 from django.contrib.staticfiles.urls import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
+from filebrowser.sites import site
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
@@ -19,6 +21,10 @@ urlpatterns = [
     path('mycontact/', include('mycontact.urls')),
     path('sample/', include('sample.urls')),
     path('myreport/', include('myreport.urls')),
+
+    path('admin/filebrowser/', site.urls),
+    path('grappelli/', include('grappelli.urls')),
+    path('tinymce/', include('tinymce.urls')),
 ]
 
 
