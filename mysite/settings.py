@@ -225,6 +225,8 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 AUTH_USER_MODEL = 'accounts.User'
 
+
+#settingはuploader.js内に記述のため、↓は未使用
 # TINYMCE_JS_URL = 'http://debug.example.org/tiny_mce/tiny_mce_src.js'
 TINYMCE_DEFAULT_CONFIG = {
     "height": "320px",
@@ -241,3 +243,4 @@ TINYMCE_DEFAULT_CONFIG = {
 }
 # TINYMCE_SPELLCHECKER = True
 # TINYMCE_COMPRESSOR = True
+# TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, "tinymce")
