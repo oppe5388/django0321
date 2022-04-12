@@ -38,7 +38,8 @@
 
     <!-- 自作の上書き用css -->
     {% comment %} <link href="{% static 'style.css' %}" rel="stylesheet"> {% endcomment %}
-
+    <script>window.CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor/';</script>
+    {{ form.media }}
     {% block extra_head %}{% endblock %}
 </head>
 

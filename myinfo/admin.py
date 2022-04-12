@@ -2,17 +2,15 @@ from django.contrib import admin
 from .models import *
 from django_summernote.admin import SummernoteModelAdmin
 
-# class InformationAdmin(SummernoteModelAdmin):
-#     summernote_fields = '__all__'
 
 class AttachmentsInline(admin.StackedInline):
     model = Attachments
     extra = 3
 
 
-class InformationAdmin(SummernoteModelAdmin, admin.ModelAdmin):
-    summernote_fields = '__all__'
-    inlines = [AttachmentsInline]
+# class InformationAdmin(SummernoteModelAdmin, admin.ModelAdmin):
+#     summernote_fields = '__all__'
+#     inlines = [AttachmentsInline]
 
 
 admin.site.register(InfoCategory)

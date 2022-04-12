@@ -12,6 +12,8 @@ from accounts.models import User
 from .widgets import CustomCheckboxSelectMultiple
 from .widgets import AccordionCheckbox
 
+from ckeditor.widgets import CKEditorWidget
+
 #登録
 class InformationForm(LoginRequiredMixin, forms.ModelForm):
 
@@ -46,7 +48,8 @@ class InformationForm(LoginRequiredMixin, forms.ModelForm):
         # fields = ['category', 'title', 'body', 'to_flag', 'filefield'] #'__all__'
         fields = ['category', 'title', 'body', ]
         widgets = {
-            'body': SummernoteWidget(),
+            # 'body': SummernoteWidget(),
+            'body': CKEditorWidget(),
             'title': forms.TextInput(attrs={'placeholder': 'タイトルを入力してください'}),
             # 'title': TextInput(attrs={'placeholder': 'タイトル'}),
         }

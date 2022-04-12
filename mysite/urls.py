@@ -19,6 +19,8 @@ urlpatterns = [
     path('mycontact/', include('mycontact.urls')),
     path('sample/', include('sample.urls')),
     path('myreport/', include('myreport.urls')),
+    
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
 
 
