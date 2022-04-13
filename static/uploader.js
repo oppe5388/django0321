@@ -37,15 +37,18 @@ tinymce.init({
     "Impact=impact,chicago;" +
     "Terminal=terminal,monaco;" +
     "Times New Roman=times new roman,times;" +
+    "メイリオ=Meiryo;" +
     "ヒラギノ角ゴ='ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','ヒラギノ角ゴ ProN W3','Hiragino Kaku Gothic ProN';" +
     "ヒラギノ丸ゴ='ヒラギノ丸ゴ Pro W4','Hiragino Maru Gothic Pro','ヒラギノ丸ゴ ProN W4','Hiragino Maru Gothic ProN';" +
     "ＭＳ Ｐゴシック='ＭＳ Ｐゴシック','MS PGothic';" +
     "ＭＳ ゴシック='ＭＳ ゴシック','MS Gothic';" +
-    "游ゴシック='游ゴシック','Yu Gothic';" +
-    "ヒラギノ明朝='ヒラギノ明朝 Pro W3','Hiragino Mincho Pro',ヒラギノ明朝 ProN W3','Hiragino Mincho ProN';" +
-    "ＭＳ Ｐ明朝='ＭＳ Ｐ明朝','MS PMincho';" +
-    "ＭＳ 明朝='ＭＳ 明朝','MS Mincho';" +
-    "游明朝='游明朝','Yu Mincho';" ,
+    "游ゴシック='游ゴシック','Yu Gothic';" ,
+    // "ヒラギノ明朝='ヒラギノ明朝 Pro W3','Hiragino Mincho Pro',ヒラギノ明朝 ProN W3','Hiragino Mincho ProN';" +
+    // "ＭＳ Ｐ明朝='ＭＳ Ｐ明朝','MS PMincho';" +
+    // "ＭＳ 明朝='ＭＳ 明朝','MS Mincho';" +
+    // "游明朝='游明朝','Yu Mincho';",
+
+    fontsize_formats: "8pt 10pt 11pt 12pt 14pt 18pt 24pt 36pt",
  
 
 
