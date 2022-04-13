@@ -93,8 +93,11 @@
 
                 </h6>
 
-                <div class="small mr-2">{{ information.created_at|date:"Y-m-d" }}　
-                    <i class="fas fa-user-edit mr-1"></i>{{ information.user.last_name }}</div>
+                <div class="small mr-2">{{ information.created_at|date:"Y-m-d" }}
+                    {% if information.created_at|date:"Y-m-d" != information.updated_at|date:"Y-m-d" %}
+                    　<i class="fas fa-history"></i>{{ information.updated_at|date:"Y-m-d" }}
+                    {% endif %}
+                    　<i class="fas fa-user-edit mr-1"></i>{{ information.user.last_name }}</div>
 
                 <!-- 右側メニュー -->
                 {% if request.user.id == information.user.id %}

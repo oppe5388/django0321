@@ -28,6 +28,7 @@ def add_fbvform(request):
             obj = form.save(commit=False)
             obj.user = request.user
             obj.created_at = timezone.datetime.now()
+            obj.updated_at = timezone.datetime.now()
             obj.save()
 
             #添付ファイル：保存＆モデル書き込み
@@ -136,6 +137,11 @@ def edit_fbvform(request, pk, *args, **kwargs):
         if form.is_valid(): 
             obj = form.save(commit=False)
             obj.user = request.user
+
+            #更新日時も更新するチェックだったら
+            if request.POST.get('chk') is not None: 
+                obj.updated_at = timezone.datetime.now()
+
             obj.save()
 
             #添付ファイル3つ
@@ -207,12 +213,12 @@ def information_list(request):
                 queryset = queryset.filter(
                         Q(title__icontains=k) | 
                         Q(body__icontains=k)
-                    ).order_by('-id')#
+                    ).order_by('-updated_at')#
 
             context['informations'] = queryset
     else:
         searchForm = SearchForm()
-        informations = Information.objects.all().order_by('-id')
+        informations = Information.objects.all().order_by('-updated_at')
         page_obj = paginate_queryset(request, informations, 20)#ページネーション用
         context['page_obj'] = page_obj
         context['informations'] = page_obj.object_list

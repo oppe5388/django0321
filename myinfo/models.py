@@ -34,7 +34,8 @@ class Information(models.Model):
     to_flag = models.CharField(max_length=100, null=True, blank=True)
     # created_at = models.DateTimeField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=False)#impot-exportで任意にするため
-    updated_at = models.DateTimeField(auto_now=True)
+    # updated_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now_add=False)#更新するしないでソートをコントロールするため
      
     def __str__(self):
         # return self.title

@@ -59,17 +59,25 @@
         <div class="mb-3"><input type="file" name="pdf_file2"></div>
         <div class="mb-3"><input type="file" name="pdf_file3"></div>
 
+        
+
         <hr>
         
         <div class="btn-toolbar">
+            <div class="btn-group ml-auto" margin-left=auto;>
+            <label><input type="checkbox" name="chk" value="date_up" class="form-check-input">日時も更新する<span class="small">（一覧で上に表示）</span></label>
+            </div>
+
+            <div class="w-100"></div>
+
             <div class="btn-group">
                 <a href='JavaScript:history.back()' class="btn btn-secondary">
                 <i class="fas fa-chevron-left"></i> 戻る</a>
             </div>
-
+            
             <div class="btn-group ml-auto" margin-left=auto;>
             <button type="submit" class="submit btn btn-primary">
-            <i class="fas fa-check"></i> 更新する（元に戻せません）</button>
+            <i class="fas fa-check"></i> 更新する</button>
             </div>
         </div>
 
