@@ -110,7 +110,8 @@ class InformationEditForm(LoginRequiredMixin, forms.ModelForm):
         # fields = ['category', 'title', 'body', 'to_flag', 'filefield'] #'__all__'
         fields = ['category', 'title', 'body', ]
         widgets = {
-            'body': SummernoteWidget(),
+            # 'body': SummernoteWidget(),
+            'body': TinyMCE,   #追加
         }
 
         #↑のフィールドのラッピングやめて、ここにカテゴリ等1つずつ書く

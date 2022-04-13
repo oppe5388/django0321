@@ -23,7 +23,7 @@ services:
       - TZ=Asia/Tokyo
 
   db:
-    image: postgres
+    image: postgres:13.5
     container_name: db2prod
     volumes:
       - db-data:/var/lib/postgresql/data

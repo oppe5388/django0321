@@ -6,6 +6,7 @@ ENV PYTHONUNBUFFERED 1
 # RUN apk update \
 #    && apk add postgresql-dev gcc python3-dev musl-dev
 
+RUN apt update && apt-get install postgresql-client -y
 RUN pip install --upgrade pip
 
 RUN mkdir /code
