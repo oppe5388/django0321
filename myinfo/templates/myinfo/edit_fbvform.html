@@ -14,7 +14,8 @@
 
         <div class="mb-3">{{ form.category }}</div>
         <div class="mb-3">{{ form.title }}</div>
-        <div class="mb-3">{{ form.body }}</div>
+        <div class="mb-1">{{ form.body }}</div>
+        <div class="text-xs text-right mb-1">Enterで改行、Shift+Enterで段落</div>
         {% if form.errors %}
 			<div class="alert alert-warning" role="alert">{{ form.errors }}</div>
         {% endif %}
