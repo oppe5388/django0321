@@ -163,10 +163,20 @@
 
                 {% comment %} <div class="small mb-1">{{ information.created_at|date:"Y-m-d" }}　
                     <i class="fas fa-user-edit mr-1"></i>{{ information.user.last_name }}</div> {% endcomment %}
-                <div>{{ information.filefield }}</div>
                 <div>
-                {% comment %} {{ information.body | striptags | truncatechars_html:50}} {% endcomment %}
-                {{ information.body | safe }}
+                    {% comment %} {{ information.body | striptags | truncatechars_html:50}} {% endcomment %}
+                    {{ information.body | safe }}
+
+                    <!--  ↓attachmentモデル逆参照 -->
+                    {% for each_attachments in information.info_attach.all %}
+                        <div class="mt-2">
+                            <a href="{{ each_attachments.file_path.url }}" target="_blank">
+                            <i class="fas fa-paperclip"></i>
+                            {% comment %} {{ each_attachments.file_path }} {% endcomment %}
+                            {{ each_attachments.file_name }}
+                            </a>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

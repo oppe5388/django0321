@@ -31,24 +31,43 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex flex-row align-items-center">
         <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-file-invoice-dollar"></i> 到着〆と送金予定日</h6>
-        　<a href="{% url "mysched:fixdisp" %}" class="btn btn-info py-0 ml-3">
-            <i class="fas fa-exchange-alt"></i> 承認日表示</a>
     </div>
-    {% comment %} {% for money in moneytrans %}
-        <div id="copyTarget1">〜{{ money.deadline|date:"n/j(D)" }}到着　→　{{ money.transfer|date:"n/j(D)" }}送金</div>
-    {% endfor %} {% endcomment %}
-
-    {% comment %} コピーするために、こちらにも表示
-    →display noneだと機能しないので、仕方なくこちらのみ表示に {% endcomment %}
     <div class="card-body">
-<textarea id="copyTarget1" rows="5" class="col-sm-12 border-0 p-0 ml-2" readonly>{% for money in moneytrans %}
-〜{{ money.deadline|date:"m-d(D)" }}着 → {{ money.transfer|date:"m-d(D)" }}送金{% endfor %}</textarea>
+  <!-- タブ部分 -->
+  <ul class="nav nav-tabs mb-2">
+    <li class="nav-item">
+      <a href="#tab1" class="nav-link active" data-toggle="tab">承認日なし</a>
+    </li>
+    <li class="nav-item">
+      <a href="#tab2" class="nav-link" data-toggle="tab">承認日あり</a>
+    </li>
+  </ul>
+
+  <!-- 内容部分 -->
+  <div class="tab-content">
+    <div id="tab1" class="tab-pane active">
+        <textarea id="copyTarget1" rows="5" class="col-sm-12 border-0 p-0 ml-2" readonly>
+{% for money in moneytrans %}〜{{ money.deadline|date:"m-d(D)" }}着 → {{ money.transfer|date:"m-d(D)" }}送金
+{% endfor %}</textarea>
         <div class="ml-2">
             <button onclick="copyToClipboard('copyTarget1')" class="btn btn-outline-primary mr-1 p-1">
                 <i class="fas fa-copy"></i>
                 <span class="small"> Copy</span>
             </button>
         </div>
+    </div>
+    <div id="tab2" class="tab-pane">
+        <textarea id="copyTarget4" rows="5" class="col-sm-12 border-0 p-0 ml-2" readonly>
+{% for money in moneytrans %}〜{{ money.deadline|date:"m-d(D)" }}着 → {{ money.fix|date:"m-d(D)" }}承認 → {{ money.transfer|date:"m-d(D)" }}送金
+{% endfor %}</textarea>
+        <div class="ml-2">
+            <button onclick="copyToClipboard('copyTarget4')" class="btn btn-outline-primary mr-1 p-1">
+                <i class="fas fa-copy"></i>
+                <span class="small"> Copy</span>
+            </button>
+        </div>
+    </div>
+  </div>
     </div>
 </div>
 
@@ -90,7 +109,8 @@
     <div class="card-body pt-0">
         <div class="text-primary">解約・発行キャンセル</div>
         <div class="mb-2 ml-2 small text-secondary">キャンセル後の再申込は、承認日の翌日から可と案内</div>
-<textarea id="copyTarget2" rows="5" class="col-sm-12 border-0 p-0 ml-2" readonly>登録日：{{ input_date|date:"Y-m-d(D)" }}
+            <textarea id="copyTarget2" rows="5" class="col-sm-12 border-0 p-0 ml-2" readonly>
+登録日：{{ input_date|date:"Y-m-d(D)" }}
 ↓
 承認日：{{ past_sched.fix|date:"Y-m-d(D)" }}
 ↓
@@ -105,7 +125,8 @@
             <hr>
         
             <div class="text-primary mb-2">相殺</div>
-<textarea id="copyTarget3" rows="3" cols="28" class="col-sm-12 border-0 p-0 ml-2" readonly>登録(承認)日：{{ input_date|date:"Y-m-d(D)" }}
+            <textarea id="copyTarget3" rows="3" cols="28" class="col-sm-12 border-0 p-0 ml-2" readonly>
+登録(承認)日：{{ input_date|date:"Y-m-d(D)" }}
 ↓
 送金日：{{ setoff_sched.transfer|date:"Y-m-d(D)" }}</textarea>
             <div class="ml-2">
