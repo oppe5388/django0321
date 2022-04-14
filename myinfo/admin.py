@@ -2,6 +2,10 @@ from django.contrib import admin
 from .models import *
 from django_summernote.admin import SummernoteModelAdmin
 
+from import_export.resources import ModelResource
+from import_export.admin import ImportExportModelAdmin
+from import_export.formats import base_formats
+
 # class InformationAdmin(SummernoteModelAdmin):
 #     summernote_fields = '__all__'
 
@@ -21,10 +25,6 @@ admin.site.register(InfoCategory)
 # admin.site.register(InfoComments)
 # admin.site.register(Attachments)
 
-from import_export.resources import ModelResource
-from import_export.admin import ImportExportModelAdmin
-from import_export.formats import base_formats
-
 class InformationResource(ModelResource):
     class Meta:
         model = Information
@@ -35,7 +35,7 @@ class InformationResource(ModelResource):
 class InformationAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('id', 'title', 'user', 'body', 'created_at')  
     resource_class = InformationResource
-    formats = [base_formats.XLSX]
+    # formats = [base_formats.XLSX]
 
 admin.site.register(Information, InformationAdmin)
 

@@ -7,7 +7,7 @@ tinymce.init({
     // toolbar: "undo redo |  bold italic | alignleft alignright aligncenter alignjustify | image media | preview",
     toolbar: [ // ツールバー(2段)
     "undo redo | bold underline forecolor backcolor emoticons removeformat | fontsizeselect formatselect | outdent indent | \
-    alignleft aligncenter alignright | numlist bullist | image media insertfile hr link template | preview fullscreen code visualblocks searchreplace ",
+    alignleft aligncenter alignright | numlist bullist | image media insertfile hr link | preview fullscreen code visualblocks searchreplace ",
     ],
     height: "550px",
     menubar: "edit format insert view table help",
