@@ -5,20 +5,35 @@
     <i class="fas fa-business-time"></i> シフト</a>
 {% endblock %}
 
+{% block extra_head %}
+<style>
+    iframe[src$=".pdf"]{
+        width:100%;
+        {% comment %} height:70vh; {% endcomment %}
+        height:60vw;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 
     {% for shift in workshifts %}
         <!--  画像は表示のみ -->
         {% if '.png' in shift.file_path|stringformat:"s" or '.jpg' in shift.file_path|stringformat:"s" or '.jpeg' in shift.file_path|stringformat:"s"%}
             <img src = /media/{{ shift.file_path }} class="img-fluid" alt="Responsive image">
+            <hr>
         <!--  他はリンク -->
         {% else %}
-            <a href="{{ shift.file_path.url }}" target="_blank">
+            {% comment %} <a href="{{ shift.file_path.url }}" target="_blank">
             <i class="fas fa-paperclip"></i>
-            {{ shift.file_name }}</a>
+            {{ shift.file_name }}</a> {% endcomment %}
+            <iframe src="{{ shift.file_path.url }}">
+                <p><b>表示されない時の表示</b>: <a href="{{ shift.file_path.url }}">ダウンロード</a>.</p>
+            </iframe>
+            <hr>
         {% endif %}
-
-        <hr>
+        
     {% endfor %}
 
+    
 {% endblock %}
