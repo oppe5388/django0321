@@ -30,7 +30,7 @@ class Information(models.Model):
     category = models.ForeignKey(InfoCategory, null=True, on_delete=models.PROTECT)
     title = models.CharField(max_length=100)
     # body = models.TextField()
-    body = tinymce_models.HTMLField()
+    body = tinymce_models.HTMLField(null=True, blank=True)
     to_flag = models.CharField(max_length=100, null=True, blank=True)
     # created_at = models.DateTimeField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=False)#impot-exportで任意にするため
@@ -121,3 +121,15 @@ class Attachments(models.Model):
     class Meta:
         verbose_name_plural = "添付ファイル"
 
+
+class WorkShifts(models.Model):
+    file_path = models.FileField(upload_to = 'uploads/')
+    created_at = models.DateTimeField(auto_now_add=False)
+
+    """ -----file_name属性として作成----- """
+    def file_name(self):
+        path = os.path.basename(self.file_path.name)  # ファイル名のみ抽出
+        return path
+
+    class Meta:
+        verbose_name_plural = "シフト"

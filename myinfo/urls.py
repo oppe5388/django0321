@@ -19,4 +19,6 @@ urlpatterns = [
     #未読削除関数呼び出し
     path('<int:pk>/read_delete', views.read_delete, name='read_delete'),
 
+    #シフト表
+    path('shift/', views.shift, name='shift'),  
 ]

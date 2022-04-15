@@ -76,3 +76,10 @@ class ReadStatesAdmin(admin.ModelAdmin):
     ordering = ('-created_at',)
 
 admin.site.register(ReadStates, ReadStatesAdmin)
+
+
+class WorkShiftsAdmin(admin.ModelAdmin):
+    list_display = ('id', 'file_path', 'created_at')
+    ordering = ('-created_at',)
+
+admin.site.register(WorkShifts, WorkShiftsAdmin)

@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404, redirect
 from django.http import HttpResponse, Http404
 
 from django.views import generic
-from .models import Information, InfoCategory, Attachments, Notifications, ReadStates, InfoComments
+# from .models import Information, InfoCategory, Attachments, Notifications, ReadStates, InfoComments
+from .models import *
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
@@ -17,6 +18,10 @@ from accounts.models import User
 
 from django.utils import timezone
 import os
+
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from .forms import SearchForm
+from django.db.models import Q
 
 
 #関数ビューで通知の中間テーブルCreateを作ってみる
@@ -191,9 +196,6 @@ def edit_fbvform(request, pk, *args, **kwargs):
 
 
 #使用中のidndex
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .forms import SearchForm
-from django.db.models import Q
 def information_list(request):
 
     #検索
@@ -295,3 +297,14 @@ def read_delete(request, pk):
     if read_exis == True:
         ReadStates.objects.filter(user=request.user, information=pk).delete()
     return redirect(request.META['HTTP_REFERER'])#元のページに戻る
+
+
+#シフト表
+def shift(request):
+
+    workshifts = WorkShifts.objects.all().order_by('-created_at')
+    context = {
+        "workshifts":workshifts,
+    }
+
+    return render(request, 'myinfo/shift.html', context)

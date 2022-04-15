@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+{% block title %}シフト{% endblock %}
+{% block topbar %}
+<a class="nav-link" href='{% url "myinfo:index" %}'>
+    <i class="fas fa-business-time"></i> シフト</a>
+{% endblock %}
+
+{% block content %}
+
+    {% for shift in workshifts %}
+        <!--  画像は表示のみ -->
+        {% if '.png' in shift.file_path|stringformat:"s" or '.jpg' in shift.file_path|stringformat:"s" or '.jpeg' in shift.file_path|stringformat:"s"%}
+            <img src = /media/{{ shift.file_path }} class="img-fluid" alt="Responsive image">
+        <!--  他はリンク -->
+        {% else %}
+            <a href="{{ shift.file_path.url }}" target="_blank">
+            <i class="fas fa-paperclip"></i>
+            {{ shift.file_name }}</a>
+        {% endif %}
+
+        <hr>
+    {% endfor %}
+
+{% endblock %}
