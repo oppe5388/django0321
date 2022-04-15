@@ -70,7 +70,7 @@ def add_fbvform(request):
             return redirect('myinfo:index')
 
     else:
-        form = InformationForm  
+        form = InformationForm
 
         #ここに
 
@@ -170,19 +170,22 @@ def edit_fbvform(request, pk, *args, **kwargs):
             messages.success(request, '更新しました！')
             return redirect('myinfo:detail', pk=pk)
 
-    else:
+        else:
+            messages.error(request, '更新できませんでした。内容を確認してください。')
+            return redirect('myinfo:update', pk=pk)
+
+
     # 一覧表示からの遷移や、確認画面から戻った時
+    form = InformationEditForm(instance=information)
 
-        form = InformationEditForm(instance=information)
-
-        context ={
-            'form': form,
-            'information':information,
-            'notification':notifications,
-            'attachment':attachments,
-            'read_state':read_states,
-            
-        }
+    context ={
+        'form': form,
+        'information':information,
+        'notification':notifications,
+        'attachment':attachments,
+        'read_state':read_states,
+        
+    }
 
     return render(request, 'myinfo/edit_fbvform.html', context)
 
