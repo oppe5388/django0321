@@ -168,14 +168,28 @@
                     {{ information.body | safe }}
 
                     <!--  ↓attachmentモデル逆参照 -->
-                    {% for each_attachments in information.info_attach.all %}
+                    {% comment %} {% for each_attachments in information.info_attach.all %}
                         <div class="mt-2">
                             <a href="{{ each_attachments.file_path.url }}" target="_blank">
                             <i class="fas fa-paperclip"></i>
-                            {% comment %} {{ each_attachments.file_path }} {% endcomment %}
                             {{ each_attachments.file_name }}
                             </a>
                         </div>
+                    {% endfor %} {% endcomment %}
+
+                    <!--  ↓attachmentモデル逆参照 -->
+                    {% for each_attachments in information.info_attach.all %}
+                    <hr>
+                        <!--  画像は表示のみ -->
+                        {% if '.png' in each_attachments.file_path|stringformat:"s" or '.jpg' in each_attachments.file_path|stringformat:"s" or '.jpeg' in each_attachments.file_path|stringformat:"s"%}
+                            <img src = /media/{{ each_attachments.file_path }} class="img-fluid" alt="Responsive image">
+                        <!--  他はリンク -->
+                        {% else %}
+                            <a href="{{ each_attachments.file_path.url }}" target="_blank">
+                            <i class="fas fa-paperclip"></i>
+                            {{ each_attachments.file_name }}                       
+                        {% endif %}
+                        </a>
                     {% endfor %}
                 </div>
             </div>
