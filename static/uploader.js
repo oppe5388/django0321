@@ -7,11 +7,11 @@ tinymce.init({
     // toolbar: "undo redo |  bold italic | alignleft alignright aligncenter alignjustify | image media | preview",
     toolbar: [ // ツールバー(2段)
     "undo redo | bold underline forecolor backcolor emoticons removeformat | fontsizeselect formatselect | outdent indent | \
-    alignleft aligncenter alignright | numlist bullist | image media insertfile hr link | preview fullscreen code visualblocks searchreplace ",
+    alignleft aligncenter alignright | numlist bullist | image media insertfile hr link | preview fullscreen code visualblocks searchreplace",
     ],
     height: "550px",
     menubar: "edit format insert view table help",
-    plugins: "visualblocks template searchreplace hr code autosave advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code fullscreen insertdatetime media table paste code help wordcount emoticons",
+    plugins: "visualblocks template searchreplace hr code autosave advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code fullscreen insertdatetime media table paste code help wordcount emoticons image",
     // toolbar: "undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft "
     // "aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor "
     // "backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | "
@@ -26,6 +26,7 @@ tinymce.init({
     automatic_uploads: true,
     image_advtab: true,
     file_picker_types: "image media",
+    paste_data_images: true,
 
     font_formats:
     "Andale Mono=andale mono,times;" +
