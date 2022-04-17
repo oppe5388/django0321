@@ -160,14 +160,16 @@ def edit_fbvform(request, pk, *args, **kwargs):
                 instance = Attachments(file_path=request.FILES['pdf_file3'] , information=obj)
                 instance.save()
 
-            #通知：選択したユーザー
-            result = request.POST.getlist("tags")
-            for user in result:
-                # user_instance = User.objects.get(pk=user)#これ出来ない・
-                user_instance = get_object_or_404(User, pk=user)
-                Notifications.objects.get_or_create(user=user_instance, information=obj)
-                #既読も
-                ReadStates.objects.get_or_create(user=user_instance, information=obj)
+            #全員未読にするチェックだったら
+            if request.POST.get('chk2') is not None: 
+                #通知：選択したユーザー
+                result = request.POST.getlist("tags")
+                for user in result:
+                    # user_instance = User.objects.get(pk=user)#これ出来ない・
+                    user_instance = get_object_or_404(User, pk=user)
+                    # Notifications.objects.get_or_create(user=user_instance, information=obj)
+                    #既読も
+                    ReadStates.objects.get_or_create(user=user_instance, information=obj)
 
 
             request.session['form_data'] = request.POST
