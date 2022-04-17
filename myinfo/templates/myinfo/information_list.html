@@ -181,7 +181,7 @@
                     {% for each_attachments in information.info_attach.all %}
                     <hr>
                         <!--  画像は表示のみ -->
-                        {% if '.png' in each_attachments.file_path|stringformat:"s" or '.jpg' in each_attachments.file_path|stringformat:"s" or '.jpeg' in each_attachments.file_path|stringformat:"s"%}
+                        {% if '.png' in each_attachments.file_path|stringformat:"s" or '.jpg' in each_attachments.file_path|stringformat:"s" or '.jpeg' in each_attachments.file_path|stringformat:"s" or '.PNG' in each_attachments.file_path|stringformat:"s" or '.JPG' in each_attachments.file_path|stringformat:"s" or '.JPEG' in each_attachments.file_path|stringformat:"s" %}
                             <img src = /media/{{ each_attachments.file_path }} class="img-fluid" alt="Responsive image">
                         <!--  他はリンク -->
                         {% else %}

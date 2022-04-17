@@ -19,7 +19,7 @@
 
     {% for shift in workshifts %}
         <!--  画像は表示のみ -->
-        {% if '.png' in shift.file_path|stringformat:"s" or '.jpg' in shift.file_path|stringformat:"s" or '.jpeg' in shift.file_path|stringformat:"s"%}
+        {% if '.png' in shift.file_path|stringformat:"s" or '.jpg' in shift.file_path|stringformat:"s" or '.jpeg' in shift.file_path|stringformat:"s" or '.PNG' in shift.file_path|stringformat:"s" or '.JPG' in shift.file_path|stringformat:"s" or '.JPEG' in shift.file_path|stringformat:"s" %}
             <img src = /media/{{ shift.file_path }} class="img-fluid" alt="Responsive image">
             <hr>
         <!--  他はリンク -->
