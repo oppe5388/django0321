@@ -133,3 +133,19 @@ class WorkShifts(models.Model):
 
     class Meta:
         verbose_name_plural = "シフト"
+
+
+# FAQクラス
+class Faqs(models.Model):
+    question = tinymce_models.HTMLField(null=True, blank=True)
+    answer1 = tinymce_models.HTMLField(null=True, blank=True)
+    answer2 = tinymce_models.HTMLField(null=True, blank=True)
+    reference = tinymce_models.HTMLField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=False)#impot-exportで任意にするため
+    updated_at = models.DateTimeField(auto_now_add=False)#更新するしないでソートをコントロールするため
+     
+    def __str__(self):
+        return self.question
+
+    class Meta:
+        verbose_name_plural = "FAQ"

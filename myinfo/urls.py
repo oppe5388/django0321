@@ -1,6 +1,9 @@
 from django.urls import path
 from . import views
 
+from django.views.generic import TemplateView
+from .views import FaqsJsonView
+
 app_name = 'myinfo'
 
 urlpatterns = [
@@ -21,4 +24,9 @@ urlpatterns = [
 
     #シフト表
     path('shift/', views.shift, name='shift'),  
+
+    #FAQ
+    path('faq/', views.faqs_list, name='faqs_list'),
+    path('faq2/', TemplateView.as_view(template_name='myinfo/faqs2.html')),
+    path('faq2/data', views.FaqsJsonView.as_view(), name='FaqsJson'),
 ]

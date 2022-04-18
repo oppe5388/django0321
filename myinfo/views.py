@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 
-from .forms import InformationForm, InformationEditForm
+from .forms import InformationForm, InformationEditForm, SearchForm, FaqSearchForm
 
 from django.contrib import messages
 
@@ -20,8 +20,9 @@ from django.utils import timezone
 import os
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .forms import SearchForm
 from django.db.models import Q
+
+from django_datatables_view.base_datatable_view import BaseDatatableView
 
 
 #関数ビューで通知の中間テーブルCreateを作ってみる
@@ -310,3 +311,60 @@ def shift(request):
     }
 
     return render(request, 'myinfo/shift.html', context)
+
+
+#FAQリスト
+def faqs_list(request):
+
+    faqsearchForm = FaqSearchForm(request.GET)
+
+    context = {
+        'faqsearchForm': faqsearchForm,
+    }
+
+    if faqsearchForm.is_valid():
+        queryset = Faqs.objects.all()
+        keyword = faqsearchForm.cleaned_data['keyword']
+        if keyword:
+            keyword = keyword.split()
+            for k in keyword:
+                queryset = queryset.filter(
+                        Q(question__icontains=k) | 
+                        Q(answer1__icontains=k) | 
+                        Q(answer2__icontains=k) | 
+                        Q(reference__icontains=k)
+                    ).order_by('-updated_at')#
+
+            context['faqs'] = queryset
+    else:
+        faqsearchForm = FaqSearchForm()
+        faqs = Faqs.objects.all().order_by('-updated_at')
+        page_obj = paginate_queryset(request, faqs, 50)#ページネーション用
+        context['page_obj'] = page_obj
+        context['faqs'] = page_obj.object_list
+
+
+    return render(request, 'myinfo/faqs.html', context)
+
+
+#FAQ Datatablesバージョン
+class FaqsJsonView(BaseDatatableView):
+    # モデルの指定
+    model = Faqs
+    # 表示するフィールドの指定
+    columns = ['id', 'question', 'answer1', 'answer2', 'reference']
+
+
+    def filter_queryset(self, qs):
+
+        search = self.request.GET.get('search[value]', None)
+        if search:
+            search_parts = search.split()
+            for part in search_parts:
+                qs = qs.filter(
+                        Q(question__icontains=part) | 
+                        Q(answer1__icontains=part) | 
+                        Q(answer2__icontains=part) | 
+                        Q(reference__icontains=part)
+                    )
+        return qs

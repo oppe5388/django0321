@@ -120,3 +120,8 @@ class InformationEditForm(LoginRequiredMixin, forms.ModelForm):
 class UploadFileForm(forms.Form):
     title = forms.CharField(max_length=50)
     pdf_file = forms.FileField()
+
+
+#FAQ検索
+class FaqSearchForm(forms.Form):
+        keyword = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder':'Search for...', 'class':'form-control'}))

@@ -83,3 +83,17 @@ class WorkShiftsAdmin(admin.ModelAdmin):
     ordering = ('-created_at',)
 
 admin.site.register(WorkShifts, WorkShiftsAdmin)
+
+
+#FAQ
+class FaqsResource(ModelResource):
+    class Meta:
+        model = Faqs
+        skip_unchanged = True
+        import_id_fields = ['id']
+
+class FaqsAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ('id', 'question', 'created_at')  
+    resource_class = FaqsResource
+
+admin.site.register(Faqs, FaqsAdmin)

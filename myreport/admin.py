@@ -13,7 +13,7 @@ class DailyReportResource(ModelResource):
         skip_unchanged = True
         import_id_fields = ['day']
 
-#お知らせインポート、エクスポート
+#インポート、エクスポート
 class DailyReportAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('day', 'user')
     resource_class = DailyReportResource

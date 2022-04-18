@@ -1,0 +1,139 @@
+{% extends 'layout.html' %}
+{% block title %}FAQ{% endblock %}
+{% block topbar %}
+<a class="nav-link" href='{% url "myinfo:faqs_list" %}'>
+    <i class="fas fa-question-circle"></i> FAQ</a>
+{% endblock %}
+
+{% block content %}
+
+{% if messages %}
+		{% for message in messages %}
+			<div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+		{% endfor %}
+{% endif %}
+
+    <!-- 検索フォーム -->
+    <div class="d-flex my-3">
+    {% if faqsearchForm %}
+    <div class="my-box mr-auto">
+        <form class="d-sm-inline-block form-inline mr-auto my-2 my-md-0" action='{% url "myinfo:faqs_list" %}' method='get'>
+            <div class="input-group">
+                {{ faqsearchForm.keyword }}
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <a href="{% url 'myinfo:faqs_list' %}" class="d-none d-sm-inline-block btn btn-secondary ml-3 py-1 px-2"><i class="fas fa-backspace"></i></a>
+    </div>
+    {% endif %}
+    
+    </div>
+
+    <!--  #関数ビュー -->
+    {% for faq in faqs %}
+        
+        <!-- Dropdown Card Example -->
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+
+                <!-- タイトル -->
+                <h6 class="m-0 font-weight-bold text-primary mr-auto">
+                </h6>
+
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                      <div class="card">
+                        <div class="card-body card-text">
+                            {{ faq.question | safe }}
+                            <div class="text-xs text-right mb-1">
+                                <br><br>{{ faq.reference | safe }}
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body card-text">
+                            {{ faq.answer1 | safe }}
+                            {% if faq.answer2 is not None %}
+                            <br>※補足：{{ faq.answer2 | safe }}</td>
+                            {% endif %}
+                        </div>
+                    </div>
+                    </div>
+                  </div>
+
+            </div>
+        </div>
+
+    {% endfor %}
+
+    {% comment %} <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Question</th>
+            <th scope="col">Answer</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for faq in faqs %}
+          <tr>
+            <td>{{ faq.question | safe }}
+                <div class="text-xs text-right mb-1">
+                    <br><br>{{ faq.reference | safe }}
+                </div>
+            </td>
+            <td>{{ faq.answer1 | safe }}
+                {% if faq.answer2 is not None %}
+                <br>※補足：{{ faq.answer2 | safe }}</td>
+                {% endif %}
+          </tr>
+            {% endfor %}
+        </tbody>
+      </table> {% endcomment %}
+      
+
+
+    <!--  ↑ページネーションのincludeがあたってないので直書き↓  -->
+    <ul class="pagination" style="justify-content:center">
+    <ul class="pagination">
+        <!-- 前へ の部分 -->
+        {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        {% endif %}
+
+        <!-- 数字の部分 -->
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <li class="page-item active"><a class="page-link" href="#!">{{ num }}</a></li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        <!-- 次へ の部分 -->
+        {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+    </ul>
+
+{% endblock %}
+
