@@ -29,4 +29,7 @@ urlpatterns = [
     path('faq/', views.faqs_list, name='faqs_list'),
     path('faq2/', TemplateView.as_view(template_name='myinfo/faqs2.html')),
     path('faq2/data', views.FaqsJsonView.as_view(), name='FaqsJson'),
+
+    #全体検索
+    path('search_result/', views.all_search, name='all_search'),     
 ]

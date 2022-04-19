@@ -2,13 +2,12 @@ from django.shortcuts import render, redirect, get_object_or_404, redirect
 from django.http import HttpResponse, Http404
 
 from django.views import generic
-# from .models import Information, InfoCategory, Attachments, Notifications, ReadStates, InfoComments
 from .models import *
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 
-from .forms import InformationForm, InformationEditForm, SearchForm, FaqSearchForm
+from .forms import *
 
 from django.contrib import messages
 
@@ -205,9 +204,11 @@ def information_list(request):
     #検索結果をページネーションするにはSessionから条件取得？
     #→中止して、検索の場合、ページネーションなしにしよう。  
     searchForm = SearchForm(request.GET)
+    allsearchForm = AllSearchForm(request.GET)
 
     context = {
         'searchForm': searchForm,
+        'allsearchForm': allsearchForm,
     }
 
     if searchForm.is_valid():
@@ -230,6 +231,7 @@ def information_list(request):
         page_obj = paginate_queryset(request, informations, 20)#ページネーション用
         context['page_obj'] = page_obj
         context['informations'] = page_obj.object_list
+        allsearchForm = AllSearchForm()
 
 
     #通知（有無だけ）
@@ -368,3 +370,50 @@ class FaqsJsonView(BaseDatatableView):
                         Q(reference__icontains=part)
                     )
         return qs
+
+
+#全体検索
+def all_search(request):
+
+    allsearchForm = AllSearchForm(request.GET)
+
+    context = {
+        'allsearchForm': allsearchForm,
+    }
+
+    if allsearchForm.is_valid():
+
+        #おしらせの検索ここに
+        queryset = Information.objects.all()
+        keyword = allsearchForm.cleaned_data['all_search_keyword']
+        if keyword:
+            keyword = keyword.split()
+            for k in keyword:
+                queryset = queryset.filter(
+                        Q(title__icontains=k) | 
+                        Q(body__icontains=k)
+                    ).order_by('-updated_at')#
+
+            context['informations'] = queryset
+
+
+        #FAQ
+        queryset = Faqs.objects.all()
+        keyword = allsearchForm.cleaned_data['all_search_keyword']
+        if keyword:
+            keyword = keyword.split()
+            for k in keyword:
+                queryset = queryset.filter(
+                        Q(question__icontains=k) | 
+                        Q(answer1__icontains=k) | 
+                        Q(answer2__icontains=k) | 
+                        Q(reference__icontains=k)
+                    ).order_by('-updated_at')#
+
+            context['faqs'] = queryset
+
+            return render(request, 'myinfo/search_result.html', context)
+
+    else:
+        allsearchForm = AllSearchForm()
+        return render(request, 'myinfo/search_result.html', context)

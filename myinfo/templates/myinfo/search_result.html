@@ -1,0 +1,134 @@
+{% extends 'layout.html' %}
+{% block title %}検索結果{% endblock %}
+{% block topbar %}
+{% endblock %}
+
+{% block content %}
+
+{% if messages %}
+		{% for message in messages %}
+			<div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+		{% endfor %}
+{% endif %}
+
+
+      <div class="h5"><i class="fas fa-broadcast-tower"></i> おしらせの検索結果：</div>
+
+      {% for information in informations %} {% comment %} #関数ビュー {% endcomment %}
+        
+      <!-- Dropdown Card Example -->
+      <div class="card shadow mb-4">
+          <!-- Card Header - Dropdown -->
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+
+              <!-- タイトル -->
+              <h6 class="m-0 font-weight-bold text-primary mr-auto">
+                  <!-- 見る側が未読だったら -->
+                  {% for unread in unread_set %}
+                      {% if information == unread.information and request.user.id == unread.user.id %}
+                      <a href="{% url 'myinfo:read_delete' information.pk %}" class="btn-info badge mr-2">
+                          <i class="fas fa-check"></i> 既読にする
+                      </a>
+                      {% endif %}
+                  {% endfor %}
+
+                  <a href="{% url 'myinfo:detail' information.pk %}">{{ information.title }}</a>
+
+              </h6>
+
+              <div class="small mr-2">{{ information.created_at|date:"Y-m-d" }}
+                  {% if information.created_at|date:"Y-m-d" != information.updated_at|date:"Y-m-d" %}
+                  　<i class="fas fa-history"></i>{{ information.updated_at|date:"Y-m-d" }}
+                  {% endif %}
+                  　<i class="fas fa-user-edit mr-1"></i>{{ information.user.last_name }}</div>
+
+              <!-- 右側メニュー -->
+              {% if request.user.id == information.user.id %}
+                  <div class="dropdown no-arrow">
+                      <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                          aria-labelledby="dropdownMenuLink">
+                          <div class="dropdown-header">action:</div>
+                          <a class="dropdown-item" href="{% url 'myinfo:update' information.pk %}">
+                              <i class="fas fa-edit"></i>
+                              編集
+                          </a>
+                          <a class="dropdown-item" href="{% url 'myinfo:delete' information.pk %}">
+                              <i class="fas fa-trash-alt"></i>
+                              削除
+                          </a>
+                      </div>
+                  </div>
+
+              {% endif %}
+          </div>
+          <!-- Card Body -->
+          <div class="card-body">
+
+              <div>
+                  {{ information.body | safe }}
+
+                  <!--  ↓attachmentモデル逆参照 -->
+                  {% for each_attachments in information.info_attach.all %}
+                  <hr>
+                      <!--  画像は表示のみ -->
+                      {% if '.png' in each_attachments.file_path|stringformat:"s" or '.jpg' in each_attachments.file_path|stringformat:"s" or '.jpeg' in each_attachments.file_path|stringformat:"s" or '.PNG' in each_attachments.file_path|stringformat:"s" or '.JPG' in each_attachments.file_path|stringformat:"s" or '.JPEG' in each_attachments.file_path|stringformat:"s" %}
+                          <img src = /media/{{ each_attachments.file_path }} class="img-fluid" alt="Responsive image">
+                      <!--  他はリンク -->
+                      {% else %}
+                          <a href="{{ each_attachments.file_path.url }}" target="_blank">
+                          <i class="fas fa-paperclip"></i>
+                          {{ each_attachments.file_name }}</a>
+                      {% endif %}
+                      
+                  {% endfor %}
+              </div>
+          </div>
+      </div>
+
+  {% endfor %}
+
+
+
+
+
+      <!-- ネストのテーブル -->
+      <div class="h5"><i class="fas fa-question-circle"></i> FAQの検索結果：</div>
+      <table class="table ">
+        <tbody>
+        {% for faq in faqs %}
+          <tr>
+            <td class="bg-gray-300 text-gray-800 pb-0 mb-3">{{ faq.question | safe }}
+                <div class="text-xs text-right">
+                    {{ faq.reference | safe }}
+                </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="pl-3 pb-3 pt-0 pr-0">
+              <table class="table mb-0 bg-white">
+                <tbody>
+                  <tr>
+                    <td>{{ faq.answer1 | safe }}
+                        {% if faq.answer2 is not None and faq.answer2 != "" %}
+                        <br>※補足：{{ faq.answer2 | safe }}
+                        {% endif %}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+
+
+{% endblock %}
+
+{% block extra_foot %}
+{% endblock %}
+
