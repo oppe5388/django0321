@@ -261,12 +261,12 @@
                         <!-- Nav Item - User Information -->
                         <div>
                             <li class="text-gray-600 d-flex small">
-                                {% now "Y/n/j(D)" %}
+                                <div class="ml-auto">{% now "Y/n/j(D)" %}</div>
                             </li>
                             <li class="text-gray-600 d-flex small align-items-center">
                                 {% if user.is_authenticated %}
                                     <div class="d-none d-sm-inline-block">こんにちは、{{ user.last_name }}さん</div>
-                                    <a href='{% url "logout" %}' class="nav-link" data-toggle="tooltip" title="Logout">
+                                    <a href='{% url "logout" %}' class="nav-link ml-auto" data-toggle="tooltip" title="Logout">
                                         <i class="fas fa-sign-out-alt"></i>
                                     </a>
                                 {% else %}

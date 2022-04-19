@@ -338,7 +338,7 @@ def faqs_list(request):
             context['faqs'] = queryset
     else:
         faqsearchForm = FaqSearchForm()
-        faqs = Faqs.objects.all().order_by('-updated_at')
+        faqs = Faqs.objects.all().order_by('-updated_at', 'id')
         page_obj = paginate_queryset(request, faqs, 50)#ページネーション用
         context['page_obj'] = page_obj
         context['faqs'] = page_obj.object_list

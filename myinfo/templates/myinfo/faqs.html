@@ -102,10 +102,34 @@
         </tbody>
       </table> {% endcomment %}
 
+
+    <!-- タブ部分 -->
+    <ul class="nav nav-tabs mb-2 small">
+        <li class="nav-item">
+            <a href="#tab1" class="nav-link active" data-toggle="tab">すべて</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tab2" class="nav-link" data-toggle="tab">週報</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tab3" class="nav-link" data-toggle="tab">研修</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tab4" class="nav-link" data-toggle="tab">名変</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tab5" class="nav-link" data-toggle="tab">商品部</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tab6" class="nav-link" data-toggle="tab">エラーMSG</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tab7" class="nav-link disabled" data-toggle="tab">検索結果</a>
+        </li>
+    </ul>
+
       <!-- ネストのテーブル -->
       <table class="table ">
-        <thead>
-        </thead>
         <tbody>
         {% for faq in faqs %}
           <tr>
@@ -121,7 +145,7 @@
                 <tbody>
                   <tr>
                     <td>{{ faq.answer1 | safe }}
-                        {% if faq.answer2 is not None %}
+                        {% if faq.answer2 is not None and faq.answer2 != "" %}
                         <br>※補足：{{ faq.answer2 | safe }}
                         {% endif %}
                     </td>
@@ -167,5 +191,24 @@
     </ul>
     </ul>
 
+{% endblock %}
+
+{% block extra_foot %}
+<!-- #tab名でtabへの直リンクを可能にする -->
+<script>
+    $(function() {
+      // Javascript to enable link to tab
+      var hash = document.location.hash;
+      if (hash) {
+        console.log(hash);
+        $('.nav-tabs a[href=\\'+hash+']').tab('show');
+      }
+
+      // Change hash for page-reload
+      $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+        window.location.hash = e.target.hash;
+      });
+    });
+</script>
 {% endblock %}
 
