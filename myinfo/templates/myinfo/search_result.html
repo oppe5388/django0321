@@ -11,8 +11,16 @@
 		{% endfor %}
 {% endif %}
 
+    <div class=" h5 mb-3">
+        "{{ keyword }}"の検索結果：
+    </div>
 
-      <div class="h5"><i class="fas fa-broadcast-tower"></i> おしらせの検索結果：</div>
+    <div class="card text-white bg-info mb-3">
+        <div class="d-flex align-items-center card-body p-2">
+            <i class="fas fa-broadcast-tower"></i>&nbsp;おしらせ
+          </div>
+    </div>
+
 
       {% for information in informations %} {% comment %} #関数ビュー {% endcomment %}
         
@@ -92,11 +100,13 @@
   {% endfor %}
 
 
-
-
+    <div class="card text-white bg-info mb-3">
+        <div class="d-flex align-items-center card-body p-2">
+            <i class="fas fa-question-circle"></i>&nbsp;FAQ
+        </div>
+    </div>
 
       <!-- ネストのテーブル -->
-      <div class="h5"><i class="fas fa-question-circle"></i> FAQの検索結果：</div>
       <table class="table ">
         <tbody>
         {% for faq in faqs %}

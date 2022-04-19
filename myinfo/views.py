@@ -204,11 +204,9 @@ def information_list(request):
     #検索結果をページネーションするにはSessionから条件取得？
     #→中止して、検索の場合、ページネーションなしにしよう。  
     searchForm = SearchForm(request.GET)
-    allsearchForm = AllSearchForm(request.GET)
 
     context = {
         'searchForm': searchForm,
-        'allsearchForm': allsearchForm,
     }
 
     if searchForm.is_valid():
@@ -231,8 +229,6 @@ def information_list(request):
         page_obj = paginate_queryset(request, informations, 20)#ページネーション用
         context['page_obj'] = page_obj
         context['informations'] = page_obj.object_list
-        allsearchForm = AllSearchForm()
-
 
     #通知（有無だけ）
     if request.user.id is not None:
@@ -375,45 +371,76 @@ class FaqsJsonView(BaseDatatableView):
 #全体検索
 def all_search(request):
 
-    allsearchForm = AllSearchForm(request.GET)
+    # allsearchForm = AllSearchForm(request.GET)
+    # context = {
+    #         'allsearchForm': allsearchForm,
+    #     }
+    # 
+    #forms.pyを使うと全viewsに記述が必要なため、layout.html直接にした
+    # if allsearchForm.is_valid():
+    #     #おしらせの検索ここに
+    #     queryset = Information.objects.all()
+    #     keyword = allsearchForm.cleaned_data['all_search_keyword']
+    #     if keyword:
+    #         keyword = keyword.split()
+    #         for k in keyword:
+    #             queryset = queryset.filter(
+    #                     Q(title__icontains=k) | 
+    #                     Q(body__icontains=k)
+    #                 ).order_by('-updated_at')#
+    #         context['informations'] = queryset
+    #     #FAQ
+    #     queryset = Faqs.objects.all()
+    #     keyword = allsearchForm.cleaned_data['all_search_keyword']
+    #     if keyword:
+    #         keyword = keyword.split()
+    #         for k in keyword:
+    #             queryset = queryset.filter(
+    #                     Q(question__icontains=k) | 
+    #                     Q(answer1__icontains=k) | 
+    #                     Q(answer2__icontains=k) | 
+    #                     Q(reference__icontains=k)
+    #                 ).order_by('-updated_at')#
+    #         context['faqs'] = queryset
+    #         return render(request, 'myinfo/search_result.html', context)
+    # else:
+    #     allsearchForm = AllSearchForm()
+    #     return render(request, 'myinfo/search_result.html', context)
 
+
+    keyword = request.GET.get('all_search')
     context = {
-        'allsearchForm': allsearchForm,
+        'keyword': keyword,
     }
+    #おしらせの検索ここに
+    queryset = Information.objects.all()
+    if keyword:
+        keyword = keyword.split()
+        for k in keyword:
+            queryset = queryset.filter(
+                    Q(title__icontains=k) | 
+                    Q(body__icontains=k)
+                ).order_by('-updated_at')#
 
-    if allsearchForm.is_valid():
-
-        #おしらせの検索ここに
-        queryset = Information.objects.all()
-        keyword = allsearchForm.cleaned_data['all_search_keyword']
-        if keyword:
-            keyword = keyword.split()
-            for k in keyword:
-                queryset = queryset.filter(
-                        Q(title__icontains=k) | 
-                        Q(body__icontains=k)
-                    ).order_by('-updated_at')#
-
-            context['informations'] = queryset
+        # context = {
+        #     'informations': queryset,
+        # }
+        context['informations'] = queryset
 
 
-        #FAQ
-        queryset = Faqs.objects.all()
-        keyword = allsearchForm.cleaned_data['all_search_keyword']
-        if keyword:
-            keyword = keyword.split()
-            for k in keyword:
-                queryset = queryset.filter(
-                        Q(question__icontains=k) | 
-                        Q(answer1__icontains=k) | 
-                        Q(answer2__icontains=k) | 
-                        Q(reference__icontains=k)
-                    ).order_by('-updated_at')#
+    #FAQ
+    queryset = Faqs.objects.all()
+    keyword = request.GET.get('all_search')
+    if keyword:
+        keyword = keyword.split()
+        for k in keyword:
+            queryset = queryset.filter(
+                    Q(question__icontains=k) | 
+                    Q(answer1__icontains=k) | 
+                    Q(answer2__icontains=k) | 
+                    Q(reference__icontains=k)
+                ).order_by('-updated_at')#
 
-            context['faqs'] = queryset
+        context['faqs'] = queryset
 
-            return render(request, 'myinfo/search_result.html', context)
-
-    else:
-        allsearchForm = AllSearchForm()
-        return render(request, 'myinfo/search_result.html', context)
+    return render(request, 'myinfo/search_result.html', context)

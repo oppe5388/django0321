@@ -27,7 +27,7 @@
                 </div>
             </div>
         </form>
-        <a href="{% url 'myinfo:faqs_list' %}" class="d-none d-sm-inline-block btn btn-secondary ml-3 py-1 px-2"><i class="fas fa-backspace"></i></a>
+        <a href="{% url 'myinfo:faqs_list' %}" class="d-none d-sm-inline-block btn btn-secondary btn-circle btn-sm ml-2"><i class="fas fa-times"></i></a>
     </div>
     {% endif %}
     
@@ -104,7 +104,7 @@
 
 
     <!-- タブ部分 -->
-    <ul class="nav nav-tabs mb-2 small">
+    {% comment %} <ul class="nav nav-tabs mb-2 small">
         <li class="nav-item">
             <a href="#tab1" class="nav-link active" data-toggle="tab">すべて</a>
         </li>
@@ -126,7 +126,7 @@
         <li class="nav-item">
             <a href="#tab7" class="nav-link disabled" data-toggle="tab">検索結果</a>
         </li>
-    </ul>
+    </ul> {% endcomment %}
 
       <!-- ネストのテーブル -->
       <table class="table ">

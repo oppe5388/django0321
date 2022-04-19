@@ -60,8 +60,8 @@
 
         {% if searchForm %}
         <div class="ml-auto">
-            <form class="d-sm-inline-block form-inline my-2 my-md-0" action='{% url "myinfo:index" %}' method='get'>
-                <div class="input-group">
+            <form class="d-sm-inline-block" action='{% url "myinfo:index" %}' method='get'>
+                <div class="input-group ">
                     {{ searchForm.keyword }}
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="submit">
@@ -70,7 +70,7 @@
                     </div>
                 </div>
             </form>
-            <a href="{% url 'myinfo:index' %}" class="d-none d-sm-inline-block btn btn-secondary ml-3 py-1 px-2"><i class="fas fa-backspace"></i></a>
+            <a href="{% url 'myinfo:index' %}" class="d-none d-sm-inline-block btn btn-secondary btn-circle btn-sm ml-2"><i class="fas fa-times"></i></a>
         </div>
         {% endif %}
     </div>

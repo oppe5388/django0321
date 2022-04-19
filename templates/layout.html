@@ -183,12 +183,14 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    {% if allsearchForm %}
+                    {% comment %} {% if allsearchForm %} {% endcomment %}
                     <form
                     class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
                     action='{% url "myinfo:all_search" %}' method='get'>
                     <div class="input-group">
-                            {{ allsearchForm.all_search_keyword }}
+                            {% comment %} {{ allsearchForm.all_search_keyword }} {% endcomment %}
+                            <input type="text" name="all_search" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                aria-label="Search" aria-describedby="basic-addon2">
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="submit">
                                 <i class="fas fa-search fa-sm"></i>
@@ -196,7 +198,7 @@
                         </div>
                     </div>
                     </form>
-                    {% endif %}
+                    {% comment %} {% endif %} {% endcomment %}
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -213,10 +215,9 @@
                             <form class="form-inline mr-auto w-100 navbar-search"
                             action='{% url "myinfo:all_search" %}' method='get'>
                                 <div class="input-group">
-                                    {% comment %} <input type="text" class="form-control bg-light border-0 small"
+                                    <input type="text" name="all_search" class="form-control bg-light border-0 small"
                                         placeholder="Search for..." aria-label="Search"
-                                        aria-describedby="basic-addon2"> {% endcomment %}
-                                        {{ allsearchForm.all_search_keyword }}
+                                        aria-describedby="basic-addon2">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="submit">
                                             <i class="fas fa-search fa-sm"></i>

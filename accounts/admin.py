@@ -12,9 +12,10 @@ class UserResource(ModelResource):
 
 class UserAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('id', 'username', 'last_login', 'last_name', 'is_active', 'is_staff')
+    list_filter = ('is_staff', 'is_superuser', 'is_active', 'groups')
     ordering = ('id', )
     resource_class = UserResource
-    formats = [base_formats.CSV]
+    # formats = [base_formats.CSV]
     
 
 admin.site.register(User, UserAdmin)
