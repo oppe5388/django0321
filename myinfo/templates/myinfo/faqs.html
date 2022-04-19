@@ -1,8 +1,8 @@
 {% extends 'layout.html' %}
 {% block title %}FAQ{% endblock %}
 {% block topbar %}
-<a class="nav-link" href='{% url "myinfo:faqs_list" %}'>
-    <i class="fas fa-question-circle"></i> FAQ</a>
+{% comment %} <a class="nav-link" href='{% url "myinfo:faqs_list" %}'>
+    <i class="fas fa-question-circle"></i> FAQ</a> {% endcomment %}
 {% endblock %}
 
 {% block content %}
@@ -16,7 +16,7 @@
     <!-- 検索フォーム -->
     <div class="d-flex my-3">
     {% if faqsearchForm %}
-    <div class="my-box mr-auto">
+    <div class="my-box ml-auto">
         <form class="d-sm-inline-block form-inline mr-auto my-2 my-md-0" action='{% url "myinfo:faqs_list" %}' method='get'>
             <div class="input-group">
                 {{ faqsearchForm.keyword }}
@@ -33,8 +33,8 @@
     
     </div>
 
-    <!--  #関数ビュー -->
-    {% for faq in faqs %}
+    <!-- カード -->
+    {% comment %} {% for faq in faqs %}
         
         <!-- Dropdown Card Example -->
         <div class="card shadow mb-4">
@@ -75,8 +75,9 @@
             </div>
         </div>
 
-    {% endfor %}
-
+    {% endfor %} {% endcomment %}
+    
+    <!-- テーブル -->
     {% comment %} <table class="table table-hover">
         <thead>
           <tr>
@@ -100,7 +101,38 @@
             {% endfor %}
         </tbody>
       </table> {% endcomment %}
-      
+
+      <!-- ネストのテーブル -->
+      <table class="table ">
+        <thead>
+        </thead>
+        <tbody>
+        {% for faq in faqs %}
+          <tr>
+            <td class="bg-gray-300 text-gray-800 pb-0 mb-3">{{ faq.question | safe }}
+                <div class="text-xs text-right">
+                    {{ faq.reference | safe }}
+                </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="pl-3 pb-3 pt-0 pr-0">
+              <table class="table mb-0 bg-white">
+                <tbody>
+                  <tr>
+                    <td>{{ faq.answer1 | safe }}
+                        {% if faq.answer2 is not None %}
+                        <br>※補足：{{ faq.answer2 | safe }}
+                        {% endif %}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
 
 
     <!--  ↑ページネーションのincludeがあたってないので直書き↓  -->

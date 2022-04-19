@@ -1,8 +1,10 @@
 {% extends 'layout.html' %}
 {% block title %}おしらせ{% endblock %}
 {% block topbar %}
-<a class="nav-link" href='{% url "myinfo:index" %}'>
-    <i class="fas fa-broadcast-tower"></i> おしらせ</a>
+{% comment %} <a class="nav-link" href='{% url "myinfo:index" %}'>
+    <i class="fas fa-broadcast-tower"></i> おしらせ</a> {% endcomment %}
+
+    
 {% endblock %}
 
 {% block content %}
@@ -41,33 +43,38 @@
     </div> {% endcomment %}
 
     <!-- 検索フォーム -->
-    <div class="d-flex my-3">
-    {% if searchForm %}
-    <div class="my-box mr-auto">
-        <form class="d-sm-inline-block form-inline mr-auto my-2 my-md-0" action='{% url "myinfo:index" %}' method='get'>
-            <div class="input-group">
-                {{ searchForm.keyword }}
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">
-                        <i class="fas fa-search fa-sm"></i>
-                    </button>
-                </div>
+    <div class="d-flex my-3 align-items-center">
+        
+        {% comment %} <div class="h4 mr-3">
+            <i class="fas fa-broadcast-tower"></i> おしらせ
+        </div> {% endcomment %}
+
+        {% comment %} {% if user.is_authenticated %} {% endcomment %}
+        {% if user.is_staff %}
+            <div class="">
+                {% comment %} <a href="{% url 'myinfo:create' %}" class="btn btn-primary"><i class="fas fa-plus"></i> 汎用ビュー</a> {% endcomment %}
+                {% comment %} <a href="{% url 'myinfo:add_form' %}" class="btn btn-primary">summernote</a> {% endcomment %}
+                {% comment %} <a href="{% url 'myinfo:add_post' %}" class="btn btn-primary">インラインフォームセット</a> {% endcomment %}
+                <a href="{% url 'myinfo:add_fbvform' %}" class="btn btn-primary rounded-pill">
+                <i class="fas fa-plus"></i> 新規</a>
             </div>
-        </form>
-        <a href="{% url 'myinfo:index' %}" class="d-none d-sm-inline-block btn btn-secondary ml-3 py-1 px-2"><i class="fas fa-backspace"></i></a>
-    </div>
-    {% endif %}
-    
-    {% comment %} {% if user.is_authenticated %} {% endcomment %}
-    {% if user.is_staff %}
+        {% endif %}
+
+        {% if searchForm %}
         <div class="ml-auto">
-            {% comment %} <a href="{% url 'myinfo:create' %}" class="btn btn-primary"><i class="fas fa-plus"></i> 汎用ビュー</a> {% endcomment %}
-            {% comment %} <a href="{% url 'myinfo:add_form' %}" class="btn btn-primary">summernote</a> {% endcomment %}
-            {% comment %} <a href="{% url 'myinfo:add_post' %}" class="btn btn-primary">インラインフォームセット</a> {% endcomment %}
-            <a href="{% url 'myinfo:add_fbvform' %}" class="btn btn-primary">
-            <i class="fas fa-plus"></i> 新規</a>
+            <form class="d-sm-inline-block form-inline my-2 my-md-0" action='{% url "myinfo:index" %}' method='get'>
+                <div class="input-group">
+                    {{ searchForm.keyword }}
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <a href="{% url 'myinfo:index' %}" class="d-none d-sm-inline-block btn btn-secondary ml-3 py-1 px-2"><i class="fas fa-backspace"></i></a>
         </div>
-    {% endif %}
+        {% endif %}
     </div>
 
     {% comment %} {% for information in object_list %} {% endcomment %}{% comment %} #汎用ビュー {% endcomment %}
