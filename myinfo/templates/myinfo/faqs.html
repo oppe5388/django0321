@@ -104,29 +104,38 @@
 
 
     <!-- タブ部分 -->
-    {% comment %} <ul class="nav nav-tabs mb-2 small">
+    
+    
+    <ul class="nav nav-tabs mb-2 small">
         <li class="nav-item">
-            <a href="#tab1" class="nav-link active" data-toggle="tab">すべて</a>
+            <a href="{% url 'myinfo:faqs_list' %}" 
+            class="nav-link {% if 'すべて' in selected_tab %} active{% endif %}">すべて</a>
         </li>
         <li class="nav-item">
-            <a href="#tab2" class="nav-link" data-toggle="tab">週報</a>
+            <a href="{% url 'myinfo:faqs_tab' p='週報' %}" 
+            class="nav-link {% if '週報' in selected_tab %} active{% endif %}">週報</a>
         </li>
         <li class="nav-item">
-            <a href="#tab3" class="nav-link" data-toggle="tab">研修</a>
+            <a href="{% url 'myinfo:faqs_tab' p='研修問題' %}" 
+            class="nav-link {% if '研修問題' in selected_tab %} active{% endif %}">研修</a>
         </li>
         <li class="nav-item">
-            <a href="#tab4" class="nav-link" data-toggle="tab">名変</a>
+            <a href="{% url 'myinfo:faqs_tab' p='名義変更QA' %}" 
+            class="nav-link {% if '名義変更QA' in selected_tab %} active{% endif %}">名変</a>
         </li>
         <li class="nav-item">
-            <a href="#tab5" class="nav-link" data-toggle="tab">商品部</a>
+            <a href="{% url 'myinfo:faqs_tab' p='商品部擦り合わせ' %}" 
+            class="nav-link {% if '商品部擦り合わせ' in selected_tab %} active{% endif %}">商品部</a>
         </li>
         <li class="nav-item">
-            <a href="#tab6" class="nav-link" data-toggle="tab">エラーMSG</a>
+            <a href="{% url 'myinfo:faqs_tab' p='エラー' %}" 
+            class="nav-link {% if 'エラー' in selected_tab %} active{% endif %}">エラーMSG</a>
         </li>
         <li class="nav-item">
-            <a href="#tab7" class="nav-link disabled" data-toggle="tab">検索結果</a>
+            <a href="#" 
+            class="nav-link disabled {% if '検索結果' in selected_tab %} active{% endif %}">検索結果</a>
         </li>
-    </ul> {% endcomment %}
+    </ul>
 
       <!-- ネストのテーブル -->
       <table class="table ">
@@ -195,7 +204,7 @@
 
 {% block extra_foot %}
 <!-- #tab名でtabへの直リンクを可能にする -->
-<script>
+{% comment %} <script>
     $(function() {
       // Javascript to enable link to tab
       var hash = document.location.hash;
@@ -209,6 +218,6 @@
         window.location.hash = e.target.hash;
       });
     });
-</script>
+</script> {% endcomment %}
 {% endblock %}
 

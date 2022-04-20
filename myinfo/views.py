@@ -334,15 +334,38 @@ def faqs_list(request):
                     ).order_by('-updated_at')#
 
             context['faqs'] = queryset
+            context['selected_tab'] = '検索結果'
     else:
         faqsearchForm = FaqSearchForm()
         faqs = Faqs.objects.all().order_by('-updated_at', 'id')
         page_obj = paginate_queryset(request, faqs, 50)#ページネーション用
         context['page_obj'] = page_obj
         context['faqs'] = page_obj.object_list
+        context['selected_tab'] = 'すべて'
 
 
     return render(request, 'myinfo/faqs.html', context)
+
+
+#FAQタブ、共通化で作れるか
+def faqs_tab(request, p):
+
+    faqsearchForm = FaqSearchForm(request.GET)
+
+    context = {
+        'faqsearchForm': faqsearchForm,
+    }
+
+    queryset = Faqs.objects.all()
+
+    queryset = queryset.filter(
+                Q(reference__icontains=p)
+            ).order_by('-updated_at')
+    context['selected_tab'] = p
+    context['faqs'] = queryset
+
+    return render(request, 'myinfo/faqs.html', context)
+
 
 
 #FAQ Datatablesバージョン

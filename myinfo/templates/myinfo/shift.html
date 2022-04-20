@@ -19,10 +19,12 @@
 
     {% for shift in workshifts %}
         <!--  画像は表示のみ -->
-        {% if '.png' in shift.file_path|stringformat:"s" or '.jpg' in shift.file_path|stringformat:"s" or '.jpeg' in shift.file_path|stringformat:"s" or '.PNG' in shift.file_path|stringformat:"s" or '.JPG' in shift.file_path|stringformat:"s" or '.JPEG' in shift.file_path|stringformat:"s" %}
+        {% comment %} {% if '.png' in shift.file_path|stringformat:"s" or '.jpg' in shift.file_path|stringformat:"s" or '.jpeg' in shift.file_path|stringformat:"s" or '.PNG' in shift.file_path|stringformat:"s" or '.JPG' in shift.file_path|stringformat:"s" or '.JPEG' in shift.file_path|stringformat:"s" %} {% endcomment %}
+        {% with name=shift.file_path|stringformat:"s"|lower %}
+        {% if '.png' in name or '.jpg' in name or '.jpeg' in name %}
             <img src = /media/{{ shift.file_path }} class="img-fluid" alt="Responsive image">
             <hr>
-        <!--  他はリンク -->
+        <!--  他はリンク→ifarame -->
         {% else %}
             {% comment %} <a href="{{ shift.file_path.url }}" target="_blank">
             <i class="fas fa-paperclip"></i>
@@ -32,6 +34,7 @@
             </iframe>
             <hr>
         {% endif %}
+        {% endwith %}
         
     {% endfor %}
 
