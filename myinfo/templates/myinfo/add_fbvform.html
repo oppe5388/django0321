@@ -47,20 +47,18 @@
         {% comment %} {{ form.tags }} {% endcomment %}
         {% comment %} {{ form.media }} {% endcomment %}
 
+        <div class="d-flex flex-row">
+            <div class="ml-auto">{{ form.is_draft }} draft</div>
+        </div>
 
-        {{ form.is_draft }}
         <div class="btn-toolbar">
-            <div class="btn-group" >
-                <div class="ml-auto" >{{ form.is_draft }}</div>
-                </div>
-            <div class="w-100"></div>
 
             <div class="btn-group ">
                 <a href='JavaScript:history.back()' class="btn btn-secondary">
                 <i class="fas fa-chevron-left"></i> 戻る</a>
             </div>
 
-            <div class="btn-group ml-auto" margin-left=auto;>
+            <div class="btn-group ml-auto">
             <button type="submit" class="submit btn btn-primary">
             <i class="fas fa-check"></i> {{ object|yesno:'更新する（元に戻せません）,作成'}}</button>
             </div>

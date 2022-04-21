@@ -51,7 +51,7 @@ class InformationForm(LoginRequiredMixin, forms.ModelForm):
             # 'body': SummernoteWidget(),
             'body': TinyMCE,   #追加
             'title': forms.TextInput(attrs={'placeholder': 'タイトルを入力してください'}),
-            # 'title': TextInput(attrs={'placeholder': 'タイトル'}),
+            'is_draft': forms.CheckboxInput(attrs={'class':'form-control small'}),
         }
 
         #↑のフィールドのラッピングやめて、ここにカテゴリ等1つずつ書く
