@@ -78,6 +78,10 @@
     {% comment %} {% for information in object_list %} {% endcomment %}{% comment %} #汎用ビュー {% endcomment %}
     {% for information in informations %} {% comment %} #関数ビュー {% endcomment %}
         
+        <!-- 他人の下書きは非表示 -->
+        {% if information.is_draft is True and information.user.id != request.user.id %}
+        {% else %}
+
         <!-- Dropdown Card Example -->
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
@@ -85,6 +89,12 @@
 
                 <!-- タイトル -->
                 <h6 class="m-0 font-weight-bold text-primary mr-auto">
+                    
+                    <!-- 自分の下書きはマーク表示 -->
+                    <span class="text-secondary" >
+                    {% if information.is_draft is True %}※下書き※{% endif %}
+                    </span>
+
                     <!-- 見る側が未読だったら -->
                     {% for unread in unread_set %}
                         {% if information == unread.information and request.user.id == unread.user.id %}
@@ -199,6 +209,8 @@
                 </div>
             </div>
         </div>
+
+        {% endif %}
 
     {% endfor %}
 

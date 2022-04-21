@@ -14,6 +14,8 @@
 {% endif %}
     <!-- <h1 class="h3 text-gray-800 flex-grow-1">おしらせの編集</h1> -->
 
+    {% if form.is_draft.value is True %}※下書き{% endif %}
+
     <form method="POST" enctype="multipart/form-data" action="{% url 'myinfo:update' information.id %}" class="form-group">
         {% csrf_token %}
 
@@ -79,6 +81,13 @@
                 <label><input type="checkbox" name="chk2" value="unread" class="form-check-input">全員未読にする</label>
             </div>
             <div class="w-100"></div>
+            
+            <div class="btn-group ml-auto mb-2" margin-left=auto;>
+                <label><input type="checkbox" name="draft" value="draft" class="form-check-input" 
+                    {% if form.is_draft.value is True %}checked{% endif %}>下書きにする</label>
+                </div>
+            <div class="w-100"></div>
+            
 
             <div class="btn-group">
                 <a href='JavaScript:history.back()' class="btn btn-secondary">

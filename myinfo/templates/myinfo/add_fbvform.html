@@ -47,11 +47,16 @@
         {% comment %} {{ form.tags }} {% endcomment %}
         {% comment %} {{ form.media }} {% endcomment %}
 
-        <div class="d-flex flex-row">
+        <!-- form-comtrolがあたって大きくなってしまうので普通のチェックボックスを使う  -->
+        {% comment %} <div class="d-flex flex-row">
             <div class="ml-auto">{{ form.is_draft }} draft</div>
-        </div>
+        </div> {% endcomment %}
 
         <div class="btn-toolbar">
+            <div class="btn-group ml-auto mb-2" margin-left=auto;>
+                <label><input type="checkbox" name="draft" value="draft" class="form-check-input">下書きにする</label>
+                </div>
+            <div class="w-100"></div>
 
             <div class="btn-group ">
                 <a href='JavaScript:history.back()' class="btn btn-secondary">

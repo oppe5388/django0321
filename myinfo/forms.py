@@ -46,12 +46,12 @@ class InformationForm(LoginRequiredMixin, forms.ModelForm):
     class Meta:
         model = Information
         # fields = ['category', 'title', 'body', 'to_flag', 'filefield'] #'__all__'
-        fields = ['category', 'title', 'body', 'is_draft']
+        fields = ['category', 'title', 'body']
         widgets = {
             # 'body': SummernoteWidget(),
             'body': TinyMCE,   #追加
             'title': forms.TextInput(attrs={'placeholder': 'タイトルを入力してください'}),
-            'is_draft': forms.CheckboxInput(attrs={'class':'form-control small'}),
+            # 'is_draft': forms.CheckboxInput(attrs={'class':''}),
         }
 
         #↑のフィールドのラッピングやめて、ここにカテゴリ等1つずつ書く

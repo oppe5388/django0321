@@ -34,6 +34,10 @@ def add_fbvform(request):
             obj.user = request.user
             obj.created_at = timezone.datetime.now()
             obj.updated_at = timezone.datetime.now()
+
+            #下書きチェックだったら
+            if request.POST.get('draft') is not None: 
+                obj.is_draft = True
             obj.save()
 
             #添付ファイル：保存＆モデル書き込み
@@ -146,6 +150,12 @@ def edit_fbvform(request, pk, *args, **kwargs):
             #更新日時も更新するチェックだったら
             if request.POST.get('chk') is not None: 
                 obj.updated_at = timezone.datetime.now()
+
+            #下書きチェックだったら
+            if request.POST.get('draft') is not None: 
+                obj.is_draft = True
+            else:
+                obj.is_draft = False
 
             obj.save()
 
