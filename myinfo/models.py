@@ -36,6 +36,7 @@ class Information(models.Model):
     created_at = models.DateTimeField(auto_now_add=False)#impot-exportで任意にするため
     # updated_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now_add=False)#更新するしないでソートをコントロールするため
+    is_draft = models.BooleanField(default=False, blank=True)
      
     def __str__(self):
         # return self.title

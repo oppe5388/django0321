@@ -46,7 +46,7 @@ class InformationForm(LoginRequiredMixin, forms.ModelForm):
     class Meta:
         model = Information
         # fields = ['category', 'title', 'body', 'to_flag', 'filefield'] #'__all__'
-        fields = ['category', 'title', 'body', ]
+        fields = ['category', 'title', 'body', 'is_draft']
         widgets = {
             # 'body': SummernoteWidget(),
             'body': TinyMCE,   #追加
@@ -108,7 +108,7 @@ class InformationEditForm(LoginRequiredMixin, forms.ModelForm):
     class Meta:
         model = Information
         # fields = ['category', 'title', 'body', 'to_flag', 'filefield'] #'__all__'
-        fields = ['category', 'title', 'body', ]
+        fields = ['category', 'title', 'body', 'is_draft']
         widgets = {
             # 'body': SummernoteWidget(),
             'body': TinyMCE,   #追加

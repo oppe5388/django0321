@@ -48,8 +48,13 @@
         {% comment %} {{ form.media }} {% endcomment %}
 
 
-
+        {{ form.is_draft }}
         <div class="btn-toolbar">
+            <div class="btn-group" >
+                <div class="ml-auto" >{{ form.is_draft }}</div>
+                </div>
+            <div class="w-100"></div>
+
             <div class="btn-group ">
                 <a href='JavaScript:history.back()' class="btn btn-secondary">
                 <i class="fas fa-chevron-left"></i> 戻る</a>
