@@ -21,6 +21,9 @@ urlpatterns = [
 
     #未読削除関数呼び出し
     path('<int:pk>/read_delete', views.read_delete, name='read_delete'),
+    #Ajaxで未読削除
+    path('ajax-number/', views.ajax_number, name='ajax_number'),
+    path('ajax_read_del/', views.ajax_read_del, name='ajax_read_del'),
 
     #シフト表
     path('shift/', views.shift, name='shift'),  
@@ -29,13 +32,10 @@ urlpatterns = [
     path('faq/', views.faqs_list, name='faqs_list'),
     path('faq/<p>', views.faqs_tab, name='faqs_tab'),#pkみたいに渡せば共通化できるのでは？
 
-
-
-
     #FAQのDatatables未使用
     # path('faq/', TemplateView.as_view(template_name='myinfo/faqs2.html')),
     # path('faq/data', views.FaqsJsonView.as_view(), name='FaqsJson'),
 
     #全体検索
-    path('search_result/', views.all_search, name='all_search'),     
+    path('search_result/', views.all_search, name='all_search'), 
 ]

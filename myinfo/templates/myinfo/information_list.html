@@ -98,7 +98,12 @@
                     <!-- 見る側が未読だったら -->
                     {% for unread in unread_set %}
                         {% if information == unread.information and request.user.id == unread.user.id %}
-                        <a href="{% url 'myinfo:read_delete' information.pk %}" class="btn-info badge mr-2">
+                        {% comment %} <a href="{% url 'myinfo:read_delete' information.pk %}" class="btn-info badge mr-2">
+                            <i class="fas fa-check"></i> 既読にする
+                        </a> {% endcomment %}
+                        
+                        <!-- ajax -->
+                        <a href="{% url 'myinfo:ajax_read_del'%}" id="ajax_read_del" class="btn-info badge mr-2">
                             <i class="fas fa-check"></i> 既読にする
                         </a>
                         {% endif %}
@@ -255,5 +260,92 @@
             <a href="{% url 'myinfo:export' %}" class="btn btn-primary">CSVエクスポート</a>
         </div>
     </div> {% endcomment %}
+
+{% endblock %}
+
+{% block extra_foot %}
+
+<div class="container">
+    <h2>数値の入力</h2>
+    <form id="ajax-number" action="{% url 'myinfo:ajax_number' %}" method="POST">
+        {% csrf_token %}
+        <input type="number" id="number1" required>
+        <input type="number" id="number2" required>
+        <button type="submit" >計算</button>
+    </form>
+
+    <h2>数値の計算</h2>
+    <div class="result">
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+  function getCookie(name) {
+      var cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          var cookies = document.cookie.split(';');
+          for (var i = 0; i < cookies.length; i++) {
+              var cookie = jQuery.trim(cookies[i]);
+              // Does this cookie string begin with the name we want?
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+  }
+
+  var csrftoken = getCookie('csrftoken');
+
+  function csrfSafeMethod(method) {
+      // these HTTP methods do not require CSRF protection
+      return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+  }
+
+  $.ajaxSetup({
+      beforeSend: function (xhr, settings) {
+          if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+              xhr.setRequestHeader("X-CSRFToken", csrftoken);
+          }
+      }
+  });
+
+  $('#ajax-number').on('submit', function(e) {
+      e.preventDefault();
+
+      $.ajax({
+          'url': '{% url "myinfo:ajax_number" %}',
+          'type': 'POST',
+          'data': {
+              'number1': $('#number1').val(),
+              'number2': $('#number2').val(),
+          },
+          'dataType': 'json'
+      })
+      .done(function(response){
+          $('.result').prepend('<p>引き算結果：' + response.minus + '</p>');
+          $('.result').prepend('<p>足し算結果：' + response.plus + '</p>');
+      });
+  });
+
+  $('#ajax_read_del').click(function(e) {
+    e.preventDefault();
+
+    $.ajax({
+        'url': '{% url "myinfo:ajax_read_del" %}',
+        'type': 'GET',
+        'data': {
+            'pk': information.pk ,
+        },
+        'dataType': 'json'
+    })
+    .done(function(response){
+        $(this).remove();
+    });
+});
+</script>
+
 
 {% endblock %}
