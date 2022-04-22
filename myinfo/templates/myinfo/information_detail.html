@@ -82,6 +82,27 @@
         </div>
     </div>
 
+    <div class="btn-toolbar">
+        <div class="btn-group ">
+            {% with next=information.get_next_by_updated_at %}
+                {% if next %}
+                <a href="{% url 'myinfo:detail' next.pk %}" class="btn btn-secondary btn-sm">
+                    <i class="fas fa-chevron-left"></i> New</a>
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        <div class="btn-group ml-auto">
+            {% with prev=information.get_previous_by_updated_at %}
+                {% if prev %}
+                    <a href="{% url 'myinfo:detail' prev.pk %}" class="btn btn-secondary btn-sm">
+                    Old <i class="fas fa-chevron-right"></i></a>
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+
+    <hr>
 
     <!-- その日記に紐づいたコメントを取り出す -->
     <p class="m-0">コメント</p>
@@ -108,9 +129,9 @@
             {% csrf_token %}
             <textarea name="text" id="com"  class="form-control"></textarea>
 
-            <div class="d-flex my-3">
+            <div class="d-flex my-2">
                 <div class="ml-auto">
-                <button type="submit" class="submit btn btn-primary">
+                <button type="submit" class="btn btn-primary btn-sm mb-3">
                     <i class="fas fa-check"></i> コメントする</button>
 
                 {% comment %} <a class="submit btn btn-primary" href="{% url 'myinfo:comment_post' information.pk %}" role="button">
