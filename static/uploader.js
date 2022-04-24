@@ -3,7 +3,6 @@ tinymce.init({
     language: "ja",
     // height: "700",
     // width: "1300",
-    // plugins: "insertdatetime media image preview",
     // toolbar: "undo redo |  bold italic | alignleft alignright aligncenter alignjustify | image media | preview",
     toolbar: [ // ツールバー(2段)
     "undo redo | bold underline forecolor backcolor emoticons removeformat | fontsizeselect formatselect | outdent indent | \
@@ -22,11 +21,14 @@ tinymce.init({
     forced_root_block :false,
 
     image_title: true,
-    image_caption: true,
+    // image_caption: true,
     automatic_uploads: true,
     image_advtab: true,
     file_picker_types: "image media",
     paste_data_images: true,
+    image_class_list: [
+        {title: 'Responsive', value: 'img-fluid'}
+    ],
 
     font_formats:
     "Andale Mono=andale mono,times;" +
