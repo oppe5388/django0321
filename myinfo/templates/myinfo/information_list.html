@@ -75,8 +75,10 @@
         {% endif %}
     </div>
 
-    {% comment %} {% for information in object_list %} {% endcomment %}{% comment %} #汎用ビュー {% endcomment %}
-    {% for information in informations %} {% comment %} #関数ビュー {% endcomment %}
+    <!-- #汎用ビュー -->
+    {% comment %} {% for information in object_list %} {% endcomment %}
+    <!-- #関数ビュー -->
+    {% for information in informations %}
         
         <!-- 他人の下書きは非表示 -->
         {% if information.is_draft is True and information.user.id != request.user.id %}
@@ -102,8 +104,9 @@
                             <i class="fas fa-check"></i> 既読にする
                         </a> {% endcomment %}
                         
-                        <!-- ajax -->
-                        <a href="{% url 'myinfo:ajax_read_del'%}" id="ajax_read_del" class="btn-info badge mr-2">
+                        <!-- ajaxで既読に -->
+                        <a href="{% url 'myinfo:ajax_read_delete' information.pk %}" id="ajax_read_del{{ information.pk }}" 
+                        class="link-delete btn-info badge mr-2" data-catid="{{ information.pk }}">
                             <i class="fas fa-check"></i> 既読にする
                         </a>
                         {% endif %}
@@ -170,7 +173,6 @@
             <div class="card-body">
 
                 <!-- 既読管理：ひとまず未読があったら表示-->
-                {% comment %} {% if user.is_superuser %} {% endcomment %}
                 {% if request.user.is_staff %}
                     <div class="mb-2">
                     {% for unread in unread_set %}
@@ -181,21 +183,9 @@
                     </div>
                 {% endif %}
 
-                {% comment %} <div class="small mb-1">{{ information.created_at|date:"Y-m-d" }}　
-                    <i class="fas fa-user-edit mr-1"></i>{{ information.user.last_name }}</div> {% endcomment %}
                 <div>
                     {% comment %} {{ information.body | striptags | truncatechars_html:50}} {% endcomment %}
                     {{ information.body | safe }}
-
-                    <!--  ↓attachmentモデル逆参照 -->
-                    {% comment %} {% for each_attachments in information.info_attach.all %}
-                        <div class="mt-2">
-                            <a href="{{ each_attachments.file_path.url }}" target="_blank">
-                            <i class="fas fa-paperclip"></i>
-                            {{ each_attachments.file_name }}
-                            </a>
-                        </div>
-                    {% endfor %} {% endcomment %}
 
                     <!--  ↓attachmentモデル逆参照 -->
                     {% for each_attachments in information.info_attach.all %}
@@ -265,22 +255,13 @@
 
 {% block extra_foot %}
 
-<div class="container">
-    <h2>数値の入力</h2>
-    <form id="ajax-number" action="{% url 'myinfo:ajax_number' %}" method="POST">
-        {% csrf_token %}
-        <input type="number" id="number1" required>
-        <input type="number" id="number2" required>
-        <button type="submit" >計算</button>
-    </form>
 
-    <h2>数値の計算</h2>
-    <div class="result">
-    </div>
-</div>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
+
+<!-- ajaxでもGETなら不要？ -->
+{% comment %} <script>
   function getCookie(name) {
       var cookieValue = null;
       if (document.cookie && document.cookie !== '') {
@@ -330,21 +311,33 @@
       });
   });
 
-  $('#ajax_read_del').click(function(e) {
-    e.preventDefault();
-
-    $.ajax({
-        'url': '{% url "myinfo:ajax_read_del" %}',
-        'type': 'GET',
-        'data': {
-            'pk': information.pk ,
-        },
-        'dataType': 'json'
-    })
-    .done(function(response){
-        $(this).remove();
-    });
 });
+</script> {% endcomment %}
+
+
+<!-- ajaxで既読にする -->
+<script>
+    $(".link-delete").on("click", function(e){ // ←ボタンのclassを書く
+        e.preventDefault();
+
+        var pk;
+        pk = $(this).attr("data-catid"); // pk取得のために"data-catid"を追加した
+        var $this = $(this);
+        // if(confirm("Sure to delete?")){
+            $.ajax({
+                url: $this.attr("href"),
+                type: "GET",
+                dataType: "json",
+                data:{ 
+                    pk: pk
+                    }, 
+                success: function(data){
+                    $('#ajax_read_del'+ pk).empty(); // ←消すidを書く
+                }
+            });
+        // }
+        return false;
+    });
 </script>
 
 

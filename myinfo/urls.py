@@ -19,11 +19,9 @@ urlpatterns = [
     #添付ファイル削除関数呼び出し
     path('<int:pk>/attach_delete', views.attach_delete, name='attach_delete'),
 
-    #未読削除関数呼び出し
-    path('<int:pk>/read_delete', views.read_delete, name='read_delete'),
-    #Ajaxで未読削除
-    path('ajax-number/', views.ajax_number, name='ajax_number'),
-    path('ajax_read_del/', views.ajax_read_del, name='ajax_read_del'),
+    #未読削除関数呼び出し→Ajaxで未読削除
+    # path('<int:pk>/read_delete', views.read_delete, name='read_delete'),
+    path('<int:pk>/ajax_read_delete', views.ajax_read_delete, name="ajax_read_delete"), 
 
     #シフト表
     path('shift/', views.shift, name='shift'),  

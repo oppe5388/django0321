@@ -26,33 +26,12 @@ from django_datatables_view.base_datatable_view import BaseDatatableView
 from django.conf import settings
 from django.http import JsonResponse
 
-def ajax_number(request):
-    number1 = int(request.POST.get('number1'))
-    number2 = int(request.POST.get('number2'))
-    plus = number1 + number2
-    minus = number1 - number2
-    d = {
-        'plus': plus,
-        'minus': minus,
-    }
-    return JsonResponse(d)
 
 
-
-
-#listからajaxで既読削除つくる
-def ajax_read_del(request):
-    pk = request.GET.get('pk')
-    read_exis = ReadStates.objects.filter(user=request.user, information=pk).exists()
-    if read_exis == True:
+def ajax_read_delete(request, pk, *args, **kwargs):
+    if request.is_ajax():
         ReadStates.objects.filter(user=request.user, information=pk).delete()
-        return HttpResponse('success')
-        # return JsonResponse(d)
-    else:
-        return HttpResponse("unsuccesful")
-
-
-
+        return JsonResponse({"message":"success"})
 
 
 #関数ビューで通知の中間テーブルCreateを作ってみる
