@@ -235,6 +235,11 @@ TINYMCE_DEFAULT_CONFIG = {
     "menubar": "edit format insert view table help",
     "plugins": "visualblocks template searchreplace hr code autosave advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code fullscreen insertdatetime media table paste code help wordcount emoticons image",
     "toolbar": "undo redo | bold underline forecolor backcolor emoticons removeformat | fontsizeselect formatselect | outdent indent | alignleft aligncenter alignright | numlist bullist | image media insertfile hr link | preview fullscreen code visualblocks searchreplace",
+    "file_picker_types": "image media",
+    "image_class_list": [
+        {"title": 'Responsive', "value": 'img-fluid'}
+    ],
+
 }
 # TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, "tinymce")
 
