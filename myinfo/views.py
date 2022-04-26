@@ -376,9 +376,8 @@ def faqs_tab(request, p):
         'faqsearchForm': faqsearchForm,
     }
 
-    queryset = Faqs.objects.all()
-
-    queryset = queryset.filter(
+    # 一度queryset = Faqs.objects.all()と刻む必要はない
+    queryset = Faqs.objects.filter(
                 Q(reference__icontains=p)
             ).order_by('-updated_at')
     context['selected_tab'] = p

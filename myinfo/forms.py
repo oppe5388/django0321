@@ -59,7 +59,7 @@ class InformationForm(LoginRequiredMixin, forms.ModelForm):
 #検索
 class SearchForm(forms.Form):
         # keyword = forms.CharField(label='検索', max_length=100)
-        keyword = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder':'おしらせの検索', 'class':'form-control bg-white border-0 small'}))
+        keyword = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder':'おしらせの検索', 'class':'form-control bg-white border-0 small', 'type':'search'}))
 
 
 #コメント入力用
@@ -124,7 +124,7 @@ class UploadFileForm(forms.Form):
 
 #FAQ検索
 class FaqSearchForm(forms.Form):
-        keyword = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder':'FAQの検索', 'class':'form-control bg-white border-0 small'}))
+        keyword = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder':'FAQの検索', 'class':'form-control bg-white border-0 small', 'type':'search'}))
 
 
 #全体検索→HTML記述で未使用に。
