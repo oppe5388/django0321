@@ -26,8 +26,19 @@ from django_datatables_view.base_datatable_view import BaseDatatableView
 from django.conf import settings
 from django.http import JsonResponse
 
+from datetime import date, datetime, timedelta
+
+#日付計算サンプル
+def date_calc(request):
+    tomorrow = datetime.today() + datetime.timedelta(days=1)
+    # return tomorrow
+    params = {
+        'tomorrow': tomorrow,
+    }
+    return render(request, 'tomorrow.html', params)
 
 
+#Ajaxで未読削除
 def ajax_read_delete(request, pk, *args, **kwargs):
     if request.is_ajax():
         ReadStates.objects.filter(user=request.user, information=pk).delete()
