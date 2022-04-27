@@ -42,6 +42,18 @@
     <!-- django-tinymce -->
     {{ form.media }}
 
+
+    <!-- デスクトップ通知 -->
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    <script>
+    window.OneSignal = window.OneSignal || [];
+    OneSignal.push(function() {
+        OneSignal.init({
+        appId: "6027ee57-82ec-485b-a5a5-6c976de75cb1",
+        });
+    });
+    </script>
+
     {% block extra_head %}{% endblock %}
 </head>
 
@@ -260,8 +272,8 @@
                         <!-- Nav Item - User Information -->
                         <div>
                             
-                            <!-- 明日の日付表示テスト -->
-                            {% comment %} {% include '../myinfo/templates/myinfo/tomorrow.html' %} {% endcomment %}
+                            <!-- 変数を表示：context_processors -->
+                            {% comment %} {{ site_name }} {% endcomment %}
 
                             <li class="d-flex justify-content-end align-items-center small text-gray-600">
                                 <div class="ml-auto">{% now "Y/n/j(D)" %}</div>

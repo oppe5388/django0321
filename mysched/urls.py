@@ -6,4 +6,5 @@ app_name = 'mysched'
 urlpatterns = [
     path('', views.mysched, name='mysched'),
     # path('', views.information_list, name='index'),
+    path('ajax_sched/', views.ajax_sched, name="ajax_sched"), 
 ]

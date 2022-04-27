@@ -5,6 +5,47 @@ from .forms import MoneyForm
 from datetime import date, datetime
 from django.contrib import messages
 
+from django.conf import settings
+from django.http import JsonResponse
+
+
+#Ajax
+def ajax_sched(request):
+
+    #日付選択あり
+    if request.GET.get('input_date'):
+        input_date = request.GET.get('input_date')
+        input_date = datetime.strptime(input_date, '%Y-%m-%d').date()
+
+        context = {
+            'input_date': input_date,
+        }
+    #日付なし
+    else:
+        context = {
+            'input_date': 'インプットなし',
+        }
+        return JsonResponse(context)
+
+    first_date = MoneyTrans.objects.order_by('entry').first().entry
+    last_date = MoneyTrans.objects.order_by('entry').last().entry
+
+    if input_date >= first_date and input_date <= last_date:
+        #entryが入力日以降のクエリセットの1つ目
+        context['past_fix'] = MoneyTrans.objects.filter(entry__gte=input_date).order_by('entry').first().fix
+        context['past_transfer'] = MoneyTrans.objects.filter(entry__gte=input_date).order_by('entry').first().transfer
+
+        #setoffが入力日以降のクエリセットの1つ目
+        context['setoff_transfer'] = MoneyTrans.objects.filter(setoff__gte=input_date).order_by('entry').first().transfer
+
+        return JsonResponse(context)
+
+    else:
+        # messages.warning(request, '対象外の日付です。')
+        context['else'] = 'elseにいっている'
+        return JsonResponse(context)
+
+
 
 def mysched(request):
     moneyForm = MoneyForm(request.GET)

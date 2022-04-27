@@ -37,6 +37,4 @@ urlpatterns = [
     #全体検索
     path('search_result/', views.all_search, name='all_search'), 
 
-    #日付計算サンプル
-    path('date_calc/', views.date_calc, name='date_calc'), 
 ]
