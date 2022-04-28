@@ -256,9 +256,23 @@
 
 <!-- ajax -->
 <script>
+    //ボタンでは動作OK
     $(".ajax_sched").on("click", function(e){ // ←ボタンのclassを書く
         e.preventDefault();
 
+    //ボタンを押さずに、日付変更のみで実行したい
+    //↓不可
+    //let date = document.querySelector("input[type='date'][name='input_date']");
+    //date.addEventListener('change', function() {
+    
+    //↓不可
+    //const input = document.querySelector('#input_date');
+    //input.addEventListener('change', function() {
+    
+    //↓不可
+    //var $date = $('input[type="date"][name="input_date"]')
+    //$date.on('change', function () {
+    
         var input_date = $('#input_date').val();
         var $this = $(this);
 
