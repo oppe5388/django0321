@@ -84,12 +84,11 @@
         <form class="d-sm-inline-block form-inline mr-auto" action='{% url "mysched:mysched" %}' method='get'>
             <div class="input-group mb-2 ml-2">
                 {{ moneyForm.input_date }}
-                    <!-- JSでchangeイベントにしたためボタン非表示→戻した -->
                 <div class="input-group-append">
                     <!-- 通常 -->
                     {% comment %} <button class="btn btn-primary" type="submit"><i class="fas fa-search fa-sm"></i></button> {% endcomment %}
-                    <!-- Ajax -->
-                    <a href="{% url 'mysched:ajax_sched' %}" class="ajax_sched btn btn-primary"><i class="fas fa-search fa-sm"></i></a>
+                    <!-- Ajax→ボタン押下不要に -->
+                    {% comment %} <a href="{% url 'mysched:ajax_sched' %}" class="ajax_sched btn btn-primary"><i class="fas fa-search fa-sm"></i></a> {% endcomment %}
                 </div>
             </div>
         </form>
@@ -257,8 +256,8 @@
 <!-- ajax -->
 <script>
     //ボタンでは動作OK
-    $(".ajax_sched").on("click", function(e){ // ←ボタンのclassを書く
-        e.preventDefault();
+    //$(".ajax_sched").on("click", function(e){ // ←ボタンのclassを書く
+    //    e.preventDefault();
 
     //ボタンを押さずに、日付変更のみで実行したい
     //↓不可
@@ -270,15 +269,16 @@
     //input.addEventListener('change', function() {
     
     //↓不可
-    //var $date = $('input[type="date"][name="input_date"]')
-    //$date.on('change', function () {
+    var $date = $('input[type="date"][name="input_date"]')
+    $date.on('change', function () {
     
         var input_date = $('#input_date').val();
-        var $this = $(this);
+        //var $this = $(this);
 
         //if(confirm("Sure?")){
             $.ajax({
-                url: $this.attr("href"),
+                // url: $this.attr("href"),
+                url: "/mysched/ajax_sched/",
                 type: "GET",
                 dataType: "json",
                 data:{ 
