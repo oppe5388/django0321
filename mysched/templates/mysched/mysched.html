@@ -29,7 +29,7 @@
 {% block content %}
 
 <div class="card shadow mb-4">
-    <div class="card-header py-3 d-flex flex-row align-items-center">
+    <div class="card-header py-3 align-items-center">
         <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-file-invoice-dollar"></i> 到着〆と送金予定日</h6>
     </div>
     <div class="card-body">
@@ -46,25 +46,29 @@
   <!-- 内容部分 -->
   <div class="tab-content">
     <div id="tab1" class="tab-pane active">
-        <textarea id="copyTarget1" rows="5" class="col-sm-12 border-0 p-0 ml-2" readonly>
+        <div class="d-flex flex-row">
+        <textarea id="copyTarget1" rows="5" style="width:260px" class="border-0 p-0 ml-2" readonly>
 {% for money in moneytrans %}〜{{ money.deadline|date:"m-d(D)" }}着 → {{ money.transfer|date:"m-d(D)" }}送金
 {% endfor %}</textarea>
-        <div class="ml-2">
-            <button onclick="copyToClipboard('copyTarget1')" class="btn btn-outline-primary mr-1 p-1">
-                <i class="fas fa-copy"></i>
-                <span class="small"> Copy</span>
-            </button>
+            <div class="ml-2 align-self-end">
+                <button onclick="copyToClipboard('copyTarget1')" class="btn btn-outline-primary mr-1">
+                    <i class="fas fa-copy"></i>
+                    {% comment %} <span class="small"> Copy</span> {% endcomment %}
+                </button>
+            </div>
         </div>
     </div>
     <div id="tab2" class="tab-pane">
-        <textarea id="copyTarget4" rows="5" class="col-sm-12 border-0 p-0 ml-2" readonly>
+        <div class="d-flex flex-row">
+        <textarea id="copyTarget4" rows="5" style="width:380px" class="border-0 p-0 ml-2" readonly>
 {% for money in moneytrans %}〜{{ money.deadline|date:"m-d(D)" }}着 → {{ money.fix|date:"m-d(D)" }}承認 → {{ money.transfer|date:"m-d(D)" }}送金
 {% endfor %}</textarea>
-        <div class="ml-2">
-            <button onclick="copyToClipboard('copyTarget4')" class="btn btn-outline-primary mr-1 p-1">
-                <i class="fas fa-copy"></i>
-                <span class="small"> Copy</span>
-            </button>
+            <div class="ml-2 align-self-end">
+                <button onclick="copyToClipboard('copyTarget4')" class="btn btn-outline-primary mr-1">
+                    <i class="fas fa-copy"></i>
+                    {% comment %} <span class="small"> Copy</span> {% endcomment %}
+                </button>
+            </div>
         </div>
     </div>
   </div>
@@ -74,22 +78,24 @@
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-file-invoice-dollar"></i> 送金日検索</h6>
+        <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-file-invoice-dollar"></i> 送金日検索（解約・発行キャンセル・相殺）</h6>
     </div>
 
     <div class="card-body">
-        <label class="text-primary">登録日（解約・発行キャンセル・相殺）を選択</label>
-        <div class="mb-2 ml-2 small text-secondary">{{ first_date|date:"Y-m-d(D)" }}〜{{ last_date|date:"Y-m-d(D)" }}検索OK</div>
+        <div><label class="text-primary">登録日を選択
+            <span class="mb-2 ml-2 small text-secondary">検索対象：{{ first_date|date:"Y-m-d(D)" }}〜{{ last_date|date:"Y-m-d(D)" }}</span>
+        </label></div>
 
         <form class="d-sm-inline-block form-inline mr-auto" action='{% url "mysched:mysched" %}' method='get'>
             <div class="input-group mb-2 ml-2">
                 {{ moneyForm.input_date }}
-                <div class="input-group-append">
+                <!-- Ajax→ボタン押下不要に -->
+                {% comment %} <div class="input-group-append"> {% endcomment %}
                     <!-- 通常 -->
                     {% comment %} <button class="btn btn-primary" type="submit"><i class="fas fa-search fa-sm"></i></button> {% endcomment %}
-                    <!-- Ajax→ボタン押下不要に -->
+                    <!-- Ajax-->
                     {% comment %} <a href="{% url 'mysched:ajax_sched' %}" class="ajax_sched btn btn-primary"><i class="fas fa-search fa-sm"></i></a> {% endcomment %}
-                </div>
+                {% comment %} </div> {% endcomment %}
             </div>
         </form>
         <div id="ajax_noinput"></div>
@@ -144,27 +150,27 @@
 
 <!-- Ajax用 -->
     <div class="card-body pt-0" id="ajax_disp">
-        <div class="text-primary">解約・発行キャンセル</div>
-        <div class="mb-2 ml-2 small text-secondary">キャンセル後の再申込は、承認日の翌日から可と案内</div>
-            <div id="ajax_result1"></div>
-                <div class="ml-2">
-                    <button onclick="copyToClipboard('ajax_add1')" class="btn btn-outline-primary mr-1 p-1">
+        <div class="text-primary">解約・発行キャンセル<span class=" ml-2 small text-secondary">キャンセル後の再申込は、承認日の翌日から可と案内</span></div>
+        
+            <div id="ajax_result1" class="d-flex flex-row">
+                <div class="ml-2 align-self-end">
+                    <button onclick="copyToClipboard('ajax_add1')" class="btn btn-outline-primary mr-1">
                         <i class="fas fa-copy"></i>
-                        <span class="small"> Copy</span>
+                        {% comment %} <span class="small"> Copy</span> {% endcomment %}
                     </button>
                 </div>
-            
+            </div>
             <hr>
         
-        <div class="text-primary mb-2">相殺</div>
-            <div id="ajax_result2"></div>
-                <div class="ml-2">
-                    <button onclick="copyToClipboard('ajax_add2')" class="btn btn-outline-primary mr-1 p-1">
+        <div class="text-primary">相殺</div>
+            <div id="ajax_result2" class="d-flex flex-row">
+                <div class="ml-2 align-self-end">
+                    <button onclick="copyToClipboard('ajax_add2')" class="btn btn-outline-primary mr-1">
                         <i class="fas fa-copy"></i>
-                        <span class="small"> Copy</span>
+                        {% comment %} <span class="small"> Copy</span> {% endcomment %}
                     </button>
                 </div>
-            
+            </div>
     </div>
 
 
@@ -296,9 +302,9 @@
                     } else {
                         $('#ajax_disp').show();
                         $('#ajax_result1').prepend(
-                            '<textarea id="ajax_add1" rows="3" class="col-sm-12 border-0 p-0 ml-2">登録：' + data.input_date + '\r\n→承認：' + data.past_fix +'\r\n→送金：' + data.past_transfer +'</textarea>');
+                            '<div><textarea id="ajax_add1" rows="3" class="border-0 p-0 ml-2">登録：' + data.input_date + '\r\n→承認：' + data.past_fix +'\r\n→送金：' + data.past_transfer +'</textarea></div>');
                         $('#ajax_result2').prepend(
-                            '<textarea id="ajax_add2" rows="2" class="col-sm-12 border-0 p-0 ml-2">登録：' + data.input_date + '\r\n→送金：' + data.setoff_transfer +'</textarea>');
+                            '<div><textarea id="ajax_add2" rows="2" class="border-0 p-0 ml-2">登録：' + data.input_date + '\r\n→送金：' + data.setoff_transfer +'</textarea></div>');
                     }
                     
                 }).fail(function (data) {
