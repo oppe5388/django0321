@@ -5,6 +5,16 @@
     <i class="fas fa-broadcast-tower"></i> おしらせ</a> {% endcomment %}
 {% endblock %}
 
+{% block extra_head %}
+<style>
+    iframe[src$=".pdf"]{
+        width:100%;
+        {% comment %} height:70vh; {% endcomment %}
+        height:60vw;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 
 {% if messages %}
@@ -68,16 +78,22 @@
             <!--  ↓attachmentモデル逆参照 -->
             {% for each_attachments in information.info_attach.all %}
             <hr>
-                <!--  画像は表示のみ -->
-                {% if '.png' in each_attachments.file_path|stringformat:"s" or '.jpg' in each_attachments.file_path|stringformat:"s" or '.jpeg' in each_attachments.file_path|stringformat:"s" or '.PNG' in each_attachments.file_path|stringformat:"s" or '.JPG' in each_attachments.file_path|stringformat:"s" or '.JPEG' in each_attachments.file_path|stringformat:"s" %}
-                    <img src = /media/{{ each_attachments.file_path }} class="img-fluid" alt="Responsive image">
-                <!--  他はリンク -->
-                {% else %}
-                    <a href="{{ each_attachments.file_path.url }}" target="_blank">
-                    <i class="fas fa-paperclip"></i>
-                    {{ each_attachments.file_name }}</a>
-                {% endif %}
-                
+                {% with name=each_attachments.file_path|stringformat:"s"|lower %}
+                    <!--  画像は表示のみ -->
+                    {% if '.png' in name or '.jpg' in name or '.jpeg' in name %}
+                        <img src = /media/{{ each_attachments.file_path }} class="img-fluid" alt="Responsive image">
+                    <!--  PDFはiframe -->
+                    {% elif '.pdf' in name %}
+                        <iframe src="{{ each_attachments.file_path.url }}">
+                            <p><b>表示されない時の表示</b>: <a href="{{ each_attachments.file_path.url }}">ダウンロード</a>.</p>
+                        </iframe>
+                    <!--  他はリンク -->
+                    {% else %}
+                        <a href="{{ each_attachments.file_path.url }}" target="_blank">
+                        <i class="fas fa-paperclip"></i>
+                        {{ each_attachments.file_name }}</a>
+                    {% endif %}
+                {% endwith %}
             {% endfor %}
         </div>
     </div>
