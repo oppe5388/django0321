@@ -44,7 +44,7 @@
         <!-- 添付済みファイル -->
         {% comment %} {% for each_attach in information.info_attach.all %} {% endcomment %}
         {% for each_attach in attachment %}
-            <div class="py-2 d-flex flex-row align-items-center">
+            <div class="py-2 d-flex flex-row align-items-center mb-2">
                 <a class="nav-link card border-left-info p-0" href="/media/{{ each_attach.file_path }}" role="button" target="_blank">
                     <div class="card-body">
                         <i class="fas fa-external-link-alt"></i>
@@ -63,7 +63,7 @@
 
 
         <!-- 添付ファイル追加  -->
-        <div class="mb-3"><input type="file" name="pdf_file1"></div>
+        <div class="mb-3"><input type="file" name="pdf_file1" data-toggle="tooltip" data-html="true" title="一覧画面ではリンク表示、<br>詳細画面ではプレビュー表示"></div>
         <div class="mb-3"><input type="file" name="pdf_file2"></div>
         <div class="mb-3"><input type="file" name="pdf_file3"></div>
 
