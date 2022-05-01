@@ -18,7 +18,11 @@
 {% block content %}
 
     {% for shift in workshifts %}
-        <!--  画像は表示のみ -->
+        <a href="{{ shift.file_path.url }}" target="_blank" class="small">
+        <i class="fas fa-paperclip"></i>
+        {{ shift.file_name }}</a>      
+
+        <!--  画像は表示 -->
         {% comment %} {% if '.png' in shift.file_path|stringformat:"s" or '.jpg' in shift.file_path|stringformat:"s" or '.jpeg' in shift.file_path|stringformat:"s" or '.PNG' in shift.file_path|stringformat:"s" or '.JPG' in shift.file_path|stringformat:"s" or '.JPEG' in shift.file_path|stringformat:"s" %} {% endcomment %}
         {% with name=shift.file_path|stringformat:"s"|lower %}
         {% if '.png' in name or '.jpg' in name or '.jpeg' in name %}
