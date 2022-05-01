@@ -48,7 +48,7 @@ admin.site.register(InfoComments, InfoCommentsAdmin)
 #添付ファイル
 from django.utils.safestring import mark_safe
 class AttachmentsAdmin(admin.ModelAdmin):
-    list_display = ('file_path', 'information', 'updatedd_at', 'thumbnail_preview')
+    list_display = ('file_path', 'information', 'updated_at', 'thumbnail_preview')
     ordering = ('-updated_at',)
 
     def thumbnail_preview(self, obj):
