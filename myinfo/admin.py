@@ -20,10 +20,7 @@ class InformationAdmin(SummernoteModelAdmin, admin.ModelAdmin):
 
 
 admin.site.register(InfoCategory)
-# admin.site.register(ReadStates)
-# admin.site.register(Notifications)
-# admin.site.register(InfoComments)
-# admin.site.register(Attachments)
+
 
 class InformationResource(ModelResource):
     class Meta:
@@ -51,13 +48,18 @@ admin.site.register(InfoComments, InfoCommentsAdmin)
 #添付ファイル
 from django.utils.safestring import mark_safe
 class AttachmentsAdmin(admin.ModelAdmin):
-    list_display = ('file_path', 'information', 'created_at', 'thumbnail_preview')
-    ordering = ('-created_at',)
+    list_display = ('file_path', 'information', 'updatedd_at', 'thumbnail_preview')
+    ordering = ('-updated_at',)
 
     def thumbnail_preview(self, obj):
         return mark_safe('<img src="{}" style="width:100px; height:auto;">'.format(obj.file_path.url))
 
     thumbnail_preview.short_description = 'プレビュー'
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "information":
+            kwargs["queryset"] = Information.objects.all().order_by('-updated_at')
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 admin.site.register(Attachments, AttachmentsAdmin)
 

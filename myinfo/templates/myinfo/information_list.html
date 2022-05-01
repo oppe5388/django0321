@@ -179,31 +179,34 @@
 
                 {% endif %}
             </div>
+
+             <!-- 既読管理：ひとまず未読があったら表示-->
+             {% if request.user.is_staff %}
+                <div class="ml-3">
+                {% for unread in unread_set %}
+                    {% if information == unread.information %}
+                        <div class="badge badge-warning">{{ unread.user.last_name }}</div>
+                    {% endif %}
+                {% endfor %}
+                </div>
+            {% endif %}
+            
+
             <!-- Card Body -->
             <div class="card-body">
-
-                <!-- 既読管理：ひとまず未読があったら表示-->
-                {% if request.user.is_staff %}
-                    <div class="mb-2">
-                    {% for unread in unread_set %}
-                        {% if information == unread.information %}
-                            <div class="badge badge-warning">{{ unread.user.last_name }}</div>
-                        {% endif %}
-                    {% endfor %}
-                    </div>
-                {% endif %}
+                <!--  ↓attachmentモデル逆参照 -->
+                {% for each_attachments in information.info_attach.all %}
+                    <a href="{{ each_attachments.file_path.url }}" target="_blank" class="btn btn-light btn-icon-split btn-sm mb-1">
+                        <span class="icon text-gray-600">
+                            <i class="fas fa-paperclip"></i>
+                        </span>
+                        <span class="text">{{ each_attachments.file_name }}</span>
+                    </a>
+                {% endfor %}
 
                 <div>
                     {% comment %} {{ information.body | striptags | truncatechars_html:50}} {% endcomment %}
                     {{ information.body | safe }}
-
-                    <!--  ↓attachmentモデル逆参照 -->
-                    {% for each_attachments in information.info_attach.all %}
-                        <hr>
-                        <a href="{{ each_attachments.file_path.url }}" target="_blank">
-                        <i class="fas fa-paperclip"></i>
-                        {{ each_attachments.file_name }}</a>                    
-                    {% endfor %}
                 </div>
             </div>
         </div>
