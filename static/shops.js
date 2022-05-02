@@ -95,7 +95,8 @@ $(document).ready(function () {
                 // className: "all",
                 render: function (data) {
                     let kaigyo = String(data);
-                    return kaigyo;
+                    // return kaigyo;
+                    return '<button type="button" class="" data-toggle="modal" data-target="#exampleModal">'+ kaigyo +'</button>';
                 },
             },
             {
@@ -129,6 +130,11 @@ $(document).ready(function () {
                 // 8列目
                 title: "カナ",
                 // visible: false, // これでもサーチ対象のままになる
+            },
+            {
+                // 9列目
+                title: "custom",
+                visible: false, // これでもサーチ対象のままになる
             },
 
         ],
