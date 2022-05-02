@@ -56,6 +56,7 @@ class AttachmentsAdmin(admin.ModelAdmin):
 
     thumbnail_preview.short_description = 'プレビュー'
 
+    #ソート
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "information":
             kwargs["queryset"] = Information.objects.all().order_by('-updated_at')

@@ -7,7 +7,7 @@ import tinymce.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('myinfo', '0003_alter_information_updated_at'),
+        ('myinfo', '0002_auto_20220410_1850'),
     ]
 
     operations = [
@@ -21,10 +21,5 @@ class Migration(migrations.Migration):
             options={
                 'verbose_name_plural': 'シフト',
             },
-        ),
-        migrations.AlterField(
-            model_name='information',
-            name='body',
-            field=tinymce.models.HTMLField(blank=True, null=True),
         ),
     ]

@@ -3,6 +3,7 @@
 from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
+import tinymce.models
 
 
 class Migration(migrations.Migration):
@@ -32,10 +33,11 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=100)),
-                ('body', models.TextField()),
+                ('body', tinymce.models.HTMLField(blank=True, null=True)),
                 ('to_flag', models.CharField(blank=True, max_length=100, null=True)),
                 ('created_at', models.DateTimeField()),
-                ('updated_at', models.DateTimeField(auto_now=True)),
+                ('updated_at', models.DateTimeField()),
+                ('is_draft', models.BooleanField(blank=True, default=False, null=True)),
                 ('category', models.ForeignKey(null=True, on_delete=django.db.models.deletion.PROTECT, to='myinfo.InfoCategory')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
