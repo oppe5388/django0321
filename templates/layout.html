@@ -79,35 +79,36 @@
             </div>
 
             <!-- Nav Item - Dashboard -->
-            {% comment %} {% with request.resolver_match.url_name as url_name %} {% endcomment %}
+            {% with request.resolver_match.url_name as url_name %}
             {% with request.resolver_match.app_name as app_name %}
-                <li class="nav-item {% if app_name == 'myinfo' and request.resolver_match.url_name != 'shift' and request.resolver_match.url_name != 'faqs_list' %}active{% endif %}">
+            {% comment %} {% with request.resolver_match.view_name as view_name %} {% endcomment %}
+                <li class="nav-item {% if app_name == 'myinfo' and url_name != 'shift' and url_name != 'faqs_list' and url_name != 'faqs_tab' %}active{% endif %}">
                     <a class="nav-link" href='{% url "myinfo:index" %}'>
                         <i class="fas fa-broadcast-tower"></i>
                         <span>おしらせ</span></a>
                 </li>
 
-                <li class="nav-item {% if request.resolver_match.url_name == 'faqs_list' %}active{% endif %}">
+                <li class="nav-item {% if url_name == 'faqs_list' or url_name == 'faqs_tab' %}active{% endif %}">
                     <a class="nav-link" href='{% url "myinfo:faqs_list" %}'>
                         <i class="fas fa-question-circle"></i>
                         <span>FAQ</span></a>
                 </li>
 
-                <li class="nav-item {% if app_name == 'mysched' %}active{% endif %}">
+                <li class="nav-item {% if url_name == 'mysched' %}active{% endif %}">
                     <a class="nav-link" href='{% url "mysched:mysched" %}'>
                         <i class="fas fa-calendar-alt"></i>
                         <span>スケジュール</span></a>
                 </li>
     
-                <li class="nav-item {% if app_name == 'mycontact' %}active{% endif %}">
+                <li class="nav-item {% if url_name == 'contacts' %}active{% endif %}">
                     <a class="nav-link" href='/mycontact/'>
                         <i class="fas fa-phone"></i>
                         <span>窓口一覧</span></a>
                 </li>
 
-                <li class="nav-item {% if app_name == 'mycontact' %}active{% endif %}">
+                <li class="nav-item {% if url_name == 'shops' %}active{% endif %}">
                     <a class="nav-link" href='/mycontact/shops'>
-                        <i class="fas fa-phone"></i>
+                        <i class="fas fa-warehouse"></i>
                         <span>販社・店舗</span></a>
                 </li>
 
@@ -117,7 +118,7 @@
                 <div class="sidebar-heading">
                     center
                 </div>
-                <li class="nav-item {% if request.resolver_match.url_name == 'shift' %}active{% endif %}">
+                <li class="nav-item {% if url_name == 'shift' %}active{% endif %}">
                     <a class="nav-link" href='/myinfo/shift/'>
                         <i class="fas fa-business-time"></i>
                         <span>シフト</span></a>
@@ -145,6 +146,7 @@
                     </li>
                 {% endif %}
 
+            {% endwith %}
             {% endwith %}
 
 

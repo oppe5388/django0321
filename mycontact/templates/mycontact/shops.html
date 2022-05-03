@@ -23,39 +23,38 @@
     }
     </style>
 
-    {% endblock %}
+{% endblock %}
 
 {% block content %}
 
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          {% comment %} <h5 class="modal-title" id="exampleModalLabel">タイトル</h5> {% endcomment %}
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <p>{{dealer.name}}</p>
+          <input type="text" class="form-control" id="recipient-name">
         </div>
       </div>
     </div>
   </div>
+
   
+<div class="card shadow p-2">
+  <div class="row">
+      <div class="col-12">
+          <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+          {% comment %} <table id="datatable" class="table table-striped table-bordered " cellspacing="0" width="100%"> {% endcomment %}
 
-<div class="row">
-    <div class="col-12">
-        {% comment %} <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%"> {% endcomment %}
-        <table id="datatable" class="table table-striped table-bordered " cellspacing="0" width="100%">
-
-        </table>
-    </div>
+          </table>
+      </div>
+  </div>
 </div>
 
 <!-- Scroll to Top Button-->
@@ -65,6 +64,19 @@
 {% endblock %}
 
 {% block extra_foot %}
+
+<script type="text/javascript">
+  $('#exampleModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // モーダル切替えボタン
+    var recipient = button.data('sample') // data-* 属性から情報を抽出
+    // 必要に応じて、ここでAJAXリクエストを開始可能（コールバックで更新することも可能）
+    // モーダルの内容を更新。ここではjQueryを使用するが、代わりにデータ・バインディング・ライブラリまたは他のメソッドを使用することも可能
+    var modal = $(this)
+    {% comment %} modal.find('.modal-title').text(recipient + 'にメッセージを送信') {% endcomment %}
+    modal.find('.modal-body').html(recipient)
+  })
+</script>
+
 <!-- jQuery first, then Tether, then Bootstrap JS. -->
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
@@ -73,7 +85,5 @@
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
 <script src="{% static "shops.js" %}"></script>
 
-<script type="text/javascript">
 
-</script>
 {% endblock %}

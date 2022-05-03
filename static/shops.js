@@ -39,7 +39,7 @@ $(document).ready(function () {
         ajax: "./shops/data",
         // ajax: "{% url 'mycontact:ShopsJson' %}",
 
-        responsive: true,
+        // responsive: true,
         
         // dom: 検索フィールド等の各種ウィジェットの配置
         // https://datatables.net/reference/option/dom
@@ -131,11 +131,12 @@ $(document).ready(function () {
                 // 2列目
                 title: "販社",
                 // className: "all",
-                // render: function (data) {
-                //     let kaigyo = String(data);
-                //     // return kaigyo;
-                //     return '<button type="button" class="" data-toggle="modal" data-target="#exampleModal">'+ kaigyo +'</button>';
-                // },
+                render: function (data, type, row) { //typeも必要
+                    // return '<a class="text-gray-800" data-toggle="modal" data-target="#exampleModal-'+ data + '">'+ data +'';
+                    return '<a class="" data-toggle="modal" data-target="#exampleModal" \
+                    data-sample="<b>' + row[12]+"</b><hr>・お客様相談室："+row[14]+"<hr>・緊急サポートダイヤル："+row[15]+"<hr>・ドメイン："+row[13]+"<hr>・NFS営業事務所："+row[19]+"　"+row[20]+"<hr>・コード："+row[10] +" ／ "+ row[11] +"<hr>・BC/本部："+row[16]+"<hr>・NFSメンテ："+row[17] +"　・自社メンテ："+row[18] + '">'+ data +'</a>';
+                },
+
             },
             {
                 // 3列目
@@ -143,7 +144,7 @@ $(document).ready(function () {
                 // className: " all",
                 // className: 'control',
                 render: function (data, type, row) {
-                    return '<a target="_blank" href="' + row[6] + '">' + data + '</a>';
+                    return '<a class="" target="_blank" href="' + row[6] + '">' + data + '</a>';
                 },
             },
             {
@@ -173,7 +174,39 @@ $(document).ready(function () {
             {
                 // 9列目
                 title: "カナ",
-                // visible: false, // これでもサーチ対象のままになる
+                // visible: false,
+            },
+            {
+                title: "", //10pk
+                visible: false,
+            },
+            {
+                title: "",//11
+                visible: false,
+            },
+            {
+                title: "",//12
+                visible: false,
+            },
+            {
+                title: "",//13
+                visible: false,
+            },
+            {
+                title: "",//14
+                visible: false,
+            },
+            {
+                title: "",//15
+                visible: false,
+            },
+            {
+                title: "",//16
+                visible: false,
+            },
+            {
+                title: "",//17
+                visible: false,
             },
         ],
 
