@@ -145,7 +145,12 @@ $(document).ready(function () {
                 // className: " all",
                 // className: 'control',
                 render: function (data, type, row) {
-                    return '<a class="" target="_blank" href="' + row[6] + '">' + data + '</a>';
+                    var targetStr = row[6]
+                    if (targetStr.indexOf('http') != -1) {
+                        return '<a class="" target="_blank" href="' + row[6] + '">' + data + '</a>';
+                    }else{
+                        return data;
+                    }
                 },
             },
             {
