@@ -72,7 +72,7 @@
     // 必要に応じて、ここでAJAXリクエストを開始可能（コールバックで更新することも可能）
     // モーダルの内容を更新。ここではjQueryを使用するが、代わりにデータ・バインディング・ライブラリまたは他のメソッドを使用することも可能
     var modal = $(this)
-    {% comment %} modal.find('.modal-title').text(recipient + 'にメッセージを送信') {% endcomment %}
+    // modal.find('.modal-title').text(recipient + 'にメッセージを送信')
     modal.find('.modal-body').html(recipient)
   })
 </script>
