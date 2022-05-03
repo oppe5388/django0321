@@ -138,11 +138,11 @@
     </ul>
 
       <!-- ネストのテーブル -->
-      <table class="table ">
+      <table class="table">
         <tbody>
         {% for faq in faqs %}
           <tr>
-            <td class="bg-gray-300 text-gray-800 pb-0 mb-3">{{ faq.question | safe }}
+            <td class="bg-gray-200 text-gray-800 pb-0 mb-3 ">{{ faq.question | safe }}
                 <div class="text-xs text-right">
                     {{ faq.reference | safe }}
                 </div>
@@ -150,7 +150,7 @@
           </tr>
           <tr>
             <td class="pl-3 pb-3 pt-0 pr-0">
-              <table class="table mb-0 bg-white">
+              <table class="table mb-0 bg-white shadow">
                 <tbody>
                   <tr>
                     <td>{{ faq.answer1 | safe }}

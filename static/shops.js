@@ -132,10 +132,23 @@ $(document).ready(function () {
                 // 2列目
                 title: "販社",
                 // className: "all",
+                // render: function (data, type, row) { //typeも必要
+                //     // return '<a class="text-gray-800" data-toggle="modal" data-target="#exampleModal-'+ data + '">'+ data +'';
+                //     return '<a class="" data-toggle="modal" data-target="#exampleModal" \
+                //     data-sample="<b>' + row[12]+"</b><hr>・お客様相談室："+row[14]+"<hr>・緊急サポートダイヤル："+row[15]+"<hr>・ドメイン："+row[13]+"<hr>・NFS営業事務所："+row[19]+"　"+row[20]+"<hr>・コード："+row[10] +" ／ "+ row[11] +"<hr>・BC/本部："+row[16]+"<hr>・NFSメンテ："+row[17] +"　・自社メンテ："+row[18] + '">'+ data +'</a>';
+                // },
                 render: function (data, type, row) { //typeも必要
                     // return '<a class="text-gray-800" data-toggle="modal" data-target="#exampleModal-'+ data + '">'+ data +'';
-                    return '<a class="" data-toggle="modal" data-target="#exampleModal" \
-                    data-sample="<b>' + row[12]+"</b><hr>・お客様相談室："+row[14]+"<hr>・緊急サポートダイヤル："+row[15]+"<hr>・ドメイン："+row[13]+"<hr>・NFS営業事務所："+row[19]+"　"+row[20]+"<hr>・コード："+row[10] +" ／ "+ row[11] +"<hr>・BC/本部："+row[16]+"<hr>・NFSメンテ："+row[17] +"　・自社メンテ："+row[18] + '">'+ data +'</a>';
+                    var table1 = "<table class='table'><tr><td>お客様相談室</td><td>"+row[14]+"\
+                                </td></tr><tr><td>緊急サポートダイヤル</td><td>"+row[15]+"\
+                                </td></tr><tr><td>ドメイン</td><td>"+row[13]+"\
+                                </td></tr><tr><td>NFS営業事務所</td><td>"+row[19]+"　"+row[20]+"\
+                                </td></tr><tr><td>コード</td><td>"+row[10]+" ／ "+row[11]+"\
+                                </td></tr><tr><td>BC/本部</td><td>"+row[16]+"\
+                                </td></tr><tr><td>NFSメンテ</td><td>"+row[17]+"\
+                                </td></tr><tr><td>自社メンテ</td><td>"+row[18]+"</td></tr></table>";
+                    return '<a class="" data-toggle="modal" data-target="#exampleModal" data-title="<b>' + row[12]+'</b>"\
+                    data-sample="' + table1 + '">'+ data +'</a>';
                 },
 
             },

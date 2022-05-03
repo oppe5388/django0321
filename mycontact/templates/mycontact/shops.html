@@ -32,7 +32,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          {% comment %} <h5 class="modal-title" id="exampleModalLabel">タイトル</h5> {% endcomment %}
+          <h5 class="modal-title" id="exampleModalLabel">タイトル</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -69,10 +69,11 @@
   $('#exampleModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // モーダル切替えボタン
     var recipient = button.data('sample') // data-* 属性から情報を抽出
+    var title = button.data('title') // data-* 属性から情報を抽出
     // 必要に応じて、ここでAJAXリクエストを開始可能（コールバックで更新することも可能）
     // モーダルの内容を更新。ここではjQueryを使用するが、代わりにデータ・バインディング・ライブラリまたは他のメソッドを使用することも可能
     var modal = $(this)
-    // modal.find('.modal-title').text(recipient + 'にメッセージを送信')
+    modal.find('.modal-title').html(title)
     modal.find('.modal-body').html(recipient)
   })
 </script>
