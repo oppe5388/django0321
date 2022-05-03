@@ -1,3 +1,26 @@
+// $('#datatable').DataTable({
+//     'autoWidth': false,
+//     'serverSide': true,
+//     'processing': true,
+//     'responsive': true,
+//     'ajax': {
+//       'url': './shops/data',
+//       'type': 'GET',
+//     },
+//     columnDefs: [
+//       {targets: 0, data: 'id'},
+//       {targets: 1, data: 'dealer__name'},
+//       {targets: 2, data: 'name'},
+//       {targets: 3, data: 'shopcode'},
+//       {targets: 4, data: 'tel'},
+//       {targets: 5, data: 'fax'},
+//       {targets: 6, data: 'homepage'},
+//       {targets: 7, data: 'memo'},
+//       {targets: 8, data: 'kana'},
+//     ]
+//   });
+  
+
 $(document).ready(function () {
 
     // 選択中のレコードid
@@ -14,6 +37,9 @@ $(document).ready(function () {
         processing: true,
         serverSide: true,
         ajax: "./shops/data",
+        // ajax: "{% url 'mycontact:ShopsJson' %}",
+
+        responsive: true,
         
         // dom: 検索フィールド等の各種ウィジェットの配置
         // https://datatables.net/reference/option/dom
@@ -78,6 +104,18 @@ $(document).ready(function () {
         // render内で他の列のデータを使うこともできる。
         // https://datatables.net/manual/data/renderers
 
+        // columnDefs: [
+        //         {targets: 0, data: 'id'},
+        //         {targets: 1, data: 'dealer__name'},
+        //         {targets: 2, data: 'name'},
+        //         {targets: 3, data: 'shopcode'},
+        //         {targets: 4, data: 'tel'},
+        //         {targets: 5, data: 'fax'},
+        //         {targets: 6, data: 'homepage'},
+        //         {targets: 7, data: 'memo'},
+        //         {targets: 8, data: 'kana'},
+        //       ],
+
         columns: [
             {
                 // 1列目(id)
@@ -93,11 +131,11 @@ $(document).ready(function () {
                 // 2列目
                 title: "販社",
                 // className: "all",
-                render: function (data) {
-                    let kaigyo = String(data);
-                    // return kaigyo;
-                    return '<button type="button" class="" data-toggle="modal" data-target="#exampleModal">'+ kaigyo +'</button>';
-                },
+                // render: function (data) {
+                //     let kaigyo = String(data);
+                //     // return kaigyo;
+                //     return '<button type="button" class="" data-toggle="modal" data-target="#exampleModal">'+ kaigyo +'</button>';
+                // },
             },
             {
                 // 3列目
@@ -110,7 +148,7 @@ $(document).ready(function () {
             },
             {
                 // 4列目
-                title: "店舗コード",
+                title: "コード",
                 // className: " all",
             },
             {
@@ -120,6 +158,7 @@ $(document).ready(function () {
             {
                 // 6列目
                 title: "FAX",
+                // visible: false,
             },
             {
                 // 7列目
@@ -128,15 +167,14 @@ $(document).ready(function () {
             },
             {
                 // 8列目
-                title: "カナ",
-                // visible: false, // これでもサーチ対象のままになる
+                title: "メモ",
+                visible: false, // これでもサーチ対象のままになる
             },
             {
                 // 9列目
-                title: "custom",
-                visible: false, // これでもサーチ対象のままになる
+                title: "カナ",
+                // visible: false, // これでもサーチ対象のままになる
             },
-
         ],
 
         // 列の表示非表示ボタン

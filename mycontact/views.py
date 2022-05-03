@@ -5,6 +5,7 @@ from django_datatables_view.base_datatable_view import BaseDatatableView
 from .models import *
 from django.db.models import Q
 import operator
+from django.utils.html import escape
 
 
 class ContactsJsonView(BaseDatatableView):
@@ -85,15 +86,24 @@ class DealersJsonView(BaseDatatableView):
 
 class ShopsJsonView(BaseDatatableView):
     model = Shops
-    columns = ['id', 'dealer', 'name', 'shopcode', 'tel', 'fax', 'homepage', 'memo', 'kana', 'custom']
-    
-    # ↓でも外部キーできない
-    # columns = ['id', 'dealers__name', 'name', 'shopcode', 'tel', 'fax', 'homepage', 'memo', 'kana', 'custom']
-    # def render_column(self, row, col):
-    #     if col == 'dealers__name':
-    #         return row.dealers.name
-    #     return super().render_column(row, col)
+    # columns = ['id', 'dealer', 'name', 'shopcode', 'tel', 'fax', 'homepage', 'memo', 'kana']
+    # ↓でソートはOKでも、検索でエラー
+    columns = ['id', 'dealer__name', 'name', 'shopcode', 'tel', 'fax', 'homepage', 'memo', 'kana']
+    def render_column(self, row, column):
+        if column == 'dealer__name':
+            return row.dealer.name
+        else:
+            return super(ShopsJsonView, self).render_column(row, column)
 
+    # https://pypi.org/project/django-datatables-view/1.20.0/
+    # 動作OK
+    # def render_column(self, row, column):
+    #     if column == 'custom':
+    #         return f'{row.dealer}'
+    #     else:
+    #         return super(ShopsJsonView, self).render_column(row, column)
+
+    # ↓外部キー検索できない、窓口一覧と同じもの
     def filter_queryset(self, qs):
 
         search = self.request.GET.get('search[value]', None)
@@ -101,11 +111,12 @@ class ShopsJsonView(BaseDatatableView):
             search_parts = search.split()
             for part in search_parts:
                 #外部キー検索できる？
-                # query = reduce(operator.and_, [ Q(dealers__name__icontains=part) for part in qs ] )
+                # query = reduce(operator.and_, [ Q(dealer__name__icontains=part) for part in qs ] )
                 # qs = qs.filter( query )
 
                 qs = qs.filter(
                         # Q(dealer__icontains=part) | #これがあるとエラーになる
+                        Q(dealer__name__icontains=part) | #これがあるとエラーになる
                         Q(name__icontains=part) | 
                         Q(shopcode__icontains=part) | 
                         Q(tel__icontains=part) | 
@@ -115,3 +126,18 @@ class ShopsJsonView(BaseDatatableView):
                         Q(kana__icontains=part)
                     )
         return qs
+
+
+#↓テストでソートできた
+# class ShopsJsonView(BaseDatatableView):
+#     model = Shops
+#     columns = [
+#         'id',
+#         'dealer__name',
+#         'name',
+#     ]
+
+#     def render_column(self, row, col):
+#         if col == 'dealer__name':
+#             return row.dealer.name
+#         return super().render_column(row, col)
