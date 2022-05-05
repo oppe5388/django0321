@@ -132,6 +132,10 @@
             class="nav-link {% if 'エラー' in selected_tab %} active{% endif %}">エラーMSG</a>
         </li>
         <li class="nav-item">
+            <a href="{% url 'myinfo:faqs_tab' p='含む含まれない' %}" 
+            class="nav-link {% if '含む含まれない' in selected_tab %} active{% endif %}">含む含まれない</a>
+        </li>
+        <li class="nav-item">
             <a href="#" 
             class="nav-link disabled {% if '検索結果' in selected_tab %} active{% endif %}">検索結果</a>
         </li>
