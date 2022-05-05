@@ -161,6 +161,36 @@
                         {% if faq.answer2 is not None and faq.answer2 != "" %}
                         <br>※補足：{{ faq.answer2 | safe }}
                         {% endif %}
+
+                        {% for contact in faq.contacts.all %}                                
+                            <a class="btn btn-info btn-icon-split btn-sm" data-toggle="modal" data-target="#contactModal{{ contact.pk }}">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-phone"></i>
+                                </span>
+                                <span class="text">{{ contact.name }}</span>
+                            </a>
+
+                            <!-- モーダル -->
+                            <div class="modal fade" id="contactModal{{ contact.pk }}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title"><b>{{ contact.name }}</b></h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <table class='table'>
+                                            <tr><td width="100">対象</td><td>{{ contact.incoming }}</td></tr>
+                                            <tr><td>TEL</td><td>{{ contact.tel }}</td></tr>
+                                            <tr><td>営業時間</td><td>{{ contact.hours }}</td></tr>
+                                            <tr><td>業務</td><td>{{ contact.title }}</td></tr>
+                                            <tr><td>詳細</td><td>{{ contact.job }}</td></tr>
+                                            </table>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% endfor %}
                     </td>
                   </tr>
                 </tbody>
