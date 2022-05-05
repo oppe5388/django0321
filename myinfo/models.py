@@ -7,8 +7,9 @@ import os
 
 #添付ファイル
 from django.core.validators import FileExtensionValidator
-
 from tinymce import models as tinymce_models
+
+from mycontact.models import *
 
 
 class InfoCategory(models.Model):
@@ -144,6 +145,7 @@ class Faqs(models.Model):
     reference = tinymce_models.HTMLField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=False)#impot-exportで任意にするため
     updated_at = models.DateTimeField(auto_now_add=False)#更新するしないでソートをコントロールするため
+    contacts = models.ManyToManyField(Contacts, blank=True)
      
     def __str__(self):
         return self.question

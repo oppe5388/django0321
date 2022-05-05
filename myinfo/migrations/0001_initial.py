@@ -37,7 +37,7 @@ class Migration(migrations.Migration):
                 ('to_flag', models.CharField(blank=True, max_length=100, null=True)),
                 ('created_at', models.DateTimeField()),
                 ('updated_at', models.DateTimeField()),
-                ('is_draft', models.BooleanField(blank=True, default=False, null=True)),
+                ('is_draft', models.BooleanField(blank=True, default=False, help_text='下書き')),
                 ('category', models.ForeignKey(null=True, on_delete=django.db.models.deletion.PROTECT, to='myinfo.InfoCategory')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
