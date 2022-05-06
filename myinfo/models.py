@@ -120,6 +120,10 @@ class Attachments(models.Model):
         path = os.path.basename(self.file_path.name)  # ファイル名のみ抽出
         return path
 
+    def __str__(self):
+        path = os.path.basename(self.file_path.name)  # ファイル名のみ抽出
+        return path
+
     class Meta:
         verbose_name_plural = "添付ファイル"
 
@@ -146,6 +150,7 @@ class Faqs(models.Model):
     created_at = models.DateTimeField(auto_now_add=False)#impot-exportで任意にするため
     updated_at = models.DateTimeField(auto_now_add=False)#更新するしないでソートをコントロールするため
     contacts = models.ManyToManyField(Contacts, blank=True)
+    attachments = models.ManyToManyField(Attachments, blank=True)
      
     def __str__(self):
         return self.question

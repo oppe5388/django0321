@@ -161,7 +161,8 @@
                         {% if faq.answer2 is not None and faq.answer2 != "" %}
                         <br>※補足：{{ faq.answer2 | safe }}
                         {% endif %}
-
+                        
+                        <!-- 問い合わせ先あれば -->
                         {% for contact in faq.contacts.all %}                                
                             <a class="btn btn-info btn-icon-split btn-sm" data-toggle="modal" data-target="#contactModal{{ contact.pk }}">
                                 <span class="icon text-white-50">
@@ -191,6 +192,29 @@
                             </div>
 
                         {% endfor %}
+
+                        <!-- 添付ファイルあれば -->
+                        {% for attach in faq.attachments.all %}                                
+                            <a class="btn btn-light btn-icon-split btn-sm" data-toggle="modal" data-target="#attachModal{{ attach.pk }}">
+                                <span class="icon text-gray-600">
+                                    <i class="fas fa-paperclip"></i>
+                                </span>
+                                <span class="text">{{ attach.file_name }}</span>
+                            </a>
+
+                            <!-- モーダル -->
+                            <div class="modal fade " id="attachModal{{ attach.pk }}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable modal-xl">
+                                    <div class="modal-content">
+                                        <iframe src="{{ attach.file_path.url }}" height=1000 >
+                                            <p><b>表示されない時の表示</b>: <a href="{{ attach.file_path.url }}">ダウンロード</a>.</p>
+                                        </iframe>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% endfor %}
+
                     </td>
                   </tr>
                 </tbody>
