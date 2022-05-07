@@ -141,12 +141,14 @@
         </li>
     </ul>
 
+    <div class="card shadow p-2 mb-2">
+
       <!-- ネストのテーブル -->
       <table class="table">
         <tbody>
         {% for faq in faqs %}
           <tr>
-            <td class="bg-gray-200 text-gray-800 pb-0 mb-3 ">{{ faq.question | safe }}
+            <td class="bg-gray-100 text-gray-800 pb-0 mb-3">{{ faq.question | safe }}
                 <div class="text-xs text-right">
                     {{ faq.reference | safe }}
                 </div>
@@ -161,6 +163,7 @@
                         {% if faq.answer2 is not None and faq.answer2 != "" %}
                         <br>※補足：{{ faq.answer2 | safe }}
                         {% endif %}
+                        <br>
                         
                         <!-- 問い合わせ先あれば -->
                         {% for contact in faq.contacts.all %}                                
@@ -250,6 +253,7 @@
         </tbody>
       </table>
 
+    </div>
 
     <!--  ↑ページネーションのincludeがあたってないので直書き↓  -->
     <ul class="pagination" style="justify-content:center">
