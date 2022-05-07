@@ -151,6 +151,7 @@ class Faqs(models.Model):
     updated_at = models.DateTimeField(auto_now_add=False)#更新するしないでソートをコントロールするため
     contacts = models.ManyToManyField(Contacts, blank=True)
     attachments = models.ManyToManyField(Attachments, blank=True)
+    dealers = models.ManyToManyField(Dealers, blank=True)
      
     def __str__(self):
         return self.question
