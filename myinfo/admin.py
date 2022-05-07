@@ -73,8 +73,14 @@ class NotificationsAdmin(admin.ModelAdmin):
 admin.site.register(Notifications, NotificationsAdmin)
 
 
-#既読
-class ReadStatesAdmin(admin.ModelAdmin):
+#既読もエクスポート
+class ReadStatesResource(ModelResource):
+    class Meta:
+        model = ReadStates
+        skip_unchanged = True
+        import_id_fields = ['id']
+
+class ReadStatesAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('user', 'information', 'created_at')
     ordering = ('-created_at',)
 
