@@ -49,6 +49,8 @@ class Contacts(models.Model):
     tel = models.TextField(max_length=100, verbose_name="TEL")
     hours = models.TextField(max_length=100, verbose_name="時間")
     searchwords = models.CharField(max_length=200, null=True, blank=True, verbose_name="検索ワード")
+    attachments = models.ManyToManyField('myinfo.Attachments', blank=True)
+    dealers = models.ManyToManyField(Dealers, blank=True)
 
     def __str__(self):
         return self.name
