@@ -26,6 +26,8 @@ from django_datatables_view.base_datatable_view import BaseDatatableView
 from django.conf import settings
 from django.http import JsonResponse
 
+from mycontact.models import *
+
 
 #Ajaxで未読削除
 def ajax_read_delete(request, pk, *args, **kwargs):
@@ -484,5 +486,21 @@ def all_search(request):
                 ).order_by('-updated_at')#
 
         context['faqs'] = queryset
+
+    #窓口
+    queryset = Contacts.objects.all()
+    keyword = request.GET.get('all_search')
+    if keyword:
+        keyword = keyword.split()
+        for k in keyword:
+            queryset = queryset.filter(
+                    Q(name__icontains=k) | 
+                    Q(title__icontains=k) | 
+                    Q(job__icontains=k) | 
+                    Q(tel__icontains=k) | 
+                    Q(searchwords__icontains=k)
+                ).order_by('id')#
+
+        context['contacts'] = queryset
 
     return render(request, 'myinfo/search_result.html', context)

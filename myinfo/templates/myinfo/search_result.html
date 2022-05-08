@@ -1,5 +1,13 @@
 {% extends 'layout.html' %}
 {% block title %}検索結果{% endblock %}
+
+{% block extra_head %}
+<style>
+    .font-small {
+        font-size: 0.8rem;
+      }
+</style>
+{% endblock %}
 {% block topbar %}
 {% endblock %}
 
@@ -13,11 +21,74 @@
 
     <div class=" h5 mb-3">
         "{{ keyword }}"の検索結果：
+        <span class="small">窓口&nbsp;{{ contacts|length }}件　おしらせ&nbsp;{{ informations|length }}件　FAQ&nbsp;{{ faqs|length }}件</span>
     </div>
 
-    <div class="card text-white bg-info mb-3">
-        <div class="d-flex align-items-center card-body p-2">
-            <i class="fas fa-broadcast-tower"></i>&nbsp;おしらせ
+    <!--窓口、の結果 -->
+    
+        <div class="card text-white bg-primary mb-3">
+            <div class="d-flex align-items-center card-body p-1">
+                <i class="fas fa-phone"></i>&nbsp;窓口&nbsp;{{ contacts|length }}件
+            </div>
+        </div>
+    {% if contacts %} 
+        <div class="table-responsive">
+            <table class="table " width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th nowrap class="font-small">相手</th>
+                        <th nowrap class="font-small">窓口</th>
+                        <th nowrap class="font-small">業務</th>
+                        <th nowrap class="font-small">詳細</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for contact in contacts %} 
+                        <tr>
+                            <td >
+                                {{ contact.incoming }}
+                                <a class="btn btn-info btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#contactModal{{ contact.pk }}">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-phone"></i>
+                                    </span>
+                                    {% comment %} <span class="text"></span> {% endcomment %}
+                                </a>
+                                <!-- モーダル -->
+                                <div class="modal fade" id="contactModal{{ contact.pk }}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-scrollable">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title"><b>{{ contact.name }}</b></h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <table class='table'>
+                                                <tr><td width="100">対象</td><td>{{ contact.incoming }}</td></tr>
+                                                <tr><td>TEL</td><td>{{ contact.tel }}</td></tr>
+                                                <tr><td>営業時間</td><td>{{ contact.hours }}</td></tr>
+                                                <tr><td>業務</td><td>{{ contact.title }}</td></tr>
+                                                <tr><td>詳細</td><td>{{ contact.job }}</td></tr>
+                                                </table>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                </td>
+                            <td nowrap>{{ contact.name }}</td>
+                            <td class="font-small">{{ contact.title }}</td>
+                            <td class="font-small">{{ contact.job }}</td>
+                        </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+
+    <!--おしらせ、の結果 -->
+    <div class="card text-white bg-primary mb-3">
+        <div class="d-flex align-items-center card-body p-1">
+            <i class="fas fa-broadcast-tower"></i>&nbsp;おしらせ&nbsp;{{ informations|length }}件
           </div>
     </div>
 
@@ -89,13 +160,13 @@
     {% endfor %}
 
 
-    <div class="card text-white bg-info mb-3">
-        <div class="d-flex align-items-center card-body p-2">
-            <i class="fas fa-question-circle"></i>&nbsp;FAQ
+    <!-- FAQの検索結果 -->
+    <div class="card text-white bg-primary mb-3">
+        <div class="d-flex align-items-center card-body p-1">
+            <i class="fas fa-question-circle"></i>&nbsp;FAQ&nbsp;{{ faqs|length }}件
         </div>
     </div>
 
-    <!-- FAQの検索結果 -->
     <!-- ネストのテーブル -->
     {% include './faqs_include.html' %}
 
