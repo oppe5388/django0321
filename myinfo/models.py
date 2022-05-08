@@ -154,7 +154,7 @@ class Faqs(models.Model):
     dealers = models.ManyToManyField(Dealers, blank=True)
      
     def __str__(self):
-        return self.question
+        return str(self.question)
 
     class Meta:
         verbose_name_plural = "FAQ"

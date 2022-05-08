@@ -240,6 +240,7 @@ TINYMCE_DEFAULT_CONFIG = {
     "image_class_list": [
         {"title": 'Responsive', "value": 'img-fluid'}
     ],
+    "forced_root_block": '',
 
 }
 # TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, "tinymce")
