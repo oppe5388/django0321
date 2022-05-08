@@ -1,0 +1,163 @@
+
+      <!-- ネストのテーブル -->
+      <table class="table">
+        <tbody>
+        {% for faq in faqs %}
+          <tr>
+            {% comment %} <td class="bg-gray-100 text-gray-800 pb-0 mb-3"> {% endcomment %}
+            <td class="bg-gray-800 text-white">
+                <span class="small"><i class="fas fa-question-circle"></i> </span>{{ faq.question | safe }}
+                <div class="text-xs text-right m-0 p-0">{{ faq.reference | safe }}</div>
+            </td>
+          </tr>
+          <tr>
+            <td class="pl-3 pb-3 pt-0 pr-0">
+              <table class="table mb-0 bg-white shadow">
+                <tbody>
+                  <tr>
+                    <td>{{ faq.answer1 | safe }}
+                        {% if faq.answer2 is not None and faq.answer2 != "" %}
+                        <br>※補足：{{ faq.answer2 | safe }}
+                        {% endif %}
+                        <br>
+                        
+                        <!-- 問い合わせ先あれば -->
+                        {% for contact in faq.contacts.all %}                                
+                            <a class="btn btn-info btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#contactModal{{ contact.pk }}">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-phone"></i>
+                                </span>
+                                <span class="text">{{ contact.name }}</span>
+                            </a>
+
+                            <!-- モーダル -->
+                            <div class="modal fade" id="contactModal{{ contact.pk }}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title"><b>{{ contact.name }}</b></h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <table class='table'>
+                                            <tr><td width="100">対象</td><td>{{ contact.incoming }}</td></tr>
+                                            <tr><td>TEL</td><td>{{ contact.tel }}</td></tr>
+                                            <tr><td>営業時間</td><td>{{ contact.hours }}</td></tr>
+                                            <tr><td>業務</td><td>{{ contact.title }}</td></tr>
+                                            <tr><td>詳細</td><td>{{ contact.job }}</td></tr>
+                                            </table>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                        <!-- 添付ファイルあれば -->
+                        {% for attach in faq.attachments.all %}                                
+                            <a class="btn btn-light btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#attachModal{{ attach.pk }}">
+                                <span class="icon text-gray-600">
+                                    <i class="fas fa-paperclip"></i>
+                                </span>
+                                <span class="text">{{ attach.file_name }}</span>
+                            </a>
+
+                            <!-- モーダル -->
+                            <div class="modal fade " id="attachModal{{ attach.pk }}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable modal-xl">
+                                    <div class="modal-content">
+                                        <iframe src="{{ attach.file_path.url }}" height=1000 >
+                                            <p><b>表示されない時の表示</b>: <a href="{{ attach.file_path.url }}">ダウンロード</a>.</p>
+                                        </iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                        <!-- 緊急サポートダイヤル：dealers×文字列あれば-->
+                        {% if faq.dealers.all and '緊急サポート' in faq.answer1 %}
+                            <a class="btn btn-warning btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#emerModal">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-ambulance"></i>
+                                </span>
+                                <span class="text">緊急サポートダイヤル</span>
+                            </a>
+
+                            <!-- モーダル -->
+                            <div class="modal fade" id="emerModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <table class='table'>
+                                                <tr><th>販売会社</th><th>緊急サポートダイヤル</th></tr>
+                                                {% for dealer in faq.dealers.all %}   
+                                                    <tr><td width="100">{{ dealer.name }}</td>
+                                                        <td>{{ dealer.emergency }}</td></tr>
+                                                {% endfor %}
+                                            </table>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        <!-- NFS営業一覧：dealers×文字列あれば-->
+                        {% if faq.dealers.all and 'NFS営業' in faq.answer1 %}
+                            <a class="btn btn-info btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#salesModal">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-user-tie"></i>
+                                </span>
+                                <span class="text">NFS営業</span>
+                            </a>
+
+                            <!-- モーダル -->
+                            <div class="modal fade" id="salesModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <table class='table'>
+                                                <tr><th>販売会社</th><th>NFS営業事務所</th></tr>
+                                                {% for dealer in faq.dealers.all %}   
+                                                    <tr><td width="100">{{ dealer.name }}</td>
+                                                        <td>{{ dealer.base}}　{{ dealer.base_tel}}</td></tr>
+                                                {% endfor %}
+                                            </table>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        <!-- ドメイン：dealers×文字列あれば-->
+                        {% if faq.dealers.all and 'メール' in faq.answer1 or 'メール' in faq.answer2 %}
+                        <a class="btn btn-info btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#domainModal">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-at"></i>
+                            </span>
+                            <span class="text">販社ドメイン</span>
+                        </a>
+
+                        <!-- モーダル -->
+                        <div class="modal fade" id="domainModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <table class='table'>
+                                            <tr><th>販売会社</th><th>ドメイン</th></tr>
+                                            {% for dealer in faq.dealers.all %}   
+                                                <tr><td width="100">{{ dealer.name }}</td>
+                                                    <td>{{ dealer.domain}}</td></tr>
+                                            {% endfor %}
+                                        </table>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
