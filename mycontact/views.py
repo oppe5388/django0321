@@ -7,12 +7,28 @@ from django.db.models import Q
 import operator
 from django.utils.html import escape
 
+from myinfo.models import Attachments
+
 
 class ContactsJsonView(BaseDatatableView):
     # モデルの指定
     model = Contacts
     # 表示するフィールドの指定
-    columns = ['id', 'incoming', 'name', 'tel', 'hours', 'title', 'job', 'searchwords']
+    columns = ['id', 'incoming', 'name', 'tel', 'hours', 'title', 'job', 'searchwords', 'attachments']
+
+    # ↓ManyToManyができない
+    # def get_initial_queryset(self, request=None):
+    #     # Optimization: Reduce the number of queries due to ManyToMany "tags" relation
+    #     return Attachments.objects.prefetch_related('file_path')
+    #     # return Attachments.objects.all().prefetch_related('file_path')
+
+    def customize_row(self, row, obj):
+        # 'row' is a dictionary representing the current row, and 'obj' is the current object.
+        # Display tags as a list of strings
+        row['attachments'] = ','.join( [t.file_path for t in obj.attachments.all()])
+        return
+
+
 
     # # 検索方法の指定：部分一致
     # def get_filter_method(self):

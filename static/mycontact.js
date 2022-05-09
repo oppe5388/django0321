@@ -168,6 +168,12 @@ $(document).ready(function () {
                 title: "検索ワード",
                 visible: false, // これでもサーチ対象のままになる
             },
+            {
+                // 9列目
+                title: "",
+                // visible: false, // これでもサーチ対象のままになる
+            },
+
         ],
 
         // 列の表示非表示ボタン
