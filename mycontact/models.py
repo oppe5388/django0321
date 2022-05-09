@@ -57,3 +57,14 @@ class Contacts(models.Model):
 
     class Meta:
         verbose_name_plural = "問い合わせ先"
+
+
+class ContactAttachRel(models.Model):
+    contact = models.ForeignKey(Contacts, on_delete=models.CASCADE)
+    attachment = models.ForeignKey('myinfo.Attachments', on_delete=models.CASCADE, related_name='contactattach_rel')
+
+    def __str__(self):
+        return str(self.contact)
+
+    class Meta:
+        verbose_name_plural = "問い合わせ添付の中間テーブル"

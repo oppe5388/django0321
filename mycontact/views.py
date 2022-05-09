@@ -7,7 +7,7 @@ from django.db.models import Q
 import operator
 from django.utils.html import escape
 
-from myinfo.models import Attachments
+# from myinfo.models import Attachments
 
 
 class ContactsJsonView(BaseDatatableView):
@@ -22,12 +22,24 @@ class ContactsJsonView(BaseDatatableView):
     #     return Attachments.objects.prefetch_related('file_path')
     #     # return Attachments.objects.all().prefetch_related('file_path')
 
-    def customize_row(self, row, obj):
-        # 'row' is a dictionary representing the current row, and 'obj' is the current object.
-        # Display tags as a list of strings
-        row['attachments'] = ','.join( [t.file_path for t in obj.attachments.all()])
-        return
+    # def customize_row(self, row, obj):
+    #     # 'row' is a dictionary representing the current row, and 'obj' is the current object.
+    #     # Display tags as a list of strings
+    #     row['attachments'] = ','.join( [t.file_path for t in obj.attachments.all()])
+    #     return
 
+    
+    # ↓FKeyでやってみる
+    def render_column(self, row, column):
+        if column == 'attachments':
+            if ContactAttachRel.objects.filter(contact=row.id).exists():
+                cont =ContactAttachRel.objects.filter(contact=row.id).first()
+                return cont.attachment.file_path.url
+                # return "添付あり"
+            else:
+                return "ああ"
+        else:
+            return super(ContactsJsonView, self).render_column(row, column)
 
 
     # # 検索方法の指定：部分一致

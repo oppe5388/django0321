@@ -56,3 +56,10 @@ class ShopsAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     search_fields = ['name']
 
 admin.site.register(Shops, ShopsAdmin)
+
+#添付中間テーブル
+class ContactAttachRelAdmin(admin.ModelAdmin):
+    list_display = ('contact', 'attachment')
+    ordering = ('-id',)
+
+admin.site.register(ContactAttachRel, ContactAttachRelAdmin)
