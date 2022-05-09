@@ -36,6 +36,9 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title"><b>{{ contact.name }}</b></h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
                                         </div>
                                         <div class="modal-body">
                                             <table class='table'>
@@ -51,6 +54,39 @@
                             </div>
                         {% endfor %}
 
+                        <!-- ヘルプデスクは文字列あれば紐付けなしでとってきてしまう-->
+                        {% if 'ヘルプデスク' in faq.question or 'ヘルプデスク' in faq.answer1 or 'ヘルプデスク' in faq.answer2 %}
+                            <a class="btn btn-info btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#helpdeskModal">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-phone"></i>
+                                </span>
+                                <span class="text">日産ヘルプデスク</span>
+                            </a>
+
+                            <!-- モーダル -->
+                            <div class="modal fade" id="helpdeskModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title"><b>{{ helpdesk.name }}</b></h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <table class='table'>
+                                            <tr><td width="100">対象</td><td>{{ helpdesk.incoming }}</td></tr>
+                                            <tr><td>TEL</td><td>{{ helpdesk.tel }}</td></tr>
+                                            <tr><td>営業時間</td><td>{{ helpdesk.hours }}</td></tr>
+                                            <tr><td>業務</td><td>{{ helpdesk.title }}</td></tr>
+                                            <tr><td>詳細</td><td>{{ helpdesk.job }}</td></tr>
+                                            </table>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+
                         <!-- 添付ファイルあれば -->
                         {% for attach in faq.attachments.all %}                                
                             <a class="btn btn-light btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#attachModal{{ attach.pk }}">
@@ -64,7 +100,12 @@
                             <div class="modal fade " id="attachModal{{ attach.pk }}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-scrollable modal-xl">
                                     <div class="modal-content">
-                                        <iframe src="{{ attach.file_path.url }}" height=1000 >
+                                        <div class="modal-header py-1">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <iframe src="{{ attach.file_path.url }}" height=1000 width=100%>
                                             <p><b>表示されない時の表示</b>: <a href="{{ attach.file_path.url }}">ダウンロード</a>.</p>
                                         </iframe>
                                     </div>
@@ -72,8 +113,9 @@
                             </div>
                         {% endfor %}
 
-                        <!-- 緊急サポートダイヤル：dealers×文字列あれば-->
-                        {% if faq.dealers.all and '緊急サポート' in faq.answer1 %}
+                        <!-- 緊急サポートダイヤル：文字列あれば。manytomany使わずallで取得にした-->
+                        {% comment %} {% if faq.dealers.all and '緊急サポート' in faq.answer1 %} {% endcomment %}
+                        {% if '緊急サポート' in faq.answer1 %}
                             <a class="btn btn-warning btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#emerModal">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-ambulance"></i>
@@ -85,10 +127,16 @@
                             <div class="modal fade" id="emerModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-scrollable">
                                     <div class="modal-content">
+                                        <div class="modal-header py-1">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
                                         <div class="modal-body">
                                             <table class='table'>
                                                 <tr><th>販売会社</th><th>緊急サポートダイヤル</th></tr>
-                                                {% for dealer in faq.dealers.all %}   
+                                                {% comment %} {% for dealer in faq.dealers.all %} {% endcomment %}
+                                                {% for dealer in dealers_all %}
                                                     <tr><td width="100">{{ dealer.name }}</td>
                                                         <td>{{ dealer.emergency }}</td></tr>
                                                 {% endfor %}
@@ -99,8 +147,9 @@
                             </div>
                         {% endif %}
 
-                        <!-- NFS営業一覧：dealers×文字列あれば-->
-                        {% if faq.dealers.all and 'NFS営業' in faq.answer1 %}
+                        <!-- NFS営業一覧：文字列あれば。manytomany使わずallで取得にした-->
+                        {% comment %} {% if faq.dealers.all and 'NFS営業' in faq.answer1 %} {% endcomment %}
+                        {% if 'NFS営業' in faq.answer1 %}
                             <a class="btn btn-info btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#salesModal">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-user-tie"></i>
@@ -112,10 +161,16 @@
                             <div class="modal fade" id="salesModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-scrollable">
                                     <div class="modal-content">
+                                        <div class="modal-header py-1">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
                                         <div class="modal-body">
                                             <table class='table'>
                                                 <tr><th>販売会社</th><th>NFS営業事務所</th></tr>
-                                                {% for dealer in faq.dealers.all %}   
+                                                {% comment %} {% for dealer in faq.dealers.all %} {% endcomment %}
+                                                {% for dealer in dealers_all %}
                                                     <tr><td width="100">{{ dealer.name }}</td>
                                                         <td>{{ dealer.base}}　{{ dealer.base_tel}}</td></tr>
                                                 {% endfor %}
@@ -126,8 +181,9 @@
                             </div>
                         {% endif %}
 
-                        <!-- ドメイン：dealers×文字列あれば-->
-                        {% if faq.dealers.all and 'メール' in faq.answer1 or 'メール' in faq.answer2 %}
+                        <!-- ドメイン：文字列あれば。manytomany使わずallで取得にした-->
+                        {% comment %} {% if faq.dealers.all and 'メール' in faq.answer1 or 'メール' in faq.answer2 %} {% endcomment %}
+                        {% if 'メール' in faq.answer1 or 'メール' in faq.answer2 %}
                             <a class="btn btn-info btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#domainModal">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-at"></i>
@@ -139,10 +195,16 @@
                             <div class="modal fade" id="domainModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-scrollable">
                                     <div class="modal-content">
+                                        <div class="modal-header py-1">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
                                         <div class="modal-body">
                                             <table class='table'>
                                                 <tr><th>販売会社</th><th>ドメイン</th></tr>
-                                                {% for dealer in faq.dealers.all %}   
+                                                {% comment %} {% for dealer in faq.dealers.all %} {% endcomment %}
+                                                {% for dealer in dealers_all %}
                                                     <tr><td width="100">{{ dealer.name }}</td>
                                                         <td>{{ dealer.domain}}</td></tr>
                                                 {% endfor %}

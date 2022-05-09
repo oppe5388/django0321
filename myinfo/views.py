@@ -341,6 +341,13 @@ def faqs_list(request):
     context = {
         'faqsearchForm': faqsearchForm,
     }
+    #ディーラーのall←全部とってくる用
+    #窓口のallは使わないか
+    #別フィールド作ってTrueFalseで分岐をテンプレートに書く（or紐付いていなかったらallということにするか）
+    context['dealers_all'] = Dealers.objects.all().order_by('id')
+    context['contacts_all'] = Contacts.objects.all().order_by('id')
+    #↓1件でもクエリセットだとtemplateでループ要になるため、firstつける
+    context['helpdesk'] = Contacts.objects.filter(name__contains="日産ヘルプデスク").first()
 
     if faqsearchForm.is_valid():
         queryset = Faqs.objects.all()
@@ -377,6 +384,11 @@ def faqs_tab(request, p):
     context = {
         'faqsearchForm': faqsearchForm,
     }
+
+    context['dealers_all'] = Dealers.objects.all().order_by('id')
+    context['contacts_all'] = Contacts.objects.all().order_by('id')
+    #↓1件でもクエリセットだとtemplateでループ要になるため、firstつける
+    context['helpdesk'] = Contacts.objects.filter(name__contains="日産ヘルプデスク").first()
 
     # 一度queryset = Faqs.objects.all()と刻む必要はない
     queryset = Faqs.objects.filter(
@@ -456,6 +468,12 @@ def all_search(request):
     context = {
         'keyword': keyword,
     }
+
+    context['dealers_all'] = Dealers.objects.all().order_by('id')
+    context['contacts_all'] = Contacts.objects.all().order_by('id')
+    #↓1件でもクエリセットだとtemplateでループ要になるため、firstつける
+    context['helpdesk'] = Contacts.objects.filter(name__contains="日産ヘルプデスク").first()
+
     #おしらせの検索ここに
     queryset = Information.objects.all()
     if keyword:
