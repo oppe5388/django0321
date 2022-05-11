@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'imagekit',
     # 'bootstrap_toolkit',
     'mysched',
-    'mycontact',
+    # 'mycontact',
     'sample',
     'myreport',
     # 'bootstrap_datepicker_plus',
