@@ -47,8 +47,14 @@ admin.site.register(InfoComments, InfoCommentsAdmin)
 
 
 #添付ファイル
+class AttachmentsResource(ModelResource):
+    class Meta:
+        model = Attachments
+        skip_unchanged = True
+        import_id_fields = ['id']
+
 from django.utils.safestring import mark_safe
-class AttachmentsAdmin(admin.ModelAdmin):
+class AttachmentsAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('file_path', 'information', 'updated_at', 'thumbnail_preview')
     ordering = ('-updated_at',)
 

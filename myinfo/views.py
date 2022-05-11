@@ -507,17 +507,17 @@ class ContactsJsonView(BaseDatatableView):
     #     return
 
     
-    # ↓FKeyでやってみる
-    def render_column(self, row, column):
-        if column == 'attachments':
-            if ContactAttachRel.objects.filter(contact=row.id).exists():
-                cont =ContactAttachRel.objects.filter(contact=row.id).first()
-                return cont.attachment.file_path.url
-                # return "添付あり"
-            else:
-                return "ああ"
-        else:
-            return super(ContactsJsonView, self).render_column(row, column)
+    # # ↓FKeyでやってみる
+    # def render_column(self, row, column):
+    #     if column == 'attachments':
+    #         if ContactAttachRel.objects.filter(contact=row.id).exists():
+    #             cont =ContactAttachRel.objects.filter(contact=row.id).first()
+    #             return cont.attachment.file_path.url
+    #             # return "添付あり"
+    #         else:
+    #             return "ああ"
+    #     else:
+    #         return super(ContactsJsonView, self).render_column(row, column)
 
 
     # # 検索方法の指定：部分一致

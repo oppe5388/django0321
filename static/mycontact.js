@@ -13,7 +13,7 @@ $(document).ready(function () {
         // https://datatables.net/examples/server_side/simple.html
         processing: true,
         serverSide: true,
-        ajax: "./contacts",
+        ajax: "./contacts/data",
         
         // dom: 検索フィールド等の各種ウィジェットの配置
         // https://datatables.net/reference/option/dom
