@@ -20,7 +20,7 @@ class InformationAdmin(SummernoteModelAdmin, admin.ModelAdmin):
     inlines = [AttachmentsInline]
 
 
-admin.site.register(InfoCategory)
+# admin.site.register(InfoCategory)
 
 
 class InformationResource(ModelResource):

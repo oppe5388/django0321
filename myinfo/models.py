@@ -10,23 +10,23 @@ from django.core.validators import FileExtensionValidator
 from tinymce import models as tinymce_models
 
 
-class InfoCategory(models.Model):
-    name = models.CharField(max_length=100, null=True, verbose_name="カテゴリ名")
-    sort_no = models.IntegerField(verbose_name="ソートNo")
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+# class InfoCategory(models.Model):
+#     name = models.CharField(max_length=100, null=True, verbose_name="カテゴリ名")
+#     sort_no = models.IntegerField(verbose_name="ソートNo")
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
 
-    class Meta:
-        verbose_name_plural = "カテゴリ"
+#     class Meta:
+#         verbose_name_plural = "カテゴリ"
 
 
 # Informationクラス
 class Information(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    category = models.ForeignKey(InfoCategory, null=True, on_delete=models.PROTECT)
+    # category = models.ForeignKey(InfoCategory, null=True, on_delete=models.PROTECT)
     title = models.CharField(max_length=100)
     # body = models.TextField()
     body = tinymce_models.HTMLField(null=True, blank=True)
@@ -36,16 +36,14 @@ class Information(models.Model):
     # updated_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now_add=False)#更新するしないでソートをコントロールするため
     is_draft = models.BooleanField(default=False, blank=True, help_text='下書き')
+    freeword = models.CharField(max_length=100, null=True, blank=True)
      
     def __str__(self):
-        # return self.title
-        return f"{self.category} {self.title}"
+        return self.title
+        # return f"{self.category} {self.title}"
 
     class Meta:
         verbose_name_plural = "お知らせ"
-
-
-
 
     def get_absolute_url(self):
         return reverse('myinfo:detail', kwargs={'pk':self.pk})
