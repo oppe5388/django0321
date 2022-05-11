@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import *
-from django_summernote.admin import SummernoteModelAdmin
+# from django_summernote.admin import SummernoteModelAdmin
 
 from import_export.resources import ModelResource
 from import_export.admin import ImportExportModelAdmin
@@ -15,9 +15,9 @@ class AttachmentsInline(admin.StackedInline):
     extra = 3
 
 
-class InformationAdmin(SummernoteModelAdmin, admin.ModelAdmin):
-    summernote_fields = '__all__'
-    inlines = [AttachmentsInline]
+# class InformationAdmin(SummernoteModelAdmin, admin.ModelAdmin):
+#     summernote_fields = '__all__'
+#     inlines = [AttachmentsInline]
 
 
 # admin.site.register(InfoCategory)
@@ -31,9 +31,10 @@ class InformationResource(ModelResource):
 
 #お知らせインポート、エクスポート
 class InformationAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ('id', 'title', 'user', 'body', 'created_at')  
+    list_display = ('id', 'title', 'user', 'created_at')  
     resource_class = InformationResource
     # formats = [base_formats.XLSX]
+    search_fields = ('title', 'body')
 
 admin.site.register(Information, InformationAdmin)
 
@@ -112,6 +113,7 @@ class FaqsAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('id', 'question', 'created_at')  
     resource_class = FaqsResource
     filter_horizontal = ('contacts', 'attachments', 'dealers')
+    search_fields = ('question', 'answer1', 'answer2')
 
 admin.site.register(Faqs, FaqsAdmin)
 
@@ -127,7 +129,7 @@ class ContactsResource(ModelResource):
 
 #インポート、エクスポート
 class ContactsAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ('incoming', 'name', 'title', 'job', 'tel', 'hours', 'searchwords')
+    list_display = ('incoming', 'name', 'title', 'tel', 'searchwords')
     resource_class = ContactsResource
     formats = [base_formats.XLSX]
     filter_horizontal = ('attachments', 'dealers')

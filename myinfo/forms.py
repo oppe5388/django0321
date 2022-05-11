@@ -1,7 +1,7 @@
 from django import forms
 from .models import Information, Attachments, InfoComments
 
-from django_summernote.widgets import SummernoteWidget
+# from django_summernote.widgets import SummernoteWidget
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # from django.contrib.auth.models import User
