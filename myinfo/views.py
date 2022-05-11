@@ -494,6 +494,28 @@ class ContactsJsonView(BaseDatatableView):
     # 表示するフィールドの指定
     columns = ['id', 'incoming', 'name', 'tel', 'hours', 'title', 'job', 'searchwords', 'attachments']
 
+    # column_defs = [
+    #     {
+    #         'name': 'id',
+    #         'visible': False,
+    #     }, {
+    #         'name': 'incoming',
+    #     }, {
+    #         'name': 'name',
+    #     }, {
+    #         'name': 'tel',
+    #     }, {
+    #         'name': 'hours',
+    #     }, {
+    #         'name': 'title',
+    #     }, {
+    #         'name': 'job',
+    #     }, {
+    #         'name': 'searchwords',
+    #     }, {
+    #         'name': 'attachments',
+    #     }
+    # ]
     # ↓ManyToManyができない
     # def get_initial_queryset(self, request=None):
     #     # Optimization: Reduce the number of queries due to ManyToMany "tags" relation
@@ -503,7 +525,9 @@ class ContactsJsonView(BaseDatatableView):
     # def customize_row(self, row, obj):
     #     # 'row' is a dictionary representing the current row, and 'obj' is the current object.
     #     # Display tags as a list of strings
-    #     row['attachments'] = ','.join( [t.file_path for t in obj.attachments.all()])
+    #     # row['attachments'] = ','.join( [t.file_path for t in obj.attachments.all()])
+    #     # row['attachments'] = ','.join( [t for t in obj.attachments.all()])
+    #     row['attachments'] = "あいうえお"
     #     return
 
     
