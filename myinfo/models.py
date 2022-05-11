@@ -9,8 +9,6 @@ import os
 from django.core.validators import FileExtensionValidator
 from tinymce import models as tinymce_models
 
-from mycontact.models import *
-
 
 class InfoCategory(models.Model):
     name = models.CharField(max_length=100, null=True, verbose_name="カテゴリ名")
@@ -141,25 +139,6 @@ class WorkShifts(models.Model):
         verbose_name_plural = "シフト"
 
 
-# FAQクラス
-class Faqs(models.Model):
-    question = tinymce_models.HTMLField(null=True, blank=True)
-    answer1 = tinymce_models.HTMLField(null=True, blank=True)
-    answer2 = tinymce_models.HTMLField(null=True, blank=True)
-    reference = tinymce_models.HTMLField(null=True, blank=True)
-    created_at = models.DateTimeField(auto_now_add=False)#impot-exportで任意にするため
-    updated_at = models.DateTimeField(auto_now_add=False)#更新するしないでソートをコントロールするため
-    contacts = models.ManyToManyField(Contacts, blank=True)
-    attachments = models.ManyToManyField(Attachments, blank=True)
-    dealers = models.ManyToManyField(Dealers, blank=True)
-     
-    def __str__(self):
-        return str(self.question)
-
-    class Meta:
-        verbose_name_plural = "FAQ"
-
-
 class Dealers(models.Model):
     code5 = models.CharField(max_length=10, verbose_name="コード5桁")
     code4 = models.CharField(max_length=10, verbose_name="コード4桁")
@@ -214,3 +193,22 @@ class Contacts(models.Model):
 
     class Meta:
         verbose_name_plural = "問い合わせ先"
+
+
+# FAQクラス
+class Faqs(models.Model):
+    question = tinymce_models.HTMLField(null=True, blank=True)
+    answer1 = tinymce_models.HTMLField(null=True, blank=True)
+    answer2 = tinymce_models.HTMLField(null=True, blank=True)
+    reference = tinymce_models.HTMLField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=False)#impot-exportで任意にするため
+    updated_at = models.DateTimeField(auto_now_add=False)#更新するしないでソートをコントロールするため
+    contacts = models.ManyToManyField(Contacts, blank=True)
+    attachments = models.ManyToManyField(Attachments, blank=True)
+    dealers = models.ManyToManyField(Dealers, blank=True)
+     
+    def __str__(self):
+        return str(self.question)
+
+    class Meta:
+        verbose_name_plural = "FAQ"
