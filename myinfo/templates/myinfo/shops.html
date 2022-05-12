@@ -1,0 +1,101 @@
+{% extends 'layout.html' %}
+{% block title %}販社・店舗{% endblock %}
+
+{% block topbar %}
+{% endblock %}
+
+{% load static %}
+
+{% block extra_head %}
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css" rel="stylesheet">
+    <style>
+    /* 詳細を広げたときに文字列が画面をはみ出さないようにする */
+    span.dtr-data {
+        white-space: normal;
+    }
+    tr {
+        font-size: 0.9rem;
+    }
+    .container-fluid {
+        padding: 1rem;
+    }
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">タイトル</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          
+          <input type="text" class="form-control" id="recipient-name">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+<div class="card shadow p-2 mb-2">
+  <div class="row">
+      <div class="col-12">
+          <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+          {% comment %} <table id="datatable" class="table table-striped table-bordered " cellspacing="0" width="100%"> {% endcomment %}
+
+          </table>
+      </div>
+  </div>
+</div>
+
+<div class="nav-link small">
+  <a href="https://map2.nissan.co.jp/c/f/DEALER/SEARCH/" target="_blank">
+  <i class="fas fa-external-link-alt mr-1"></i>販売店検索 - 日産自動車（住所/最寄駅/店名）
+  </a>
+</div>
+<div class="nav-link small">
+  <a href="https://www3.nissan.co.jp/dealers.html" target="_blank">
+  <i class="fas fa-external-link-alt mr-1"></i>販売店検索 - 日産自動車（地図）
+  </a>
+</div>
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+{% endblock %}
+
+{% block extra_foot %}
+
+<script type="text/javascript">
+  $('#exampleModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // モーダル切替えボタン
+    var recipient = button.data('sample') // data-* 属性から情報を抽出
+    var title = button.data('title') // data-* 属性から情報を抽出
+    // 必要に応じて、ここでAJAXリクエストを開始可能（コールバックで更新することも可能）
+    // モーダルの内容を更新。ここではjQueryを使用するが、代わりにデータ・バインディング・ライブラリまたは他のメソッドを使用することも可能
+    var modal = $(this)
+    modal.find('.modal-title').html(title)
+    modal.find('.modal-body').html(recipient)
+  })
+</script>
+
+<!-- jQuery first, then Tether, then Bootstrap JS. -->
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
+<script src="{% static "shops.js" %}"></script>
+
+
+{% endblock %}

@@ -91,7 +91,7 @@
             {% with request.resolver_match.url_name as url_name %}
             {% with request.resolver_match.app_name as app_name %}
             {% comment %} {% with request.resolver_match.view_name as view_name %} {% endcomment %}
-                <li class="nav-item {% if app_name == 'myinfo' and url_name != 'shift' and url_name != 'faqs_list' and url_name != 'faqs_tab' %}active{% endif %}">
+                <li class="nav-item {% if url_name == 'index' or url_name == 'add_fbvform' or url_name == 'detail' or url_name == 'update' or url_name == 'delete'%}active{% endif %}">
                     <a class="nav-link" href='{% url "myinfo:index" %}'>
                         <i class="fas fa-broadcast-tower"></i>
                         <span>おしらせ</span></a>
@@ -110,13 +110,13 @@
                 </li>
     
                 <li class="nav-item {% if url_name == 'contacts' %}active{% endif %}">
-                    <a class="nav-link" href='/mycontact/'>
+                    <a class="nav-link" href='{% url "myinfo:contacts" %}'>
                         <i class="fas fa-phone"></i>
                         <span>窓口</span></a>
                 </li>
 
                 <li class="nav-item {% if url_name == 'shops' %}active{% endif %}">
-                    <a class="nav-link" href='/mycontact/shops'>
+                    <a class="nav-link" href='{% url "myinfo:shops" %}'>
                         <i class="fas fa-warehouse"></i>
                         <span>販社・店舗</span></a>
                 </li>

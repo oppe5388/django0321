@@ -13,7 +13,7 @@ $(document).ready(function () {
         // https://datatables.net/examples/server_side/simple.html
         processing: true,
         serverSide: true,
-        ajax: "./contacts",
+        ajax: "./contacts/data",
         
         // dom: 検索フィールド等の各種ウィジェットの配置
         // https://datatables.net/reference/option/dom
@@ -77,6 +77,18 @@ $(document).ready(function () {
 
         // render内で他の列のデータを使うこともできる。
         // https://datatables.net/manual/data/renderers
+
+        // columnDefs: [
+        //         {targets: 0, data: 'id'},
+        //         {targets: 1, data: 'incoming'},
+        //         {targets: 2, data: 'name'},
+        //         {targets: 3, data: 'tel'},
+        //         {targets: 4, data: 'hours'},
+        //         {targets: 5, data: 'title'},
+        //         {targets: 6, data: 'job'},
+        //         {targets: 7, data: 'searchwords'},
+        //         {targets: 8, data: 'attachments'},
+        //       ],
 
         columns: [
             {
@@ -168,6 +180,22 @@ $(document).ready(function () {
                 title: "検索ワード",
                 visible: false, // これでもサーチ対象のままになる
             },
+            {
+                // 9列目
+                title: "",
+                // visible: false, // これでもサーチ対象のままになる
+                
+                // render: function (data, type, row) { //typeも必要
+                //     return '<a href="' +  data+ '" data-toggle="modal" data-target="#exampleModal" data-title=""\
+                //     data-sample="">'+ row[10]  +'</a>';
+                // },
+
+                // render: function (data, type, row) { //typeも必要
+                //     return '<a class="" data-toggle="modal" data-target="#exampleModal" data-title="<b>' + row[10]+'</b>"\
+                //     data-sample="">'+ data +'</a>';
+                // },
+            },
+
         ],
 
         // 列の表示非表示ボタン
