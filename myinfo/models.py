@@ -9,7 +9,7 @@ import os
 from django.core.validators import FileExtensionValidator
 from tinymce import models as tinymce_models
 
-from mycontact.models import *
+# from mycontact.models import *
 
 
 class InfoCategory(models.Model):
@@ -149,9 +149,9 @@ class Faqs(models.Model):
     reference = tinymce_models.HTMLField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=False)#impot-exportで任意にするため
     updated_at = models.DateTimeField(auto_now_add=False)#更新するしないでソートをコントロールするため
-    contacts = models.ManyToManyField(Contacts, blank=True)
+    # contacts = models.ManyToManyField(Contacts, blank=True)
     attachments = models.ManyToManyField(Attachments, blank=True)
-    dealers = models.ManyToManyField(Dealers, blank=True)
+    # dealers = models.ManyToManyField(Dealers, blank=True)
      
     def __str__(self):
         return str(self.question)

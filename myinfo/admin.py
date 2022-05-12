@@ -104,6 +104,6 @@ class FaqsResource(ModelResource):
 class FaqsAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('id', 'question', 'created_at')  
     resource_class = FaqsResource
-    filter_horizontal = ('contacts', 'attachments', 'dealers')
+    # filter_horizontal = ('contacts', 'attachments', 'dealers')
 
 admin.site.register(Faqs, FaqsAdmin)
