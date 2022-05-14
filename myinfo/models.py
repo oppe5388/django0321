@@ -160,13 +160,13 @@ class Dealers(models.Model):
 
 class Shops(models.Model):
     dealer = models.ForeignKey(Dealers, null=True, on_delete=models.PROTECT)
-    name = models.CharField(max_length=50, null=True, verbose_name="店名")
-    shopcode = models.CharField(max_length=10, null=True, verbose_name="店舗コード")
-    tel = models.CharField(max_length=50, null=True, verbose_name="TEL")
-    fax = models.CharField(max_length=50, null=True, verbose_name="FAX")
-    homepage = models.CharField(max_length=200, null=True, verbose_name="H.P.")
-    memo = models.CharField(max_length=100, null=True, verbose_name="メモ")
-    kana = models.CharField(max_length=50, null=True, verbose_name="フリガナ")
+    name = models.CharField(max_length=50, null=True, blank=True, verbose_name="店名")
+    shopcode = models.CharField(max_length=10, null=True, blank=True, verbose_name="店舗コード")
+    tel = models.CharField(max_length=50, null=True, blank=True, verbose_name="TEL")
+    fax = models.CharField(max_length=50, null=True, blank=True, verbose_name="FAX")
+    homepage = models.CharField(max_length=200, null=True, blank=True, verbose_name="H.P.")
+    memo = models.CharField(max_length=100, null=True, blank=True, verbose_name="メモ")
+    kana = models.CharField(max_length=50, null=True, blank=True, verbose_name="フリガナ")
 
     def __str__(self):
         return self.name
