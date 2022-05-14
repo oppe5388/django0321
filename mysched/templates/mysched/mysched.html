@@ -27,6 +27,68 @@
 {% endblock %}
 
 {% block content %}
+<div class="card shadow mb-4">
+    <div class="card-header py-3 align-items-center">
+        <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-file-invoice-dollar"></i> 長得の申込できる日</h6>
+    </div>
+    <div>
+        <a class="btn btn-secondary btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#contactModal{{ contact.pk }}">
+            <span class="icon text-white-100">
+                <i class="fas fa-chevron-up"></i>
+            </span>
+        </a>
+    </div>
+    <div>
+        <a class="btn btn-secondary btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#contactModal{{ contact.pk }}">
+            <span class="icon text-white-100">
+                <i class="fas fa-chevron-down"></i>
+            </span>
+        </a>
+    </div>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>初度登録</th>
+                        <th>申込できる日</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Donna Snider</td>
+                        <td>Customer Support</td>
+                    </tr>
+                    <tr>
+                        <td>Donna Snider</td>
+                        <td>Customer Support</td>
+                    </tr>
+                    <tr>
+                        <td>Donna Snider</td>
+                        <td>Customer Support</td>
+                    </tr>
+                    <tr>
+                        <td>Donna Snider</td>
+                        <td>Customer Support</td>
+                    </tr>
+                    <tr>
+                        <td>Donna Snider</td>
+                        <td>Customer Support</td>
+                    </tr>
+                    <tr>
+                        <td>Donna Snider</td>
+                        <td>Customer Support</td>
+                    </tr>
+                    <tr>
+                        <td>Donna Snider</td>
+                        <td>Customer Support</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
 <div class="card shadow mb-4">
     <div class="card-header py-3 align-items-center">

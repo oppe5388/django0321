@@ -9,6 +9,18 @@ from django.conf import settings
 from django.http import JsonResponse
 
 
+#長得の年月算出
+def affordable_calc(request):
+    today = date.today().month
+
+    context = {
+            'today': today,
+        }
+
+    return JsonResponse(context)
+
+
+
 #Ajax
 def ajax_sched(request):
 
