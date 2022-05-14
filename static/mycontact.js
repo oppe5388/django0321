@@ -109,9 +109,9 @@ $(document).ready(function () {
                 render: function (data) {
                     let result;
                     if (data == "販社") {
-                        result = data.replace("販社", '<div class="card border-left-info">&nbsp;販社</div>');
+                        result = data.replace("販社", '<div class="card badge-info">&nbsp;販社</div>');
                     } else if (data == "顧客") {
-                        result = data.replace("顧客", '<div class="card border-left-warning">&nbsp;顧客</div>');
+                        result = data.replace("顧客", '<div class="card badge-warning">&nbsp;顧客</div>');
                     } else {
                         result = data;
                     }

@@ -47,7 +47,11 @@
                         <tr>
                             <td >
                                 {{ contact.incoming }}
-                                <a class="btn btn-info btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#contactModal{{ contact.pk }}">
+                                {% if '販社' in contact.incoming %} 
+                                    <a class="btn btn-info btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#contactModal{{ contact.pk }}">
+                                {% else %} 
+                                    <a class="btn btn-warning btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#contactModal{{ contact.pk }}">
+                                {% endif %} 
                                     <span class="icon text-white-50">
                                         <i class="fas fa-phone"></i>
                                     </span>
