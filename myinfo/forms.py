@@ -1,7 +1,7 @@
 from django import forms
 from .models import Information, Attachments, InfoComments
 
-from django_summernote.widgets import SummernoteWidget
+# from django_summernote.widgets import SummernoteWidget
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # from django.contrib.auth.models import User
@@ -47,6 +47,7 @@ class InformationForm(LoginRequiredMixin, forms.ModelForm):
         model = Information
         # fields = ['category', 'title', 'body', 'to_flag', 'filefield'] #'__all__'
         fields = ['category', 'title', 'body']
+        fields = ['title', 'body']
         widgets = {
             # 'body': SummernoteWidget(),
             'body': TinyMCE,   #追加
@@ -109,6 +110,7 @@ class InformationEditForm(LoginRequiredMixin, forms.ModelForm):
         model = Information
         # fields = ['category', 'title', 'body', 'to_flag', 'filefield'] #'__all__'
         fields = ['category', 'title', 'body', 'is_draft']
+        fields = ['title', 'body', 'is_draft']
         widgets = {
             # 'body': SummernoteWidget(),
             'body': TinyMCE,   #追加
