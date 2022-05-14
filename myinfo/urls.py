@@ -37,9 +37,4 @@ urlpatterns = [
     #全体検索
     path('search_result/', views.all_search, name='all_search'), 
 
-    path('contacts', TemplateView.as_view(template_name='myinfo/contacts_list.html'), name='contacts'),
-    path('contacts/data', views.ContactsJsonView.as_view(), name='ContactsJson'),
-    path('shops', TemplateView.as_view(template_name='myinfo/shops.html'), name='shops'),
-    path('shops/data', views.ShopsJsonView.as_view(), name='ShopsJson'),
-
 ]

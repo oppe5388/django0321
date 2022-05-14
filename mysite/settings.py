@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap4',           # django-bootstrap4
-    # 'django_summernote',
+    'django_summernote',
     'import_export',
     'django.forms',  # 足す
     
@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'imagekit',
     # 'bootstrap_toolkit',
     'mysched',
-    # 'mycontact',
+    'mycontact',
     'sample',
     'myreport',
     # 'bootstrap_datepicker_plus',

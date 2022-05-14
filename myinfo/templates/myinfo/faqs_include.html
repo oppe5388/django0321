@@ -96,41 +96,22 @@
                                 <span class="text">{{ attach.file_name }}</span>
                             </a>
 
-                            {% with name=attach.file_name|stringformat:"s"|lower %}
-                                <!--  画像 -->
-                                {% if '.png' in name or '.jpg' in name or '.jpeg' in name %}
-                                    <!-- モーダル 最大100% -->
-                                    <div class="modal fade " id="attachModal{{ attach.pk }}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-scrollable">
-                                            <div class="modal-content">
-                                                <div class="modal-header py-1">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                
-                                                <img src = "{{ attach.file_path.url }}"  max-width=100% >
-                                            </div>
+                            <!-- モーダル -->
+                            <div class="modal fade " id="attachModal{{ attach.pk }}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                <!--  modal-dialog-fluidとlayout.htmlで指定して幅広に-->
+                                <div class="modal-dialog modal-dialog-scrollable modal-xl modal-dialog-fluid">
+                                    <div class="modal-content">
+                                        <div class="modal-header py-1">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
                                         </div>
+                                        <iframe src="{{ attach.file_path.url }}" height=1000>
+                                            <p><b>表示されない時の表示</b>: <a href="{{ attach.file_path.url }}">ダウンロード</a>.</p>
+                                        </iframe>
                                     </div>
-                                {% else %}
-                                     <!-- モーダル　modal-dialog-fluidとlayout.htmlで指定して幅広に-->
-                                     <div class="modal fade " id="attachModal{{ attach.pk }}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-scrollable modal-xl modal-dialog-fluid">
-                                            <div class="modal-content">
-                                                <div class="modal-header py-1">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <iframe src="{{ attach.file_path.url }}" height=1000>
-                                                    <p><b>表示されない時の表示</b>: <a href="{{ attach.file_path.url }}">ダウンロード</a>.</p>
-                                                </iframe>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endif %}
-                            {% endwith %}
+                                </div>
+                            </div>
                         {% endfor %}
 
                         <!-- 緊急サポートダイヤル：文字列あれば。manytomany使わずallで取得にした-->
