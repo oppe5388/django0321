@@ -53,7 +53,16 @@
         <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-file-invoice-dollar"></i> 長得の申込できる日</h6>
     </div>
 
+    <div>
+    初度登録
+    <input type="" id="name" name="name" required>年
+    <input type="" id="name" name="name" required>月
+    </div>
+    <div>
+        　　　　　令和 XX年
+    </div>
     <form class="ml-auto" action='{% url "mysched:mysched" %}' method='get'>
+        ±1ヶ月してajaxで表示させる？
         <div>
             <a class="btn btn-secondary btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#contactModal{{ contact.pk }}">
                 <span class="icon text-white-100">
@@ -74,21 +83,42 @@
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
+                <thead class="bg-gray-600 text-white">
                     <tr>
                         <th>初度登録</th>
-                        <th>申込できる日</th>
+                        <th>申込できる日（54ヶ月後）</th>
                     </tr>
                 </thead>
-                {{ today }}
-                {{ able_date }}
+                {% comment %} {{ today }}
+                {{ able_date }} {% endcomment %}
+                
                 <tbody>
                     {% for chotoku in chotoku_set %}
                     <tr>
-                        <td id="chotoku_result1">{{ chotoku.shodo }}</td>
-                        <td></td>
+                        <td id="chotoku_result1">2017年8月（平成29年）</td>
+                        <td>2022/2/1</td>
                     </tr>
                     {% endfor %}
+                    <tr>
+                        <td id="chotoku_result1">2017年9月（平成29年）</td>
+                        <td>2022/3/1</td>
+                    </tr>
+                    <tr>
+                        <td id="chotoku_result1">2017年10月（平成29年）</td>
+                        <td>2022/4/1</td>
+                    </tr>
+                    <tr class="text-primary">
+                        <td id="chotoku_result1">今月の54ヶ月前</td>
+                        <td>2022/5/1今月</td>
+                    </tr>
+                    <tr>
+                        <td id="chotoku_result1">2017年12月（平成29年）</td>
+                        <td>2022/6/1</td>
+                    </tr>
+                    <tr>
+                        <td id="chotoku_result1">2018年1月（平成30年）</td>
+                        <td>2022/7/1</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
