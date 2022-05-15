@@ -14,3 +14,4 @@ django-datatables-view
 # django-filebrowser
 django-tinymce
 django-dbbackup
+python-dateutil

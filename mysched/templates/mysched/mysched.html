@@ -16,6 +16,27 @@
     textarea {
         color: #5a5c69;
     }
+
+
+
+    <!-- https://b-risk.jp/blog/2021/01/anim-reference/ -->
+    .anim-box.fadeup.is-animated {
+        animation: fadeup 1s cubic-bezier(0.33, 1, 0.68, 1) 1 forwards;
+      }
+       
+      @keyframes fadeup {
+        0% {
+          transform: translateY(30px);
+          opacity: 0;
+        }
+        80% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 </style>
 
 {% endblock %}
@@ -31,20 +52,24 @@
     <div class="card-header py-3 align-items-center">
         <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-file-invoice-dollar"></i> 長得の申込できる日</h6>
     </div>
-    <div>
-        <a class="btn btn-secondary btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#contactModal{{ contact.pk }}">
-            <span class="icon text-white-100">
-                <i class="fas fa-chevron-up"></i>
-            </span>
-        </a>
-    </div>
-    <div>
-        <a class="btn btn-secondary btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#contactModal{{ contact.pk }}">
-            <span class="icon text-white-100">
-                <i class="fas fa-chevron-down"></i>
-            </span>
-        </a>
-    </div>
+
+    <form class="ml-auto" action='{% url "mysched:mysched" %}' method='get'>
+        <div>
+            <a class="btn btn-secondary btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#contactModal{{ contact.pk }}">
+                <span class="icon text-white-100">
+                    <i class="fas fa-chevron-up"></i>
+                </span>
+            </a>
+        </div>
+        <div>
+            <a class="btn btn-secondary btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#contactModal{{ contact.pk }}">
+                <span class="icon text-white-100">
+                    <i class="fas fa-chevron-down"></i>
+                </span>
+            </a>
+        </div>
+    </form>
+
 
     <div class="card-body">
         <div class="table-responsive">
@@ -55,35 +80,15 @@
                         <th>申込できる日</th>
                     </tr>
                 </thead>
+                {{ today }}
+                {{ able_date }}
                 <tbody>
+                    {% for chotoku in chotoku_set %}
                     <tr>
-                        <td>Donna Snider</td>
-                        <td>Customer Support</td>
+                        <td id="chotoku_result1">{{ chotoku.shodo }}</td>
+                        <td></td>
                     </tr>
-                    <tr>
-                        <td>Donna Snider</td>
-                        <td>Customer Support</td>
-                    </tr>
-                    <tr>
-                        <td>Donna Snider</td>
-                        <td>Customer Support</td>
-                    </tr>
-                    <tr>
-                        <td>Donna Snider</td>
-                        <td>Customer Support</td>
-                    </tr>
-                    <tr>
-                        <td>Donna Snider</td>
-                        <td>Customer Support</td>
-                    </tr>
-                    <tr>
-                        <td>Donna Snider</td>
-                        <td>Customer Support</td>
-                    </tr>
-                    <tr>
-                        <td>Donna Snider</td>
-                        <td>Customer Support</td>
-                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
@@ -168,7 +173,7 @@
         {% endfor %}
     {% endif %}
     
-    <!-- 通常：未使用 -->
+    <!-- ajaxでない通常：未使用 -->
     {% if past_sched %}
         {% comment %} <div>登録日：{{ input_date }}</div>
         <div>↓</div>
@@ -242,6 +247,35 @@
 {% endblock %}
 
 {% block extra_foot %}
+
+<!-- 長得ajaxつくる -->
+<script>
+    {% comment %} $(document).ready(function(){ {% endcomment %}
+    $(function() {
+        // ページ読み込み時に実行したい処理
+    
+        $.ajax({ 
+            url: "/mysched/chotoku_calc/",
+            type: "GET",
+            dataType: "json",
+            data:{ 
+                today: today,
+                },
+            }).done(function (data) {
+                console.log(data);
+
+                $('#chotoku_result1').prepend(
+                    '</div>'+ data.today +'</div>');
+                
+            }).fail(function (data) {
+                console.log("エラーのほう");
+                $('#ajax_disp').hide();
+        });
+
+    });
+
+</script>
+
 
 <!-- jqueryカレンダー -->
 {% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -317,6 +351,7 @@
 
       // ajax用　はじめは結果非表示
       $('#ajax_disp').hide();
+
     });
 </script>
 

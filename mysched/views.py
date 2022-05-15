@@ -8,13 +8,23 @@ from django.contrib import messages
 from django.conf import settings
 from django.http import JsonResponse
 
+#長得の月計算用
+from dateutil.relativedelta import relativedelta
 
-#長得の年月算出
-def affordable_calc(request):
-    today = date.today().month
+
+#長得をajaxで更新あとで。
+def chotoku_calc(request):
+    today = date.today()
+
+    #ひとまず4年半前を表示してみる
+
+    four_harf_ago = today - relativedelta(months=54)
+
+    first_day = today.replace(day=1)
 
     context = {
             'today': today,
+            'four_harf_ago': four_harf_ago,
         }
 
     return JsonResponse(context)
@@ -79,6 +89,14 @@ def mysched(request):
     last_set = MoneyTrans.objects.order_by('entry').last()
     last_date = last_set.entry
     context['last_date'] = last_date
+
+
+    #長得用
+    today = date.today()
+    able_date = today.replace(day=1)
+    context['able_date'] = able_date
+    context['today'] = today
+
 
     #登録日をカレンダーで選択→表示用
     if moneyForm.is_valid():
