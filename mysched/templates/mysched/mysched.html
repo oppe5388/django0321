@@ -51,18 +51,22 @@
 
 {% block content %}
 <div class="card shadow mb-4">
-    <div class="card-header py-3 align-items-center">
-        <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-file-invoice-dollar"></i> 長得の申込できる日</h6>
+    <div class="card-header align-items-center">
+        <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-file-invoice-dollar"></i> 長得の申込できる日 
+        <a href="#" class="text-info" data-toggle="popover" data-trigger="hover" data-html="true"
+        title="長得" data-content="● コース：通常の18車付B・18B・12車付B・12Bのみ<br>※よって、V37・CD・GTR・EV・商用車（軽商用車はOK）は対象外
+        " ><i class="fas fa-info-circle"></i></a>
+        </h6>
     </div>
 
     <div class="card-body">
 
+        {% comment %} 
         <div class="d-flex flex-row align-items-center mb-2">
             初度登録
             <div>{{ moneyForm.chotoku_date }}</div>
             令和 XX年
             
-            {% comment %} 
             <form class="" action='{% url "mysched:mysched" %}' method='get'>
                 <div>
                     <a class="btn btn-secondary btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#contactModal{{ contact.pk }}">
@@ -79,42 +83,130 @@
                     </a>
                 </div>
             </form>
-            {% endcomment %}
+        </div>
+        {% endcomment %}
+
+        
+
+        <div class="accordion" id="accordionExample">
+
+            <div class="card">
+              <div class="card-header py-1" id="headingTwo">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    最近
+                  </button>
+              </div>
+              <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body p-1">
+                
+                    <div class="table-responsive table-hover table-sm">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead class="bg-gray-600 text-white">
+                                <tr>
+                                    <th>初度登録</th>
+                                    <th>申込できる日（54ヶ月後の1日）</th>
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                                <tr>
+                                    <td id="chotoku_shodo1"></td>
+                                    <td id="chotoku_base1"></td>
+                                </tr>
+                                <tr>
+                                    <td id="chotoku_shodo2"></td>
+                                    <td id="chotoku_base2"></td>
+                                </tr>
+                                <tr class="text-primary font-weight-bold">
+                                    <td id="chotoku_shodo3"></td><!-- 今月の54ヶ月前 -->
+                                    <td id="chotoku_base3"></td><!-- 今月の1日 -->
+                                </tr>
+                                <tr>
+                                    <td id="chotoku_shodo4"></td>
+                                    <td id="chotoku_base4"></td>
+                                </tr>
+                                <tr>
+                                    <td id="chotoku_shodo5"></td>
+                                    <td id="chotoku_base5"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header py-1" id="headingThree">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    未来
+                  </button>
+              </div>
+              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                <div class="card-body">
+
+                    <div class="table-responsive table-hover table-sm">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead class="bg-gray-600 text-white">
+                                <tr>
+                                    <th>初度登録</th>
+                                    <th>申込できる日（54ヶ月後の1日）</th>
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                                <tr><td id="chotoku_shodo6"></td>
+                                    <td id="chotoku_base6"></td></tr>
+                                <tr><td id="chotoku_shodo7"></td>
+                                    <td id="chotoku_base7"></td></tr>
+                                <tr><td id="chotoku_shodo8"></td>
+                                    <td id="chotoku_base8"></td></tr>
+                                <tr><td id="chotoku_shodo9"></td>
+                                    <td id="chotoku_base9"></td></tr>
+                                <tr><td id="chotoku_shodo10"></td>
+                                    <td id="chotoku_base10"></td></tr>
+                                <tr><td id="chotoku_shodo11"></td>
+                                    <td id="chotoku_base11"></td></tr>
+                                <tr><td id="chotoku_shodo12"></td>
+                                    <td id="chotoku_base12"></td></tr>
+                                <tr><td id="chotoku_shodo13"></td>
+                                    <td id="chotoku_base13"></td></tr>
+                                <tr><td id="chotoku_shodo14"></td>
+                                    <td id="chotoku_base14"></td></tr>
+                                <tr><td id="chotoku_shodo15"></td>
+                                    <td id="chotoku_base15"></td></tr>
+                                <tr><td id="chotoku_shodo16"></td>
+                                    <td id="chotoku_base16"></td></tr>
+                                <tr><td id="chotoku_shodo17"></td>
+                                    <td id="chotoku_base17"></td></tr>
+                                <tr><td id="chotoku_shodo18"></td>
+                                    <td id="chotoku_base18"></td></tr>
+                                <tr><td id="chotoku_shodo19"></td>
+                                    <td id="chotoku_base19"></td></tr>
+                                <tr><td id="chotoku_shodo20"></td>
+                                    <td id="chotoku_base20"></td></tr>
+                                <tr><td id="chotoku_shodo21"></td>
+                                    <td id="chotoku_base21"></td></tr>
+                                <tr><td id="chotoku_shodo22"></td>
+                                    <td id="chotoku_base22"></td></tr>
+                                <tr><td id="chotoku_shodo23"></td>
+                                    <td id="chotoku_base23"></td></tr>
+                                <tr><td id="chotoku_shodo24"></td>
+                                    <td id="chotoku_base24"></td></tr>
+                                <tr><td id="chotoku_shodo25"></td>
+                                    <td id="chotoku_base25"></td></tr>
+                                <tr><td id="chotoku_shodo26"></td>
+                                    <td id="chotoku_base26"></td></tr>
+                                <tr><td id="chotoku_shodo27"></td>
+                                    <td id="chotoku_base27"></td></tr>                                    
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+              </div>
+            </div>
         </div>
 
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead class="bg-gray-600 text-white">
-                    <tr>
-                        <th>初度登録</th>
-                        <th>申込できる日（54ヶ月後の1日）</th>
-                    </tr>
-                </thead>
-                
-                <tbody>
-                    <tr>
-                        <td id="chotoku_shodo1"></td>
-                        <td id="chotoku_base1"></td>
-                    </tr>
-                    <tr>
-                        <td id="chotoku_shodo2"></td>
-                        <td id="chotoku_base2"></td>
-                    </tr>
-                    <tr class="text-primary">
-                        <td id="chotoku_shodo3"></td><!-- 今月の54ヶ月前 -->
-                        <td id="chotoku_base3"></td><!-- 今月の1日 -->
-                    </tr>
-                    <tr>
-                        <td id="chotoku_shodo4"></td>
-                        <td id="chotoku_base4"></td>
-                    </tr>
-                    <tr>
-                        <td id="chotoku_shodo5"></td>
-                        <td id="chotoku_base5"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
     </div>
 </div>
 
@@ -145,6 +237,11 @@
                     <i class="fas fa-copy"></i>
                 </button>
             </div>
+            {% comment %} <p id="copyTarget1mes" class="ml-2 align-self-end"></p> {% endcomment %}
+            <a href="#" id="copyTarget1mes" class="btn btn-success btn-sm ml-2 align-self-end">
+                <span class="icon text-white-50"><i class="fas fa-check"></i></span>
+                <span class="text">Copied</span>
+            </a>
         </div>
     </div>
     <div id="tab2" class="tab-pane">
@@ -157,6 +254,10 @@
                     <i class="fas fa-copy"></i>
                 </button>
             </div>
+            <a href="#" id="copyTarget4mes" class="btn btn-success btn-sm ml-2 align-self-end">
+                <span class="icon text-white-50"><i class="fas fa-check"></i></span>
+                <span class="text">Copied</span>
+            </a>
         </div>
     </div>
   </div>
@@ -240,6 +341,10 @@
                         <i class="fas fa-copy"></i>
                     </button>
                 </div>
+                <a href="#" id="ajax_add1mes" class="btn btn-success btn-sm ml-2 align-self-end">
+                    <span class="icon text-white-50"><i class="fas fa-check"></i></span>
+                    <span class="text">Copied</span>
+                </a>
             </div>
             <hr>
         <div class="text-primary">相殺</div>
@@ -249,6 +354,10 @@
                         <i class="fas fa-copy"></i>
                     </button>
                 </div>
+                <a href="#" id="ajax_add2mes" class="btn btn-success btn-sm ml-2 align-self-end">
+                    <span class="icon text-white-50"><i class="fas fa-check"></i></span>
+                    <span class="text">Copied</span>
+                </a>
             </div>
     </div>
 
@@ -265,6 +374,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/locale/ja.js"></script>
 
 
+<script>
+$(function () {
+    $('[data-toggle="popover"]').popover()
+    })
+
+</script>
 
 <script>
 //和暦の年だけ返す
@@ -284,7 +399,13 @@ function change_to_wareki(date){
 <script>
     $(function() {
         // ページ読み込み時
+        //コピーmessage非表示用
+        $(document.getElementById("copyTarget1mes")).hide();
+        $(document.getElementById("copyTarget4mes")).hide();
+        $(document.getElementById("ajax_add1mes")).hide();
+        $(document.getElementById("ajax_add2mes")).hide();
 
+        //↓ここから長得
         // alert("日本時間 " + moment().format("YYYY年MM月DD日(ddd) HH:mm:ss"));
         //var base_day = moment().date(1).format("YYYY-MM-DD");// 今月1日
 
@@ -296,7 +417,7 @@ function change_to_wareki(date){
         var ago54dt =new Date(moment(base_day).subtract(54, 'months'));
         var wareki = change_to_wareki(ago54dt);
 
-        for (let i = 1; i < 6; i++) {
+        for (let i = 1; i < 29; i++) {
             $('#chotoku_base'+i).prepend(base_day+"("+base_wareki+")");
             $('#chotoku_shodo'+i).prepend(ago54 +"("+wareki+")");
             
@@ -367,7 +488,14 @@ function change_to_wareki(date){
         document.execCommand("Copy");
 
         // コピーをお知らせする
-        alert("コピーしました : \n" + copyTarget.value);
+        //alert("コピーしました : \n" + copyTarget.value);
+        
+        var mesTarget = document.getElementById(id+"mes");
+        //$(mesTarget).text('Copied!');
+        $(mesTarget).show();
+
+        //setTimeout(function(){$(mesTarget).text('');}, 2000);
+        setTimeout(function(){$(mesTarget).hide();}, 2000);
     }
 
     //↓textareaの行数を自動調整するのを、使えるように出来ていない
