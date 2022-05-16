@@ -15,3 +15,4 @@ django-datatables-view
 django-tinymce
 django-dbbackup
 python-dateutil
+# django-crontab

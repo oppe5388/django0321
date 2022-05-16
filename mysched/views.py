@@ -12,7 +12,7 @@ from django.http import JsonResponse
 from dateutil.relativedelta import relativedelta
 
 
-#長得をajaxで更新あとで。
+#長得をajaxで更新：あとで。
 def chotoku_calc(request):
     today = date.today()
 

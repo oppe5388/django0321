@@ -15,3 +15,5 @@ class MoneyForm(LoginRequiredMixin, forms.Form):
     #         super().__init__(*args, **kwargs)
 
     #         self.fields['input_date'].initial = date.today()
+
+    chotoku_date = forms.DateField(widget=forms.DateInput(attrs={'type':'month', 'id':'chotoku_date', 'class':'datepicker form-control form-control-user'}))

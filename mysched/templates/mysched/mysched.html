@@ -39,6 +39,8 @@
       }
 </style>
 
+
+
 {% endblock %}
 
 {% block title %}スケジュール{% endblock %}
@@ -53,71 +55,62 @@
         <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-file-invoice-dollar"></i> 長得の申込できる日</h6>
     </div>
 
-    <div>
-    初度登録
-    <input type="" id="name" name="name" required>年
-    <input type="" id="name" name="name" required>月
-    </div>
-    <div>
-        　　　　　令和 XX年
-    </div>
-    <form class="ml-auto" action='{% url "mysched:mysched" %}' method='get'>
-        ±1ヶ月してajaxで表示させる？
-        <div>
-            <a class="btn btn-secondary btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#contactModal{{ contact.pk }}">
-                <span class="icon text-white-100">
-                    <i class="fas fa-chevron-up"></i>
-                </span>
-            </a>
-        </div>
-        <div>
-            <a class="btn btn-secondary btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#contactModal{{ contact.pk }}">
-                <span class="icon text-white-100">
-                    <i class="fas fa-chevron-down"></i>
-                </span>
-            </a>
-        </div>
-    </form>
-
-
     <div class="card-body">
+
+        <div class="d-flex flex-row align-items-center mb-2">
+            初度登録
+            <div>{{ moneyForm.chotoku_date }}</div>
+            令和 XX年
+            
+            {% comment %} 
+            <form class="" action='{% url "mysched:mysched" %}' method='get'>
+                <div>
+                    <a class="btn btn-secondary btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#contactModal{{ contact.pk }}">
+                        <span class="icon text-white-100">
+                            <i class="fas fa-chevron-up"></i>
+                        </span>
+                    </a>
+                </div>
+                <div>
+                    <a class="btn btn-secondary btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#contactModal{{ contact.pk }}">
+                        <span class="icon text-white-100">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </a>
+                </div>
+            </form>
+            {% endcomment %}
+        </div>
+
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead class="bg-gray-600 text-white">
                     <tr>
                         <th>初度登録</th>
-                        <th>申込できる日（54ヶ月後）</th>
+                        <th>申込できる日（54ヶ月後の1日）</th>
                     </tr>
                 </thead>
-                {% comment %} {{ today }}
-                {{ able_date }} {% endcomment %}
                 
                 <tbody>
-                    {% for chotoku in chotoku_set %}
                     <tr>
-                        <td id="chotoku_result1">2017年8月（平成29年）</td>
-                        <td>2022/2/1</td>
-                    </tr>
-                    {% endfor %}
-                    <tr>
-                        <td id="chotoku_result1">2017年9月（平成29年）</td>
-                        <td>2022/3/1</td>
+                        <td id="chotoku_shodo1"></td>
+                        <td id="chotoku_base1"></td>
                     </tr>
                     <tr>
-                        <td id="chotoku_result1">2017年10月（平成29年）</td>
-                        <td>2022/4/1</td>
+                        <td id="chotoku_shodo2"></td>
+                        <td id="chotoku_base2"></td>
                     </tr>
                     <tr class="text-primary">
-                        <td id="chotoku_result1">今月の54ヶ月前</td>
-                        <td>2022/5/1今月</td>
+                        <td id="chotoku_shodo3"></td><!-- 今月の54ヶ月前 -->
+                        <td id="chotoku_base3"></td><!-- 今月の1日 -->
                     </tr>
                     <tr>
-                        <td id="chotoku_result1">2017年12月（平成29年）</td>
-                        <td>2022/6/1</td>
+                        <td id="chotoku_shodo4"></td>
+                        <td id="chotoku_base4"></td>
                     </tr>
                     <tr>
-                        <td id="chotoku_result1">2018年1月（平成30年）</td>
-                        <td>2022/7/1</td>
+                        <td id="chotoku_shodo5"></td>
+                        <td id="chotoku_base5"></td>
                     </tr>
                 </tbody>
             </table>
@@ -150,7 +143,6 @@
             <div class="ml-2 align-self-end">
                 <button onclick="copyToClipboard('copyTarget1')" class="btn btn-outline-primary mr-1">
                     <i class="fas fa-copy"></i>
-                    {% comment %} <span class="small"> Copy</span> {% endcomment %}
                 </button>
             </div>
         </div>
@@ -163,7 +155,6 @@
             <div class="ml-2 align-self-end">
                 <button onclick="copyToClipboard('copyTarget4')" class="btn btn-outline-primary mr-1">
                     <i class="fas fa-copy"></i>
-                    {% comment %} <span class="small"> Copy</span> {% endcomment %}
                 </button>
             </div>
         </div>
@@ -204,15 +195,9 @@
     {% endif %}
     
     <!-- ajaxでない通常：未使用 -->
+    {% comment %}
     {% if past_sched %}
-        {% comment %} <div>登録日：{{ input_date }}</div>
-        <div>↓</div>
-        <div>承認日：{{ past_sched.fix }}</div>
-        <div>↓</div>
-        <div>送金日：{{ past_sched.transfer }}</div> {% endcomment %}
-
-        {% comment %} コピーするために、こちらにも表示
-        →display noneだと機能しないので、仕方なくこちらのみ表示に {% endcomment %}
+        <!-- →display noneだと機能しないので、仕方なくこちらのみ表示に -->
     <div class="card-body pt-0">
         <div class="text-primary">解約・発行キャンセル</div>
         <div class="mb-2 ml-2 small text-secondary">キャンセル後の再申込は、承認日の翌日から可と案内</div>
@@ -244,32 +229,28 @@
             </div>
     </div>
     {% endif %}
+    {% endcomment %}
 
 <!-- Ajax用 -->
     <div class="card-body pt-0" id="ajax_disp">
         <div class="text-primary">解約・発行キャンセル<span class=" ml-2 small text-secondary">キャンセル後の再申込は、承認日の翌日から可と案内</span></div>
-        
             <div id="ajax_result1" class="d-flex flex-row">
                 <div class="ml-2 align-self-end">
                     <button onclick="copyToClipboard('ajax_add1')" class="btn btn-outline-primary mr-1">
                         <i class="fas fa-copy"></i>
-                        {% comment %} <span class="small"> Copy</span> {% endcomment %}
                     </button>
                 </div>
             </div>
             <hr>
-        
         <div class="text-primary">相殺</div>
             <div id="ajax_result2" class="d-flex flex-row">
                 <div class="ml-2 align-self-end">
                     <button onclick="copyToClipboard('ajax_add2')" class="btn btn-outline-primary mr-1">
                         <i class="fas fa-copy"></i>
-                        {% comment %} <span class="small"> Copy</span> {% endcomment %}
                     </button>
                 </div>
             </div>
     </div>
-
 
 
 </div>
@@ -279,11 +260,54 @@
 {% block extra_foot %}
 
 <!-- 長得ajaxつくる -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/locale/ja.js"></script>
+
+
+
 <script>
-    {% comment %} $(document).ready(function(){ {% endcomment %}
+//和暦の年だけ返す
+function change_to_wareki(date){
+
+    const options = {
+        year: 'numeric',
+        // month: 'short',
+        // day: 'numeric',
+        // weekday: 'short',
+      }
+    var wareki = date.toLocaleDateString("ja-JP-u-ca-japanese", options);
+    return wareki;
+  }
+</script>
+
+<script>
     $(function() {
-        // ページ読み込み時に実行したい処理
-    
+        // ページ読み込み時
+
+        // alert("日本時間 " + moment().format("YYYY年MM月DD日(ddd) HH:mm:ss"));
+        //var base_day = moment().date(1).format("YYYY-MM-DD");// 今月1日
+
+        // -2ヶ月の1日
+        var base_day = moment(new Date()).subtract(2, 'months').date(1).format("YYYY-MM-DD");// 今月1日
+        var base_wareki = change_to_wareki(new Date());
+
+        var ago54 = moment(base_day).subtract(54, 'months').format('YYYY年MM月');// 54ヶ月前
+        var ago54dt =new Date(moment(base_day).subtract(54, 'months'));
+        var wareki = change_to_wareki(ago54dt);
+
+        for (let i = 1; i < 6; i++) {
+            $('#chotoku_base'+i).prepend(base_day+"("+base_wareki+")");
+            $('#chotoku_shodo'+i).prepend(ago54 +"("+wareki+")");
+            
+            var base_day = moment(base_day).add(1, 'months').date(1).format("YYYY-MM-DD");// 今月1日
+            var base_wareki = change_to_wareki(new Date());
+            var ago54 = moment(base_day).subtract(54, 'months').format('YYYY年MM月');// 54ヶ月前
+            var ago54dt =new Date(moment(base_day).subtract(54, 'months'));
+            var wareki = change_to_wareki(ago54dt);
+        }
+
+
         $.ajax({ 
             url: "/mysched/chotoku_calc/",
             type: "GET",
@@ -294,8 +318,8 @@
             }).done(function (data) {
                 console.log(data);
 
-                $('#chotoku_result1').prepend(
-                    '</div>'+ data.today +'</div>');
+                // $('#chotoku_base').prepend(
+                //     '</div>'+ data.today +'</div>');
                 
             }).fail(function (data) {
                 console.log("エラーのほう");
