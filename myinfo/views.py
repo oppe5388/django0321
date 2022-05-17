@@ -21,7 +21,9 @@ import os
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 
-from django_datatables_view.base_datatable_view import BaseDatatableView
+# from django_datatables_view.base_datatable_view import BaseDatatableView
+# from django_ajax_datatable.base_datatable_view import BaseDatatableView
+from ajax_datatable.views import AjaxDatatableView
 
 from django.conf import settings
 from django.http import JsonResponse
@@ -402,7 +404,8 @@ def faqs_tab(request, p):
 
 
 #FAQ Datatablesバージョン
-class FaqsJsonView(BaseDatatableView):
+# class FaqsJsonView(BaseDatatableView):
+class FaqsJsonView(AjaxDatatableView):
     # モデルの指定
     model = Faqs
     # 表示するフィールドの指定
@@ -488,7 +491,8 @@ def all_search(request):
 
 
 
-class ContactsJsonView(BaseDatatableView):
+# class ContactsJsonView(BaseDatatableView):
+class ContactsJsonView(AjaxDatatableView):
     # モデルの指定
     model = Contacts
     # 表示するフィールドの指定
@@ -567,7 +571,8 @@ class ContactsJsonView(BaseDatatableView):
         return qs
 
 
-class DealersJsonView(BaseDatatableView):
+# class DealersJsonView(BaseDatatableView):
+class DealersJsonView(AjaxDatatableView):
     # モデルの指定
     model = Dealers
     # 表示するフィールドの指定
@@ -578,7 +583,8 @@ class DealersJsonView(BaseDatatableView):
         return super().FILTER_ICONTAINS
 
 
-class ShopsJsonView(BaseDatatableView):
+# class ShopsJsonView(BaseDatatableView):
+class ShopsJsonView(AjaxDatatableView):
     model = Shops
     # columns = ['id', 'dealer', 'name', 'shopcode', 'tel', 'fax', 'homepage', 'memo', 'kana']
     # ↓でソートはOKでも、検索でエラー
@@ -667,3 +673,7 @@ class ShopsJsonView(BaseDatatableView):
                         Q(kana__icontains=part)
                     )
         return qs
+
+
+def contacts(request):
+    return render(request, 'myinfo/contacts_list.html', {})

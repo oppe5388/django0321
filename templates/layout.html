@@ -63,6 +63,14 @@
           }
     </style>
 
+
+    <!-- django-ajax-datatable -->   
+    <link href="{% static 'ajax_datatable/css/style.css' %}" rel="stylesheet" />
+    <!-- link rel='stylesheet' href="{% static 'datatables.net-bs/css/dataTables.bootstrap.min.css' %}" -->
+    <link rel='stylesheet' href="{% static 'datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}">
+    <link rel='stylesheet' href="{% static 'datatables.net-buttons-bs/css/buttons.bootstrap.min.css' %}">
+
+
     {% block extra_head %}{% endblock %}
 </head>
 
@@ -394,6 +402,20 @@
 
     <!-- tinyMCE -->
     <script src="{% static 'uploader.js' %}"></script>
+
+
+    <!-- django-ajax-datatable -->   
+    <script type="text/javascript" src="{% static 'ajax_datatable/js/utils.js' %}"></script>
+    <script src="{% static 'datatables.net/js/jquery.dataTables.min.js' %}"></script>
+    <!-- script src="{% static 'datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script -->
+    <script src="{% static 'datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+    <script src="{% static 'datatables.net-buttons/js/buttons.print.min.js' %}"></script>
+    <script src="{% static 'datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
+    <script src="{% static 'datatables.net-buttons-bs/js/buttons.bootstrap.min.js' %}"></script>
+    <script src="{% static 'jszip/dist/jszip.min.js' %}"></script>
+    <script src="{% static 'pdfmake/build/pdfmake.min.js' %}"></script>
+    <script src="{% static 'pdfmake/build/vfs_fonts.js' %}"></script>
     
 {% block extra_foot %}{% endblock %}
 

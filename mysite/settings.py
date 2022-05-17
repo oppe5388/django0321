@@ -32,7 +32,7 @@ INSTALLED_APPS = [
     'bootstrap4',           # django-bootstrap4
     'django_summernote',
     'import_export',
-    'django.forms',  # 足す
+    'django.forms',
     
     'accounts.apps.AccountsConfig',
     'myinfo',
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     # 'filebrowser',
     'tinymce',
     'dbbackup',  # django-dbbackup 追加
+    'ajax_datatable',
 ]
 
 
