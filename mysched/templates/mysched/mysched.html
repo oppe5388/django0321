@@ -54,7 +54,7 @@
     <div class="card-header align-items-center">
         <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-file-invoice-dollar"></i> 長得の申込できる日 
         <a href="#" class="text-info" data-toggle="popover" data-trigger="hover" data-html="true"
-        title="長得" data-content="● コース：通常の18車付B・18B・12車付B・12Bのみ<br>※よって、V37・CD・GTR・EV・商用車（軽商用車はOK）は対象外
+        title="長得" data-content="●コース：乗用の18車付B・18B・12車付B・12Bのみ<br>※よって、V37・CD・GTR・EV・商用車（軽商用車はOK）は対象外
         " ><i class="fas fa-info-circle"></i></a>
         </h6>
     </div>
@@ -89,64 +89,103 @@
         
 
         <div class="accordion" id="accordionExample">
+            <div class="card">
+                <div class="card-header py-1" id="headingOne">
+                    <button class="btn btn-link collapsed py-0" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        previous...
+                    </button>
+                </div>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="table-responsive table-hover table-sm">
+                            <table class="table table-bordered" width="100%" cellspacing="0">
+                                <thead class="bg-gray-600 text-white">
+                                    <tr>
+                                        <th>初度登録</th>
+                                        <th>申込できる日（54ヶ月後の1日）</th>
+                                    </tr>
+                                </thead>
+                                    
+                                <tbody>
+                                    <tr><td id="chotoku_shodo-14"></td>
+                                        <td id="chotoku_base-14"></td></tr>
+                                    <tr><td id="chotoku_shodo-13"></td>
+                                        <td id="chotoku_base-13"></td></tr>
+                                    <tr><td id="chotoku_shodo-12"></td>
+                                        <td id="chotoku_base-12"></td></tr>
+                                    <tr><td id="chotoku_shodo-11"></td>
+                                        <td id="chotoku_base-11"></td></tr>
+                                    <tr><td id="chotoku_shodo-10"></td>
+                                        <td id="chotoku_base-10"></td></tr>
+                                    <tr><td id="chotoku_shodo-9"></td>
+                                        <td id="chotoku_base-9"></td></tr>
+                                    <tr><td id="chotoku_shodo-8"></td>
+                                        <td id="chotoku_base-8"></td></tr>
+                                    <tr><td id="chotoku_shodo-7"></td>
+                                        <td id="chotoku_base-7"></td></tr>
+                                    <tr><td id="chotoku_shodo-6"></td>
+                                        <td id="chotoku_base-6"></td></tr>
+                                    <tr><td id="chotoku_shodo-5"></td>
+                                        <td id="chotoku_base-5"></td></tr>
+                                    <tr><td id="chotoku_shodo-4"></td>
+                                        <td id="chotoku_base-4"></td></tr>
+                                    <tr><td id="chotoku_shodo-3"></td>
+                                        <td id="chotoku_base-3"></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="card">
-              <div class="card-header py-1" id="headingTwo">
-                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    最近
-                  </button>
-              </div>
-              <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                <div class="card-body p-1">
-                
-                    <div class="table-responsive table-hover table-sm">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead class="bg-gray-600 text-white">
-                                <tr>
-                                    <th>初度登録</th>
-                                    <th>申込できる日（54ヶ月後の1日）</th>
-                                </tr>
-                            </thead>
-                            
-                            <tbody>
-                                <tr>
-                                    <td id="chotoku_shodo1"></td>
-                                    <td id="chotoku_base1"></td>
-                                </tr>
-                                <tr>
-                                    <td id="chotoku_shodo2"></td>
-                                    <td id="chotoku_base2"></td>
-                                </tr>
-                                <tr class="text-primary font-weight-bold">
-                                    <td id="chotoku_shodo3"></td><!-- 今月の54ヶ月前 -->
-                                    <td id="chotoku_base3"></td><!-- 今月の1日 -->
-                                </tr>
-                                <tr>
-                                    <td id="chotoku_shodo4"></td>
-                                    <td id="chotoku_base4"></td>
-                                </tr>
-                                <tr>
-                                    <td id="chotoku_shodo5"></td>
-                                    <td id="chotoku_base5"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
+                <div class="card-header py-1" id="headingTwo">
+                    <button class="btn btn-link collapsed py-0" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    recent
+                    </button>
                 </div>
-              </div>
+                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                
+                        <div class="table-responsive table-hover table-sm">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead class="bg-gray-600 text-white">
+                                    <tr>
+                                        <th>初度登録</th>
+                                        <th>申込できる日（54ヶ月後の1日）</th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
+                                    <tr><td id="chotoku_shodo-2"></td>
+                                        <td id="chotoku_base-2"></td></tr>
+                                    <tr><td id="chotoku_shodo-1"></td>
+                                        <td id="chotoku_base-1"></td></tr>
+                                    <tr class="text-primary font-weight-bold">
+                                        <td id="chotoku_shodo0"></td><!-- 今月の54ヶ月前  -->
+                                        <td id="chotoku_base0"></td></tr><!-- 今月の1日 -->
+                                    <tr><td id="chotoku_shodo1"></td>
+                                        <td id="chotoku_base1"></td></tr>
+                                    <tr><td id="chotoku_shodo2"></td>
+                                        <td id="chotoku_base2"></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
+
             <div class="card">
               <div class="card-header py-1" id="headingThree">
-                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    未来
+                  <button class="btn btn-link collapsed py-0" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    next...
                   </button>
               </div>
               <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                 <div class="card-body">
 
                     <div class="table-responsive table-hover table-sm">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
                             <thead class="bg-gray-600 text-white">
                                 <tr>
                                     <th>初度登録</th>
@@ -155,6 +194,12 @@
                             </thead>
                             
                             <tbody>
+                                <tr><td id="chotoku_shodo3"></td>
+                                    <td id="chotoku_base3"></td></tr>
+                                <tr><td id="chotoku_shodo4"></td>
+                                    <td id="chotoku_base4"></td></tr>
+                                <tr><td id="chotoku_shodo5"></td>
+                                    <td id="chotoku_base5"></td></tr>
                                 <tr><td id="chotoku_shodo6"></td>
                                     <td id="chotoku_base6"></td></tr>
                                 <tr><td id="chotoku_shodo7"></td>
@@ -172,9 +217,9 @@
                                 <tr><td id="chotoku_shodo13"></td>
                                     <td id="chotoku_base13"></td></tr>
                                 <tr><td id="chotoku_shodo14"></td>
-                                    <td id="chotoku_base14"></td></tr>
+                                    <td id="chotoku_base14"></td></tr>                                    
                                 <tr><td id="chotoku_shodo15"></td>
-                                    <td id="chotoku_base15"></td></tr>
+                                    <td id="chotoku_base15"></td></tr>      
                                 <tr><td id="chotoku_shodo16"></td>
                                     <td id="chotoku_base16"></td></tr>
                                 <tr><td id="chotoku_shodo17"></td>
@@ -196,9 +241,7 @@
                                 <tr><td id="chotoku_shodo25"></td>
                                     <td id="chotoku_base25"></td></tr>
                                 <tr><td id="chotoku_shodo26"></td>
-                                    <td id="chotoku_base26"></td></tr>
-                                <tr><td id="chotoku_shodo27"></td>
-                                    <td id="chotoku_base27"></td></tr>                                    
+                                    <td id="chotoku_base26"></td></tr>                                   
                             </tbody>
                         </table>
                     </div>
@@ -409,43 +452,25 @@ function change_to_wareki(date){
         // alert("日本時間 " + moment().format("YYYY年MM月DD日(ddd) HH:mm:ss"));
         //var base_day = moment().date(1).format("YYYY-MM-DD");// 今月1日
 
-        // -2ヶ月の1日
-        var base_day = moment(new Date()).subtract(2, 'months').date(1).format("YYYY-MM-DD");// 今月1日
-        var base_wareki = change_to_wareki(new Date());
-
-        var ago54 = moment(base_day).subtract(54, 'months').format('YYYY年MM月');// 54ヶ月前
+        // -14ヶ月の1日
+        var base_day = moment(new Date()).subtract(14, 'months').date(1).format("YYYY-MM-DD");// 今月1日
+        var base_dt =new Date(moment(base_day));
+        var base_wareki = change_to_wareki(base_dt);
+        var ago54 = moment(base_day).subtract(54, 'months').date(1).format('YYYY年MM月');// 54ヶ月前
         var ago54dt =new Date(moment(base_day).subtract(54, 'months'));
         var wareki = change_to_wareki(ago54dt);
 
-        for (let i = 1; i < 29; i++) {
-            $('#chotoku_base'+i).prepend(base_day+"("+base_wareki+")");
-            $('#chotoku_shodo'+i).prepend(ago54 +"("+wareki+")");
+        for (let i = -14; i < 27; i++) {
+            $('#chotoku_base'+i).prepend("("+base_wareki+") "+base_day);
+            $('#chotoku_shodo'+i).prepend("("+wareki+") "+ago54);
             
             var base_day = moment(base_day).add(1, 'months').date(1).format("YYYY-MM-DD");// 今月1日
-            var base_wareki = change_to_wareki(new Date());
-            var ago54 = moment(base_day).subtract(54, 'months').format('YYYY年MM月');// 54ヶ月前
+            var base_dt =new Date(moment(base_day));
+            var base_wareki = change_to_wareki(base_dt);
+            var ago54 = moment(base_day).subtract(54, 'months').date(1).format('YYYY年MM月');// 54ヶ月前
             var ago54dt =new Date(moment(base_day).subtract(54, 'months'));
             var wareki = change_to_wareki(ago54dt);
         }
-
-
-        $.ajax({ 
-            url: "/mysched/chotoku_calc/",
-            type: "GET",
-            dataType: "json",
-            data:{ 
-                today: today,
-                },
-            }).done(function (data) {
-                console.log(data);
-
-                // $('#chotoku_base').prepend(
-                //     '</div>'+ data.today +'</div>');
-                
-            }).fail(function (data) {
-                console.log("エラーのほう");
-                $('#ajax_disp').hide();
-        });
 
     });
 
