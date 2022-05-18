@@ -180,21 +180,21 @@ $(document).ready(function () {
                 title: "検索ワード",
                 visible: false, // これでもサーチ対象のままになる
             },
-            // {
-            //     // 9列目
-            //     title: "",
-            //     // visible: false, // これでもサーチ対象のままになる
+            {
+                // 9列目
+                title: "",
+                // visible: false, // これでもサーチ対象のままになる
                 
-            //     // render: function (data, type, row) { //typeも必要
-            //     //     return '<a href="' +  data+ '" data-toggle="modal" data-target="#exampleModal" data-title=""\
-            //     //     data-sample="">'+ row[10]  +'</a>';
-            //     // },
+                // render: function (data, type, row) { //typeも必要
+                //     return '<a href="' +  data+ '" data-toggle="modal" data-target="#exampleModal" data-title=""\
+                //     data-sample="">'+ row[10]  +'</a>';
+                // },
 
-            //     // render: function (data, type, row) { //typeも必要
-            //     //     return '<a class="" data-toggle="modal" data-target="#exampleModal" data-title="<b>' + row[10]+'</b>"\
-            //     //     data-sample="">'+ data +'</a>';
-            //     // },
-            // },
+                // render: function (data, type, row) { //typeも必要
+                //     return '<a class="" data-toggle="modal" data-target="#exampleModal" data-title="<b>' + row[10]+'</b>"\
+                //     data-sample="">'+ data +'</a>';
+                // },
+            },
 
         ],
 

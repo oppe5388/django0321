@@ -495,54 +495,16 @@ class ContactsJsonView(BaseDatatableView):
     # 表示するフィールドの指定
     columns = ['id', 'incoming', 'name', 'tel', 'hours', 'title', 'job', 'searchwords', 'attachments']
 
-    # column_defs = [
-    #     {
-    #         'name': 'id',
-    #         'visible': False,
-    #     }, {
-    #         'name': 'incoming',
-    #     }, {
-    #         'name': 'name',
-    #     }, {
-    #         'name': 'tel',
-    #     }, {
-    #         'name': 'hours',
-    #     }, {
-    #         'name': 'title',
-    #     }, {
-    #         'name': 'job',
-    #     }, {
-    #         'name': 'searchwords',
-    #     }, {
-    #         'name': 'attachments',
-    #     }
-    # ]
-    # ↓ManyToManyができない
-    # def get_initial_queryset(self, request=None):
-    #     # Optimization: Reduce the number of queries due to ManyToMany "tags" relation
-    #     return Attachments.objects.prefetch_related('file_path')
-    #     # return Attachments.objects.all().prefetch_related('file_path')
-
-    # def customize_row(self, row, obj):
-    #     # 'row' is a dictionary representing the current row, and 'obj' is the current object.
-    #     # Display tags as a list of strings
-    #     # row['attachments'] = ','.join( [t.file_path for t in obj.attachments.all()])
-    #     # row['attachments'] = ','.join( [t for t in obj.attachments.all()])
-    #     row['attachments'] = "あいうえお"
-    #     return
-
-    
-    # # ↓FKeyでやってみる
-    # def render_column(self, row, column):
-    #     if column == 'attachments':
-    #         if ContactAttachRel.objects.filter(contact=row.id).exists():
-    #             cont =ContactAttachRel.objects.filter(contact=row.id).first()
-    #             return cont.attachment.file_path.url
-    #             # return "添付あり"
-    #         else:
-    #             return "ああ"
-    #     else:
-    #         return super(ContactsJsonView, self).render_column(row, column)
+    # ↓FKey(M2Mの中間テーブル)でやってみる
+    def render_column(self, row, column):
+        if column == 'attachments':
+            if ContactAttachRel.objects.filter(contact=row.id).exists():
+                return str(ContactAttachRel.objects.filter(contact=row.id).first().attachment)
+                # return "添付あり"
+            else:
+                return "なし"
+        else:
+            return super(ContactsJsonView, self).render_column(row, column)
 
 
     # # 検索方法の指定：部分一致
