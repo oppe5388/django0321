@@ -499,7 +499,7 @@ class ContactsJsonView(BaseDatatableView):
     def render_column(self, row, column):
         if column == 'attachments':
             if ContactAttachRel.objects.filter(contact=row.id).exists():
-                return str(ContactAttachRel.objects.filter(contact=row.id).first().attachment)
+                return str(ContactAttachRel.objects.filter(contact=row.id).first().attachment.file_path)
                 # return "添付あり"
             else:
                 return "なし"

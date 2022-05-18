@@ -190,10 +190,9 @@ $(document).ready(function () {
                 //     data-sample="">'+ row[10]  +'</a>';
                 // },
 
-                // render: function (data, type, row) { //typeも必要
-                //     return '<a class="" data-toggle="modal" data-target="#exampleModal" data-title="<b>' + row[10]+'</b>"\
-                //     data-sample="">'+ data +'</a>';
-                // },
+                render: function (data, type, row) { //typeも必要
+                    return '<a href="media/' +data+ '">'+ data +'</a>';
+                },
             },
 
         ],
