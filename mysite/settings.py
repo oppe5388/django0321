@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'imagekit',
     # 'bootstrap_toolkit',
     'mysched',
-    # 'mycontact',
     'sample',
     'myreport',
     # 'bootstrap_datepicker_plus',
@@ -48,7 +47,7 @@ INSTALLED_APPS = [
     # 'filebrowser',
     'tinymce',
     'dbbackup',  # django-dbbackup 追加
-    'ajax_datatable',
+    # 'ajax_datatable',
 ]
 
 

@@ -34,18 +34,9 @@
     <link href="https://cdn.datatables.net/1.11.5/css/dataTables.semanticui.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.semanticui.min.css" rel="stylesheet"> {% endcomment %}
 
-    <link href="{% static 'ajax_datatable/css/style.css' %}" rel="stylesheet" />
-    <link href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
-
     {% endblock %}
 
 {% block content %}
-
-<table id="datatable_permissions">
-</table>
-
-
-
 {% comment %} <div id='allBtn'>
     <button id="btn-show-all" type="button" class="btn-flat-border">全部開く</button>
     <button id="btn-hide-all" type="button" class="btn-flat-border">全部閉じる</button>
@@ -70,22 +61,22 @@
 </div>
 </div>
 
-{% comment %} 
 <div class="card shadow p-2">
     <div class="row">
         <div class="col-12">
             <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-
             </table>
         </div>
     </div>
 </div>
-{% endcomment %}
 
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
+
+<!-- django-ajax-datatable中止 --> 
+{% comment %} <table id="datatable_permissions"></table> {% endcomment %}
 {% endblock %}
 
 {% block extra_foot %}
@@ -134,17 +125,12 @@
   }); {% endcomment %}
 </script>
 
-<!-- django-ajax-datatable --> 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script type="text/javascript" src="{% static 'ajax_datatable/js/utils.js' %}"></script>
-<script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-
-<script language="javascript">
-
+<!-- django-ajax-datatable中止 --> 
+{% comment %} <script language="javascript">
     $(document).ready(function() {
         AjaxDatatableViewUtils.initialize_table(
             $('#datatable_permissions'),
-            "{% url 'ajax_datatable_permissions' %}",
+             "{% url 'myinfo:ajax_datatable_permissions' %}",
             {
                 // extra_options (example)
                 processing: false,
@@ -157,6 +143,6 @@
             },
         );
     });
+</script> {% endcomment %}
 
-</script>
 {% endblock %}

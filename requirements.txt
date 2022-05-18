@@ -16,4 +16,4 @@ django-tinymce
 django-dbbackup
 python-dateutil
 # django-crontab
-django-ajax-datatable
+# django-ajax-datatable
