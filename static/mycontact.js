@@ -103,15 +103,17 @@ $(document).ready(function () {
             },
             {
                 // 2列目
-                title: "相手",
+                title: "",
                 // className: "all",
                 // visible: false,
                 render: function (data) {
                     let result;
-                    if (data == "販社") {
-                        result = data.replace("販社", '<div class="card badge-info">&nbsp;販社</div>');
-                    } else if (data == "顧客") {
-                        result = data.replace("顧客", '<div class="card badge-warning">&nbsp;顧客</div>');
+                    if (data == "販社から") {
+                        result = data.replace("販社から", '<div class="card badge-info">&nbsp;販社から</div>');
+                    } else if (data == "販社本部から") {
+                        result = data.replace("販社本部から", '<div class="card badge-secondary">&nbsp;販社本部から</div>');
+                    } else if (data == "顧客から") {
+                        result = data.replace("顧客から", '<div class="card badge-warning">&nbsp;顧客から</div>');
                     } else {
                         result = data;
                     }
