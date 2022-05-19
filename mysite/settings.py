@@ -249,3 +249,7 @@ TINYMCE_DEFAULT_CONFIG = {
 DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
 # BASE_DIR/backups/にバックアップファイルを保存する設定
 DBBACKUP_STORAGE_OPTIONS = {'location': os.path.join(BASE_DIR, 'backups')}
+# 最新の3つのファイルを保存(それより古いものは順番に破棄)する設定
+DBBACKUP_CLEANUP_KEEP = 6
+# メディアのバックアップファイルも同様の設定
+DBBACKUP_CLEANUP_KEEP_MEDIA = 6
