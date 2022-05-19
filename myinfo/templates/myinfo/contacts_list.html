@@ -42,23 +42,20 @@
     <button id="btn-hide-all" type="button" class="btn-flat-border">全部閉じる</button>
 </div> {% endcomment %}
 
+  <!-- モーダル　modal-dialog-fluidとlayout.htmlで指定して幅広に-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-xl modal-dialog-fluid">
+      <div class="modal-content">
+          <div class="modal-header py-1">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-    <div class="modal-content">
-    <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">タイトル</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        
-        
-    </div>
-    </div>
-</div>
+          </div>
+      </div>
+  </div>
 </div>
 
 <div class="card shadow p-2">
@@ -80,6 +77,21 @@
 {% endblock %}
 
 {% block extra_foot %}
+
+<script type="text/javascript">
+    $('#exampleModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) // モーダル切替えボタン
+      var recipient = button.data('sample') // data-* 属性から情報を抽出
+      var title = button.data('title') // data-* 属性から情報を抽出
+      // 必要に応じて、ここでAJAXリクエストを開始可能（コールバックで更新することも可能）
+      // モーダルの内容を更新。ここではjQueryを使用するが、代わりにデータ・バインディング・ライブラリまたは他のメソッドを使用することも可能
+      var modal = $(this)
+      modal.find('.modal-title').html(title)
+      modal.find('.modal-body').html(recipient)
+      // modal.find('.modal-content').html(recipient)
+    })
+  </script>
+
 <!-- jQuery first, then Tether, then Bootstrap JS. -->
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>

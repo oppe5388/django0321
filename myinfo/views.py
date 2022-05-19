@@ -499,10 +499,14 @@ class ContactsJsonView(BaseDatatableView):
     def render_column(self, row, column):
         if column == 'attachments':
             if ContactAttachRel.objects.filter(contact=row.id).exists():
-                return str(ContactAttachRel.objects.filter(contact=row.id).first().attachment.file_path)
-                # return "添付あり"
-            else:
-                return "なし"
+                url = ContactAttachRel.objects.filter(contact=row.id).first().attachment.file_path.url
+                file_name = str(ContactAttachRel.objects.filter(contact=row.id).first().attachment)
+                iframe ="<iframe src='" + url + "' height=1000 width=100%></iframe>"
+                #↑と↓で"と'を入れ替えているとOK
+                return '<a class="btn btn-light btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#exampleModal" data-sample="' + iframe + '">\
+                        <span class="icon text-gray-600"><i class="fas fa-paperclip"></i></span><span class="text">'+ file_name +'</span></a>'
+            # else:
+            #     return "なし"
         else:
             return super(ContactsJsonView, self).render_column(row, column)
 

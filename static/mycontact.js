@@ -184,15 +184,19 @@ $(document).ready(function () {
                 // 9列目
                 title: "",
                 // visible: false, // これでもサーチ対象のままになる
-                
-                // render: function (data, type, row) { //typeも必要
-                //     return '<a href="' +  data+ '" data-toggle="modal" data-target="#exampleModal" data-title=""\
-                //     data-sample="">'+ row[10]  +'</a>';
+
+                // render: function (data ,type, row) { //typeも必要
+                //     if (data != 'なし') {
+                //         return '<a data-toggle="modal" data-target="#exampleModal" data-title="<b>' + row[0]+'</b>"\
+                //         data-sample="' +data+ '">'+ row[0] +'</a>';
+                //         // var iframe ="<iframe src='" +data+"' height=1000></iframe>"
+                //         // return '<a class="" data-toggle="modal" data-target="#exampleModal" data-title="<b>' + "あああ"+'</b>"\
+                //         // data-sample="' + data + '">'+ "あああ" +'</a>';
+                //     } else {
+                //         return null
+                //     }
                 // },
 
-                render: function (data, type, row) { //typeも必要
-                    return '<a href="media/' +data+ '">'+ data +'</a>';
-                },
             },
 
         ],
