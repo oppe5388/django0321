@@ -171,13 +171,13 @@ admin.site.register(Shops, ShopsAdmin)
 
 
 #
-class ContactAttachRelResource(ModelResource):
-    class Meta:
-        model = ContactAttachRel
-        skip_unchanged = True
-        import_id_fields = ['id']
+# class ContactAttachRelResource(ModelResource):
+#     class Meta:
+#         model = ContactAttachRel
+#         skip_unchanged = True
+#         import_id_fields = ['id']
 
-class ContactAttachRelAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ('contact', 'attachment')
+# class ContactAttachRelAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+#     list_display = ('contact', 'attachment')
 
-admin.site.register(ContactAttachRel, ContactAttachRelAdmin)
+# admin.site.register(ContactAttachRel, ContactAttachRelAdmin)

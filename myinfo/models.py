@@ -183,8 +183,8 @@ class Contacts(models.Model):
     tel = models.TextField(max_length=100, verbose_name="TEL")
     hours = models.TextField(max_length=100, verbose_name="時間")
     searchwords = models.CharField(max_length=200, null=True, blank=True, verbose_name="検索ワード")
-    # attachments = models.ManyToManyField(Attachments, blank=True)
-    attachments = models.ManyToManyField(Attachments, blank=True, through="ContactAttachRel",)
+    attachments = models.ManyToManyField(Attachments, blank=True)
+    # attachments = models.ManyToManyField(Attachments, blank=True, through="ContactAttachRel",)
     dealers = models.ManyToManyField(Dealers, blank=True)
 
     def __str__(self):
@@ -213,6 +213,6 @@ class Faqs(models.Model):
         verbose_name_plural = "FAQ"
 
 
-class ContactAttachRel(models.Model):
-    contact = models.ForeignKey("Contacts", on_delete=models.CASCADE)
-    attachment = models.ForeignKey("Attachments", on_delete=models.CASCADE)
+# class ContactAttachRel(models.Model):
+#     contact = models.ForeignKey("Contacts", on_delete=models.CASCADE)
+#     attachment = models.ForeignKey("Attachments", on_delete=models.CASCADE)

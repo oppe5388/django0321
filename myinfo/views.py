@@ -498,13 +498,30 @@ class ContactsJsonView(BaseDatatableView):
     # ↓FKey(M2Mの中間テーブル)でやってみる
     def render_column(self, row, column):
         if column == 'attachments':
-            if ContactAttachRel.objects.filter(contact=row.id).exists():
-                url = ContactAttachRel.objects.filter(contact=row.id).first().attachment.file_path.url
-                file_name = str(ContactAttachRel.objects.filter(contact=row.id).first().attachment)
-                iframe ="<iframe src='" + url + "' height=1000 width=100%></iframe>"
-                #↑と↓で"と'を入れ替えているとOK
-                return '<a class="btn btn-light btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#exampleModal" data-sample="' + iframe + '">\
-                        <span class="icon text-gray-600"><i class="fas fa-paperclip"></i></span><span class="text">'+ file_name +'</span></a>'
+            # ↓中間テーブル自作
+            # if ContactAttachRel.objects.filter(contact=row.id).exists():
+            #     url = ContactAttachRel.objects.filter(contact=row.id).first().attachment.file_path.url
+            #     file_name = str(ContactAttachRel.objects.filter(contact=row.id).first().attachment)
+            #     iframe ="<iframe src='" + url + "' height=1000 width=100%></iframe>"
+            #     #↑と↓で"と'を入れ替えているとOK
+            #     return '<a class="btn btn-light btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#exampleModal" data-sample="' + iframe + '">\
+            #             <span class="icon text-gray-600"><i class="fas fa-paperclip"></i></span><span class="text">'+ file_name +'</span></a>'
+            
+            # ↓中間テーブル自作なし
+            attachs = Contacts.objects.get(id=row.id).attachments.all()
+            block =""
+            if attachs.exists():
+                for attach in attachs:
+                    # url =attach.first().file_path.url
+                    # file_name = str(attach.first())
+                    url =attach.file_path.url
+                    file_name = str(attach)
+                    iframe ="<iframe src='" + url + "' height=1000 width=100%></iframe>"
+                    #↑と↓で"と'を入れ替えているとOK
+                    block = block + '<a class="btn btn-light btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#exampleModal" data-sample="' + iframe + '">\
+                            <span class="icon text-gray-600"><i class="fas fa-paperclip"></i></span><span class="text">'+ file_name +'</span></a>'+"　"
+                
+                return block
             # else:
             #     return "なし"
         else:
