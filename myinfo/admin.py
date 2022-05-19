@@ -130,6 +130,7 @@ class ContactsResource(ModelResource):
 #インポート、エクスポート
 class ContactsAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('incoming', 'name', 'title', 'tel', 'searchwords')
+    ordering = ('id',)
     resource_class = ContactsResource
     formats = [base_formats.XLSX]
     filter_horizontal = ('attachments', 'dealers')
