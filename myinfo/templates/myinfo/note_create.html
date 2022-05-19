@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+{% block title %}ノート{% endblock %}
+{% block topbar %}
+{% endblock %}
+
+{% block content %}
+
+    <form method="POST" enctype="multipart/form-data" action="{% url 'myinfo:note_create' %}" class="form-group">
+        {% csrf_token %}
+
+        <div class="mb-3">{{ form.title }}</div>
+        <div class="mb-1">{{ form.body }}</div>
+        <div class="text-xs text-right mb-1">Enterで改行、Shift+Enterで段落</div>
+        <div class="mb-1">{{ form.share }}</div>
+
+        {% comment %}
+        {% for kadai in category.kadai_name.all %}
+            <p>{{ kadai.kadai_name }}</p>
+        {% endfor %}
+        {% endcomment %}
+
+
+        {% if form.errors %}
+			<div class="alert alert-warning" role="alert">{{ form.errors }}</div>
+        {% endif %}
+
+
+        <hr>
+
+        <div class="btn-toolbar">
+
+            <div class="w-100"></div>
+
+            <div class="btn-group ">
+                <a href='JavaScript:history.back()' class="btn btn-secondary">
+                <i class="fas fa-chevron-left"></i> 戻る</a>
+            </div>
+
+            <div class="btn-group ml-auto">
+            <button type="submit" class="submit btn btn-primary">
+            <i class="fas fa-check"></i> 作成</button>
+            </div>
+        </div>
+
+    </form>
+
+    <div>
+        
+    </div>
+{% endblock %}
+
