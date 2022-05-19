@@ -112,7 +112,7 @@ class FaqsResource(ModelResource):
 class FaqsAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('id', 'question', 'created_at')  
     resource_class = FaqsResource
-    # filter_horizontal = ('contacts', 'attachments', 'dealers')
+    filter_horizontal = ('contacts', 'attachments', 'dealers')
     search_fields = ('question', 'answer1', 'answer2')
 
 admin.site.register(Faqs, FaqsAdmin)
@@ -132,7 +132,7 @@ class ContactsAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('incoming', 'name', 'title', 'tel', 'searchwords')
     resource_class = ContactsResource
     formats = [base_formats.XLSX]
-    # filter_horizontal = ('attachments', 'dealers')
+    filter_horizontal = ('attachments', 'dealers')
 
 admin.site.register(Contacts, ContactsAdmin)
 
