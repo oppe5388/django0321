@@ -110,7 +110,7 @@ class FaqsResource(ModelResource):
         import_id_fields = ['id']
 
 class FaqsAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ('id', 'question', 'created_at')  
+    list_display = ('id', 'question', 'reference','created_at')  
     resource_class = FaqsResource
     filter_horizontal = ('contacts', 'attachments', 'dealers')
     search_fields = ('question', 'answer1', 'answer2')

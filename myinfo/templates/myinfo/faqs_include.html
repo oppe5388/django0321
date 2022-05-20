@@ -234,6 +234,34 @@
                                 </div>
                             </div>
                         {% endif %}
+
+                        <!-- 振り先だったら、一覧pdfを全てに添付 -->
+                        {% if '振り先' in faq.reference %}
+                            <a class="btn btn-light btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#furisakiModal">
+                                <span class="icon text-gray-600">
+                                    <i class="fas fa-paperclip"></i>
+                                </span>
+                                <span class="text">{{furisaki}}</span>
+                            </a>
+
+                            <!-- モーダル　modal-dialog-fluidとlayout.htmlで指定して幅広に-->
+                            <div class="modal fade " id="furisakiModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable modal-xl modal-dialog-fluid">
+                                    <div class="modal-content">
+                                        <div class="modal-header py-1">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <iframe src="{{ furisaki.file_path.url }}" height=1000>
+                                            <p><b>表示されない時の表示</b>: <a href="{{ furisaki.file_path.url }}">ダウンロード</a>.</p>
+                                        </iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        
                     </td>
                   </tr>
                 </tbody>

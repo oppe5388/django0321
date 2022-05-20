@@ -350,6 +350,9 @@ def faqs_list(request):
     #↓1件でもクエリセットだとtemplateでループ要になるため、firstつける
     context['helpdesk'] = Contacts.objects.filter(name__contains="日産ヘルプデスク").first()
 
+    #振り先一覧pdfのパス
+    context['furisaki'] = Attachments.objects.filter(file_path__contains="振り先一覧").first()
+
     if faqsearchForm.is_valid():
         queryset = Faqs.objects.all()
         keyword = faqsearchForm.cleaned_data['keyword']
@@ -390,6 +393,9 @@ def faqs_tab(request, p):
     context['contacts_all'] = Contacts.objects.all().order_by('id')
     #↓1件でもクエリセットだとtemplateでループ要になるため、firstつける
     context['helpdesk'] = Contacts.objects.filter(name__contains="日産ヘルプデスク").first()
+
+    #振り先一覧pdfのパス
+    context['furisaki'] = Attachments.objects.filter(file_path__contains="振り先一覧").first()
 
     # 一度queryset = Faqs.objects.all()と刻む必要はない
     queryset = Faqs.objects.filter(
@@ -468,6 +474,9 @@ def all_search(request):
                 ).order_by('-updated_at')#
 
         context['faqs'] = queryset
+
+    #振り先一覧pdfのパス
+    context['furisaki'] = Attachments.objects.filter(file_path__contains="振り先一覧").first()
 
     #窓口
     queryset = Contacts.objects.all()

@@ -36,10 +36,11 @@
             <table class="table " width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th nowrap class="font-small">相手</th>
+                        <th nowrap class="font-small"></th>
                         <th nowrap class="font-small">窓口</th>
                         <th nowrap class="font-small">業務</th>
                         <th nowrap class="font-small">詳細</th>
+                        <th nowrap class="font-small"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -57,6 +58,7 @@
                                     </span>
                                     {% comment %} <span class="text"></span> {% endcomment %}
                                 </a>
+
                                 <!-- モーダル -->
                                 <div class="modal fade" id="contactModal{{ contact.pk }}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-scrollable">
@@ -77,10 +79,40 @@
                                     </div>
                                 </div>
                                 
-                                </td>
+                            </td>
+
                             <td nowrap>{{ contact.name }}</td>
                             <td class="font-small">{{ contact.title }}</td>
                             <td class="font-small">{{ contact.job }}</td>
+
+                            <!-- 添付ファイルあれば -->
+                            <td>
+                            {% for attach in contact.attachments.all %}
+                                
+                                <a class="btn btn-light btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#attachModal{{ attach.pk }}">
+                                    <span class="icon text-gray-600">
+                                        <i class="fas fa-paperclip"></i>
+                                    </span>
+                                    <span class="text">{{ attach.file_name }}</span>
+                                </a>
+
+                                <!-- モーダル　modal-dialog-fluidとlayout.htmlで指定して幅広に-->
+                                <div class="modal fade " id="attachModal{{ attach.pk }}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-scrollable modal-xl modal-dialog-fluid">
+                                        <div class="modal-content">
+                                            <div class="modal-header py-1">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <iframe src="{{ attach.file_path.url }}" height=1000>
+                                                <p><b>表示されない時の表示</b>: <a href="{{ attach.file_path.url }}">ダウンロード</a>.</p>
+                                            </iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            </td>
                         </tr>
 
                     {% endfor %}
