@@ -196,12 +196,25 @@
             <div class="card-body">
                 <!--  ↓attachmentモデル逆参照 -->
                 {% for each_attachments in information.info_attach.all %}
-                    <a href="{{ each_attachments.file_path.url }}" target="_blank" class="btn btn-light btn-icon-split btn-sm mb-1">
+                    {% with name=each_attachments.file_path|stringformat:"s"|lower %}
+                    <!--  動画はdatailへ遷移させる -->
+                    {% if '.mp4' in name or '.mov' in name %}
+                    <a href="{% url 'myinfo:detail' information.pk %}" class="btn btn-light btn-icon-split btn-sm mb-1">
                         <span class="icon text-gray-600">
-                            <i class="fas fa-paperclip"></i>
+                            <i class="fas fa-video"></i>
                         </span>
                         <span class="text">{{ each_attachments.file_name }}</span>
                     </a>
+                    <!--  他は通常リンク（PDFは別タブで開かれる） -->
+                    {% else %}
+                        <a href="{{ each_attachments.file_path.url }}" target="_blank" class="btn btn-light btn-icon-split btn-sm mb-1">
+                            <span class="icon text-gray-600">
+                                <i class="fas fa-paperclip"></i>
+                            </span>
+                            <span class="text">{{ each_attachments.file_name }}</span>
+                        </a>
+                    {% endif %}
+                    {% endwith %}
                 {% endfor %}
 
                 <div>
