@@ -38,39 +38,47 @@
     </div>
 
     <!-- #関数ビュー -->
-    {% for report in dailyreports %} 
-        
-        <!-- Dropdown Card Example -->
-        <div class="card shadow mb-3">
-            <!-- Card Header - Dropdown -->
-            <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
+    {% for report in dailyreports %}
 
-                <!-- タイトル -->
-                <h6 class="m-0 font-weight-bold text-primary mr-auto">
-                    <!-- 見る側が未読だったら -->
-                    {% for read in read_set %}
-                        {% if report == read.report and request.user.id == read.user.id %}
-                        <div class="badge badge-warning">未読</div>
+        <!-- 本人またはLDのみ -->
+        {% if request.user.id == information.user.id or request.user.id <= 4 %}
+            
+            <!-- Dropdown Card Example -->
+            <div class="card shadow mb-3">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
+
+                    <!-- タイトル -->
+                    <h6 class="m-0 font-weight-bold text-primary mr-auto">
+                        <!-- LDのみ見る側が未読だったら -->
+                        {% if request.user.id <= 4 %}
+                            {% for read in read_set %}
+                                {% if report == read.report and request.user.id == read.user.id %}
+                                <div class="badge badge-warning">未読</div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+
+                        <a href="{% url 'myreport:detail' report.pk %}">{{ report.user.last_name }} {{ report.day }}</a>
+                        　
+                    </h6>
+
+
+                    <!-- LD既読表示-->
+                    {% for chk in check_set %}
+                        {% if report == chk.report %}
+                            <div class="badge badge-success"><i class="fas fa-check"></i> {{ chk.user.last_name }}</div>
                         {% endif %}
                     {% endfor %}
 
-                    <a href="{% url 'myreport:detail' report.pk %}">{{ report.day }}</a>
-                </h6>
-
-
-                <!-- LD既読表示-->
-                {% for chk in check_set %}
-                    {% if report == chk.report %}
-                        <div class="badge badge-success"><i class="fas fa-check"></i> {{ chk.user.last_name }}</div>
-                    {% endif %}
-                {% endfor %}
-
+                </div>
+                <!-- Card Body -->
+                <div class="card-body py-2">
+                    {{ report.body1| linebreaksbr| truncatechars_html:50}}
+                </div>
             </div>
-            <!-- Card Body -->
-            <div class="card-body py-2">
-                {{ report.body1| linebreaksbr| truncatechars_html:50}}
-            </div>
-        </div>
+
+        {% endif %}
 
     {% endfor %}
 

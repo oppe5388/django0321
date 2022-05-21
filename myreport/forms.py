@@ -36,25 +36,6 @@ class DailyReportForm(LoginRequiredMixin, forms.ModelForm):
         }
 
 
-# #変更・更新は別→一緒なら使わない？
-# class DailyReportEditForm(LoginRequiredMixin, forms.ModelForm):
-
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-
-#         for field in self.fields.values():
-#             if 'class' in field.widget.attrs:
-#                 field.widget.attrs['class'] += ' form-control'
-#             else:
-#                 field.widget.attrs['class'] = 'form-control'
-
-#     class Meta:
-#         model = DailyReport
-#         fields = '__all__'
-#         widgets = {
-#             'day': forms.DateInput(attrs={'type':'date'}),
-#         }
-
 #検索
 class SearchForm(forms.Form):
     keyword = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder':'Search for...', 'class':'form-control'}))
