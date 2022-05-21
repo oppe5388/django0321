@@ -138,15 +138,17 @@
                         <i class="fas fa-business-time"></i>
                         <span>シフト</span></a>
                 </li>
-
+                
+                {% if request.user.id <= 4 %}
                 <li class="nav-item">
                     <a class="nav-link" href='{% url 'admin:index' %}'>
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>管理サイト</span></a>
                 </li>
+                {% endif %}
 
                 <!-- LDか新人のみ表示 -->
-                {% if request.user.id == 13 or request.user.id <= 4 %}
+                {% if request.user.id == 13 or request.user.id == 14 or request.user.id <= 4 %}
                     <!-- Divider -->
                     <hr class="sidebar-divider d-none d-md-block">
 

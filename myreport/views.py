@@ -92,6 +92,9 @@ def detail_fbvform(request, pk):
         "report":report,
     }
 
+
+    context['reportread'] = ReportRead.objects.filter(report=pk)
+
     return render(request,template_name,context)
 
 
