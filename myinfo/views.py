@@ -669,3 +669,53 @@ class ShopsJsonView(BaseDatatableView):
 # django-ajax-datatable中止
 # def contacts(request):
 #     return render(request, 'myinfo/contacts_list.html', {})
+
+
+#ノートlist
+def note_list(request):
+
+    notesearchForm = NoteSearchForm(request.GET)
+
+    context = {
+        'notesearchForm': notesearchForm,
+    }
+
+    if notesearchForm.is_valid():
+        queryset = Note.objects.all()
+        keyword = notesearchForm.cleaned_data['keyword']
+        if keyword:
+            keyword = keyword.split()
+            for k in keyword:
+                queryset = queryset.filter(
+                        Q(title__icontains=k) | 
+                        Q(body__icontains=k)
+                    ).order_by('-updated_at')#
+
+            context['note_set'] = queryset
+    else:
+        notesearchForm = NoteSearchForm()
+        note_set = Note.objects.all().order_by('-updated_at')
+        page_obj = paginate_queryset(request, note_set, 20)#ページネーション用
+        context['page_obj'] = page_obj
+        context['note_set'] = page_obj.object_list
+
+    return render(request, 'myinfo/note_list.html', context)
+
+
+#ノート新規
+def note_create(request):
+    if request.method == "POST":
+        form = NoteCreateForm(request.POST, request.FILES)
+
+        if form.is_valid(): 
+            obj = form.save(commit=False)
+            obj.owner = request.user
+            obj.updated_at = timezone.datetime.now()
+            obj.save()
+
+            return redirect('myinfo:note_list')
+
+    else:
+        form = NoteCreateForm
+
+    return render(request, 'myinfo/note_create.html', {'form': form })

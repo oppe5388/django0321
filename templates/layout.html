@@ -127,6 +127,12 @@
                         <span>販社・店舗</span></a>
                 </li>
 
+                <li class="nav-item {% if  'note_' in url_name %}active{% endif %}">
+                    <a class="nav-link" href='{% url "myinfo:note_list" %}'>
+                        <i class="fas fa-pencil-alt"></i>
+                        <span>{{ request.user.last_name }}'sノート</span></a>
+                </li>
+
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
                 <!-- Heading -->

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Information, Attachments, InfoComments
+from .models import *
 
 # from django_summernote.widgets import SummernoteWidget
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -132,3 +132,20 @@ class FaqSearchForm(forms.Form):
 #全体検索→HTML記述で未使用に。
 # class AllSearchForm(forms.Form):
 #         all_search_keyword = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder':'Search for...', 'class':'form-control bg-light border-0 small'}))
+
+
+#個人ノート検索
+class NoteSearchForm(forms.Form):
+        keyword = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder':'ノートの検索', 'class':'form-control bg-white border-0 small', 'type':'search'}))
+
+
+#ノート登録
+class NoteCreateForm(LoginRequiredMixin, forms.ModelForm):
+
+    class Meta:
+        model = Note
+        fields = ['title', 'body']
+        widgets = {
+            'body': TinyMCE,   #追加
+            'title': forms.TextInput(attrs={'placeholder': 'タイトルを入力してください', 'class':'form-control'}),
+        }

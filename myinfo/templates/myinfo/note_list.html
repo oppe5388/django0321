@@ -1,0 +1,159 @@
+{% extends 'layout.html' %}
+{% block title %}ノート{% endblock %}
+{% block topbar %}{% endblock %}
+
+{% block extra_head %}{% endblock %}
+
+
+{% block content %}
+
+{% if messages %}
+		{% for message in messages %}
+			<div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+		{% endfor %}
+{% endif %}
+
+    <!-- 検索フォーム -->
+    <div class="d-flex my-3 align-items-center">
+
+        <div class="">
+            <a href="{% url 'myinfo:note_create' %}" class="btn btn-primary rounded-pill">
+            <i class="fas fa-plus"></i> 新規</a>
+        </div>
+
+        {% if notesearchForm %}
+        <div class="ml-auto">
+            <form class="d-sm-inline-block" action='{% url "myinfo:note_list" %}' method='get'>
+                <div class="input-group ">
+                    {{ notesearchForm.keyword }}
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <a href="{% url 'myinfo:note_list' %}" class="d-none d-sm-inline-block btn btn-secondary btn-circle btn-sm ml-2"><i class="fas fa-times"></i></a>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- #関数ビュー -->
+    {% for note in note_set %}
+        
+        <!-- 他人は非表示 -->
+        {% if note.owner.id != request.user.id %}
+        {% else %}
+
+        <!-- Dropdown Card Example -->
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+
+                <!-- タイトル -->
+                <h6 class="m-0 font-weight-bold text-primary mr-auto">
+                    <span>{{ note.title }}</span>
+                </h6>
+
+                <div class="small mr-2">{{ note.updated_at|date:"Y-m-d" }}
+                    　<i class="fas fa-user-edit mr-1"></i>{{ note.owner.last_name }}</div>
+
+                <!-- 右側メニュー -->
+                {% if request.user.id == note.owner.id %}
+                    <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                            aria-labelledby="dropdownMenuLink">
+                            <div class="dropdown-header">action:</div>
+                            {% comment %} <a class="dropdown-item" href="{% url 'myinfo:note_update' note.pk %}"> {% endcomment %}
+                                <i class="fas fa-edit"></i>
+                                編集
+                            </a>
+                            {% comment %} <a class="dropdown-item" href="{% url 'myinfo:note_delete' note.pk %}"> {% endcomment %}
+                            <a class="dropdown-item" data-toggle="modal" data-target="#testModal">
+                                <i class="fas fa-trash-alt"></i>
+                                削除
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- ボタン・リンククリック後に表示される画面の内容 -->
+                    <div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title " id="myModalLabel">削除の確認</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <label>削除してよろしいですか？（元に戻せません）</label>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                        <i class="fas fa-chevron-left"></i> 戻る
+                                    </button>
+                                    <button type="button" class="btn btn-danger ml-auto" margin-left=auto;>
+                                        <i class="fas fa-trash-alt"></i> 削除する
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                {% endif %}
+            </div>
+            
+            <!-- Card Body -->
+            <div class="card-body">
+                <div>{{ note.body | safe }}</div>
+            </div>
+        </div>
+
+        {% endif %}
+
+    {% endfor %}
+
+    <!--  ↑ページネーションのincludeがあたってないので直書き↓  -->
+    <ul class="pagination" style="justify-content:center">
+    <ul class="pagination">
+        <!-- 前へ の部分 -->
+        {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        {% endif %}
+
+        <!-- 数字の部分 -->
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <li class="page-item active"><a class="page-link" href="#!">{{ num }}</a></li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        <!-- 次へ の部分 -->
+        {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+    </ul>
+
+
+    {% comment %} <div class="d-flex my-3">
+        <div class="ml-auto">
+            <a href="{% url 'myinfo:export' %}" class="btn btn-primary">CSVエクスポート</a>
+        </div>
+    </div> {% endcomment %}
+
+{% endblock %}
+
+{% block extra_foot %}{% endblock %}

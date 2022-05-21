@@ -219,15 +219,15 @@ class Faqs(models.Model):
 
 
 # 個人ノート
-# class Note(models.Model):
-#     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='note_owner')
-#     title = models.CharField(max_length=100)
-#     body = tinymce_models.HTMLField(null=True, blank=True)
-#     share = models.ManyToManyField(User, blank=True)
-#     updated_at = models.DateTimeField(auto_now_add=False)#更新するしないでソートをコントロールするため
+class Note(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='note_owner')
+    title = models.CharField(max_length=100)
+    body = tinymce_models.HTMLField(null=True, blank=True)
+    share = models.ManyToManyField(User, blank=True)
+    updated_at = models.DateTimeField(auto_now_add=False)#更新するしないでソートをコントロールするため
 
-#     def __str__(self):
-#         return self.title
+    def __str__(self):
+        return self.title
 
-#     class Meta:
-#         verbose_name_plural = "個人ノート"
+    class Meta:
+        verbose_name_plural = "個人ノート"

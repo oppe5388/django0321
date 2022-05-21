@@ -91,6 +91,7 @@ class ReadStatesResource(ModelResource):
 class ReadStatesAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('user', 'information', 'created_at')
     ordering = ('-created_at',)
+    list_filter = ['user']
 
 admin.site.register(ReadStates, ReadStatesAdmin)
 
@@ -182,3 +183,21 @@ admin.site.register(Shops, ShopsAdmin)
 #     list_display = ('contact', 'attachment')
 
 # admin.site.register(ContactAttachRel, ContactAttachRelAdmin)
+
+
+# 個人ノート
+class NoteResource(ModelResource):
+    class Meta:
+        model = Note
+        skip_unchanged = True
+        import_id_fields = ['id']
+
+#インポート、エクスポート
+class NoteAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ('owner','title','updated_at')
+    ordering = ('-updated_at',)
+    resource_class = NoteResource
+    search_fields = ['title','body']
+    list_filter = ['owner']
+
+admin.site.register(Note, NoteAdmin)
