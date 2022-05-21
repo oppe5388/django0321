@@ -87,6 +87,11 @@
                         <iframe src="{{ each_attachments.file_path.url }}">
                             <p><b>表示されない時の表示</b>: <a href="{{ each_attachments.file_path.url }}">ダウンロード</a>.</p>
                         </iframe>
+                    <!--  動画は再生 -->
+                    {% elif '.mp4' in name or '.mov' in name %}
+                    {% comment %} <div class="embed-responsive embed-responsive-1by1"> {% endcomment %}
+                        <video controls autoplay muted playsinline class="img-fluid" alt="Responsive" src="{{ each_attachments.file_path.url }}"></video>
+                    {% comment %} </div> {% endcomment %}
                     <!--  他はリンク -->
                     {% else %}
                         <a href="{{ each_attachments.file_path.url }}" target="_blank">
