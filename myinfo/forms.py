@@ -146,6 +146,12 @@ class NoteCreateForm(LoginRequiredMixin, forms.ModelForm):
         queryset=User.objects.filter(is_active=True),
         widget=forms.CheckboxSelectMultiple)
 
+    def __init__(self, *args, **kwargs):
+        # first call parent's constructor
+        super(NoteCreateForm, self).__init__(*args, **kwargs)
+        # there's a `fields` property now
+        self.fields['share'].required = False
+
     class Meta:
         model = Note
         fields = ['title', 'body', 'share']
