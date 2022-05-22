@@ -712,6 +712,7 @@ def note_create(request):
             obj.owner = request.user
             obj.updated_at = timezone.datetime.now()
             obj.save()
+            form.save_m2m() #formのメソッド、M2Mフィードで必要
 
             return redirect('myinfo:note_list')
 

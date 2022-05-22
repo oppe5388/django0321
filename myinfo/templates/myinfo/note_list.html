@@ -108,6 +108,13 @@
             <!-- Card Body -->
             <div class="card-body">
                 <div>{{ note.body | safe }}</div>
+
+                {% if note.share.all %}
+                    <code>シェア</code>
+                    {% for share in note.share.all %}
+                        <div class="badge badge-secondary">{{ share.last_name }}</div>
+                    {% endfor %}
+                {% endif %}
             </div>
         </div>
 

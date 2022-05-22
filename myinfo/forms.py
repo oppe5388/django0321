@@ -142,9 +142,14 @@ class NoteSearchForm(forms.Form):
 #ノート登録
 class NoteCreateForm(LoginRequiredMixin, forms.ModelForm):
 
+    share = forms.ModelMultipleChoiceField(
+        queryset=User.objects.filter(is_active=True),
+        widget=forms.CheckboxSelectMultiple)
+
     class Meta:
         model = Note
-        fields = ['title', 'body']
+        # fields = ['title', 'body', 'share']
+        fields = ['title', 'body', 'share']
         widgets = {
             'body': TinyMCE,   #追加
             'title': forms.TextInput(attrs={'placeholder': 'タイトルを入力してください', 'class':'form-control'}),

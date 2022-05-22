@@ -11,7 +11,22 @@
         <div class="mb-3">{{ form.title }}</div>
         <div class="mb-1">{{ form.body }}</div>
         <div class="text-xs text-right mb-1">Enterで改行、Shift+Enterで段落</div>
-        <div class="mb-1">{{ form.share }}</div>
+        <div class="mb-1"></div>
+
+        <div class="accordion" id="accordionExample">
+            <div class="card">
+                <div class="card-header py-1" id="headingOne">
+                    <button class="btn btn-link collapsed py-0" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        シェア
+                    </button>
+                </div>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                        {{ form.share }}
+                    </div>
+                </div>
+            </div>
+        </div>
 
         {% comment %}
         {% for kadai in category.kadai_name.all %}
