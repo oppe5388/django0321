@@ -720,3 +720,46 @@ def note_create(request):
         form = NoteCreateForm
 
     return render(request, 'myinfo/note_create.html', {'form': form })
+
+
+#ノート削除
+def note_delete(request, pk):
+    Note.objects.filter(pk=pk).delete()
+    messages.info(request, '削除しました！')
+    return redirect(request.META['HTTP_REFERER'])#元のページに戻る
+
+
+#Update関数ビューつくる
+def note_update(request, pk, *args, **kwargs):
+
+    note = get_object_or_404(Note, pk=pk)
+
+    #外部キーなので_set.all()でなくrelated_nameで
+    share = note.share.all()
+    
+    if request.method == 'POST':
+        form = NoteCreateForm(request.POST, request.FILES, instance=note)
+
+        if form.is_valid(): 
+            obj = form.save(commit=False)
+            obj.owner = request.user
+            obj.save()
+            form.save_m2m() #formのメソッド、M2Mフィードで必要
+
+            messages.success(request, '更新しました！')
+            return redirect('myinfo:note_list')
+
+        else:
+            messages.error(request, '更新できませんでした。内容を確認してください。')
+            return redirect('myinfo:note_update', pk=pk)
+
+
+    # 一覧表示からの遷移や、確認画面から戻った時
+    form =  NoteCreateForm(instance=note)
+
+    context ={
+        'form': form,
+        'note':note,        
+    }
+
+    return render(request, 'myinfo/note_create.html', context)

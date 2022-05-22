@@ -52,8 +52,8 @@ urlpatterns = [
     #個人ノート
     path('note', views.note_list, name='note_list'),
     path('note_create', views.note_create, name='note_create'),
-    # path('note/<int:pk>/', views.note_detail, name='note_detail'),
-    # path('note/<int:pk>/update/', views.note_update, name='note_update'),
-    # path('mnote/<int:pk>/delete/', views.DeleteView.as_view(), name='note_delete'),
+    # path('note/<int:pk>/', views.note_detail, name='note_detail'),作らない
+    path('note/<int:pk>/update/', views.note_update, name='note_update'),
+    path('note/<int:pk>/delete/', views.note_delete, name='note_delete'),
     
 ]

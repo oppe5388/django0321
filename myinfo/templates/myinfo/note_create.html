@@ -5,7 +5,25 @@
 
 {% block content %}
 
-    <form method="POST" enctype="multipart/form-data" action="{% url 'myinfo:note_create' %}" class="form-group">
+{% if messages %}
+		{% for message in messages %}
+			<div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+		{% endfor %}
+{% endif %}
+
+{% if form.errors %}
+    <div class="alert alert-warning" role="alert">{{ form.errors }}</div>
+{% endif %}
+
+    {% comment %} <form method="POST" enctype="multipart/form-data" action="{% url 'myinfo:note_create' %}" class="form-group"> {% endcomment %}
+    {% comment %} <form method="POST" enctype="multipart/form-data" action="{{ note|yesno:"{% url 'myinfo:note_update' note.id %}, {% url 'myinfo:note_create' %}" }}" class="form-group"> {% endcomment %}
+    {% if note %}
+        更新
+        <form method="POST" enctype="multipart/form-data" action="{% url 'myinfo:note_update' note.id%}" class="form-group">
+    {% else %}
+        作成
+        <form method="POST" enctype="multipart/form-data" action="{% url 'myinfo:note_create' %}" class="form-group">
+    {% endif %}
         {% csrf_token %}
 
         <div class="mb-3">{{ form.title }}</div>
@@ -28,18 +46,6 @@
             </div>
         </div>
 
-        {% comment %}
-        {% for kadai in category.kadai_name.all %}
-            <p>{{ kadai.kadai_name }}</p>
-        {% endfor %}
-        {% endcomment %}
-
-
-        {% if form.errors %}
-			<div class="alert alert-warning" role="alert">{{ form.errors }}</div>
-        {% endif %}
-
-
         <hr>
 
         <div class="btn-toolbar">
@@ -53,7 +59,7 @@
 
             <div class="btn-group ml-auto">
             <button type="submit" class="submit btn btn-primary">
-            <i class="fas fa-check"></i> 作成</button>
+            <i class="fas fa-check"></i> {{ note|yesno:'更新する（元に戻せません）,作成'}}</button>
             </div>
         </div>
 

@@ -68,11 +68,10 @@
                         <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                             aria-labelledby="dropdownMenuLink">
                             <div class="dropdown-header">action:</div>
-                            {% comment %} <a class="dropdown-item" href="{% url 'myinfo:note_update' note.pk %}"> {% endcomment %}
+                            <a class="dropdown-item" href="{% url 'myinfo:note_update' note.id %}">
                                 <i class="fas fa-edit"></i>
                                 編集
                             </a>
-                            {% comment %} <a class="dropdown-item" href="{% url 'myinfo:note_delete' note.pk %}"> {% endcomment %}
                             <a class="dropdown-item" data-toggle="modal" data-target="#testModal">
                                 <i class="fas fa-trash-alt"></i>
                                 削除
@@ -84,19 +83,19 @@
                     <div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <div class="modal-header">
+                                {% comment %} <div class="modal-header">
                                     <h4 class="modal-title " id="myModalLabel">削除の確認</h4>
-                                </div>
+                                </div> {% endcomment %}
                                 <div class="modal-body">
-                                    <label>削除してよろしいですか？（元に戻せません）</label>
+                                    <label>{{ note.title }}<br>を削除しますか？（元に戻せません）</label>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                         <i class="fas fa-chevron-left"></i> 戻る
                                     </button>
-                                    <button type="button" class="btn btn-danger ml-auto" margin-left=auto;>
+                                    <a href="{% url 'myinfo:note_delete' note.id %}" class="btn btn-danger ml-auto" margin-left=auto;>
                                         <i class="fas fa-trash-alt"></i> 削除する
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>

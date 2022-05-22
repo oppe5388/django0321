@@ -148,7 +148,6 @@ class NoteCreateForm(LoginRequiredMixin, forms.ModelForm):
 
     class Meta:
         model = Note
-        # fields = ['title', 'body', 'share']
         fields = ['title', 'body', 'share']
         widgets = {
             'body': TinyMCE,   #追加
