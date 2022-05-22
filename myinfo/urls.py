@@ -55,5 +55,6 @@ urlpatterns = [
     # path('note/<int:pk>/', views.note_detail, name='note_detail'),作らない
     path('note/<int:pk>/update/', views.note_update, name='note_update'),
     path('note/<int:pk>/delete/', views.note_delete, name='note_delete'),
+    path('note/<p>', views.note_tab, name='note_tab'),
     
 ]

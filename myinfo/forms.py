@@ -136,7 +136,7 @@ class FaqSearchForm(forms.Form):
 
 #個人ノート検索
 class NoteSearchForm(forms.Form):
-        keyword = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder':'ノートの検索', 'class':'form-control bg-white border-0 small', 'type':'search'}))
+        keyword = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder':'ノート検索（自分のみ）', 'class':'form-control bg-white border-0 small', 'type':'search'}))
 
 
 #ノート登録

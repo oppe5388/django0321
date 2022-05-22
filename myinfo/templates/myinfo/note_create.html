@@ -15,15 +15,12 @@
     <div class="alert alert-warning" role="alert">{{ form.errors }}</div>
 {% endif %}
 
-    {% comment %} <form method="POST" enctype="multipart/form-data" action="{% url 'myinfo:note_create' %}" class="form-group"> {% endcomment %}
-    {% comment %} <form method="POST" enctype="multipart/form-data" action="{{ note|yesno:"{% url 'myinfo:note_update' note.id %}, {% url 'myinfo:note_create' %}" }}" class="form-group"> {% endcomment %}
     {% if note %}
-        更新
-        <form method="POST" enctype="multipart/form-data" action="{% url 'myinfo:note_update' note.id%}" class="form-group">
+        <form method="POST" enctype="multipart/form-data" action="{% url 'myinfo:note_update' note.id %}" class="form-group">
     {% else %}
-        作成
         <form method="POST" enctype="multipart/form-data" action="{% url 'myinfo:note_create' %}" class="form-group">
     {% endif %}
+
         {% csrf_token %}
 
         <div class="mb-3">{{ form.title }}</div>

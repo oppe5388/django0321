@@ -687,17 +687,38 @@ def note_list(request):
             keyword = keyword.split()
             for k in keyword:
                 queryset = queryset.filter(
-                        Q(title__icontains=k) | 
-                        Q(body__icontains=k)
+                        Q(owner=request.user) & #検索も自分のものだけ
+                        (Q(title__icontains=k) | Q(body__icontains=k))
                     ).order_by('-updated_at')#
 
             context['note_set'] = queryset
+            context['selected_tab'] = '検索結果'
     else:
         notesearchForm = NoteSearchForm()
-        note_set = Note.objects.all().order_by('-updated_at')
+        # note_set = Note.objects.all().order_by('-updated_at')
+        note_set = Note.objects.filter(owner=request.user).order_by('-updated_at')#自分のものだけ
         page_obj = paginate_queryset(request, note_set, 20)#ページネーション用
         context['page_obj'] = page_obj
         context['note_set'] = page_obj.object_list
+        context['selected_tab'] = '自分'
+
+    return render(request, 'myinfo/note_list.html', context)
+
+#ノート、シェア用タブ
+def note_tab(request, p):
+
+    notesearchForm = NoteSearchForm(request.GET)
+
+    context = {
+        'notesearchForm': notesearchForm,
+    }
+
+    # 一度queryset = Faqs.objects.all()と刻む必要はない
+    queryset = Note.objects.filter(
+                Q(share__in=[request.user])
+            ).order_by('-updated_at')
+    context['selected_tab'] = p
+    context['note_set'] = queryset
 
     return render(request, 'myinfo/note_list.html', context)
 
