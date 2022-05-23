@@ -494,6 +494,37 @@ def all_search(request):
 
         context['contacts'] = queryset
 
+
+    #自分のノート検索
+    keyword = request.GET.get('all_search')
+    if keyword:
+        keyword = keyword.split()
+        for k in keyword:
+            queryset = Note.objects.all().filter(
+                    Q(owner=request.user) & #自分のものだけ
+                    (Q(title__icontains=k) | Q(body__icontains=k))
+                ).order_by('-updated_at')#
+
+        context['note_set'] = queryset
+        note_cnt = queryset.count()
+
+    #シェアのノートも検索
+    keyword = request.GET.get('all_search')
+    if keyword:
+        keyword = keyword.split()
+        for k in keyword:
+            queryset = Note.objects.all().filter(
+                    Q(share__in=[request.user]) & #シェアのものだけ
+                    (Q(title__icontains=k) | Q(body__icontains=k))
+                ).order_by('-updated_at')#
+
+        context['note_set_share'] = queryset
+        note_cnt = note_cnt + queryset.count()
+
+    #ノート件数（自分＋シェア）
+    context['note_cnt'] = note_cnt
+
+
     return render(request, 'myinfo/search_result.html', context)
 
 
@@ -681,18 +712,32 @@ def note_list(request):
     }
 
     if notesearchForm.is_valid():
-        queryset = Note.objects.all()
+        #自分の検索
         keyword = notesearchForm.cleaned_data['keyword']
+        keyword2 = notesearchForm.cleaned_data['keyword']
         if keyword:
             keyword = keyword.split()
             for k in keyword:
-                queryset = queryset.filter(
-                        Q(owner=request.user) & #検索も自分のものだけ
+                queryset = Note.objects.all().filter(
+                        Q(owner=request.user) & #自分のものだけ
                         (Q(title__icontains=k) | Q(body__icontains=k))
                     ).order_by('-updated_at')#
 
             context['note_set'] = queryset
             context['selected_tab'] = '検索結果'
+
+        #シェアも検索
+        if keyword2:
+            keyword2 = keyword2.split()
+            for k in keyword2:
+                queryset = Note.objects.all().filter(
+                        Q(share__in=[request.user]) & #シェアのものだけ
+                        (Q(title__icontains=k) | Q(body__icontains=k))
+                    ).order_by('-updated_at')#
+
+            context['note_set_share'] = queryset
+
+
     else:
         notesearchForm = NoteSearchForm()
         # note_set = Note.objects.all().order_by('-updated_at')

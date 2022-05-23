@@ -21,16 +21,27 @@
 
     <div class=" h5 mb-3">
         "{{ keyword }}"の検索結果：
-        <span class="small">窓口&nbsp;{{ contacts|length }}件　おしらせ&nbsp;{{ informations|length }}件　FAQ&nbsp;{{ faqs|length }}件</span>
+        <span class="small">ノート&nbsp;{{ note_cnt }}件　窓口&nbsp;{{ contacts|length }}件　おしらせ&nbsp;{{ informations|length }}件　FAQ&nbsp;{{ faqs|length }}件</span>
     </div>
+ 
+    <!-- ノートの検索結果 -->
+    {% if note_cnt > 0 %}
+    <div class="card text-white bg-primary mb-3">
+        <div class="d-flex align-items-center card-body p-1">
+            <i class="fas fa-pencil-alt"></i>&nbsp;ノート&nbsp;{{ note_cnt }}件
+        </div>
+    </div>
+    {% endif %}
+    {% include './note_include.html' %}
 
     <!--窓口、の結果 -->
-    
+    {% if contacts %} 
         <div class="card text-white bg-primary mb-3">
             <div class="d-flex align-items-center card-body p-1">
                 <i class="fas fa-phone"></i>&nbsp;窓口&nbsp;{{ contacts|length }}件
             </div>
         </div>
+    {% endif %}
     {% if contacts %} 
         <div class="table-responsive">
             <table class="table " width="100%" cellspacing="0">
@@ -122,11 +133,13 @@
     {% endif %}
 
     <!--おしらせ、の結果 -->
+    {% if informations %} 
     <div class="card text-white bg-primary mb-3">
         <div class="d-flex align-items-center card-body p-1">
             <i class="fas fa-broadcast-tower"></i>&nbsp;おしらせ&nbsp;{{ informations|length }}件
           </div>
     </div>
+    {% endif %}
 
     {% for information in informations %} {% comment %} #関数ビュー {% endcomment %}
         
@@ -197,11 +210,13 @@
 
 
     <!-- FAQの検索結果 -->
+    {% if faqs %} 
     <div class="card text-white bg-primary mb-3">
         <div class="d-flex align-items-center card-body p-1">
             <i class="fas fa-question-circle"></i>&nbsp;FAQ&nbsp;{{ faqs|length }}件
         </div>
     </div>
+    {% endif %}
 
     <!-- ネストのテーブル -->
     {% include './faqs_include.html' %}

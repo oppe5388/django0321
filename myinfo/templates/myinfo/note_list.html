@@ -57,88 +57,8 @@
 </ul>
 
 
-    <!-- #関数ビュー -->
-    {% for note in note_set %}
-        
-        <!-- 他人は非表示→前もってviewsでした -->
-        {% comment %} {% if note.owner.id != request.user.id %}
-        {% else %} {% endcomment %}
+{% include './note_include.html' %}
 
-        <!-- Dropdown Card Example -->
-        <div class="card shadow mb-4">
-            <!-- Card Header - Dropdown -->
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-
-                <!-- タイトル -->
-                <h6 class="m-0 font-weight-bold text-primary mr-auto">
-                    <span>{{ note.title }}</span>
-                </h6>
-
-                <div class="small mr-2">{{ note.updated_at|date:"Y-m-d" }}
-                    　<i class="fas fa-user-edit mr-1"></i>{{ note.owner.last_name }}</div>
-
-                <!-- 右側メニュー -->
-                {% if request.user.id == note.owner.id %}
-                    <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                            aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">action:</div>
-                            <a class="dropdown-item" href="{% url 'myinfo:note_update' note.id %}">
-                                <i class="fas fa-edit"></i>
-                                編集
-                            </a>
-                            <a class="dropdown-item" data-toggle="modal" data-target="#testModal">
-                                <i class="fas fa-trash-alt"></i>
-                                削除
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- ボタン・リンククリック後に表示される画面の内容 -->
-                    <div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                {% comment %} <div class="modal-header">
-                                    <h4 class="modal-title " id="myModalLabel">削除の確認</h4>
-                                </div> {% endcomment %}
-                                <div class="modal-body">
-                                    <label>{{ note.title }}<br>を削除しますか？（元に戻せません）</label>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                                        <i class="fas fa-chevron-left"></i> 戻る
-                                    </button>
-                                    <a href="{% url 'myinfo:note_delete' note.id %}" class="btn btn-danger ml-auto" margin-left=auto;>
-                                        <i class="fas fa-trash-alt"></i> 削除する
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                {% endif %}
-            </div>
-            
-            <!-- Card Body -->
-            <div class="card-body">
-                <div>{{ note.body | safe }}</div>
-
-                {% if note.share.all %}
-                    <div class="badge badge-secondary">{{ note.owner.last_name }}</div> <code class="text-xs">shared with</code>
-                    {% for share in note.share.all %}
-                        <div class="badge badge-secondary">{{ share.last_name }}</div>
-                    {% endfor %}
-                {% endif %}
-            </div>
-        </div>
-
-        {% comment %} {% endif %} {% endcomment %}
-
-    {% endfor %}
 
     <!--  ↑ページネーションのincludeがあたってないので直書き↓  -->
     <ul class="pagination" style="justify-content:center">
