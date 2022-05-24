@@ -9,6 +9,10 @@ import os
 from django.core.validators import FileExtensionValidator
 from tinymce import models as tinymce_models
 
+#Web Push通知
+from django.shortcuts import resolve_url
+import requests
+
 
 # class InfoCategory(models.Model):
 #     name = models.CharField(max_length=100, null=True, verbose_name="カテゴリ名")
@@ -47,6 +51,22 @@ class Information(models.Model):
 
     def get_absolute_url(self):
         return reverse('myinfo:detail', kwargs={'pk':self.pk})
+
+
+    def browser_push(self, request):
+        """記事をブラウザ通知"""
+        data = {
+            'app_id': '6027ee57-82ec-485b-a5a5-6c976de75cb1',
+            'included_segments': ['All'],
+            'contents': {'en': self.title},
+            'headings': {'en': 'VccMarshより'},
+            'url': resolve_url('myinfo:detail', pk=self.pk),
+        }
+        requests.post(
+            "https://onesignal.com/api/v1/notifications",
+            headers={'Authorization': 'Basic NDQ4Y2RiZTctNTgxMy00ZTc2LWFiYzctZTRiZGMyMGYwNjJh'},  # 先頭にBasic という文字列がつく
+            json=data,
+        )
 
 class ReadStates(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

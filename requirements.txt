@@ -17,3 +17,4 @@ django-dbbackup
 python-dateutil
 # django-crontab
 # django-ajax-datatable
+requests

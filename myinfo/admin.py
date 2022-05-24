@@ -7,20 +7,15 @@ from import_export.admin import ImportExportModelAdmin
 from import_export.formats import base_formats
 from import_export.widgets import ForeignKeyWidget
 
-# class InformationAdmin(SummernoteModelAdmin):
-#     summernote_fields = '__all__'
+
+def notify(modeladmin, request, queryset):
+    for post in queryset:
+        post.browser_push(request)
+
 
 class AttachmentsInline(admin.StackedInline):
     model = Attachments
     extra = 3
-
-
-# class InformationAdmin(SummernoteModelAdmin, admin.ModelAdmin):
-#     summernote_fields = '__all__'
-#     inlines = [AttachmentsInline]
-
-
-# admin.site.register(InfoCategory)
 
 
 class InformationResource(ModelResource):
@@ -35,7 +30,9 @@ class InformationAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = InformationResource
     # formats = [base_formats.XLSX]
     search_fields = ('title', 'body')
+    actions = [notify]
 
+notify.short_description = '通知を送信する'
 admin.site.register(Information, InformationAdmin)
 
 
