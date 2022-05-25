@@ -17,8 +17,6 @@
         color: #5a5c69;
     }
 
-
-
     <!-- https://b-risk.jp/blog/2021/01/anim-reference/ -->
     .anim-box.fadeup.is-animated {
         animation: fadeup 1s cubic-bezier(0.33, 1, 0.68, 1) 1 forwards;
@@ -45,11 +43,19 @@
 
 {% block title %}スケジュール{% endblock %}
 {% block topbar %}
-{% comment %} <a class="nav-link" href='{% url "mysched:mysched" %}'>
-    <i class="fas fa-calendar-alt"></i> スケジュール</a> {% endcomment %}
 {% endblock %}
 
 {% block content %}
+
+<div class="form-group col-xs-12 col-sm-6">
+    <label for="dateOfBirth" class="control-label"></label>
+    <div class="input-group">
+      <div class="input-group-addon">
+        <span class="jy">元号XX年</span>
+      </div>
+      <input type="month" name="dateOfBirth" id="dateOfBirth" class="form-control" max="" title="入力してください。">
+    </div>
+  </div>
 <div class="card shadow mb-4">
     <div class="card-header align-items-center">
         <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-wallet"></i> 長得の申込できる日 
@@ -61,13 +67,13 @@
 
     <div class="card-body">
 
-        {% comment %} 
+        
         <div class="d-flex flex-row align-items-center mb-2">
             初度登録
             <div>{{ moneyForm.chotoku_date }}</div>
             令和 XX年
             
-            <form class="" action='{% url "mysched:mysched" %}' method='get'>
+            {% comment %} <form class="" action='{% url "mysched:mysched" %}' method='get'>
                 <div>
                     <a class="btn btn-secondary btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#contactModal{{ contact.pk }}">
                         <span class="icon text-white-100">
@@ -82,9 +88,9 @@
                         </span>
                     </a>
                 </div>
-            </form>
+            </form> {% endcomment %}
         </div>
-        {% endcomment %}
+        
 
         
 
@@ -410,6 +416,21 @@
 {% endblock %}
 
 {% block extra_foot %}
+
+<!-- 和暦 -->
+<script>
+    $('#dateOfBirth').change(function() {
+        var $dob = $(this);
+        var d = moment($dob.val()).toDate();
+        var jy = '元号XX年';
+        if (d.toString() !== "Invalid Date") {
+          jy = d.toLocaleDateString('ja-JP-u-ca-japanese', {
+            year: 'numeric'
+          });
+        }
+        $dob.prev().find('span.jy').text(jy);
+      });
+</script>
 
 <!-- 長得ajaxつくる -->
 
