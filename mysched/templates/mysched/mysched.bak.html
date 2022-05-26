@@ -1,0 +1,647 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block extra_head %}
+<!-- カレンダー表示用 #テンプレートに渡しているフォームの変数名を「.」の前に書く-->
+{% comment %} <link rel="stylesheet" type="text/css" href="{% static 'admin/css/base.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/forms.css' %}"/>
+<script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
+{{ moneyForm.media }}
+<script type="text/javascript" src="{% static 'admin/js/core.js' %}"></script>
+<script type="text/javascript" src="{% static 'admin/js/admin/RelatedObjectLookups.js' %}"></script> {% endcomment %}
+
+<!-- jqueryカレンダー -->
+{% comment %} <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> {% endcomment %}
+<style>
+    textarea {
+        color: #5a5c69;
+    }
+
+    <!-- https://b-risk.jp/blog/2021/01/anim-reference/ -->
+    .anim-box.fadeup.is-animated {
+        animation: fadeup 1s cubic-bezier(0.33, 1, 0.68, 1) 1 forwards;
+      }
+       
+      @keyframes fadeup {
+        0% {
+          transform: translateY(30px);
+          opacity: 0;
+        }
+        80% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+</style>
+
+
+
+{% endblock %}
+
+{% block title %}スケジュール{% endblock %}
+{% block topbar %}
+{% endblock %}
+
+{% block content %}
+
+<div class="form-group col-xs-12 col-sm-6">
+    <label for="dateOfBirth" class="control-label"></label>
+    <div class="input-group">
+      <div class="input-group-addon">
+        <span class="jy">元号XX年</span>
+      </div>
+      <input type="month" name="dateOfBirth" id="dateOfBirth" class="form-control" max="" title="入力してください。">
+    </div>
+  </div>
+<div class="card shadow mb-4">
+    <div class="card-header align-items-center">
+        <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-wallet"></i> 長得の申込できる日 
+        <a href="#" class="text-info" data-toggle="popover" data-trigger="hover" data-html="true"
+        title="長得" data-content="●コース：乗用の18車付B・18B・12車付B・12Bのみ<br>※よって、V37・CD・GTR・EV・商用車（軽商用車はOK）は対象外
+        " ><i class="fas fa-info-circle"></i></a>
+        </h6>
+    </div>
+
+    <div class="card-body">
+
+        
+        <div class="d-flex flex-row align-items-center mb-2">
+            初度登録
+            <div>{{ moneyForm.chotoku_date }}</div>
+            令和 XX年
+            
+            {% comment %} <form class="" action='{% url "mysched:mysched" %}' method='get'>
+                <div>
+                    <a class="btn btn-secondary btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#contactModal{{ contact.pk }}">
+                        <span class="icon text-white-100">
+                            <i class="fas fa-chevron-up"></i>
+                        </span>
+                    </a>
+                </div>
+                <div>
+                    <a class="btn btn-secondary btn-icon-split btn-sm mt-1" data-toggle="modal" data-target="#contactModal{{ contact.pk }}">
+                        <span class="icon text-white-100">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </a>
+                </div>
+            </form> {% endcomment %}
+        </div>
+        
+
+        
+
+        <div class="accordion" id="accordionExample">
+            <div class="card">
+                <div class="card-header py-1" id="headingOne">
+                    <button class="btn btn-link collapsed py-0" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        previous...
+                    </button>
+                </div>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="table-responsive table-hover table-sm">
+                            <table class="table table-bordered" width="100%" cellspacing="0">
+                                <thead class="bg-gray-600 text-white">
+                                    <tr>
+                                        <th>初度登録</th>
+                                        <th>申込できる日（54ヶ月後の1日）</th>
+                                    </tr>
+                                </thead>
+                                    
+                                <tbody>
+                                    <tr><td id="chotoku_shodo-14"></td>
+                                        <td id="chotoku_base-14"></td></tr>
+                                    <tr><td id="chotoku_shodo-13"></td>
+                                        <td id="chotoku_base-13"></td></tr>
+                                    <tr><td id="chotoku_shodo-12"></td>
+                                        <td id="chotoku_base-12"></td></tr>
+                                    <tr><td id="chotoku_shodo-11"></td>
+                                        <td id="chotoku_base-11"></td></tr>
+                                    <tr><td id="chotoku_shodo-10"></td>
+                                        <td id="chotoku_base-10"></td></tr>
+                                    <tr><td id="chotoku_shodo-9"></td>
+                                        <td id="chotoku_base-9"></td></tr>
+                                    <tr><td id="chotoku_shodo-8"></td>
+                                        <td id="chotoku_base-8"></td></tr>
+                                    <tr><td id="chotoku_shodo-7"></td>
+                                        <td id="chotoku_base-7"></td></tr>
+                                    <tr><td id="chotoku_shodo-6"></td>
+                                        <td id="chotoku_base-6"></td></tr>
+                                    <tr><td id="chotoku_shodo-5"></td>
+                                        <td id="chotoku_base-5"></td></tr>
+                                    <tr><td id="chotoku_shodo-4"></td>
+                                        <td id="chotoku_base-4"></td></tr>
+                                    <tr><td id="chotoku_shodo-3"></td>
+                                        <td id="chotoku_base-3"></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header py-1" id="headingTwo">
+                    <button class="btn btn-link collapsed py-0" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    recent
+                    </button>
+                </div>
+                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                
+                        <div class="table-responsive table-hover table-sm">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead class="bg-gray-600 text-white">
+                                    <tr>
+                                        <th>初度登録</th>
+                                        <th>申込できる日（54ヶ月後の1日）</th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
+                                    <tr><td id="chotoku_shodo-2"></td>
+                                        <td id="chotoku_base-2"></td></tr>
+                                    <tr><td id="chotoku_shodo-1"></td>
+                                        <td id="chotoku_base-1"></td></tr>
+                                    <tr class="text-primary font-weight-bold">
+                                        <td id="chotoku_shodo0"></td><!-- 今月の54ヶ月前  -->
+                                        <td id="chotoku_base0"></td></tr><!-- 今月の1日 -->
+                                    <tr><td id="chotoku_shodo1"></td>
+                                        <td id="chotoku_base1"></td></tr>
+                                    <tr><td id="chotoku_shodo2"></td>
+                                        <td id="chotoku_base2"></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header py-1" id="headingThree">
+                  <button class="btn btn-link collapsed py-0" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    next...
+                  </button>
+              </div>
+              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                <div class="card-body">
+
+                    <div class="table-responsive table-hover table-sm">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <thead class="bg-gray-600 text-white">
+                                <tr>
+                                    <th>初度登録</th>
+                                    <th>申込できる日（54ヶ月後の1日）</th>
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                                <tr><td id="chotoku_shodo3"></td>
+                                    <td id="chotoku_base3"></td></tr>
+                                <tr><td id="chotoku_shodo4"></td>
+                                    <td id="chotoku_base4"></td></tr>
+                                <tr><td id="chotoku_shodo5"></td>
+                                    <td id="chotoku_base5"></td></tr>
+                                <tr><td id="chotoku_shodo6"></td>
+                                    <td id="chotoku_base6"></td></tr>
+                                <tr><td id="chotoku_shodo7"></td>
+                                    <td id="chotoku_base7"></td></tr>
+                                <tr><td id="chotoku_shodo8"></td>
+                                    <td id="chotoku_base8"></td></tr>
+                                <tr><td id="chotoku_shodo9"></td>
+                                    <td id="chotoku_base9"></td></tr>
+                                <tr><td id="chotoku_shodo10"></td>
+                                    <td id="chotoku_base10"></td></tr>
+                                <tr><td id="chotoku_shodo11"></td>
+                                    <td id="chotoku_base11"></td></tr>
+                                <tr><td id="chotoku_shodo12"></td>
+                                    <td id="chotoku_base12"></td></tr>
+                                <tr><td id="chotoku_shodo13"></td>
+                                    <td id="chotoku_base13"></td></tr>
+                                <tr><td id="chotoku_shodo14"></td>
+                                    <td id="chotoku_base14"></td></tr>                                    
+                                <tr><td id="chotoku_shodo15"></td>
+                                    <td id="chotoku_base15"></td></tr>      
+                                <tr><td id="chotoku_shodo16"></td>
+                                    <td id="chotoku_base16"></td></tr>
+                                <tr><td id="chotoku_shodo17"></td>
+                                    <td id="chotoku_base17"></td></tr>
+                                <tr><td id="chotoku_shodo18"></td>
+                                    <td id="chotoku_base18"></td></tr>
+                                <tr><td id="chotoku_shodo19"></td>
+                                    <td id="chotoku_base19"></td></tr>
+                                <tr><td id="chotoku_shodo20"></td>
+                                    <td id="chotoku_base20"></td></tr>
+                                <tr><td id="chotoku_shodo21"></td>
+                                    <td id="chotoku_base21"></td></tr>
+                                <tr><td id="chotoku_shodo22"></td>
+                                    <td id="chotoku_base22"></td></tr>
+                                <tr><td id="chotoku_shodo23"></td>
+                                    <td id="chotoku_base23"></td></tr>
+                                <tr><td id="chotoku_shodo24"></td>
+                                    <td id="chotoku_base24"></td></tr>
+                                <tr><td id="chotoku_shodo25"></td>
+                                    <td id="chotoku_base25"></td></tr>
+                                <tr><td id="chotoku_shodo26"></td>
+                                    <td id="chotoku_base26"></td></tr>                                   
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3 align-items-center">
+        <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-file-invoice-dollar"></i> 到着〆と送金予定日</h6>
+    </div>
+    <div class="card-body">
+  <!-- タブ部分 -->
+  <ul class="nav nav-tabs mb-2">
+    <li class="nav-item">
+      <a href="#tab1" class="nav-link active" data-toggle="tab">承認日なし</a>
+    </li>
+    <li class="nav-item">
+      <a href="#tab2" class="nav-link" data-toggle="tab">承認日あり</a>
+    </li>
+  </ul>
+
+  <!-- 内容部分 -->
+  <div class="tab-content">
+    <div id="tab1" class="tab-pane active">
+        <div class="d-flex flex-row">
+        <textarea id="copyTarget1" rows="5" style="width:260px" class="border-0 p-0 ml-2" readonly>
+{% for money in moneytrans %}〜{{ money.deadline|date:"m-d(D)" }}着 → {{ money.transfer|date:"m-d(D)" }}送金
+{% endfor %}</textarea>
+            <div class="ml-2 align-self-end">
+                <button onclick="copyToClipboard('copyTarget1')" class="btn btn-outline-primary mr-1">
+                    <i class="fas fa-copy"></i>
+                </button>
+            </div>
+            {% comment %} <p id="copyTarget1mes" class="ml-2 align-self-end"></p> {% endcomment %}
+            <a href="#" id="copyTarget1mes" class="btn btn-success btn-sm ml-2 align-self-end">
+                <span class="icon text-white-50"><i class="fas fa-check"></i></span>
+                <span class="text">Copied</span>
+            </a>
+        </div>
+    </div>
+    <div id="tab2" class="tab-pane">
+        <div class="d-flex flex-row">
+        <textarea id="copyTarget4" rows="5" style="width:380px" class="border-0 p-0 ml-2" readonly>
+{% for money in moneytrans %}〜{{ money.deadline|date:"m-d(D)" }}着 → {{ money.fix|date:"m-d(D)" }}承認 → {{ money.transfer|date:"m-d(D)" }}送金
+{% endfor %}</textarea>
+            <div class="ml-2 align-self-end">
+                <button onclick="copyToClipboard('copyTarget4')" class="btn btn-outline-primary mr-1">
+                    <i class="fas fa-copy"></i>
+                </button>
+            </div>
+            <a href="#" id="copyTarget4mes" class="btn btn-success btn-sm ml-2 align-self-end">
+                <span class="icon text-white-50"><i class="fas fa-check"></i></span>
+                <span class="text">Copied</span>
+            </a>
+        </div>
+    </div>
+  </div>
+    </div>
+</div>
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-file-invoice-dollar"></i> 送金日検索（解約・発行キャンセル・相殺）</h6>
+    </div>
+
+    <div class="card-body">
+        <div><label class="text-primary">登録日を選択
+            <span class="mb-2 ml-2 small text-secondary">検索対象：{{ first_date|date:"Y-m-d(D)" }}〜{{ last_date|date:"Y-m-d(D)" }}</span>
+        </label></div>
+
+        <form class="d-sm-inline-block form-inline mr-auto" action='{% url "mysched:mysched" %}' method='get'>
+            <div class="input-group mb-2 ml-2">
+                {{ moneyForm.input_date }}
+                <!-- Ajax→ボタン押下不要に -->
+                {% comment %} <div class="input-group-append"> {% endcomment %}
+                    <!-- 通常 -->
+                    {% comment %} <button class="btn btn-primary" type="submit"><i class="fas fa-search fa-sm"></i></button> {% endcomment %}
+                    <!-- Ajax-->
+                    {% comment %} <a href="{% url 'mysched:ajax_sched' %}" class="ajax_sched btn btn-primary"><i class="fas fa-search fa-sm"></i></a> {% endcomment %}
+                {% comment %} </div> {% endcomment %}
+            </div>
+        </form>
+        <div id="ajax_noinput"></div>
+    </div>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    
+    <!-- ajaxでない通常：未使用 -->
+    {% comment %}
+    {% if past_sched %}
+        <!-- →display noneだと機能しないので、仕方なくこちらのみ表示に -->
+    <div class="card-body pt-0">
+        <div class="text-primary">解約・発行キャンセル</div>
+        <div class="mb-2 ml-2 small text-secondary">キャンセル後の再申込は、承認日の翌日から可と案内</div>
+            <textarea id="copyTarget2" rows="5" class="col-sm-12 border-0 p-0 ml-2" readonly>
+登録日：{{ input_date|date:"Y-m-d(D)" }}
+↓
+承認日：{{ past_sched.fix|date:"Y-m-d(D)" }}
+↓
+送金日：{{ past_sched.transfer|date:"Y-m-d(D)" }}</textarea>
+            <div class="ml-2">
+                <button onclick="copyToClipboard('copyTarget2')" class="btn btn-outline-primary mr-1 p-1">
+                    <i class="fas fa-copy"></i>
+                    <span class="small"> Copy</span>
+                </button>
+            </div>
+
+            <hr>
+        
+            <div class="text-primary mb-2">相殺</div>
+            <textarea id="copyTarget3" rows="3" cols="28" class="col-sm-12 border-0 p-0 ml-2" readonly>
+登録(承認)日：{{ input_date|date:"Y-m-d(D)" }}
+↓
+送金日：{{ setoff_sched.transfer|date:"Y-m-d(D)" }}</textarea>
+            <div class="ml-2">
+                <button onclick="copyToClipboard('copyTarget3')" class="btn btn-outline-primary mr-1 p-1">
+                    <i class="fas fa-copy"></i>
+                    <span class="small"> Copy</span>
+                </button>
+            </div>
+    </div>
+    {% endif %}
+    {% endcomment %}
+
+<!-- Ajax用 -->
+    <div class="card-body pt-0" id="ajax_disp">
+        <div class="text-primary">解約・発行キャンセル<span class=" ml-2 small text-secondary">キャンセル後の再申込は、承認日の翌日から可と案内</span></div>
+            <div id="ajax_result1" class="d-flex flex-row">
+                <div class="ml-2 align-self-end">
+                    <button onclick="copyToClipboard('ajax_add1')" class="btn btn-outline-primary mr-1">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+                <a href="#" id="ajax_add1mes" class="btn btn-success btn-sm ml-2 align-self-end">
+                    <span class="icon text-white-50"><i class="fas fa-check"></i></span>
+                    <span class="text">Copied</span>
+                </a>
+            </div>
+            <hr>
+        <div class="text-primary">相殺</div>
+            <div id="ajax_result2" class="d-flex flex-row">
+                <div class="ml-2 align-self-end">
+                    <button onclick="copyToClipboard('ajax_add2')" class="btn btn-outline-primary mr-1">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+                <a href="#" id="ajax_add2mes" class="btn btn-success btn-sm ml-2 align-self-end">
+                    <span class="icon text-white-50"><i class="fas fa-check"></i></span>
+                    <span class="text">Copied</span>
+                </a>
+            </div>
+    </div>
+
+
+</div>
+
+{% endblock %}
+
+{% block extra_foot %}
+
+<!-- 和暦 -->
+<script>
+    $('#dateOfBirth').change(function() {
+        var $dob = $(this);
+        var d = moment($dob.val()).toDate();
+        var jy = '元号XX年';
+        if (d.toString() !== "Invalid Date") {
+          jy = d.toLocaleDateString('ja-JP-u-ca-japanese', {
+            year: 'numeric'
+          });
+        }
+        $dob.prev().find('span.jy').text(jy);
+      });
+</script>
+
+<!-- 長得ajaxつくる -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/locale/ja.js"></script>
+
+
+<script>
+$(function () {
+    $('[data-toggle="popover"]').popover()
+    })
+
+</script>
+
+<script>
+//和暦の年だけ返す
+function change_to_wareki(date){
+
+    const options = {
+        year: 'numeric',
+        // month: 'short',
+        // day: 'numeric',
+        // weekday: 'short',
+      }
+    var wareki = date.toLocaleDateString("ja-JP-u-ca-japanese", options);
+    return wareki;
+  }
+</script>
+
+<script>
+    $(function() {
+        // ページ読み込み時
+        //コピーmessage非表示用
+        $(document.getElementById("copyTarget1mes")).hide();
+        $(document.getElementById("copyTarget4mes")).hide();
+        $(document.getElementById("ajax_add1mes")).hide();
+        $(document.getElementById("ajax_add2mes")).hide();
+
+        //↓ここから長得
+        // alert("日本時間 " + moment().format("YYYY年MM月DD日(ddd) HH:mm:ss"));
+        //var base_day = moment().date(1).format("YYYY-MM-DD");// 今月1日
+
+        // -14ヶ月の1日
+        var base_day = moment(new Date()).subtract(14, 'months').date(1).format("YYYY-MM-DD");// 今月1日
+        var base_dt =new Date(moment(base_day));
+        var base_wareki = change_to_wareki(base_dt);
+        var ago54 = moment(base_day).subtract(54, 'months').date(1).format('YYYY年MM月');// 54ヶ月前
+        var ago54dt =new Date(moment(base_day).subtract(54, 'months'));
+        var wareki = change_to_wareki(ago54dt);
+
+        for (let i = -14; i < 27; i++) {
+            $('#chotoku_base'+i).prepend("("+base_wareki+") "+base_day);
+            $('#chotoku_shodo'+i).prepend("("+wareki+") "+ago54);
+            
+            var base_day = moment(base_day).add(1, 'months').date(1).format("YYYY-MM-DD");// 今月1日
+            var base_dt =new Date(moment(base_day));
+            var base_wareki = change_to_wareki(base_dt);
+            var ago54 = moment(base_day).subtract(54, 'months').date(1).format('YYYY年MM月');// 54ヶ月前
+            var ago54dt =new Date(moment(base_day).subtract(54, 'months'));
+            var wareki = change_to_wareki(ago54dt);
+        }
+
+    });
+
+</script>
+
+
+<!-- jqueryカレンダー -->
+{% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+    $(function () {
+        // 日付は、年-月-日 の形式でお願いする。
+        let dateFormat = 'yy-mm-dd';
+        $(".datepicker").datepicker({
+            dateFormat: dateFormat,
+            changeMonth: true,
+            changeYear: true,
+        });
+    });
+</script> {% endcomment %}
+
+<script>
+    // 日付変更イベント→月移動で実行されてしまうので、中止。jqueryカレンダーだと逆に実行されない
+    {% comment %} function inputChange(event){
+        // console.log(event.currentTarget.value);
+        var url = "{% url 'mysched:mysched' %}";
+        document.location.href = url + "?input_date=" + event.currentTarget.value;
+    }
+
+    let text = document.getElementById('input_date');
+    text.addEventListener('input', inputChange); {% endcomment %}
+
+    function copyToClipboard(id) {
+        // コピー対象をJavaScript上で変数として定義する
+        var copyTarget = document.getElementById(id);
+
+        // コピー対象のテキストを選択する
+        copyTarget.select();
+
+        // 選択しているテキストをクリップボードにコピーする
+        document.execCommand("Copy");
+
+        // コピーをお知らせする
+        //alert("コピーしました : \n" + copyTarget.value);
+        
+        var mesTarget = document.getElementById(id+"mes");
+        //$(mesTarget).text('Copied!');
+        $(mesTarget).show();
+
+        //setTimeout(function(){$(mesTarget).text('');}, 2000);
+        setTimeout(function(){$(mesTarget).hide();}, 2000);
+    }
+
+    //↓textareaの行数を自動調整するのを、使えるように出来ていない
+    //textareaの要素を取得
+    let textarea = document.getElementById('copyTarget1');
+    //textareaのデフォルトの要素の高さを取得
+    let clientHeight = textarea.clientHeight;
+
+    //textareaのinputイベント
+    textarea.addEventListener('input', ()=>{
+        //textareaの要素の高さを設定（rows属性で行を指定するなら「px」ではなく「auto」で良いかも！）
+        textarea.style.height = clientHeight + 'px';
+        //textareaの入力内容の高さを取得
+        let scrollHeight = textarea.scrollHeight;
+        //textareaの高さに入力内容の高さを設定
+        textarea.style.height = scrollHeight + 'px';
+    });
+
+</script>
+
+<!-- #tab名でtabへの直リンクを可能にする -->
+<script>
+    $(function() {
+      // Javascript to enable link to tab
+      var hash = document.location.hash;
+      if (hash) {
+        console.log(hash);
+        $('.nav-tabs a[href=\\'+hash+']').tab('show');
+      }
+
+      // Change hash for page-reload
+      $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+        window.location.hash = e.target.hash;
+      });
+
+      // ajax用　はじめは結果非表示
+      $('#ajax_disp').hide();
+
+    });
+</script>
+
+
+<!-- ajax -->
+<script>
+    //ボタンでは動作OK
+    //$(".ajax_sched").on("click", function(e){ // ←ボタンのclassを書く
+    //    e.preventDefault();
+
+    //ボタンを押さずに、日付変更のみで実行したい
+    //↓不可
+    //let date = document.querySelector("input[type='date'][name='input_date']");
+    //date.addEventListener('change', function() {
+    
+    //↓不可
+    //const input = document.querySelector('#input_date');
+    //input.addEventListener('change', function() {
+    
+    //↓不可
+    var $date = $('input[type="date"][name="input_date"]')
+    $date.on('change', function () {
+    
+        var input_date = $('#input_date').val();
+        //var $this = $(this);
+
+        //if(confirm("Sure?")){
+            $.ajax({
+                // url: $this.attr("href"),
+                url: "/mysched/ajax_sched/",
+                type: "GET",
+                dataType: "json",
+                data:{ 
+                    input_date: input_date,
+                    },
+                }).done(function (data) {
+                    console.log(data);
+                    $('#ajax_add1').remove();
+                    $('#ajax_add2').remove();
+                    $('#ajax_add0').remove();
+
+                    if (data.input_date == 'インプットなし') {
+                        $('#ajax_noinput').prepend(
+                            '<div id="ajax_add0" class="alert alert-warning">日付を選択してください</div>' );
+                    } else {
+                        $('#ajax_disp').show();
+                        $('#ajax_result1').prepend(
+                            '<div><textarea id="ajax_add1" rows="3" class="border-0 p-0 ml-2">登録：' + data.input_date + '\r\n→承認：' + data.past_fix +'\r\n→送金：' + data.past_transfer +'</textarea></div>');
+                        $('#ajax_result2').prepend(
+                            '<div><textarea id="ajax_add2" rows="2" class="border-0 p-0 ml-2">登録：' + data.input_date + '\r\n→送金：' + data.setoff_transfer +'</textarea></div>');
+                    }
+                    
+                }).fail(function (data) {
+                    console.log("エラーのほう");
+                    $('#ajax_disp').hide();
+            });
+        //}
+        return false;
+    });
+
+
+</script>
+
+
+{% endblock %}

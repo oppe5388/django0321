@@ -92,10 +92,7 @@ def mysched(request):
 
 
     #長得用
-    today = date.today()
-    able_date = today.replace(day=1)
-    context['able_date'] = able_date
-    context['today'] = today
+    context['four_harf_ago'] = date.today().replace(day=1) - relativedelta(months=54)
 
 
     #登録日をカレンダーで選択→表示用
