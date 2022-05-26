@@ -249,7 +249,7 @@ def information_list(request):
     else:
         searchForm = SearchForm()
         informations = Information.objects.all().order_by('-updated_at')
-        page_obj = paginate_queryset(request, informations, 20)#ページネーション用
+        page_obj = paginate_queryset(request, informations, 10)#ページネーション用
         context['page_obj'] = page_obj
         context['informations'] = page_obj.object_list
 

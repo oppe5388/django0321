@@ -57,61 +57,32 @@
     </div>
 
     <div class="card-body">
-        初度登録<span class="text-danger" id="">{{ four_harf_ago|date:"Y年M" }}</span>以前が、現在お申込いただけます。
+        <p>現在、<span class="text-danger" id="ago54"></span>初度まで申込できます。</p>
 
-       
+        <div>初度登録
+        <select id="year_select">
+            <option>- 年 -</option>
+            <option value="" id="year-2"></option>
+            <option value="" id="year-1"></option>
+            <option value="" id="year0"></option>
+            <option value="" id="year1"></option>
+            <option value="" id="year2"></option>
+            <option value="" id="year3"></option>
 
-        <div class="d-flex flex-row">
-            <div class="d-flex flex-row align-items-center mb-2  col-8">
-                初度登録
-                <div>{{ moneyForm.chotoku_date }}</div>
-                令和 XX年
-            </div>
-
-            <div class="table-responsive table-hover table-sm col-4">
-                <table class="table table-bordered" cellspacing="0">
-                    <thead class="bg-gray-600 text-white">
-                        <tr><th>和暦・西暦</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td id="year"></td></tr>
-                        <tr><td id="year"></td></tr>
-                        <tr><td id="year"></td></tr>
-                        <tr><td id="year"></td></tr>
-                        <tr><td id="year"></td></tr>
-                        <tr><td id="year"></td></tr>
-                    </tbody>
-                </table>
-            </div>
+        </select>
+        
+        <select id="month_select">
+            <option>- 月 -</option>
+            {% with ''|center:12 as range %}
+            {% for _ in range %}
+                <option value="{{ forloop.counter }}">{{ forloop.counter }}月</option>
+            {% endfor %}
+            {% endwith %}
+        </select>
+        <p id="target">→●年()●月1日から申込できます。</p>
 
         </div>
 
-
-        
-            {% comment %} <div class="table-responsive table-hover table-sm">
-                <table class="table table-bordered" width="100%" cellspacing="0">
-                    <thead class="bg-gray-600 text-white">
-                        <tr>
-                            <th>初度登録</th>
-                            <th>申込できる日（54ヶ月後の1日）</th>
-                        </tr>
-                    </thead>
-                    
-                    <tbody>
-                        <tr><td id="chotoku_shodo-2"></td>
-                            <td id="chotoku_base-2"></td></tr>
-                        <tr><td id="chotoku_shodo-1"></td>
-                            <td id="chotoku_base-1"></td></tr>
-                        <tr class="text-primary font-weight-bold">
-                            <td id="chotoku_shodo0"></td><!-- 今月の54ヶ月前  -->
-                            <td id="chotoku_base0"></td></tr><!-- 今月の1日 -->
-                        <tr><td id="chotoku_shodo1"></td>
-                            <td id="chotoku_base1"></td></tr>
-                        <tr><td id="chotoku_shodo2"></td>
-                            <td id="chotoku_base2"></td></tr>
-                    </tbody>
-                </table>
-            </div> {% endcomment %}
 
     </div>
 </div>
@@ -253,7 +224,6 @@
 </script>
 
 <!-- 長得ajaxつくる -->
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/locale/ja.js"></script>
 
@@ -266,7 +236,7 @@ $(function () {
 </script>
 
 <script>
-//和暦の年だけ返す
+//和暦の年だけ返す関数
 function change_to_wareki(date){
 
     const options = {
@@ -281,47 +251,81 @@ function change_to_wareki(date){
 </script>
 
 <script>
-    $(function() {
-        // ページ読み込み時
-        //コピーmessage非表示用
-        $(document.getElementById("copyTarget1mes")).hide();
-        $(document.getElementById("copyTarget4mes")).hide();
-        $(document.getElementById("ajax_add1mes")).hide();
-        $(document.getElementById("ajax_add2mes")).hide();
+// ページ読み込み時
+$(function() {
+    //コピーmessage非表示用
+    $(document.getElementById("copyTarget1mes")).hide();
+    $(document.getElementById("copyTarget4mes")).hide();
+    $(document.getElementById("ajax_add1mes")).hide();
+    $(document.getElementById("ajax_add2mes")).hide();
 
-        //↓ここから長得
-        // alert("日本時間 " + moment().format("YYYY年MM月DD日(ddd) HH:mm:ss"));
-        //var base_day = moment().date(1).format("YYYY-MM-DD");// 今月1日
+    //↓ここから長得
 
-        // -14ヶ月の1日
-        var base_day = moment(new Date()).subtract(14, 'months').date(1).format("YYYY-MM-DD");// 今月1日
-        var base_dt =new Date(moment(base_day));
-        var base_wareki = change_to_wareki(base_dt);
-        var ago54 = moment(base_day).subtract(54, 'months').date(1).format('YYYY年MM月');// 54ヶ月前
-        var ago54dt =new Date(moment(base_day).subtract(54, 'months'));
-        var wareki = change_to_wareki(ago54dt);
+    //今日の54ヶ月前の和暦
+    var ago54 = moment(new Date()).subtract(54, 'months').date(1);//1日
+    var wareki_ago54 = change_to_wareki(new Date(moment(ago54)));
+    $('#ago54').prepend(ago54.format("YYYY")+"年("+wareki_ago54+")"+ago54.format("M")+"月");
 
-        for (let i = -14; i < 27; i++) {
-            $('#chotoku_base'+i).prepend("("+base_wareki+") "+base_day);
-            $('#chotoku_shodo'+i).prepend("("+wareki+") "+ago54);
-            
-            var base_day = moment(base_day).add(1, 'months').date(1).format("YYYY-MM-DD");// 今月1日
-            var base_dt =new Date(moment(base_day));
-            var base_wareki = change_to_wareki(base_dt);
-            var ago54 = moment(base_day).subtract(54, 'months').date(1).format('YYYY年MM月');// 54ヶ月前
-            var ago54dt =new Date(moment(base_day).subtract(54, 'months'));
-            var wareki = change_to_wareki(ago54dt);
+     //西暦・和暦のプルダウン
+    var year1 = moment(new Date()).subtract(2, 'y').month(0).date(1).format("YYYY");// 2年前1月1日
+    var wareki1 = change_to_wareki(new Date(moment(year1)));
+    var year12 = moment(new Date()).subtract(2, 'y').month(11).date(1).format("YYYY");// 今年12月1日
+    var wareki12 = change_to_wareki(new Date(moment(year12)));
+   
+    for (let i = -2; i < 5; i++) {
+        //value代入
+        $('#year'+i).val(year1);
+        //1月と12月の和暦が違ったら併記
+        if (wareki1 == wareki12) {
+            $('#year'+i).prepend(year1+"年("+wareki1+")");
+        } else {
+            $('#year'+i).prepend(year1+"年("+wareki1+"/"+wareki12+")");
+        };
+        
+        var year1 = moment(year1).add(1, 'y').format("YYYY");// 今年1月1日
+        var wareki1 = change_to_wareki(new Date(moment(year1)));
+        var year12 = moment(year12).add(1, 'y').format("YYYY");// 今年12月1日
+        var wareki12 = change_to_wareki(new Date(moment(year12)));
+    }
+});
+</script>
+
+<!-- 長得JSつくる -->
+<script>
+    
+
+    function myfunc() {
+        var shodo_date = '';
+        var text = '';
+
+        var year = document.getElementById('year_select').value;;
+        var month = document.getElementById('month_select').value;;
+        var shodo_date = new Date(year+"/"+month+"/1");
+
+        //日付だったら
+        if (shodo_date.toString() !== "Invalid Date") {
+
+            //+54ヶ月の和暦
+            var later54 = moment(shodo_date).add(54, 'months').date(1);//1日
+            var wareki_later54 = change_to_wareki(new Date(moment(later54)));
+            var kekka = later54.format("YYYY")+"年("+wareki_later54+")"+later54.format("M")+"月"
+            {% comment %} $('#later54').prepend(later54.format("YYYY")+"年("+wareki_later54+")"+later54.format("M")+"月"); {% endcomment %}
+            text = kekka;
         }
+        target.innerHTML = text;
+        
 
-        var this_yesr = moment(new Date()).month(0).date(1).format("YYYY");// 今年1月1日
-        var this_yesr_dt =new Date(moment(this_yesr));
-        var wareki = change_to_wareki(this_yesr_dt);
-        $('#year').prepend(this_yesr+"("+wareki+")");
+    }
+    //変更されたら
+    let year = document.getElementById('year_select');
+    year.onchange = myfunc;
 
+    let month = document.getElementById('month_select');
+    month.onchange = myfunc;
 
-    });
 
 </script>
+
 
 <script>
 
@@ -386,7 +390,7 @@ function change_to_wareki(date){
 </script>
 
 
-<!-- ajax -->
+<!-- 送金スケajax -->
 <script>
     //
     var $date = $('input[type="date"][name="input_date"]')
