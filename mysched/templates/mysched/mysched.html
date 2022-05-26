@@ -57,19 +57,38 @@
     </div>
 
     <div class="card-body">
-        現在、初度登録が、<span id="chotoku_shodo0"></span>　以前は申込できます。
+        初度登録<span class=""> {{ four_harf_ago }}</span>以前は申込できます。
 
-        {{ four_harf_ago }}
+       
 
-        
-        <div class="d-flex flex-row align-items-center mb-2">
-            初度登録
-            <div>{{ moneyForm.chotoku_date }}</div>
-            令和 XX年
-            
+        <div class="d-flex flex-row">
+            <div class="d-flex flex-row align-items-center mb-2  col-8">
+                初度登録
+                <div>{{ moneyForm.chotoku_date }}</div>
+                令和 XX年
+            </div>
+
+            <div class="table-responsive table-hover table-sm col-4">
+                <table class="table table-bordered" cellspacing="0">
+                    <thead class="bg-gray-600 text-white">
+                        <tr><th>和暦・西暦</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td id="year"></td></tr>
+                        <tr><td id="year"></td></tr>
+                        <tr><td id="year"></td></tr>
+                        <tr><td id="year"></td></tr>
+                        <tr><td id="year"></td></tr>
+                        <tr><td id="year"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
         </div>
+
+
         
-            <div class="table-responsive table-hover table-sm">
+            {% comment %} <div class="table-responsive table-hover table-sm">
                 <table class="table table-bordered" width="100%" cellspacing="0">
                     <thead class="bg-gray-600 text-white">
                         <tr>
@@ -92,7 +111,7 @@
                             <td id="chotoku_base2"></td></tr>
                     </tbody>
                 </table>
-            </div>
+            </div> {% endcomment %}
 
     </div>
 </div>
@@ -293,6 +312,12 @@ function change_to_wareki(date){
             var ago54dt =new Date(moment(base_day).subtract(54, 'months'));
             var wareki = change_to_wareki(ago54dt);
         }
+
+        var this_yesr = moment(new Date()).month(0).date(1).format("YYYY");// 今年1月1日
+        var this_yesr_dt =new Date(moment(this_yesr));
+        var wareki = change_to_wareki(this_yesr_dt);
+        $('#year').prepend(this_yesr+"("+wareki+")");
+
 
     });
 
