@@ -59,7 +59,7 @@
 
     <div class="card-body">
         
-        <p>現在、初度<span class="text-primary" id="ago54"></span>までの車両が申込できます。</p>
+        {% comment %} <p>現在、初度<span class="text-primary" id="ago54"></span>までの車両が申込できます。</p> {% endcomment %}
 
         <label class="form-label mb-0">初度登録</label>
         <div class="d-flex flex-row">
@@ -256,49 +256,8 @@ function change_to_wareki(date){
 </script>
 
 <script>
-// ページ読み込み時
-$(function() {
-    //コピーmessage非表示用
-    $(document.getElementById("copyTarget1mes")).hide();
-    $(document.getElementById("copyTarget4mes")).hide();
-    $(document.getElementById("ajax_add1mes")).hide();
-    $(document.getElementById("ajax_add2mes")).hide();
 
-    //↓ここから長得
-
-    //今日の54ヶ月前の和暦
-    var ago54 = moment(new Date()).subtract(54, 'months').date(1);//1日
-    var wareki_ago54 = change_to_wareki(new Date(moment(ago54)));
-    $('#ago54').prepend(ago54.format("YYYY")+"年("+wareki_ago54+")"+ago54.format("M")+"月");
-
-     //西暦・和暦のプルダウン
-    var year1 = moment().subtract(6, 'y').startOf('year').format("YYYY");// 5年前1月1日
-    var wareki1 = change_to_wareki(new Date(moment(year1)));
-    var year12 = moment().subtract(6, 'y').endOf('year').format("YYYY-MM-DD");// 12月31日
-    var wareki12 = change_to_wareki(new Date(moment(year12)));
-   
-    for (let i = -6; i < 2; i++) {
-        //value代入
-        $('#year'+i).val(year1);
-        //1月と12月の和暦が違ったら併記
-
-        if (wareki1 == wareki12) {
-            $('#year'+i).prepend(year1+"年("+wareki1+")");
-        } else {
-            $('#year'+i).prepend(year1+"年("+wareki1+"/"+wareki12+")");
-        };
-        
-        var year1 = moment(year1).add(1, 'y').format("YYYY");// 1月1日
-        var wareki1 = change_to_wareki(new Date(moment(year1)));
-        var year12 = moment(year12).add(1, 'y').format("YYYY-MM-DD");// 12月1日
-        var wareki12 = change_to_wareki(new Date(moment(year12)));
-    }
-});
-</script>
-
-<!-- 長得の年月選択時 -->
-<script>
-
+    //初度プルダウンから申込年月表示の関数
     function myfunc() {
         var shodo_date = '';
         var text = '';
@@ -317,9 +276,61 @@ $(function() {
             text = kekka;
         }
         target.innerHTML = text;
-    
     }
-    //変更されたら
+
+
+    // ページ読み込み時
+    $(function() {
+        //コピーmessage非表示用
+        $(document.getElementById("copyTarget1mes")).hide();
+        $(document.getElementById("copyTarget4mes")).hide();
+        $(document.getElementById("ajax_add1mes")).hide();
+        $(document.getElementById("ajax_add2mes")).hide();
+
+        //↓ここから長得
+
+        //西暦・和暦のプルダウン
+        var year1 = moment().subtract(6, 'y').startOf('year').format("YYYY");// 5年前1月1日
+        var wareki1 = change_to_wareki(new Date(moment(year1)));
+        var year12 = moment().subtract(6, 'y').endOf('year').format("YYYY-MM-DD");// 12月31日
+        var wareki12 = change_to_wareki(new Date(moment(year12)));
+    
+        for (let i = -6; i < 2; i++) {
+            //value代入
+            $('#year'+i).val(year1);
+            //1月と12月の和暦が違ったら併記
+
+            if (wareki1 == wareki12) {
+                $('#year'+i).prepend(year1+"年("+wareki1+")");
+            } else {
+                $('#year'+i).prepend(year1+"年("+wareki1+"/"+wareki12+")");
+            };
+            
+            var year1 = moment(year1).add(1, 'y').format("YYYY");// 1月1日
+            var wareki1 = change_to_wareki(new Date(moment(year1)));
+            var year12 = moment(year12).add(1, 'y').format("YYYY-MM-DD");// 12月1日
+            var wareki12 = change_to_wareki(new Date(moment(year12)));
+        }
+
+        //今日の54ヶ月前の和暦
+        var ago54 = moment(new Date()).subtract(54, 'months').date(1);//1日
+        var wareki_ago54 = change_to_wareki(new Date(moment(ago54)));
+        $('#ago54').prepend(ago54.format("YYYY")+"年("+wareki_ago54+")"+ago54.format("M")+"月");
+
+        var ago54_year = ago54.format("YYYY");
+        var ago54_month = ago54.format("M");
+        {% comment %} alert (ago54_year); {% endcomment %}
+        //初期値を今月申込可能な年月に。
+        $('#year_select').val(ago54_year);
+        $('#month_select').val(ago54_month);
+
+        //関数呼び出し
+        myfunc();
+
+    });
+
+
+    //プルダウン変更されたら
     let year = document.getElementById('year_select');
     year.onchange = myfunc;
 
