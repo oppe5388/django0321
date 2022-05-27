@@ -58,35 +58,36 @@
     </div>
 
     <div class="card-body">
-        <p>現在、初度<span class="text-danger" id="ago54"></span>までの車両が申込できます。</p>
-
-        <div>初度登録
-        <select id="year_select">
-            <option>- 年 -</option>
-            <option value="" id="year-4"></option>
-            <option value="" id="year-3"></option>
-            <option value="" id="year-2"></option>
-            <option value="" id="year-1"></option>
-            <option value="" id="year0"></option>
-            <option value="" id="year1"></option>
-            <option value="" id="year2"></option>
-            <option value="" id="year3"></option>
-            <option value="" id="year4"></option>
-            <option value="" id="year5"></option>
-        </select>
         
-        <select id="month_select">
-            <option>- 月 -</option>
-            {% with ''|center:12 as range %}
-            {% for _ in range %}
-                <option value="{{ forloop.counter }}">{{ forloop.counter }}月</option>
-            {% endfor %}
-            {% endwith %}
-        </select>
-        <p id="target">→●年()●月1日から申込できます。</p>
+        <p>現在、初度<span class="text-primary" id="ago54"></span>までの車両が申込できます。</p>
 
+        <label class="form-label mb-0">初度登録</label>
+        <div class="d-flex flex-row">
+            <div class="">
+                <select id="year_select" class="form-control mb-2">
+                    <option>- 年 -</option>
+                    <option value="" id="year-6"></option>
+                    <option value="" id="year-5"></option>
+                    <option value="" id="year-4"></option>
+                    <option value="" id="year-3"></option>
+                    <option value="" id="year-2"></option>
+                    <option value="" id="year-1"></option>
+                    <option value="" id="year0"></option>
+                </select>
+            </div>
+            <div class="">
+                <select id="month_select" class="form-control">
+                    <option>- 月 -</option>
+                    {% with ''|center:12 as range %}
+                    {% for _ in range %}
+                        <option value="{{ forloop.counter }}">{{ forloop.counter }}月</option>
+                    {% endfor %}
+                    {% endwith %}
+                </select>
+            </div>
         </div>
-
+        
+        <p id="target"></p>
 
     </div>
 </div>
@@ -271,12 +272,12 @@ $(function() {
     $('#ago54').prepend(ago54.format("YYYY")+"年("+wareki_ago54+")"+ago54.format("M")+"月");
 
      //西暦・和暦のプルダウン
-    var year1 = moment().subtract(5, 'y').startOf('year').format("YYYY");// 2年前1月1日
+    var year1 = moment().subtract(6, 'y').startOf('year').format("YYYY");// 5年前1月1日
     var wareki1 = change_to_wareki(new Date(moment(year1)));
-    var year12 = moment().subtract(5, 'y').endOf('year').format("YYYY-MM-DD");// 12月31日
+    var year12 = moment().subtract(6, 'y').endOf('year').format("YYYY-MM-DD");// 12月31日
     var wareki12 = change_to_wareki(new Date(moment(year12)));
    
-    for (let i = -5; i < 5; i++) {
+    for (let i = -6; i < 2; i++) {
         //value代入
         $('#year'+i).val(year1);
         //1月と12月の和暦が違ったら併記
@@ -295,9 +296,8 @@ $(function() {
 });
 </script>
 
-<!-- 長得JSつくる -->
+<!-- 長得の年月選択時 -->
 <script>
-    
 
     function myfunc() {
         var shodo_date = '';
@@ -305,21 +305,19 @@ $(function() {
 
         var year = document.getElementById('year_select').value;;
         var month = document.getElementById('month_select').value;;
-        var shodo_date = new Date(year+"/"+month+"/1");
+        var shodo_date = new Date(year, month, 1);
 
         //日付だったら
         if (shodo_date.toString() !== "Invalid Date") {
 
             //+54ヶ月の和暦
-            var later54 = moment(shodo_date).add(54, 'months').date(1);//1日
+            var later54 = moment(shodo_date).add(53, 'months');
             var wareki_later54 = change_to_wareki(new Date(moment(later54)));
-            var kekka = later54.format("YYYY")+"年("+wareki_later54+")"+later54.format("M")+"月"
-            {% comment %} $('#later54').prepend(later54.format("YYYY")+"年("+wareki_later54+")"+later54.format("M")+"月"); {% endcomment %}
+            var kekka = "→ <span class='text-primary'>" + later54.format("YYYY")+"年("+wareki_later54+")"+later54.format("M")+"月1日</span>から申込できます。"
             text = kekka;
         }
         target.innerHTML = text;
-        
-
+    
     }
     //変更されたら
     let year = document.getElementById('year_select');
@@ -327,7 +325,6 @@ $(function() {
 
     let month = document.getElementById('month_select');
     month.onchange = myfunc;
-
 
 </script>
 
