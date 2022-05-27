@@ -38,7 +38,7 @@
 
 {% block content %}
 
-<div class="form-group col-xs-12 col-sm-6">
+{% comment %} <div class="form-group col-xs-12 col-sm-6">
     <label for="dateOfBirth" class="control-label"></label>
     <div class="input-group">
       <div class="input-group-addon">
@@ -46,7 +46,8 @@
       </div>
       <input type="month" name="dateOfBirth" id="dateOfBirth" class="form-control" max="" title="入力してください。">
     </div>
-  </div>
+</div> {% endcomment %}
+
 <div class="card shadow mb-4">
     <div class="card-header align-items-center">
         <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-wallet"></i> 長得の申込できる日 
@@ -57,18 +58,21 @@
     </div>
 
     <div class="card-body">
-        <p>現在、<span class="text-danger" id="ago54"></span>初度まで申込できます。</p>
+        <p>現在、初度<span class="text-danger" id="ago54"></span>までの車両が申込できます。</p>
 
         <div>初度登録
         <select id="year_select">
             <option>- 年 -</option>
+            <option value="" id="year-4"></option>
+            <option value="" id="year-3"></option>
             <option value="" id="year-2"></option>
             <option value="" id="year-1"></option>
             <option value="" id="year0"></option>
             <option value="" id="year1"></option>
             <option value="" id="year2"></option>
             <option value="" id="year3"></option>
-
+            <option value="" id="year4"></option>
+            <option value="" id="year5"></option>
         </select>
         
         <select id="month_select">
@@ -267,24 +271,25 @@ $(function() {
     $('#ago54').prepend(ago54.format("YYYY")+"年("+wareki_ago54+")"+ago54.format("M")+"月");
 
      //西暦・和暦のプルダウン
-    var year1 = moment(new Date()).subtract(2, 'y').month(0).date(1).format("YYYY");// 2年前1月1日
+    var year1 = moment().subtract(5, 'y').startOf('year').format("YYYY");// 2年前1月1日
     var wareki1 = change_to_wareki(new Date(moment(year1)));
-    var year12 = moment(new Date()).subtract(2, 'y').month(11).date(1).format("YYYY");// 今年12月1日
+    var year12 = moment().subtract(5, 'y').endOf('year').format("YYYY-MM-DD");// 12月31日
     var wareki12 = change_to_wareki(new Date(moment(year12)));
    
-    for (let i = -2; i < 5; i++) {
+    for (let i = -5; i < 5; i++) {
         //value代入
         $('#year'+i).val(year1);
         //1月と12月の和暦が違ったら併記
+
         if (wareki1 == wareki12) {
             $('#year'+i).prepend(year1+"年("+wareki1+")");
         } else {
             $('#year'+i).prepend(year1+"年("+wareki1+"/"+wareki12+")");
         };
         
-        var year1 = moment(year1).add(1, 'y').format("YYYY");// 今年1月1日
+        var year1 = moment(year1).add(1, 'y').format("YYYY");// 1月1日
         var wareki1 = change_to_wareki(new Date(moment(year1)));
-        var year12 = moment(year12).add(1, 'y').format("YYYY");// 今年12月1日
+        var year12 = moment(year12).add(1, 'y').format("YYYY-MM-DD");// 12月1日
         var wareki12 = change_to_wareki(new Date(moment(year12)));
     }
 });
@@ -328,7 +333,7 @@ $(function() {
 
 
 <script>
-
+// コピーボタン
     function copyToClipboard(id) {
         // コピー対象をJavaScript上で変数として定義する
         var copyTarget = document.getElementById(id);
