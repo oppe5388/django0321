@@ -40,7 +40,8 @@ class Information(models.Model):
     # updated_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now_add=False)#更新するしないでソートをコントロールするため
     is_draft = models.BooleanField(default=False, blank=True, help_text='下書き')
-    freeword = models.CharField(max_length=100, null=True, blank=True)
+    for_search = models.CharField(max_length=100, null=True, blank=True)
+    non_html = models.CharField(max_length=2000, null=True, blank=True)
      
     def __str__(self):
         return self.title
@@ -202,7 +203,8 @@ class Contacts(models.Model):
     job = models.TextField(max_length=1000, verbose_name="詳細")
     tel = models.TextField(max_length=100, verbose_name="TEL")
     hours = models.TextField(max_length=100, verbose_name="時間")
-    searchwords = models.CharField(max_length=200, null=True, blank=True, verbose_name="検索ワード")
+    # searchwords = models.CharField(max_length=200, null=True, blank=True, verbose_name="検索ワード")
+    for_search = models.CharField(max_length=200, null=True, blank=True, verbose_name="検索ワード")
     attachments = models.ManyToManyField(Attachments, blank=True)
     # attachments = models.ManyToManyField(Attachments, blank=True, through="ContactAttachRel",)
     dealers = models.ManyToManyField(Dealers, blank=True)
@@ -225,6 +227,7 @@ class Faqs(models.Model):
     contacts = models.ManyToManyField(Contacts, blank=True)
     attachments = models.ManyToManyField(Attachments, blank=True)
     dealers = models.ManyToManyField(Dealers, blank=True)
+    non_html = models.CharField(max_length=2000, null=True, blank=True)
      
     def __str__(self):
         return str(self.question)
@@ -245,6 +248,8 @@ class Note(models.Model):
     body = tinymce_models.HTMLField(null=True, blank=True)
     share = models.ManyToManyField(User, blank=True)
     updated_at = models.DateTimeField(auto_now_add=False)#更新するしないでソートをコントロールするため
+    non_html = models.CharField(max_length=2000, null=True, blank=True)
+    for_search = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return self.title

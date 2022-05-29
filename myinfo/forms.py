@@ -46,12 +46,13 @@ class InformationForm(LoginRequiredMixin, forms.ModelForm):
     class Meta:
         model = Information
         # fields = ['category', 'title', 'body', 'to_flag', 'filefield'] #'__all__'
-        fields = ['category', 'title', 'body']
-        fields = ['title', 'body']
+        # fields = ['category', 'title', 'body']
+        fields = ['title', 'body', 'for_search']
         widgets = {
             # 'body': SummernoteWidget(),
             'body': TinyMCE,   #追加
             'title': forms.TextInput(attrs={'placeholder': 'タイトルを入力してください'}),
+            'for_search': forms.TextInput(attrs={'placeholder': '検索キーワード'}),
             # 'is_draft': forms.CheckboxInput(attrs={'class':''}),
         }
 
@@ -109,11 +110,12 @@ class InformationEditForm(LoginRequiredMixin, forms.ModelForm):
     class Meta:
         model = Information
         # fields = ['category', 'title', 'body', 'to_flag', 'filefield'] #'__all__'
-        fields = ['category', 'title', 'body', 'is_draft']
-        fields = ['title', 'body', 'is_draft']
+        # fields = ['category', 'title', 'body', 'is_draft']
+        fields = ['title', 'body', 'is_draft', 'for_search']
         widgets = {
             # 'body': SummernoteWidget(),
             'body': TinyMCE,   #追加
+            'for_search': forms.TextInput(attrs={'placeholder': '検索キーワード'}),
         }
 
         #↑のフィールドのラッピングやめて、ここにカテゴリ等1つずつ書く
@@ -154,8 +156,9 @@ class NoteCreateForm(LoginRequiredMixin, forms.ModelForm):
 
     class Meta:
         model = Note
-        fields = ['title', 'body', 'share']
+        fields = ['title', 'body', 'share', 'for_search']
         widgets = {
             'body': TinyMCE,   #追加
             'title': forms.TextInput(attrs={'placeholder': 'タイトルを入力してください', 'class':'form-control'}),
+            'for_search': forms.TextInput(attrs={'placeholder': '検索キーワード', 'class':'form-control'}),
         }

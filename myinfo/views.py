@@ -242,7 +242,9 @@ def information_list(request):
             for k in keyword:
                 queryset = queryset.filter(
                         Q(title__icontains=k) | 
-                        Q(body__icontains=k)
+                        # Q(body__icontains=k)
+                        Q(non_html__icontains=k) | 
+                        Q(for_search__icontains=k)
                     ).order_by('-updated_at')#
 
             context['informations'] = queryset
@@ -360,10 +362,11 @@ def faqs_list(request):
             keyword = keyword.split()
             for k in keyword:
                 queryset = queryset.filter(
-                        Q(question__icontains=k) | 
-                        Q(answer1__icontains=k) | 
-                        Q(answer2__icontains=k) | 
-                        Q(reference__icontains=k)
+                        # Q(question__icontains=k) | 
+                        # Q(answer1__icontains=k) | 
+                        # Q(answer2__icontains=k) | 
+                        # Q(reference__icontains=k)
+                        Q(non_html__icontains=k)
                     ).order_by('-updated_at')#
 
             context['faqs'] = queryset
@@ -408,7 +411,7 @@ def faqs_tab(request, p):
 
 
 
-#FAQ Datatablesバージョン
+#FAQ Datatablesバージョン未使用
 class FaqsJsonView(BaseDatatableView):
     # モデルの指定
     model = Faqs
@@ -451,7 +454,9 @@ def all_search(request):
         for k in keyword:
             queryset = queryset.filter(
                     Q(title__icontains=k) | 
-                    Q(body__icontains=k)
+                    # Q(body__icontains=k)
+                    Q(non_html__icontains=k) | 
+                    Q(for_search__icontains=k)
                 ).order_by('-updated_at')#
 
         # context = {
@@ -467,10 +472,11 @@ def all_search(request):
         keyword = keyword.split()
         for k in keyword:
             queryset = queryset.filter(
-                    Q(question__icontains=k) | 
-                    Q(answer1__icontains=k) | 
-                    Q(answer2__icontains=k) | 
-                    Q(reference__icontains=k)
+                    # Q(question__icontains=k) | 
+                    # Q(answer1__icontains=k) | 
+                    # Q(answer2__icontains=k) | 
+                    # Q(reference__icontains=k)
+                    Q(non_html__icontains=k)
                 ).order_by('-updated_at')#
 
         context['faqs'] = queryset
@@ -489,7 +495,8 @@ def all_search(request):
                     Q(title__icontains=k) | 
                     Q(job__icontains=k) | 
                     Q(tel__icontains=k) | 
-                    Q(searchwords__icontains=k)
+                    # Q(searchwords__icontains=k)
+                    Q(for_search__icontains=k)
                 ).order_by('id')#
 
         context['contacts'] = queryset
@@ -502,7 +509,8 @@ def all_search(request):
         for k in keyword:
             queryset = Note.objects.all().filter(
                     Q(owner=request.user) & #自分のものだけ
-                    (Q(title__icontains=k) | Q(body__icontains=k))
+                    # (Q(title__icontains=k) | Q(body__icontains=k))
+                    (Q(title__icontains=k) | Q(non_html__icontains=k) | Q(for_search__icontains=k))
                 ).order_by('-updated_at')#
 
         context['note_set'] = queryset
@@ -515,7 +523,8 @@ def all_search(request):
         for k in keyword:
             queryset = Note.objects.all().filter(
                     Q(share__in=[request.user]) & #シェアのものだけ
-                    (Q(title__icontains=k) | Q(body__icontains=k))
+                    # (Q(title__icontains=k) | Q(body__icontains=k))
+                    (Q(title__icontains=k) | Q(non_html__icontains=k) | Q(for_search__icontains=k))
                 ).order_by('-updated_at')#
 
         context['note_set_share'] = queryset
@@ -533,7 +542,8 @@ class ContactsJsonView(BaseDatatableView):
     # モデルの指定
     model = Contacts
     # 表示するフィールドの指定
-    columns = ['id', 'incoming', 'name', 'tel', 'hours', 'title', 'job', 'searchwords', 'attachments']
+    # columns = ['id', 'incoming', 'name', 'tel', 'hours', 'title', 'job', 'searchwords', 'attachments']
+    columns = ['id', 'incoming', 'name', 'tel', 'hours', 'title', 'job', 'for_search', 'attachments']
 
     # ↓FKey(M2Mの中間テーブル)でやってみる
     def render_column(self, row, column):
@@ -591,7 +601,8 @@ class ContactsJsonView(BaseDatatableView):
                         Q(job__icontains=part) | 
                         Q(tel__icontains=part) | 
                         Q(hours__icontains=part) | 
-                        Q(searchwords__icontains=part)
+                        # Q(searchwords__icontains=part)
+                        Q(for_search__icontains=part)
                     )
         return qs
 
@@ -720,7 +731,8 @@ def note_list(request):
             for k in keyword:
                 queryset = Note.objects.all().filter(
                         Q(owner=request.user) & #自分のものだけ
-                        (Q(title__icontains=k) | Q(body__icontains=k))
+                        # (Q(title__icontains=k) | Q(body__icontains=k))
+                        (Q(title__icontains=k) | Q(non_html__icontains=k) | Q(for_search__icontains=k))
                     ).order_by('-updated_at')#
 
             context['note_set'] = queryset
@@ -732,7 +744,8 @@ def note_list(request):
             for k in keyword2:
                 queryset = Note.objects.all().filter(
                         Q(share__in=[request.user]) & #シェアのものだけ
-                        (Q(title__icontains=k) | Q(body__icontains=k))
+                        # (Q(title__icontains=k) | Q(body__icontains=k))
+                        (Q(title__icontains=k) | Q(non_html__icontains=k) | Q(for_search__icontains=k))
                     ).order_by('-updated_at')#
 
             context['note_set_share'] = queryset
