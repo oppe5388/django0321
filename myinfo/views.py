@@ -29,6 +29,9 @@ from django.http import JsonResponse
 
 import operator
 
+#HTML除去
+from django.utils.html import strip_tags
+
 
 #Ajaxで未読削除
 def ajax_read_delete(request, pk, *args, **kwargs):
@@ -51,6 +54,10 @@ def add_fbvform(request):
             #下書きチェックだったら
             if request.POST.get('draft') is not None: 
                 obj.is_draft = True
+
+            #html除去
+            obj.non_html = strip_tags(request.POST.get('body'))
+
             obj.save()
 
             #添付ファイル：保存＆モデル書き込み
@@ -69,25 +76,15 @@ def add_fbvform(request):
                 instance.save()
 
             # user = get_object_or_404(User, pk=request.POST["notification_user"])#これで出来た
-            # user = User.objects.get(pk=request.POST["notification_user"])
-            # Notifications.objects.create(user=user, information=obj)
 
             #通知：選択したユーザー
             result = request.POST.getlist("tags")
             for user in result:
-                # user_instance = User.objects.get(pk=user)#これ出来ない・
                 user_instance = get_object_or_404(User, pk=user)
                 # Notifications.objects.create(user=user_instance, information=obj)
                 #既読も同じでok？
                 ReadStates.objects.create(user=user_instance, information=obj)
 
-            #↓これ↓が最終
-            # file = request.FILES.get('file')
-            # Attachments.objects.create(file_path=file, information=obj)
-            #↓これ↑が最終
-
-                # for file in files:
-                #     Attachments.objects.create(file_path=file, information=obj)
 
             return redirect('myinfo:index')
 
@@ -169,6 +166,9 @@ def edit_fbvform(request, pk, *args, **kwargs):
                 obj.is_draft = True
             else:
                 obj.is_draft = False
+
+            #html除去
+            obj.non_html = strip_tags(request.POST.get('body'))
 
             obj.save()
 
@@ -790,6 +790,10 @@ def note_create(request):
             obj = form.save(commit=False)
             obj.owner = request.user
             obj.updated_at = timezone.datetime.now()
+
+            #html除去
+            obj.non_html = strip_tags(request.POST.get('body'))
+
             obj.save()
             form.save_m2m() #formのメソッド、M2Mフィードで必要
 
@@ -822,6 +826,10 @@ def note_update(request, pk, *args, **kwargs):
         if form.is_valid(): 
             obj = form.save(commit=False)
             obj.owner = request.user
+
+            #html除去
+            obj.non_html = strip_tags(request.POST.get('body'))
+
             obj.save()
             form.save_m2m() #formのメソッド、M2Mフィードで必要
 
