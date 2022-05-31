@@ -32,6 +32,8 @@ import operator
 #HTML除去
 from django.utils.html import strip_tags
 
+import requests
+
 
 #Ajaxで未読削除
 def ajax_read_delete(request, pk, *args, **kwargs):
@@ -796,6 +798,19 @@ def note_create(request):
 
             obj.save()
             form.save_m2m() #formのメソッド、M2Mフィードで必要
+
+            data = {
+                'app_id': '6027ee57-82ec-485b-a5a5-6c976de75cb1',
+                'included_segments': ['All'],
+                'contents': {'en': 'note create'},
+                'headings': {'en': 'Noteが作成されました'},
+                'url': resolve_url('myinfo:note_list'),
+            }
+            requests.post(
+                "https://onesignal.com/api/v1/notifications",
+                headers={'Authorization': 'Basic NDQ4Y2RiZTctNTgxMy00ZTc2LWFiYzctZTRiZGMyMGYwNjJh'},  # 先頭にBasic という文字列がつく
+                json=data,
+            )   
 
             return redirect('myinfo:note_list')
 
