@@ -14,9 +14,9 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('summernote/', include('django_summernote.urls')),
 
-    # path('myinfo/', include('myinfo.urls')),
-    # path('', RedirectView.as_view(url='/myinfo/')),
-    path('', include('myinfo.urls')),
+    path('myinfo/', include('myinfo.urls')),
+    path('', RedirectView.as_view(url='/myinfo/')),
+    # path('', include('myinfo.urls')),
 
     path('mysched/', include('mysched.urls')),
     # path('mycontact/', include('mycontact.urls')),
