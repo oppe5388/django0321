@@ -88,6 +88,21 @@ def add_fbvform(request):
                 ReadStates.objects.create(user=user_instance, information=obj)
 
 
+             #ブラウザ通知：できたらmodel.pyにクラス書く→できたら、model.pyクラス外に関数化して書く
+            if request.POST.get('draft') is None: 
+                data = {
+                    'app_id': '6027ee57-82ec-485b-a5a5-6c976de75cb1',
+                    'included_segments': ['All'],
+                    'contents': {'en': 'info create'},
+                    'headings': {'en': 'お知らせが作成されました'},
+                    'url': resolve_url('myinfo:index'),
+                }
+                requests.post(
+                    "https://onesignal.com/api/v1/notifications",
+                    headers={'Authorization': 'Basic NDQ4Y2RiZTctNTgxMy00ZTc2LWFiYzctZTRiZGMyMGYwNjJh'},  # 先頭にBasic という文字列がつく
+                    json=data,
+                )   
+
             return redirect('myinfo:index')
 
     else:
@@ -799,18 +814,19 @@ def note_create(request):
             obj.save()
             form.save_m2m() #formのメソッド、M2Mフィードで必要
 
-            data = {
-                'app_id': '6027ee57-82ec-485b-a5a5-6c976de75cb1',
-                'included_segments': ['All'],
-                'contents': {'en': 'note create'},
-                'headings': {'en': 'Noteが作成されました'},
-                'url': resolve_url('myinfo:note_list'),
-            }
-            requests.post(
-                "https://onesignal.com/api/v1/notifications",
-                headers={'Authorization': 'Basic NDQ4Y2RiZTctNTgxMy00ZTc2LWFiYzctZTRiZGMyMGYwNjJh'},  # 先頭にBasic という文字列がつく
-                json=data,
-            )   
+            #ブラウザ通知
+            # data = {
+            #     'app_id': '6027ee57-82ec-485b-a5a5-6c976de75cb1',
+            #     'included_segments': ['All'],
+            #     'contents': {'en': 'note create'},
+            #     'headings': {'en': 'Noteが作成されました'},
+            #     'url': resolve_url('myinfo:note_list'),
+            # }
+            # requests.post(
+            #     "https://onesignal.com/api/v1/notifications",
+            #     headers={'Authorization': 'Basic NDQ4Y2RiZTctNTgxMy00ZTc2LWFiYzctZTRiZGMyMGYwNjJh'},  # 先頭にBasic という文字列がつく
+            #     json=data,
+            # )   
 
             return redirect('myinfo:note_list')
 
