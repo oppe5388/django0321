@@ -46,7 +46,7 @@ services:
       - ./static:/code/static
       - media_volume:/code/media
       - certs:/etc/nginx/certs
-      - html:/usr/share/nginx/html
+      # - html:/usr/share/nginx/html #OneSignalSDKWorker.jsコピーが上書きされないようコメントアウトした
       - vhost:/etc/nginx/vhost.d
       - /var/run/docker.sock:/tmp/docker.sock:ro
     depends_on:
