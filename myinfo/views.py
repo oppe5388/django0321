@@ -34,6 +34,12 @@ from django.utils.html import strip_tags
 
 import requests
 
+#個別ブラウザ通知の関数
+def onegisnal_id_create(request):
+    onesignal_user_id = request.POST['id']
+    OneSignalUser.objects.create(onesignal_user_id=onesignal_user_id)
+    return HttpResponse('ok')
+
 
 #Ajaxで未読削除
 def ajax_read_delete(request, pk, *args, **kwargs):

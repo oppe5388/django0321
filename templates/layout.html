@@ -63,6 +63,70 @@
           }
     </style>
 
+    <!-- 特定ユーザーデスクトップ通知 -->
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    <!-- ajaxのpostなので↓ -->
+    <script>
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+      
+        var csrftoken = getCookie('csrftoken');
+      
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+      
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
+
+
+    window.OneSignal = window.OneSignal || [];
+    OneSignal.push(function() {
+        OneSignal.init({
+        appId: "6027ee57-82ec-485b-a5a5-6c976de75cb1",
+        });
+    });
+      OneSignal.push(function () {
+        OneSignal.on("subscriptionChange", function (isSubscribed) {
+          if (isSubscribed) {
+            OneSignal.getUserId(function (userId) {
+              console.log(userId);
+              $.ajax({
+                url: "/ajaxの向け先",  // ここは書き換えてください 
+                type: "POST",
+                data: {
+                  id: userId,
+                },
+                dataType: "json",
+              }).done((response) => {
+                console.log(response);
+              });
+            });
+          }
+        });
+      });
+
+    </script>
+
 
     <!-- django-ajax-datatable -->   
     {% comment %} <link href="{% static 'ajax_datatable/css/style.css' %}" rel="stylesheet" />

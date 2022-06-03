@@ -57,4 +57,7 @@ urlpatterns = [
     path('note/<int:pk>/delete/', views.note_delete, name='note_delete'),
     path('note/<p>', views.note_tab, name='note_tab'),
     
+    #個別ブラウザ関数
+    path('onegisnal_id_create/', views.onegisnal_id_create, name="onegisnal_id_create"), 
+
 ]

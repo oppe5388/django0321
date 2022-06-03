@@ -13,6 +13,7 @@ from tinymce import models as tinymce_models
 from django.shortcuts import resolve_url
 import requests
 
+from django.utils import timezone
 
 # class InfoCategory(models.Model):
 #     name = models.CharField(max_length=100, null=True, verbose_name="カテゴリ名")
@@ -25,6 +26,45 @@ import requests
 
 #     class Meta:
 #         verbose_name_plural = "カテゴリ"
+
+def browser_push(title, text, url):
+    """ブラウザ通知"""
+    data = {
+        'app_id': '6027ee57-82ec-485b-a5a5-6c976de75cb1',
+        'included_segments': ['All'],
+        'contents': {'en': title},
+        'headings': {'en': text},
+        'url': url,
+    }
+    requests.post(
+        "https://onesignal.com/api/v1/notifications",
+        headers={'Authorization': 'Basic NDQ4Y2RiZTctNTgxMy00ZTc2LWFiYzctZTRiZGMyMGYwNjJh'},  # 先頭にBasic という文字列がつく
+        json=data,
+    )
+
+
+# 特定ユーザーへのブラウザ通知用モデル
+class OneSignalUser(models.Model):
+    onesignal_user_id = models.CharField('OneSignalUserID', max_length=255)
+    created_at = models.DateTimeField('作成日', default=timezone.now)
+
+    def __str__(self):
+        return self.onesignal_user_id
+
+    def push(self, title, text, url):
+        data = {
+            'app_id': '6027ee57-82ec-485b-a5a5-6c976de75cb1',
+            'include_player_ids': [self.onesignal_user_id],  # ここが今までのpushと違う
+            'contents': {'en': title},
+            'headings': {'en': text},
+            'url': url,
+        }
+        res = requests.post(
+            "https://onesignal.com/api/v1/notifications",
+            headers={'Authorization': 'Basic NDQ4Y2RiZTctNTgxMy00ZTc2LWFiYzctZTRiZGMyMGYwNjJh'},
+            json=data,
+        )
+        print(res, res.text)
 
 
 # Informationクラス
@@ -52,22 +92,28 @@ class Information(models.Model):
 
     def get_absolute_url(self):
         return reverse('myinfo:detail', kwargs={'pk':self.pk})
-
-
+    
     def browser_push(self, request):
         """記事をブラウザ通知"""
-        data = {
-            'app_id': '6027ee57-82ec-485b-a5a5-6c976de75cb1',
-            'included_segments': ['All'],
-            'contents': {'en': self.title},
-            'headings': {'en': 'VccMarshより'},
-            'url': resolve_url('myinfo:detail', pk=self.pk),
-        }
-        requests.post(
-            "https://onesignal.com/api/v1/notifications",
-            headers={'Authorization': 'Basic NDQ4Y2RiZTctNTgxMy00ZTc2LWFiYzctZTRiZGMyMGYwNjJh'},  # 先頭にBasic という文字列がつく
-            json=data,
-        )
+        # 上で定義した関数を呼び出すだけ
+        browser_push(self.title, 'おしらせが掲載されました。', resolve_url('myinfo:detail', pk=self.pk))
+
+
+    # def browser_push(self, request):
+    #     """記事をブラウザ通知"""
+    #     data = {
+    #         'app_id': '6027ee57-82ec-485b-a5a5-6c976de75cb1',
+    #         'included_segments': ['All'],
+    #         'contents': {'en': self.title},
+    #         'headings': {'en': 'VccMarshより'},
+    #         'url': resolve_url('myinfo:detail', pk=self.pk),
+    #     }
+    #     requests.post(
+    #         "https://onesignal.com/api/v1/notifications",
+    #         headers={'Authorization': 'Basic NDQ4Y2RiZTctNTgxMy00ZTc2LWFiYzctZTRiZGMyMGYwNjJh'},  # 先頭にBasic という文字列がつく
+    #         json=data,
+    #     )
+        
 
 class ReadStates(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
