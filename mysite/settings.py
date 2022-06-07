@@ -76,7 +76,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'myinfo.context_processors.my_context_processor', # 追加
-                'myreport.context_processors.my_context_processor', # 追加
+                # 'myreport.context_processors.my_context_processor', # 追加
             ],
         },
     },
