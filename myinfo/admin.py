@@ -198,3 +198,9 @@ class NoteAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_filter = ['owner']
 
 admin.site.register(Note, NoteAdmin)
+
+
+class OneSignalUserAdmin(admin.ModelAdmin):
+    list_display = ('onesignal_user_id','created_at')
+
+admin.site.register(OneSignalUser, OneSignalUserAdmin)

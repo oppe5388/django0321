@@ -42,8 +42,27 @@
     <!-- django-tinymce -->
     {{ form.media }}
 
+    <!-- tinyMCE -->
+    <script src="{% static 'uploader.js' %}"></script>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{% static 'SBadmin2_origin/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'SBadmin2_origin/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{% static 'SBadmin2_origin/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+    <!-- Custom scripts for all pages-->
+    {% comment %} <script src="{% static 'SBadmin2_origin/js/sb-admin-2.min.js' %}"></script> {% endcomment %}
+    <script src="{% static 'SBadmin2_origin/js/sb-admin-2.js' %}"></script>
+
+    <script>
+        $('[data-toggle="tooltip"]').tooltip();
+    </script>
+
 
     <!-- デスクトップ通知 -->
+    {% comment %} 
     <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
     <script>
     window.OneSignal = window.OneSignal || [];
@@ -53,6 +72,7 @@
         });
     });
     </script>
+    {% endcomment %}
 
     <style>
         .modal-dialog-fluid {
@@ -105,25 +125,27 @@
         appId: "6027ee57-82ec-485b-a5a5-6c976de75cb1",
         });
     });
-      OneSignal.push(function () {
+
+    OneSignal.push(function () {
         OneSignal.on("subscriptionChange", function (isSubscribed) {
-          if (isSubscribed) {
-            OneSignal.getUserId(function (userId) {
-              console.log(userId);
-              $.ajax({
-                url: "/ajaxの向け先",  // ここは書き換えてください 
-                type: "POST",
-                data: {
-                  id: userId,
-                },
-                dataType: "json",
-              }).done((response) => {
-                console.log(response);
-              });
-            });
-          }
+            if (isSubscribed) {
+                OneSignal.getUserId(function (userId) {
+                    console.log(userId);
+                    $.ajax({
+                    //url: "/ajaxの向け先",  // ここは書き換えてください
+                    url: "{% url 'myinfo:onegisnal_id_create' %}",
+                    type: "POST",
+                    data: {
+                        id: userId,
+                    },
+                    dataType: "json",
+                    }).done((response) => {
+                    console.log(response);
+                    });
+                });
+            }
         });
-      });
+    });
 
     </script>
 
@@ -452,26 +474,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="{% static 'SBadmin2_origin/vendor/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'SBadmin2_origin/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="{% static 'SBadmin2_origin/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
-
-    <!-- Custom scripts for all pages-->
-    {% comment %} <script src="{% static 'SBadmin2_origin/js/sb-admin-2.min.js' %}"></script> {% endcomment %}
-    <script src="{% static 'SBadmin2_origin/js/sb-admin-2.js' %}"></script>
-
-    <script type="text/javascript">
-    
-        $('[data-toggle="tooltip"]').tooltip();
-
-    </script>
-
-    <!-- tinyMCE -->
-    <script src="{% static 'uploader.js' %}"></script>
 
 
     <!-- django-ajax-datatable -->   

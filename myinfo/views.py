@@ -96,18 +96,30 @@ def add_fbvform(request):
 
              #ブラウザ通知：できたらmodel.pyにクラス書く→できたら、model.pyクラス外に関数化して書く
             if request.POST.get('draft') is None: 
-                data = {
-                    'app_id': '6027ee57-82ec-485b-a5a5-6c976de75cb1',
-                    'included_segments': ['All'],
-                    'contents': {'en': 'info create'},
-                    'headings': {'en': 'お知らせが作成されました'},
-                    'url': resolve_url('myinfo:index'),
-                }
-                requests.post(
-                    "https://onesignal.com/api/v1/notifications",
-                    headers={'Authorization': 'Basic NDQ4Y2RiZTctNTgxMy00ZTc2LWFiYzctZTRiZGMyMGYwNjJh'},  # 先頭にBasic という文字列がつく
-                    json=data,
-                )   
+                #ブラウザ通知：直書き
+                # data = {
+                #     'app_id': '6027ee57-82ec-485b-a5a5-6c976de75cb1',
+                #     'included_segments': ['All'],
+                #     'contents': {'en': 'info create'},
+                #     'headings': {'en': 'お知らせが作成されました'},
+                #     'url': resolve_url('myinfo:index'),
+                # }
+                # requests.post(
+                #     "https://onesignal.com/api/v1/notifications",
+                #     headers={'Authorization': 'Basic NDQ4Y2RiZTctNTgxMy00ZTc2LWFiYzctZTRiZGMyMGYwNjJh'},  # 先頭にBasic という文字列がつく
+                #     json=data,
+                # )
+
+                #汎用のブラウザ通知関数呼び出し
+                # title = request.POST.get('title')
+                # browser_push(
+                #     title,
+                #     'お知らせが作成されました',
+                #     resolve_url('myinfo:index')
+                # )
+
+                #モデルインスタンスのブラウザ通知メソッド呼び出し
+                obj.browser_push(request)
 
             return redirect('myinfo:index')
 
@@ -219,6 +231,10 @@ def edit_fbvform(request, pk, *args, **kwargs):
 
 
             request.session['form_data'] = request.POST
+
+            if request.POST.get('draft') is None:
+                #モデルインスタンスのブラウザ通知メソッド呼び出し
+                obj.browser_push(request)
 
             messages.success(request, '更新しました！')
             return redirect('myinfo:detail', pk=pk)
