@@ -86,6 +86,7 @@
     <!-- 特定ユーザーデスクトップ通知 -->
     <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
     <!-- ajaxのpostなので↓ -->
+    {% csrf_token %}
     <script>
         function getCookie(name) {
             var cookieValue = null;
