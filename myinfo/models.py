@@ -46,6 +46,7 @@ def browser_push(title, text, url):
 # 特定ユーザーへのブラウザ通知用モデル
 class OneSignalUser(models.Model):
     onesignal_user_id = models.CharField('OneSignalUserID', max_length=255)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     created_at = models.DateTimeField('作成日', default=timezone.now)
 
     def __str__(self):

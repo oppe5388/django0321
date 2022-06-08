@@ -200,7 +200,15 @@ class NoteAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 admin.site.register(Note, NoteAdmin)
 
 
-class OneSignalUserAdmin(admin.ModelAdmin):
-    list_display = ('onesignal_user_id','created_at')
+#ブラウザ通知
+class OneSignalUserResource(ModelResource):
+    class Meta:
+        model = OneSignalUser
+        skip_unchanged = True
+        import_id_fields = ['id']
+
+class OneSignalUserAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ('user', 'onesignal_user_id','created_at')
+    resource_class = OneSignalUserResource
 
 admin.site.register(OneSignalUser, OneSignalUserAdmin)

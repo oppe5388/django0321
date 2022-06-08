@@ -37,7 +37,10 @@ import requests
 #個別ブラウザ通知の関数
 def onegisnal_id_create(request):
     onesignal_user_id = request.POST['id']
-    OneSignalUser.objects.create(onesignal_user_id=onesignal_user_id)
+    OneSignalUser.objects.create(
+        onesignal_user_id=onesignal_user_id,
+        user=request.user,
+        )
     return HttpResponse('ok')
 
 
