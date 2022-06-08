@@ -89,22 +89,8 @@
             }
             return cookieValue;
         }
-      
-        var csrftoken = getCookie('csrftoken');
-      
-        function csrfSafeMethod(method) {
-            // these HTTP methods do not require CSRF protection
-            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-        }
-      
-        $.ajaxSetup({
-            beforeSend: function (xhr, settings) {
-                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                }
-            }
-        });
 
+        var csrftoken = getCookie('csrftoken');
 
     window.OneSignal = window.OneSignal || [];
     OneSignal.push(function() {
@@ -121,11 +107,15 @@
                     console.log(userId);
                     $.ajax({
                     //url: "/ajaxの向け先",  // ここは書き換えてください
-                    url: "{% url 'myinfo:onegisnal_id_create' %}",
+                    url: "/myinfo/onegisnal_id_create/",
                     type: "POST",
                     data: {
                         id: userId,
                     },
+                beforeSend: function (xhr) {
+                    console.log('header set');
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                },
                     dataType: "json",
                     }).done((response) => {
                     console.log(response);
