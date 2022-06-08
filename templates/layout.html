@@ -118,6 +118,7 @@
         OneSignal.on("subscriptionChange", function (isSubscribed) {
             if (isSubscribed) {
                 OneSignal.getUserId(function (userId) {
+                    console.log(csrftoken);
                     console.log(userId);
                     $.ajax({
                     //url: "/ajaxの向け先",  // ここは書き換えてください
