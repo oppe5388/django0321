@@ -97,8 +97,10 @@ class Information(models.Model):
     def browser_push(self, request):
         """記事をブラウザ通知"""
         # 上で定義した関数を呼び出すだけ
-        browser_push(self.title, 'おしらせが掲載されました。', resolve_url('myinfo:detail', pk=self.pk))
+        browser_push(self.title, '新しいおしらせが掲載されました', resolve_url('myinfo:detail', pk=self.pk))
 
+    def browser_push_update(self, request):
+        browser_push(self.title, 'おしらせが更新されました', resolve_url('myinfo:detail', pk=self.pk))
 
     # def browser_push(self, request):
     #     """記事をブラウザ通知"""

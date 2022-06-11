@@ -198,12 +198,17 @@ def edit_fbvform(request, pk, *args, **kwargs):
             #更新日時も更新するチェックだったら
             if request.POST.get('chk') is not None: 
                 obj.updated_at = timezone.datetime.now()
+                #更新のブラウザ通知
+                obj.browser_push_update(request)
 
             #下書きチェックだったら
             if request.POST.get('draft') is not None: 
                 obj.is_draft = True
             else:
                 obj.is_draft = False
+                #モデルインスタンスのブラウザ通知メソッド呼び出し
+                obj.browser_push(request)
+
 
             #html除去
             obj.non_html = strip_tags(request.POST.get('body'))
@@ -232,13 +237,8 @@ def edit_fbvform(request, pk, *args, **kwargs):
                     #既読も
                     ReadStates.objects.get_or_create(user=user_instance, information=obj)
 
-
             request.session['form_data'] = request.POST
-
-            if request.POST.get('draft') is None:
-                #モデルインスタンスのブラウザ通知メソッド呼び出し
-                obj.browser_push(request)
-
+                
             messages.success(request, '更新しました！')
             return redirect('myinfo:detail', pk=pk)
 
@@ -839,19 +839,12 @@ def note_create(request):
             obj.save()
             form.save_m2m() #formのメソッド、M2Mフィードで必要
 
-            #ブラウザ通知
-            # data = {
-            #     'app_id': '6027ee57-82ec-485b-a5a5-6c976de75cb1',
-            #     'included_segments': ['All'],
-            #     'contents': {'en': 'note create'},
-            #     'headings': {'en': 'Noteが作成されました'},
-            #     'url': resolve_url('myinfo:note_list'),
-            # }
-            # requests.post(
-            #     "https://onesignal.com/api/v1/notifications",
-            #     headers={'Authorization': 'Basic NDQ4Y2RiZTctNTgxMy00ZTc2LWFiYzctZTRiZGMyMGYwNjJh'},  # 先頭にBasic という文字列がつく
-            #     json=data,
-            # )   
+            for share in obj.share.all():
+                onesignals = OneSignalUser.objects.filter(user=share)
+                if onesignals:
+                    for one in onesignals:
+                        OneSignalUser.push(one,title=str(obj.owner)+'さんからノートがシェアされました', 
+                        text=obj.title, url=resolve_url('myinfo:note_tab', p='シェア'))
 
             return redirect('myinfo:note_list')
 
@@ -888,6 +881,13 @@ def note_update(request, pk, *args, **kwargs):
 
             obj.save()
             form.save_m2m() #formのメソッド、M2Mフィードで必要
+
+            for share in obj.share.all():
+                onesignals = OneSignalUser.objects.filter(user=share)
+                if onesignals:
+                    for one in onesignals:
+                        OneSignalUser.push(one,title=str(obj.owner)+'さんシェアのノートが更新されました', 
+                        text=obj.title, url=resolve_url('myinfo:note_tab', p='シェア'))
 
             messages.success(request, '更新しました！')
             return redirect('myinfo:note_list')
