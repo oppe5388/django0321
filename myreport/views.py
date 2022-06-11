@@ -14,6 +14,11 @@ from django.utils import timezone
 
 from django.contrib.auth.decorators import login_required
 
+#LDへへブラウザ通知
+from myinfo.models import OneSignalUser
+from django.shortcuts import resolve_url
+from django.shortcuts import get_list_or_404
+
 #Create
 @login_required
 def add_fbvform(request):
@@ -29,6 +34,13 @@ def add_fbvform(request):
             for num in range(1, 5):
                 user_instance = get_object_or_404(User, pk=num)
                 ReportRead.objects.get_or_create(user=user_instance, report=obj)
+
+                #LDへ通知を作る
+                # onesignals = get_list_or_404(OneSignalUser, user=num)
+                onesignals = OneSignalUser.objects.filter(user=num)
+                if onesignals:
+                    for one in onesignals:
+                        OneSignalUser.push(one,title='日報が作成されました', text=str(obj.day), url=resolve_url('myreport:index'))
 
             return redirect('myreport:index')
 

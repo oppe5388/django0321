@@ -34,7 +34,7 @@ from django.utils.html import strip_tags
 
 import requests
 
-#個別ブラウザ通知の関数
+#個別ブラウザ通知のために、許可時にモデルにonesignalのidを登録
 def onegisnal_id_create(request):
     onesignal_user_id = request.POST['id']
     OneSignalUser.objects.create(
