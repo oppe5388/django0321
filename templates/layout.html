@@ -163,7 +163,11 @@
                 <li class="nav-item {% if url_name == 'index' or url_name == 'add_fbvform' or url_name == 'detail' or url_name == 'update' or url_name == 'delete'%}active{% endif %}">
                     <a class="nav-link" href='{% url "myinfo:index" %}'>
                         <i class="fas fa-broadcast-tower"></i>
-                        <span>おしらせ</span></a>
+                        <span>おしらせ</span>
+                        {% if midoku_info %}
+                            <span class="badge badge-danger">{{midoku_info}}</span>
+                        {% endif %}
+                    </a>
                 </li>
 
                 <li class="nav-item {% if url_name == 'faqs_list' or url_name == 'faqs_tab' %}active{% endif %}">
