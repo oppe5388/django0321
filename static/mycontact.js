@@ -172,8 +172,10 @@ $(document).ready(function () {
                 title: "詳細",
                 // 改行コードをbrへ置換で反映する
                 render: function (data) {
-                    let aaa = '<br>' + data;
-                    let kaigyo = aaa.replace(/\r?\n/g, '<br>');
+                    let kaigyo = '<br>' + data;
+                    kaigyo = kaigyo.replace('strike', '<s>');
+                    kaigyo = kaigyo.replace('stend', '</s>');
+                    kaigyo = kaigyo.replace(/\r?\n/g, '<br>');
                     return kaigyo;
                 },
             },

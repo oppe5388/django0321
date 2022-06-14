@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'tinymce',
     'dbbackup',  # django-dbbackup 追加
     # 'ajax_datatable',
+    'myprofit',
 ]
 
 

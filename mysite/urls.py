@@ -26,6 +26,7 @@ urlpatterns = [
     # path('admin/filebrowser/', site.urls),
     # path('grappelli/', include('grappelli.urls')),
     path('tinymce/', include('tinymce.urls')),
+    path('myprofit/', include('myprofit.urls')),
 ]
 
 
