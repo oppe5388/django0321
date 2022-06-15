@@ -15,122 +15,18 @@
     <title>VCC | {% block title %}{% endblock %}</title>
 
     <!-- Custom fonts for this template-->
-    <!-- <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> -->
     <link href="{% static 'SBadmin2_origin/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
 
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    {% comment %} <link rel="stylesheet" href="{% static 'SBadmin2_origin/css/sb-admin-2.min.css' %}"> {% endcomment %}
     <link rel="stylesheet" href="{% static 'SBadmin2_origin/css/sb-admin-2.css' %}">
 
     <!-- Custom styles for this page -->
     <link href="{% static 'SBadmin2_origin/vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
-
-   <!-- ウィジェットのcssとjs -->
-   <link href="{% static 'accordion.css' %}" rel="stylesheet">
-   <script src="{% static 'accordion.js' %}"></script>
    
    <!-- favicon -->
     <link rel="icon" href="{% static 'icon/favicon.ico' %}">
-
-    <!-- 自作の上書き用css -->
-    {% comment %} <link href="{% static 'style.css' %}" rel="stylesheet"> {% endcomment %}
-
-    <!-- django-tinymce -->
-    {{ form.media }}
-    <!-- tinyMCE -->
-    <script src="{% static 'uploader.js' %}"></script>
-
-    <!-- デスクトップ通知 -->
-    {% comment %} 
-    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-    <script>
-    window.OneSignal = window.OneSignal || [];
-    OneSignal.push(function() {
-        OneSignal.init({
-        appId: "6027ee57-82ec-485b-a5a5-6c976de75cb1",
-        });
-    });
-    </script>
-    {% endcomment %}
-
-    <style>
-        .modal-dialog-fluid {
-            max-width: inherit;
-            margin-left: 10%;
-            margin-right: 10%;
-          }
-    </style>
-
-    <!-- 特定ユーザーデスクトップ通知 -->
-    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-    <!-- ajaxのpostなので↓ -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <!-- ↓↓編集・削除メニュー不可になったのでコメントアウト -->
-    {% comment %} <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> {% endcomment %}
-    {% csrf_token %}
-    <script>
-        function getCookie(name) {
-            var cookieValue = null;
-            if (document.cookie && document.cookie !== '') {
-                var cookies = document.cookie.split(';');
-                for (var i = 0; i < cookies.length; i++) {
-                    var cookie = jQuery.trim(cookies[i]);
-                    // Does this cookie string begin with the name we want?
-                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
-                    }
-                }
-            }
-            return cookieValue;
-        }
-
-        var csrftoken = getCookie('csrftoken');
-
-    window.OneSignal = window.OneSignal || [];
-    OneSignal.push(function() {
-        OneSignal.init({
-        appId: "6027ee57-82ec-485b-a5a5-6c976de75cb1",
-        });
-    });
-
-    OneSignal.push(function () {
-        OneSignal.on("subscriptionChange", function (isSubscribed) {
-            if (isSubscribed) {
-                OneSignal.getUserId(function (userId) {
-                    console.log(csrftoken);
-                    console.log(userId);
-                    $.ajax({
-                    //url: "/ajaxの向け先",  // ここは書き換えてください
-                    url: "/myinfo/onegisnal_id_create/",
-                    type: "POST",
-                    data: {
-                        id: userId,
-                    },
-                beforeSend: function (xhr) {
-                    console.log('header set');
-                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                },
-                    dataType: "json",
-                    }).done((response) => {
-                    console.log(response);
-                    });
-                });
-            }
-        });
-    });
-
-    </script>
-
-    <!-- django-ajax-datatable -->   
-    {% comment %} <link href="{% static 'ajax_datatable/css/style.css' %}" rel="stylesheet" />
-    <link href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" /> {% endcomment %}
-
 
     {% block extra_head %}{% endblock %}
 </head>
@@ -141,20 +37,20 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav sidebar sidebar-dark accordion bg-gray-900" id="accordionSidebar">
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href='{% url "myinfo:index" %}'>
-                <div class="sidebar-brand-text mx-3">VCC MARSH</div>
+                <div class="sidebar-brand-text mx-3">プリンスOiso株式会社</div>
             </a>
 
             <!-- Divider -->
-            {% comment %} <hr class="sidebar-divider my-0"> {% endcomment %}
-            <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
             <!-- Heading -->
-            <div class="sidebar-heading">
-                operation
-            </div>
+            <li class="nav-item {% if url_name == 'index' or url_name == 'add_fbvform' or url_name == 'detail' or url_name == 'update' or url_name == 'delete'%}active{% endif %}">
+                <a href="#" class="btn btn-light container py-1 my-0">
+                    <span class="text">新車CA</span>
+                </a>
+            </li>
 
             <!-- Nav Item - Dashboard -->
             {% with request.resolver_match.url_name as url_name %}
@@ -252,33 +148,6 @@
             {% endwith %}
 
 
-
-
-            {% comment %} <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Interface
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Components</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
-                    </div>
-                </div>
-            </li> {% endcomment %}
-
-
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -304,23 +173,6 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <!-- Topbar Search -->
-                    {% comment %} {% if allsearchForm %} {% endcomment %}
-                    <form
-                    class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-                    action='{% url "myinfo:all_search" %}' method='get'>
-                    <div class="input-group">
-                            {% comment %} {{ allsearchForm.all_search_keyword }} {% endcomment %}
-                            <input type="search" name="all_search" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="submit">
-                                <i class="fas fa-search fa-sm"></i>
-                            </button>
-                        </div>
-                    </div>
-                    </form>
-                    {% comment %} {% endif %} {% endcomment %}
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
