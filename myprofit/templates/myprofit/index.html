@@ -18,6 +18,24 @@
     <link href="{% static 'celestialAdmin/template/css/vertical-layout-light/style.css' %}" rel="stylesheet">
     <!-- endinject -->
     <link rel="shortcut icon" href="{% static 'celestialAdmin/template/images/favicon.png' %}" />
+  
+  <style>
+    .blink {
+      -webkit-animation: blink 1s ease-in-out infinite alternate;
+      animation: blink 1s ease-in-out infinite alternate;
+    }
+    @-webkit-keyframes blink {
+      0% {opacity: 0;}
+      100% {opacity: 1;}
+    }
+    @keyframes blink {
+      0% {opacity: 0;}
+      100% {opacity: 1;}
+    }
+  </style>
+  
+  
+  
   </head>
   
   <body>
@@ -56,11 +74,11 @@
           <li class="nav-item border-bottom">
             <a class="nav-link" href="#">
               <span class="menu-title">受注</span><i class="typcn typcn-chevron-right menu-arrow"></i>
-            </a>    
+            </a>
           </li>
           <li class="nav-item border-bottom">
             <a class="nav-link" href="#">
-              <span class="menu-title">登録・納車・回収</span><i class="typcn typcn-chevron-right menu-arrow"></i>
+              <span class="menu-title blink">登録・納車・回収</span><i class="typcn typcn-chevron-right menu-arrow"></i>
             </a>
           </li>
           <li class="nav-item border-bottom">
