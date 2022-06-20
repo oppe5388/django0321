@@ -7,10 +7,3 @@ def profit_top(request):
         }
 
     return render(request, 'myprofit/top.html', context)
-
-
-def sample(request):
-    context ={
-            'aaa': '',
-        }
-    return render(request, 'myprofit/index.html', context)

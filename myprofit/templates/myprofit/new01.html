@@ -8,6 +8,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>PROFIT mock</title>
+
+  <!-- パンくずリスト -->
+  <!-- Bootstrapを使用するためのリンクタグ設置 -->
+  <!-- link tags to use Bootstrap. -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrapを使用するためのリンクタグ設置 -->
+  <!-- link tags to use Bootstrap. -->
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+
     <!-- base:css -->
     <link href="{% static 'celestialAdmin/template/vendors/typicons.font/font/typicons.css' %}" rel="stylesheet">
     <link href="{% static 'celestialAdmin/template/vendors/css/vendor.bundle.base.css' %}" rel="stylesheet">
@@ -18,7 +28,19 @@
     <link href="{% static 'celestialAdmin/template/css/vertical-layout-light/style.css' %}" rel="stylesheet">
     <!-- endinject -->
     <link rel="shortcut icon" href="{% static 'celestialAdmin/template/images/favicon.png' %}" />
-  
+
+
+    <!-- パンくずリスト続き -->
+    <style>
+      .breadcrumb{
+          {% comment %} background-color: white; {% endcomment %}
+      }
+      .breadcrumb-item + .breadcrumb-item::before {
+          content: ">";
+      }
+    </style>
+
+  <!-- 点滅 -->
   <style>
     .blink {
       -webkit-animation: blink 1s ease-in-out infinite alternate;
@@ -33,15 +55,12 @@
       100% {opacity: 1;}
     }
   </style>
-  
-  
-  
+ 
   </head>
   
   <body>
-    <div class="container-scroller">
-      <!-- トップバー -->
-      <!-- partial:partials/_navbar.html -->
+    <div class="container-scroller">       
+      <!-- partial:partials/_navbar.html ←トップバー-->
 
       <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
@@ -49,10 +68,19 @@
           <button class="p-3 navbar-toggler navbar-toggler align-self-center d-none d-lg-flex" type="button" data-toggle="minimize">
             <span class="typcn typcn-th-menu"></span>
           </button>
+        </div>
 
-          
-        <!-- パンくずリストはここに書こうか -->
 
+          <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+            <ul class="navbar-nav mr-auto">
+              <!-- パンくずリスト -->
+              <div>VCC案内用：</div>
+              <li class="breadcrumb-item nav-item d-flex m-0"><a title="マウスオーバー時の表示" href="{% url 'myprofit:profit_top' %}"><i class="fa fa-home"> Home</i></a></li>
+              <li class="breadcrumb-item active nav-item d-flex m-0">このページ</li>
+            </ul>
+
+
+          </div>
       </nav>
       <!-- partial -->
       <div class="container-fluid page-body-wrapper">
@@ -221,6 +249,10 @@
       <!-- page-body-wrapper ends -->
     </div>
     <!-- container-scroller -->
+
+    <!-- パンくずリスト -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js" integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp" crossorigin="anonymous"></script>
+    
     <!-- base:js -->
     <script src="{% static 'celestialAdmin/template/vendors/js/vendor.bundle.base.js' %}"></script>
     <!-- endinject -->
