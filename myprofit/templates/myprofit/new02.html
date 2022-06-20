@@ -1,4 +1,4 @@
-{% extends 'profit_base.html' %}
+{% extends 'profit/profit_base.html' %}
 {% load static %}
 {% block title %}PROFIT_mock{% endblock %}
 
@@ -9,54 +9,7 @@
 {% endblock %}
 
 {% block sidebar %}
-<ul class="nav">
-  <li class="nav-item bg-white">
-    <div class="sidebar-menu-title">新車C/A</div>
-  </li>
-
-  <li class="nav-item border-bottom">
-    <a class="nav-link" href="#">
-      <span class="menu-title">商談</span><i class="typcn typcn-chevron-right menu-arrow"></i>
-    </a>
-  </li>
-  <li class="nav-item border-bottom">
-    <a class="nav-link" href="#">
-      <span class="menu-title">受注</span><i class="typcn typcn-chevron-right menu-arrow"></i>
-    </a>
-  </li>
-  <li class="nav-item border-bottom">
-    <a class="nav-link" href="#">
-      <span class="menu-title active">登録・納車・回収</span><i class="typcn typcn-chevron-right menu-arrow"></i>
-    </a>
-  </li>
-  <li class="nav-item border-bottom">
-    <a class="nav-link" href="#">
-      <span class="menu-title">保険</span><i class="typcn typcn-chevron-right menu-arrow"></i>
-    </a>
-  </li>
-
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-      <i class="typcn typcn-briefcase menu-icon"></i>
-      <span class="menu-title">UI Elements</span>
-      <i class="typcn typcn-chevron-right menu-arrow"></i>
-    </a>
-    <div class="collapse" id="ui-basic">
-      <ul class="nav flex-column sub-menu">
-        <li class="nav-item"> <a class="nav-link" href="#">Buttons</a></li>
-        <li class="nav-item"> <a class="nav-link" href="#">Dropdowns</a></li>
-        <li class="nav-item"> <a class="nav-link" href="#">Typography</a></li>
-      </ul>
-    </div>
-  </li>
-
-</ul>
-
-<div class="col align-self-end nav-item">
-  <a class="nav-link" href="#">
-    <span class="menu-title">トップメニュー</span></i>
-  </a>
-</div>
+  {% include 'profit/side_new.html' %}
 {% endblock %}
 
 {% block mainpanel %}

@@ -1,63 +1,73 @@
-{% extends 'profit_base.html' %}
+{% extends 'profit/profit_base.html' %}
 {% load static %}
 {% block title %}PROFIT_mock{% endblock %}
 
 {% block breadcrumb %}
 <li class="breadcrumb-item nav-item d-flex m-0"><a title="" href="{% url 'myprofit:profit_top' %}"><i class="fa fa-home"> Home</i></a></li>
-<li class="breadcrumb-item active nav-item d-flex m-0">新車CA</li>
+<li class="breadcrumb-item nav-item d-flex m-0"><a title="" href="{% url 'myprofit:new01' %}">新車CA</i></a></li>
+<li class="breadcrumb-item nav-item d-flex m-0"><a title="" href="{% url 'myprofit:new02' %}">登録・納車・回収</i></a></li>
+<li class="breadcrumb-item active nav-item d-flex m-0">申込/取消画面</li>
 {% endblock %}
 
 {% block sidebar %}
-<ul class="nav">
-  <li class="nav-item bg-white">
-    <div class="sidebar-menu-title">新車C/A</div>
-  </li>
-
-  <li class="nav-item border-bottom">
-    <a class="nav-link" href="#">
-      <span class="menu-title">商談</span><i class="typcn typcn-chevron-right menu-arrow"></i>
-    </a>
-  </li>
-  <li class="nav-item border-bottom">
-    <a class="nav-link" href="#">
-      <span class="menu-title">受注</span><i class="typcn typcn-chevron-right menu-arrow"></i>
-    </a>
-  </li>
-  <li class="nav-item border-bottom">
-    <a class="nav-link blink" href="{% url 'myprofit:new02' %}">
-      <span class="menu-title">登録・納車・回収</span><i class="typcn typcn-chevron-right menu-arrow"></i>
-    </a>
-  </li>
-  <li class="nav-item border-bottom">
-    <a class="nav-link" href="#">
-      <span class="menu-title">保険</span><i class="typcn typcn-chevron-right menu-arrow"></i>
-    </a>
-  </li>
-
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-      <i class="typcn typcn-briefcase menu-icon"></i>
-      <span class="menu-title">UI Elements</span>
-      <i class="typcn typcn-chevron-right menu-arrow"></i>
-    </a>
-    <div class="collapse" id="ui-basic">
-      <ul class="nav flex-column sub-menu">
-        <li class="nav-item"> <a class="nav-link" href="#">Buttons</a></li>
-        <li class="nav-item"> <a class="nav-link" href="#">Dropdowns</a></li>
-        <li class="nav-item"> <a class="nav-link" href="#">Typography</a></li>
-      </ul>
-    </div>
-  </li>
-
-</ul>
-
-<div class="col align-self-end nav-item">
-  <a class="nav-link" href="#">
-    <span class="menu-title">トップメニュー</span></i>
-  </a>
-</div>
-{% endblock %}
+  {% include 'profit/side_new.html' %}
+{% endblock %} 
 
 {% block mainpanel %}
+<div class="row">
+  <div class="col-3">
+    <h4 class="font-weight-bold">新中サ区分：<span class="text-secondary">新車</span></h4>
+  </div>
+
+  <div class="col-9 card bg-light p-1 mb-2">
+    <div class="card-body p-1 m-0">
+      <div class="form-group row">
+        <label class="col-2 col-sm-form-label">伝票番号：</label>
+        <div class="col-4">
+          <input class="sm-form-control">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12 card bg-light p-1 mb-2">
+    <div class="card-title p-1">商品情報</div>
+
+    <div class="card-body p-1 m-0">
+      <div class="form-group">
+        <div class="row">
+          <label class="col-4 col-sm-form-label">メンテナンス商品会員番号：</label>
+          <div class="col-4">
+            <select class="sm-form-control">
+              <option>（新規申込／契約）</option>
+              <option>。。。</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <label class="col-4 col-sm-form-label">担当者：</label>
+          <div class="col-4">
+            <input class="sm-form-control">
+          </div>
+          <div class="col-4">
+            <input class="sm-form-control">
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+
+
+
+    
+  </div>
+</div>
+
 
 {% endblock %}
