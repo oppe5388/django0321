@@ -6,7 +6,58 @@
 {% endblock %}
 
 {% block sidebar %}
+<ul class="nav">
+    <li class="nav-item bg-white">
+      <div class="sidebar-menu-title">for VCC</div>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+        <i class="typcn typcn-briefcase menu-icon"></i>
+        <span class="menu-title">申込</span>
+        <i class="typcn typcn-chevron-right menu-arrow"></i>
+      </a>
+      <div class="collapse" id="ui-basic">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="{% url 'myprofit:new01' %}">新車</a></li>
+          <li class="nav-item"> <a class="nav-link" href="#">中古車（未作成）</a></li>
+          <li class="nav-item"> <a class="nav-link" href="#">サービス（未作成）</a></li>
+        </ul>
+      </div>
+    </li>
+
+  </ul>
+
 {% endblock %}
 
 {% block mainpanel %}
+<div>印刷したいもの<br>
+    <input type="radio" name="q1" value="はい"> 申込書？<br>
+    <input type="radio" name="q1" value="いいえ"> 会員証？<br>
+    <input type="radio" name="q1" value="いいえ"> 申込書と会員証？<br>
+</div>
+<hr>
+<div>ステータスは？<br>
+    <input type="radio" name="q1" value="はい">なし（申込前）<br>
+    <input type="radio" name="q1" value="はい">申込書未発行（＝申込はした）<br>
+    <input type="radio" name="q1" value="いいえ">車両情報未登録（＝NFS-Webの申込書印刷ボタンは押された（登録番号や車検満了日が入っていない状態で））<br>
+    <input type="radio" name="q1" value="いいえ">会員証未発行（＝NFS-Webの申込書印刷ボタンは押された（登録番号や車検満了日が入っている状態で））<br>
+    <input type="radio" name="q1" value="いいえ">本登録（＝NFS-Webの会員証印刷ボタンは押された）<br>
+</div>
+<p>聞き方例</p>
+<p>ああああ</p>
+<hr>
+<p>申込は？<br>
+    <input type="radio" name="q1" value="はい">新車<br>
+    <input type="radio" name="q1" value="はい">中古車<br>
+    <input type="radio" name="q1" value="はい">サービス<br>
+</p>
+<hr>
+<p>（実は内容変更したい？）<br>
+    <input type="radio" name="q1" value="はい">はい<br>
+    <input type="radio" name="q1" value="はい">いいえ<br>
+</p>
+
+<p>エラーメッセージ検索：</p>
+
 {% endblock %}
