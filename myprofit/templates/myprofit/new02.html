@@ -4,7 +4,7 @@
 
 {% block breadcrumb %}
 <li class="breadcrumb-item nav-item d-flex m-0"><a title="" href="{% url 'myprofit:profit_top' %}"><i class="fa fa-home"> Home</i></a></li>
-<li class="breadcrumb-item nav-item d-flex m-0"><a title="" href="{% url 'myprofit:new01' %}">新車CA</i></a></li>
+<li class="breadcrumb-item nav-item d-flex m-0"><a title="" href="{% url 'myprofit:new01' %}">新車CA</a></li>
 <li class="breadcrumb-item active nav-item d-flex m-0">登録・納車・回収</li>
 {% endblock %}
 
@@ -54,7 +54,7 @@
         </ul>
         <div class="font-weight-bold">【納車】</div>
         <ul class="list-unstyled ml-3">
-          <li class="blink">メンテプロ申込書印刷 <i class="typcn typcn-chevron-right menu-arrow"></i></li>
+          <li class="blink"><a href="{% url 'myprofit:new03' %}">メンテプロ申込書印刷<i class="typcn typcn-chevron-right menu-arrow"></i></a></li>
           <li>メンテプロ会員証印刷 <i class="typcn typcn-chevron-right menu-arrow"></i></li>
           <li>NFSメンテトップメニュー <i class="typcn typcn-chevron-right menu-arrow"></i></li>
           

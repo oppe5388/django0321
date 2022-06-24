@@ -16,4 +16,8 @@ def new02(request):
 def new03(request):
     context ={'aaa': ''}
     return render(request, 'myprofit/new03.html', context)
+
+def new04(request):
+    context ={'aaa': ''}
+    return render(request, 'myprofit/new04.html', context)
     
