@@ -3,8 +3,13 @@
 {% block title %}PROFIT_mock{% endblock %}
 
 {% block breadcrumb %}
-<li class="breadcrumb-item nav-item d-flex m-0"><a title="" href="{% url 'myprofit:profit_top' %}"><i class="fa fa-home"> Home</i></a></li>
-<li class="breadcrumb-item active nav-item d-flex m-0">新車CA</li>
+<div class=" nav-item d-flex m-0 h6">
+  <li class="breadcrumb-item"><a href="{% url 'myprofit:profit_top' %}"><i class="fa fa-home"> Home</i></a></li>
+  <li class="breadcrumb-item active">新車CA</li>
+  <li class="breadcrumb-item"><a href="{% url 'myprofit:new02' %}">登録・納車・回収</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'myprofit:new03' %}">申込/取消画面</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'myprofit:new04' %}">NFS-Webログイン画面</a></li>
+</div>
 {% endblock %}
 
 {% block sidebar %}

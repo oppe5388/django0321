@@ -59,7 +59,7 @@
     <div class="container-scroller">       
       <!-- partial:partials/_navbar.html ←トップバー-->
 
-      <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <nav class="navbar col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
           <a class="brand-logo font-weight-bold nav-link p-0 text-black" href="{% url 'myprofit:profit_top' %}">日産プリンスMarsh株式会社</a>
           <button class="p-3 navbar-toggler navbar-toggler align-self-center d-none d-lg-flex" type="button" data-toggle="minimize">
@@ -70,9 +70,21 @@
         <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
           <ul class="navbar-nav mr-auto">
             <!-- パンくずリスト -->
-            <div>VCC案内用：</div>
             {% block breadcrumb %}{% endblock %}
           </ul>
+
+          <ul class="navbar-nav ml-auto">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="VCC用エラー検索...">
+              <div class="input-group-append">
+                <span class="input-group-text" id="search">
+                  <i class="typcn typcn-zoom"></i>
+                </span>
+              </div>
+            </div>
+            
+          </ul>
+
         </div>
       </nav>
       <!-- partial -->
