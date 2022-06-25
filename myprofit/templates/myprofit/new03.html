@@ -27,18 +27,20 @@
 
   <div class="col-9 card bg-light p-1 mb-2">
     <div class="card-body p-1 m-0">
-      <div class="d-flex flex-row align-items-center" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-      title="sample" data-content="
-      ・申込前：N1234A000<br>
-      ・申込書未発行：N1234A111<br>
-      ・車両情報未登録：N1234A222<br>
-      ・会員証未発行：N1234A333<br>
-      ・本登録：N1234A444
-      ">
-        
+      <div class="d-flex flex-row align-items-center">
+      
         <label class="col-2 pl-0" >注文書番号：</label>
         <input class="col-3" id="search_input">
-        <button type="button" class="ml-auto btn btn-outline-dark blink" id="search">検索</button>
+        <button type="button" class="btn btn-info btn-rounded p-1 ml-1" data-container="body" data-toggle="popover" data-html="true" data-placement="bottom" 
+        title="sample" data-content="
+          ・申込前：N1234A000<br>
+          ・申込書未発行：N1234A111<br>
+          ・車両情報未登録：N1234A222<br>
+          ・会員証未発行：N1234A333<br>
+          ・本登録：N1234A444
+          ">vcc
+        </button>
+        <button type="button" class="ml-auto btn btn-outline-dark blink" id="test">検索</button>
       </div>
     </div>
   </div>
@@ -194,11 +196,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/locale/ja.js"></script>
 <script>
-  $("#search").click(function () {
+  $("#test").click(function () {
 
     var search_input = $('#search_input').val();
 
-    if (search_input == "N1234A000" || search_input == "N1234A111"|| search_input == "N1234A222"|| search_input == "N1234A333"|| search_input == "N1234A444") {
+    if (search_input == "N1234A000" || search_input == "N1234A111" || search_input == "N1234A222" || search_input == "N1234A333"|| search_input == "N1234A444") {
+
       $('#customer_no').val(1);
       $("#tantou_cord").val("001234"); // 値を設定
       $("#tantou_name").val("大磯　太郎");
@@ -242,11 +245,8 @@
       $("#plate_no").val("");
       $("#frame_no").val("");
       $("#register_date").val("");
-
     }
   });
-
-
 </script>
 
 <script>
