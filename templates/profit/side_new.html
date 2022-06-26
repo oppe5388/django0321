@@ -14,7 +14,7 @@
     </a>
   </li>
   <li class="nav-item border-bottom">
-    <a class="nav-link" href="#">
+    <a class="nav-link" href="{% url 'myprofit:new02' %}" id="touroku">
       <span class="menu-title">登録・納車・回収</span><i class="typcn typcn-chevron-right menu-arrow"></i>
     </a>
   </li>
@@ -24,7 +24,7 @@
     </a>
   </li>
 
-  <li class="nav-item">
+  {% comment %} <li class="nav-item">
     <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
       <i class="typcn typcn-briefcase menu-icon"></i>
       <span class="menu-title">UI Elements</span>
@@ -37,12 +37,13 @@
         <li class="nav-item"> <a class="nav-link" href="#">Typography</a></li>
       </ul>
     </div>
+  </li> {% endcomment %}
+
+  <li class="nav-item col-3 fixed-bottom mb-2">
+    <a class="nav-link" href="#">
+      <span class="menu-title">トップメニュー</span>
+    </a>
   </li>
 
 </ul>
 
-<div class="col align-self-end nav-item">
-  <a class="nav-link" href="#">
-    <span class="menu-title">トップメニュー</span></i>
-  </a>
-</div>
