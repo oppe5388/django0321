@@ -1,0 +1,284 @@
+{% extends 'profit/profit_base.html' %}
+{% load static %}
+{% block title %}PROFIT_mock{% endblock %}
+
+{% block breadcrumb %}
+<div class=" nav-item d-flex m-0 h6">
+  {% comment %} <li class="breadcrumb-item"><a href="{% url 'myprofit:profit_top' %}"><i class="fa fa-home"> Home</i></a></li>
+  <li class="breadcrumb-item"><a href="{% url 'myprofit:new01' %}">新車CA</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'myprofit:new02' %}">登録・納車・回収</a></li>
+  <li class="breadcrumb-item">申込/取消画面</li>
+  <li class="breadcrumb-item"><a href="{% url 'myprofit:new04' %}">NFS-Webログイン画面</a></li> {% endcomment %}
+</div>
+{% endblock %}
+
+{% block sidebar %}
+  {% include 'profit/side_new.html' %}
+{% endblock %} 
+
+{% block mainpanel %}
+
+<div class="container-fluid">
+
+<div class="row">
+  <div class="col-3">
+    <h4 class="font-weight-bold">新中サ区分：<span class="text-secondary">新車</span></h4>
+  </div>
+
+  <div class="col-9 card bg-light p-1 mb-2">
+    <div class="card-body p-1 m-0">
+      <div class="d-flex flex-row align-items-center">
+      
+        <label class="col-2 pl-0" >注文書番号：</label>
+        <input class="col-3" id="search_input">
+        <button type="button" class="btn btn-info btn-rounded p-1 ml-1" data-container="body" data-toggle="popover" data-html="true" data-placement="bottom"
+        title="sample" data-content="
+          ・申込前：N1234A000<br>
+          ・申込書未発行、車両情報未登録(車両基盤未)：N1234A111<br>
+          ・申込書未発行、車両情報未登録(車両基盤入力済み)：N1234A222<br>
+          ・会員証未発行：N1234A333<br>
+          ・本登録：N1234A444
+          ">vcc
+        </button>
+        <button type="button" class="ml-auto btn btn-outline-dark blink" id="test">検索</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12 card bg-light p-1 mb-2">
+    <p class="font-weight-bold">商品情報</p>
+
+    <div class="card-body p-1">
+      <div class="d-flex flex-row align-items-center">
+        <label class="col-3 pl-0">メンテナンス商品会員番号：</label>
+        <select class="col-7" id="customer_no">
+          <option value="0">（新規申込／契約）</option>
+          <option value="1">410987654　A：メンテプロパック54車検付B　〜20XX/XX/XX</option>
+        </select>
+      </div>
+      <div class="d-flex flex-row align-items-center">
+        <label class="col-3 pl-1">メニュー情報(*)：</label>
+        <input class="col-1" id="menu_cord">
+        <input class="col-4" id="menu_name">
+      </div>
+
+      <div class="d-flex flex-row align-items-center">
+        <label class="col-3 pl-1">担当者(*)：</label>
+        <input class="col-2" id="tantou_cord">
+        <input class="col-3" id="tantou_name">
+      </div>
+
+      <div class="d-flex flex-row align-items-center">
+        <label class="col-3 pl-1">フォロー担当者(*)：</label>
+        <input class="col-2" id="follow_cord">
+        <input class="col-3" id="follow_name">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12 card bg-light p-1 mb-2">
+    <p class="font-weight-bold">使用者情報</p>
+
+    <div class="card-body p-1">
+      <div class="d-flex flex-row align-items-center">
+        <label class="col-3 pl-1">氏名（漢字）(*)：</label>
+        <input class="col-4" id="customer_kanji">
+      </div>
+      <div class="d-flex flex-row align-items-center">
+        <label class="col-3 pl-1">氏名（ｶﾅ）(*)：</label>
+        <input class="col-4" id="customer_kana">
+      </div>
+      <div class="d-flex flex-row align-items-center">
+        <label class="col-3 pl-1">郵便番号(*)：</label>
+        <input class="col-4" id="post_cord">
+      </div>
+      <div class="d-flex flex-row align-items-center">
+        <label class="col-3 pl-1">住所（漢字）(*)：</label>
+        <input class="col-4" id="address_kanji">
+      </div>
+      <div class="d-flex flex-row align-items-center">
+        <label class="col-3 pl-1">住所（ｶﾅ）：</label>
+        <input class="col-4" id="address_kana">
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12 card bg-light p-1 mb-2">
+    <p class="font-weight-bold">車両情報</p>
+
+    <div class="card-body p-1">
+      <div class="d-flex flex-row align-items-center">
+        <label class="col-3 pl-1">車名(*)：</label>
+        <input class="col-4" id="car_name">
+      </div>
+      <div class="d-flex flex-row align-items-center">
+        <label class="col-3 pl-1">型式：</label>
+        <input class="col-4" id="car_model">
+      </div>
+      <div class="d-flex flex-row align-items-center">
+        <label class="col-3 pl-1">登録No(*)：</label>
+        <input class="col-4" id="plate_no">
+      </div>
+      <div class="d-flex flex-row align-items-center">
+        <label class="col-3 pl-1">車台No(*)：</label>
+        <input class="col-4" id="frame_no">
+      </div>
+      {% comment %} <p class="">　</p> {% endcomment %}
+      <div class="d-flex flex-row align-items-center">
+        <label class="col-3 pl-1">車種クラス(*)：</label>
+        <input class="col-4">
+      </div>
+      <div class="d-flex flex-row align-items-center">
+        <label class="col-3 pl-1">初度登録年月(*)：</label>
+        <input class="col-4" id="register_date">
+      </div>
+      {% comment %} <p class="">　</p> {% endcomment %}
+      <div class="d-flex flex-row align-items-center">
+        <label class="col-3 pl-1">車検満了日(*)：</label>
+        <input class="col-4">
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="row">
+<p class="small">(*):必須項目</p>
+</div>
+
+<div class="row justify-content-center">
+
+  <div class="col-8 card bg-light p-1 mb-2 ">
+    <div class="card-body p-1 m-0 ">
+      <p class="text-primary" id="message">　</p>
+      <div class="d-flex flex-row ">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-outline-dark disabled" data-toggle="modal" data-target="#exampleModalCenter" id="entry">会員証印刷</button>
+        <button type="button" class="ml-auto btn btn-outline-dark">メニューに戻る</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">メンテプロ - 新車申込／取消</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        申込するためにNFSへ接続します。よろしいですか？
+      </div>
+      <div class="modal-footer">
+        <a href="{% url 'myprofit:new04' %}" class="btn btn-outline-dark">OK</a>
+        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">キャンセル</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 検索ボタン→テキストを入力 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/locale/ja.js"></script>
+<script>
+  $("#test").click(function () {
+
+    var search_input = $('#search_input').val();
+
+    if (search_input == "N1234A000" || search_input == "N1234A111" || search_input == "N1234A222" || search_input == "N1234A333"|| search_input == "N1234A444") {
+
+      $('#customer_no').val(1);
+      $("#menu_cord").val("S0");
+      $("#menu_name").val("メンテプロパック54車検付B");
+      $("#tantou_cord").val("001234"); // 値を設定
+      $("#tantou_name").val("大磯　太郎");
+      $("#follow_cord").val("001234");
+      $("#follow_name").val("大磯　太郎");
+
+      $("#customer_kanji").val("尾凪　花子");
+      $("#customer_kana").val("ｵﾅｷﾞ ﾊﾅｺ");
+      $("#post_cord").val("171-0014");
+      $("#address_kanji").val("豊島区池袋9-8-7");
+
+      $("#car_name").val("ｽｶｲﾗｲﾝ");
+      $("#car_model").val("5BA-RV37");
+      $("#plate_no").val("練馬330さ9876");
+      $("#frame_no").val("RV37-130855");
+
+      var shodo_date = moment(new Date()).format('YYYY年MM月');//今月
+      $("#register_date").val(shodo_date);
+
+      //検索ボタンの点滅やめる
+      $('button').removeClass('blink');
+
+      //未申込→エラー
+      if (search_input == "N1234A000") {
+        $("#message").text("指定した注文書番号は存在しません。");
+      }
+      //申込済（車両情報入れた
+      if (search_input == "N1234A111" || search_input == "N1234A222" || search_input == "N1234A333") {
+        $('#entry').addClass('disabled');
+        $("#message").text("メンテプロ申込済です。取り消す場合は、注文書入力にてクーポンメニューコードの削除をしてくだい。");
+      }
+      //本登録→エラーメッセージ
+      if (search_input == "N1234A444") {
+        $('#entry').addClass('disabled');
+        $("#message").text("クーポン発行済です。");
+      }
+
+    } else { // クリア
+      $('#customer_no').val(0);
+      $("#menu_cord").val("");
+      $("#menu_name").val("");
+      $("#tantou_cord").val("");
+      $("#tantou_name").val("");
+      $("#follow_cord").val("");
+      $("#follow_name").val("");
+
+      $("#customer_kanji").val("");
+      $("#customer_kana").val("");
+      $("#post_cord").val("");
+      $("#address_kanji").val("");
+
+      $("#car_name").val("");
+      $("#car_model").val("");
+      $("#plate_no").val("");
+      $("#frame_no").val("");
+      $("#register_date").val("");
+
+      //メッセージ
+      $("#message").text("　");
+    }
+  });
+</script>
+
+<script>
+  $(function () {
+      $('[data-toggle="popover"]').popover()
+  });
+  //↓popoverボタン以外でもクリックで閉じる→テキスト選択不可になるので中止
+  {% comment %} $('.popover-dismiss').popover({
+    trigger: 'focus'
+  }) {% endcomment %}
+</script>
+
+{% endblock %}

@@ -4,11 +4,11 @@
 
 {% block breadcrumb %}
 <div class=" nav-item d-flex m-0 h6">
-  <li class="breadcrumb-item"><a href="{% url 'myprofit:profit_top' %}"><i class="fa fa-home"> Home</i></a></li>
+  {% comment %} <li class="breadcrumb-item"><a href="{% url 'myprofit:profit_top' %}"><i class="fa fa-home"> Home</i></a></li>
   <li class="breadcrumb-item active"><a href="{% url 'myprofit:new01' %}">新車CA</a></li>
   <li class="breadcrumb-item">登録・納車・回収</li>
   <li class="breadcrumb-item"><a href="{% url 'myprofit:new03' %}">申込/取消画面</a></li>
-  <li class="breadcrumb-item"><a href="{% url 'myprofit:new04' %}">NFS-Webログイン画面</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'myprofit:new04' %}">NFS-Webログイン画面</a></li> {% endcomment %}
 </div>
 {% endblock %}
 
@@ -17,13 +17,13 @@
 {% endblock %}
 
 {% block mainpanel %}
-{% include 'profit/main_new.html' %}
+  {% include 'profit/main_new.html' %}
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
   $(function() {
     //申込書印刷を点滅
-    $('#application').addClass('blink');
+    $('#certificate').addClass('blink');
   });
 </script>
 {% endblock %}
