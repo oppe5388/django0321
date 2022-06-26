@@ -2,6 +2,14 @@
 {% load static %}
 {% block title %}PROFIT_mock{% endblock %}
 
+{% block extra_head %}
+<style>
+  .popover{
+      max-width:600px;
+  }
+</style>
+{% endblock %}
+
 {% block breadcrumb %}
 <div class=" nav-item d-flex m-0 h6">
   {% comment %} <li class="breadcrumb-item"><a href="{% url 'myprofit:profit_top' %}"><i class="fa fa-home"> Home</i></a></li>
@@ -34,8 +42,8 @@
         <button type="button" class="btn btn-info btn-rounded p-1 ml-1" data-container="body" data-toggle="popover" data-html="true" data-placement="bottom"
         title="sample" data-content="
           ・申込前：N1234A000<br>
-          ・申込書未発行、車両情報未登録(車両基盤未)：N1234A111<br>
-          ・申込書未発行、車両情報未登録(車両基盤入力済み)：N1234A222<br>
+          ・申込書未発行/車両情報未登録(車両基盤未)：N1234A111<br>
+          ・申込書未発行/車両情報未登録(車両基盤入力済み)：N1234A222<br>
           ・会員証未発行：N1234A333<br>
           ・本登録：N1234A444
           ">vcc
