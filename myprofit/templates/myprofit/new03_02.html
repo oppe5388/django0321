@@ -54,6 +54,8 @@
   </div>
 </div>
 
+
+<form method="#" action="#">
 <div class="row">
   <div class="col-12 card bg-light p-1 mb-2">
     <p class="font-weight-bold">商品情報</p>
@@ -141,7 +143,7 @@
       {% comment %} <p class="">　</p> {% endcomment %}
       <div class="d-flex flex-row align-items-center">
         <label class="col-3 pl-1">車種クラス(*)：</label>
-        <input class="col-4">
+        <input class="col-4" id="car_cord">
       </div>
       <div class="d-flex flex-row align-items-center">
         <label class="col-3 pl-1">初度登録年月(*)：</label>
@@ -150,12 +152,13 @@
       {% comment %} <p class="">　</p> {% endcomment %}
       <div class="d-flex flex-row align-items-center">
         <label class="col-3 pl-1">車検満了日(*)：</label>
-        <input class="col-4">
+        <input class="col-4"  id="inspection">
       </div>
 
     </div>
   </div>
 </div>
+</form>
 
 <div class="row">
 <p class="small">(*):必須項目</p>
@@ -168,8 +171,8 @@
       <p class="text-primary" id="message">　</p>
       <div class="d-flex flex-row ">
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-outline-dark disabled" data-toggle="modal" data-target="#exampleModalCenter" id="entry">会員証印刷</button>
-        <button type="button" class="ml-auto btn btn-outline-dark">メニューに戻る</button>
+        <button type="button" class="btn btn-outline-dark disabled" data-toggle="modal" data-target="#" id="entry">会員証印刷</button>
+        <a href="{% url 'myprofit:new02_02' %}" class="ml-auto btn btn-outline-dark">メニューに戻る</a>
       </div>
 
     </div>
@@ -186,16 +189,16 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">メンテプロ - 新車申込／取消</h5>
+        <h5 class="modal-title" id="exampleModalCenterTitle">メンテプロ - 新車契約</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        申込するためにNFSへ接続します。よろしいですか？
+        会員証印刷するためにNFSへ接続します。よろしいですか？
       </div>
       <div class="modal-footer">
-        <a href="{% url 'myprofit:new04' %}" class="btn btn-outline-dark">OK</a>
+        <a href="{% url 'myprofit:new04_02' %}" class="btn btn-outline-dark">OK</a>
         <button type="button" class="btn btn-outline-dark" data-dismiss="modal">キャンセル</button>
       </div>
     </div>
@@ -209,6 +212,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/locale/ja.js"></script>
 <script>
   $("#test").click(function () {
+
+    //クリア
+    $('form').find(':text').val("");//inputすべて
+    $('#customer_no').val(0);
+    $("#message").text("　");//メッセージ
+    $('#entry').removeClass('blink');
+    $('#entry').addClass('disabled');
+    $('#entry')[0].dataset.target = "#";//モーダル無効に
 
     var search_input = $('#search_input').val();
 
@@ -229,11 +240,14 @@
 
       $("#car_name").val("ｽｶｲﾗｲﾝ");
       $("#car_model").val("5BA-RV37");
-      $("#plate_no").val("練馬330さ9876");
+      //$("#plate_no").val("練馬330さ9876");
       $("#frame_no").val("RV37-130855");
+      $("#car_cord").val("15");
 
       var shodo_date = moment(new Date()).format('YYYY年MM月');//今月
       $("#register_date").val(shodo_date);
+      var shaken_date = moment(new Date()).add(3, 'y').format('YYYY年MM月');//今月
+      //$("#inspection").val(shaken_date);
 
       //検索ボタンの点滅やめる
       $('button').removeClass('blink');
@@ -242,39 +256,30 @@
       if (search_input == "N1234A000") {
         $("#message").text("指定した注文書番号は存在しません。");
       }
-      //申込済（車両情報入れた
-      if (search_input == "N1234A111" || search_input == "N1234A222" || search_input == "N1234A333") {
-        $('#entry').addClass('disabled');
-        $("#message").text("メンテプロ申込済です。取り消す場合は、注文書入力にてクーポンメニューコードの削除をしてくだい。");
+      //申込済（車両情報未
+      if (search_input == "N1234A111") {
+        $("#message").text("　");
+      }
+      //申込済（車両情報済み
+      if (search_input == "N1234A222" || search_input == "N1234A333") {
+        $("#plate_no").val("練馬330さ9876");
+        $("#inspection").val(shaken_date);
+
+        $('#entry').removeClass('disabled');
+        $('#entry').addClass('blink');
+        $("#message").text("内容をご確認の上、よろしければ[会員証印刷]を押してください。");
+        //$('.get-data')[0].dataset.category = $(this).data("category");//例
+        $('#entry')[0].dataset.target = "#exampleModalCenter";//このときだけモーダル有効に
       }
       //本登録→エラーメッセージ
       if (search_input == "N1234A444") {
-        $('#entry').addClass('disabled');
+        $("#plate_no").val("練馬330さ9876");
+        $("#inspection").val(shaken_date);
         $("#message").text("クーポン発行済です。");
       }
 
     } else { // クリア
-      $('#customer_no').val(0);
-      $("#menu_cord").val("");
-      $("#menu_name").val("");
-      $("#tantou_cord").val("");
-      $("#tantou_name").val("");
-      $("#follow_cord").val("");
-      $("#follow_name").val("");
 
-      $("#customer_kanji").val("");
-      $("#customer_kana").val("");
-      $("#post_cord").val("");
-      $("#address_kanji").val("");
-
-      $("#car_name").val("");
-      $("#car_model").val("");
-      $("#plate_no").val("");
-      $("#frame_no").val("");
-      $("#register_date").val("");
-
-      //メッセージ
-      $("#message").text("　");
     }
   });
 </script>

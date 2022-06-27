@@ -22,3 +22,6 @@ def new02_02(request):
 
 def new03_02(request):
     return render(request, 'myprofit/new03_02.html')
+
+def new04_02(request):
+    return render(request, 'myprofit/new04_02.html')
