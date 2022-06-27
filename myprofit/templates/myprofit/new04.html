@@ -3,13 +3,7 @@
 {% block title %}PROFIT_mock{% endblock %}
 
 {% block breadcrumb %}
-<div class=" nav-item d-flex m-0 h6">
-  <li class="breadcrumb-item"><a href="{% url 'myprofit:profit_top' %}"><i class="fa fa-home"> Home</i></a></li>
-  <li class="breadcrumb-item"><a href="{% url 'myprofit:new01' %}">新車CA</a></li>
-  <li class="breadcrumb-item"><a href="{% url 'myprofit:new02' %}">登録・納車・回収</a></li>
-  <li class="breadcrumb-item"><a href="{% url 'myprofit:new03' %}">申込/取消画面</a></li>
-  <li class="breadcrumb-item active">NFS-Webログイン画面</li>
-</div>
+  {% include 'profit/bread_new_entry.html' %}
 {% endblock %}
 
 {% block sidebar %}
@@ -46,6 +40,11 @@
 <script>
   $("#clear").click(function () {
       $('input').val(""); //inputすべて
+  });
+</script>
+<script>
+  $(function () {
+    $("#back").attr("href", "{% url 'myprofit:new03' %}") //中断ボタン
   });
 </script>
 

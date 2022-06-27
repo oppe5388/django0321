@@ -3,13 +3,7 @@
 {% block title %}PROFIT_mock{% endblock %}
 
 {% block breadcrumb %}
-<div class=" nav-item d-flex m-0 h6">
-  <li class="breadcrumb-item"><a href="{% url 'myprofit:profit_top' %}"><i class="fa fa-home"> Home</i></a></li>
-  <li class="breadcrumb-item"><a href="{% url 'myprofit:new01' %}">新車CA</a></li>
-  <li class="breadcrumb-item"><a href="{% url 'myprofit:new02' %}">登録・納車・回収</a></li>
-  <li class="breadcrumb-item">申込/取消画面</li>
-  <li class="breadcrumb-item"><a href="{% url 'myprofit:new04' %}">NFS-Webログイン画面</a></li>
-</div>
+  {% include 'profit/bread_new_entry.html' %}
 {% endblock %}
 
 {% block sidebar %}
@@ -46,6 +40,7 @@
   </div>
 </div>
 
+<form method="#" action="#">
 <div class="row">
   <div class="col-12 card bg-light p-1 mb-2">
     <p class="font-weight-bold">商品情報</p>
@@ -148,6 +143,7 @@
     </div>
   </div>
 </div>
+</form>
 
 <div class="row">
 <p class="small">(*):必須項目</p>
@@ -160,9 +156,9 @@
       <p class="text-primary" id="message">　</p>
       <div class="d-flex flex-row ">
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-outline-dark disabled" data-toggle="modal" data-target="#exampleModalCenter" id="entry">申込</button>
+        <button type="button" class="btn btn-outline-dark disabled" data-toggle="modal" data-target="#" id="entry">申込</button>
         <button type="button" class="btn btn-outline-dark disabled">申込み取消</button>
-        <button type="button" class="ml-auto btn btn-outline-dark">メニューに戻る</button>
+        <a href="{% url 'myprofit:new02' %}" class="ml-auto btn btn-outline-dark">メニューに戻る</a>
       </div>
 
     </div>
@@ -203,6 +199,13 @@
 <script>
   $("#test").click(function () {
 
+    //クリア
+    $('form').find(':text').val("");//inputすべて
+    $('#customer_no').val(0);
+    $("#message").text("　");//メッセージ
+    $('#entry').removeClass('blink');
+    $('#entry').addClass('disabled');
+    $('#entry')[0].dataset.target = "#";//モーダル無効に
     var search_input = $('#search_input').val();
 
     if (search_input == "N1234A000" || search_input == "N1234A111" || search_input == "N1234A222" || search_input == "N1234A333"|| search_input == "N1234A444") {
@@ -222,11 +225,14 @@
 
       $("#car_name").val("ｽｶｲﾗｲﾝ");
       $("#car_model").val("5BA-RV37");
-      $("#plate_no").val("練馬330さ9876");
+      //$("#plate_no").val("練馬330さ9876");
       $("#frame_no").val("RV37-130855");
+      $("#car_cord").val("15");
 
       var shodo_date = moment(new Date()).format('YYYY年MM月');//今月
       $("#register_date").val(shodo_date);
+      var shaken_date = moment(new Date()).add(3, 'y').format('YYYY年MM月');//今月
+      //$("#inspection").val(shaken_date);
 
       //検索ボタンの点滅やめる
       $('button').removeClass('blink');
@@ -236,40 +242,19 @@
         $('#entry').removeClass('disabled');
         $('#entry').addClass('blink');
         $("#message").text("内容をご確認の上、よろしければ申込を押してください。");
+        $('#entry')[0].dataset.target = "#exampleModalCenter";//このときだけモーダル有効に
       }
       //申込済→エラーメッセージ
       if (search_input == "N1234A111" || search_input == "N1234A222" || search_input == "N1234A333") {
-        $('#entry').addClass('disabled');
         $("#message").text("メンテプロ申込済です。取り消す場合は、注文書入力にてクーポンメニューコードの削除をしてくだい。");
       }
       //本登録→エラーメッセージ
       if (search_input == "N1234A444") {
-        $('#entry').addClass('disabled');
         $("#message").text("クーポン発行済です。");
       }
 
     } else { // クリア
-      $('#customer_no').val(0);
-      $("#menu_cord").val("");
-      $("#menu_name").val("");
-      $("#tantou_cord").val("");
-      $("#tantou_name").val("");
-      $("#follow_cord").val("");
-      $("#follow_name").val("");
 
-      $("#customer_kanji").val("");
-      $("#customer_kana").val("");
-      $("#post_cord").val("");
-      $("#address_kanji").val("");
-
-      $("#car_name").val("");
-      $("#car_model").val("");
-      $("#plate_no").val("");
-      $("#frame_no").val("");
-      $("#register_date").val("");
-
-      //メッセージ
-      $("#message").text("　");
     }
   });
 </script>

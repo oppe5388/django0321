@@ -48,5 +48,10 @@
       $('input').val(""); //inputすべて
   });
 </script>
+<script>
+  $(function () {
+    $("#back").attr("href", "{% url 'myprofit:new03_02' %}") //中断ボタン
+  });
+</script>
 
 {% endblock %}
