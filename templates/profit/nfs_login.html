@@ -34,8 +34,23 @@
             <input class="col-3" value="●●●●●●">
             <span class="col-3 text-primary">(半角6文字)</span>
           </div>
+        
+        <hr>
+  
+        <div class="row justify-content-center">
+          <div class="d-flex flex-row ">
+            {% comment %} <button type="button" class="btn btn-outline-dark m-2" data-toggle="modal" data-target="#exampleModalCenter" id="send">送信</button> {% endcomment %}
+            <button type="button" class="btn btn-outline-dark m-2" id="test1">送信</button>
+            <button type="button" class="btn btn-outline-dark m-2" id="clear">消去</button>
+            <a href="#" class="btn btn-outline-dark m-2" id="back1">中断</a>
+
+            
+          </div>
+        </div>
+
         </form>
 
+        {% comment %} ここから確認画面 {% endcomment %}
         <div id="confirm">
           <div class="d-flex flex-row align-items-center justify-content-center">
             <span class="">いつもご利用いただきありがとうございます。</span>
@@ -52,19 +67,17 @@
           <div class="d-flex flex-row align-items-center justify-content-center">
             <span class="col-3 mb-2">大磯　太郎　様</span>
           </div>
-        </div>        
-  
-        <hr>
-  
-        <div class="row justify-content-center">
-          <div class="d-flex flex-row ">
-            <button type="button" class="btn btn-outline-dark m-2" data-toggle="modal" data-target="#exampleModalCenter" id="send">送信</button>
-            <button type="button" class="btn btn-outline-dark m-2" id="clear">消去</button>
-            <a href="#" class="btn btn-outline-dark m-2" id="back">中断</a>
 
-            <button type="button" class="btn btn-outline-dark m-2" id="test2">テスト</button>
+          <hr>
+  
+          <div class="row justify-content-center">
+            <div class="d-flex flex-row ">
+              <button type="button" class="btn btn-outline-dark m-2" data-toggle="modal" data-target="#exampleModalCenter" id="send">送信</button>
+              <button type="button" class="btn btn-outline-dark m-2" id="test2">戻る</button>
+              <a href="#" class="btn btn-outline-dark m-2" id="back2">中断</a>
+            </div>
           </div>
-        </div>
+        </div>      
       </div>
     </div>
   </div>
@@ -80,20 +93,13 @@
       $('#confirm').hide();//最初は非表示
     });
 
-    $("#test2").click(function () {
-      //$('form').remove();
+    $("#test1").click(function () {
       $('form').hide();
       $('#confirm').show();
-      $("#clear").text("戻る");
-      $('#clear').attr('id', 'modoru');
-      $('#clear')[0].dataset.target = "#";//戻るために
     });
 
-    $("#modoru").click(function () {
+    $("#test2").click(function () {
       $('form').show();
-      $('#confirm').hide();
-      $("#modoru").text("消去");
-      $('#modoru').attr('id', 'clear');//戻るために
-      
+      $('#confirm').hide();      
     });
   </script>
