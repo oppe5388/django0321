@@ -3,7 +3,7 @@
 {% block title %}PROFIT_mock{% endblock %}
 
 {% block breadcrumb %}
-  {% include 'profit/bread_new_cert.html' %}
+  {% comment %} {% include 'profit/bread_new_cert.html' %} {% endcomment %}
 {% endblock %}
 
 {% block sidebar %}
@@ -17,7 +17,7 @@
 <script>
   $(function() {
     //申込書印刷を点滅
-    $('#certificate').addClass('blink');
+    $('#mente_menu').addClass('blink');
   });
 </script>
 {% endblock %}

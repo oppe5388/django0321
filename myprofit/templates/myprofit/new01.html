@@ -14,8 +14,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
   $(function() {
-    //登録納車回収を点滅
-    $('#touroku').addClass('blink');
+    $('#touroku').addClass('blink');//登録納車回収を点滅
+    $("#touroku").attr("href", "{% url 'myprofit:new02' %}") //申込書印刷のリンクを点滅にする
   });
 </script>
 {% endblock %}

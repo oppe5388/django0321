@@ -4,33 +4,55 @@
           ■ログイン
       </div>
     </div>
+
+    
     <div class="row">
       <div class="col-lg-12 p-2 bg-white pt-5">
-        <div class="d-flex flex-row align-items-center justify-content-center">
-          <label class="col-4">販売会社コード</label>
-          <input class="col-3 bg-light" value="10300">
-          <span class="col-3 text-primary">(5桁)</span>
-        </div>
-        <div class="d-flex flex-row align-items-center justify-content-center">
-          <label class="col-4">店舗コード（操作担当者）</label>
-          <input class="col-3" value="1E0">
-          <span class="col-3 text-primary">(3桁)</span>
-        </div>
-        <div class="d-flex flex-row align-items-center justify-content-center">
-          <label class="col-4">担当者コード（操作担当者）</label>
-          <input class="col-3" value="001234">
-          <span class="col-3 text-primary">(6桁)</span>
-        </div>
-        <div class="d-flex flex-row align-items-center justify-content-center">
-          <label class="col-4">担当者名（操作担当者）</label>
-          <input class="col-3" value="大磯　太郎">
-          <span class="col-3 text-primary">(全角10文字)</span>
-        </div>
-        <div class="d-flex flex-row align-items-center justify-content-center">
-          <label class="col-4">NFSログインパスワード</label>
-          <input class="col-3" value="●●●●●●">
-          <span class="col-3 text-primary">(半角6文字)</span>
-        </div>
+        <form>
+          <div class="d-flex flex-row align-items-center justify-content-center">
+            <label class="col-4">販売会社コード</label>
+            <input class="col-3 bg-light" value="10300">
+            <span class="col-3 text-primary">(5桁)</span>
+          </div>
+          <div class="d-flex flex-row align-items-center justify-content-center">
+            <label class="col-4">店舗コード（操作担当者）</label>
+            <input class="col-3" value="1E0">
+            <span class="col-3 text-primary">(3桁)</span>
+          </div>
+          <div class="d-flex flex-row align-items-center justify-content-center">
+            <label class="col-4">担当者コード（操作担当者）</label>
+            <input class="col-3" value="001234">
+            <span class="col-3 text-primary">(6桁)</span>
+          </div>
+          <div class="d-flex flex-row align-items-center justify-content-center">
+            <label class="col-4">担当者名（操作担当者）</label>
+            <input class="col-3" value="大磯　太郎">
+            <span class="col-3 text-primary">(全角10文字)</span>
+          </div>
+          <div class="d-flex flex-row align-items-center justify-content-center">
+            <label class="col-4">NFSログインパスワード</label>
+            <input class="col-3" value="●●●●●●">
+            <span class="col-3 text-primary">(半角6文字)</span>
+          </div>
+        </form>
+
+        <div id="confirm">
+          <div class="d-flex flex-row align-items-center justify-content-center">
+            <span class="">いつもご利用いただきありがとうございます。</span>
+          </div>
+          <div class="d-flex flex-row align-items-center justify-content-center">
+            <span class="">　</span>
+          </div>
+          <div class="d-flex flex-row align-items-center justify-content-center">
+            <span class="col-3 mb-2">日産プリンスMarsh株式会社</span>
+          </div>
+          <div class="d-flex flex-row align-items-center justify-content-center">
+            <span class="col-3 mb-2">VCC店</span>
+          </div>
+          <div class="d-flex flex-row align-items-center justify-content-center">
+            <span class="col-3 mb-2">大磯　太郎　様</span>
+          </div>
+        </div>        
   
         <hr>
   
@@ -39,8 +61,39 @@
             <button type="button" class="btn btn-outline-dark m-2" data-toggle="modal" data-target="#exampleModalCenter" id="send">送信</button>
             <button type="button" class="btn btn-outline-dark m-2" id="clear">消去</button>
             <a href="#" class="btn btn-outline-dark m-2" id="back">中断</a>
+
+            <button type="button" class="btn btn-outline-dark m-2" id="test2">テスト</button>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/locale/ja.js"></script>
+
+  <script>
+    $(function() {
+      $('#confirm').hide();//最初は非表示
+    });
+
+    $("#test2").click(function () {
+      //$('form').remove();
+      $('form').hide();
+      $('#confirm').show();
+      $("#clear").text("戻る");
+      $('#clear').attr('id', 'modoru');
+      $('#clear')[0].dataset.target = "#";//戻るために
+    });
+
+    $("#modoru").click(function () {
+      $('form').show();
+      $('#confirm').hide();
+      $("#modoru").text("消去");
+      $('#modoru').attr('id', 'clear');//戻るために
+      
+    });
+  </script>

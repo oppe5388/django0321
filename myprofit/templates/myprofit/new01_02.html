@@ -11,13 +11,11 @@
 {% endblock %}
 
 {% block mainpanel %}
-  {% include 'profit/main_new.html' %}
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
   $(function() {
-    //申込書印刷を点滅
-    $('#certificate').addClass('blink');
+    $('#touroku').addClass('blink');//登録納車回収を点滅
+    $("#touroku").attr("href", "{% url 'myprofit:new02_02' %}") //会員証印刷のリンクにする
   });
 </script>
 {% endblock %}

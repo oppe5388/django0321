@@ -1,0 +1,10 @@
+<div class="h6 text-primary mr-2 row">新車×会員証印刷ボタン</div>
+{% with request.resolver_match.url_name as url_name %}
+    <div class=" nav-item d-flex m-0 h6">
+        <li class="breadcrumb-item"><a href="{% url 'myprofit:profit_top' %}"><i class="fa fa-home"> Home</i></a></li>
+        <li class="breadcrumb-item {% if url_name == 'new01_02' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:new01_02' %}">新車CA</a></li>
+        <li class="breadcrumb-item {% if url_name == 'new02_02' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:new02_02' %}">登録・納車・回収</a></li>
+        <li class="breadcrumb-item {% if url_name == 'new03_02' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:new03_02' %}">新車契約画面</a></li>
+        <li class="breadcrumb-item {% if url_name == 'new04_02' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:new04_02' %}">NFS-Webログイン画面</a></li>
+    </div>
+{% endwith %}
