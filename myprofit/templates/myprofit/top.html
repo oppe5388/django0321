@@ -7,8 +7,19 @@
 
 {% block sidebar %}
 <ul class="nav">
+    
+    <div class="nav-search">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="エラーメッセージ検索">
+        <div class="input-group-append">
+          <span class="input-group-text" id="search">
+            <i class="typcn typcn-zoom"></i>
+          </span>
+        </div>
+      </div>
+    </div>
     <li class="nav-item bg-white">
-      <div class="sidebar-menu-title">for VCC</div>
+      <div class="sidebar-menu-title">VCCメニュー</div>
     </li>
 
     <li class="nav-item">
@@ -17,7 +28,7 @@
         <span class="menu-title">これから申込</span>
         <i class="typcn typcn-chevron-right menu-arrow"></i>
       </a>
-      <div class="collapse" id="ui-basic1">
+      <div class="collapse show" id="ui-basic1">
         <ul class="nav flex-column sub-menu">
           <li class="nav-item"> <a class="nav-link" href="{% url 'myprofit:new01' %}">新車</a></li>
           <li class="nav-item"> <a class="nav-link" href="#">中古車（未作成）</a></li>
@@ -32,7 +43,7 @@
         <span class="menu-title">途中から</span>
         <i class="typcn typcn-chevron-right menu-arrow"></i>
       </a>
-      <div class="collapse" id="ui-basic2">
+      <div class="collapse show" id="ui-basic2">
         <ul class="nav flex-column sub-menu">
           <li class="nav-item"> <a class="nav-link" href="{% url 'myprofit:new01_02' %}">新車</a></li>
           <li class="nav-item"> <a class="nav-link" href="#">中古車（未作成）</a></li>
@@ -47,9 +58,11 @@
         <span class="menu-title">本登録後</span>
         <i class="typcn typcn-chevron-right menu-arrow"></i>
       </a>
-      <div class="collapse" id="ui-basic3">
+      <div class="collapse show" id="ui-basic3">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'myprofit:new01_03' %}">新車・中古車・サービス</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'myprofit:new01_03' %}">新車</a></li>
+          <li class="nav-item"> <a class="nav-link" href="#">中古車（未作成）</a></li>
+          <li class="nav-item"> <a class="nav-link" href="#">サービス（未作成）</a></li>
         </ul>
       </div>
     </li>

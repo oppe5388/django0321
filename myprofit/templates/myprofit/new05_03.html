@@ -8,14 +8,24 @@
 
 {% block sidebar %}
   {% include 'profit/side_new.html' %}
-{% endblock %}
+{% endblock %} 
 
 {% block mainpanel %}
+  {% include 'profit/nfs_menu.html' %}
+
+
+<!-- クリアボタン -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
-  $(function() {
-    $('#touroku').addClass('blink');//登録納車回収を点滅
-    $("#touroku").attr("href", "{% url 'myprofit:new02_03' %}") //メンテトップのリンクにする
+  $("#clear").click(function () {
+      $('input').val(""); //inputすべて
   });
 </script>
+<script>
+  $(function () {
+    $("#back1").attr("href", "{% url 'myprofit:new03' %}") //中断ボタン
+    $("#back2").attr("href", "{% url 'myprofit:new03' %}") //中断ボタン
+  });
+</script>
+
 {% endblock %}
