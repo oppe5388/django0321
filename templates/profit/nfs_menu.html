@@ -10,7 +10,7 @@
           {% comment %} <a href="#" class="text-dark text-decoration-none small">MP申込R</a>
           <a href="#" class="text-dark text-decoration-none small">ZESP申込R</a>
           <a href="#" class="text-dark text-decoration-none small">車両R</a> {% endcomment %}
-          <a href="#" class="text-dark text-decoration-none small">お客様L</a>
+          <a href="#" class="text-dark text-decoration-none small" id="search_menu1">お客様L</a>
           <a href="#" class="text-dark text-decoration-none small">仮申込L</a>
           <a href="#" class="text-dark text-decoration-none small">期限切L</a>
           <a href="#" class="text-dark text-decoration-none small">申込書未送L</a>
@@ -18,7 +18,7 @@
       </div>
     </div>
     
-    <div class="d-flex bg-light p-1 mx-2">■連携業務メニュー</div>
+    <div class="d-flex bg-light p-1 mx-2">■PROFIT連携業務メニュー</div>
     <hr class="p-0 mt-0 border-dark mx-2">
   
       {% comment %} <div class="d-flex mx-2"> {% endcomment %}
@@ -26,16 +26,16 @@
         <div class="row">
           <div class="col-lg-12 p-2 pt-5">
               <div class="d-flex flex-row justify-content-center">
-                <a href="#" class="btn btn-outline-dark m-2 col-3" id="#">お客様一覧検索</a>
+                <a href="#" class="btn btn-inverse-dark m-2 col-3" id="search_menu2">お客様一覧検索</a>
               </div>
               <div class="d-flex flex-row justify-content-center">
-                <a href="#" class="btn btn-outline-dark m-2 col-3" id="#">仮申込ステータス一覧</a>
+                <a href="#" class="btn btn-inverse-dark m-2 col-3" id="#">仮申込ステータス一覧</a>
               </div>
               <div class="d-flex flex-row justify-content-center">
-                <a href="#" class="btn btn-outline-dark m-2 col-3" id="#">期限切れ警告一覧</a>
+                <a href="#" class="btn btn-inverse-dark m-2 col-3" id="#">期限切れ警告一覧</a>
               </div>
               <div class="d-flex flex-row justify-content-center">
-                <a href="#" class="btn btn-outline-dark m-2 col-3" id="#">申込書未送付一覧</a>
+                <a href="#" class="btn btn-inverse-dark m-2 col-3" id="#">申込書未送付一覧</a>
               </div>
           </div>
         </div>
@@ -52,17 +52,5 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/locale/ja.js"></script>
 
   <script>
-    $(function() {
-      $('#confirm').hide();//最初は非表示
-    });
 
-    $("#test1").click(function () {
-      $('form').hide();
-      $('#confirm').show();
-    });
-
-    $("#test2").click(function () {
-      $('form').show();
-      $('#confirm').hide();      
-    });
   </script>

@@ -6,7 +6,7 @@
     <div class="col-12 bg-light p-0 mb-0">
       <div class="d-flex flex-row navbar">
         <a href="#" class="text-dark text-decoration-none small pr-2 border border-dark border-left-0 border-top-0 border-bottom-0">販売店メニューに戻る</a>
-        <a href="#" class="text-dark text-decoration-none small">メニュー</a>
+        <a href="#" class="text-dark text-decoration-none small" id="nfs_menu">メニュー</a>
         {% comment %} <a href="#" class="text-dark text-decoration-none small">MP申込R</a>
         <a href="#" class="text-dark text-decoration-none small">ZESP申込R</a>
         <a href="#" class="text-dark text-decoration-none small">車両R</a> {% endcomment %}
@@ -26,48 +26,48 @@
 
       <div class="col-5 pl-0">
         <div class="d-flex flex-nowrap">
-          <span class="col-3 px-0">会員証No</span>
-          <input class="col-6 px-0" id="#">
+          <span class="col-3 pl-1 pr-0 mb-1">会員証No</span>
+          <input class="col-6 px-0 mb-1" id="#">
         </div>
         <div class="d-flex flex-nowrap">
-          <span class="col-3 px-0">氏名ｶﾅ</span>
-          <input class="col-6 px-0" id="#">
+          <span class="col-3 pl-1 pr-0 mb-1">氏名ｶﾅ</span>
+          <input class="col-6 px-0 mb-1" id="#">
         </div>
         <div class="d-flex flex-nowrap">
-          <span class="col-3 px-0">販売会社</span>
-          <input class="col-3 px-0" id="#">
-          <span class="col-3 px-0">郵便番号</span>
-          <input class="col-3 " id="#">
+          <span class="col-3 pl-1 pr-0 mb-1">販売会社</span>
+          <input class="col-3 px-0 mb-1" id="#">
+          <span class="col-3 pl-1 pr-0 mb-1">郵便番号</span>
+          <input class="col-3 mb-1" id="#">
         </div>
       </div>
 
-      <div class="col-5 pl-0">
+      <div class="col-6 pl-0">
         <div class="d-flex">
-          <div class="col-5 px-0">メンテナンスNo</div>
-          <input class="col-5 px-0" id="#">
+          <div class="col-3 pl-1 pr-0 mb-1">ﾒﾝﾃﾅﾝｽNo</div>
+          <input class="col-6 px-0 mb-1" id="#">
         </div>
         <div class="d-flex flex-nowrap">
-          <div class="col-5 px-0">氏名漢字</div>
-          <input class="col-5 px-0" id="#">
+          <div class="col-3 pl-1 pr-0 mb-1">氏名漢字</div>
+          <input class="col-6 px-0 mb-1" id="#">
         </div>
         <div class="d-flex flex-nowrap">
-          <span class="col-3 px-0">電話番号</span>
-          <input class="col-2 px-0" id="#">
-          <span class="col-5 px-0">登録番号(下4桁)</span>
-          <input class="col-2 px-0" id="#">
+          <span class="col-3 pl-1 pr-0 mb-1">電話番号</span>
+          <input class="col-3 px-2 mb-1" id="#">
+          <span class="col-4 pl-1 pr-0 mb-1">登録番号(下4桁)</span>
+          <input class="col-2 px-2 mb-1" id="#">
           
         </div>
       </div>
 
       <div class="col-1 px-0">
         <div class="d-flex flex-nowrap">
-          <div class="col px-0">　</div>
+          <div class="col px-0 mb-1">　</div>
         </div>
         <div class="d-flex flex-nowrap">
-          <div class="col px-0">　</div>
+          <div class="col px-0 mb-1">　</div>
         </div>
         <div class="d-flex flex-nowrap">
-          <a href="#" class=" btn btn-inverse-dark btn-sm py-1 mr-auto">検索</a>
+          <a href="#" class=" btn btn-inverse-dark btn-sm py-1 mr-auto mb-1">検索</a>
         </div>
       </div>
         
@@ -86,13 +86,4 @@
       $('#confirm').hide();//最初は非表示
     });
 
-    $("#test1").click(function () {
-      $('form').hide();
-      $('#confirm').show();
-    });
-
-    $("#test2").click(function () {
-      $('form').show();
-      $('#confirm').hide();      
-    });
   </script>

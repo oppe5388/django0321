@@ -17,6 +17,9 @@ def new03(request):
 def new04(request):
     return render(request, 'myprofit/new04.html')
 
+def new05(request):
+    return render(request, 'myprofit/new05.html')
+
 def new01_02(request):
     return render(request, 'myprofit/new01_02.html')
 
