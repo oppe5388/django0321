@@ -1,12 +1,13 @@
-<div class="h6 text-primary mr-2 row">新車×申込書印刷ボタン</div>
 {% with request.resolver_match.url_name as url_name %}
     <div class=" nav-item d-flex m-0 h6 d-flex flex-wrap">
+        <li class="text-primary mr-2">新車×申込書印刷：</li>
         <li class="breadcrumb-item"><a href="{% url 'myprofit:profit_top' %}"><i class="fa fa-home"> Home</i></a></li>
         <li class="breadcrumb-item {% if url_name == 'new01' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:new01' %}">新車CA</a></li>
         <li class="breadcrumb-item {% if url_name == 'new02' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:new02' %}">登録・納車・回収</a></li>
         <li class="breadcrumb-item {% if url_name == 'new03' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:new03' %}">申込/取消画面</a></li>
         <li class="breadcrumb-item {% if url_name == 'new04' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:new04' %}">NFS-Webログイン画面</a></li>
         <li class="breadcrumb-item {% if url_name == 'new05' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:new05' %}">受付申込登録</a></li>
-        <li class="breadcrumb-item {% if url_name == 'new06' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:new06' %}">受付申込確認</a></li>
+        <li class="breadcrumb-item {% if url_name == 'new06' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:new06' %}">受付申込確認・完了</a></li>
+        <li class="breadcrumb-item {% if url_name == 'new07' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:new07' %}">会員情報</a></li>
     </div>
 {% endwith %}

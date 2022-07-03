@@ -1,6 +1,4 @@
-{% comment %} <div class="container-fluid"> {% endcomment %}
-
-  <div class="bg-white" style="height: 1000px;">
+<div class="bg-white" style="height: 750px;">
 
   <div class="p-0 mb-2">
     <div class="col-12 bg-light p-0 mb-0">
@@ -10,7 +8,7 @@
     </div>
   </div>
 
-
+  <div id="confirm">
     <div class="d-flex bg-light p-1 mx-2">■メンテプロパック　受付申込確認</div>
     <hr class="p-0 mt-0 border-dark mx-2">
 
@@ -79,7 +77,6 @@
           <span class="col-6">eﾒｰﾙｱﾄﾞﾚｽ</span>
           <span class="">：</span>
         </div>
-
       </div>
 
       <!-- 右列 -->
@@ -148,31 +145,153 @@
           <span class="col-6 ">支払手段</span>
           <span class="">：日産ｶｰﾄﾞ</span>
         </div>  
+      </div>
+
+    </div>
+
+    <span class="text-primary small d-flex justify-content-center mt-2">
+      ※送信で次の画面へ、戻るで前の画面へ、中断でProfit画面に戻ります。
+    </span>
+    <span class="text-primary small d-flex justify-content-center">
+      ※この画面移行は修正できません。修正される場合は一旦キャンセルを行い、再度申込受付登録を行ってください。（登録番号は除く）
+    </span>
+
+    <div class="d-flex flex-row justify-content-center">
+        <a href="#" class="btn btn-inverse-dark m-2" id="send1">送信</a>
+        <a href="#" class="btn btn-inverse-dark m-2" id="test1">戻る</a>
+        <a href="#" class="btn btn-inverse-dark m-2" id="back1">中断</a>
+    </div>
+    <div class="d-flex flex-row justify-content-center">
+      <a href="#" class="btn btn-inverse-warning m-2 px-5" id="recommend">おすすめ商品確認</a>
+    </div>
+
+ </div>
+
+  <!-- ここから完了画面-->
+  <div id="fix">
+    <div class="d-flex bg-light p-1 mx-2">■メンテプロパック　受付申込完了</div>
+    <hr class="p-0 mt-0 border-dark mx-2">
+
+    <div class="d-flex mx-2 mb-3 justify-content-center">
+      <div class="col-10">
+        <div class="d-flex flex-nowrap mb-1">
+          <span class="col-12">申込を受付しました。</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex mx-2 mb-3 justify-content-center">
+      <!-- 左列 -->
+      <div class="col-5">
+        <div class="d-flex flex-nowrap mb-1">
+          <span class="col-12">【お申込み内容】</span>
+        </div>
+        <div class="d-flex flex-nowrap mb-1">
+          <span class="col-6">会員証No</span>
+          <span class="">：410987654</span>
+        </div>
+        <div class="d-flex flex-nowrap mb-1">
+          <span class="col-6">氏名漢字</span>
+          <span class="">：尾凪　花子</span>
+        </div>
+        <div class="d-flex flex-nowrap mb-1">
+          <span class="col-6">車名</span>
+          <span class="">：ｽｶｲﾗｲﾝ</span>
+        </div>
+        <div class="d-flex flex-nowrap mb-1">
+          <span class="col-6">注文書No</span>
+          <span class="">：N1234A000</span>
+        </div>
+        <div class="d-flex flex-nowrap mb-1">
+          <span class="col-6">　</span>
+        </div>
+        <div class="d-flex flex-nowrap mb-1">
+          <span class="col-6">ｻｰﾋﾞｽ商品</span>
+          <span class="">：</span>
+        </div>
+        <div class="d-flex flex-nowrap mb-1">
+          <span class="col-6">入会ｺｰｽ</span>
+          <span class="">：</span>
+        </div>
+
+      </div>
+
+      <!-- 右列 -->
+      <div class="col-5">
+        <div class="d-flex flex-nowrap mb-1">
+          <span class="col-6">　</span>
+        </div>
+        <div class="d-flex flex-nowrap mb-1">
+          <span class="col-6">販売会社</span>
+          <span class="">：10330</span>
+        </div>
+        <div class="d-flex flex-nowrap mb-1">
+          <span class="col-6">申込店舗</span>
+          <span class="">：1E0</span>
+        </div>
+        <div class="d-flex flex-nowrap mb-1">
+          <span class="col-6">申込担当者ｺｰﾄﾞ</span>
+          <span class="">：001234</span>
+        </div>
+        <div class="d-flex flex-nowrap mb-1">
+          <span class="col-6">申込担当者名</span>
+          <span class="">：大磯　太郎</span>
+        </div>
+        <div class="d-flex flex-nowrap mb-1">
+          <span class="col-6">　</span>
+        </div>
+        <div class="d-flex flex-nowrap mb-1">
+          <span class="col-6 ">お支払額</span>
+          <span class="">：156,920円</span>
+          <span class="text-primary small d-flex align-items-end">(消費税込み)</span>
+        </div>
+        <div class="d-flex flex-nowrap mb-1">
+          <span class="col-6 ">支払手段</span>
+          <span class="">：日産ｶｰﾄﾞ</span>
+        </div>
 
       </div>
 
     </div>
-      
-    <div>
 
-        <span class="text-primary small d-flex justify-content-center mt-2">
-          ※送信で次の画面へ、戻るで前の画面へ、中断でProfit画面に戻ります。
-        </span>
-        <span class="text-primary small d-flex justify-content-center">
-          ※この画面移行は修正できません。修正される場合は一旦キャンセルを行い、再度申込受付登録を行ってください。（登録番号は除く）
-        </span>
-
-        <div class="row justify-content-center">
-          <div class="d-flex flex-row ">
-            <a href="#" class="btn btn-inverse-dark m-2" id="send">送信</a>
-            <button type="button" class="btn btn-inverse-dark m-2" id="test2">戻る</button>
-            <a href="#" class="btn btn-inverse-dark m-2" id="back2">中断</a>
-          </div>
+    <div class="d-flex mx-2 mb-5 justify-content-center">
+      <div class="col-10">
+        <div class="d-flex flex-nowrap mb-1">
+          <span class="col-12">【お読みください】</span>
+        </div>
+        <div class="d-flex flex-nowrap mb-1">
+          <span class="col-12">1.　この段階ではまだ正式な申込いには至っていません。</span>
+        </div>
+        <div class="d-flex flex-nowrap mb-1">
+          <span class="col-12">2.　このあとに「申込書の印刷」「会員証の印刷」があります。</span>
+        </div>
+        <div class="d-flex flex-nowrap mb-1">
+          <span class="col-12">3.　本日から6ヶ月以内に「会員証発行」がされないと、本申込は自動的にキャンセルとなります。
+            その際は再度お申込をいただくことになります。</span>
+        </div>
+        <div class="d-flex flex-nowrap mb-1">
+          <span class="col-12">　</span>
+        </div>
+        <div class="d-flex flex-nowrap mb-1">
+          <span class="col-12">ご不明な点につきましては、NFSメンテプロパックデスクまでお問い合わせください。</span>
+        </div>
+        <div class="d-flex flex-nowrap mb-1">
+          <span class="col-12">電話　0120-948-348</span>
         </div>
 
+      </div>
     </div>
+
+
+    <div class="d-flex flex-row justify-content-center">
+        <a href="#" class="btn btn-inverse-dark m-2" id="send2">送信</a>
+    </div>
+
   </div>
-{% comment %} </div> {% endcomment %}
+      
+
+
+</div>
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -182,23 +301,13 @@
 
   <script>
     $(function() {
-      $('#confirm').hide();//最初は非表示
+      $('#fix').hide();//最初は非表示
+    });
+
+    //送信ボタン→確認画面から完了画面に変更
+    $("#send1").click(function () {
+      $('#confirm').hide();
+      $('#fix').show();
     });
 
   </script>
-
-<!-- サービス商品と入会コースのプルダウン連動-->
-<script>
-  var $city = $('select[id="city"]');
-  $('select[id="prefecture"]').change(function() {
-    var val1 = $(this).val();  
-    $city.find('option').each(function() {
-      var val2 = $(this).data('val');
-      if (val1 === val2) {
-        $(this).show();
-      }else {
-        $(this).hide();
-      }
-    })
-  })
-</script>

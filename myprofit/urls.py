@@ -13,6 +13,7 @@ urlpatterns = [
     path('new04', views.new04, name='new04'),
     path('new05', views.new05, name='new05'),
     path('new06', views.new06, name='new06'),
+    path('new07', views.new07, name='new07'),
     path('new01_02', views.new01_02, name='new01_02'),
     path('new02_02', views.new02_02, name='new02_02'),
     path('new03_02', views.new03_02, name='new03_02'),

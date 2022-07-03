@@ -11,7 +11,7 @@
 {% endblock %} 
 
 {% block mainpanel %}
-  {% include 'profit/nfs_confirm.html' %}
+  {% include 'profit/nfs_customer.html' %}
 
 
 
@@ -19,13 +19,6 @@
 <script>
   $(function () {
     $("#nfs_menu").attr("href", "{% url 'myprofit:new05_03' %}") //お客様一覧検索
-  });
-</script>
-<script>
-  $(function () {
-    $("#test1").attr("href", "{% url 'myprofit:new05' %}") //戻る
-    $("#back1").attr("href", "{% url 'myprofit:new03' %}") //中断ボタン
-    $("#send2").attr("href", "{% url 'myprofit:new07' %}") //確認後の送信ボタン
   });
 </script>
 
