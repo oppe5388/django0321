@@ -56,3 +56,5 @@ def new05_03(request):
 def new06_03(request):
     return render(request, 'myprofit/new06_03.html')
 
+def new07_03(request):
+    return render(request, 'myprofit/new07_03.html')

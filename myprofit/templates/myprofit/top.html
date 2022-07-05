@@ -2,6 +2,13 @@
 {% load static %}
 {% block title %}PROFIT_mock{% endblock %}
 
+{% block extra_head %}
+<style>
+  .colorwhite{
+    color:gray
+  }
+</style>
+{% endblock %}
 {% block breadcrumb %}
 {% endblock %}
 
@@ -25,7 +32,7 @@
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#ui-basic1" aria-expanded="true">
         <i class="typcn typcn-briefcase menu-icon"></i>
-        <span class="menu-title">これから申込</span>
+        <span class="menu-title">申込（またはキャンセル）</span>
         <i class="typcn typcn-chevron-right menu-arrow"></i>
       </a>
       <div class="collapse show" id="ui-basic1">
@@ -40,7 +47,7 @@
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic">
         <i class="typcn typcn-briefcase menu-icon"></i>
-        <span class="menu-title">途中から</span>
+        <span class="menu-title">続きから</span>
         <i class="typcn typcn-chevron-right menu-arrow"></i>
       </a>
       <div class="collapse show" id="ui-basic2">
@@ -73,7 +80,7 @@
 
 {% block mainpanel %}
 
-<h4 class="h3 font-weight-bold mb-3">Navigation</h4>
+<h4 class="h3 font-weight-bold mb-3">VCC Navigation（未作成）</h4>
 
 
 <div class="card mb-2">
@@ -102,32 +109,59 @@
       <h4 class="h4 font-weight-bold mb-3">2. ステータス</h4>
     </div>
 
-    <div class="btn-group-toggle btn-group-vertical" data-toggle="buttons">
+    <!-- 縦のボタングループ版 -->
+    {% comment %} <div class="btn-group-toggle btn-group-vertical" data-toggle="buttons">
       <label class="btn btn-sm btn-inverse-secondary">
         <input type="radio" name="options" id="option1" autocomplete="off">
-          <div class="text-left">なし（申込前）</div>
+          <div class="text-left">（申込前）</div>
       </label>
       <label class="btn btn-sm btn-inverse-secondary">
         <input type="radio" name="options" id="option2" autocomplete="off">
-        <div class="text-left">申込書未発行（＝申込はした）</div>
+        <div class="text-left">申込書未発行</div>
       </label>
       <label class="btn btn-sm btn-inverse-secondary">
         <input type="radio" name="options" id="option3" autocomplete="off">
-        <div class="text-left">車両情報未登録（＝登録番号や車検満了日なしでNFS-Webの申込書印刷ボタンは押した）</div>
+        <div class="text-left">車両情報未登録</div>
       </label>
       <label class="btn btn-sm btn-inverse-secondary">
         <input type="radio" name="options" id="option3" autocomplete="off">
-        <div class="text-left">会員証未発行（＝登録番号や車検満了日ありでNFS-Webの申込書印刷ボタンは押した）</div>
+        <div class="text-left">会員証未発行</div>
       </label>
       <label class="btn btn-sm btn-inverse-secondary">
         <input type="radio" name="options" id="option3" autocomplete="off">
-        <div class="text-left">本登録（＝NFS-Webの会員証印刷ボタンは押した）</div>
+        <div class="text-left">本登録</div>
+      </label>
+    </div> {% endcomment %}
+
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+      <label class="btn btn-sm btn-inverse-secondary">
+        <input type="radio" name="options" id="option1" autocomplete="off">(申込前)
+      </label>
+      <label class="btn btn-sm btn-inverse-secondary">
+        <input type="radio" name="options" id="option2" autocomplete="off">申込書未発行
+        <a href="#" class="text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+          data-content="申込はした" ><i class="fa fa-question-circle colorwhite"></i></a>
+      </label>
+      <label class="btn btn-sm btn-inverse-secondary">
+        <input type="radio" name="options" id="option3" autocomplete="off">車両情報未登録
+        <a href="#" class="text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+          data-content="登録番号や車検満了日なしで、NFS-Webの申込書印刷ボタンは押した"><i class="fa fa-question-circle colorwhite"></i></a>
+      </label>
+      <label class="btn btn-sm btn-inverse-secondary">
+        <input type="radio" name="options" id="option3" autocomplete="off">会員証未発行
+        <a href="#" class="text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+          data-content="登録番号や車検満了日がある状態で、NFS-Webの申込書印刷ボタンは押した"><i class="fa fa-question-circle colorwhite"></i></a>
+      </label>
+      <label class="btn btn-sm btn-inverse-secondary">
+        <input type="radio" name="options" id="option3" autocomplete="off">本登録
+        <a href="#" class="text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+          data-content="NFS-Webの会員証印刷ボタンまで押した" ><i class="fa fa-question-circle colorwhite"></i></a>
       </label>
     </div>
+      
+
   </div>
 </div>
-
-<p>聞き方例：ああああ</p>
 
 <div class="card mb-2">
   <div class="card-body p-2">
@@ -170,4 +204,14 @@
 <div class="row justify-content-center m-2">
   <a href="#" class="btn btn-primary ml-auto">Go</a>
 </div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>  
+<script>
+  $(function () {
+      $('[data-toggle="popover"]').popover()
+  });
+</script>
+
+
 {% endblock %}

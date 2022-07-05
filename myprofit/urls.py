@@ -24,5 +24,6 @@ urlpatterns = [
     path('new04_03', views.new04_03, name='new04_03'),
     path('new05_03', views.new05_03, name='new05_03'),
     path('new06_03', views.new06_03, name='new06_03'),
+    path('new07_03', views.new07_03, name='new07_03'),
     
 ]
