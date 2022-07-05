@@ -3,7 +3,7 @@
 {% block title %}PROFIT_mock{% endblock %}
 
 {% block breadcrumb %}
-  {% include 'profit/bread_new_entry.html' %}
+  {% include 'profit/bread_new_cert.html' %}
 {% endblock %}
 
 {% block sidebar %}
@@ -66,9 +66,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
   $(function () {
-    $("#end").attr("href", "{% url 'myprofit:new03' %}") //PROFIT申込画面
+    $("#end").attr("href", "{% url 'myprofit:new03_02' %}") //PROFIT申込画面
      
-    $('#cert').hide();// 会員証印刷ボタンは非表示
+    //$('#cert').hide();// 会員証印刷ボタンは非表示
   });
 
   //PDF開く＆モーダル閉じる
@@ -80,13 +80,13 @@
     $('#exampleModalCenter').modal('hide')
   });
 
-  //$("#cert").click(function () {
-  //  $('#Modal2').modal('show')
-  //});
-  //$("#modal_ok2").click(function () {
-  //  $('#Modal2').modal('hide')
-  //  $('#entry').hide();// 申込書印刷ボタン非表示にする
-  //});
+  $("#cert").click(function () {
+    $('#Modal2').modal('show')
+  });
+  $("#modal_ok2").click(function () {
+    $('#Modal2').modal('hide')
+    $('#entry').hide();// 申込書印刷ボタン非表示にする
+  });
 </script>
 
 {% endblock %}

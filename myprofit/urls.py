@@ -18,10 +18,11 @@ urlpatterns = [
     path('new02_02', views.new02_02, name='new02_02'),
     path('new03_02', views.new03_02, name='new03_02'),
     path('new04_02', views.new04_02, name='new04_02'),
+    path('new07_02', views.new07_02, name='new07_02'),
     path('new01_03', views.new01_03, name='new01_03'),
     path('new02_03', views.new02_03, name='new02_03'),
     path('new04_03', views.new04_03, name='new04_03'),
     path('new05_03', views.new05_03, name='new05_03'),
     path('new06_03', views.new06_03, name='new06_03'),
-
+    
 ]

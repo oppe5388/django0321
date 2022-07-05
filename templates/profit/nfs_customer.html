@@ -346,15 +346,14 @@
       </table>
     </div>
 
-        <span class="text-primary small d-flex justify-content-center mt-2">
-          ※送信で次の画面へ、戻りで画面内容クリア、業務メニューで申込をやめます
-        </span>
-
         <div class="row justify-content-center">
           <div class="d-flex flex-row ">
-            <a href="#" class="btn btn-inverse-dark m-2" id="send">送信</a>
-            <button type="button" class="btn btn-inverse-dark m-2" id="test2">戻り</button>
-            <a href="#" class="btn btn-inverse-dark m-2" id="back2">業務メニュー</a>
+            {% comment %} <button type="button" class="btn btn-inverse-dark m-2" data-toggle="modal" data-target="#exampleModalCenter" id="entry">申込書印刷</button> {% endcomment %}
+            <button type="button" class="btn btn-inverse-dark m-2" id="entry">申込書印刷</button>
+            <a href="#" class="btn btn-inverse-dark m-2" id="cert">会員証印刷</a>
+            <a href="#" class="btn btn-inverse-dark m-2" id="end">終了</a>
+            <a href="#" class="btn btn-inverse-dark m-2" id="history">お客様履歴</a>
+            <!-- 戻る・業務メニュー・お客様一覧検索-->
           </div>
         </div>
 
