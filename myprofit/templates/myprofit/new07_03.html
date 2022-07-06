@@ -11,7 +11,7 @@
 {% endblock %} 
 
 {% block mainpanel %}
-  {% include 'profit/nfs_customer.html' %}
+  {% include 'profit/nfs_customer2.html' %}
 
 
 <!-- モーダル申込書 -->
@@ -69,7 +69,7 @@
     //$('#cert').hide();// 会員証印刷ボタンは非表示
     $('#entry').hide();// 申込書印刷ボタンは非表示
     $("#end").text("業務メニュー");//真ん中のボタンの文字
-    $("#end").attr("href", "{% url 'myprofit:new06_03' %}") //PROFIT申込画面
+    $("#end").attr("href", "{% url 'myprofit:new05_03' %}") //業務メニュー
   });
 
   //PDF開く＆モーダル閉じる
