@@ -27,6 +27,10 @@ urlpatterns = [
     path('new06_03', views.new06_03, name='new06_03'),
     path('new07_03', views.new07_03, name='new07_03'),
 
-    path('service02', views.service02, name='service02'),
+    path('service01_01', views.service01_01, name='service01_01'),
+    path('service02_01', views.service02_01, name='service02_01'),
+    path('service03_01', views.service03_01, name='service03_01'),
+    path('service03_02', views.service03_02, name='service03_02'),
+    path('service04_03', views.service04_03, name='service04_03'),
     
 ]
