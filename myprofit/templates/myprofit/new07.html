@@ -89,4 +89,13 @@
   //});
 </script>
 
+<!-- お客様履歴：別ウインドウ-->
+<script>
+  let button1 = document.getElementById('history');
+  button1.addEventListener('click', () => {
+    let option = 'width=700,height=500,left=100,top=100'
+      let newwin = open('{% url 'myprofit:new08' %}','mywindow', option);
+  });
+</script>
+
 {% endblock %}

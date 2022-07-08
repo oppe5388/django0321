@@ -26,6 +26,9 @@ def new06(request):
 def new07(request):
     return render(request, 'myprofit/new07.html')
 
+def new08(request):
+    return render(request, 'myprofit/new08.html')
+
 def new01_02(request):
     return render(request, 'myprofit/new01_02.html')
 
@@ -58,3 +61,7 @@ def new06_03(request):
 
 def new07_03(request):
     return render(request, 'myprofit/new07_03.html')
+
+
+def service02(request):
+    return render(request, 'myprofit/service02.html')

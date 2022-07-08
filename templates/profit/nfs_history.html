@@ -1,0 +1,183 @@
+{% load static %}
+{% load bootstrap4 %}
+
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}{% endblock %}</title>
+
+  <!-- パンくずリスト -->
+  <!-- Bootstrapを使用するためのリンクタグ設置 -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+    <!-- base:css -->
+    <link href="{% static 'celestialAdmin/template/vendors/typicons.font/font/typicons.css' %}" rel="stylesheet">
+    <link href="{% static 'celestialAdmin/template/vendors/css/vendor.bundle.base.css' %}" rel="stylesheet">
+    <!-- endinject --> 
+    <!-- plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link href="{% static 'celestialAdmin/template/css/vertical-layout-light/style.css' %}" rel="stylesheet">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="{% static 'celestialAdmin/template/images/favicon.png' %}" />
+
+
+  <!-- 点滅 -->
+  <style>
+    .blink {
+      -webkit-animation: blink 1s ease-in-out infinite alternate;
+      animation: blink 1s ease-in-out infinite alternate;
+    }
+    @-webkit-keyframes blink {
+      0% {opacity: 0;}
+      100% {opacity: 1;}
+    }
+    @keyframes blink {
+      0% {opacity: 0;}
+      100% {opacity: 1;}
+    }
+  </style>
+  {% block extra_head %}{% endblock %}
+  </head>
+  
+  <body>
+    <div class="container-scroller">
+      <!-- partial:partials/_navbar.html ←トップバー-->
+
+      <!-- partial -->
+      {% comment %} <div class="container-fluid page-body-wrapper"> {% endcomment %}
+        <!-- partial:partials/_settings-panel.html -->
+        <!-- partial -->
+        
+        <!-- partial:partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        {% block sidebar %}{% endblock %}
+        </nav>
+
+        <!-- partial -->
+        <div class="main-panel">
+          {% comment %} <div class="content-wrapper"> {% endcomment %}
+            {% block mainpanel %}{% endblock %}
+
+            
+<!-- baseを読まない。mainも直に書く -->
+
+            <div class="bg-white d-flex flex-column" style="height: 500px;">
+
+              <div class="bg-light p-1 mx-2">■お客様履歴（410987654：尾凪　花子様）</div>
+              <hr class="p-0 mt-0 border-dark mx-2">
+          
+          
+              <!-- テーブル -->
+              <div class="mx-2 mb-3">
+                <table class="table table-bordered">
+                  <thead class="thead-light">
+                    <tr>
+                      <th class="p-1 align-middle text-center" width="20%"><span class="small font-weight-bold">登録日時</span></th>
+                      <th class="p-1 align-middle text-center" width="20%"><span class="small font-weight-bold">SEQ</span></th>
+                      <th class="p-1 align-middle text-center" width="60%"><span class="small font-weight-bold">内容</span></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="p-1"><span class="small">2022/07/01 09:02:30</td>
+                        <td class="p-1"><span class="small">001234：大磯　太郎</td>
+                        <td class="p-1"><span class="small">■会員証印刷</td>
+                      </tr>
+                    </tr>
+                    <tr>
+                      <td class="p-1"><span class="small">2022/07/01 09:01:55</td>
+                      <td class="p-1"><span class="small">001234：大磯　太郎</td>
+                      <td class="p-1"><span class="small">■申込書印刷</td>
+                    </tr>
+          
+                  </tbody>
+                </table>
+              </div>
+              
+              <!-- 親のflex-columnとmt-autoで下寄せ-->
+              <div class="mt-auto d-flex mb-3 justify-content-center">
+                <button type="button" class="btn btn-inverse-dark m-2" id="close">戻る</button>
+              </div>
+              <!-- 販社にはメモ登録なかったのでコメントアウト-->
+              {% comment %} <div class="mt-auto d-flex mx-2 mb-3 justify-content-center flex-column">
+                <div class="d-flex">
+                  <div class="mr-auto p-2 bd-highlight">メモ登録</div>
+                  <div class="p-2 bd-highlight">販売会社へ</div>
+                </div>
+                <input class="d-flex flex-row form-control" id="#">
+                <button type="button" class="d-flex ml-auto btn btn-inverse-dark m-2" id="#">登録</button>
+              </div>{% endcomment %}
+          
+
+            </div>
+          
+          
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+          
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/locale/ja.js"></script>
+            
+            <!-- 戻るボタンで閉じる-->
+            <script>
+              let closebutton = document.getElementById('close');
+              closebutton.addEventListener('click', () => {
+                  close();
+              });
+            </script>
+
+<!-- baseを読まない。mainも直に書くここまで -->
+
+
+
+
+          {% comment %} </div> {% endcomment %}
+          <!-- content-wrapper ends -->
+          <!-- partial:partials/_footer.html -->
+
+          <footer class="footer">
+            <div class="d-sm-flex justify-content-center justify-content-sm-between">
+              <span class="text-center text-sm-left d-block d-sm-inline-block">Copyright &copy; VccMarsh {% now "Y" %}</span>
+              {% comment %} <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Free <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard </a>templates from Bootstrapdash.com</span> {% endcomment %}
+            </div>
+          </footer>
+
+        </div>
+        <!-- main-panel ends -->
+      {% comment %} </div> {% endcomment %}
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+
+    <!-- パンくずリスト -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js" integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp" crossorigin="anonymous"></script>
+    
+    <!-- base:js -->
+    <script src="{% static 'celestialAdmin/template/vendors/js/vendor.bundle.base.js' %}"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page-->
+    <!-- End plugin js for this page-->
+    <!-- inject:js -->
+    <script src="{% static 'celestialAdmin/template/js/off-canvas.js' %}"></script>
+    <script src="{% static 'celestialAdmin/template/js/hoverable-collapse.js' %}"></script>
+    <script src="{% static 'celestialAdmin/template/js/template.js' %}"></script>
+    <script src="{% static 'celestialAdmin/template/js/settings.js' %}"></script>
+    <script src="{% static 'celestialAdmin/template/js/todolist.js' %}"></script>
+    <!-- endinject -->
+    <!-- plugin js for this page -->
+    <script src="{% static 'celestialAdmin/template/vendors/progressbar.js/progressbar.min.js' %}"></script>
+    <script src="{% static 'celestialAdmin/template/vendors/chart.js/Chart.min.js' %}"></script>
+    <!-- End plugin js for this page -->
+    <!-- Custom js for this page-->
+    <script src="{% static 'celestialAdmin/template/js/dashboard.js' %}"></script>
+    <!-- End custom js for this page-->
+  </body>
+</html>
+
+
+
