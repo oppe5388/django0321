@@ -29,7 +29,7 @@
         <div class="d-flex flex-nowrap">
           <span class="col-3 mb-1">申込担当者ｺｰﾄﾞ</span>
           <span class="text-primary">※</span>
-          <input class="col-2 mb-1" id="tantou_cord">
+          <input class="col-2 mb-1" id="tantou_code">
         </div>
         <div class="d-flex flex-nowrap">
           <span class="col-3 mb-1">申込担当者名</span>
@@ -62,11 +62,11 @@
         <div class="d-flex flex-nowrap">
           <span class="col-3 mb-1">性別</span>
           <span class="text-primary">　</span>
-          <select class="mb-1" id="gender">
+          <select class="col-1 mb-1" id="gender">
             <option value="0">選択してください</option>
-            <option value="">男</option>
-            <option value="">女</option>
-            <option value="">法人</option>
+            <option value="1">男</option>
+            <option value="2">女</option>
+            <option value="3">法人</option>
           </select>
         </div>
         <div class="d-flex flex-nowrap">
@@ -110,18 +110,19 @@
         <div class="d-flex flex-nowrap">
           <span class="col-3 mb-1">ﾒｰｶｰ区分</span>
           <span class="text-primary">※</span>
-          <select class="mb-1" id="maker">
+          <select class="col-2 mb-1" id="maker">
             <option value="0">選択してください</option>
-            <option value="">日産車</option>
-            <option value="">その他</option>
+            <option value="1">日産車</option>
+            <option value="2">その他</option>
           </select>
         </div>
         <div class="d-flex flex-nowrap">
           <span class="col-3 mb-1">車名/車種ｸﾗｽ</span>
           <span class="text-primary">※</span>
           <input class="col-4 mb-1" id="car_name">
-          <select class="mb-1 ml-1" id="car_class">
-            <option value="0">選択してください</option>            
+          <select class="col-2 mb-1 ml-1" id="car_class">
+            <option value="0">選択してください</option>
+            <option value="1">乗用車LL</option>
           </select>
           <a href="" class="btn btn-inverse-dark btn-sm py-0 mb-1 ml-1 d-flex align-items-center">検索</a>
         </div>
@@ -143,7 +144,7 @@
         <div class="d-flex flex-nowrap">
           <span class="col-3 mb-1">登録番号</span>
           <span class="text-primary">　</span>
-          <select class="mb-1" id="plate_no1">
+          <select class="col-2 mb-1" id="plate_no1">
             <option value="0">選択してください</option>            
           </select>
           <input class="col-1 mb-1" id="plate_no2">
@@ -161,11 +162,11 @@
         <div class="d-flex flex-nowrap">
           <span class="col-3 mb-1">新中サ区分</span>
           <span class="text-primary">※</span>
-          <select class="mb-1" id="entry_div">
+          <select class="col-2 mb-1" id="entry_div">
             <option value="0">選択してください</option>
-            <option value="0">新車</option>
-            <option value="0">中古車</option>
-            <option value="0">サービス</option>
+            <option value="1">新車</option>
+            <option value="2">中古車</option>
+            <option value="3">サービス</option>
           </select>
         </div>
         <div class="d-flex flex-nowrap">
@@ -184,8 +185,8 @@
         <div class="d-flex flex-nowrap">
           <span class="col-3 mb-1">ｻｰﾋﾞｽ商品</span>
           <span class="text-primary">※</span>
-          <select class="mb-1" id="prefecture">
-            <option value="">選択してください
+          <select class="col-3 mb-1" id="product">
+            <option value="0">選択してください
             <option value="joyo">メンテプロパック（乗用）
             <option value="ev">メンテプロパック（EV）
             <option value="premium">NISSAN EVあんしんプラスプレミアム
@@ -200,9 +201,9 @@
         <div class="d-flex flex-nowrap">
           <span class="col-3 mb-1">入会ｺｰｽ</span>
           <span class="text-primary">※</span>
-          <select class="mb-1" id="city">
+          <select class="col-5 mb-1" id="course">
             <option value="">選択してください</option>
-            <option value="" data-val="joyo">メンテプロパック30ベーシック</option>
+            <option value="joyo" data-val="">メンテプロパック54車検付きベーシック</option>
           </select>
         </div>
         <div class="d-flex flex-nowrap">
@@ -215,10 +216,10 @@
         <div class="d-flex flex-nowrap">
           <span class="col-3 mb-1">支払手段</span>
           <span class="text-primary">※</span>
-          <select class="mb-1" id="payment">
+          <select class="col-2 mb-1" id="payment">
             <option value="0">選択してください</option>
-            <option value="0">現金</option>
-            <option value="0">日産カード</option>
+            <option value="1">現金</option>
+            <option value="2">日産カード</option>
           </select>
         </div>
 
