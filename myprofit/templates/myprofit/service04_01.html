@@ -3,7 +3,7 @@
 {% block title %}PROFIT_mock{% endblock %}
 
 {% block breadcrumb %}
-  {% comment %} {% include 'profit/bread_new_mente.html' %} {% endcomment %}
+  {% include 'profit/bread_service_cancel.html' %}
 {% endblock %}
 
 {% block sidebar %}
@@ -48,9 +48,9 @@
 </script>
 <script>
   $(function () {
-    $("#back1").attr("href", "{% url 'myprofit:new02_03' %}") //中断ボタン
-    $("#back2").attr("href", "{% url 'myprofit:new02_03' %}") //中断ボタン
-    $("#send").attr("href", "{% url 'myprofit:new05_03' %}") //確認後の送信ボタン
+    $("#back1").attr("href", "{% url 'myprofit:service03_01' %}") //中断ボタン
+    $("#back2").attr("href", "{% url 'myprofit:service03_01' %}") //中断ボタン
+    $("#send").attr("href", "{% url 'myprofit:service07_01' %}") //確認後の送信ボタン
   });
 </script>
 

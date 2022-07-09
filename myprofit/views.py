@@ -74,5 +74,11 @@ def service03_01(request):
 def service03_02(request):
     return render(request, 'myprofit/service03_02.html')
 
+def service04_01(request):
+    return render(request, 'myprofit/service04_01.html')
+
 def service04_03(request):
     return render(request, 'myprofit/service04_03.html')
+
+def service07_01(request):
+    return render(request, 'myprofit/service07_01.html')

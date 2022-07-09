@@ -1,0 +1,76 @@
+{% extends 'profit/profit_base.html' %}
+{% load static %}
+{% block title %}PROFIT_mock{% endblock %}
+
+{% block breadcrumb %}
+  {% include 'profit/bread_service_cancel.html' %}
+{% endblock %}
+
+{% block sidebar %}
+  {% include 'profit/side_new.html' %}
+{% endblock %} 
+
+{% block mainpanel %}
+  {% include 'profit/nfs_customer1.html' %}
+
+
+<!-- モーダル申込取消 -->
+<div class="modal fade" id="exampleModalCenter" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Webページからのメッセージ</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        申込キャンセルしてよろしいでしょうか？<br>
+        よろしければ「OK」を押してください。
+      </div>
+      <div class="modal-footer">
+        <!-- PDF開く＆モーダル閉じる -->
+        <a href="#" class="btn btn-outline-dark" id="modal_ok">OK</a>
+        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">キャンセル</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+  $(function () {
+    $("#entry").text("申込キャンセル") //申込キャンセルにする
+    $("#end").attr("href", "{% url 'myprofit:service03_01' %}") //PROFIT申込画面
+     
+    $('#cert').hide();// 会員証印刷ボタンは非表示
+  });
+
+  //PDF開く＆モーダル閉じる
+  //そのためにはまずshowでモーダル表示しないといけない
+  $("#entry").click(function () {
+    $('#exampleModalCenter').modal('show')
+  });
+  $("#modal_ok").click(function () {
+    $('#exampleModalCenter').modal('hide')
+    $('#status').val('申込ｷｬﾝｾﾙ')
+    $('#entry').removeClass('btn-inverse-dark');//disabledで枠なしになるので、lightにする
+    $('#entry').addClass('disabled btn-outline-light');
+    $('#entry')[0].dataset.target = "#";//モーダル無効に
+  });
+
+</script>
+
+<!-- お客様履歴：別ウインドウ-->
+<script>
+  let button1 = document.getElementById('history');
+  button1.addEventListener('click', () => {
+    let option = 'width=700,height=500,left=100,top=100'
+      let newwin = open('{% url 'myprofit:new08' %}','mywindow', option);
+  });
+</script>
+
+{% endblock %}

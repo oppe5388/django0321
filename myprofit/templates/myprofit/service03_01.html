@@ -3,7 +3,7 @@
 {% block title %}PROFIT_mock{% endblock %}
 
 {% block breadcrumb %}
-  {% comment %} {% include 'profit/bread_new_entry.html' %} {% endcomment %}
+  {% include 'profit/bread_service_cancel.html' %}
 {% endblock %}
 
 {% block sidebar %}
@@ -29,13 +29,13 @@
         <span class="col px-0">登録番号</span>
         <div class="col-4 d-flex flex-column px-1">
           <div class="d-flex flex-row">
-            <select class="col" id="">
+            <select class="col-4 px-1" id="search_plate1">
               <option value="0"></option>
               <option value="1">練馬</option>
             </select>
-            <input class="col" id="">
-            <input class="col-2" id="">
-            <input class="col" id="">
+            <input class="col px-1" id="search_plate2">
+            <input class="col-2 px-1" id="search_plate3">
+            <input class="col px-1" id="search_plate4">
           </div>
           <div class="d-flex flex-row">
             <div class="small">例）品川 123 ｱ 1234</div>
@@ -45,11 +45,11 @@
         
         <button type="button" class="btn btn-info btn-rounded p-1 mx-1" data-container="body" data-toggle="popover" data-html="true" data-placement="bottom"
         title="sample" data-content="
-          ・申込前：N1234A000<br>
-          ・申込書未発行：N1234A111<br>
-          ・車両情報未登録：N1234A222<br>
-          ・会員証未発行：N1234A333<br>
-          ・本登録：N1234A444
+          ・申込前：練馬330さ0000<br>
+          ・申込書未発行：練馬330さ1111<br>
+          ・車両情報未登録：<br>
+          ・会員証未発行：練馬330さ3333<br>
+          ・本登録：練馬330さ4444
           ">vcc
         </button>
         <button type="button" class="ml-auto btn btn-outline-dark blink" id="test">検索</button>
@@ -68,7 +68,7 @@
         <label class="col-3 pl-0">メンテナンス商品会員番号：</label>
         <select class="col-7" id="customer_no">
           <option value="0">（新規申込／契約）</option>
-          <option value="1">410987654　A：メンテプロパック54車検付B　〜20XX/XX/XX</option>
+          <option value="1">410987654　A：メンテプロパック18車検付B　〜20XX/XX/XX</option>
         </select>
       </div>
       <div class="d-flex flex-row align-items-center">
@@ -136,11 +136,11 @@
         <input class="col-4" id="car_model">
       </div>
       <div class="d-flex flex-row align-items-center">
-        <label class="col-3 pl-1">登録No：</label>
+        <label class="col-3 pl-1">登録No(*)：</label>
         <input class="col-4" id="plate_no">
       </div>
       <div class="d-flex flex-row align-items-center">
-        <label class="col-3 pl-1">車台No：</label>
+        <label class="col-3 pl-1">車台No(*)：</label>
         <input class="col-4" id="frame_no">
       </div>
       <p class="">　</p>
@@ -149,14 +149,14 @@
         <input class="col-4">
       </div> {% endcomment %}
       <div class="d-flex flex-row align-items-center">
-        <label class="col-3 pl-1">初度登録年月：</label>
+        <label class="col-3 pl-1">初度登録年月(*)：</label>
         <input class="col-4" id="register_date">
       </div>
       <p class="">　</p>
-      {% comment %} <div class="d-flex flex-row align-items-center">
+      <div class="d-flex flex-row align-items-center">
         <label class="col-3 pl-1">車検満了日(*)：</label>
-        <input class="col-4">
-      </div> {% endcomment %}
+        <input class="col-4" id="inspection">
+      </div>
 
     </div>
   </div>
@@ -174,13 +174,13 @@
       <p class="text-primary" id="message">　</p>
       <div class="d-flex flex-row ">
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-outline-dark disabled" data-toggle="modal" data-target="#" id="entry">申込</button>
-        <button type="button" class="btn btn-outline-dark disabled">申込み取消</button>
-        <a href="{% url 'myprofit:new02' %}" class="ml-auto btn btn-outline-dark">メニューに戻る</a>
+        <button type="button" class="btn btn-outline-dark disabled" data-toggle="modal" data-target="#ModalCenterEntry" id="entry">申込</button>
+        <button type="button" class="btn btn-outline-dark disabled" data-toggle="modal" data-target="#ModalCenterCancel" id="cancel">申込み取消</button>
+        <a href="{% url 'myprofit:service02_01' %}" class="ml-auto btn btn-outline-dark">メニューに戻る</a>
       </div>
 
     </div>
-  </div>
+</div>
 </div>
 
 </div>
@@ -188,12 +188,12 @@
 
 
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!-- Modal申込 -->
+<div class="modal fade" id="ModalCenterEntry" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">メンテプロ - 新車申込／取消</h5>
+        <h5 class="modal-title" id="exampleModalCenterTitle">メンテプロ - サービス契約</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -202,12 +202,34 @@
         申込するためにNFSへ接続します。よろしいですか？
       </div>
       <div class="modal-footer">
-        <a href="{% url 'myprofit:new04' %}" class="btn btn-outline-dark">OK</a>
+        {% comment %} <a href="{% url 'myprofit:service04' %}" class="btn btn-outline-dark">OK</a> {% endcomment %}
         <button type="button" class="btn btn-outline-dark" data-dismiss="modal">キャンセル</button>
       </div>
     </div>
   </div>
 </div>
+
+<!-- Modal申込取消 -->
+<div class="modal fade" id="ModalCenterCancel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">メンテプロ - サービス申込／取消</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        申込み取消するためにNFSへ接続します。よろしいですか？
+      </div>
+      <div class="modal-footer">
+        <a href="{% url 'myprofit:service04_01' %}" class="btn btn-outline-dark">OK</a>
+        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">キャンセル</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <!-- 検索ボタン→テキストを入力 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -224,13 +246,22 @@
     $('#entry').removeClass('blink');
     $('#entry').addClass('disabled');
     $('#entry')[0].dataset.target = "#";//モーダル無効に
-    var search_input = $('#search_input').val();
+    $('#cancel').removeClass('blink');
+    $('#cancel').addClass('disabled');
+    $('#cancel')[0].dataset.target = "#";//モーダル無効に
 
-    if (search_input == "N1234A000" || search_input == "N1234A111" || search_input == "N1234A222" || search_input == "N1234A333"|| search_input == "N1234A444") {
+    //検索の登録番号3つ入れてしまう
+    $('#search_plate1').val(1);
+    $('#search_plate2').val("330");
+    $('#search_plate3').val("ｻ");
+
+    var search_input = $('#search_plate4').val();
+
+    if (search_input == "0000" || search_input == "1111" || search_input == "3333" || search_input == "4444") {
 
       $('#customer_no').val(1);
       $("#menu_cord").val("S0");
-      $("#menu_name").val("メンテプロパック54車検付B");
+      $("#menu_name").val("メンテプロパック18車検付B");
       $("#tantou_cord").val("001234"); // 値を設定
       $("#tantou_name").val("大磯　太郎");
       $("#follow_cord").val("001234");
@@ -243,31 +274,35 @@
 
       $("#car_name").val("ｽｶｲﾗｲﾝ");
       $("#car_model").val("5BA-RV37");
-      //$("#plate_no").val("練馬330さ9876");
+      var plate = "練馬330ｻ" + $('#search_plate4').val();
+      $("#plate_no").val(plate);
       $("#frame_no").val("RV37-130855");
       $("#car_cord").val("15");
 
-      var shodo_date = moment(new Date()).format('YYYY年MM月');//今月
+      var shodo_date = moment(new Date()).add(-3, 'y').format('YYYY年MM月');//3年前
       $("#register_date").val(shodo_date);
-      var shaken_date = moment(new Date()).add(3, 'y').format('YYYY年MM月');//今月
-      //$("#inspection").val(shaken_date);
+      var shaken_date = moment(new Date()).add(2, 'y').format('YYYY年MM月');//2年後
+      $("#inspection").val(shaken_date);
 
       //検索ボタンの点滅やめる
       $('button').removeClass('blink');
 
       //未申込→申込ボタン点滅、メッセージ
-      if (search_input == "N1234A000") {
+      if (search_input == "0000") {
         $('#entry').removeClass('disabled');
         $('#entry').addClass('blink');
-        $("#message").text("内容をご確認の上、よろしければ申込を押してください。");
-        $('#entry')[0].dataset.target = "#exampleModalCenter";//このときだけモーダル有効に
+        //$("#message").text("内容をご確認の上、よろしければ申込を押してください。");
+        $("#message").text("未使用のクーポンがまだあります。新規申し込みを行うには申込みボタンを押してください。");
+        $('#entry')[0].dataset.target = "#ModalCenterEntry";//このときだけモーダル有効に
       }
-      //申込済→エラーメッセージ
-      if (search_input == "N1234A111" || search_input == "N1234A222" || search_input == "N1234A333") {
-        $("#message").text("メンテプロ申込済です。取り消す場合は、注文書入力にてクーポンメニューコードの削除をしてくだい。");
+      //申込済→申込取消ボタンを点滅
+      if (search_input == "1111" || search_input == "3333") {
+        $('#cancel').removeClass('disabled');
+        $('#cancel').addClass('blink');
+        $('#cancel')[0].dataset.target = "#ModalCenterCancel";//このときだけモーダル有効に
       }
       //本登録→エラーメッセージ
-      if (search_input == "N1234A444") {
+      if (search_input == "4444") {
         $("#message").text("クーポン発行済です。");
       }
 
@@ -280,6 +315,11 @@
 <script>
   $(function () {
       $('[data-toggle="popover"]').popover()
+
+      //検索の登録番号3つ入れてしまう
+      $('#search_plate1').val(1);
+      $('#search_plate2').val("330");
+      $('#search_plate3').val("ｻ");
   });
   //↓popoverボタン以外でもクリックで閉じる→テキスト選択不可になるので中止
   {% comment %} $('.popover-dismiss').popover({

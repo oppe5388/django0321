@@ -31,6 +31,8 @@ urlpatterns = [
     path('service02_01', views.service02_01, name='service02_01'),
     path('service03_01', views.service03_01, name='service03_01'),
     path('service03_02', views.service03_02, name='service03_02'),
+    path('service04_01', views.service04_01, name='service04_01'),
     path('service04_03', views.service04_03, name='service04_03'),
+    path('service07_01', views.service07_01, name='service07_01'),
     
 ]
