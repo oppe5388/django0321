@@ -64,12 +64,73 @@
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/locale/ja.js"></script>
 <script>
+  var entry_year = moment(new Date()).format('YYYY');
+  var entry_month = moment(new Date()).format('MM');
+  var entry_day = moment(new Date()).format('DD');
+
   $(function () {
     $("#end").attr("href", "{% url 'myprofit:new03' %}") //PROFIT申込画面
      
     $('#cert').hide();// 会員証印刷ボタンは非表示
+
+    $('#cert_no').val("410987654");
+    $('#status').val("申込書未発行");
+
+    $('#company_code').val("13300");
+    $('#company_name').val("日産プリンスMarsh株式会社");
+    $('#shop_code').val("1E0");
+    $('#shop_name').val("ミッドタウン店");
+    $("#tantou_code").val("001234"); // 値を設定
+    $("#tantou_name").val("大磯　太郎");
+    $('#mente_company_code').val("13300");
+    $('#mente_company_name').val("日産プリンスMarsh株式会社");
+    $('#mente_shop_code').val("1E0");
+    $('#mente_shop_name').val("ミッドタウン店");
+    $("#mente_tantou_code").val("001234"); // 値を設定
+    $("#mente_tantou_name").val("大磯　太郎");
+    $('#company_code2').val("13300");
+    $("#customer_kanji2").val("尾凪　花子");
+
+    $("#customer_kanji").val("尾凪　花子");
+    $("#customer_kana").val("ｵﾅｷﾞ ﾊﾅｺ");
+    $("#birthday_year").val("2000");
+    $("#birthday_month").val("04");
+    $("#birthday_day").val("01");
+    $("#gender").val("女");
+    $("#post_code1").val("171");
+    $("#post_code2").val("0014");
+    $("#address_kanji").val("豊島区池袋9-8-7");
+    $("#tel").val("070-1239-1721");
+    $("#order_no").val("N1234AXXX");  
+
+    $("#maker").val("日産車");
+    $("#car_name").val("ｽｶｲﾗｲﾝ");
+    $("#car_class").val("乗用車LL");
+    $("#car_model").val("5BA-RV37");
+    $("#base_no").val("V37");
+    //$("#plate_no").val("練馬330さ9876");
+    $("#frame_no").val("RV37-130855");
+    $("#car_code").val("15");
+    $("#entry_div").val(1);
+    //var shodo_date = moment(new Date()).format('YYYY年MM月');//今月
+    //$("#register_date").val(shodo_date);
+    //var shaken_date = moment(new Date()).add(3, 'y').format('YYYY年MM月');//今月
+
+    $("#product").val("メンテプロパック（乗用）");
+    $("#course").val("メンテプロパック54車検付きベーシック");
+    $("#price").val("156,920");
+    $("#payment").val("日産カード");
+    
+    //申込日：今日
+
+    $("#entry_year").val(entry_year);
+    $("#entry_month").val(entry_month);
+    $("#entry_day").val(entry_day);
   });
+
 
   //PDF開く＆モーダル閉じる
   //そのためにはまずshowでモーダル表示しないといけない
@@ -78,6 +139,10 @@
   });
   $("#modal_ok").click(function () {
     $('#exampleModalCenter').modal('hide')
+    $('#status').val("車両情報未登録");
+    $("#entry_print_year").val(entry_year);
+    $("#entry_print_month").val(entry_month);
+    $("#entry_print_day").val(entry_day);
   });
 
   //$("#cert").click(function () {
@@ -87,6 +152,7 @@
   //  $('#Modal2').modal('hide')
   //  $('#entry').hide();// 申込書印刷ボタン非表示にする
   //});
+
 </script>
 
 <!-- お客様履歴：別ウインドウ-->
