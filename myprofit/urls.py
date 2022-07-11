@@ -6,6 +6,10 @@ from django.views.generic import TemplateView
 app_name = 'myprofit'
 
 urlpatterns = [
+    path('used06', views.used06, name='used06'),
+    path('used07', views.used07, name='used07'),
+
+
     path('', views.profit_top, name='profit_top'),
     path('new01', views.new01, name='new01'),
     path('new02', views.new02, name='new02'),

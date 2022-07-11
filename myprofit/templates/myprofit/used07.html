@@ -1,0 +1,93 @@
+{% extends 'profit/profit_base.html' %}
+{% load static %}
+{% block title %}PROFIT_mock{% endblock %}
+
+{% block breadcrumb %}
+  {% include 'profit/bread_new_mente.html' %}
+{% endblock %}
+
+{% block sidebar %}
+  {% include 'profit/side_new.html' %}
+{% endblock %} 
+
+{% block mainpanel %}
+  {% include 'profit/nfs_customer2.html' %}
+
+
+<!-- モーダル申込書 -->
+<div class="modal fade" id="exampleModalCenter" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Webページからのメッセージ</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        申込書を印刷します。<br>
+        よろしければ「OK」を押してください。
+      </div>
+      <div class="modal-footer">
+        <!-- PDF開く＆モーダル閉じる -->
+        <a href="/media/uploads/2022/05/01/2022GW他部署稼働状況_0501修正.pdf" target="_blank" class="btn btn-outline-dark" id="modal_ok">OK</a>
+        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">キャンセル</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- モーダル会員証 -->
+<div class="modal fade" id="Modal2" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Webページからのメッセージ</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        印刷してよろしいでしょうか？<br>
+        印刷後は申込キャンセル出来ません、全て解約手続きとなります。<br>
+        よろしければ「OK」を押してください。
+      </div>
+      <div class="modal-footer">
+        <!-- PDF開く＆モーダル閉じる -->
+        <a href="/media/uploads/2022/05/01/2022GW他部署稼働状況_0501修正.pdf" target="_blank" class="btn btn-outline-dark" id="modal_ok2">OK</a>
+        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">キャンセル</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+  $(function () {
+    //$('#cert').hide();// 会員証印刷ボタンは非表示
+    $('#entry').hide();// 申込書印刷ボタンは非表示
+    $("#end").text("業務メニュー");//真ん中のボタンの文字
+    $("#end").attr("href", "{% url 'myprofit:new05_03' %}") //業務メニュー
+  });
+
+  //PDF開く＆モーダル閉じる
+  //そのためにはまずshowでモーダル表示しないといけない
+  $("#entry").click(function () {
+    $('#exampleModalCenter').modal('show')
+  });
+  $("#modal_ok").click(function () {
+    $('#exampleModalCenter').modal('hide')
+  });
+
+  $("#cert").click(function () {
+    $('#Modal2').modal('show')
+  });
+  $("#modal_ok2").click(function () {
+    $('#Modal2').modal('hide')
+    $('#entry').hide();// 申込書印刷ボタン非表示にする
+  });
+</script>
+
+{% endblock %}

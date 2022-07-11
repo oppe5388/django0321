@@ -1,5 +1,20 @@
 from django.shortcuts import render
+from .forms import *
 
+def used06(request):
+    #会員証番号欄
+    searchForm = SearchForm(request.GET)
+    context = {
+        'searchForm': searchForm,
+    }
+
+    return render(request, 'myprofit/used06.html', context)
+
+def used07(request):
+    cert_no =request.POST.get('cert_no')
+
+    return render(request, 'myprofit/used07.html')
+    
 
 def profit_top(request):
     context ={'aaa': ''}

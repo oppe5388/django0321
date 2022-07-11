@@ -28,12 +28,17 @@
     <div class="d-flex bg-light p-1 mx-2">■お客様一覧検索</div>
     <hr class="p-0 mt-0 border-dark mx-2">
 
+    <form class="" action='#' method='get' id="view1">
     <div class="d-flex mx-2">
 
       <div class="col-5 pl-0">
         <div class="d-flex flex-nowrap">
           <span class="col-3 pl-1 pr-0 mb-1">会員証No</span>
-          <input class="col-6 px-0 mb-1" id="#">
+          {% comment %} <input class="col-6 px-0 mb-1" id="#"> {% endcomment %}
+          
+          {{ searchForm.keyword }}
+          
+          
           <button type="button" class="btn btn-info btn-rounded p-1 ml-1" data-container="body" data-toggle="popover" data-html="true" data-placement="bottom"
             title="sample" data-content="
               ・申込前：<br>
@@ -111,7 +116,7 @@
         </thead>
         <tbody>
           <tr>
-            <td class="p-1"><span class="">1</td>
+            <td class="p-1"><span class="" id="test">1</td>
             <td class="p-1"><span class="">13300</td>
             <td class="p-1"><span class="">1E0</td>
             <td class="p-1"><span class="">410987654</td>
@@ -120,7 +125,9 @@
             <td class="p-1"><span class="">練馬 330 ｻ 9876</td>
             <td class="p-1"><span class="">54車検B</td>
             <td class="p-1"><span class="">本登録</td>
-            <td class="p-1"><span class=""><a href="#" class=" btn btn-inverse-dark btn py-1 mb-1" id="view1">照会</a></td>
+            {% comment %} <td class="p-1"><span class=""><a href="#" class=" btn btn-inverse-dark btn py-1 mb-1" id="view1">照会</a></td> {% endcomment %}
+            <input type="hidden" name="cert_no" id="hidden_no">
+            <td class="p-1"><span class=""><button class="btn btn-inverse-dark btn py-1 mb-1" type="submit">照会</button></td>
           </tr>
         </tbody>
       </table>
@@ -128,6 +135,7 @@
 
   </div>
 
+  </form>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -142,5 +150,10 @@
 
     $("#search1").click(function () {
       $('#result1').show();
+      //hidden.valに会員証番号を入れておく→submitしたらvaildのccontextに入れて07へ遷移にする
+      var cert_no = $('#id_keyword').val();
+      $('#hidden_no').val(cert_no);
+      
     });
   </script>
+

@@ -1,0 +1,25 @@
+{% extends 'profit/profit_base.html' %}
+{% load static %}
+{% block title %}PROFIT_mock{% endblock %}
+
+{% block breadcrumb %}
+  {% include 'profit/bread_new_mente.html' %}
+{% endblock %}
+
+{% block sidebar %}
+  {% include 'profit/side_new.html' %}
+{% endblock %} 
+
+{% block mainpanel %}
+  {% include 'profit/nfs_search.html' %}
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+  $(function () {
+    //$("#nfs_menu").attr("href", "{% url 'myprofit:new05_03' %}") //お客様一覧検索
+    $("#view1").attr("action", "{% url 'myprofit:used07' %}") //お客様一覧検索
+  });
+</script>
+
+{% endblock %}
