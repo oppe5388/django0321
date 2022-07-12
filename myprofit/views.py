@@ -1,19 +1,30 @@
 from django.shortcuts import render
 from .forms import *
 
+def used03(request):
+    context = {}
+    return render(request, 'myprofit/used03.html', context)
+
+def used05(request):
+    return render(request, 'myprofit/used05.html')
+
 def used06(request):
-    #会員証番号欄
+    #会員証番号欄→これも未使用なのでcontext = {}で良さそう
     searchForm = SearchForm(request.GET)
     context = {
         'searchForm': searchForm,
     }
-
     return render(request, 'myprofit/used06.html', context)
 
 def used07(request):
-    cert_no =request.POST.get('cert_no')
+    context = {
+        'cert_no': request.GET.get('cert_no'),
+        'cancel_flag': request.GET.get('cancel_flag'),
+    }
+    return render(request, 'myprofit/used07.html', context)
 
-    return render(request, 'myprofit/used07.html')
+def history(request):
+    return render(request, 'myprofit/history.html')
     
 
 def profit_top(request):

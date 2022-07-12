@@ -15,7 +15,10 @@
 {% block sidebar %}
 <ul class="nav">
     
-    <div class="nav-search">
+    <li class="nav-item bg-white">
+      <div class="sidebar-menu-title text-dark">VCCメニュー</div>
+    </li>
+    <div class="nav-search mt-3">
       <div class="input-group">
         <input type="text" class="form-control" placeholder="エラーメッセージ検索">
         <div class="input-group-append">
@@ -25,9 +28,6 @@
         </div>
       </div>
     </div>
-    <li class="nav-item bg-white">
-      <div class="sidebar-menu-title text-dark">VCCメニュー</div>
-    </li>
 
     <li class="nav-item">
       <a class="nav-link py-1 mt-2" data-toggle="collapse" href="#ui-basic1" aria-expanded="false">
@@ -38,9 +38,6 @@
         <ul class="nav flex-column sub-menu">
           <li class="nav-item"> <a class="nav-link" href="{% url 'myprofit:new01' %}">新車</a></li>
           <li class="nav-item"> <a class="nav-link" href="#">中古車（未作成）</a></li>
-          <li class="nav-item"> <a class="nav-link" href="#">中古車（キャンセル）</a></li>
-          <li class="nav-item"> <a class="nav-link" href="#">サービス：コース作業から</a></li>
-          <li class="nav-item"> <a class="nav-link" href="#">サービス：見積・受付・納品から</a></li>
           <li class="nav-item"> <a class="nav-link" href="{% url 'myprofit:service01_01' %}">サービス（キャンセル）</a></li>
         </ul>
       </div>
@@ -210,6 +207,7 @@
 <script>
   $(function () {
       $('[data-toggle="popover"]').popover()
+      $('#sidebar').removeClass('bg-white');
   });
 </script>
 
