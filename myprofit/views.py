@@ -1,23 +1,44 @@
 from django.shortcuts import render
 from .forms import *
 
+def used02(request):
+    context = {
+        'route': request.GET.get('route'),
+    }
+    return render(request, 'myprofit/used02.html', context)
+
 def used03(request):
-    context = {}
+    context = {
+        'route': request.GET.get('route'),
+    }
     return render(request, 'myprofit/used03.html', context)
 
+def used04(request):
+    context = {
+        'route': request.GET.get('route'),
+        'cert_no': request.GET.get('cert_no'),
+        'cancel_flag': request.GET.get('cancel_flag'),
+    }
+    return render(request, 'myprofit/used04.html', context)
+
 def used05(request):
-    return render(request, 'myprofit/used05.html')
+    context = {
+        'route': request.GET.get('route'),
+    }
+    return render(request, 'myprofit/used05.html', context)
 
 def used06(request):
     #会員証番号欄→これも未使用なのでcontext = {}で良さそう
     searchForm = SearchForm(request.GET)
     context = {
         'searchForm': searchForm,
+        'route': request.GET.get('route'),
     }
     return render(request, 'myprofit/used06.html', context)
 
 def used07(request):
     context = {
+        'route': request.GET.get('route'),
         'cert_no': request.GET.get('cert_no'),
         'cancel_flag': request.GET.get('cancel_flag'),
     }

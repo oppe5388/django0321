@@ -3,7 +3,7 @@
 {% block title %}PROFIT_mock{% endblock %}
 
 {% block breadcrumb %}
-  {% include 'profit/bread_used_mente.html' %}
+  {% include 'profit/bread_used.html' %}
 {% endblock %}
 
 {% block sidebar %}
@@ -19,9 +19,9 @@
 
 <script>
   $(function () {
-    $("#search_menu1").attr("href", "{% url 'myprofit:used06' %}") //お客様一覧検索
-    $("#search_menu2").attr("href", "{% url 'myprofit:used06' %}") //お客様一覧検索
-
+    var route = $('#route').val();
+    $("#search_menu1").attr("href", "{% url 'myprofit:used06' %}?route=" +route) //お客様一覧検索
+    $("#search_menu2").attr("href", "{% url 'myprofit:used06' %}?route=" +route) //お客様一覧検索
   });
 </script>
 

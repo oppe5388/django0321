@@ -1,87 +1,8 @@
-{% comment %} <div class="container-fluid">
-    <div class="row mb-0">
-      <div class="col-lg-12 p-2 bg-light">
-          ■ログイン
-      </div>
-    </div>
-
-    
-    <div class="row">
-      <div class="col-lg-12 p-2 bg-white pt-5">
-        <form>
-          <div class="d-flex flex-row align-items-center justify-content-center">
-            <label class="col-4">販売会社コード</label>
-            <input class="col-3 bg-light" value="10300">
-            <span class="col-3 text-primary">(5桁)</span>
-          </div>
-          <div class="d-flex flex-row align-items-center justify-content-center">
-            <label class="col-4">店舗コード（操作担当者）</label>
-            <input class="col-3" value="1E0">
-            <span class="col-3 text-primary">(3桁)</span>
-          </div>
-          <div class="d-flex flex-row align-items-center justify-content-center">
-            <label class="col-4">担当者コード（操作担当者）</label>
-            <input class="col-3" value="001234">
-            <span class="col-3 text-primary">(6桁)</span>
-          </div>
-          <div class="d-flex flex-row align-items-center justify-content-center">
-            <label class="col-4">担当者名（操作担当者）</label>
-            <input class="col-3" value="大磯　太郎">
-            <span class="col-3 text-primary">(全角10文字)</span>
-          </div>
-          <div class="d-flex flex-row align-items-center justify-content-center">
-            <label class="col-4">NFSログインパスワード</label>
-            <input class="col-3" value="●●●●●●">
-            <span class="col-3 text-primary">(半角6文字)</span>
-          </div>
-        
-        <hr>
-  
-        <div class="row justify-content-center">
-          <div class="d-flex flex-row ">
-
-            <button type="button" class="btn btn-inverse-dark m-2" id="test1">送信</button>
-            <button type="button" class="btn btn-inverse-dark m-2" id="clear">消去</button>
-            <a href="#" class="btn btn-inverse-dark m-2" id="back1">中断</a>
-
-            
-          </div>
-        </div>
-
-        </form>
-
-        <!-- ここから確認画面-->
-        <div id="confirm">
-          <div class="d-flex flex-row align-items-center justify-content-center">
-            <span class="">いつもご利用いただきありがとうございます。</span>
-          </div>
-          <div class="d-flex flex-row align-items-center justify-content-center">
-            <span class="">　</span>
-          </div>
-          <div class="d-flex flex-row align-items-center justify-content-center">
-            <span class="col-4 mb-2">日産プリンスMarsh株式会社</span>
-          </div>
-          <div class="d-flex flex-row align-items-center justify-content-center">
-            <span class="col-4 mb-2">VCC店</span>
-          </div>
-          <div class="d-flex flex-row align-items-center justify-content-center">
-            <span class="col-4 mb-2">大磯　太郎　様</span>
-          </div>
-
-          <hr>
-  
-          <div class="row justify-content-center">
-            <div class="d-flex flex-row ">
-              <a href="#" class="btn btn-inverse-dark m-2" id="send">送信</a>
-              <button type="button" class="btn btn-inverse-dark m-2" id="test2">戻る</button>
-              <a href="#" class="btn btn-inverse-dark m-2" id="back2">中断</a>
-            </div>
-          </div>
-        </div>      
-      </div>
-    </div>
-  </div>
-</div> {% endcomment %}
+<form class="" action='#' method='get' id="view1">
+  <input type="hidden" name="route" id="route" value="{{route}}">
+  <input type="hidden" name="cert_no" id="hidden_no" value="{{cert_no}}">
+  <input type="hidden" name="cancel_flag" id="cancel_flag" value="{{cancel_flag}}">
+</form>
 
   <div class="bg-white" style="height: 600px;">
 
@@ -100,7 +21,7 @@
         <form>
           <div class="d-flex flex-row align-items-center justify-content-center">
             <label class="col-4">販売会社コード</label>
-            <input class="col-3" value="10300" disabled>
+            <input class="col-3" value="13300" disabled>
             <span class="col-3 text-primary">(5桁)</span>
           </div>
           <div class="d-flex flex-row align-items-center justify-content-center">
@@ -129,9 +50,9 @@
         <div class="row justify-content-center">
           <div class="d-flex flex-row ">
             {% comment %} <button type="button" class="btn btn-outline-dark m-2" data-toggle="modal" data-target="#exampleModalCenter" id="send">送信</button> {% endcomment %}
-            <button type="button" class="btn btn-inverse-dark m-2" id="test1">送信</button>
+            <button type="button" class="btn btn-inverse-dark m-2" id="send1">送信</button>
             <button type="button" class="btn btn-inverse-dark m-2" id="clear">消去</button>
-            <a href="#" class="btn btn-inverse-dark m-2" id="back1">中断</a>
+            <a href="#" class="btn btn-inverse-dark m-2" id="end1">中断</a>
 
             
           </div>
@@ -151,7 +72,7 @@
             <span class="col-4 mb-2">日産プリンスMarsh株式会社</span>
           </div>
           <div class="d-flex flex-row align-items-center justify-content-center">
-            <span class="col-4 mb-2">VCC店</span>
+            <span class="col-4 mb-2">ミッドタウン店</span>
           </div>
           <div class="d-flex flex-row align-items-center justify-content-center">
             <span class="col-4 mb-2">大磯　太郎　様</span>
@@ -161,9 +82,9 @@
   
           <div class="row justify-content-center">
             <div class="d-flex flex-row ">
-              <a href="#" class="btn btn-inverse-dark m-2" id="send">送信</a>
-              <button type="button" class="btn btn-inverse-dark m-2" id="test2">戻る</button>
-              <a href="#" class="btn btn-inverse-dark m-2" id="back2">中断</a>
+              <a href="#" class="btn btn-inverse-dark m-2" id="send2">送信</a>
+              <button type="button" class="btn btn-inverse-dark m-2" id="modoru">戻る</button>
+              <a href="#" class="btn btn-inverse-dark m-2" id="end2">中断</a>
             </div>
           </div>
         </div>      
@@ -180,12 +101,16 @@
       $('#confirm').hide();//最初は非表示
     });
 
-    $("#test1").click(function () {
+    $("#send1").click(function () {
       $('form').hide();
       $('#confirm').show();
     });
 
-    $("#test2").click(function () {
+    $("#clear").click(function () {
+      $('input').val(""); //inputすべて
+    });
+
+    $("#modoru").click(function () {
       $('form').show();
       $('#confirm').hide();      
     });

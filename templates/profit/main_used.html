@@ -1,0 +1,85 @@
+<form class="" action='#' method='get' id="view1">
+  <input type="hidden" name="route" id="route" value="{{route}}">
+</form>
+
+<div id="main">
+<div class="row" id="main">
+  <div class="col-lg-12 stretch-card p-2">
+    <div class="card">
+      <h5 class="card-title m-2 mx-auto">受注・納車・回収</h5>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-4 d-flex grid-margin stretch-card p-2">
+    <div class="card">
+      <h4 class="card-title my-1 mx-auto">CAP</h4>
+      <hr>
+      <div class="card-body p-2">
+        <div class="font-weight-bold">【受注】</div>
+        <ul class="list-unstyled">
+        <li>　</li><li>　</li><li>　</li><li>　</li>
+        </ul>
+        <div class="font-weight-bold">【納車・回収】</div>
+        <ul class="list-unstyled">
+          <li>　</li><li>　</li><li>　</li><li>　</li><li>　</li>
+        </ul>
+        <div class="font-weight-bold">【商談】</div>
+        <ul class="list-unstyled">
+          <li>　</li><li>　</li><li>　</li><li>　</li><li>　</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-4 d-flex grid-margin stretch-card p-2">
+    <div class="card">
+      <h4 class="card-title my-1 mx-auto">店舗オンライン</h4>
+      <hr>
+      <div class="card-body p-2">
+        <div class="font-weight-bold">【受注】</div>
+        <ul class="list-unstyled">
+          <li>　</li><li>　</li><li>　</li><li>　</li>
+        </ul>
+        <div class="font-weight-bold">【納車・回収】</div>
+        <ul class="list-unstyled ml-3">
+          <li id="entry"><a href="{% url 'myprofit:used03' %}?route={{route}}">メンテプロ申込書印刷<i class="typcn typcn-chevron-right menu-arrow"></i></a></li>
+          <li id="cert"><a href="{% url 'myprofit:used03' %}?route={{route}}">メンテプロ会員証印刷 <i class="typcn typcn-chevron-right menu-arrow"></i></a></li>
+          <li id="mente"><a href="{% url 'myprofit:used04' %}?route={{route}}">NFSメンテトップメニュー <i class="typcn typcn-chevron-right menu-arrow"></i></a></li>
+          <li>他社メンテプロ（自社会員対応） <i class="typcn typcn-chevron-right menu-arrow"></i></li>
+          <li>　</li>
+        </ul>
+        <div class="font-weight-bold">【商談】</div>
+        <ul class="list-unstyled">
+          <li>　</li><li>　</li><li>　</li><li>　</li><li>　</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+
+  <div class="col-4 d-flex grid-margin stretch-card p-2">
+    <div class="card">
+      <h4 class="card-title my-1 mx-auto">本部オンライン</h4>
+      <hr>
+      <div class="card-body p-2">
+        <div class="font-weight-bold">【受注】</div>
+        <ul class="list-unstyled">
+        <li>　</li><li>　</li><li>　</li><li>　</li>
+        </ul>
+        <div class="font-weight-bold">【納車・回収】</div>
+        <ul class="list-unstyled">
+          <li>　</li><li>　</li><li>　</li><li>　</li><li>　</li>
+        </ul>
+        <div class="font-weight-bold">【商談】</div>
+        <ul class="list-unstyled">
+          <li>　</li><li>　</li><li>　</li><li>　</li><li>　</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>

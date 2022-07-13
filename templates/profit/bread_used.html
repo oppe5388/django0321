@@ -1,0 +1,34 @@
+{% with request.resolver_match.url_name as url_name %}
+    <div class="nav-item d-flex m-0 h6 d-flex flex-wrap">
+      {% if route == "entry" %}
+        <li class="text-primary mr-2">中古車×申込書ボタン：</li>
+        <div class="d-flex flex-column px-1">
+          <div class="d-flex">
+
+          </div>
+        </div>
+
+      {% elif route == "cert" %}
+        <li class="text-primary mr-2">中古車×会員証ボタン：</li>
+        <div class="d-flex flex-column px-1">
+          <div class="d-flex">
+
+          </div>
+        </div>
+
+      {% elif route == "mente" %}
+        <li class="text-primary mr-2">中古車×メンテトップ：</li>
+        <div class="d-flex flex-column px-1">
+          <div class="d-flex">
+            <li class="breadcrumb-item {% if url_name == 'used03' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:used03' %}?route=mente">中古車契約</a></li>
+            <li class="breadcrumb-item {% if url_name == 'used05' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:used05' %}?route=mente">連携業務メニュー</a></li>
+            <li class="breadcrumb-item {% if url_name == 'used06' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:used06' %}?route=mente">お客様一覧検索</a></li>
+            <li class="breadcrumb-item {% if url_name == 'used07' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:used07' %}?route=mente">会員情報</a></li>
+          </div>
+          {% comment %} <div class="d-flex">
+            <li class="breadcrumb-item {% if url_name == 'used07' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:used07' %}">会員情報</a></li>
+          </div> {% endcomment %}
+        </div>
+      {% endif %}
+    </div>
+{% endwith %}
