@@ -21,13 +21,15 @@
     //$("#end1").attr("href", "{% url 'myprofit:new02_03' %}") //中断ボタン
     //$("#end2").attr("href", "{% url 'myprofit:new02_03' %}") //中断ボタン
 
-    //routeが申込書or会員証なら、07へ。メンテトップからなら05へ
+    //routeが申込書なら05entryへ。会員証なら07へ。メンテトップからなら05へ
     var route = $('#route').val();
-    //点滅
-    if (route == "entry" || route == "cert" ) {
-      $("#send2").attr("href", "{% url 'myprofit:used07' %}?route=" +route) //確認後の送信ボタン
+    //確認後の送信ボタン
+    if (route == "entry" ) {
+      $("#view1").attr("action", "{% url 'myprofit:used05entry' %}")
+    } else if (route == "cert" ) {
+      $("#view1").attr("action", "{% url 'myprofit:used07' %}")
     } else if (route == "mente" ) {
-      $("#send2").attr("href", "{% url 'myprofit:used05' %}?route=" +route) //確認後の送信ボタン
+      $("#view1").attr("action", "{% url 'myprofit:used05' %}")
     }
     
   });

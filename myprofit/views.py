@@ -21,6 +21,13 @@ def used04(request):
     }
     return render(request, 'myprofit/used04.html', context)
 
+def used05entry(request):
+    context = {
+        'route': request.GET.get('route'),
+        'cert_no': request.GET.get('cert_no'),
+    }
+    return render(request, 'myprofit/used05entry.html', context)
+
 def used05(request):
     context = {
         'route': request.GET.get('route'),
@@ -35,6 +42,14 @@ def used06(request):
         'route': request.GET.get('route'),
     }
     return render(request, 'myprofit/used06.html', context)
+
+def used06confirm(request):
+    context = {
+        'route': request.GET.get('route'),
+        'cert_no': request.GET.get('cert_no'),
+        'cancel_flag': request.GET.get('cancel_flag'),
+    }
+    return render(request, 'myprofit/used06confirm.html', context)
 
 def used07(request):
     context = {

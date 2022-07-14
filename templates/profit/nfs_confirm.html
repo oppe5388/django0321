@@ -1,3 +1,8 @@
+<form class="" action='#' method='get' id="view1">
+  <input type="hidden" name="route" id="route" value="{{route}}">
+  <input type="hidden" name="cert_no" id="hidden_no" value="{{cert_no}}">
+  <input type="hidden" name="cancel_flag" id="cancel_flag" value="{{cancel_flag}}">
+
 <div class="bg-white" style="height: 750px;">
 
   <div class="p-0 mb-2">
@@ -18,7 +23,7 @@
       <div class="col-6">
         <div class="d-flex flex-nowrap mb-1">
           <span class="col-4">販売会社</span>
-          <span class="">：10330</span>
+          <span class="">：13300</span>
         </div>
         <div class="d-flex flex-nowrap mb-1">
           <span class="col-4">申込店舗</span>
@@ -51,7 +56,7 @@
         </div>
         <div class="d-flex flex-nowrap mb-1">
           <span class="col-4">生年月日</span>
-          <span class="">：</span>
+          <span class="">：2000年04月01日</span>
         </div>
         <div class="d-flex flex-nowrap mb-1">
           <span class="col-4">性別</span>
@@ -83,7 +88,7 @@
       <div class="col-6">
         <div class="d-flex flex-nowrap mb-1">
           <span class="col-4">注文書No</span>
-          <span class="">：N1234AXXX</span>
+          <span class="">：</span>
         </div>
         <div class="d-flex flex-nowrap mb-1">
           <span class="col-4">車台型式</span>
@@ -111,11 +116,11 @@
         </div>
         <div class="d-flex flex-nowrap mb-1">
           <span class="col-4">車台番号</span>
-          <span class="">：RV37130855</span>
+          <span class="">：RV37-130855</span>
         </div>
         <div class="d-flex flex-nowrap mb-1">
           <span class="col-4">新中サ区分</span>
-          <span class="">：新車</span>
+          <span class="">：サービス</span>
         </div>
         <div class="d-flex flex-nowrap mb-1">
           <span class="col-4">初度登録年月</span>
@@ -134,11 +139,11 @@
         </div>
         <div class="d-flex flex-nowrap mb-1">
           <span class="col-4">入会ｺｰｽ</span>
-          <span class="">：メンテプロパック54車検付きベーシック</span>
+          <span class="">：メンテプロパック18車検付きベーシック</span>
         </div>
         <div class="d-flex flex-nowrap mb-1">
           <span class="col-4 ">お支払額</span>
-          <span class="">：156,920円</span>
+          <span class="">：85,690円</span>
           <span class="text-primary small d-flex align-items-end">(消費税込み)</span>
         </div>
         <div class="d-flex flex-nowrap mb-1">
@@ -158,11 +163,13 @@
 
     <div class="d-flex flex-row justify-content-center">
         <a href="#" class="btn btn-inverse-dark m-2" id="send1">送信</a>
-        <a href="#" class="btn btn-inverse-dark m-2" id="test1">戻る</a>
+        {% comment %} <a href="#" class="btn btn-inverse-dark m-2" id="test1">戻る</a> {% endcomment %}
+        <button class="btn btn-inverse-dark m-2" type="submit" id="test1">戻る</button>
         <a href="#" class="btn btn-inverse-dark m-2" id="back1">中断</a>
     </div>
     <div class="d-flex flex-row justify-content-center">
-      <a href="#" class="btn btn-inverse-warning m-2 px-5" id="recommend">おすすめ商品確認</a>
+      {% comment %} <a href="#" class="btn btn-inverse-warning m-2 px-5" id="recommend">おすすめ商品確認</a> {% endcomment %}
+      <button type="button" class="btn btn-inverse-warning m-2 px-5" id="recommend">おすすめ商品確認</button>
     </div>
 
  </div>
@@ -188,7 +195,7 @@
         </div>
         <div class="d-flex flex-nowrap mb-1">
           <span class="col-4">会員証No</span>
-          <span class="">：410987654</span>
+          <span class="">：</span>
         </div>
         <div class="d-flex flex-nowrap mb-1">
           <span class="col-4">氏名漢字</span>
@@ -200,7 +207,7 @@
         </div>
         <div class="d-flex flex-nowrap mb-1">
           <span class="col-4">注文書No</span>
-          <span class="">：N1234A000</span>
+          <span class="">：</span>
         </div>
         <div class="d-flex flex-nowrap mb-1">
           <span class="col-4">　</span>
@@ -211,7 +218,7 @@
         </div>
         <div class="d-flex flex-nowrap mb-1">
           <span class="col-4">入会ｺｰｽ</span>
-          <span class="">：メンテプロパック54車検付きベーシック</span>
+          <span class="" id="course">：メンテプロパック18車検付きベーシック</span>
         </div>
 
       </div>
@@ -242,7 +249,7 @@
         </div>
         <div class="d-flex flex-nowrap mb-1">
           <span class="col-4 ">お支払額</span>
-          <span class="">：156,920円</span>
+          <span class="">：85,690円</span>
           <span class="text-primary small d-flex align-items-end">(消費税込み)</span>
         </div>
         <div class="d-flex flex-nowrap mb-1">
@@ -284,14 +291,60 @@
 
 
     <div class="d-flex flex-row justify-content-center">
-        <a href="#" class="btn btn-inverse-dark m-2" id="send2">送信</a>
+        {% comment %} <a href="#" class="btn btn-inverse-dark m-2" id="send2">送信</a> {% endcomment %}
+        <button class="btn btn-inverse-dark m-2" type="submit" id="send2">送信</button>
     </div>
 
   </div>
       
-
-
 </div>
+
+</form>
+
+
+<!-- ページ表示時のおすすめ警告モーダル作る-->
+<div class="modal fade" id="Modal1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Webページからのメッセージ</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        その他おすすめ商品が存在します。<br>
+        おすすめ商品は「受付申込確認画面」の下段に「おすすめ商品」ボタンが表示されますのでご確認ください。
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- おすすめ商品ボタンのモーダル作る-->
+<div class="modal fade" id="Modal2" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Webページからのメッセージ</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        【おすすめ商品】<br>
+        ・メンテプロパック長得18車検付きベーシック
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

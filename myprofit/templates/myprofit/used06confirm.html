@@ -1,0 +1,49 @@
+{% extends 'profit/profit_base.html' %}
+{% load static %}
+{% block title %}PROFIT_mock{% endblock %}
+
+{% block breadcrumb %}
+  {% include 'profit/bread_used.html' %}
+{% endblock %}
+
+{% block sidebar %}
+  {% include 'profit/side_used.html' %}
+{% endblock %} 
+
+{% block mainpanel %}
+  {% include 'profit/nfs_confirm.html' %}
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+  $(function () {
+    $("#nfs_menu").attr("href", "{% url 'myprofit:new05_03' %}") //お客様一覧検索
+    $("#back1").attr("href", "{% url 'myprofit:used03' %}?route=entry") //中断ボタン
+
+    //コースが18だったら、はじめにおすすめ警告モーダルを表示、ボタンも表示
+    if($('#course').text() == '：メンテプロパック18車検付きベーシック' ){
+      $('#Modal1').modal('show');
+    }else{
+      $('#recommend').hide();
+    }
+    
+  });
+
+  //おすすめ商品ボタン
+  $("#recommend").click(function () {
+    $('#Modal2').modal('show')
+  });
+
+  //戻るボタン：先を03に変更してcontext送信
+  $("#test1").click(function () {
+    $("#view1").attr("action", "{% url 'myprofit:used05entry' %}")//戻る
+  });
+
+  //確認後の送信ボタン：先を07に変更してcontext送信
+  $("#send2").click(function () {
+    $("#view1").attr("action", "{% url 'myprofit:used07' %}")//確認後の送信ボタン
+  });
+</script>
+
+{% endblock %}

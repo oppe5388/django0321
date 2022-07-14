@@ -93,6 +93,7 @@
     $('#entry').hide();// 申込書印刷ボタンは非表示
     $('#cancel').hide();// 申込キャンセルは非表示
     $("#end").text("業務メニュー");//真ん中のボタンの文字
+    var route = $('#route').val();
     $("#end").attr("href", "{% url 'myprofit:used05' %}?route=" +route) //業務メニュー
     
     var cert_no = $('#cert_no').val();

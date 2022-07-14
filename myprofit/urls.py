@@ -10,7 +10,9 @@ urlpatterns = [
     path('used03', views.used03, name='used03'),
     path('used04', views.used04, name='used04'),
     path('used05', views.used05, name='used05'),
+    path('used05entry', views.used05entry, name='used05entry'),
     path('used06', views.used06, name='used06'),
+    path('used06confirm', views.used06confirm, name='used06confirm'),
     path('used07', views.used07, name='used07'),
 
     path('history', views.history, name='history'),

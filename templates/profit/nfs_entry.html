@@ -1,17 +1,27 @@
 {% comment %} <div class="container-fluid"> {% endcomment %}
+<form class="" action='#' method='get' id="view1">
+  <input type="hidden" name="route" id="route" value="{{route}}">
+  <input type="hidden" name="cert_no" id="hidden_no" value="{{cert_no}}">
+  <input type="hidden" name="cancel_flag" id="cancel_flag" value="{{cancel_flag}}">
+
 
   <div class="bg-white" style="height: 1000px;">
 
-  <div class="p-0 mb-2">
-    <div class="col-12 bg-light p-0 mb-0">
-      <div class="d-flex flex-row navbar">
-        <a href="#" class="text-dark text-decoration-none small pr-2 border border-dark border-left-0 border-top-0 border-bottom-0">販売店メニューに戻る</a>
+    <div class="p-0 mb-2">
+      <div class="col-12 bg-light p-0 mb-0">
+        <div class="d-flex flex-row navbar">
+          <a href="#" class="text-dark text-decoration-none small pr-2 border border-dark border-left-0 border-top-0 border-bottom-0">販売店メニューに戻る</a>
+        </div>
       </div>
     </div>
-  </div>
 
 
-    <div class="d-flex bg-light p-1 mx-2">■メンテプロパック　受付申込登録</div>
+    <div class="d-flex bg-light p-1 mx-2">■メンテプロパック　受付申込登録
+      <button type="button" class="btn btn-info btn-rounded p-1 ml-1" data-container="body" data-toggle="popover" data-html="true" data-placement="right"
+      data-content="本来は入力しますが、そのまま送信
+        ">vcc
+      </button>
+    </div>
     <hr class="p-0 mt-0 border-dark mx-2">
 
     {% comment %} <div class="d-flex mx-2"> {% endcomment %}
@@ -145,7 +155,8 @@
           <span class="col-3 mb-1">登録番号</span>
           <span class="text-primary">　</span>
           <select class="col-2 mb-1" id="plate_no1">
-            <option value="0">選択してください</option>            
+            <option value="0">選択してください</option>  
+            <option value="1">練馬</option>          
           </select>
           <input class="col-1 mb-1" id="plate_no2">
           <input class="col-1 mb-1" id="plate_no3">
@@ -187,7 +198,7 @@
           <span class="text-primary">※</span>
           <select class="col-3 mb-1" id="product">
             <option value="0">選択してください
-            <option value="joyo">メンテプロパック（乗用）
+            <option value="1">メンテプロパック（乗用）
             <option value="ev">メンテプロパック（EV）
             <option value="premium">NISSAN EVあんしんプラスプレミアム
             <option value="chotoku">メンテプロパック長得（乗用）
@@ -203,7 +214,8 @@
           <span class="text-primary">※</span>
           <select class="col-5 mb-1" id="course">
             <option value="">選択してください</option>
-            <option value="joyo" data-val="">メンテプロパック54車検付きベーシック</option>
+            <option value="1" data-val="">メンテプロパック54車検付きベーシック</option>
+            <option value="2" data-val="">メンテプロパック18車検付きベーシック</option>
           </select>
         </div>
         <div class="d-flex flex-nowrap">
@@ -229,7 +241,8 @@
 
         <div class="row justify-content-center">
           <div class="d-flex flex-row ">
-            <a href="#" class="btn btn-inverse-dark m-2" id="send">送信</a>
+            {% comment %} <a href="#" class="btn btn-inverse-dark m-2" id="send">送信</a> {% endcomment %}
+            <button class="btn btn-inverse-dark m-2" type="submit" id="send">送信</button>
             <button type="button" class="btn btn-inverse-dark m-2" id="test2">戻り</button>
             <a href="#" class="btn btn-inverse-dark m-2" id="back2">業務メニュー</a>
           </div>
@@ -238,6 +251,8 @@
         
     {% comment %} </div> {% endcomment %}
   </div>
+
+</form>
 {% comment %} </div> {% endcomment %}
 
 
@@ -248,23 +263,7 @@
 
   <script>
     $(function() {
+      $('[data-toggle="popover"]').popover()
       $('#confirm').hide();//最初は非表示
     });
-
   </script>
-
-<!-- サービス商品と入会コースのプルダウン連動-->
-<script>
-  var $city = $('select[id="city"]');
-  $('select[id="prefecture"]').change(function() {
-    var val1 = $(this).val();  
-    $city.find('option').each(function() {
-      var val2 = $(this).data('val');
-      if (val1 === val2) {
-        $(this).show();
-      }else {
-        $(this).hide();
-      }
-    })
-  })
-</script>

@@ -2,7 +2,7 @@
   <input type="hidden" name="route" id="route" value="{{route}}">
   <input type="hidden" name="cert_no" id="hidden_no" value="{{cert_no}}">
   <input type="hidden" name="cancel_flag" id="cancel_flag" value="{{cancel_flag}}">
-</form>
+
 
   <div class="bg-white" style="height: 600px;">
 
@@ -18,7 +18,7 @@
     <hr class="p-0 mt-0 border-dark mx-2">
   
       <div class="col-lg-12 p-2 bg-white pt-5">
-        <form>
+        <div id="initial">
           <div class="d-flex flex-row align-items-center justify-content-center">
             <label class="col-4">販売会社コード</label>
             <input class="col-3" value="13300" disabled>
@@ -45,20 +45,18 @@
             <span class="col-3 text-primary">(半角6文字)</span>
           </div>
         
-        <hr>
+          <hr>
   
-        <div class="row justify-content-center">
-          <div class="d-flex flex-row ">
-            {% comment %} <button type="button" class="btn btn-outline-dark m-2" data-toggle="modal" data-target="#exampleModalCenter" id="send">送信</button> {% endcomment %}
-            <button type="button" class="btn btn-inverse-dark m-2" id="send1">送信</button>
-            <button type="button" class="btn btn-inverse-dark m-2" id="clear">消去</button>
-            <a href="#" class="btn btn-inverse-dark m-2" id="end1">中断</a>
-
-            
-          </div>
+          <div class="row justify-content-center">
+            <div class="d-flex flex-row ">
+              {% comment %} <button type="button" class="btn btn-outline-dark m-2" data-toggle="modal" data-target="#exampleModalCenter" id="send">送信</button> {% endcomment %}
+              <button type="button" class="btn btn-inverse-dark m-2" id="send1">送信</button>
+              <button type="button" class="btn btn-inverse-dark m-2" id="clear">消去</button>
+              <a href="#" class="btn btn-inverse-dark m-2" id="end1">中断</a>
+            </div>
         </div>
 
-        </form>
+        </div>
 
         <!-- ここから確認画面-->
         <div id="confirm">
@@ -82,14 +80,15 @@
   
           <div class="row justify-content-center">
             <div class="d-flex flex-row ">
-              <a href="#" class="btn btn-inverse-dark m-2" id="send2">送信</a>
+              {% comment %} <a href="#" class="btn btn-inverse-dark m-2" id="send2">送信</a> {% endcomment %}
+              <button class="btn btn-inverse-dark m-2" type="submit" id="send2">送信</button>
               <button type="button" class="btn btn-inverse-dark m-2" id="modoru">戻る</button>
               <a href="#" class="btn btn-inverse-dark m-2" id="end2">中断</a>
             </div>
           </div>
         </div>      
       </div>
-
+</form>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -102,7 +101,7 @@
     });
 
     $("#send1").click(function () {
-      $('form').hide();
+      $('#initial').hide();
       $('#confirm').show();
     });
 
@@ -111,7 +110,7 @@
     });
 
     $("#modoru").click(function () {
-      $('form').show();
+      $('#initial').show();
       $('#confirm').hide();      
     });
   </script>

@@ -4,7 +4,12 @@
         <li class="text-primary mr-2">中古車×申込書ボタン：</li>
         <div class="d-flex flex-column px-1">
           <div class="d-flex">
-
+            <li class="breadcrumb-item {% if url_name == 'used02' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:used02' %}?route=entry">受注・納車・回収</a></li>
+            <li class="breadcrumb-item {% if url_name == 'used03' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:used03' %}?route=entry">中古車契約</a></li>
+            <li class="breadcrumb-item {% if url_name == 'used04' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:used04' %}?route=entry">NFSログイン</a></li>
+            <li class="breadcrumb-item {% if url_name == 'used05entry' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:used05entry' %}?route=entry">受付申込登録</a></li>
+            <li class="breadcrumb-item {% if url_name == 'used06confirm' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:used06confirm' %}?route=entry">受付申込登録</a></li>
+            <li class="breadcrumb-item {% if url_name == 'used07' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:used07' %}?route=entry">会員情報</a></li>
           </div>
         </div>
 
@@ -12,7 +17,10 @@
         <li class="text-primary mr-2">中古車×会員証ボタン：</li>
         <div class="d-flex flex-column px-1">
           <div class="d-flex">
-
+            <li class="breadcrumb-item {% if url_name == 'used02' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:used02' %}?route=cert">受注・納車・回収</a></li>
+            <li class="breadcrumb-item {% if url_name == 'used03' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:used03' %}?route=cert">中古車契約</a></li>
+            <li class="breadcrumb-item {% if url_name == 'used04' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:used04' %}?route=cert">NFSログイン</a></li>
+            <li class="breadcrumb-item {% if url_name == 'used07' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:used07' %}?route=cert">会員情報</a></li>
           </div>
         </div>
 
@@ -20,7 +28,8 @@
         <li class="text-primary mr-2">中古車×メンテトップ：</li>
         <div class="d-flex flex-column px-1">
           <div class="d-flex">
-            <li class="breadcrumb-item {% if url_name == 'used03' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:used03' %}?route=mente">中古車契約</a></li>
+            <li class="breadcrumb-item {% if url_name == 'used02' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:used02' %}?route=mente">受注・納車・回収</a></li>
+            <li class="breadcrumb-item {% if url_name == 'used04' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:used04' %}?route=mente">NFSログイン</a></li>
             <li class="breadcrumb-item {% if url_name == 'used05' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:used05' %}?route=mente">連携業務メニュー</a></li>
             <li class="breadcrumb-item {% if url_name == 'used06' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:used06' %}?route=mente">お客様一覧検索</a></li>
             <li class="breadcrumb-item {% if url_name == 'used07' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:used07' %}?route=mente">会員情報</a></li>

@@ -36,7 +36,6 @@
   </div>
 </div>
 
-<form method="#" action="#">
 <div class="row">
   <div class="col-12 card bg-light p-1 mb-2">
     <p class="font-weight-bold m-0">商品情報</p>
@@ -46,7 +45,7 @@
         <span class="col-4 pl-4 mb-1">メンテナンス商品会員番号：</span>
         <select class="col-7" id="customer_no">
           <option value="0">（新規申込／契約）</option>
-          <option value="1">410XXXXXX　A：メンテプロパック長得18車検付B　〜20XX/XX/XX</option>
+          <option value="1">410XXXXXX　A：メンテプロパック18車検付B　〜20XX/XX/XX</option>
         </select>
       </div>
       <div class="d-flex flex-row align-items-center">
@@ -139,7 +138,7 @@
     </div>
   </div>
 </div>
-</form>
+
 
 <div class="row">
 <p class="small mb-0">(*):必須項目</p>
@@ -262,7 +261,7 @@
       $('#dis_cancel').hide();
     }
 
-    $("#view1").attr("action", "{% url 'myprofit:used07' %}") //お客様一覧検索
+    $("#view1").attr("action", "{% url 'myprofit:used04' %}") //お客様一覧検索
   });
 
   //検索ボタン
@@ -302,7 +301,7 @@
 
       $('#customer_no').val(1);
       $("#menu_code").val("S0");
-      $("#menu_name").val("メンテプロパック長得18車検付B");
+      $("#menu_name").val("メンテプロパック18車検付B");
       $("#tantou_code").val("001234"); // 値を設定
       $("#tantou_name").val("大磯　太郎");
       $("#follow_code").val("001234");
@@ -365,7 +364,7 @@
       } else if (route == "cert" ) {
         //未申込→メッセージ
         if (search_input == "U2E123001" || search_input == "U2E123002") {
-          $("#message").text("指定した注文書番号は存在しません。");
+          $("#message").text("指定した注文書番号は存在しません？VCC：未申込");
         }
         //申込済（車両情報未→押せないまま
         if (search_input == "U2E123003" || search_input == "U2E123005") {
@@ -387,8 +386,8 @@
       }
 
 
-    } else { // クリア
-
+    } else {
+      $("#message").text("指定した注文書番号は存在しません。");//メッセージ
     }
 
     //context用に会員証no入れる、キャンセル
