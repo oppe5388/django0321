@@ -15,7 +15,7 @@
 <div class="container-fluid">
 
 <div class="row">
-  <div class="col-3">
+  <div class="col-3 pl-2 p-1">
     <h4 class="font-weight-bold">新中サ区分：<span class="text-secondary">中古車</span></h4>
   </div>
 
@@ -24,13 +24,6 @@
         <input type="radio" class="m-1" value="" checked>
         <span class="col-2 px-0">注文書番号</span>
         <input class="col-3" id="search_input" >
-
-        <button type="button" class="btn btn-info btn-rounded p-1 mx-1" data-container="body" data-toggle="popover" data-html="true" data-placement="bottom"
-        title="sample" data-content="
-          ・申込前：<br>
-          
-          ">vcc
-        </button>
         <button type="button" class="ml-auto btn btn-outline-dark blink py-2" id="test">検索</button>
       </div>
   </div>
@@ -156,6 +149,10 @@
         <button type="button" class="btn btn-outline-dark disabled py-2" id="dis_cancel">申込み取消</button>
         <button type="button" class="btn btn-outline-dark py-2" data-toggle="modal" data-target="#ModalCenterCert" id="cert">会員証印刷</button>
         <button type="button" class="btn btn-outline-dark disabled py-2" id="dis_cert">会員証印刷</button>
+        <button type="button" class="btn btn-info btn-rounded p-1 ml-1" id="cert_pop" data-container="body" data-toggle="popover" data-html="true" data-placement="right"
+        data-content="申込書未発行〜会員証未発行、かつ、車両基盤入力済みのみ進める
+          ">vcc
+        </button>
         <a href="{% url 'myprofit:used02' %}?route={{route}}" class="ml-auto btn btn-outline-dark py-2">メニューに戻る</a>
       </div>
 
@@ -256,9 +253,11 @@
     var route = $('#route').val();
     if (route == "entry" ) {
       $('#dis_cert').hide();
+      $('#cert_pop').hide();
     } else if (route == "cert" ) {
       $('#dis_entry').hide();
       $('#dis_cancel').hide();
+      $('#cert_pop').show();
     }
 
     $("#view1").attr("action", "{% url 'myprofit:used04' %}") //お客様一覧検索

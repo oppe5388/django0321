@@ -21,13 +21,14 @@
     //$("#end1").attr("href", "{% url 'myprofit:new02_03' %}") //中断ボタン
     //$("#end2").attr("href", "{% url 'myprofit:new02_03' %}") //中断ボタン
 
-    //routeが申込書なら05entryへ。会員証なら07へ。メンテトップからなら05へ
+    //routeが申込書なら05entryへ。会員証またはcancelフラグなら07へ。メンテトップからなら05へ
     var route = $('#route').val();
+    var cancel_flag = $('#cancel_flag').val();
     //確認後の送信ボタン
-    if (route == "entry" ) {
-      $("#view1").attr("action", "{% url 'myprofit:used05entry' %}")
-    } else if (route == "cert" ) {
+    if (route == "cert" || cancel_flag =="True") {
       $("#view1").attr("action", "{% url 'myprofit:used07' %}")
+    } else if (route == "entry" ) {
+      $("#view1").attr("action", "{% url 'myprofit:used05entry' %}")
     } else if (route == "mente" ) {
       $("#view1").attr("action", "{% url 'myprofit:used05' %}")
     }

@@ -192,12 +192,15 @@
     //中古車：車両情報未登録
     if(cert_no == '410987013' || cert_no == '410987014'){
 
-      $('#status').val("車両情報未登録");
-
       if(cert_no == '410987013'){//車両情報未登録（車両なし）
         $("#order_no").val("U2E123005");
+        $('#status').val("車両情報未登録");
       } else if(cert_no == '410987014'){//車両情報未登録（車両あり）
         $("#order_no").val("U2E123006");
+        if(route == 'cert'){//会員証印刷ボタンからきていたら、未発行ステにして会員証印刷ボタンも
+          $('#status').val("会員証未発行");
+          $('#cert').show();// 申込書印刷ボタン表示
+        } 
       }
 
       $("#entry_print_year").val(entry_date.format('YYYY'));

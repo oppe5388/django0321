@@ -14,7 +14,6 @@
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-
     <!-- base:css -->
     <link href="{% static 'celestialAdmin/template/vendors/typicons.font/font/typicons.css' %}" rel="stylesheet">
     <link href="{% static 'celestialAdmin/template/vendors/css/vendor.bundle.base.css' %}" rel="stylesheet">
@@ -35,28 +34,38 @@
       .breadcrumb-item + .breadcrumb-item::before {
           content: ">";
       }
+
+      /* モーダルのテーブルの区切り */
+      .ex_border_a {
+        border-top: 2px solid gray;
+      }
+
+      /* 点滅 */
+      .blink {
+        -webkit-animation: blink 1s ease-in-out infinite alternate;
+        animation: blink 1s ease-in-out infinite alternate;
+      }
+      @-webkit-keyframes blink {
+        0% {opacity: 0;}
+        100% {opacity: 1;}
+      }
+      @keyframes blink {
+        0% {opacity: 0;}
+        100% {opacity: 1;}
+      }
     </style>
 
-  <!-- 点滅 -->
   <style>
-    .blink {
-      -webkit-animation: blink 1s ease-in-out infinite alternate;
-      animation: blink 1s ease-in-out infinite alternate;
-    }
-    @-webkit-keyframes blink {
-      0% {opacity: 0;}
-      100% {opacity: 1;}
-    }
-    @keyframes blink {
-      0% {opacity: 0;}
-      100% {opacity: 1;}
-    }
+
   </style>
+
   {% block extra_head %}{% endblock %}
   </head>
   
   <body>
-    <div class="container-scroller">       
+    {% include 'profit/sample_case.html' %}
+    <div class="container-scroller">
+      
       <!-- partial:partials/_navbar.html ←トップバー-->
 
       <nav class="navbar col-12 p-0 fixed-top d-flex flex-row">
@@ -69,12 +78,13 @@
           </button>
         </div>
 
-        <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end pr-3">
           <ul class="mr-auto list-unstyled">
             <!-- パンくずリスト -->
             {% block breadcrumb %}{% endblock %}
           </ul>
-
+          <!-- sampleモーダル開くボタン -->
+          <a href="#" data-toggle="modal" data-target="#case_modal" id="case_modal" class="btn btn-sm btn-inverse-info align-items-center justify-content-end p-1">Sample</a>
         </div>
       </nav>
       <!-- partial -->
@@ -91,7 +101,6 @@
         <div class="main-panel">
           <div class="content-wrapper">
             {% block mainpanel %}{% endblock %}
-
           </div>
           <!-- content-wrapper ends -->
           <!-- partial:partials/_footer.html -->
