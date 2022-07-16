@@ -17,7 +17,6 @@ urlpatterns = [
 
     path('history', views.history, name='history'),
 
-
     path('', views.profit_top, name='profit_top'),
 
     path('new02', views.new02, name='new02'),
@@ -29,5 +28,7 @@ urlpatterns = [
     path('new06confirm', views.new06confirm, name='new06confirm'),
     path('new07', views.new07, name='new07'),
 
-    
+    path('service02', views.service02, name='service02'),
+    path('service03', views.service03, name='service03'),
+    path('service04', views.service04, name='service04'),    
 ]

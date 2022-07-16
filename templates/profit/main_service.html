@@ -1,3 +1,8 @@
+<form class="" action='#' method='get' id="view1">
+  <input type="hidden" name="route" id="route" value="{{route}}">
+</form>
+
+<div id="main">
 <div class="row">
   <div class="col-lg-12 stretch-card p-2">
     <div class="card">
@@ -47,9 +52,9 @@
           <li>経整備精算 <i class="typcn typcn-chevron-right menu-arrow"></i></li>
           <li>NFSリース契約照会 <i class="typcn typcn-chevron-right menu-arrow"></i></li>
           <li>　</li>
-          <li id="application"><a href="{% url 'myprofit:service03_01' %}">メンテプロ申込書印刷<i class="typcn typcn-chevron-right menu-arrow"></i></a></li>
-          <li id="certificate"><a href="{% url 'myprofit:service03_02' %}">メンテプロ会員証印刷 <i class="typcn typcn-chevron-right menu-arrow"></i></a></li>
-          <li id="mente_menu"><a href="{% url 'myprofit:service04_03' %}">NFSメンテトップメニュー <i class="typcn typcn-chevron-right menu-arrow"></i></a></li>
+          <li id="entry"><a href="{% url 'myprofit:service03' %}?route={{route}}">メンテプロ申込書印刷<i class="typcn typcn-chevron-right menu-arrow"></i></a></li>
+          <li id="cert"><a href="{% url 'myprofit:service03' %}?route={{route}}">メンテプロ会員証印刷 <i class="typcn typcn-chevron-right menu-arrow"></i></a></li>
+          <li id="mente"><a href="{% url 'myprofit:service04' %}?route={{route}}">NFSメンテトップメニュー <i class="typcn typcn-chevron-right menu-arrow"></i></a></li>
           <li>他社メンテプロ（自社会員対応） <i class="typcn typcn-chevron-right menu-arrow"></i></li>
         </ul>
         <div class="font-weight-bold">　</div>
@@ -100,4 +105,6 @@
       </div>
     </div>
   </div>
+</div>
+
 </div>
