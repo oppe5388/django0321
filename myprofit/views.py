@@ -183,3 +183,9 @@ def service07(request):
         'cancel_flag': request.GET.get('cancel_flag'),
     }
     return render(request, 'myprofit/service07.html', context)
+
+def service01(request):
+    context = {
+        'route': request.GET.get('route'),
+    }
+    return render(request, 'myprofit/service01.html', context)

@@ -36,6 +36,8 @@ urlpatterns = [
     path('service06', views.service06, name='service06'),
     path('service06confirm', views.service06confirm, name='service06confirm'),
     path('service07', views.service07, name='service07'),
+    path('service01', views.service01, name='service01'),
+
 
 
 ]
