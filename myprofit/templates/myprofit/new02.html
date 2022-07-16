@@ -3,7 +3,7 @@
 {% block title %}PROFIT_mock{% endblock %}
 
 {% block breadcrumb %}
-  {% include 'profit/bread_new_entry.html' %}
+  {% include 'profit/bread_new.html' %}
 {% endblock %}
 
 {% block sidebar %}
@@ -11,13 +11,32 @@
 {% endblock %}
 
 {% block mainpanel %}
-{% include 'profit/main_new.html' %}
+  {% include 'profit/main_new.html' %}
+  
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
   $(function() {
-    //申込書印刷を点滅
-    $('#application').addClass('blink');
+
+    $('#main').hide();// 最初はメニュー非表示
+    $('#touroku').addClass('blink');// 受注納車回収を点滅
+
+    var route = $('#route').val();
+    //点滅
+    if (route == "entry" ) {
+      $('#entry').addClass('blink');
+    } else if (route == "cert" ) {
+      $('#cert').addClass('blink');
+    } else if (route == "mente" ) {
+      $('#mente').addClass('blink');
+    }
+
+    // 受注納車回収をクリックでメニュー表示
+    $("#touroku").click(function () {
+      $('#main').show();// 最初はメニュー非表示
+      $('#touroku').removeClass('blink');// 受注納車回収を点滅
+    });
+    
   });
 </script>
 {% endblock %}

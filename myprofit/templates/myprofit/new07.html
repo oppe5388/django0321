@@ -3,7 +3,7 @@
 {% block title %}PROFIT_mock{% endblock %}
 
 {% block breadcrumb %}
-  {% include 'profit/bread_new_entry.html' %}
+  {% include 'profit/bread_new.html' %}
 {% endblock %}
 
 {% block sidebar %}
@@ -11,7 +11,7 @@
 {% endblock %} 
 
 {% block mainpanel %}
-  {% include 'profit/nfs_customer1.html' %}
+  {% include 'profit/nfs_customer2.html' %}
 
 
 <!-- モーダル申込書 -->
@@ -61,107 +61,267 @@
   </div>
 </div>
 
+<!-- モーダル申込キャンセル -->
+<div class="modal fade" id="Modal3" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Webページからのメッセージ</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        申込キャンセルしてよろしいでしょうか？<br>
+        よろしければ「OK」を押してください。
+      </div>
+      <div class="modal-footer">
+        <!-- 処理＆モーダル閉じる -->
+        <a href="#" class="btn btn-outline-dark" id="modal_ok3">OK</a>
+        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">キャンセル</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/locale/ja.js"></script>
 <script>
-  var entry_year = moment(new Date()).format('YYYY');
-  var entry_month = moment(new Date()).format('MM');
-  var entry_day = moment(new Date()).format('DD');
-
   $(function () {
-    $("#end").attr("href", "{% url 'myprofit:new03' %}") //PROFIT申込画面
-     
     $('#cert').hide();// 会員証印刷ボタンは非表示
-
-    $('#cert_no').val("410987654");
-    $('#status').val("申込書未発行");
-
-    $('#company_code').val("13300");
-    $('#company_name').val("日産プリンスMarsh株式会社");
-    $('#shop_code').val("1E0");
-    $('#shop_name').val("ミッドタウン店");
-    $("#tantou_code").val("001234"); // 値を設定
-    $("#tantou_name").val("大磯　太郎");
-    $('#mente_company_code').val("13300");
-    $('#mente_company_name').val("日産プリンスMarsh株式会社");
-    $('#mente_shop_code').val("1E0");
-    $('#mente_shop_name').val("ミッドタウン店");
-    $("#mente_tantou_code").val("001234"); // 値を設定
-    $("#mente_tantou_name").val("大磯　太郎");
-    $('#company_code2').val("13300");
-    $("#customer_kanji2").val("尾凪　花子");
-
-    $("#customer_kanji").val("尾凪　花子");
-    $("#customer_kana").val("ｵﾅｷﾞ ﾊﾅｺ");
-    $("#birthday_year").val("2000");
-    $("#birthday_month").val("04");
-    $("#birthday_day").val("01");
-    $("#gender").val("女");
-    $("#post_code1").val("171");
-    $("#post_code2").val("0014");
-    $("#address_kanji").val("豊島区池袋9-8-7");
-    $("#tel").val("070-1239-1721");
-    $("#order_no").val("N1234AXXX");  
-
-    $("#maker").val("日産車");
-    $("#car_name").val("ｽｶｲﾗｲﾝ");
-    $("#car_class").val("乗用車LL");
-    $("#car_model").val("5BA-RV37");
-    $("#base_no").val("V37");
-    //$("#plate_no").val("練馬330さ9876");
-    $("#frame_no").val("RV37-130855");
-    $("#car_code").val("15");
-    $("#entry_div").val(1);
-    //var shodo_date = moment(new Date()).format('YYYY年MM月');//今月
-    //$("#register_date").val(shodo_date);
-    //var shaken_date = moment(new Date()).add(3, 'y').format('YYYY年MM月');//今月
-
-    $("#product").val("メンテプロパック（乗用）");
-    $("#course").val("メンテプロパック54車検付きベーシック");
-    $("#price").val("156,920");
-    $("#payment").val("日産カード");
+    $('#entry').hide();// 申込書印刷ボタンは非表示
+    $('#cancel').hide();// 申込キャンセルは非表示
+    $("#end").text("業務メニュー");//真ん中のボタンの文字
+    var route = $('#route').val();
+    $("#end").attr("href", "{% url 'myprofit:new05' %}?route=" +route) //業務メニュー
     
-    //申込日：今日
+    var cert_no = $('#cert_no').val();
+    var shaken_date = moment(new Date()).add(740, 'd');
+    var entry_date = moment(new Date()).add(-2, 'd');
+    var shodo_date = moment(new Date()).add(-5, 'y');
+    
+    //新車共通
+    if(cert_no == '410987001' ||
+      cert_no == '410987002' || 
+      cert_no == '410987006' || 
+      cert_no == '410987007' || 
+      cert_no == '410987011' || 
+      cert_no == '410987012' || 
+      cert_no == '410987015' || 
+      cert_no == '410987018'){
 
-    $("#entry_year").val(entry_year);
-    $("#entry_month").val(entry_month);
-    $("#entry_day").val(entry_day);
+      $("#register_year").val(shodo_date.format('YYYY'));
+      $("#register_month").val(shodo_date.format('MM'));
+      //申込前も進んできた前提だから申込日入れてOK
+      $("#entry_year").val(entry_date.format('YYYY'));
+      $("#entry_month").val(entry_date.format('MM'));
+      $("#entry_day").val(entry_date.format('DD'));
+    }
+
+    //中古車×車両あり共通
+    if(cert_no == '410987002' || 
+      cert_no == '410987007' || 
+      cert_no == '410987012' || 
+      cert_no == '410987015' || 
+      cert_no == '410987018'){
+
+      $("#plate_no1").val("練馬");
+      $("#plate_no2").val("330");
+      $("#plate_no3").val("ｻ");
+      $("#plate_no4").val("9999");
+      $("#insp_year").val(shaken_date.format('YYYY'));
+      $("#insp_month").val(shaken_date.format('MM'));
+      $("#insp_day").val(shaken_date.format('DD'));
+    }
+
+    //新車：本登録
+    if(cert_no == '410987018' ){
+
+      var hontouroku_date = entry_date
+      var kigen_date = moment(hontouroku_date).add(60, 'M');
+
+      //送金日
+      if (entry_date.format('DD') < 2) {
+        var send_date = moment(entry_date).date(4);
+      } else if (entry_date.format('DD') >= 2 && entry_date.format('DD') < 12) {
+        var send_date = moment(entry_date).date(14);
+      } else if (entry_date.format('DD') >= 12 && entry_date.format('DD') < 22) {
+        var send_date = moment(entry_date).date(24);
+      } else if (entry_date.format('DD') >= 22 && entry_date.format('DD') < 28) {
+        var send_date = moment(entry_date).add(1, 'M').date(1).add(-1, 'd');
+      } else {
+        var send_date = moment(entry_date).add(1, 'M').date(4);
+      }
+
+      $('#status').val("本登録");
+      $("#order_no").val("N123A0008");
+
+      $("#entry_send_year").val(send_date.format('YYYY'));
+      $("#entry_send_month").val(send_date.format('MM'));
+      $("#entry_send_day").val(send_date.format('DD'));
+
+      $("#entry_print_year").val(entry_date.format('YYYY'));
+      $("#entry_print_month").val(entry_date.format('MM'));
+      $("#entry_print_day").val(entry_date.format('DD'));
+      $("#cert_year").val(hontouroku_date.format('YYYY'));
+      $("#cert_month").val(hontouroku_date.format('MM'));
+      $("#cert_day").val(hontouroku_date.format('DD'));
+      $("#cert_print_year").val(hontouroku_date.format('YYYY'));
+      $("#cert_print_month").val(hontouroku_date.format('MM'));
+      $("#cert_print_day").val(hontouroku_date.format('DD'));
+      $("#expire_year").val(kigen_date.format('YYYY'));
+      $("#expire_month").val(kigen_date.format('MM'));
+      $("#expire_day").val(kigen_date.format('DD'));
+    }
+
+    //新車：会員証未発行
+    if(cert_no ==  '410987015' ){
+
+      $('#status').val("会員証未発行");
+      $("#order_no").val("N123A0007");
+
+      $("#entry_print_year").val(entry_date.format('YYYY'));
+      $("#entry_print_month").val(entry_date.format('MM'));
+      $("#entry_print_day").val(entry_date.format('DD'));
+
+      $('#cert').show();// 会員証印刷ボタン表示
+      $('#entry').show();// 申込書印刷ボタン表示
+    }
+
+    //新車：車両情報未登録
+    if(cert_no == '410987011' || cert_no == '410987012'){
+
+      if(cert_no == '410987011'){//車両情報未登録（車両なし）
+        $("#order_no").val("N123A0005");
+        $('#status').val("車両情報未登録");
+      } else if(cert_no == '410987012'){//車両情報未登録（車両あり）
+        $("#order_no").val("N123A0006");
+        if(route == 'cert'){//会員証印刷ボタンからきていたら、未発行ステにして会員証印刷ボタンも
+          $('#status').val("会員証未発行");
+          $('#cert').show();// 申込書印刷ボタン表示
+        } 
+      }
+
+      $("#entry_print_year").val(entry_date.format('YYYY'));
+      $("#entry_print_month").val(entry_date.format('MM'));
+      $("#entry_print_day").val(entry_date.format('DD'));
+
+      $('#entry').show();// 申込書印刷ボタン表示
+    }
+
+    //新車：申込書未発行
+    if(cert_no == '410987006' || cert_no == '410987007'){
+
+      $('#status').val("申込書未発行");
+
+      if(cert_no == '410987006'){//車両情報未登録（車両なし）
+        $("#order_no").val("N123A0003");
+      } else if(cert_no == '410987007'){//車両情報未登録（車両あり）
+        $("#order_no").val("N123A0004");
+      }
+
+      $('#entry').show();// 申込書印刷ボタン表示
+    }
+
+    //新車：申込前（申込から進んできた前提）
+    if(cert_no == '410987001' || cert_no == '410987002'){
+
+      $('#status').val("申込書未発行");
+
+      if(cert_no == '410987001'){//（車両なし）
+        $("#order_no").val("N123A0001");
+      } else if(cert_no == '410987002'){//（車両あり）
+        $("#order_no").val("N123A0002");
+      }
+
+      $('#entry').show();// 申込書印刷ボタン表示
+      $("#end").text("終了");//真ん中のボタンの文字
+      $("#end").attr("href", "{% url 'myprofit:new03' %}?route=" +route)
+    }
+
+    //キャンセルフラグがTrue→申込キャンセルボタン
+    if($('#cancel_flag').val() == "True"){
+      $('#entry').hide();// 申込書印刷ボタン表示
+      $('#cert').hide();// 申込書印刷ボタン表示
+      $('#cancel').show();// 申込書印刷ボタン表示
+      $("#end").text("終了");//真ん中のボタンの文字
+      $("#end").attr("href", "{% url 'myprofit:new03' %}?route=" +route)
+    }
+
   });
-
 
   //PDF開く＆モーダル閉じる
   //そのためにはまずshowでモーダル表示しないといけない
+
+  //申込書印刷ボタン
   $("#entry").click(function () {
     $('#exampleModalCenter').modal('show')
   });
   $("#modal_ok").click(function () {
     $('#exampleModalCenter').modal('hide')
-    $('#status').val("車両情報未登録");
-    $("#entry_print_year").val(entry_year);
-    $("#entry_print_month").val(entry_month);
-    $("#entry_print_day").val(entry_day);
+
+    //申込書印刷日がブランクだったら、印刷日を入れる
+    if($('#entry_print_year').val() == '' ){
+      var today = moment(new Date());
+      $("#entry_print_year").val(today.format('YYYY'));
+      $("#entry_print_month").val(today.format('MM'));
+      $("#entry_print_day").val(today.format('DD'));
+    }
+
+    //申込書未発行だったら、ステータスを変える＆会員証未発行だったら会員証印刷ボタンを表示する
+    if($('#status').val() == "申込書未発行" ){
+      if($('#plate_no1').val() == "" ){
+        $('#status').val("車両情報未登録");
+      } else {
+        $('#status').val("会員証未発行");
+        $('#cert').show();// 会員証印刷ボタン表示
+      }
+    }
   });
 
-  //$("#cert").click(function () {
-  //  $('#Modal2').modal('show')
-  //});
-  //$("#modal_ok2").click(function () {
-  //  $('#Modal2').modal('hide')
-  //  $('#entry').hide();// 申込書印刷ボタン非表示にする
-  //});
-
-</script>
-
-<!-- お客様履歴：別ウインドウ-->
-<script>
-  let button1 = document.getElementById('history');
-  button1.addEventListener('click', () => {
-    let option = 'width=700,height=500,left=100,top=100'
-      let newwin = open('{% url 'myprofit:new08' %}','mywindow', option);
+  //会員証印刷ボタン
+  $("#cert").click(function () {
+    $('#Modal2').modal('show')
   });
+  $("#modal_ok2").click(function () {
+    $('#Modal2').modal('hide')
+    $('#entry').hide();// 申込書印刷ボタン非表示にする
+
+    //本登録日がブランクだったら、本登録と期限を入れる
+    if($('#cert_year').val() == '' ){
+      $('#status').val("本登録");
+      var today = moment(new Date());
+      var kigen_date = moment(today).add(30, 'M');
+      $("#cert_year").val(today.format('YYYY'));
+      $("#cert_month").val(today.format('MM'));
+      $("#cert_day").val(today.format('DD'));
+      $("#expire_year").val(kigen_date.format('YYYY'));
+      $("#expire_month").val(kigen_date.format('MM'));
+      $("#expire_day").val(kigen_date.format('DD'));
+
+    }
+    //印刷日入れる
+    $("#cert_print_year").val(today.format('YYYY'));
+    $("#cert_print_month").val(today.format('MM'));
+    $("#cert_print_day").val(today.format('DD'));
+    //印刷回数増やす
+    $("#print_cnt").val(Number($("#print_cnt").val()) + 1);
+  });
+
+  //申込キャンセルボタン
+  $("#cancel").click(function () {
+    $('#Modal3').modal('show')
+  });
+  $("#modal_ok3").click(function () {
+    $('#Modal3').modal('hide')
+    $('#cancel').hide();// 申込キャンセルボタン非表示にする
+
+    //ステータス申込キャンセルにする
+    $('#status').val("申込キャンセル");
+  });
+
+
 </script>
 
 {% endblock %}

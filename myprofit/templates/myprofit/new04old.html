@@ -3,7 +3,7 @@
 {% block title %}PROFIT_mock{% endblock %}
 
 {% block breadcrumb %}
-  {% include 'profit/bread_new_mente.html' %}
+  {% include 'profit/bread_new_entry.html' %}
 {% endblock %}
 
 {% block sidebar %}
@@ -41,16 +41,12 @@
   $("#clear").click(function () {
       $('input').val(""); //inputすべて
   });
-  
-  $("#send").click(function () {
-    $('input').val(""); //inputすべて
-  });
 </script>
 <script>
   $(function () {
-    $("#back1").attr("href", "{% url 'myprofit:new02_03' %}") //中断ボタン
-    $("#back2").attr("href", "{% url 'myprofit:new02_03' %}") //中断ボタン
-    $("#send").attr("href", "{% url 'myprofit:new05_03' %}") //確認後の送信ボタン
+    $("#back1").attr("href", "{% url 'myprofit:new03' %}") //中断ボタン
+    $("#back2").attr("href", "{% url 'myprofit:new03' %}") //中断ボタン
+    $("#send").attr("href", "{% url 'myprofit:new05' %}") //確認後の送信ボタン
   });
 </script>
 

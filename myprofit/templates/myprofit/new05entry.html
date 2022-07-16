@@ -3,11 +3,11 @@
 {% block title %}PROFIT_mock{% endblock %}
 
 {% block breadcrumb %}
-  {% include 'profit/bread_used.html' %}
+  {% include 'profit/bread_new.html' %}
 {% endblock %}
 
 {% block sidebar %}
-  {% include 'profit/side_used.html' %}
+  {% include 'profit/side_new.html' %}
 {% endblock %} 
 
 {% block mainpanel %}
@@ -18,7 +18,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
   $(function () {
-    $("#view1").attr("action", "{% url 'myprofit:used06confirm' %}")
+    $("#view1").attr("action", "{% url 'myprofit:new06confirm' %}")
 
     //共通
     $('#company').val("13300");

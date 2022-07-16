@@ -1,0 +1,46 @@
+{% with request.resolver_match.url_name as url_name %}
+    <div class="nav-item d-flex m-0 h6 d-flex flex-wrap">
+      {% if route == "entry" %}
+        <li class="text-primary mr-2">新車×申込書ボタン：</li>
+        <div class="d-flex flex-column px-1">
+          <div class="d-flex">
+            <li class="breadcrumb-item {% if url_name == 'new02' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:new02' %}?route=entry">登録・納車・回収</a></li>
+            <li class="breadcrumb-item {% if url_name == 'new03' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:new03' %}?route=entry">新車申込／取消</a></li>
+            <li class="breadcrumb-item {% if url_name == 'new04' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:new04' %}?route=entry">NFSログイン</a></li>
+            <li class="breadcrumb-item {% if url_name == 'new05entry' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:new05entry' %}?route=entry">受付申込登録</a></li>
+            <li class="breadcrumb-item {% if url_name == 'new06confirm' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:new06confirm' %}?route=entry">受付申込確認/完了</a></li>
+            <li class="breadcrumb-item {% if url_name == 'new07' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:new07' %}?route=entry">会員情報</a></li>
+          </div>
+        </div>
+
+      {% elif route == "cert" %}
+        <li class="text-primary mr-2">新車×会員証ボタン：</li>
+        <div class="d-flex flex-column px-1">
+          <div class="d-flex">
+            <li class="breadcrumb-item {% if url_name == 'new02' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:new02' %}?route=cert">登録・納車・回収</a></li>
+            <li class="breadcrumb-item {% if url_name == 'new03' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:new03' %}?route=cert">中古車契約</a></li>
+            <li class="breadcrumb-item {% if url_name == 'new04' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:new04' %}?route=cert">NFSログイン</a></li>
+            <li class="breadcrumb-item {% if url_name == 'new07' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:new07' %}?route=cert">会員情報</a></li>
+          </div>
+        </div>
+
+      {% elif route == "mente" %}
+        <li class="text-primary mr-2">新車×メンテトップ：</li>
+        <div class="d-flex flex-column px-1">
+          <div class="d-flex">
+            <li class="breadcrumb-item {% if url_name == 'new02' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:new02' %}?route=mente">登録・納車・回収</a></li>
+            <li class="breadcrumb-item {% if url_name == 'new04' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:new04' %}?route=mente">NFSログイン</a></li>
+            <li class="breadcrumb-item {% if url_name == 'new05' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:new05' %}?route=mente">連携業務メニュー</a></li>
+            <li class="breadcrumb-item {% if url_name == 'new06' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:new06' %}?route=mente">お客様一覧検索</a></li>
+            <li class="breadcrumb-item {% if url_name == 'new07' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:new07' %}?route=mente">会員情報</a></li>
+          </div>
+          {% comment %} <div class="d-flex">
+            <li class="breadcrumb-item {% if url_name == 'used07' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:used07' %}">会員情報</a></li>
+          </div> {% endcomment %}
+        </div>
+      {% endif %}
+    </div>
+{% endwith %}
+
+
+

@@ -8,15 +8,16 @@
     <div class="p-0 mb-2">
       <div class="col-12 bg-light p-0 mb-0">
         <div class="d-flex flex-row navbar">
+          {% if route == 'entry' or route == 'cert' %}
+          <a href="#" class="text-dark text-decoration-none small pr-2 border border-dark border-left-0 border-top-0 border-bottom-0">販売店メニューに戻る</a>
+          {% else %}
           <a href="#" class="text-dark text-decoration-none small pr-2 border border-dark border-left-0 border-top-0 border-bottom-0">販売店メニューに戻る</a>
           <a href="#" class="text-dark text-decoration-none small" id="nfs_menu">メニュー</a>
-          {% comment %} <a href="#" class="text-dark text-decoration-none small">MP申込R</a>
-          <a href="#" class="text-dark text-decoration-none small">ZESP申込R</a>
-          <a href="#" class="text-dark text-decoration-none small">車両R</a> {% endcomment %}
           <a href="#" class="text-dark text-decoration-none small">お客様L</a>
           <a href="#" class="text-dark text-decoration-none small">仮申込L</a>
           <a href="#" class="text-dark text-decoration-none small">期限切L</a>
           <a href="#" class="text-dark text-decoration-none small">申込書未送L</a>
+          {% endif %}
         </div>
       </div>
     </div>

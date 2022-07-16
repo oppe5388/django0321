@@ -24,7 +24,7 @@
     </li>
     <div class="nav-search mt-3">
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="エラー検索">
+        <input type="text" class="form-control" placeholder="エラー検索（未）">
         <div class="input-group-append">
           <span class="input-group-text" id="search">
             <i class="typcn typcn-zoom"></i>
@@ -40,9 +40,9 @@
       </a>
       <div class="collapse show" id="ui-basic1">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'myprofit:new01' %}">新車</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'myprofit:new02' %}?route=entry">新車</a></li>
           <li class="nav-item"> <a class="nav-link" href="{% url 'myprofit:used02' %}?route=entry">中古車</a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'myprofit:service01_01' %}">サービス（キャンセル）</a></li>
+          <li class="nav-item"> <a class="nav-link" href="#">サービス（未）</a></li>
         </ul>
       </div>
     </li>
@@ -54,9 +54,9 @@
       </a>
       <div class="collapse show" id="ui-basic2">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'myprofit:new01_02' %}">新車</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'myprofit:new02' %}?route=cert">新車</a></li>
           <li class="nav-item"> <a class="nav-link" href="{% url 'myprofit:used02' %}?route=cert">中古車</a></li>
-          <li class="nav-item"> <a class="nav-link" href="#">サービス（未作成）</a></li>
+          <li class="nav-item"> <a class="nav-link" href="#">サービス（未）</a></li>
         </ul>
       </div>
     </li>
@@ -68,20 +68,28 @@
       </a>
       <div class="collapse show" id="ui-basic3">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'myprofit:new01_03' %}">新車</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'myprofit:new02' %}?route=mente">新車</a></li>
           <li class="nav-item"> <a class="nav-link" href="{% url 'myprofit:used02' %}?route=mente">中古車</a></li>
-          <li class="nav-item"> <a class="nav-link" href="#">サービス（未作成）</a></li>
+          <li class="nav-item"> <a class="nav-link" href="#">サービス（未）</a></li>
         </ul>
       </div>
     </li>
-
   </ul>
+  <ul class="sidebar-legend ">
+    <li>
+      <p class="sidebar-menu-title">Other</p>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link">#受付申込登録エラー（未）</a>
+    </li>
+  </ul>
+
 
 {% endblock %}
 
 {% block mainpanel %}
 
-<h4 class="h3 font-weight-bold mb-3">VCC Navigation（未作成）</h4>
+<h4 class="h3 font-weight-bold mb-3">VCC Navigation<span class="h6">（未作成。左のメニューをご使用ください）</span></h4>
 
 
 <div class="card mb-2">
@@ -90,15 +98,15 @@
       <h4 class="h4 font-weight-bold mb-3">1. 印刷したいもの</h4>
     </div>
 
-    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+    <div class="btn-group btn-group-toggle" data-toggle="buttons" id="option1">
       <label class="btn btn-sm btn-inverse-secondary">
-        <input type="radio" name="options" id="option1" autocomplete="off"> 申込書
+        <input type="radio" name="options" id="op1_1" autocomplete="off"> 申込書
       </label>
       <label class="btn btn-sm btn-inverse-secondary">
-        <input type="radio" name="options" id="option2" autocomplete="off"> 会員証
+        <input type="radio" name="options" id="op1_2" autocomplete="off"> 会員証
       </label>
       <label class="btn btn-sm btn-inverse-secondary">
-        <input type="radio" name="options" id="option3" autocomplete="off"> 申込書と会員証
+        <input type="radio" name="options" id="op1_3" autocomplete="off"> 申込書と会員証
       </label>
     </div>
   </div>
@@ -167,7 +175,25 @@
 <div class="card mb-2">
   <div class="card-body p-2">
     <div class="d-flex flex-wrap justify-content-between">
-      <h4 class="h4 font-weight-bold mb-3">3. 申込区分</h4>
+      <h4 class="h4 font-weight-bold mb-3">3. 車両基盤</h4>
+    </div>
+
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+      <label class="btn btn-sm btn-inverse-secondary">
+        <input type="radio" name="options" id="option1" autocomplete="off">まだ
+      </label>
+      <label class="btn btn-sm btn-inverse-secondary">
+        <input type="radio" name="options" id="option2" autocomplete="off">入力（反映）済み
+      </label>
+    </div>
+  </div>
+</div>
+
+
+<div class="card mb-2">
+  <div class="card-body p-2">
+    <div class="d-flex flex-wrap justify-content-between">
+      <h4 class="h4 font-weight-bold mb-3">4. 申込区分</h4>
     </div>
 
     <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -188,7 +214,7 @@
 <div class="card mb-2">
   <div class="card-body p-2">
     <div class="d-flex flex-wrap justify-content-between">
-      <h4 class="h4 font-weight-bold mb-3">（4. 実は内容を変更したい？）</h4>
+      <h4 class="h4 font-weight-bold mb-3">（5. 実は内容を変更したい？）</h4>
     </div>
 
     <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -212,6 +238,11 @@
   $(function () {
       $('[data-toggle="popover"]').popover()
       $('#sidebar').removeClass('bg-white');
+  });
+
+
+  $("#option1").change(function() {
+    
   });
 </script>
 

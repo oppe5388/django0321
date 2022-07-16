@@ -67,80 +67,61 @@ def profit_top(request):
     context ={'aaa': ''}
     return render(request, 'myprofit/top.html', context)
 
-def new01(request):
-    return render(request, 'myprofit/new01.html')
 
 def new02(request):
-    return render(request, 'myprofit/new02.html')
+    context = {
+        'route': request.GET.get('route'),
+    }
+    return render(request, 'myprofit/new02.html', context)
 
 def new03(request):
-    return render(request, 'myprofit/new03.html')
+    context = {
+        'route': request.GET.get('route'),
+    }
+    return render(request, 'myprofit/new03.html', context)
 
 def new04(request):
-    return render(request, 'myprofit/new04.html')
+    context = {
+        'route': request.GET.get('route'),
+        'cert_no': request.GET.get('cert_no'),
+        'cancel_flag': request.GET.get('cancel_flag'),
+    }
+    return render(request, 'myprofit/new04.html', context)
+
+def new05entry(request):
+    context = {
+        'route': request.GET.get('route'),
+        'cert_no': request.GET.get('cert_no'),
+    }
+    return render(request, 'myprofit/new05entry.html', context)
 
 def new05(request):
-    return render(request, 'myprofit/new05.html')
+    context = {
+        'route': request.GET.get('route'),
+    }
+    return render(request, 'myprofit/new05.html', context)
 
 def new06(request):
-    return render(request, 'myprofit/new06.html')
+    #会員証番号欄→これも未使用なのでcontext = {}で良さそう
+    searchForm = SearchForm(request.GET)
+    context = {
+        'searchForm': searchForm,
+        'route': request.GET.get('route'),
+    }
+    return render(request, 'myprofit/new06.html', context)
+
+def new06confirm(request):
+    context = {
+        'route': request.GET.get('route'),
+        'cert_no': request.GET.get('cert_no'),
+        'cancel_flag': request.GET.get('cancel_flag'),
+    }
+    return render(request, 'myprofit/new06confirm.html', context)
 
 def new07(request):
-    return render(request, 'myprofit/new07.html')
-
-def new08(request):
-    return render(request, 'myprofit/new08.html')
-
-def new01_02(request):
-    return render(request, 'myprofit/new01_02.html')
-
-def new02_02(request):
-    return render(request, 'myprofit/new02_02.html')
-
-def new03_02(request):
-    return render(request, 'myprofit/new03_02.html')
-
-def new04_02(request):
-    return render(request, 'myprofit/new04_02.html')
-
-def new07_02(request):
-    return render(request, 'myprofit/new07_02.html')
-
-def new01_03(request):
-    return render(request, 'myprofit/new01_03.html')
-
-def new02_03(request):
-    return render(request, 'myprofit/new02_03.html')
-
-def new04_03(request):
-    return render(request, 'myprofit/new04_03.html')
-
-def new05_03(request):
-    return render(request, 'myprofit/new05_03.html')
-
-def new06_03(request):
-    return render(request, 'myprofit/new06_03.html')
-
-def new07_03(request):
-    return render(request, 'myprofit/new07_03.html')
-
-def service01_01(request):
-    return render(request, 'myprofit/service01_01.html')
-
-def service02_01(request):
-    return render(request, 'myprofit/service02_01.html')
-
-def service03_01(request):
-    return render(request, 'myprofit/service03_01.html')
-
-def service03_02(request):
-    return render(request, 'myprofit/service03_02.html')
-
-def service04_01(request):
-    return render(request, 'myprofit/service04_01.html')
-
-def service04_03(request):
-    return render(request, 'myprofit/service04_03.html')
-
-def service07_01(request):
-    return render(request, 'myprofit/service07_01.html')
+    context = {
+        'route': request.GET.get('route'),
+        'cert_no': request.GET.get('cert_no'),
+        'cancel_flag': request.GET.get('cancel_flag'),
+    }
+    return render(request, 'myprofit/new07.html', context)
