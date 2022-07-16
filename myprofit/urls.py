@@ -30,5 +30,12 @@ urlpatterns = [
 
     path('service02', views.service02, name='service02'),
     path('service03', views.service03, name='service03'),
-    path('service04', views.service04, name='service04'),    
+    path('service04', views.service04, name='service04'),
+    path('service05entry', views.service05entry, name='service05entry'),
+    path('service05', views.service05, name='service05'),
+    path('service06', views.service06, name='service06'),
+    path('service06confirm', views.service06confirm, name='service06confirm'),
+    path('service07', views.service07, name='service07'),
+
+
 ]

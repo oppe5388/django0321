@@ -1,0 +1,434 @@
+{% extends 'profit/profit_base.html' %}
+{% load static %}
+{% block title %}PROFIT_mock{% endblock %}
+
+{% block breadcrumb %}
+  {% include 'profit/bread_service.html' %}
+{% endblock %}
+
+{% block sidebar %}
+  {% include 'profit/side_service.html' %}
+{% endblock %} 
+
+{% block mainpanel %}
+
+<div class="container-fluid">
+
+<div class="row">
+  <div class="col-3 pl-2 p-1">
+    <h4 class="font-weight-bold">新中サ区分：<span class="text-secondary">サービス</span></h4>
+  </div>
+
+  <div class="col-9 card bg-light p-1 mb-2">
+    <div class="card-body p-1 m-0">
+      <div class="d-flex align-items-start">
+        <input type="radio" class="m-1" value="" disabled>
+        <span class="col px-0 text-muted">伝票番号</span>
+        <input class="" id="" disabled>
+        <input type="radio" class="m-1" value="" checked>
+        <span class="col px-0">登録番号</span>
+        <div class="col-4 d-flex flex-column px-1">
+          <div class="d-flex flex-row">
+            <select class="col-4 px-1" id="search_plate1">
+              <option value="0"></option>
+              <option value="1">練馬</option>
+            </select>
+            <input class="col px-1" id="search_plate2">
+            <input class="col-2 px-1" id="search_plate3">
+            <input class="col px-1" id="search_plate4">
+          </div>
+          <div class="d-flex flex-row">
+            <div class="small">例）品川 123 ｱ 1234</div>
+          </div>
+        </div>
+        <button type="button" class="ml-auto btn btn-outline-dark blink" id="test">検索</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12 card bg-light p-1 mb-2">
+    <p class="font-weight-bold m-0">商品情報</p>
+
+    <div class="card-body p-1">
+      <div class="d-flex flex-row align-items-center">
+        <span class="col-4 pl-4 mb-1">メンテナンス商品会員番号：</span>
+        <select class="col-7" id="customer_no">
+          <option value="0">（新規申込／契約）</option>
+          <option value="1">410XXXXXX　A：メンテプロパック18車検付B　〜20XX/XX/XX</option>
+        </select>
+      </div>
+      <div class="d-flex flex-row align-items-center">
+        <span class="col-4 pl-4 mb-1">メニュー情報(*)：</span>
+        <input class="col-1" id="menu_code">
+        <input class="col-4" id="menu_name">
+      </div>
+
+      <div class="d-flex flex-row align-items-center">
+        <span class="col-4 pl-4 mb-1">担当者(*)：</span>
+        <input class="col-2" id="tantou_code">
+        <input class="col-4" id="tantou_name">
+      </div>
+
+      <div class="d-flex flex-row align-items-center">
+        <span class="col-4 pl-4 mb-1">フォロー担当者(*)：</span>
+        <input class="col-2" id="follow_code">
+        <input class="col-4" id="follow_name">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12 card bg-light p-1 mb-2">
+    <p class="font-weight-bold m-0">使用者情報</p>
+
+    <div class="card-body p-1">
+      <div class="d-flex flex-row align-items-center">
+        <span class="col-4 pl-4 mb-1">氏名（漢字）(*)：</span>
+        <input class="col-4" id="customer_kanji">
+      </div>
+      <div class="d-flex flex-row align-items-center">
+        <span class="col-4 pl-4 mb-1">氏名（ｶﾅ）(*)：</span>
+        <input class="col-4" id="customer_kana">
+      </div>
+      <div class="d-flex flex-row align-items-center">
+        <span class="col-4 pl-4 mb-1">郵便番号(*)：</span>
+        <input class="col-4" id="post_code">
+      </div>
+      <div class="d-flex flex-row align-items-center">
+        <span class="col-4 pl-4 mb-1">住所（漢字）(*)：</span>
+        <input class="col-4" id="address_kanji">
+      </div>
+      <div class="d-flex flex-row align-items-center">
+        <span class="col-4 pl-4 mb-1">住所（ｶﾅ）：</span>
+        <input class="col-4" id="address_kana">
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12 card bg-light p-1 mb-2">
+    <p class="font-weight-bold m-0">車両情報</p>
+
+    <div class="card-body p-1">
+      <div class="d-flex flex-row align-items-center">
+        <span class="col-4 pl-4 mb-1">車名(*)：</span>
+        <input class="col-4" id="car_name">
+      </div>
+      <div class="d-flex flex-row align-items-center">
+        <span class="col-4 pl-4 mb-1">型式：</span>
+        <input class="col-4" id="car_model">
+      </div>
+      <div class="d-flex flex-row align-items-center">
+        <span class="col-4 pl-4 mb-1">登録No：</span>
+        <input class="col-4" id="plate_no">
+      </div>
+      <div class="d-flex flex-row align-items-center">
+        <span class="col-4 pl-4 mb-1">車台No：</span>
+        <input class="col-4" id="frame_no">
+      </div>
+      <p class="">　</p>
+      {% comment %} <div class="d-flex flex-row align-items-center">
+        <span class="col-4 pl-4 mb-1">車種クラス(*)：</span>
+        <input class="col-4">
+      </div> {% endcomment %}
+      <div class="d-flex flex-row align-items-center">
+        <span class="col-4 pl-4 mb-1">初度登録年月：</span>
+        <input class="col-4" id="register_date">
+      </div>
+      <p class="">　</p>
+      <div class="d-flex flex-row align-items-center">
+        <span class="col-4 pl-4 mb-1">車検満了日：</span>
+        <input class="col-4" id="inspection">
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+<p class="small mb-0">(*):必須項目</p>
+</div>
+
+<div class="row justify-content-center">
+
+  <div class="col-8 card bg-light p-1 mb-2 ">
+      <p class="text-primary" id="message">　</p>
+      <div class="d-flex flex-row ">
+        <!-- モーダル無効有効ができないので、disabledボタンを専用で用意した -->
+        <button type="button" class="btn btn-outline-dark py-2" data-toggle="modal" data-target="#ModalCenterEntry" id="entry">申込</button>
+        <button type="button" class="btn btn-outline-dark disabled py-2" id="dis_entry">申込</button>
+        <button type="button" class="btn btn-outline-dark py-2" data-toggle="modal" data-target="#ModalCenterCancel" id="cancel">申込み取消</button>
+        <button type="button" class="btn btn-outline-dark disabled py-2" id="dis_cancel">申込み取消</button>
+        <button type="button" class="btn btn-outline-dark py-2" data-toggle="modal" data-target="#ModalCenterCert" id="cert">会員証印刷</button>
+        <button type="button" class="btn btn-outline-dark disabled py-2" id="dis_cert">会員証印刷</button>
+        <button type="button" class="btn btn-info btn-rounded p-1 ml-1" id="cert_pop" data-container="body" data-toggle="popover" data-html="true" data-placement="right"
+        data-content="申込書未発行〜会員証未発行、かつ、車両基盤入力済みのみ進める
+          ">vcc
+        </button>
+        <a href="{% url 'myprofit:used02' %}?route={{route}}" class="ml-auto btn btn-outline-dark py-2">メニューに戻る</a>
+      </div>
+
+</div>
+</div>
+
+</div>
+
+<form class="" action='#' method='get' id="view1">
+<input type="hidden" name="route" id="route" value="{{route}}">
+<input type="hidden" name="cert_no" id="hidden_no">
+<input type="hidden" name="cancel_flag" id="cancel_flag">
+
+<!-- Modal申込 -->
+<div class="modal fade" id="Modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">メンテプロ - 中古車申込／取消</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        申込するためにNFSへ接続します。よろしいですか？
+      </div>
+      <div class="modal-footer">
+        {% comment %} <a href="{% url 'myprofit:used07' %}" class="btn btn-outline-dark">OK</a> {% endcomment %}
+        <button class="btn btn-outline-dark" type="submit">OK</button>
+        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">キャンセル</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal申込取消 -->
+<div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">メンテプロ - 中古車申込／取消</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        申込み取消するためにNFSへ接続します。よろしいですか？
+      </div>
+      <div class="modal-footer">
+        {% comment %} <a href="{% url 'myprofit:used07' %}" class="btn btn-outline-dark">OK</a> {% endcomment %}
+        <button class="btn btn-outline-dark" type="submit">OK</button>
+        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">キャンセル</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal会員証印刷 -->
+<div class="modal fade" id="Modal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">メンテプロ - 中古車契約</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        会員証印刷するためにNFSへ接続します。よろしいですか？
+      </div>
+      <div class="modal-footer">
+        {% comment %} <a href="{% url 'myprofit:used07' %}" class="btn btn-outline-dark">OK</a> {% endcomment %}
+        <button class="btn btn-outline-dark" type="submit">OK</button>
+        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">キャンセル</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</form>
+
+
+<!-- 検索ボタン→テキストを入力 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/locale/ja.js"></script>
+<script>
+  $(function () {
+    $('[data-toggle="popover"]').popover()
+
+    //検索の登録番号3つ入れてしまう
+    $('#search_plate1').val(1);
+    $('#search_plate2').val("330");
+    $('#search_plate3').val("ｻ");
+
+    //モーダル有効ボタン非表示
+    $('#entry').hide();
+    $('#cancel').hide();
+    $('#cert').hide();
+
+    //routeが申込からと会員証からで、disのボタンも非表示に
+    var route = $('#route').val();
+    if (route == "entry" ) {
+      $('#dis_cert').hide();
+      $('#cert_pop').hide();
+    } else if (route == "cert" ) {
+      $('#dis_entry').hide();
+      $('#dis_cancel').hide();
+      $('#cert_pop').show();
+    }
+
+    $("#view1").attr("action", "{% url 'myprofit:service04' %}")
+  });
+
+  //検索ボタン
+  $("#test").click(function () {
+    //クリア
+    $('form').find(':text').val("");//inputすべて
+    $('#customer_no').val(0);
+    $("#message").text("　");//メッセージ
+
+    //モーダル有効ボタン非表示
+    $('#entry').hide();
+    $('#dis_entry').show();
+    $('#cancel').hide();
+    $('#dis_cancel').show();
+    $('#cert').hide();
+    $('#dis_cert').show();
+
+    //routeが申込からと会員証からで、disのボタンも非表示に
+    var route = $('#route').val();
+    if (route == "entry" ) {
+      $('#dis_cert').hide();
+    } else if (route == "cert" ) {
+      $('#dis_entry').hide();
+      $('#dis_cancel').hide();
+    }
+
+    var search_input = $('#search_plate4').val();
+
+    if (search_input == "0014" || 
+        search_input == "0015" || 
+        search_input == "0016" || 
+        search_input == "0017") {
+
+      $('#customer_no').val(1);
+      $("#menu_code").val("K0");
+      $("#menu_name").val("メンテプロパック18車検付B");
+      $("#tantou_code").val("001234"); // 値を設定
+      $("#tantou_name").val("大磯　太郎");
+      $("#follow_code").val("001234");
+      $("#follow_name").val("大磯　太郎");
+
+      $("#customer_kanji").val("尾凪　花子");
+      $("#customer_kana").val("ｵﾅｷﾞ ﾊﾅｺ");
+      $("#post_code").val("171-0014");
+      $("#address_kanji").val("豊島区池袋9-8-7");
+
+      $("#car_name").val("ｽｶｲﾗｲﾝ");
+      $("#car_model").val("5BA-RV37");
+      $("#frame_no").val("RV37-130855");
+      $("#car_code").val("15");
+      var shodo_date = moment(new Date()).add(-5, 'y').format('YYYY年MM月');//5年前
+      $("#register_date").val(shodo_date);
+
+      //車両情報あり→サービスは全件
+      var plate = "練馬330ｻ" + $('#search_plate4').val();
+      $("#plate_no").val(plate);
+      var shaken_date = moment(new Date()).add(740, 'd').format('YYYY年MM月DD日');//740日後
+      $("#inspection").val(shaken_date);
+
+
+      //検索ボタンの点滅やめる
+      $('button').removeClass('blink');
+
+      //route申込書の場合
+      if (route == "entry" ) {
+        //未申込→申込ボタン点滅、メッセージ
+        if (search_input == "0014") {
+          $('#entry').show();
+          $('#entry').addClass('blink');
+          $('#dis_entry').hide();
+          //$("#message").text("内容をご確認の上、よろしければ申込を押してください。");
+          $("#message").text("未使用のクーポンがまだあります。新規申し込みを行うには申込みボタンを押してください。");
+        }
+        //申込済→申込取消ボタンを点滅
+        if (search_input == "0015" || 
+            search_input == "0016") {
+          $('#cancel').show();
+          $('#cancel').addClass('blink');
+          $('#dis_cancel').hide();
+        }
+        //本登録→エラーメッセージ
+        if (search_input == "0017") {
+          $("#message").text("クーポン発行済です。");
+        }
+
+      //route会員証の場合
+      } else if (route == "cert" ) {
+        //未申込→メッセージ
+        if (search_input == "0014") {
+          $("#message").text("指定した注文書番号は存在しません？VCC：未申込");
+        }
+        //申込済（車両情報未→押せないまま→サービスはなし
+
+        //申込済（車両情報済み
+        if (search_input == "0015" || 
+            search_input == "0016") {
+          $('#cert').show();
+          $('#cert').addClass('blink');
+          $('#dis_cert').hide();
+          $("#message").text("内容をご確認の上、よろしければ[会員証印刷]を押してください。");
+        }
+        //本登録→エラーメッセージ
+        if (search_input == "0017") {
+          $("#message").text("クーポン発行済です。");
+        }
+
+      }
+
+
+    } else {
+      $("#message").text("指定した登録番号は存在しません。");//メッセージ
+    }
+
+    //context用に会員証no入れる、キャンセル
+    if (search_input == "0014") {
+      $("#hidden_no").val("410987005");
+    } else if (search_input == "0015") { 
+      $("#hidden_no").val("410987010");
+    } else if (search_input == "0016") { 
+      $("#hidden_no").val("410987017");
+    } else if (search_input == "0017") { 
+      $("#hidden_no").val("410987020");
+    }
+  });
+
+  //申込モーダル→キャンセルフラグ消す
+  $("#entry").click(function () {
+    $('#Modal1').modal('show')
+    $("#cancel_flag").val("");
+  });
+
+  //申込取消モーダル→キャンセルフラグ入れる
+  $("#cancel").click(function () {
+    $('#Modal2').modal('show')
+    $("#cancel_flag").val("True");
+  });
+
+  //会員証モーダル
+  $("#cert").click(function () {
+    $('#Modal3').modal('show')
+    $("#cancel_flag").val("");
+  });
+
+
+</script>
+
+
+{% endblock %}

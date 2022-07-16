@@ -1,0 +1,28 @@
+{% extends 'profit/profit_base.html' %}
+{% load static %}
+{% block title %}PROFIT_mock{% endblock %}
+
+{% block breadcrumb %}
+  {% include 'profit/bread_service.html' %}
+{% endblock %}
+
+{% block sidebar %}
+  {% include 'profit/side_service.html' %}
+{% endblock %} 
+
+{% block mainpanel %}
+  {% include 'profit/nfs_menu.html' %}
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+  $(function () {
+    var route = $('#route').val();
+    $("#search_menu1").attr("href", "{% url 'myprofit:service06' %}?route=" +route) //お客様一覧検索
+    $("#search_menu2").attr("href", "{% url 'myprofit:service06' %}?route=" +route) //お客様一覧検索
+  });
+</script>
+
+{% endblock %}

@@ -145,3 +145,41 @@ def service04(request):
         'cancel_flag': request.GET.get('cancel_flag'),
     }
     return render(request, 'myprofit/service04.html', context)
+
+def service05entry(request):
+    context = {
+        'route': request.GET.get('route'),
+        'cert_no': request.GET.get('cert_no'),
+    }
+    return render(request, 'myprofit/service05entry.html', context)
+
+def service05(request):
+    context = {
+        'route': request.GET.get('route'),
+    }
+    return render(request, 'myprofit/service05.html', context)
+
+def service06(request):
+    #会員証番号欄→これも未使用なのでcontext = {}で良さそう
+    searchForm = SearchForm(request.GET)
+    context = {
+        'searchForm': searchForm,
+        'route': request.GET.get('route'),
+    }
+    return render(request, 'myprofit/service06.html', context)
+
+def service06confirm(request):
+    context = {
+        'route': request.GET.get('route'),
+        'cert_no': request.GET.get('cert_no'),
+        'cancel_flag': request.GET.get('cancel_flag'),
+    }
+    return render(request, 'myprofit/service06confirm.html', context)
+
+def service07(request):
+    context = {
+        'route': request.GET.get('route'),
+        'cert_no': request.GET.get('cert_no'),
+        'cancel_flag': request.GET.get('cancel_flag'),
+    }
+    return render(request, 'myprofit/service07.html', context)

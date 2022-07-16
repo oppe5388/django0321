@@ -1,0 +1,124 @@
+{% extends 'profit/profit_base.html' %}
+{% load static %}
+{% block title %}PROFIT_mock{% endblock %}
+
+{% block breadcrumb %}
+  {% include 'profit/bread_service.html' %}
+{% endblock %}
+
+{% block sidebar %}
+  {% include 'profit/side_service.html' %}
+{% endblock %} 
+
+{% block mainpanel %}
+  {% include 'profit/nfs_entry.html' %}
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+  $(function () {
+    $("#view1").attr("action", "{% url 'myprofit:service06confirm' %}")
+
+    //共通
+    $('#company').val("13300");
+    $('#shop').val("1E0");
+    $("#tantou_code").val("001234"); // 値を設定
+    $("#tantou_name").val("大磯　太郎");
+    $("#customer_kanji").val("尾凪　花子");
+    $("#customer_kana").val("ｵﾅｷﾞ ﾊﾅｺ");
+    $("#birthday_year").val("2000");
+    $("#birthday_month").val("04");
+    $("#birthday_day").val("01");
+    $("#gender").val(2);
+    $("#post_code1").val("171");
+    $("#post_code2").val("0014");
+    $("#address_kanji").val("豊島区池袋9-8-7");
+    $("#tel").val("070-1239-1721");
+    $("#maker").val(1);
+    //$('#maker').prop('disabled', true);
+    $("#car_name").val("ｽｶｲﾗｲﾝ");
+    //$('#car_name').prop('disabled', true);
+    $("#car_class").val(1);
+    //$('#car_class').prop('disabled', true);
+    $("#car_model").val("5BA-RV37");
+    $("#base_no").val("V37");
+    //$('#base_no').prop('disabled', true);
+    $("#frame_no1").val("RV37-130855");
+    //$("#car_code").val("15");
+    $("#payment").val(2);
+    
+    $('#order_no').prop('disabled', true);
+    $('#entry_div').prop('disabled', true);
+    $("#product").val("1");
+    //$('#product').prop('disabled', true);
+
+    //それぞれ
+    var cert_no = $('#hidden_no').val();
+
+    if(cert_no == '410987001' || cert_no == '410987002'){//新車54
+      $("#entry_div").val(1);
+      $("#course").val("1");
+      $('#course').prop('disabled', true);
+      $("#price").val("156,920");
+    }else if(cert_no == '410987003' || cert_no == '410987004'){//中古車18
+      $("#course").val("2");
+      $('#course').prop('disabled', true);
+      $("#price").val("85,690");
+    }else if(cert_no == '410987003' || cert_no == '410987004' || cert_no == '410987005'){//サービス18
+      $("#course").val("2");
+      $("#price").val("85,690");
+    }
+
+    //新車車両あり
+    if(cert_no == '410987002'){
+      var shodo_date = moment(new Date())
+      $("#register_year").val(shodo_date.format('YYYY'));
+      $("#register_month").val(shodo_date.format('MM'));
+      var shaken_date = moment(new Date()).add(3, 'y');
+      $("#insp_year").val(shaken_date.format('YYYY'));
+      $("#insp_month").val(shaken_date.format('MM'));
+      $("#insp_day").val(shaken_date.format('DD'));
+    //中古車サービス車両あり
+    }else if(cert_no == '410987004' || cert_no == '410987005'){
+      var shodo_date = moment(new Date()).add(-5, 'y');
+      $("#register_year").val(shodo_date.format('YYYY'));
+      $("#register_month").val(shodo_date.format('MM'));
+      var shaken_date = moment(new Date()).add(740, 'd');
+      $("#insp_year").val(shaken_date.format('YYYY'));
+      $("#insp_month").val(shaken_date.format('MM'));
+      $("#insp_day").val(shaken_date.format('DD'));
+    }
+
+
+    if(cert_no == '410987001' ){//新車
+      $("#order_no").val("N123A0001");      
+    }else if(cert_no == '410987002' ){//新車
+      $("#order_no").val("N123A0002");
+      $("#plate_no1").val(1);
+      $("#plate_no2").val("330");
+      $("#plate_no3").val("ｻ");
+      $("#plate_no4").val("9999");
+    }else if(cert_no == '410987003' ){//中古車
+      $("#order_no").val("U2E123001");
+      $("#entry_div").val(2);
+    }else if(cert_no == '410987004' ){//中古車
+      $("#order_no").val("U2E123002");
+      $("#entry_div").val(2);
+      $("#plate_no1").val(1);
+      $("#plate_no2").val("330");
+      $("#plate_no3").val("ｻ");
+      $("#plate_no4").val("9999");
+    }else if(cert_no == '410987005' ){//サービス
+      $("#order_no").val("502D0001");
+      $("#entry_div").val(3);
+      $("#plate_no1").val(1);
+      $("#plate_no2").val("330");
+      $("#plate_no3").val("ｻ");
+      $("#plate_no4").val("0014");
+    }
+
+  });
+</script>
+
+{% endblock %}

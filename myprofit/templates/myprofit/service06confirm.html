@@ -1,0 +1,109 @@
+{% extends 'profit/profit_base.html' %}
+{% load static %}
+{% block title %}PROFIT_mock{% endblock %}
+
+{% block breadcrumb %}
+  {% include 'profit/bread_service.html' %}
+{% endblock %}
+
+{% block sidebar %}
+  {% include 'profit/side_service.html' %}
+{% endblock %} 
+
+{% block mainpanel %}
+  {% include 'profit/nfs_confirm.html' %}
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+  $(function () {
+    $("#nfs_menu").attr("href", "{% url 'myprofit:service05' %}?route=entry") //お客様一覧検索
+    $("#back1").attr("href", "{% url 'myprofit:service03' %}?route=entry") //中断ボタン
+
+    //コースが18だったら、はじめにおすすめ警告モーダルを表示、ボタンも表示
+    if($('#course1').text() == '：メンテプロパック18車検付きベーシック' ){
+      $('#Modal1').modal('show');
+    }else{
+      $('#recommend').hide();
+    }
+
+    //コースに応じて差し込み
+    var cert_no = $('#hidden_no').val();
+    $("#cert_no").text("："+cert_no);
+
+    //courseと区分：新車
+    if(cert_no == '410987001' || cert_no == '410987002'){
+      $("#course1").text("：メンテプロパック54車検付きベーシック");
+      $("#course2").text("：メンテプロパック54車検付きベーシック");
+      $("#price1").text("：156,920円");
+      $("#price2").text("：156,920円");
+      $("#entry_div").text("：新車");
+    //中古車
+    }else if(cert_no == '410987003' ||cert_no == '410987004'){
+      $("#entry_div").text("：中古車");
+    }
+
+    //
+    //新車車両あり
+    if(cert_no == '410987002'){
+      var shodo_date = moment(new Date())
+      $("#register_date").text(shodo_date.format('：YYYY年MM月'));
+      var shaken_date = moment(new Date()).add(3, 'y');
+      $("#insp_date").text(shaken_date.format('：YYYY年MM月DD日'));
+      $("#plate_no").text("：練馬 300 ｻ 9999");
+    //中古車車両あり
+    }else if(cert_no == '410987004'){
+      var shodo_date = moment(new Date()).add(-5, 'y');
+      $("#register_date").text(shodo_date.format('：YYYY年MM月'));
+      var shaken_date = moment(new Date()).add(740, 'd');
+      $("#insp_date").text(shaken_date.format('：YYYY年MM月DD日'));
+      $("#plate_no").text("：練馬 300 ｻ 9999");
+    //サービス車両あり
+    }else if(cert_no == '410987005'){
+      var shodo_date = moment(new Date()).add(-5, 'y');
+      $("#register_date").text(shodo_date.format('：YYYY年MM月'));
+      var shaken_date = moment(new Date()).add(740, 'd');
+      $("#insp_date").text(shaken_date.format('：YYYY年MM月DD日'));
+      $("#plate_no").text("：練馬 300 ｻ 0014");
+    }
+    
+    //注文書No
+    if(cert_no == '410987001' ){//新車
+      $("#order_no1").text("：N123A0001");      
+      $("#order_no2").text("：N123A0001");
+    }else if(cert_no == '410987002' ){//新車
+      $("#order_no1").text("：N123A0002");
+      $("#order_no2").text("：N123A0002");
+    }else if(cert_no == '410987003' ){//中古車
+      $("#order_no1").text("：U2E123001");
+      $("#order_no2").text("：U2E123001");
+    }else if(cert_no == '410987004' ){//中古車
+      $("#order_no1").text("：U2E123002");
+      $("#order_no2").text("：U2E123002");
+    }else if(cert_no == '410987005' ){//サービス
+      $("#order_no1").text("：502D0001");
+      $("#order_no2").text("：502D0001");
+    }
+
+    
+    
+  });
+
+  //おすすめ商品ボタン
+  $("#recommend").click(function () {
+    $('#Modal2').modal('show')
+  });
+
+  //戻るボタン：先を03に変更してcontext送信
+  $("#test1").click(function () {
+    $("#view1").attr("action", "{% url 'myprofit:service05entry' %}")//戻る
+  });
+
+  //確認後の送信ボタン：先を07に変更してcontext送信
+  $("#send2").click(function () {
+    $("#view1").attr("action", "{% url 'myprofit:service07' %}")//確認後の送信ボタン
+  });
+</script>
+
+{% endblock %}

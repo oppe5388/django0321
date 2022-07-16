@@ -3,21 +3,22 @@
 {% block title %}PROFIT_mock{% endblock %}
 
 {% block breadcrumb %}
-  {% include 'profit/bread_service_cancel.html' %}
+  {% include 'profit/bread_service.html' %}
 {% endblock %}
 
 {% block sidebar %}
   {% include 'profit/side_service.html' %}
-{% endblock %}
+{% endblock %} 
 
 {% block mainpanel %}
-{% include 'profit/main_service.html' %}
+  {% include 'profit/nfs_search.html' %}
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
-  $(function() {
-    //申込書印刷を点滅
-    $('#application').addClass('blink');
+  $(function () {
+    $("#view1").attr("action", "{% url 'myprofit:service07' %}") //お客様一覧検索
   });
 </script>
+
 {% endblock %}
