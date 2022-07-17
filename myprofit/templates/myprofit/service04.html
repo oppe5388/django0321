@@ -25,7 +25,7 @@
     //確認後の送信ボタン
     if (route == "cert" || cancel_flag =="True") {
       $("#view1").attr("action", "{% url 'myprofit:service07' %}")
-    } else if (route == "entry" ) {
+    } else if (route == "entry" || route == "entry2") {
       $("#view1").attr("action", "{% url 'myprofit:service05entry' %}")
     } else if (route == "mente" ) {
       $("#view1").attr("action", "{% url 'myprofit:service05' %}")

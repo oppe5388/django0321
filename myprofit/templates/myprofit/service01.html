@@ -14,15 +14,17 @@
 
 <form class="" action='#' method='get' id="view1">
   <input type="hidden" name="route" id="route" value="{{route}}">
-</form>
 
-<a href="{% url 'myprofit:service03' %}?route={{route}}" id="entry">メンテプロ申込</a>
-  
+  <input name="cert_no" id="hidden_no" value="410987005">
+
+<button class="btn btn-outline-dark" type="submit">メンテプロ申込</button>
+</form>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
   $(function() {
 
+    $("#view1").attr("action", "{% url 'myprofit:service03' %}");
 
   });
 </script>

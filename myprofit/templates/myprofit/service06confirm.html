@@ -18,8 +18,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
   $(function () {
-    $("#nfs_menu").attr("href", "{% url 'myprofit:service05' %}?route=entry") //お客様一覧検索
-    $("#back1").attr("href", "{% url 'myprofit:service03' %}?route=entry") //中断ボタン
+    var route = $('#route').val();
+    $("#nfs_menu").attr("href", "{% url 'myprofit:service05' %}?route=" +route)//お客様一覧検索
+    $("#back1").attr("href", "{% url 'myprofit:service03' %}?route=" +route) //中断ボタン
 
     //コースが18だったら、はじめにおすすめ警告モーダルを表示、ボタンも表示
     if($('#course1').text() == '：メンテプロパック18車検付きベーシック' ){

@@ -135,6 +135,7 @@ def service02(request):
 def service03(request):
     context = {
         'route': request.GET.get('route'),
+        'cert_no': request.GET.get('cert_no'),
     }
     return render(request, 'myprofit/service03.html', context)
 

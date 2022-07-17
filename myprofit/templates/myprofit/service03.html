@@ -19,11 +19,12 @@
     <h4 class="font-weight-bold">新中サ区分：<span class="text-secondary">サービス</span></h4>
   </div>
 
-  <div class="col-9 card bg-light p-1 mb-2">
+  <!-- 見積・受付・納品から -->
+  <div class="col-9 card bg-light p-1 mb-2" id="entry1_block">
     <div class="card-body p-1 m-0">
       <div class="d-flex align-items-start">
         <input type="radio" class="m-1" value="" disabled>
-        <span class="col px-0 text-muted">伝票番号</span>
+        <span class="col  px-0 text-muted">伝票番号</span>
         <input class="" id="" disabled>
         <input type="radio" class="m-1" value="" checked>
         <span class="col px-0">登録番号</span>
@@ -45,6 +46,19 @@
       </div>
     </div>
   </div>
+
+  <!-- コース作業から入ったらこちら -->
+  <div class="col-9 card bg-light p-1 mb-2" id="entry2_block">
+    <div class="card-body p-1 m-0">
+      <div class="d-flex align-items-start">
+        <span class="col-2  px-0 text-muted">伝票番号</span>
+        <input class="col-3" id="" disabled>
+      </div>
+    </div>
+  </div>
+
+
+
 </div>
 
 <div class="row">
@@ -181,7 +195,7 @@
 
 <form class="" action='#' method='get' id="view1">
 <input type="hidden" name="route" id="route" value="{{route}}">
-<input type="hidden" name="cert_no" id="hidden_no">
+<input type="hidden" name="cert_no" id="hidden_no" value="{{cert_no}}">
 <input type="hidden" name="cancel_flag" id="cancel_flag">
 
 <!-- Modal申込 -->
@@ -259,35 +273,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/locale/ja.js"></script>
 <script>
-  $(function () {
-    $('[data-toggle="popover"]').popover()
 
-    //検索の登録番号3つ入れてしまう
-    $('#search_plate1').val(1);
-    $('#search_plate2').val("330");
-    $('#search_plate3').val("ｻ");
+  //検索の関数
+  function searchFunc(){
 
-    //モーダル有効ボタン非表示
-    $('#entry').hide();
-    $('#cancel').hide();
-    $('#cert').hide();
-
-    //routeが申込からと会員証からで、disのボタンも非表示に
-    var route = $('#route').val();
-    if (route == "entry" ) {
-      $('#dis_cert').hide();
-      $('#cert_pop').hide();
-    } else if (route == "cert" ) {
-      $('#dis_entry').hide();
-      $('#dis_cancel').hide();
-      $('#cert_pop').show();
-    }
-
-    $("#view1").attr("action", "{% url 'myprofit:service04' %}")
-  });
-
-  //検索ボタン
-  $("#test").click(function () {
     //クリア
     $('form').find(':text').val("");//inputすべて
     $('#customer_no').val(0);
@@ -303,7 +292,7 @@
 
     //routeが申込からと会員証からで、disのボタンも非表示に
     var route = $('#route').val();
-    if (route == "entry" ) {
+    if (route == "entry" || route == "entry2") {
       $('#dis_cert').hide();
     } else if (route == "cert" ) {
       $('#dis_entry').hide();
@@ -348,7 +337,7 @@
       $('button').removeClass('blink');
 
       //route申込書の場合
-      if (route == "entry" ) {
+      if (route == "entry" || route == "entry2") {
         //未申込→申込ボタン点滅、メッセージ
         if (search_input == "0014") {
           $('#entry').show();
@@ -407,6 +396,66 @@
     } else if (search_input == "0017") { 
       $("#hidden_no").val("410987020");
     }
+  }
+
+
+  //ページ表示時
+  $(function () {
+    $('[data-toggle="popover"]').popover()
+
+    //検索の登録番号3つ入れてしまう
+    $('#search_plate1').val(1);
+    $('#search_plate2').val("330");
+    $('#search_plate3').val("ｻ");
+
+    //モーダル有効ボタン非表示
+    $('#entry').hide();
+    $('#cancel').hide();
+    $('#cert').hide();
+
+    //routeが申込からと会員証からで、disのボタンも非表示に
+    var route = $('#route').val();
+    if (route == "entry" ) {
+      $('#dis_cert').hide();
+      $('#cert_pop').hide();
+      $('#entry2_block').hide();
+    } else if (route == "cert" ) {
+      $('#dis_entry').hide();
+      $('#dis_cancel').hide();
+      $('#cert_pop').show();
+      $('#entry2_block').hide();
+    //コース作業からだったら、検索ボタン非表示ですでに入力済み状態にする
+    } else if (route == "entry2" ) {
+      $('#dis_cert').hide();
+      $('#cert_pop').hide();
+
+      //会員証番号から登録番号入れる
+      var hidden_no = $('#hidden_no').val();
+      //context用に会員証no入れる、キャンセル
+      if (hidden_no == "410987005") {
+        $("#search_plate4").val("0014");
+      } else if (hidden_no == "410987010") {
+        $("#search_plate4").val("0015");
+      } else if (hidden_no == "410987017") {
+        $("#search_plate4").val("0016");
+      } else if (hidden_no == "410987020") {
+        $("#search_plate4").val("0017");
+      } 
+
+      searchFunc();
+
+      $('#entry1_block').hide();
+      
+    }
+
+    $("#view1").attr("action", "{% url 'myprofit:service04' %}");
+
+
+  });
+
+  //検索ボタン
+  $("#test").click(function () {
+    searchFunc();
   });
 
   //申込モーダル→キャンセルフラグ消す
