@@ -12,12 +12,117 @@
 
 {% block mainpanel %}
 
-<form class="" action='#' method='get' id="view1">
+<style>
+  .vertical {
+      writing-mode: vertical-rl;
+  }
+</style>
+
+<form class="" action='#' method='get' id="view1" name="view1">
+
+    <div class="d-flex flex-row navbar bg-light mb-1">
+      <div class="text-dark small text-center">F1<br>お客様<br>ワンストップ</div>
+      <div class="text-dark small text-center"><i class="fa fa-search fa-2x"></i><br>F2<br>検索</div>
+      <div class="text-dark small text-center"><i class="fa fa-user fa-2x"></i><br>F3<br>顧客</div>
+      <div class="text-dark small text-center"><i class="fa fa-car fa-2x"></i><br>F4<br>車両(普通)</div>
+      <div class="text-dark small text-center"><i class="fa fa-car fa-2x"></i><br>F5<br>車両(経)</div>
+      <div class="text-dark small text-center"><i class="fa fa-file-text-o fa-2x"></i><br>F6<br>伝票</div>
+      <div class="text-dark small text-center"><i class="fa fa-print fa-2x"></i><br>F7<br>印刷</div>
+      <div class="text-dark small text-center"><i class="fa fa-history fa-2x"></i><br>F8<br>履歴</div>
+      <div class="text-dark small text-center"><i class="fa fa-phone fa-2x"></i><br>F9<br>予約</div>
+      <div class="text-dark small text-center"><i class="fa fa-table fa-2x"></i><br>F10<br>コース作業</div>
+      <div class="text-dark small text-center"><i class="fa fa-file-text fa-2x"></i><br>F11<br>申請書類</div>
+      <div class="text-dark small text-center"><i class="fa fa-sign-out fa-2x"></i><br>F12<br>終了</div>
+    </div>
+
+    <div class="d-flex mb-1">
+      <div class="col-11 d-flex flex-row navbar bg-light">
+        <div class="text-dark small text-center"><i class="fa fa-floppy-o fa-lg"></i> 登録</div>
+        <div class="text-dark small text-center"><i class="fa fa-plus-square-o fa-lg"></i> 新規</div>
+        <div class="text-dark small text-center"><i class="fa fa-user fa-lg"></i> 顧客車両情報</div>
+        <div class="text-dark small text-center"><i class="fa fa-car fa-lg"></i> 料金一覧表</div>
+        <div class="text-dark small text-center"><i class="fa fa-table fa-lg"></i> 料金比較</div>
+        <div class="text-dark small text-center"><i class="fa fa-money fa-lg"></i> 値引ガイド</div>
+        <div class="text-dark small text-center"><i class="fa fa-wrench fa-lg"></i> セット作業</div>
+        {% comment %} <button class="text-dark small text-center" type="submit"><i class="fa fa-file-o fa-lg"></i> メンテプロ申込</button> {% endcomment %}
+        <a href="#" class="text-dark small text-center p-1" onclick="document.view1.submit()" id="entry"><i class="fa fa-file-o fa-lg"></i> メンテプロ申込</a>
+      </div>
+      <div class="col-1 d-flex flex-row navbar bg-info text-white small justify-content-center">
+        新規
+      </div>
+    </div>
+
+
+    <div class="d-flex">
+      <div class="col-3 d-flex flex-column px-0 ">
+        <div class="d-flex mb-1">
+          <div class="col-1 bg-secondary vertical text-white p-4 text-center">
+            お客様情報
+          </div>
+          <div class="col-11 bg-gradient-light">
+            <div>顧客コード</div>
+            <div>お名前</div>
+            <div>フリガナ</div>
+            <div>連絡先</div>
+            <div>e-mail</div>
+          </div>
+        </div>
+
+        <div class="d-flex mb-1">
+          <div class="col-1 bg-secondary vertical text-white p-4 text-center">
+            車両情報
+          </div>
+          <div class="col-11 bg-gradient-light">
+            <div>登録番号</div>
+            <div>種別番号</div>
+            <div>車名</div>
+            <div>車種</div>
+            <div>型式</div>
+            <div>自・営の別</div>
+            <div>初年度</div>
+            <div>総排気量</div>
+            <div>車検満期日</div>
+            <div>自賠責満期日</div>
+            <div>料率グループ</div>
+          </div>
+        </div>
+
+        <div class="d-flex mb-1">
+          <div class="col-1 bg-secondary vertical text-white p-4 text-center">
+            
+          </div>
+          <div class="col-11 bg-gradient-light">
+            <div>受付担当</div>
+            <div>種別番号</div>
+            <div>車名</div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="col-9 d-flex flex-column">
+        <div class="d-flex mb-1 bg-dark text-warning p-2" style="height: 100px;">
+          メンテナンスメニュー
+          車検
+          定期（乗）
+          定期（商）
+          新車点検
+        </div>
+
+        <div class="d-flex flex-row mb-1 bg-info text-secondary p-2" style="height: 300px;">
+          <div class="">しんぷるコース</div>
+          <div class="">さわやかパック</div>
+          <div class="">マッハプロ初回車検</div>
+          <div class="">マッハプロ基本コース</div>
+          <div class="">マッハプロ予防コース</div>
+        </div>
+      </div>
+    </div>
+      
+
+
   <input type="hidden" name="route" id="route" value="{{route}}">
-
   <input name="cert_no" id="hidden_no" value="410987005">
-
-<button class="btn btn-outline-dark" type="submit">メンテプロ申込</button>
 </form>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
