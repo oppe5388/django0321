@@ -25,7 +25,7 @@
       <div class="text-dark small text-center"><i class="fa fa-search fa-2x"></i><br>F2<br>検索</div>
       <div class="text-dark small text-center"><i class="fa fa-user fa-2x"></i><br>F3<br>顧客</div>
       <div class="text-dark small text-center"><i class="fa fa-car fa-2x"></i><br>F4<br>車両(普通)</div>
-      <div class="text-dark small text-center"><i class="fa fa-car fa-2x"></i><br>F5<br>車両(経)</div>
+      <div class="text-dark small text-center"><i class="fa fa-car fa-2x"></i><br>F5<br>車両(軽)</div>
       <div class="text-dark small text-center"><i class="fa fa-file-text-o fa-2x"></i><br>F6<br>伝票</div>
       <div class="text-dark small text-center"><i class="fa fa-print fa-2x"></i><br>F7<br>印刷</div>
       <div class="text-dark small text-center"><i class="fa fa-history fa-2x"></i><br>F8<br>履歴</div>
@@ -45,26 +45,45 @@
         <div class="text-dark small text-center"><i class="fa fa-money fa-lg"></i> 値引ガイド</div>
         <div class="text-dark small text-center"><i class="fa fa-wrench fa-lg"></i> セット作業</div>
         {% comment %} <button class="text-dark small text-center" type="submit"><i class="fa fa-file-o fa-lg"></i> メンテプロ申込</button> {% endcomment %}
-        <a href="#" class="text-dark small text-center p-1" onclick="document.view1.submit()" id="entry"><i class="fa fa-file-o fa-lg"></i> メンテプロ申込</a>
+        <a href="#" class="text-dark small text-center p-1 nav-link" onclick="document.view1.submit()" id="entry"><i class="fa fa-file-o fa-lg"></i> メンテプロ申込</a>
       </div>
-      <div class="col-1 d-flex flex-row navbar bg-info text-white small justify-content-center">
+      <div class="col-1 d-flex flex-row navbar bg-secondary text-white small justify-content-center">
         新規
       </div>
     </div>
 
 
     <div class="d-flex">
-      <div class="col-3 d-flex flex-column px-0 ">
+      <div class="col-5 d-flex flex-column pl-0">
         <div class="d-flex mb-1">
           <div class="col-1 bg-secondary vertical text-white p-4 text-center">
             お客様情報
           </div>
-          <div class="col-11 bg-gradient-light">
-            <div>顧客コード</div>
-            <div>お名前</div>
-            <div>フリガナ</div>
-            <div>連絡先</div>
-            <div>e-mail</div>
+          <div class="col-11 bg-gradient-light p-1">
+            <div class="d-flex flex-nowrap">
+              <span class="col-3 mb-1 p-0">顧客コード</span>
+              <input class="col-6 mb-1">
+            </div>
+            <div class="d-flex flex-nowrap">
+              <span class="col-3 mb-1 p-0">お名前</span>
+              <input class="col-8 mb-1">
+            </div>
+            <div class="d-flex flex-nowrap">
+              <span class="col-3 mb-1 p-0"></span>
+              <input class="col-7 mb-1">様
+            </div>
+            <div class="d-flex flex-nowrap">
+              <span class="col-3 mb-1 p-0">フリガナ</span>
+              <input class="col-8 mb-1">
+            </div>
+            <div class="d-flex flex-nowrap">
+              <span class="col-3 mb-1 p-0">連絡先</span>
+              <input class="col-8 mb-1">
+            </div>
+            <div class="d-flex flex-nowrap">
+              <span class="col-3 mb-1 p-0">e-mail</span>
+              <input class="col-8 mb-1">
+            </div>
           </div>
         </div>
 
@@ -72,18 +91,70 @@
           <div class="col-1 bg-secondary vertical text-white p-4 text-center">
             車両情報
           </div>
-          <div class="col-11 bg-gradient-light">
-            <div>登録番号</div>
-            <div>種別番号</div>
-            <div>車名</div>
-            <div>車種</div>
-            <div>型式</div>
-            <div>自・営の別</div>
-            <div>初年度</div>
-            <div>総排気量</div>
-            <div>車検満期日</div>
-            <div>自賠責満期日</div>
-            <div>料率グループ</div>
+          <div class="col-11 bg-gradient-light p-1">
+            <div class="d-flex flex-nowrap">
+              <span class="col-3 mb-1 p-0">登録番号</span>
+              <input class="col-2 mb-1">
+              <button class="p-1 mb-1">?</button>
+              <input class="col-1 mb-1">
+              <input class="col-1 mb-1">
+              <input class="col-2 mb-1">
+            </div>
+            <div class="d-flex flex-nowrap">
+              <span class="col-3 mb-1 p-0">類別番号</span>
+              <input class="col-2 mb-1">-
+              <input class="col-2 mb-1">
+            </div>
+            <div class="d-flex flex-nowrap">
+              <span class="col-3 mb-1 p-0">車名</span>
+              <input class="col-7 mb-1">
+              <button class="p-1 mb-1">?</button>
+            </div>
+            <div class="d-flex flex-nowrap">
+              <span class="col-3 mb-1 p-0">車種</span>
+              <input class="col-7 mb-1">
+              <button class="p-1 mb-1">?</button>
+            </div>
+            <div class="d-flex flex-nowrap">
+              <span class="col-3 mb-1 p-0">型式</span>
+              <input class="col-4 mb-1">
+              <select class="col-2 mb-1"></select>
+            </div>
+            <div class="d-flex flex-nowrap">
+              <span class="col-3 mb-1 p-0">自・営の別</span>
+              <select class="col-3 mb-1"></select>
+              <span class="col-3 mb-1 p-0">走行距離</span>
+              <input class="col-2 mb-1">km
+            </div>
+            <div class="d-flex flex-nowrap">
+              <span class="col-3 mb-1 p-0">初年度</span>
+              <input class="col-2 mb-1">
+              <input class="col-1 mb-1">年
+              <input class="col-1 mb-1">月
+            </div>
+            <div class="d-flex flex-nowrap">
+              <span class="col-3 mb-1 p-0">総排気量</span>
+              <input class="col-4 mb-1">
+              <select class="col-2 mb-1"></select>
+            </div>
+            <div class="d-flex flex-nowrap">
+              <span class="col-3 mb-1 p-0">車検満期日</span>
+              <input class="col-2 mb-1">
+              <input class="col-1 mb-1">年
+              <input class="col-1 mb-1">月
+              <input class="col-1 mb-1">日
+            </div>
+            <div class="d-flex flex-nowrap">
+              <span class="col-3 mb-1 p-0">自賠責満期</span>
+              <input class="col-2 mb-1">
+              <input class="col-1 mb-1">年
+              <input class="col-1 mb-1">月
+              <input class="col-1 mb-1">日
+            </div>
+            <div class="d-flex flex-nowrap">
+              <span class="col-3 mb-1 p-0">料率グルー</span>
+              <select class="col-4 mb-1"></select>
+            </div>
           </div>
         </div>
 
@@ -92,32 +163,85 @@
             
           </div>
           <div class="col-11 bg-gradient-light">
-            <div>受付担当</div>
-            <div>種別番号</div>
-            <div>車名</div>
+            <div class="d-flex flex-nowrap">
+              <span class="col-3 mb-1 p-0">受付担当</span>
+              <input class="col-6 mb-1">
+              <button class="p-1 mb-1">?</button>
+            </div>
+            <div class="d-flex flex-nowrap">
+              <span class="col-3 mb-1 p-0">メカ担当</span>
+              <input class="col-6 mb-1">
+              <button class="p-1 mb-1">?</button>
+            </div>
+            <div class="d-flex flex-nowrap">
+              <span class="col-3 mb-1 p-0">摘要1</span>
+              <input class="col-8 mb-1">
+            </div>
           </div>
         </div>
       </div>
 
       
-      <div class="col-9 d-flex flex-column">
-        <div class="d-flex mb-1 bg-dark text-warning p-2" style="height: 100px;">
-          メンテナンスメニュー
-          車検
-          定期（乗）
-          定期（商）
-          新車点検
+      <div class="col-7 d-flex flex-column pr-0">
+      
+        <div class="d-flex flex-column mb-1 alert-info p-0" style="height: 500px;">
+          <div class="d-flex bg-dark py-4 px-2">
+            <div class="text-warning">メンテナンス<br>メニュー</div>
+            <div class="text-light">　<span class="text-secondary"><i class="fa fa-car fa-lg"></i></span>車検</div>
+            <div class="text-light">　<span class="text-secondary"><i class="fa fa-car fa-lg"></i></span>定期（乗）</div>
+            <div class="text-light">　<span class="text-secondary"><i class="fa fa-car fa-lg"></i></span>定期（商）</div>
+            <div class="text-light">　<span class="text-secondary"><i class="fa fa-car fa-lg"></i></span>新車点検</div>
+          </div>
+          <div class="d-flex flex-wrap">
+            <div class="card-title m-3">しんぷるコース</div>
+            <div class="card-title m-3">さわやかパック</div>
+            <div class="card-title m-3">マッハプロ初回車検</div>
+            <div class="card-title m-3">マッハプロ基本コース</div>
+            <div class="card-title m-3">マッハプロ予防コース</div>
+          </div>
         </div>
 
-        <div class="d-flex flex-row mb-1 bg-info text-secondary p-2" style="height: 300px;">
-          <div class="">しんぷるコース</div>
-          <div class="">さわやかパック</div>
-          <div class="">マッハプロ初回車検</div>
-          <div class="">マッハプロ基本コース</div>
-          <div class="">マッハプロ予防コース</div>
+        <div class="d-flex mb-1 alert-success p-2" >
+          <div class="small vertical p-1 text-center">料金</div>
+          <div class="col small px-0">
+            <div class="text-nowrap">基本料金</div>
+            <input class="col text-right" value="0">
+          </div>
+          <div class=""><br>+</div>
+          <div class="col small px-0">
+            <div class="text-nowrap">諸費用合計</div>
+            <input class="col text-right" value="0">
+          </div>
+          <div class=""><br>+</div>
+          <div class="col small px-0">
+            <div class="text-nowrap">追加作業合計</div>
+            <input class="col text-right" value="0">
+          </div>
+          <div class=""><br>+<br>+</div>
+          <div class="col small px-0">
+            <div class="text-nowrap">追加部品合計</div>
+            <input class="col text-right" value="0">
+            <div class="text-nowrap">整備(消費税)</div>
+          </div>
+          <div class=""><br>-</div>
+          <div class="col small px-0">
+            <div class="text-nowrap">値引金額</div>
+            <input class="col text-right" value="0">
+            <input class="col text-right" value="0">
+          </div>
+          <div class=""><br>=</div>
+          <div class="col small px-0">
+            <div class="text-nowrap">合計金額</div>
+            <span class="text-nowrap"><input class="col-9 text-right" value="0">円</span>
+          </div>
         </div>
       </div>
+
+      
     </div>
+
+
+    
       
 
 
@@ -130,6 +254,7 @@
   $(function() {
 
     $("#view1").attr("action", "{% url 'myprofit:service03' %}");
+    $('#entry').addClass('blink');
 
   });
 </script>
