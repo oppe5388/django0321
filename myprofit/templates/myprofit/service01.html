@@ -19,6 +19,8 @@
 </style>
 
 <form class="" action='#' method='get' id="view1" name="view1">
+  <input type="hidden" name="route" id="route" value="{{route}}">
+  <input type="hidden" name="cert_no" id="hidden_no" value="410987005">
 
     <div class="d-flex flex-row navbar bg-light mb-1">
       <div class="text-dark small text-center">F1<br>お客様<br>ワンストップ</div>
@@ -51,6 +53,7 @@
         新規
       </div>
     </div>
+</form>
 
 
     <div class="d-flex">
@@ -95,7 +98,7 @@
             <div class="d-flex flex-nowrap">
               <span class="col-3 mb-1 p-0">登録番号</span>
               <input class="col-2 mb-1">
-              <button class="p-1 mb-1">?</button>
+              <button class="p-1 mb-1" disabled>?</button>
               <input class="col-1 mb-1">
               <input class="col-1 mb-1">
               <input class="col-2 mb-1">
@@ -108,12 +111,12 @@
             <div class="d-flex flex-nowrap">
               <span class="col-3 mb-1 p-0">車名</span>
               <input class="col-7 mb-1">
-              <button class="p-1 mb-1">?</button>
+              <button class="p-1 mb-1" disabled>?</button>
             </div>
             <div class="d-flex flex-nowrap">
               <span class="col-3 mb-1 p-0">車種</span>
               <input class="col-7 mb-1">
-              <button class="p-1 mb-1">?</button>
+              <button class="p-1 mb-1" disabled>?</button>
             </div>
             <div class="d-flex flex-nowrap">
               <span class="col-3 mb-1 p-0">型式</span>
@@ -187,10 +190,10 @@
         <div class="d-flex flex-column mb-1 alert-info p-0" style="height: 500px;">
           <div class="d-flex bg-dark py-4 px-2">
             <div class="text-warning">メンテナンス<br>メニュー</div>
-            <div class="text-light">　<span class="text-secondary"><i class="fa fa-car fa-lg"></i></span>車検</div>
-            <div class="text-light">　<span class="text-secondary"><i class="fa fa-car fa-lg"></i></span>定期（乗）</div>
-            <div class="text-light">　<span class="text-secondary"><i class="fa fa-car fa-lg"></i></span>定期（商）</div>
-            <div class="text-light">　<span class="text-secondary"><i class="fa fa-car fa-lg"></i></span>新車点検</div>
+            <div class="text-light mx-2"><span class="text-secondary"><i class="fa fa-car fa-lg"></i></span>車検</div>
+            <div class="text-light mx-2"><span class="text-secondary"><i class="fa fa-car fa-lg"></i></span>定期(乗)</div>
+            <div class="text-light mx-2"><span class="text-secondary"><i class="fa fa-car fa-lg"></i></span>定期(商)</div>
+            <div class="text-light mx-2"><span class="text-secondary"><i class="fa fa-car fa-lg"></i></span>新車点検</div>
           </div>
           <div class="d-flex flex-wrap">
             <div class="card-title m-3">しんぷるコース</div>
@@ -239,15 +242,6 @@
 
       
     </div>
-
-
-    
-      
-
-
-  <input type="hidden" name="route" id="route" value="{{route}}">
-  <input name="cert_no" id="hidden_no" value="410987005">
-</form>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
