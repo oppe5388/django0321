@@ -107,13 +107,13 @@
         <input type="radio" name="s1" id="op1_2" autocomplete="off" value="会員証"> 会員証
       </label>
       <label class="btn btn-sm btn-inverse-secondary">
-        <input type="radio" name="s1" id="op1_3" autocomplete="off" value="申込書と会員証"> 申込書と会員証
+        <input type="radio" name="s1" id="op1_3" autocomplete="off" value="両方"> 申込書と会員証
       </label>
     </div>
   </div>
 </div>
 
-<div class="card mb-2">
+<div class="card mb-2" id="block2">
   <div class="card-body p-2">
     <div class="d-flex flex-wrap justify-content-between">
       <h4 class="h4 font-weight-bold mb-3">2. ステータス</h4>
@@ -143,27 +143,27 @@
       </label>
     </div> {% endcomment %}
 
-    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+    <div class="btn-group btn-group-toggle" data-toggle="buttons" id="select2">
       <label class="btn btn-sm btn-inverse-secondary">
-        <input type="radio" name="options" id="option1" autocomplete="off">(申込前)
+        <input type="radio" name="s2" id="op2_1" autocomplete="off" value="申込前">(申込前)
       </label>
       <label class="btn btn-sm btn-inverse-secondary">
-        <input type="radio" name="options" id="option2" autocomplete="off">申込書未発行
+        <input type="radio" name="s2" id="op2_2" autocomplete="off" value="申込書未発行">申込書未発行
         <a href="#" class="text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
           data-content="申込はした" ><i class="fa fa-question-circle colorwhite"></i></a>
       </label>
       <label class="btn btn-sm btn-inverse-secondary">
-        <input type="radio" name="options" id="option3" autocomplete="off">車両情報未登録
+        <input type="radio" name="s2" id="op2_3" autocomplete="off" value="車両情報未登録">車両情報未登録
         <a href="#" class="text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
           data-content="登録番号や車検満了日なしで、NFS-Webの申込書印刷ボタンは押した"><i class="fa fa-question-circle colorwhite"></i></a>
       </label>
       <label class="btn btn-sm btn-inverse-secondary">
-        <input type="radio" name="options" id="option3" autocomplete="off">会員証未発行
+        <input type="radio" name="s2" id="op2_4" autocomplete="off" value="会員証未発行">会員証未発行
         <a href="#" class="text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
           data-content="登録番号や車検満了日がある状態で、NFS-Webの申込書印刷ボタンは押した"><i class="fa fa-question-circle colorwhite"></i></a>
       </label>
       <label class="btn btn-sm btn-inverse-secondary">
-        <input type="radio" name="options" id="option3" autocomplete="off">本登録
+        <input type="radio" name="s2" id="op2_5" autocomplete="off" value="本登録">本登録
         <a href="#" class="text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
           data-content="NFS-Webの会員証印刷ボタンまで押した" ><i class="fa fa-question-circle colorwhite"></i></a>
       </label>
@@ -179,62 +179,63 @@
       <h4 class="h4 font-weight-bold mb-3">3. 車両基盤</h4>
     </div>
 
-    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+    <div class="btn-group btn-group-toggle" data-toggle="buttons" id="select3">
       <label class="btn btn-sm btn-inverse-secondary">
-        <input type="radio" name="options" id="option1" autocomplete="off">まだ
+        <input type="radio" name="s3" id="op3_1" autocomplete="off" value="もともと">もともと申込時に反映済み
       </label>
       <label class="btn btn-sm btn-inverse-secondary">
-        <input type="radio" name="options" id="option2" autocomplete="off">入力（反映）済み
+        <input type="radio" name="s3" id="op3_2" autocomplete="off" value="入力済">申込時は未、今は反映済み
+      </label>
+      <label class="btn btn-sm btn-inverse-secondary">
+        <input type="radio" name="s3" id="op3_3" autocomplete="off" value="まだ">まだ
       </label>
     </div>
   </div>
 </div>
 
 
-<div class="card mb-2">
+{% comment %} <div class="card mb-2">
   <div class="card-body p-2">
     <div class="d-flex flex-wrap justify-content-between">
       <h4 class="h4 font-weight-bold mb-3">4. 申込区分</h4>
     </div>
 
-    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+    <div class="btn-group btn-group-toggle" data-toggle="buttons" id="select4">
       <label class="btn btn-sm btn-inverse-secondary">
-        <input type="radio" name="options" id="option1" autocomplete="off">新車
+        <input type="radio" name="s4" id="option1" autocomplete="off" value="新車">新車
       </label>
       <label class="btn btn-sm btn-inverse-secondary">
-        <input type="radio" name="options" id="option2" autocomplete="off">中古車
+        <input type="radio" name="s4" id="option2" autocomplete="off" value="中古車">中古車
       </label>
       <label class="btn btn-sm btn-inverse-secondary">
-        <input type="radio" name="options" id="option3" autocomplete="off">サービス
+        <input type="radio" name="s4" id="option3" autocomplete="off" value="サービス">サービス
       </label>
     </div>
   </div>
-</div>
+</div> {% endcomment %}
 
 
-<div class="card mb-2">
+<div class="card mb-2 bg-light">
   <div class="card-body p-2">
     <div class="d-flex flex-wrap justify-content-between">
-      <h4 class="h4 font-weight-bold mb-3">（5. 実は内容を変更したい？）</h4>
+      <h4 class="h4 font-weight-bold mb-3 text-muted">（5. 実は内容を変更したい？）</h4>
     </div>
 
     <div class="btn-group btn-group-toggle" data-toggle="buttons">
-      <label class="btn btn-sm btn-inverse-secondary">
-        <input type="radio" name="options" id="option1" autocomplete="off">はい
+      <label class="btn btn-sm btn-inverse-secondary bg-light">
+        <input type="radio" name="options" id="option1" autocomplete="off"><span class="text-muted">はい</span>
       </label>
-      <label class="btn btn-sm btn-inverse-secondary active">
-        <input type="radio" name="options" id="option2" autocomplete="off" checked>いいえ
+      <label class="btn btn-sm btn-inverse-secondary bg-light">
+        <input type="radio" name="options" id="option2" autocomplete="off"><span class="text-muted">いいえ</span>
       </label>
     </div>
   </div>
 </div>
 
-<div class="row justify-content-center m-2">
+{% comment %} <div class="row justify-content-center m-2">
   <a href="#" class="btn btn-primary ml-auto">Go</a>
-</div>
+</div> {% endcomment %}
 
-
-<p>テキスト入力すると検索条件となりフィルタリングします。</p>  
 <input id="myInput" type="text" placeholder="Search..">
 <table class="table table-sm table-hover table-responsive">
   <thead>
@@ -269,33 +270,69 @@
 </table>
 
 
+<div id="jqs-11">
+  <dl>
+    <dt>開閉パネル<span> Open</span></dt>
+    <dd><p>これは開閉パネルのサンプルです。</p></dd>
+  </dl>
+</div>
+
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <script>
+  //スライドイン表示
+  //$("#block2").css("display", "none");
+  //$("#select1").change(function() {
+  //  $("#block2").css("display", "none");
+  //  $("#block2").slideDown("fast")
+  //});
+
   //changeで呼ぶ関数
   function disp_flow(date){
+    //テーブルフィルタ
+    var value = $('input:radio[name="s1"]:checked').val();
+    var value = value + $('input:radio[name="s2"]:checked').val();
+    var value = value + $('input:radio[name="s3"]:checked').val();
+    var value = value + $('input:radio[name="s4"]:checked').val();
 
+    //全部hideにしておいて、含むでshowとかかな？
+
+    //alert(value);
+    //var value = $('#myInput').val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
   }
 
   $(function () {
       $('[data-toggle="popover"]').popover()
       $('#sidebar').removeClass('bg-white');
   });
-  
+
+  $("#select1").change(function() {
+    disp_flow();
+  });
+
+  $("#select2").change(function() {
+    disp_flow();
+  });
+
+  $("#select3").change(function() {
+    disp_flow();
+  });
+
+  $("#select4").change(function() {
+    disp_flow();
+  });
 
   //テーブルフィルタ
   $("#myInput").on("keyup", function() {
-  //$("#myInput").change(function() {
     var value = $(this).val().toLowerCase();
     $("#myTable tr").filter(function() {
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
-  });
-
-
-  $("#select1").change(function() {
-    var select1 = $('input:radio[name="s1"]:checked').val();
-		$('#myInput').val(select1);
   });
 </script>
 
