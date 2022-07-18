@@ -99,15 +99,15 @@
       <h4 class="h4 font-weight-bold mb-3">1. 印刷したいもの</h4>
     </div>
 
-    <div class="btn-group btn-group-toggle" data-toggle="buttons" id="option1">
+    <div class="btn-group btn-group-toggle" data-toggle="buttons" id="select1">
       <label class="btn btn-sm btn-inverse-secondary">
-        <input type="radio" name="options" id="op1_1" autocomplete="off"> 申込書
+        <input type="radio" name="s1" id="op1_1" autocomplete="off" value="申込書"> 申込書
       </label>
       <label class="btn btn-sm btn-inverse-secondary">
-        <input type="radio" name="options" id="op1_2" autocomplete="off"> 会員証
+        <input type="radio" name="s1" id="op1_2" autocomplete="off" value="会員証"> 会員証
       </label>
       <label class="btn btn-sm btn-inverse-secondary">
-        <input type="radio" name="options" id="op1_3" autocomplete="off"> 申込書と会員証
+        <input type="radio" name="s1" id="op1_3" autocomplete="off" value="申込書と会員証"> 申込書と会員証
       </label>
     </div>
   </div>
@@ -234,18 +234,69 @@
 </div>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>  
+<p>テキスト入力すると検索条件となりフィルタリングします。</p>  
+<input id="myInput" type="text" placeholder="Search..">
+<table class="table table-sm table-hover table-responsive">
+  <thead>
+  <tr class="table-dark">
+    <th>Result</th>
+    <th>Select</th>
+    <th>id</th>
+  </tr>
+  </thead>
+  <tbody id="myTable">
+  <tr>
+    <td>申込書×本登録</td>
+    <td>申込書・本登録・- -</td>
+    <td>op1_1op2_4</td>
+  </tr>
+  <tr>
+    <td>テスト</td>
+    <td>花子</td>
+    <td>test2@mail.com</td>
+  </tr>
+  <tr>
+    <td>テスト</td>
+    <td>三郎</td>
+    <td>test3@test.com</td>
+  </tr>
+  <tr>
+    <td>テスト</td>
+    <td>次郎</td>
+    <td>test4@test.com</td>
+  </tr>
+  </tbody>
+</table>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <script>
+  //changeで呼ぶ関数
+  function disp_flow(date){
+
+  }
+
   $(function () {
       $('[data-toggle="popover"]').popover()
       $('#sidebar').removeClass('bg-white');
   });
+  
+
+  //テーブルフィルタ
+  $("#myInput").on("keyup", function() {
+  //$("#myInput").change(function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
 
 
-  $("#option1").change(function() {
-    
+  $("#select1").change(function() {
+    var select1 = $('input:radio[name="s1"]:checked').val();
+		$('#myInput').val(select1);
   });
 </script>
-
 
 {% endblock %}
