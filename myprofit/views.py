@@ -162,9 +162,9 @@ def service05(request):
 
 def service06(request):
     #会員証番号欄→これも未使用なのでcontext = {}で良さそう
-    searchForm = SearchForm(request.GET)
+    # searchForm = SearchForm(request.GET)
     context = {
-        'searchForm': searchForm,
+        # 'searchForm': searchForm,
         'route': request.GET.get('route'),
     }
     return render(request, 'myprofit/service06.html', context)

@@ -39,8 +39,8 @@
       <div class="col-5 pl-0">
         <div class="d-flex flex-nowrap">
           <span class="col-3 pl-1 pr-0 mb-1">会員証No</span>
-          {% comment %} <input class="col-6 px-0 mb-1" id="#"> {% endcomment %}
-          {{ searchForm.keyword }}
+          <input class="col-6 px-0 mb-1" id="search_input" maxlength="9">
+          {% comment %} {{ searchForm.keyword }} {% endcomment %}
         </div>
         <div class="d-flex flex-nowrap">
           <span class="col-3 pl-1 pr-0 mb-1">氏名ｶﾅ</span>
@@ -80,7 +80,10 @@
           <div class="col px-0 mb-1">　</div>
         </div>
         <div class="d-flex flex-nowrap">
-          <a href="#" class=" btn btn-inverse-dark btn-sm py-1 mr-auto mb-1" id="search1">検索</a>
+          {% comment %} <a href="#" class=" btn btn-inverse-dark btn-sm py-1 mr-auto mb-1" id="search1">検索</a> {% endcomment %}
+          <!-- buttonにすることでEnterでSubmitするのを防ぐ -->
+          
+          <button type="button" class=" btn btn-inverse-dark btn-sm py-1 mr-auto mb-1" id="search1">検索</button>
         </div>
       </div>
         
@@ -123,7 +126,7 @@
 
     <!-- 結果なしメッセージ -->
     <div class="d-flex mx-4 my-3 justify-content-center">
-      <span class="text-primary small" id="result2">指定した〜</span>
+      <span class="text-primary small" id="result2">該当する会員が見つかりません。</span>
     </div>
 
   </div>
@@ -138,19 +141,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/locale/ja.js"></script>
 
   <script>
-    $(function() {
-      $('[data-toggle="popover"]').popover()
-      $('#result1').hide();//最初は非表示
-      $('#result2').hide();
-    });
 
-    $("#search1").click(function () {
+    //検索の関数
+    function searchFunc(){
 
       $('#result1').hide();
       $('#result2').hide();
 
       //hidden.valに会員証番号を入れておく→submitしたらvaildのccontextに入れて07へ遷移にする
-      var cert_no = $('#id_keyword').val();
+      //var cert_no = $('#id_keyword').val();//forms.py使った場合
+      var cert_no = $('#search_input').val();
       $('#hidden_no').val(cert_no);
       $('#cert_no').text(cert_no);
 
@@ -195,7 +195,34 @@
           cert_no == 410987018) {
         $('#course').text("54車付B");
       }
-      
+
+    }
+
+    //ページ表示時
+    $(function() {
+      $('[data-toggle="popover"]').popover()
+      $('#result1').hide();//最初は非表示
+      $('#result2').hide();
+    });
+
+    $("#search1").click(function () {
+      //検索
+      searchFunc();
+    });
+  </script>
+
+  <!-- EnterキーでSubmitすることを防ぐ -->
+  <script>
+    $(function(){
+        $("input"). keydown(function(e) {
+            if ((e.which && e.which === 13) || (e.keyCode && e.keyCode === 13)) {
+                //Enterで検索にする
+                searchFunc();
+                return false;
+            } else {
+                return true;
+            }
+        });
     });
   </script>
 
