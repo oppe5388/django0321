@@ -65,27 +65,27 @@
           <div class="col-11 bg-gradient-light p-1">
             <div class="d-flex flex-nowrap">
               <span class="col-3 mb-1 p-0">顧客コード</span>
-              <input class="col-6 mb-1">
+              <input class="col-6 mb-1 px-0" value="07012391721">
             </div>
             <div class="d-flex flex-nowrap">
               <span class="col-3 mb-1 p-0">お名前</span>
-              <input class="col-8 mb-1">
+              <input class="col-8 mb-1 px-0" value="尾凪　花子">
             </div>
             <div class="d-flex flex-nowrap">
               <span class="col-3 mb-1 p-0"></span>
-              <input class="col-7 mb-1">様
+              <input class="col-7 mb-1 px-0">様
             </div>
             <div class="d-flex flex-nowrap">
               <span class="col-3 mb-1 p-0">フリガナ</span>
-              <input class="col-8 mb-1">
+              <input class="col-8 mb-1 px-0" value="ｵﾅｷﾞ ﾊﾅｺ">
             </div>
             <div class="d-flex flex-nowrap">
               <span class="col-3 mb-1 p-0">連絡先</span>
-              <input class="col-8 mb-1">
+              <input class="col-8 mb-1 px-0" value="070 - 1239 - 1721">
             </div>
             <div class="d-flex flex-nowrap">
               <span class="col-3 mb-1 p-0">e-mail</span>
-              <input class="col-8 mb-1">
+              <input class="col-8 mb-1 px-0">
             </div>
           </div>
         </div>
@@ -97,66 +97,72 @@
           <div class="col-11 bg-gradient-light p-1">
             <div class="d-flex flex-nowrap">
               <span class="col-3 mb-1 p-0">登録番号</span>
-              <input class="col-2 mb-1">
+              <input class="col-2 mb-1 px-0" value="練馬">
               <button class="p-1 mb-1" disabled>?</button>
-              <input class="col-1 mb-1">
-              <input class="col-1 mb-1">
-              <input class="col-2 mb-1">
+              <input class="col-2 mb-1 px-0" value="300">
+              <input class="col-1 mb-1 px-0" value="ｻ">
+              <input class="col-2 mb-1 px-0" value="0014">
             </div>
             <div class="d-flex flex-nowrap">
               <span class="col-3 mb-1 p-0">類別番号</span>
-              <input class="col-2 mb-1">-
-              <input class="col-2 mb-1">
+              <input class="col-2 mb-1 px-0" value="17750">-
+              <input class="col-2 mb-1 px-0" value="0464">
             </div>
             <div class="d-flex flex-nowrap">
               <span class="col-3 mb-1 p-0">車名</span>
-              <input class="col-7 mb-1">
-              <button class="p-1 mb-1" disabled>?</button>
+              <input class="col-7 mb-1 px-0" value="ニッサン">
+              <button class="p-1 mb-1 px-0" disabled>?</button>
             </div>
             <div class="d-flex flex-nowrap">
               <span class="col-3 mb-1 p-0">車種</span>
-              <input class="col-7 mb-1">
-              <button class="p-1 mb-1" disabled>?</button>
+              <input class="col-7 mb-1 px-0" value="スカイライン">
+              <button class="p-1 mb-1 px-0" disabled>?</button>
             </div>
             <div class="d-flex flex-nowrap">
               <span class="col-3 mb-1 p-0">型式</span>
-              <input class="col-4 mb-1">
-              <select class="col-2 mb-1"></select>
+              <input class="col-4 mb-1 px-0" value="5BA-RV37">
+              <select class="col-2 mb-1 px-0"></select>
             </div>
             <div class="d-flex flex-nowrap">
               <span class="col-3 mb-1 p-0">自・営の別</span>
-              <select class="col-3 mb-1"></select>
+              <select class="col-3 mb-1 px-0" value="0">
+                <option value="0">自家用</option>
+              </select>
               <span class="col-3 mb-1 p-0">走行距離</span>
-              <input class="col-2 mb-1">km
+              <input class="col-2 mb-1 px-0" value="12,345">km
             </div>
             <div class="d-flex flex-nowrap">
               <span class="col-3 mb-1 p-0">初年度</span>
-              <input class="col-2 mb-1">
-              <input class="col-1 mb-1">年
-              <input class="col-1 mb-1">月
+              {% comment %} <input class="col-2 mb-1 px-0" value=""> {% endcomment %}
+              <input class="col-2 mb-1 px-0" value="" id="register_year">年
+              <input class="col-1 mb-1 px-0" value="" id="register_month">月
             </div>
             <div class="d-flex flex-nowrap">
               <span class="col-3 mb-1 p-0">総排気量</span>
-              <input class="col-4 mb-1">
-              <select class="col-2 mb-1"></select>
+              <input class="col-4 mb-1 px-0" value="2.99">
+              <select class="col-2 mb-1 px-0" value="0">
+                <option value="0">L</option>
+              </select>
             </div>
             <div class="d-flex flex-nowrap">
               <span class="col-3 mb-1 p-0">車検満期日</span>
-              <input class="col-2 mb-1">
-              <input class="col-1 mb-1">年
-              <input class="col-1 mb-1">月
-              <input class="col-1 mb-1">日
+              {% comment %} <input class="col-2 mb-1 px-0" value=""> {% endcomment %}
+              <input class="col-2 mb-1 px-0" value="" id="insp_year">年
+              <input class="col-1 mb-1 px-0" value="" id="insp_month">月
+              <input class="col-1 mb-1 px-0" value="" id="insp_day">日
             </div>
             <div class="d-flex flex-nowrap">
               <span class="col-3 mb-1 p-0">自賠責満期</span>
-              <input class="col-2 mb-1">
-              <input class="col-1 mb-1">年
-              <input class="col-1 mb-1">月
-              <input class="col-1 mb-1">日
+              {% comment %} <input class="col-2 mb-1 px-0" value=""> {% endcomment %}
+              <input class="col-2 mb-1 px-0" value="" id="jibai_year">年
+              <input class="col-1 mb-1 px-0" value="" id="jibai_month">月
+              <input class="col-1 mb-1 px-0" value="" id="jibai_day">日
             </div>
             <div class="d-flex flex-nowrap">
               <span class="col-3 mb-1 p-0">料率グルー</span>
-              <select class="col-4 mb-1"></select>
+              <select class="col-4 mb-1 px-0" value="0">
+                <option value="0">L（セダン）</option>
+              </select>
             </div>
           </div>
         </div>
@@ -168,17 +174,17 @@
           <div class="col-11 bg-gradient-light">
             <div class="d-flex flex-nowrap">
               <span class="col-3 mb-1 p-0">受付担当</span>
-              <input class="col-6 mb-1">
-              <button class="p-1 mb-1">?</button>
+              <input class="col-6 mb-1 px-0" value="大磯　太郎">
+              <button class="p-1 mb-1 px-0">?</button>
             </div>
             <div class="d-flex flex-nowrap">
               <span class="col-3 mb-1 p-0">メカ担当</span>
-              <input class="col-6 mb-1">
-              <button class="p-1 mb-1">?</button>
+              <input class="col-6 mb-1 px-0" value="大磯　太郎">
+              <button class="p-1 mb-1 px-0">?</button>
             </div>
             <div class="d-flex flex-nowrap">
               <span class="col-3 mb-1 p-0">摘要1</span>
-              <input class="col-8 mb-1">
+              <input class="col-8 mb-1 px-0">
             </div>
           </div>
         </div>
@@ -244,11 +250,41 @@
     </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/locale/ja.js"></script>
 <script>
+//和暦の年だけ返す関数
+function change_to_wareki(date){
+
+  const options = {
+      year: 'numeric',
+      // month: 'short',
+      // day: 'numeric',
+      // weekday: 'short',
+    }
+  var wareki = date.toLocaleDateString("ja-JP-u-ca-japanese", options);
+  return wareki;
+}
+
   $(function() {
 
     $("#view1").attr("action", "{% url 'myprofit:service03' %}");
     $('#entry').addClass('blink');
+
+    var shodo_month = moment(new Date()).add(-5, 'y').format('MM');//5年前
+    var wareki_shodo = change_to_wareki(new Date(moment(new Date()).add(-5, 'y')));
+    var wareki_shodo = wareki_shodo.replace('年', '');
+    $('#register_year').val(wareki_shodo);
+    $('#register_month').val(shodo_month);
+
+    var shaken_month = moment(new Date()).add(740, 'd').format('MM');//740日後
+    var shaken_day = moment(new Date()).add(740, 'd').format('DD');//740日後
+    var wareki_shaken = change_to_wareki(new Date(moment(new Date()).add(740, 'd')));
+    var wareki_shaken = wareki_shaken.replace('年', '');
+    $('#insp_year').val(wareki_shaken);
+    $('#insp_month').val(shaken_month);
+    $('#insp_day').val(shaken_day);
+    
 
   });
 </script>
