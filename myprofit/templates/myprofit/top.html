@@ -101,13 +101,10 @@
 
     <div class="btn-group btn-group-toggle" data-toggle="buttons" id="select1">
       <label class="btn btn-sm btn-inverse-secondary">
-        <input type="radio" name="s1" id="op1_1" autocomplete="off" value="申込書"> 申込書
+        <input type="radio" name="s1" id="op1_1" autocomplete="off" value="申込書">申込書（＆会員証）
       </label>
       <label class="btn btn-sm btn-inverse-secondary">
-        <input type="radio" name="s1" id="op1_2" autocomplete="off" value="会員証"> 会員証
-      </label>
-      <label class="btn btn-sm btn-inverse-secondary">
-        <input type="radio" name="s1" id="op1_3" autocomplete="off" value="両方"> 申込書と会員証
+        <input type="radio" name="s1" id="op1_2" autocomplete="off" value="会員証">会員証のみ
       </label>
     </div>
   </div>
@@ -181,10 +178,12 @@
 
     <div class="btn-group btn-group-toggle" data-toggle="buttons" id="select3">
       <label class="btn btn-sm btn-inverse-secondary">
-        <input type="radio" name="s3" id="op3_1" autocomplete="off" value="もともと">もともと申込時に反映済み
+        <input type="radio" name="s3" id="op3_1" autocomplete="off" value="もともと">申込前に済（契約に車両情報あり）
       </label>
       <label class="btn btn-sm btn-inverse-secondary">
-        <input type="radio" name="s3" id="op3_2" autocomplete="off" value="入力済">申込時は未、今は反映済み
+        <input type="radio" name="s3" id="op3_2" autocomplete="off" value="入力済">申込時は未、今は済
+        <a href="#" class="text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+          data-content="入力後、反映までの時間は販社により異なります"><i class="fa fa-question-circle colorwhite"></i></a>
       </label>
       <label class="btn btn-sm btn-inverse-secondary">
         <input type="radio" name="s3" id="op3_3" autocomplete="off" value="まだ">まだ
