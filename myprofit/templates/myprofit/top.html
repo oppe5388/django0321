@@ -69,7 +69,7 @@
       </div>
       <div class="collapse show" id="ui-basic3">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'myprofit:new02' %}?route=mente">新車</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'myprofit:new02' %}route=mente">新車</a></li>
           <li class="nav-item"> <a class="nav-link" href="{% url 'myprofit:used02' %}?route=mente">中古車</a></li>
           <li class="nav-item"> <a class="nav-link" href="{% url 'myprofit:service02' %}?route=mente">サービス</a></li>
         </ul>
@@ -90,7 +90,7 @@
 
 {% block mainpanel %}
 
-<h4 class="h3 font-weight-bold mb-3">VCC Navi<span class="h6">（未作成。左のメニューをご使用ください）</span></h4>
+<h4 class="h3 font-weight-bold mb-3">VCC Navi<span class="h6">（契約Sample入力済）</span></h4>
 
 
 <div class="card mb-2">
@@ -141,21 +141,21 @@
     </div> {% endcomment %}
 
     <div class="btn-group btn-group-toggle" data-toggle="buttons" id="select2">
-      <label class="btn btn-sm btn-inverse-secondary">
+      <label class="btn btn-sm btn-inverse-secondary" id="sel2_1">
         <input type="radio" name="s2" id="op2_1" autocomplete="off" value="申込前">(申込前)
       </label>
-      <label class="btn btn-sm btn-inverse-secondary">
-        <input type="radio" name="s2" id="op2_2" autocomplete="off" value="申込書未発行">申込書未発行
+      <label class="btn btn-sm btn-inverse-secondary" id="sel2_2">
+        <input type="radio" name="s2" id="op2_2" autocomplete="off" value="申込書未">申込書未発行
         <a href="#" class="text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
           data-content="申込はした" ><i class="fa fa-question-circle colorwhite"></i></a>
       </label>
       <label class="btn btn-sm btn-inverse-secondary">
-        <input type="radio" name="s2" id="op2_3" autocomplete="off" value="車両情報未登録">車両情報未登録
+        <input type="radio" name="s2" id="op2_3" autocomplete="off" value="車両未">車両情報未登録
         <a href="#" class="text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
           data-content="登録番号や車検満了日なしで、NFS-Webの申込書印刷ボタンは押した"><i class="fa fa-question-circle colorwhite"></i></a>
       </label>
       <label class="btn btn-sm btn-inverse-secondary">
-        <input type="radio" name="s2" id="op2_4" autocomplete="off" value="会員証未発行">会員証未発行
+        <input type="radio" name="s2" id="op2_4" autocomplete="off" value="会員証未">会員証未発行
         <a href="#" class="text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
           data-content="登録番号や車検満了日がある状態で、NFS-Webの申込書印刷ボタンは押した"><i class="fa fa-question-circle colorwhite"></i></a>
       </label>
@@ -170,18 +170,18 @@
   </div>
 </div>
 
-<div class="card mb-2">
+<div class="card mb-2" id="block3">
   <div class="card-body p-2">
     <div class="d-flex flex-wrap justify-content-between">
       <h4 class="h4 font-weight-bold mb-3">3. 車両基盤</h4>
     </div>
 
     <div class="btn-group btn-group-toggle" data-toggle="buttons" id="select3">
-      <label class="btn btn-sm btn-inverse-secondary">
+      <label class="btn btn-sm btn-inverse-secondary" id="sel3_1">
         <input type="radio" name="s3" id="op3_1" autocomplete="off" value="もともと">申込前に済（契約に車両情報あり）
       </label>
       <label class="btn btn-sm btn-inverse-secondary">
-        <input type="radio" name="s3" id="op3_2" autocomplete="off" value="入力済">申込時は未、今は済
+        <input type="radio" name="s3" id="op3_2" autocomplete="off" value="入力済">申込時は未、後に入力済み
         <a href="#" class="text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
           data-content="入力後、反映までの時間は販社により異なります"><i class="fa fa-question-circle colorwhite"></i></a>
       </label>
@@ -214,7 +214,7 @@
 </div> {% endcomment %}
 
 
-<div class="card mb-2 bg-light">
+{% comment %} <div class="card mb-2 bg-light">
   <div class="card-body p-2">
     <div class="d-flex flex-wrap justify-content-between">
       <h4 class="h4 font-weight-bold mb-3 text-muted">（5. 実は内容を変更したい？）</h4>
@@ -229,13 +229,25 @@
       </label>
     </div>
   </div>
-</div>
-
-{% comment %} <div class="row justify-content-center m-2">
-  <a href="#" class="btn btn-primary ml-auto">Go</a>
 </div> {% endcomment %}
 
-<input id="myInput" type="text" placeholder="Search..">
+<hr>
+<div class="card mb-2 " id="block3">
+  <div class="card-body p-2">
+    <div class="d-flex flex-wrap justify-content-between">
+      <h4 class="h4 font-weight-bold text-secondary">Result：</h4>
+    </div>
+
+    <div class="d-flex align-items-center" id="result">
+    </div>
+    <div class="d-flex align-items-center" id="result2">
+    </div>
+  </div>
+</div>
+
+<a class="mt-3 btn btn-rounded btn-secondary py-2" href="{% url 'myprofit:profit_top' %}">Reset</a>
+
+{% comment %} <input id="myInput" type="text" placeholder="Search..">
 <table class="table table-sm table-hover table-responsive">
   <thead>
   <tr class="table-dark">
@@ -266,15 +278,7 @@
     <td>test4@test.com</td>
   </tr>
   </tbody>
-</table>
-
-
-<div id="jqs-11">
-  <dl>
-    <dt>開閉パネル<span> Open</span></dt>
-    <dd><p>これは開閉パネルのサンプルです。</p></dd>
-  </dl>
-</div>
+</table> {% endcomment %}
 
 
 
@@ -290,13 +294,160 @@
 
   //changeで呼ぶ関数
   function disp_flow(date){
-    //テーブルフィルタ
-    var value = $('input:radio[name="s1"]:checked').val();
-    var value = value + $('input:radio[name="s2"]:checked').val();
-    var value = value + $('input:radio[name="s3"]:checked').val();
-    var value = value + $('input:radio[name="s4"]:checked').val();
+    //
+    var value1 = $('input:radio[name="s1"]:checked').val();
+    var value2 = $('input:radio[name="s2"]:checked').val();
+    var value3 = $('input:radio[name="s3"]:checked').val();
 
-    //全部hideにしておいて、含むでshowとかかな？
+
+
+    //?route=entry&cert_no=410987
+    //?route=cert&cert_no=410987&cert_no=410987
+    //?route=mente&cert_no=410987
+    //初期化
+    $('#result').empty();
+    $('#result2').empty();
+
+    $("#sel2_1").removeClass("btn-light");
+    $("#sel2_1").addClass("btn-inverse-secondary");
+
+    $("#sel2_2").removeClass("btn-light");
+    $("#sel2_2").addClass("btn-inverse-secondary");
+
+    $("#sel3_1").removeClass("btn-light");
+    $("#sel3_1").addClass("btn-inverse-secondary");
+
+    //申込書
+    if (value1 == "申込書" ) {
+      if (value2 == "本登録") {
+        $("#block3").slideUp("fast");
+        $('#result').append('<div class="h4 font-weight-bold m-2">メンテトップメニュー<i class="fa fa-arrow-circle-right m-2"></i></div>').hide();
+        $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}route=mente&cert_no=410987">新車</a>').hide();
+        $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}route=mente&cert_no=410987">中古車</a>').hide();
+        $('#result').append('<a class="btn btn-sm btn-inverse-warning" href="{% url 'myprofit:service02' %}route=mente&cert_no=410987">サービス</a>').hide();
+        $('#result2').append('<span class="ml-2">申込書はTELで許可、会員証は翌々日からFAXで許可<span>').hide();
+        $('#result').fadeIn(500);
+        $('#result2').fadeIn(500);
+      
+      } else if (value2 == "申込前" ) {
+        $("#block3").slideUp("fast");
+        $('#result').append('<div class="h4 font-weight-bold m-2">メンテプロ申込書印刷<i class="fa fa-arrow-circle-right m-2"></i></div>').hide();
+        $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}?route=entry&cert_no=410987">新車</a>').hide();
+        $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}?route=entry&cert_no=410987">中古車</a>').hide();
+        $('#result').append('<a class="btn btn-sm btn-inverse-warning" href="{% url 'myprofit:service02' %}?route=entry&cert_no=410987">サービス</a>').hide();
+        $('#result').fadeIn(500);
+
+      } else if (value2 == "申込書未" ) {
+        $("#block3").slideDown("fast");
+        if (value3 == "もともと") {
+          $('#result').append('<div class="h4 font-weight-bold m-2">メンテプロ会員証印刷<i class="fa fa-arrow-circle-right m-2"></i></div>').hide();
+          $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}?route=cert&cert_no=410987">新車</a>').hide();
+          $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}?route=cert&cert_no=410987">中古車</a>').hide();
+          $('#result').append('<a class="btn btn-sm btn-inverse-warning mr-2" href="{% url 'myprofit:service02' %}?route=cert&cert_no=410987">サービス</a>').hide();
+          $('#result2').append('<div class="h4 font-weight-bold m-2">メンテトップメニュー<i class="fa fa-arrow-circle-right m-2"></i></div>').hide();
+          $('#result2').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}route=mente&cert_no=410987">新車</a>').hide();
+          $('#result2').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}route=mente&cert_no=410987">中古車</a>').hide();
+          $('#result2').append('<a class="btn btn-sm btn-inverse-warning" href="{% url 'myprofit:service02' %}route=mente&cert_no=410987">サービス</a>').hide();
+          $('#result').fadeIn(500);
+          $('#result2').fadeIn(500);
+        
+        } else if (value3 == "入力済" ) {
+          $('#result').append('<div class="h4 font-weight-bold m-2">メンテプロ会員証印刷<i class="fa fa-arrow-circle-right m-2"></i></div>').hide();
+          $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}?route=cert&cert_no=410987">新車</a>').hide();
+          $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}?route=cert&cert_no=410987">中古車</a>').hide();
+          $('#result').fadeIn(500);
+        
+        } else if (value3 == "まだ" ) {
+          $('#result').append('<div class="h4 font-weight-bold m-2">メンテトップメニュー<i class="fa fa-arrow-circle-right m-2"></i></div>').hide();
+          $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}route=mente&cert_no=410987">新車</a>').hide();
+          $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}route=mente&cert_no=410987">中古車</a>').hide();
+          $('#result2').append('<span class="ml-2">申込書のみ可（会員証は基盤入力後に可）<span>').hide();
+          $('#result').fadeIn(500);
+          $('#result2').fadeIn(500);
+        }
+      } else if (value2 == "車両未" ) {
+        $("#block3").slideDown("fast");
+        $("#sel3_1").removeClass("btn-inverse-secondary");
+        $("#sel3_1").addClass("btn-light");
+        
+        if (value3 == "入力済" ) {
+          $('#result').append('<div class="h4 font-weight-bold m-2">メンテプロ会員証印刷<i class="fa fa-arrow-circle-right m-2"></i></div>').hide();
+          $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}?route=cert&cert_no=410987">新車</a>').hide();
+          $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}?route=cert&cert_no=410987">中古車</a>').hide();
+          $('#result').fadeIn(500);
+        
+        } else if (value3 == "まだ" ) {
+          $('#result').append('<div class="h4 font-weight-bold m-2">メンテトップメニュー<i class="fa fa-arrow-circle-right m-2"></i></div>').hide();
+          $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}route=mente&cert_no=410987">新車</a>').hide();
+          $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}route=mente&cert_no=410987">中古車</a>').hide();
+          $('#result2').append('<span class="ml-2">申込書のみ可（会員証は基盤入力後に可）<span>').hide();
+          $('#result').fadeIn(500);
+          $('#result2').fadeIn(500);
+        }
+      } else if (value2 == "会員証未" ) {
+        $("#block3").slideUp("fast");
+        
+        $('#result').append('<div class="h4 font-weight-bold m-2">メンテプロ会員証印刷<i class="fa fa-arrow-circle-right m-2"></i></div>').hide();
+        $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}?route=cert&cert_no=410987">新車</a>').hide();
+        $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}?route=cert&cert_no=410987">中古車</a>').hide();
+        $('#result').append('<a class="btn btn-sm btn-inverse-warning mr-2" href="{% url 'myprofit:service02' %}?route=cert&cert_no=410987">サービス</a>').hide();
+        $('#result2').append('<div class="h4 font-weight-bold m-2">メンテトップメニュー<i class="fa fa-arrow-circle-right m-2"></i></div>').hide();
+        $('#result2').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}route=mente&cert_no=410987">新車</a>').hide();
+        $('#result2').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}route=mente&cert_no=410987">中古車</a>').hide();
+        $('#result2').append('<a class="btn btn-sm btn-inverse-warning" href="{% url 'myprofit:service02' %}route=mente&cert_no=410987">サービス</a>').hide();
+        $('#result').fadeIn(500);
+        $('#result2').fadeIn(500);
+      }
+      
+    } else if (value1 == "会員証" ) {
+      $("#sel2_1").removeClass("btn-inverse-secondary");
+      $("#sel2_1").addClass("btn-light");
+
+      $("#sel2_2").removeClass("btn-inverse-secondary");
+      $("#sel2_2").addClass("btn-light");
+
+      if (value2 == "本登録") {
+        $("#block3").slideUp("fast");
+        $('#result').append('<div class="h4 font-weight-bold m-2">メンテトップメニュー<i class="fa fa-arrow-circle-right m-2"></i></div>').hide();
+        $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}route=mente&cert_no=410987">新車</a>').hide();
+        $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}route=mente&cert_no=410987">中古車</a>').hide();
+        $('#result').append('<a class="btn btn-sm btn-inverse-warning" href="{% url 'myprofit:service02' %}route=mente&cert_no=410987">サービス</a>').hide();
+        $('#result2').append('<span class="ml-2">会員証は翌々日からFAXで許可<span>').hide();
+        $('#result').fadeIn(500);
+        $('#result2').fadeIn(500);
+
+      } else if (value2 == "車両未" ) {
+        $("#block3").slideDown("fast");
+        $("#sel3_1").removeClass("btn-inverse-secondary");
+        $("#sel3_1").addClass("btn-light");
+        
+        if (value3 == "入力済" ) {
+          $('#result').append('<div class="h4 font-weight-bold m-2">メンテプロ会員証印刷<i class="fa fa-arrow-circle-right m-2"></i></div>').hide();
+          $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}?route=cert&cert_no=410987">新車</a>').hide();
+          $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}?route=cert&cert_no=410987">中古車</a>').hide();
+          $('#result').fadeIn(500);
+        
+        } else if (value3 == "まだ" ) {
+          $('#result2').append('<span class="ml-2">会員証は基盤入力後に可<span>').hide();
+          $('#result2').fadeIn(500);
+        }
+      } else if (value2 == "会員証未" ) {
+        $("#block3").slideUp("fast");
+        
+        $('#result').append('<div class="h4 font-weight-bold m-2">メンテプロ会員証印刷<i class="fa fa-arrow-circle-right m-2"></i></div>').hide();
+        $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}?route=cert&cert_no=410987">新車</a>').hide();
+        $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}?route=cert&cert_no=410987">中古車</a>').hide();
+        $('#result').append('<a class="btn btn-sm btn-inverse-warning mr-2" href="{% url 'myprofit:service02' %}?route=cert&cert_no=410987">サービス</a>').hide();
+        $('#result2').append('<div class="h4 font-weight-bold m-2">メンテトップメニュー<i class="fa fa-arrow-circle-right m-2"></i></div>').hide();
+        $('#result2').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}route=mente&cert_no=410987">新車</a>').hide();
+        $('#result2').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}route=mente&cert_no=410987">中古車</a>').hide();
+        $('#result2').append('<a class="btn btn-sm btn-inverse-warning" href="{% url 'myprofit:service02' %}route=mente&cert_no=410987">サービス</a>').hide();
+        $('#result').fadeIn(500);
+        $('#result2').fadeIn(500);
+      }
+
+    }
+
 
     //alert(value);
     //var value = $('#myInput').val().toLowerCase();
@@ -322,11 +473,7 @@
     disp_flow();
   });
 
-  $("#select4").change(function() {
-    disp_flow();
-  });
-
-  //テーブルフィルタ
+  //参考：テーブルフィルタ
   $("#myInput").on("keyup", function() {
     var value = $(this).val().toLowerCase();
     $("#myTable tr").filter(function() {
