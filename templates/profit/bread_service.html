@@ -4,12 +4,12 @@
         <li class="text-primary mr-2">サービス×申込書ボタン：</li>
         <div class="d-flex flex-column px-1">
           <div class="d-flex">
-            <li class="breadcrumb-item {% if url_name == 'service02' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service02' %}?route=entry">受注・納車・回収</a></li>
-            <li class="breadcrumb-item {% if url_name == 'service03' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service03' %}?route=entry">サービス申込／取消</a></li>
-            <li class="breadcrumb-item {% if url_name == 'service04' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service04' %}?route=entry">NFSログイン</a></li>
-            <li class="breadcrumb-item {% if url_name == 'service05entry' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service05entry' %}?route=entry">受付申込登録</a></li>
-            <li class="breadcrumb-item {% if url_name == 'service06confirm' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service06confirm' %}?route=entry">受付申込確認/完了</a></li>
-            <li class="breadcrumb-item {% if url_name == 'service07' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service07' %}?route=entry">会員情報</a></li>
+            <li class="breadcrumb-item {% if url_name == 'service02' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service02' %}?route=entry&cert_no={{cert_no}}">受注・納車・回収</a></li>
+            <li class="breadcrumb-item {% if url_name == 'service03' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service03' %}?route=entry&cert_no={{cert_no}}">サービス申込／取消</a></li>
+            <li class="breadcrumb-item {% if url_name == 'service04' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service04' %}?route=entry&cert_no={{cert_no}}">NFSログイン</a></li>
+            <li class="breadcrumb-item {% if url_name == 'service05entry' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service05entry' %}?route=entry&cert_no={{cert_no}}">受付申込登録</a></li>
+            <li class="breadcrumb-item {% if url_name == 'service06confirm' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service06confirm' %}?route=entry&cert_no={{cert_no}}">受付申込確認/完了</a></li>
+            <li class="breadcrumb-item {% if url_name == 'service07' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service07' %}?route=entry&cert_no={{cert_no}}">会員情報</a></li>
           </div>
         </div>
 
@@ -17,12 +17,12 @@
         <li class="text-primary mr-2">コース作業(サービス)：</li>
         <div class="d-flex flex-column px-1">
           <div class="d-flex">
-            <li class="breadcrumb-item {% if url_name == 'service01' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service01' %}?route=entry2">コース作業画面</a></li>
-            <li class="breadcrumb-item {% if url_name == 'service03' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service03' %}?route=entry2">サービス申込／取消</a></li>
-            <li class="breadcrumb-item {% if url_name == 'service04' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service04' %}?route=entry2">NFSログイン</a></li>
-            <li class="breadcrumb-item {% if url_name == 'service05entry' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service05entry' %}?route=entry2">受付申込登録</a></li>
-            <li class="breadcrumb-item {% if url_name == 'service06confirm' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service06confirm' %}?route=entry2">受付申込確認/完了</a></li>
-            <li class="breadcrumb-item {% if url_name == 'service07' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service07' %}?route=entry2">会員情報</a></li>
+            <li class="breadcrumb-item {% if url_name == 'service01' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service01' %}?route=entry2&cert_no={{cert_no}}">コース作業画面</a></li>
+            <li class="breadcrumb-item {% if url_name == 'service03' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service03' %}?route=entry2&cert_no={{cert_no}}">サービス申込／取消</a></li>
+            <li class="breadcrumb-item {% if url_name == 'service04' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service04' %}?route=entry2&cert_no={{cert_no}}">NFSログイン</a></li>
+            <li class="breadcrumb-item {% if url_name == 'service05entry' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service05entry' %}?route=entry2&cert_no={{cert_no}}">受付申込登録</a></li>
+            <li class="breadcrumb-item {% if url_name == 'service06confirm' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service06confirm' %}?route=entry2&cert_no={{cert_no}}">受付申込確認/完了</a></li>
+            <li class="breadcrumb-item {% if url_name == 'service07' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service07' %}?route=entry2&cert_no={{cert_no}}">会員情報</a></li>
           </div>
         </div>
 
@@ -30,10 +30,10 @@
         <li class="text-primary mr-2">サービス×会員証ボタン：</li>
         <div class="d-flex flex-column px-1">
           <div class="d-flex">
-            <li class="breadcrumb-item {% if url_name == 'service02' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service02' %}?route=cert">受注・納車・回収</a></li>
-            <li class="breadcrumb-item {% if url_name == 'service03' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service03' %}?route=cert">サービス契約</a></li>
-            <li class="breadcrumb-item {% if url_name == 'service04' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service04' %}?route=cert">NFSログイン</a></li>
-            <li class="breadcrumb-item {% if url_name == 'service07' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service07' %}?route=cert">会員情報</a></li>
+            <li class="breadcrumb-item {% if url_name == 'service02' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service02' %}?route=cert&cert_no={{cert_no}}">受注・納車・回収</a></li>
+            <li class="breadcrumb-item {% if url_name == 'service03' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service03' %}?route=cert&cert_no={{cert_no}}">サービス契約</a></li>
+            <li class="breadcrumb-item {% if url_name == 'service04' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service04' %}?route=cert&cert_no={{cert_no}}">NFSログイン</a></li>
+            <li class="breadcrumb-item {% if url_name == 'service07' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service07' %}?route=cert&cert_no={{cert_no}}">会員情報</a></li>
           </div>
         </div>
 
@@ -41,11 +41,11 @@
         <li class="text-primary mr-2">サービス×メンテトップ：</li>
         <div class="d-flex flex-column px-1">
           <div class="d-flex">
-            <li class="breadcrumb-item {% if url_name == 'service02' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service02' %}?route=mente">受注・納車・回収</a></li>
-            <li class="breadcrumb-item {% if url_name == 'service04' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service04' %}?route=mente">NFSログイン</a></li>
-            <li class="breadcrumb-item {% if url_name == 'service05' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service05' %}?route=mente">連携業務メニュー</a></li>
-            <li class="breadcrumb-item {% if url_name == 'service06' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service06' %}?route=mente">お客様一覧検索</a></li>
-            <li class="breadcrumb-item {% if url_name == 'service07' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service07' %}?route=mente">会員情報</a></li>
+            <li class="breadcrumb-item {% if url_name == 'service02' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service02' %}?route=mente&cert_no={{cert_no}}">受注・納車・回収</a></li>
+            <li class="breadcrumb-item {% if url_name == 'service04' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service04' %}?route=mente&cert_no={{cert_no}}">NFSログイン</a></li>
+            <li class="breadcrumb-item {% if url_name == 'service05' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service05' %}?route=mente&cert_no={{cert_no}}">連携業務メニュー</a></li>
+            <li class="breadcrumb-item {% if url_name == 'service06' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service06' %}?route=mente&cert_no={{cert_no}}">お客様一覧検索</a></li>
+            <li class="breadcrumb-item {% if url_name == 'service07' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service07' %}?route=mente&cert_no={{cert_no}}">会員情報</a></li>
           </div>
           {% comment %} <div class="d-flex">
             <li class="breadcrumb-item {% if url_name == 'service07' %}btn btn-light btn-rounded p-1{% endif %}"><a href="{% url 'myprofit:service07' %}">会員情報</a></li>

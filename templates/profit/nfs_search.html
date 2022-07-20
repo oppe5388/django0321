@@ -203,6 +203,14 @@
       $('[data-toggle="popover"]').popover()
       $('#result1').hide();//最初は非表示
       $('#result2').hide();
+
+      //Naviから会員証Noが含まれていたら、差し込む
+      var cert_no = $('#hidden_no').val();
+      if (cert_no != "") {
+        $("#search_input").val(cert_no);
+      }
+
+
     });
 
     $("#search1").click(function () {

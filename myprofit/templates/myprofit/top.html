@@ -322,9 +322,9 @@
       if (value2 == "本登録") {
         $("#block3").slideUp("fast");
         $('#result').append('<div class="h4 font-weight-bold m-2">メンテトップメニュー<i class="fa fa-arrow-circle-right m-2"></i></div>').hide();
-        $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}route=mente&cert_no=410987">新車</a>').hide();
-        $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}route=mente&cert_no=410987">中古車</a>').hide();
-        $('#result').append('<a class="btn btn-sm btn-inverse-warning" href="{% url 'myprofit:service02' %}route=mente&cert_no=410987">サービス</a>').hide();
+        $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}?route=mente&cert_no=410987018">新車</a>').hide();
+        $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}?route=mente&cert_no=410987019">中古車</a>').hide();
+        $('#result').append('<a class="btn btn-sm btn-inverse-warning" href="{% url 'myprofit:service02' %}?route=mente&cert_no=410987020">サービス</a>').hide();
         $('#result2').append('<span class="ml-2">申込書はTELで許可、会員証は翌々日からFAXで許可<span>').hide();
         $('#result').fadeIn(500);
         $('#result2').fadeIn(500);
@@ -332,35 +332,36 @@
       } else if (value2 == "申込前" ) {
         $("#block3").slideUp("fast");
         $('#result').append('<div class="h4 font-weight-bold m-2">メンテプロ申込書印刷<i class="fa fa-arrow-circle-right m-2"></i></div>').hide();
-        $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}?route=entry&cert_no=410987">新車</a>').hide();
-        $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}?route=entry&cert_no=410987">中古車</a>').hide();
-        $('#result').append('<a class="btn btn-sm btn-inverse-warning" href="{% url 'myprofit:service02' %}?route=entry&cert_no=410987">サービス</a>').hide();
+        $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}?route=entry&cert_no=410987002">新車</a>').hide();
+        $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}?route=entry&cert_no=410987004">中古車</a>').hide();
+        $('#result').append('<a class="btn btn-sm btn-inverse-warning mr-2" href="{% url 'myprofit:service02' %}?route=entry&cert_no=410987005">サービス</a>').hide();
+        $('#result').append('<a class="btn btn-sm btn-inverse-warning" href="{% url 'myprofit:service01' %}?route=entry2&cert_no=410987005">コース作業</a>').hide();
         $('#result').fadeIn(500);
 
       } else if (value2 == "申込書未" ) {
         $("#block3").slideDown("fast");
         if (value3 == "もともと") {
           $('#result').append('<div class="h4 font-weight-bold m-2">メンテプロ会員証印刷<i class="fa fa-arrow-circle-right m-2"></i></div>').hide();
-          $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}?route=cert&cert_no=410987">新車</a>').hide();
-          $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}?route=cert&cert_no=410987">中古車</a>').hide();
-          $('#result').append('<a class="btn btn-sm btn-inverse-warning mr-2" href="{% url 'myprofit:service02' %}?route=cert&cert_no=410987">サービス</a>').hide();
+          $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}?route=cert&cert_no=410987007">新車</a>').hide();
+          $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}?route=cert&cert_no=410987009">中古車</a>').hide();
+          $('#result').append('<a class="btn btn-sm btn-inverse-warning mr-2" href="{% url 'myprofit:service02' %}?route=cert&cert_no=410987010">サービス</a>').hide();
           $('#result2').append('<div class="h4 font-weight-bold m-2">メンテトップメニュー<i class="fa fa-arrow-circle-right m-2"></i></div>').hide();
-          $('#result2').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}route=mente&cert_no=410987">新車</a>').hide();
-          $('#result2').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}route=mente&cert_no=410987">中古車</a>').hide();
-          $('#result2').append('<a class="btn btn-sm btn-inverse-warning" href="{% url 'myprofit:service02' %}route=mente&cert_no=410987">サービス</a>').hide();
+          $('#result2').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}?route=mente&cert_no=410987007">新車</a>').hide();
+          $('#result2').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}?route=mente&cert_no=410987009">中古車</a>').hide();
+          $('#result2').append('<a class="btn btn-sm btn-inverse-warning" href="{% url 'myprofit:service02' %}?route=mente&cert_no=410987010">サービス</a>').hide();
           $('#result').fadeIn(500);
           $('#result2').fadeIn(500);
         
         } else if (value3 == "入力済" ) {
           $('#result').append('<div class="h4 font-weight-bold m-2">メンテプロ会員証印刷<i class="fa fa-arrow-circle-right m-2"></i></div>').hide();
-          $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}?route=cert&cert_no=410987">新車</a>').hide();
-          $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}?route=cert&cert_no=410987">中古車</a>').hide();
+          $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}?route=cert&cert_no=410987007">新車</a>').hide();
+          $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}?route=cert&cert_no=410987009">中古車</a>').hide();
           $('#result').fadeIn(500);
         
         } else if (value3 == "まだ" ) {
           $('#result').append('<div class="h4 font-weight-bold m-2">メンテトップメニュー<i class="fa fa-arrow-circle-right m-2"></i></div>').hide();
-          $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}route=mente&cert_no=410987">新車</a>').hide();
-          $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}route=mente&cert_no=410987">中古車</a>').hide();
+          $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}?route=mente&cert_no=410987006">新車</a>').hide();
+          $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}?route=mente&cert_no=410987008">中古車</a>').hide();
           $('#result2').append('<span class="ml-2">申込書のみ可（会員証は基盤入力後に可）<span>').hide();
           $('#result').fadeIn(500);
           $('#result2').fadeIn(500);
@@ -372,14 +373,14 @@
         
         if (value3 == "入力済" ) {
           $('#result').append('<div class="h4 font-weight-bold m-2">メンテプロ会員証印刷<i class="fa fa-arrow-circle-right m-2"></i></div>').hide();
-          $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}?route=cert&cert_no=410987">新車</a>').hide();
-          $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}?route=cert&cert_no=410987">中古車</a>').hide();
+          $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}?route=cert&cert_no=410987012">新車</a>').hide();
+          $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}?route=cert&cert_no=410987014">中古車</a>').hide();
           $('#result').fadeIn(500);
         
         } else if (value3 == "まだ" ) {
           $('#result').append('<div class="h4 font-weight-bold m-2">メンテトップメニュー<i class="fa fa-arrow-circle-right m-2"></i></div>').hide();
-          $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}route=mente&cert_no=410987">新車</a>').hide();
-          $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}route=mente&cert_no=410987">中古車</a>').hide();
+          $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}?route=mente&cert_no=410987011">新車</a>').hide();
+          $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}?route=mente&cert_no=410987013">中古車</a>').hide();
           $('#result2').append('<span class="ml-2">申込書のみ可（会員証は基盤入力後に可）<span>').hide();
           $('#result').fadeIn(500);
           $('#result2').fadeIn(500);
@@ -388,13 +389,13 @@
         $("#block3").slideUp("fast");
         
         $('#result').append('<div class="h4 font-weight-bold m-2">メンテプロ会員証印刷<i class="fa fa-arrow-circle-right m-2"></i></div>').hide();
-        $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}?route=cert&cert_no=410987">新車</a>').hide();
-        $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}?route=cert&cert_no=410987">中古車</a>').hide();
-        $('#result').append('<a class="btn btn-sm btn-inverse-warning mr-2" href="{% url 'myprofit:service02' %}?route=cert&cert_no=410987">サービス</a>').hide();
+        $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}?route=cert&cert_no=410987015">新車</a>').hide();
+        $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}?route=cert&cert_no=410987016">中古車</a>').hide();
+        $('#result').append('<a class="btn btn-sm btn-inverse-warning mr-2" href="{% url 'myprofit:service02' %}?route=cert&cert_no=410987017">サービス</a>').hide();
         $('#result2').append('<div class="h4 font-weight-bold m-2">メンテトップメニュー<i class="fa fa-arrow-circle-right m-2"></i></div>').hide();
-        $('#result2').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}route=mente&cert_no=410987">新車</a>').hide();
-        $('#result2').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}route=mente&cert_no=410987">中古車</a>').hide();
-        $('#result2').append('<a class="btn btn-sm btn-inverse-warning" href="{% url 'myprofit:service02' %}route=mente&cert_no=410987">サービス</a>').hide();
+        $('#result2').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}?route=mente&cert_no=410987015">新車</a>').hide();
+        $('#result2').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}?route=mente&cert_no=410987016">中古車</a>').hide();
+        $('#result2').append('<a class="btn btn-sm btn-inverse-warning" href="{% url 'myprofit:service02' %}?route=mente&cert_no=410987017">サービス</a>').hide();
         $('#result').fadeIn(500);
         $('#result2').fadeIn(500);
       }
@@ -409,9 +410,9 @@
       if (value2 == "本登録") {
         $("#block3").slideUp("fast");
         $('#result').append('<div class="h4 font-weight-bold m-2">メンテトップメニュー<i class="fa fa-arrow-circle-right m-2"></i></div>').hide();
-        $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}route=mente&cert_no=410987">新車</a>').hide();
-        $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}route=mente&cert_no=410987">中古車</a>').hide();
-        $('#result').append('<a class="btn btn-sm btn-inverse-warning" href="{% url 'myprofit:service02' %}route=mente&cert_no=410987">サービス</a>').hide();
+        $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}?route=mente&cert_no=410987018">新車</a>').hide();
+        $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}?route=mente&cert_no=410987019">中古車</a>').hide();
+        $('#result').append('<a class="btn btn-sm btn-inverse-warning" href="{% url 'myprofit:service02' %}?route=mente&cert_no=410987020">サービス</a>').hide();
         $('#result2').append('<span class="ml-2">会員証は翌々日からFAXで許可<span>').hide();
         $('#result').fadeIn(500);
         $('#result2').fadeIn(500);
@@ -423,8 +424,8 @@
         
         if (value3 == "入力済" ) {
           $('#result').append('<div class="h4 font-weight-bold m-2">メンテプロ会員証印刷<i class="fa fa-arrow-circle-right m-2"></i></div>').hide();
-          $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}?route=cert&cert_no=410987">新車</a>').hide();
-          $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}?route=cert&cert_no=410987">中古車</a>').hide();
+          $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}?route=cert&cert_no=410987012">新車</a>').hide();
+          $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}?route=cert&cert_no=410987014">中古車</a>').hide();
           $('#result').fadeIn(500);
         
         } else if (value3 == "まだ" ) {
@@ -435,13 +436,13 @@
         $("#block3").slideUp("fast");
         
         $('#result').append('<div class="h4 font-weight-bold m-2">メンテプロ会員証印刷<i class="fa fa-arrow-circle-right m-2"></i></div>').hide();
-        $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}?route=cert&cert_no=410987">新車</a>').hide();
-        $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}?route=cert&cert_no=410987">中古車</a>').hide();
-        $('#result').append('<a class="btn btn-sm btn-inverse-warning mr-2" href="{% url 'myprofit:service02' %}?route=cert&cert_no=410987">サービス</a>').hide();
+        $('#result').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}?route=cert&cert_no=410987015">新車</a>').hide();
+        $('#result').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}?route=cert&cert_no=410987016">中古車</a>').hide();
+        $('#result').append('<a class="btn btn-sm btn-inverse-warning mr-2" href="{% url 'myprofit:service02' %}?route=cert&cert_no=410987017">サービス</a>').hide();
         $('#result2').append('<div class="h4 font-weight-bold m-2">メンテトップメニュー<i class="fa fa-arrow-circle-right m-2"></i></div>').hide();
-        $('#result2').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}route=mente&cert_no=410987">新車</a>').hide();
-        $('#result2').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}route=mente&cert_no=410987">中古車</a>').hide();
-        $('#result2').append('<a class="btn btn-sm btn-inverse-warning" href="{% url 'myprofit:service02' %}route=mente&cert_no=410987">サービス</a>').hide();
+        $('#result2').append('<a class="btn btn-sm btn-inverse-primary mr-2" href="{% url 'myprofit:new02' %}?route=mente&cert_no=410987015">新車</a>').hide();
+        $('#result2').append('<a class="btn btn-sm btn-inverse-success mr-2" href="{% url 'myprofit:used02' %}?route=mente&cert_no=410987016">中古車</a>').hide();
+        $('#result2').append('<a class="btn btn-sm btn-inverse-warning" href="{% url 'myprofit:service02' %}?route=mente&cert_no=410987017">サービス</a>').hide();
         $('#result').fadeIn(500);
         $('#result2').fadeIn(500);
       }

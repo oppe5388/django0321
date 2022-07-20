@@ -163,7 +163,7 @@
 
 <form class="" action='#' method='get' id="view1">
 <input type="hidden" name="route" id="route" value="{{route}}">
-<input type="hidden" name="cert_no" id="hidden_no">
+<input type="hidden" name="cert_no" id="hidden_no" value="{{cert_no}}">
 <input type="hidden" name="cancel_flag" id="cancel_flag">
 
 <!-- Modal申込 -->
@@ -261,6 +261,26 @@
     }
 
     $("#view1").attr("action", "{% url 'myprofit:new04' %}") //お客様一覧検索
+
+    //Naviから会員証Noが含まれていたら、差し込む
+    var cert_no = $('#hidden_no').val();
+    if (cert_no == "410987001") {
+      $("#search_input").val("N123A0001");
+    } else if (cert_no == "410987002") { 
+      $("#search_input").val("N123A0002");
+    } else if (cert_no == "410987006") { 
+      $("#search_input").val("N123A0003");
+    } else if (cert_no == "410987007") { 
+      $("#search_input").val("N123A0004");
+    } else if (cert_no == "410987011") { 
+      $("#search_input").val("N123A0005");
+    } else if (cert_no == "410987012") { 
+      $("#search_input").val("N123A0006");
+    } else if (cert_no == "410987015") { 
+      $("#search_input").val("N123A0007");
+    } else if (cert_no == "410987018") { 
+      $("#search_input").val("N123A0008");
+    }
   });
 
   //検索ボタン

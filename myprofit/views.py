@@ -4,12 +4,14 @@ from .forms import *
 def used02(request):
     context = {
         'route': request.GET.get('route'),
+        'cert_no': request.GET.get('cert_no'),
     }
     return render(request, 'myprofit/used02.html', context)
 
 def used03(request):
     context = {
         'route': request.GET.get('route'),
+        'cert_no': request.GET.get('cert_no'),
     }
     return render(request, 'myprofit/used03.html', context)
 
@@ -31,6 +33,7 @@ def used05entry(request):
 def used05(request):
     context = {
         'route': request.GET.get('route'),
+        'cert_no': request.GET.get('cert_no'),
     }
     return render(request, 'myprofit/used05.html', context)
 
@@ -40,6 +43,7 @@ def used06(request):
     context = {
         'searchForm': searchForm,
         'route': request.GET.get('route'),
+        'cert_no': request.GET.get('cert_no'),
     }
     return render(request, 'myprofit/used06.html', context)
 
@@ -71,12 +75,14 @@ def profit_top(request):
 def new02(request):
     context = {
         'route': request.GET.get('route'),
+        'cert_no': request.GET.get('cert_no'),
     }
     return render(request, 'myprofit/new02.html', context)
 
 def new03(request):
     context = {
         'route': request.GET.get('route'),
+        'cert_no': request.GET.get('cert_no'),
     }
     return render(request, 'myprofit/new03.html', context)
 
@@ -98,6 +104,7 @@ def new05entry(request):
 def new05(request):
     context = {
         'route': request.GET.get('route'),
+        'cert_no': request.GET.get('cert_no'),
     }
     return render(request, 'myprofit/new05.html', context)
 
@@ -107,6 +114,7 @@ def new06(request):
     context = {
         'searchForm': searchForm,
         'route': request.GET.get('route'),
+        'cert_no': request.GET.get('cert_no'),
     }
     return render(request, 'myprofit/new06.html', context)
 
@@ -129,6 +137,7 @@ def new07(request):
 def service02(request):
     context = {
         'route': request.GET.get('route'),
+        'cert_no': request.GET.get('cert_no'),
     }
     return render(request, 'myprofit/service02.html', context)
 
@@ -157,6 +166,7 @@ def service05entry(request):
 def service05(request):
     context = {
         'route': request.GET.get('route'),
+        'cert_no': request.GET.get('cert_no'),
     }
     return render(request, 'myprofit/service05.html', context)
 
@@ -166,6 +176,7 @@ def service06(request):
     context = {
         # 'searchForm': searchForm,
         'route': request.GET.get('route'),
+        'cert_no': request.GET.get('cert_no'),
     }
     return render(request, 'myprofit/service06.html', context)
 
@@ -188,5 +199,6 @@ def service07(request):
 def service01(request):
     context = {
         'route': request.GET.get('route'),
+        'cert_no': request.GET.get('cert_no'),
     }
     return render(request, 'myprofit/service01.html', context)

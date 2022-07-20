@@ -20,8 +20,9 @@
 <script>
   $(function () {
     var route = $('#route').val();
-    $("#search_menu1").attr("href", "{% url 'myprofit:used06' %}?route=" +route) //お客様一覧検索
-    $("#search_menu2").attr("href", "{% url 'myprofit:used06' %}?route=" +route) //お客様一覧検索
+    var cert_no = $('#hidden_no').val();
+    $("#search_menu1").attr("href", "{% url 'myprofit:used06' %}?route=" +route+ "&cert_no=" +cert_no) //お客様一覧検索
+    $("#search_menu2").attr("href", "{% url 'myprofit:used06' %}?route=" +route+ "&cert_no=" +cert_no) //お客様一覧検索
   });
 </script>
 
