@@ -450,6 +450,19 @@
 
     $("#view1").attr("action", "{% url 'myprofit:service04' %}");
 
+    //Naviから会員証Noが含まれていたら、差し込む
+    var hidden_no = $('#hidden_no').val();
+    //context用に会員証no入れる、キャンセル
+    if (hidden_no == "410987005") {
+      $("#search_plate4").val("0014");
+    } else if (hidden_no == "410987010") {
+      $("#search_plate4").val("0015");
+    } else if (hidden_no == "410987017") {
+      $("#search_plate4").val("0016");
+    } else if (hidden_no == "410987020") {
+      $("#search_plate4").val("0017");
+    } 
+
 
   });
 

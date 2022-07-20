@@ -6,7 +6,7 @@ $(function () {
     $('#cancel').hide();// 申込キャンセルは非表示
     $("#end").text("業務メニュー");//真ん中のボタンの文字
     var route = $('#route').val();
-    $("#end").attr("href", "{% url 'myprofit:new05' %}?route=" +route) //業務メニュー
+    //$("#end").attr("href", "{% url 'myprofit:new05' %}?route=" +route) //業務メニュー
     
     var cert_no = $('#cert_no').val();
     var shaken_date = moment(new Date()).add(740, 'd');
@@ -397,7 +397,16 @@ $(function () {
         $('#cert').hide();// 申込書印刷ボタン表示
         $('#cancel').show();// 申込書印刷ボタン表示
         $("#end").text("終了");//真ん中のボタンの文字
-        $("#end").attr("href", "{% url 'myprofit:new03' %}?route=" +route)
+
+        var order_no = $("#order_no").val();//注文書番号
+        if(order_no.startsWith("N")){
+            $("#end").attr("href", "{% url 'myprofit:new03' %}?route=" +route)
+        } else if (order_no.startsWith("U")){
+            $("#end").attr("href", "{% url 'myprofit:used03' %}?route=" +route)
+        } else {
+            $("#end").attr("href", "{% url 'myprofit:service03' %}?route=" +route) 
+        }
+        
     }
 
 });
