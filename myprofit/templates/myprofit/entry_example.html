@@ -1,0 +1,371 @@
+{% extends 'profit/profit_base.html' %}
+{% load static %}
+{% block title %}PROFIT_mock{% endblock %}
+
+{% block breadcrumb %}
+{% endblock %}
+
+{% block sidebar %}
+  {% comment %} {% include 'profit/side_new.html' %} {% endcomment %}
+{% endblock %} 
+
+{% block mainpanel %}
+  <form class="" action='#' method='get' id="view1">
+    {% comment %} <input type="hidden" name="route" id="route" value="{{route}}">
+    <input type="hidden" name="cert_no" id="hidden_no" value="{{cert_no}}">
+    <input type="hidden" name="cancel_flag" id="cancel_flag" value="{{cancel_flag}}"> {% endcomment %}
+  
+    <div class="card bg-white pb-3">
+  
+      <div class="p-0 mb-2">
+        <div class="col-12 bg-light p-0 mb-0">
+          <div class="d-flex flex-row navbar">
+            <a href="#" class="text-dark text-decoration-none small pr-2 border border-dark border-left-0 border-top-0 border-bottom-0">販売店メニューに戻る</a>
+          </div>
+        </div>
+      </div>
+  
+  
+      <div class="d-flex bg-light p-1 mx-2">■メンテプロパック　受付申込登録
+        <button type="button" class="btn btn-info btn-rounded p-1 ml-1" data-container="body" data-toggle="popover" data-html="true" data-placement="right"
+        data-content="本来は入力しますが、そのまま送信
+          ">vcc
+        </button>
+      </div>
+      <hr class="p-0 mt-0 border-dark mx-2">
+  
+      {% comment %} <div class="d-flex mx-2"> {% endcomment %}
+  
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1">販売会社</span>
+            <span class="text-primary">　</span>
+            <input class="col-2 mb-1 mx-0 " id="company" disabled>
+          </div>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1">申込店舗</span>
+            <span class="text-primary">※</span>
+            <input class="col-2 mb-1" id="shop">
+          </div>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1">申込担当者ｺｰﾄﾞ</span>
+            <span class="text-primary">※</span>
+            <input class="col-2 mb-1" id="tantou_code">
+          </div>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1">申込担当者名</span>
+            <span class="text-primary">※</span>
+            <input class="col-3 mb-1" id="tantou_name">
+          </div>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1">氏名<span class="text-primary small">(半角ｶﾅ)</span></span>
+            <span class="text-primary">※</span>
+            <div class-"">
+              <div class-""><input class="col-12" id="customer_kana"></div>
+              <span class="text-primary small">（例）「ﾆｯｻﾝ ﾀﾛｳ」（姓と名の間はスペースを入れてください）</span>
+            </div>
+          </div>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1"><button id="kanji_error" class="btn p-0 text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+              data-content="アポストロフィーは不可<br>⇒代わりに「´」または「′」を使う
+              " ><i class="fa fa-info-circle"></i> 氏名<span class="small">(漢字)</span></button>
+            </span>
+            <span class="text-primary">※</span>
+            <div class-"">
+              <div class-""><input class="col-12" id="customer_kanji"></div>
+              <span class="text-primary small">（例）「日産　太郎」（姓と名の間はスペースを入れてください）</span>
+            </div>
+          </div>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1">生年月日</span>
+            <span class="text-primary">　</span>
+            <input class="col-1 mb-1" id="birthday_year"><span class="small d-flex align-items-end mb-1 mr-1">年</span>
+            <input class="col-1 mb-1" id="birthday_month"><span class="small d-flex align-items-end mb-1 mr-1">月</span>
+            <input class="col-1 mb-1" id="birthday_day"><span class="small d-flex align-items-end mb-1 mr-1">日</span>
+          </div>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1">性別</span>
+            <span class="text-primary">　</span>
+            <select class="col-1 mb-1" id="gender">
+              <option value="0">選択してください</option>
+              <option value="1">男</option>
+              <option value="2">女</option>
+              <option value="3">法人</option>
+            </select>
+          </div>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1">郵便番号</span>
+            <span class="text-primary">※</span>
+            <input class="col-1 mb-1" id="post_code1">
+            <span class="mb-1 mr-1">−</span>
+            <input class="col-1 mb-1" id="post_code2">
+            <a href="#" class="btn btn-inverse-dark btn-sm py-0 px-1 mb-1 ml-1 d-flex align-items-center">住所検索</a>
+            <span class="text-primary small d-flex align-items-end mb-1">※郵便番号入力後、「住所検索」ボタンを押すと住所を表示します</span>
+          </div>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1">住所<span class="text-primary small">(半角ｶﾅ)</span></span>
+            <span class="text-primary">　</span>
+            <input class="col-6 mb-1" id="address_kana">
+          </div>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1">住所<span class="text-primary small">(漢字)</span></span>
+            <span class="text-primary">※</span>
+            <div class-"">
+              <div class-""><input class="col-8 " id="address_kanji"></div>
+              <span class="text-primary small ">※表示された住所に補助住所(町名、アパート名、号室等)を追加して登録してください
+                また、修正が必要な場合は修正願います </span>
+            </div>
+          </div>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1">電話番号</span>
+            <span class="text-primary">　</span>
+            <input class="col-2 mb-1" id="tel">
+          </div>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1"><button id="mail_error" class="btn p-0 text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+              data-content="アットマーク、ドットなしは不可<br>⇒「〜@〜.〜」にする
+              " ><i class="fa fa-info-circle"></i> eﾒｰﾙｱﾄﾞﾚｽ</button>
+            </span>
+            <span class="text-primary">　</span>
+            <input class="col-5 mb-1" id="mail">
+          </div>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1">注文書No</span>
+            <span class="text-primary">　</span>
+            <input class="col-3 mb-1" id="order_no">
+          </div>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1">ﾒｰｶｰ区分</span>
+            <span class="text-primary">※</span>
+            <select class="col-2 mb-1" id="maker">
+              <option value="0">選択してください</option>
+              <option value="1">日産車</option>
+              <option value="2">その他</option>
+            </select>
+          </div>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1">車名/車種ｸﾗｽ</span>
+            <span class="text-primary">※</span>
+            <input class="col-4 mb-1" id="car_name">
+            <select class="col-2 mb-1 ml-1" id="car_class">
+              <option value="0">選択してください</option>
+              <option value="1">乗用車LL</option>
+            </select>
+            <a href="" class="btn btn-inverse-dark btn-sm py-0 mb-1 ml-1 d-flex align-items-center">検索</a>
+          </div>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1">車台型式</span>
+            <span class="text-primary">　</span>
+            <input class="col-3 mb-1" id="#">
+          </div>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1">型式</span>
+            <span class="text-primary">　</span>
+            <input class="col-2 mb-1" id="car_model">
+          </div>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1">基本</span>
+            <span class="text-primary">※</span>
+            <input class="col-1 mb-1" id="base_no">
+          </div>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1">登録番号</span>
+            <span class="text-primary">　</span>
+            <select class="col-2 mb-1" id="plate_no1">
+              <option value="0">選択してください</option>  
+              <option value="1">練馬</option>          
+            </select>
+            <input class="col-1 mb-1" id="plate_no2">
+            <input class="col-1 mb-1" id="plate_no3">
+            <input class="col-1 mb-1" id="plate_no4">
+            <span class="text-primary small d-flex align-items-end mb-1">（例）幕張 300 ｻ 0123</span>
+              
+          </div>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1">車台番号</span>
+            <span class="text-primary">　</span>
+            <input class="col-2 mb-1" id="frame_no1">
+            <input class="col-2 mb-1" id="frame_no2">
+          </div>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1">新中サ区分</span>
+            <span class="text-primary">※</span>
+            <select class="col-2 mb-1" id="entry_div">
+              <option value="0">選択してください</option>
+              <option value="1">新車</option>
+              <option value="2">中古車</option>
+              <option value="3">サービス</option>
+            </select>
+          </div>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1">初度登録年月</span>
+            <span class="text-primary">　</span>
+            <input class="col-1 mb-1" id="register_year"><span class="small d-flex align-items-end mb-1 mr-1">年</span>
+            <input class="col-1 mb-1" id="register_month"><span class="small d-flex align-items-end mb-1 mr-1">月</span>
+          </div>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1"><button id="insp_error" class="btn p-0 text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+              data-content="申込当日以前の日付は不可<br>⇒翌日以降にする。
+              " ><i class="fa fa-info-circle"></i> 車検満了年月日</button>
+            </span>
+            <span class="text-primary">　</span>
+            <input class="col-1 mb-1" id="insp_year"><span class="small d-flex align-items-end mb-1 mr-1">年</span>
+            <input class="col-1 mb-1" id="insp_month"><span class="small d-flex align-items-end mb-1 mr-1">月</span>
+            <input class="col-1 mb-1" id="insp_day"><span class="small d-flex align-items-end mb-1 mr-1">日</span>
+          </div>
+
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1">ｻｰﾋﾞｽ商品</span>
+            <span class="text-primary">※</span>
+            <select class="col-3 mb-1" id="product">
+              <option value="0">選択してください
+              <option value="1">メンテプロパック（乗用）
+              <option value="ev">メンテプロパック（EV）
+              <option value="premium">NISSAN EVあんしんプラスプレミアム
+              <option value="chotoku">メンテプロパック長得（乗用）
+              <option value="shoyo">メンテプロパック（商用）
+              <option value="cd">メンテプロパック（CD）
+              <option value="turbo">メンテプロパックターボ（乗用）
+              <option value="nismo">メンテプロパックNISMO
+              <option value="evsp">メンテプロパック（EVSP）
+            </select>
+          </div>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1">入会ｺｰｽ</span>
+            <span class="text-primary">※</span>
+            <select class="col-5 mb-1" id="course">
+              <option value="">選択してください</option>
+              <option value="1" data-val="">メンテプロパック54車検付きベーシック</option>
+              <option value="2" data-val="">メンテプロパック18車検付きベーシック</option>
+            </select>
+          </div>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1">お支払額</span>
+            <span class="text-primary">　</span>
+            <input class="col-2 mb-1" id="price">
+            <span class="small d-flex align-items-end mb-1 mr-1">円</span>
+            <span class="text-primary small d-flex align-items-end mb-1">(消費税込み)</span>
+          </div>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1">支払手段</span>
+            <span class="text-primary">※</span>
+            <select class="col-2 mb-1" id="payment">
+              <option value="0">選択してください</option>
+              <option value="1">現金</option>
+              <option value="2">日産カード</option>
+            </select>
+          </div>
+  
+          <span class="text-primary small d-flex justify-content-center mt-2">
+            ※送信で次の画面へ、戻りで画面内容クリア、業務メニューで申込をやめます
+          </span>
+  
+          <div class="row justify-content-center">
+            <div class="d-flex flex-row ">
+              <button class="btn btn-inverse-dark m-2" type="submit" id="send">送信</button>
+              <button type="button" class="btn btn-inverse-dark m-2" id="test2">戻り</button>
+              <a href="#" class="btn btn-inverse-dark m-2" id="back2">業務メニュー</a>
+            </div>
+          </div>
+  
+    </div>
+  
+  </form>
+  
+  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/locale/ja.js"></script>
+  
+    <script>
+      $(function() {
+        $('[data-toggle="popover"]').popover()
+
+
+        //契約者名漢字
+        $('#kanji_error').on('show.bs.popover', function () {
+          $('#customer_kanji').addClass("alert-warning");
+        })
+        $('#kanji_error').on('hide.bs.popover', function () {
+          $('#customer_kanji').removeClass("alert-warning");
+        })
+
+        //メールアドレス
+        $('#mail_error').on('show.bs.popover', function () {
+          $('#mail').addClass("alert-warning");
+        })
+        $('#mail_error').on('hide.bs.popover', function () {
+          $('#mail').removeClass("alert-warning");
+        })
+
+        //車検満了日
+        $('#insp_error').on('show.bs.popover', function () {
+          $('#insp_year').addClass("alert-warning");
+          $('#insp_month').addClass("alert-warning");
+          $('#insp_day').addClass("alert-warning");
+        })
+        $('#insp_error').on('hide.bs.popover', function () {
+          $('#insp_year').removeClass("alert-warning");
+          $('#insp_month').removeClass("alert-warning");
+          $('#insp_day').removeClass("alert-warning");
+        })
+      });
+    </script>
+
+
+<script>
+  $(function () {
+
+    //共通
+    $('#company').val("13300");
+    $('#shop').val("1E0");
+    $("#tantou_code").val("001234"); // 値を設定
+    $("#tantou_name").val("大磯　太郎");
+    $("#customer_kanji").val("尾凪　花子");
+    $("#customer_kana").val("ｵﾅｷﾞ ﾊﾅｺ");
+    $("#birthday_year").val("2000");
+    $("#birthday_month").val("04");
+    $("#birthday_day").val("01");
+    $("#gender").val(2);
+    $("#post_code1").val("171");
+    $("#post_code2").val("0014");
+    $("#address_kanji").val("豊島区池袋9-8-7");
+    $("#tel").val("070-1239-1721");
+    $("#maker").val(1);
+    $('#maker').prop('disabled', true);
+    $("#car_name").val("ｽｶｲﾗｲﾝ");
+    $('#car_name').prop('disabled', true);
+    $("#car_class").val(1);
+    $('#car_class').prop('disabled', true);
+    $("#car_model").val("5BA-RV37");
+    $("#base_no").val("V37");
+    $('#base_no').prop('disabled', true);
+    $("#frame_no1").val("RV37-130855");
+    $("#payment").val(2);
+    
+    $('#order_no').prop('disabled', true);
+    $('#entry_div').prop('disabled', true);
+    $("#product").val("1");
+
+    $("#price").val("156,920");
+
+    var shodo_date = moment(new Date())
+    $("#register_year").val(shodo_date.format('YYYY'));
+    $("#register_month").val(shodo_date.format('MM'));
+    var shaken_date = moment(new Date()).add(3, 'y');
+    $("#insp_year").val(shaken_date.format('YYYY'));
+    $("#insp_month").val(shaken_date.format('MM'));
+    $("#insp_day").val(shaken_date.format('DD'));
+
+    //それぞれ
+    var cert_no = $('#hidden_no').val();
+
+    $("#order_no").val("N123A9999");
+
+
+  
+
+  });
+</script>
+
+{% endblock %}

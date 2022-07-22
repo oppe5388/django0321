@@ -202,3 +202,9 @@ def service01(request):
         'cert_no': request.GET.get('cert_no'),
     }
     return render(request, 'myprofit/service01.html', context)
+
+
+def entry_example(request):
+    context = {
+    }
+    return render(request, 'myprofit/entry_example.html', context)
