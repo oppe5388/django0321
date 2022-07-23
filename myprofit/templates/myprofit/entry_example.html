@@ -27,14 +27,21 @@
   
   
       <div class="d-flex bg-light p-1 mx-2">■メンテプロパック　受付申込登録
-        <button type="button" class="btn btn-info btn-rounded p-1 ml-1" data-container="body" data-toggle="popover" data-html="true" data-placement="right"
-        data-content="本来は入力しますが、そのまま送信
-          ">vcc
-        </button>
       </div>
       <hr class="p-0 mt-0 border-dark mx-2">
   
       {% comment %} <div class="d-flex mx-2"> {% endcomment %}
+
+        <div id="course_error4">
+          <span class="text-primary small d-flex justify-content-center my-2 text-center">
+            この商品は登録されていません。<br>
+            商品をご確認のうえ、再度登録してください。
+          </span>
+        </div>
+        <!-- ?#へ飛ぶのを防止用 -->
+        <div id="kihon_error1">
+          <span class="small d-flex justify-content-center my-2"></span>
+        </div>
   
           <div class="d-flex flex-nowrap">
             <span class="col-3 mb-1">販売会社</span>
@@ -65,13 +72,13 @@
             </div>
           </div>
           <div class="d-flex flex-nowrap">
-            <span class="col-3 mb-1"><button id="kanji_error" class="btn p-0 text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            <span class="col-3 mb-1"><span id="kanji_error" class="btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
               data-content="アポストロフィーは不可<br>⇒代わりに「´」または「′」を使う
-              " ><i class="fa fa-info-circle"></i> 氏名<span class="small">(漢字)</span></button>
+              " ><i class="fa fa-info-circle"></i> 氏名<span class="small">(漢字)</span></span>
             </span>
             <span class="text-primary">※</span>
             <div class="">
-              <div class=""><input class="col-12" id="customer_kanji"></div>
+              <div class=""><input class="col" id="customer_kanji"></div>
               <span class="text-primary small">（例）「日産　太郎」（姓と名の間はスペースを入れてください）</span>
             </div>
           </div>
@@ -98,7 +105,7 @@
             <input class="col-1 mb-1" id="post_code1">
             <span class="mb-1 mr-1">−</span>
             <input class="col-1 mb-1" id="post_code2">
-            <a href="#" class="btn btn-inverse-dark btn-sm py-0 px-1 mb-1 ml-1 d-flex align-items-center">住所検索</a>
+            <a href="" class="btn btn-inverse-dark btn-sm py-0 px-1 mb-1 ml-1 d-flex align-items-center">住所検索</a>
             <span class="text-primary small d-flex align-items-end mb-1">※郵便番号入力後、「住所検索」ボタンを押すと住所を表示します</span>
           </div>
           <div class="d-flex flex-nowrap">
@@ -121,9 +128,9 @@
             <input class="col-2 mb-1" id="tel">
           </div>
           <div class="d-flex flex-nowrap">
-            <span class="col-3 mb-1"><button id="mail_error" class="btn p-0 text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            <span class="col-3 mb-1"><span id="mail_error" class="btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
               data-content="アットマーク、ドットなしは不可<br>⇒「〜@〜.〜」にする
-              " ><i class="fa fa-info-circle"></i> eﾒｰﾙｱﾄﾞﾚｽ</button>
+              " ><i class="fa fa-info-circle"></i> eﾒｰﾙｱﾄﾞﾚｽ</span>
             </span>
             <span class="text-primary">　</span>
             <input class="col-5 mb-1" id="mail">
@@ -138,29 +145,40 @@
             <span class="text-primary">※</span>
             <select class="col-2 mb-1" id="maker">
               <option value="0">選択してください</option>
-              <option value="1">日産車</option>
+              <option value="1" selected>日産車</option>
               <option value="2">その他</option>
             </select>
           </div>
 
           <div class="d-flex flex-nowrap">
-            <span class="col-3 mb-1">車名/車種ｸﾗｽ</span>
+            <span class="col-3 mb-1">
+              <div class="d-flex flex-column">
+                車名/車種ｸﾗｽ
+                <button id="course_error" class="btn p-0 btn-rounded btn-warning mb-1" data-toggle="popover" data-trigger="focus" data-html="true" data-placement="bottom"
+                data-content="車種クラス×サービス商品×入会コースの組み合わせ
+                " ><i class="fa fa-hand-o-down"></i>クラス×商品コース</button>
+              </div>
+            </span>
             <span class="text-primary">※</span>
             <div class="">
               <div class="d-flex">
-                <div class="d-flex flex-column">
+                <div class="d-flex flex-column col-4 px-0">
                   <input class="col mb-1 py-0" id="car_name">
-                  <div class="col"></div>
+                  <div class="col">　</div>
                 </div>
-                <div class="d-flex flex-column">
+                <div class="d-flex flex-column col-9 pl-1">
                   <div class="d-flex">
-                    <select class="col-4 mb-1 ml-1" id="car_class">
+                    <select class="col-5 mb-1 ml-1" id="car_class">
                       <option value="0">選択してください</option>
                       <option value="1">乗用車LL</option>
                     </select>
-                    <a href="" class="btn btn-inverse-dark btn-sm py-1 ml-1 align-items-center">検索</a>
+                    <a href="" id="nissan1" class="btn btn-inverse-dark btn-sm py-1 ml-1 align-items-center">検索</a>
+                    <span class="ml-2 px-1 alert-warning" id="course_error1">内容をご確認ください</span>
                   </div>
-                  <span class="text-primary small ml-1">車種クラス入力後、「車両検索」ボタンを押すと車名を表示します</span>
+                  <div >
+                    <span id="nissan2" class="text-primary small ml-1">車種クラス入力後、「車両検索」ボタンを押すと車名を表示します</span>
+                    <span id="nissan3" class="text-primary small ml-1">　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -177,9 +195,19 @@
             <input class="col-2 mb-1" id="car_model">
           </div>
           <div class="d-flex flex-nowrap">
-            <span class="col-3 mb-1">基本</span>
+            <span class="col-3 mb-1">
+              <div class="d-flex flex-column">
+                基本
+                <button id="kihon_error" class="btn p-0 btn-rounded btn-warning mb-1" data-toggle="popover" data-trigger="focus" data-html="true" data-placement=""
+                  data-content="車種クラス×基本3桁×商品の組み合わせ
+                  " ><i class="fa fa-hand-o-down"></i>基本×商品コース</button>
+              </div>
+            </span>
             <span class="text-primary">※</span>
-            <input class="col-1 mb-1" id="base_no">
+            <div class="d-flex flex-column">
+              <input class="col-4 mb-1" id="base_no">
+              <div class="　"></div>
+            </div>
           </div>
           <div class="d-flex flex-nowrap">
             <span class="col-3 mb-1">登録番号</span>
@@ -217,9 +245,9 @@
             <input class="col-1 mb-1" id="register_month"><span class="small d-flex align-items-end mb-1 mr-1">月</span>
           </div>
           <div class="d-flex flex-nowrap">
-            <span class="col-3 mb-1"><button id="insp_error" class="btn p-0 text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            <span class="col-3 mb-1"><span id="insp_error" class="btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
               data-content="申込当日以前の日付は不可<br>⇒翌日以降にする。
-              " ><i class="fa fa-info-circle"></i> 車検満了年月日</button>
+              " ><i class="fa fa-info-circle"></i> 車検満了年月日</span>
             </span>
             <span class="text-primary">　</span>
             <input class="col-1 mb-1" id="insp_year"><span class="small d-flex align-items-end mb-1 mr-1">年</span>
@@ -230,7 +258,7 @@
           <div class="d-flex flex-nowrap">
             <span class="col-3 mb-1">ｻｰﾋﾞｽ商品</span>
             <span class="text-primary">※</span>
-            <select class="col-3 mb-1" id="product">
+            <select class=" mb-1" id="product">
               <option value="0">選択してください
               <option value="1">メンテプロパック（乗用）
               <option value="ev">メンテプロパック（EV）
@@ -242,25 +270,33 @@
               <option value="nismo">メンテプロパックNISMO
               <option value="evsp">メンテプロパック（EVSP）
             </select>
+            <span class="ml-2 px-1 alert-warning" id="course_error2-1">内容をご確認ください</span>
+            <span class="ml-2 px-1 alert-warning" id="course_error2-2">この車両は選択した商品の対象外です</span>
           </div>
           <div class="d-flex flex-nowrap">
             <span class="col-3 mb-1">入会ｺｰｽ</span>
             <span class="text-primary">※</span>
-            <select class="col-5 mb-1" id="course">
+            <select class="mb-1" id="course">
               <option value="">選択してください</option>
               <option value="1" data-val="">メンテプロパック54車検付きベーシック</option>
               <option value="2" data-val="">メンテプロパック18車検付きベーシック</option>
             </select>
+            <span class="ml-2 px-1 alert-warning" id="course_error3">内容をご確認ください</span>
           </div>
           <div class="d-flex flex-nowrap">
-            <span class="col-3 mb-1"><button id="price_error" class="btn p-0 text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            <span class="col-3 mb-1"><span id="price_error" class="btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
               data-content="金額相違は不可<br>⇒ブランクで送信すれば正しい金額が入る
-              " ><i class="fa fa-info-circle"></i> お支払額</button>
+              " ><i class="fa fa-info-circle"></i> お支払額</span>
             </span>
             <span class="text-primary">　</span>
-            <input class="col-2 mb-1" id="price">
-            <span class="small d-flex align-items-end mb-1 mr-1">円</span>
-            <span class="text-primary small d-flex align-items-end mb-1">(消費税込み)</span>
+            <div class="d-flex flex-column">
+              <div class="d-flex">
+                <input class=" mb-1" id="price">
+                <span class="small d-flex align-items-end mb-1 mr-1">円</span>
+                <span class="text-primary small d-flex align-items-end mb-1">(消費税込み)</span>
+              </div>
+              <span class="px-1 alert-warning" id="price_error2">NFS-Web算出額 156,920円　　お支払額とNFS-Web算出額が違っています。</span>
+            </div>
           </div>
           <div class="d-flex flex-nowrap">
             <span class="col-3 mb-1">支払手段</span>
@@ -278,9 +314,10 @@
   
           <div class="row justify-content-center">
             <div class="d-flex flex-row ">
-              <button class="btn btn-inverse-dark m-2" type="submit" id="send">送信</button>
-              <button type="button" class="btn btn-inverse-dark m-2" id="test2">戻り</button>
-              <a href="#" class="btn btn-inverse-dark m-2" id="back2">業務メニュー</a>
+              <button class="btn btn-inverse-dark m-2" type="submit" id="send" disabled>送信</button>
+              <button type="button" class="btn btn-inverse-dark m-2" id="test2" disabled>戻り</button>
+              <button type="button" class="btn btn-inverse-dark m-2" id="" disabled>業務メニュー</button>
+              {% comment %} <a href="#" class="btn btn-inverse-dark m-2" id="back2">業務メニュー</a> {% endcomment %}
             </div>
           </div>
   
@@ -295,8 +332,94 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/locale/ja.js"></script>
   
     <script>
+
+      //コースエラー表示は関数化
+      function course_show(){
+        $('#car_class').addClass("alert-warning");
+        $("#product").addClass("alert-warning");
+        $("#course").addClass("alert-warning");
+        $('#course_error1').show();
+        $('#course_error2-1').show();
+        $('#course_error3').show();
+        $('#course_error4').show();
+
+      };
+
+      //コースエラー非表示関数
+      function course_hide(){
+        $('#car_class').removeClass("alert-warning");
+        $('#product').removeClass("alert-warning");
+        $('#course').removeClass("alert-warning");
+        $('#course_error1').hide();
+        $('#course_error2-1').hide();
+        $('#course_error3').hide();
+        $('#course_error4').hide();
+
+      };
+
+      //基本エラー表示は関数化
+      function kihon_show(){
+        $('#car_class').addClass("alert-warning");
+        $("#product").addClass("alert-warning");
+        $("#base_no").addClass("alert-warning");
+        $('#kihon_error1').show();
+      };
+
+      //基本エラー非表示関数
+      function kihon_hide(){
+        $('#car_class').removeClass("alert-warning");
+        $("#product").removeClass("alert-warning");
+        $("#base_no").removeClass("alert-warning");
+        $('#kihon_error1').hide();
+      };
+
       $(function() {
-        $('[data-toggle="popover"]').popover()
+        $('[data-toggle="popover"]').popover();
+
+        
+
+        //はじめは非表示
+        $('#price_error2').hide();
+        $('#course_error1').hide();
+        $('#course_error2-1').hide();
+        $('#course_error2-2').hide();
+        $('#course_error3').hide();
+        $('#course_error4').hide();
+        $('#kihon_error1').hide();
+        $('#nissan3').hide();//体裁用ダミー
+
+        //日産車とその他でグレーアウトやボタン表示を変更
+        $("#maker").change(function() {
+          if ($("#maker").val()==1) {
+            $('#car_name').prop('disabled', true);
+            $('#base_no').prop('disabled', true);
+            $('#nissan1').show();
+            $('#nissan2').show();
+            $('#nissan3').hide();//体裁用ダミー
+          } else {
+            $('#car_name').prop('disabled', false);
+            $('#base_no').prop('disabled', false);
+            $('#nissan1').hide();
+            $('#nissan2').hide();
+            $('#nissan3').show();
+          }
+        });
+        
+        //コース
+        $('#course_error').on('show.bs.popover', function () {
+          course_show();
+        })
+        $('#course_error').on('hide.bs.popover', function () {
+          course_hide();
+        })
+
+        //基本3桁エラー
+        $('#kihon_error').on('show.bs.popover', function () {
+          kihon_show();
+        })
+        $('#kihon_error').on('hide.bs.popover', function () {
+          kihon_hide();
+        })
 
 
         //契約者名漢字
@@ -330,9 +453,11 @@
         //支払金額
         $('#price_error').on('show.bs.popover', function () {
           $('#price').addClass("alert-warning");
+          $('#price_error2').show();
         })
         $('#price_error').on('hide.bs.popover', function () {
           $('#price').removeClass("alert-warning");
+          $('#price_error2').hide();
         })
       });
     </script>
@@ -346,22 +471,23 @@
     $('#shop').val("1E0");
     $("#tantou_code").val("001234"); // 値を設定
     $("#tantou_name").val("大磯　太郎");
-    $("#customer_kanji").val("尾凪　花子");
-    $("#customer_kana").val("ｵﾅｷﾞ ﾊﾅｺ");
-    $("#birthday_year").val("2000");
-    $("#birthday_month").val("04");
-    $("#birthday_day").val("01");
+    $("#customer_kanji").val("アポストロフィー’ｓ株式会社　OK→「´」「′」");
+    $("#customer_kana").val("ｱﾎﾟｽﾄﾛﾌｨｰ");
     $("#gender").val(2);
     $("#post_code1").val("171");
     $("#post_code2").val("0014");
     $("#address_kanji").val("豊島区池袋9-8-7");
     $("#tel").val("070-1239-1721");
-    $("#maker").val(1);
-    $('#maker').prop('disabled', true);
+    $("#mail").val("vcc@marsh");
+    //$("#maker").val(1);
+    //$('#maker').prop('disabled', true);
     $("#car_name").val("ｽｶｲﾗｲﾝ");
     $('#car_name').prop('disabled', true);
+
+
+
     $("#car_class").val(1);
-    $('#car_class').prop('disabled', true);
+    //$('#car_class').prop('disabled', true);
     $("#car_model").val("5BA-RV37");
     $("#base_no").val("V37");
     $('#base_no').prop('disabled', true);
@@ -369,15 +495,16 @@
     $("#payment").val(2);
     
     $('#order_no').prop('disabled', true);
+    $('#entry_div').val(3);
     $('#entry_div').prop('disabled', true);
     $("#product").val("1");
 
-    $("#price").val("156,920");
+    $("#price").val("100,000");
 
     var shodo_date = moment(new Date())
     $("#register_year").val(shodo_date.format('YYYY'));
     $("#register_month").val(shodo_date.format('MM'));
-    var shaken_date = moment(new Date()).add(3, 'y');
+    var shaken_date = moment(new Date());
     $("#insp_year").val(shaken_date.format('YYYY'));
     $("#insp_month").val(shaken_date.format('MM'));
     $("#insp_day").val(shaken_date.format('DD'));
