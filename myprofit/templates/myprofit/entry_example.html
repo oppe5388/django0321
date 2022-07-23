@@ -59,8 +59,8 @@
           <div class="d-flex flex-nowrap">
             <span class="col-3 mb-1">氏名<span class="text-primary small">(半角ｶﾅ)</span></span>
             <span class="text-primary">※</span>
-            <div class-"">
-              <div class-""><input class="col-12" id="customer_kana"></div>
+            <div class="">
+              <div class=""><input class="col-12" id="customer_kana"></div>
               <span class="text-primary small">（例）「ﾆｯｻﾝ ﾀﾛｳ」（姓と名の間はスペースを入れてください）</span>
             </div>
           </div>
@@ -70,8 +70,8 @@
               " ><i class="fa fa-info-circle"></i> 氏名<span class="small">(漢字)</span></button>
             </span>
             <span class="text-primary">※</span>
-            <div class-"">
-              <div class-""><input class="col-12" id="customer_kanji"></div>
+            <div class="">
+              <div class=""><input class="col-12" id="customer_kanji"></div>
               <span class="text-primary small">（例）「日産　太郎」（姓と名の間はスペースを入れてください）</span>
             </div>
           </div>
@@ -109,8 +109,8 @@
           <div class="d-flex flex-nowrap">
             <span class="col-3 mb-1">住所<span class="text-primary small">(漢字)</span></span>
             <span class="text-primary">※</span>
-            <div class-"">
-              <div class-""><input class="col-8 " id="address_kanji"></div>
+            <div class="">
+              <div class=""><input class="col-8 " id="address_kanji"></div>
               <span class="text-primary small ">※表示された住所に補助住所(町名、アパート名、号室等)を追加して登録してください
                 また、修正が必要な場合は修正願います </span>
             </div>
@@ -142,16 +142,30 @@
               <option value="2">その他</option>
             </select>
           </div>
+
           <div class="d-flex flex-nowrap">
             <span class="col-3 mb-1">車名/車種ｸﾗｽ</span>
             <span class="text-primary">※</span>
-            <input class="col-4 mb-1" id="car_name">
-            <select class="col-2 mb-1 ml-1" id="car_class">
-              <option value="0">選択してください</option>
-              <option value="1">乗用車LL</option>
-            </select>
-            <a href="" class="btn btn-inverse-dark btn-sm py-0 mb-1 ml-1 d-flex align-items-center">検索</a>
+            <div class="">
+              <div class="d-flex">
+                <div class="d-flex flex-column">
+                  <input class="col mb-1 py-0" id="car_name">
+                  <div class="col"></div>
+                </div>
+                <div class="d-flex flex-column">
+                  <div class="d-flex">
+                    <select class="col-4 mb-1 ml-1" id="car_class">
+                      <option value="0">選択してください</option>
+                      <option value="1">乗用車LL</option>
+                    </select>
+                    <a href="" class="btn btn-inverse-dark btn-sm py-1 ml-1 align-items-center">検索</a>
+                  </div>
+                  <span class="text-primary small ml-1">車種クラス入力後、「車両検索」ボタンを押すと車名を表示します</span>
+                </div>
+              </div>
+            </div>
           </div>
+
           <div class="d-flex flex-nowrap">
             <span class="col-3 mb-1">車台型式</span>
             <span class="text-primary">　</span>
@@ -239,7 +253,10 @@
             </select>
           </div>
           <div class="d-flex flex-nowrap">
-            <span class="col-3 mb-1">お支払額</span>
+            <span class="col-3 mb-1"><button id="price_error" class="btn p-0 text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+              data-content="金額相違は不可<br>⇒ブランクで送信すれば正しい金額が入る
+              " ><i class="fa fa-info-circle"></i> お支払額</button>
+            </span>
             <span class="text-primary">　</span>
             <input class="col-2 mb-1" id="price">
             <span class="small d-flex align-items-end mb-1 mr-1">円</span>
@@ -308,6 +325,14 @@
           $('#insp_year').removeClass("alert-warning");
           $('#insp_month').removeClass("alert-warning");
           $('#insp_day').removeClass("alert-warning");
+        })
+
+        //支払金額
+        $('#price_error').on('show.bs.popover', function () {
+          $('#price').addClass("alert-warning");
+        })
+        $('#price_error').on('hide.bs.popover', function () {
+          $('#price').removeClass("alert-warning");
         })
       });
     </script>
