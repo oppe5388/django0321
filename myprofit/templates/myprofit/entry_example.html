@@ -2,6 +2,14 @@
 {% load static %}
 {% block title %}PROFIT_mock{% endblock %}
 
+{% block extra_head %}
+<style>
+.popover {
+  background: #c4dbff;
+}
+</style>
+{% endblock %}
+
 {% block breadcrumb %}
 {% endblock %}
 
@@ -28,20 +36,14 @@
   
       <div class="d-flex bg-light p-1 mx-2">■メンテプロパック　受付申込登録
       </div>
-      <hr class="p-0 mt-0 border-dark mx-2">
+      <hr class="p-0 mt-0 border-dark mx-2 mb-2">
   
       {% comment %} <div class="d-flex mx-2"> {% endcomment %}
 
-        <div id="course_error4">
-          <span class="text-primary small d-flex justify-content-center my-2 text-center">
-            この商品は登録されていません。<br>
-            商品をご確認のうえ、再度登録してください。
-          </span>
-        </div>
-        <!-- ?#へ飛ぶのを防止用 -->
-        <div id="kihon_error1">
-          <span class="small d-flex justify-content-center my-2"></span>
-        </div>
+        <span id="course_error4" class="text-primary small d-flex justify-content-center text-center">
+          この商品は登録されていません。<br>
+          商品をご確認のうえ、再度登録してください。
+        </span>
   
           <div class="d-flex flex-nowrap">
             <span class="col-3 mb-1">販売会社</span>
@@ -105,7 +107,7 @@
             <input class="col-1 mb-1" id="post_code1">
             <span class="mb-1 mr-1">−</span>
             <input class="col-1 mb-1" id="post_code2">
-            <a href="" class="btn btn-inverse-dark btn-sm py-0 px-1 mb-1 ml-1 d-flex align-items-center">住所検索</a>
+            <span class="btn btn-inverse-dark btn-sm py-0 px-1 mb-1 ml-1 d-flex align-items-center">住所検索</span>
             <span class="text-primary small d-flex align-items-end mb-1">※郵便番号入力後、「住所検索」ボタンを押すと住所を表示します</span>
           </div>
           <div class="d-flex flex-nowrap">
@@ -148,16 +150,21 @@
               <option value="1" selected>日産車</option>
               <option value="2">その他</option>
             </select>
+            <span class="ml-1 mb-1"><span id="" class="btn p-0 text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+              data-content="日産車のとき、車名と基本3桁がグレーアウトで操作不可に。<br>また、検索ボタンが表示される。
+              " ><i class="fa fa-info-circle"></i></span>
+            </span>
           </div>
 
           <div class="d-flex flex-nowrap">
             <span class="col-3 mb-1">
-              <div class="d-flex flex-column">
-                車名/車種ｸﾗｽ
-                <button id="course_error" class="btn p-0 btn-rounded btn-warning mb-1" data-toggle="popover" data-trigger="focus" data-html="true" data-placement="bottom"
-                data-content="車種クラス×サービス商品×入会コースの組み合わせ
-                " ><i class="fa fa-hand-o-down"></i>クラス×商品コース</button>
-              </div>
+              {% comment %} <div class="d-flex flex-column"> {% endcomment %}
+                <span class=""><span id="class_error" class="btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                  data-content="・「基本」も黄色？<br>・「入会コース」も黄色？<br>どちらか確認
+                  " ><i class="fa fa-info-circle"></i> 車名/車種ｸﾗｽ</span>
+                </span>
+                
+              {% comment %} </div> {% endcomment %}
             </span>
             <span class="text-primary">※</span>
             <div class="">
@@ -172,8 +179,14 @@
                       <option value="0">選択してください</option>
                       <option value="1">乗用車LL</option>
                     </select>
-                    <a href="" id="nissan1" class="btn btn-inverse-dark btn-sm py-1 ml-1 align-items-center">検索</a>
-                    <span class="ml-2 px-1 alert-warning" id="course_error1">内容をご確認ください</span>
+                    <span id="nissan1">
+                      <button type="button" class="btn btn-inverse-dark btn-sm py-1 ml-1 align-items-center" id="car_search">検索</button>
+                      <span class="ml-1 mb-1"><span id="" class="btn p-0 text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                        data-content="サービス商品が選択されていると、商品に合致する車両しか表示されなくなる<br>⇒商品を「選択してください」に戻してから検索
+                        " ><i class="fa fa-info-circle"></i></span>
+                      </span>
+                    </span>
+                    <span class="ml-2 px-1" id="course_error1">　　　　　　　　　　</span>
                   </div>
                   <div >
                     <span id="nissan2" class="text-primary small ml-1">車種クラス入力後、「車両検索」ボタンを押すと車名を表示します</span>
@@ -196,12 +209,15 @@
           </div>
           <div class="d-flex flex-nowrap">
             <span class="col-3 mb-1">
-              <div class="d-flex flex-column">
-                基本
-                <button id="kihon_error" class="btn p-0 btn-rounded btn-warning mb-1" data-toggle="popover" data-trigger="focus" data-html="true" data-placement=""
-                  data-content="車種クラス×基本3桁×商品の組み合わせ
-                  " ><i class="fa fa-hand-o-down"></i>基本×商品コース</button>
-              </div>
+              {% comment %} <div class="d-flex flex-column"> {% endcomment %}
+                <span class=""><span id="kihon_error" class="btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                  data-content="クラス×基本3桁×商品の組み合わせNG
+                  " ><i class="fa fa-info-circle"></i> 基本</span>
+                </span>
+                <button id="" class="btn py-0 px-2 btn-rounded btn-secondary" data-toggle="popover" data-trigger="focus" data-html="true" data-placement="bottom"
+                data-content="クラス×基本3桁×商品の組み合わせNG
+                " ><i class="fa fa-hand-o-down"></i> 手順</button>
+              {% comment %} </div> {% endcomment %}
             </span>
             <span class="text-primary">※</span>
             <div class="d-flex flex-column">
@@ -256,7 +272,12 @@
           </div>
 
           <div class="d-flex flex-nowrap">
-            <span class="col-3 mb-1">ｻｰﾋﾞｽ商品</span>
+            <span class="col-3 mb-1">
+              <span class=""><span id="product_error" class="btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                data-content="・「基本」も黄色？<br>・「入会コース」も黄色？<br>どちらか確認
+                " ><i class="fa fa-info-circle"></i> ｻｰﾋﾞｽ商品</span>
+              </span>
+            </span>
             <span class="text-primary">※</span>
             <select class=" mb-1" id="product">
               <option value="0">選択してください
@@ -274,12 +295,19 @@
             <span class="ml-2 px-1 alert-warning" id="course_error2-2">この車両は選択した商品の対象外です</span>
           </div>
           <div class="d-flex flex-nowrap">
-            <span class="col-3 mb-1">入会ｺｰｽ</span>
+            <span class="col-3 mb-1">
+              <span class=""><span id="course_error" class="btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                data-content="クラス×商品×コースの組み合わせNG
+                " ><i class="fa fa-info-circle"></i> 入会ｺｰｽ</span>
+              </span>
+              <button id="" class="btn py-0 px-2 btn-rounded btn-secondary" data-toggle="popover" data-trigger="focus" data-html="true" data-placement="bottom"
+                data-content="クラス×商品×コースの組み合わせNG
+                " ><i class="fa fa-hand-o-down"></i> 手順</button>
+            </span>
             <span class="text-primary">※</span>
             <select class="mb-1" id="course">
               <option value="">選択してください</option>
-              <option value="1" data-val="">メンテプロパック54車検付きベーシック</option>
-              <option value="2" data-val="">メンテプロパック18車検付きベーシック</option>
+              <option value="1" data-val="">メンテプロパック30EV</option>
             </select>
             <span class="ml-2 px-1 alert-warning" id="course_error3">内容をご確認ください</span>
           </div>
@@ -333,44 +361,71 @@
   
     <script>
 
-      //コースエラー表示は関数化
-      function course_show(){
+      //クラスと商品
+      function class_product_on(){
         $('#car_class').addClass("alert-warning");
         $("#product").addClass("alert-warning");
+      };
+      function class_product_off(){
+        $('#car_class').removeClass("alert-warning");
+        $("#product").removeClass("alert-warning");
+      };
+      function course_on(){
         $("#course").addClass("alert-warning");
-        $('#course_error1').show();
+        $('#course_error1').text("内容をご確認ください");
+        $('#course_error1').addClass("alert-warning");
         $('#course_error2-1').show();
         $('#course_error3').show();
-        $('#course_error4').show();
+        $('#course_error4').html("この商品は登録されていません。<br>商品をご確認のうえ、再度登録してください。");
+      };
+      function course_off(){
+        $('#course').removeClass("alert-warning");
+        $('#course_error1').text("　　　　　　　　　　");
+        $('#course_error1').removeClass("alert-warning");
+        $('#course_error2-1').hide();
+        $('#course_error3').hide();
+        $('#course_error4').html("　<br>　");
+      };
+      function kihon_on(){
+        $("#base_no").addClass("alert-warning");
+        $('#kihon_error1').show();
+      };
+      function kihon_off(){
+        $("#base_no").removeClass("alert-warning");
+        $('#kihon_error1').hide();
+      };
 
+      //コースエラー表示は関数化
+      function course_show(){
+        class_product_on();
+        course_on();
       };
 
       //コースエラー非表示関数
       function course_hide(){
-        $('#car_class').removeClass("alert-warning");
-        $('#product').removeClass("alert-warning");
-        $('#course').removeClass("alert-warning");
-        $('#course_error1').hide();
-        $('#course_error2-1').hide();
-        $('#course_error3').hide();
-        $('#course_error4').hide();
-
+        class_product_off();
+        course_off();
       };
 
       //基本エラー表示は関数化
       function kihon_show(){
-        $('#car_class').addClass("alert-warning");
-        $("#product").addClass("alert-warning");
-        $("#base_no").addClass("alert-warning");
-        $('#kihon_error1').show();
+        class_product_on();
+        kihon_on();
       };
 
       //基本エラー非表示関数
       function kihon_hide(){
-        $('#car_class').removeClass("alert-warning");
-        $("#product").removeClass("alert-warning");
-        $("#base_no").removeClass("alert-warning");
-        $('#kihon_error1').hide();
+        class_product_off();
+        kihon_off();
+      };
+
+      //コースと基本を交互に
+      function course_kihon_repeat(){
+        class_product_on();
+        setTimeout("course_on()", 0);
+        setTimeout("course_off()", 1000);
+        setTimeout("kihon_on()", 1000);
+        setTimeout("kihon_off()", 2000);
       };
 
       $(function() {
@@ -380,11 +435,10 @@
 
         //はじめは非表示
         $('#price_error2').hide();
-        $('#course_error1').hide();
         $('#course_error2-1').hide();
         $('#course_error2-2').hide();
         $('#course_error3').hide();
-        $('#course_error4').hide();
+        $('#course_error4').html("　<br>　");
         $('#kihon_error1').hide();
         $('#nissan3').hide();//体裁用ダミー
 
@@ -408,17 +462,44 @@
         //コース
         $('#course_error').on('show.bs.popover', function () {
           course_show();
+          setTimeout("course_show()", 1000);//交互のhideで遅れてhideされた時用
         })
         $('#course_error').on('hide.bs.popover', function () {
           course_hide();
+          setTimeout("course_hide()", 1000);//↑で遅れてshowされた時用
+        })
+
+        //クラスは交互
+        var timer = null;
+        $('#class_error').on('show.bs.popover', function () {
+          course_kihon_repeat();
+          timer = setInterval("course_kihon_repeat()", 2000);
+        })
+        $('#class_error').on('hide.bs.popover', function () {
+          clearInterval(timer);
+          course_hide();
+          kihon_hide();
+        })
+        //商品も交互
+        var timer = null;
+        $('#product_error').on('show.bs.popover', function () {
+          course_kihon_repeat();
+          timer = setInterval("course_kihon_repeat()", 2000);
+        })
+        $('#product_error').on('hide.bs.popover', function () {
+          clearInterval(timer);
+          course_hide();
+          kihon_hide();
         })
 
         //基本3桁エラー
         $('#kihon_error').on('show.bs.popover', function () {
           kihon_show();
+          setTimeout("kihon_show()", 1000);//交互のhideで遅れてhideされた時用
         })
         $('#kihon_error').on('hide.bs.popover', function () {
           kihon_hide();
+          setTimeout("kihon_hide()", 1000);//↑で遅れてshowされた時用
         })
 
 
@@ -489,7 +570,7 @@
     $("#car_class").val(1);
     //$('#car_class').prop('disabled', true);
     $("#car_model").val("5BA-RV37");
-    $("#base_no").val("V37");
+    $("#base_no").val("V39");
     $('#base_no').prop('disabled', true);
     $("#frame_no1").val("RV37-130855");
     $("#payment").val(2);
@@ -497,7 +578,8 @@
     $('#order_no').prop('disabled', true);
     $('#entry_div').val(3);
     $('#entry_div').prop('disabled', true);
-    $("#product").val("1");
+    $("#product").val("ev");
+    $("#course").val("1");
 
     $("#price").val("100,000");
 
@@ -517,6 +599,16 @@
 
   
 
+  });
+</script>
+
+
+<!-- 車両：別ウインドウ-->
+<script>
+  let button1 = document.getElementById('car_search');
+  button1.addEventListener('click', () => {
+    let option = 'width=360,height=440,left=100,top=100'
+      let newwin = open('{% url 'myprofit:car' %}','mywindow', option);
   });
 </script>
 

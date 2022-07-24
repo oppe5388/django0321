@@ -208,3 +208,6 @@ def entry_example(request):
     context = {
     }
     return render(request, 'myprofit/entry_example.html', context)
+
+def car(request):
+    return render(request, 'myprofit/car.html')
