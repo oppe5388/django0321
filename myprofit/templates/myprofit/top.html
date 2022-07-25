@@ -17,75 +17,7 @@
 {% endblock %}
 
 {% block sidebar %}
-<ul class="nav">
-    
-    <li class="nav-item bg-white">
-      <div class="sidebar-menu-title text-dark">VCCメニュー</div>
-    </li>
-    <div class="nav-search mt-3">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="エラー検索（未）">
-        <div class="input-group-append">
-          <span class="input-group-text" id="search">
-            <i class="typcn typcn-zoom"></i>
-          </span>
-        </div>
-      </div>
-    </div>
-
-    <li class="nav-item">
-      <div class="nav-link py-1 mt-2" data-toggle="collapse" href="#ui-basic1" aria-expanded="false">
-        <i class="typcn typcn-briefcase menu-icon mr-1"></i>
-        <span class="menu-title">申込する・キャンセルする</span>
-      </div>
-      <div class="collapse show" id="ui-basic1">
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'myprofit:new02' %}?route=entry">新車</a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'myprofit:used02' %}?route=entry">中古車</a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'myprofit:service02' %}?route=entry">サービス</a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'myprofit:service01' %}?route=entry2">コース作業(サービス)</a></li>
-        </ul>
-      </div>
-    </li>
-
-    <li class="nav-item">
-      <div class="nav-link py-1 mt-2" data-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic">
-        <i class="typcn typcn-briefcase menu-icon mr-1"></i>
-        <span class="menu-title">続きから発行する</span>
-      </div>
-      <div class="collapse show" id="ui-basic2">
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'myprofit:new02' %}?route=cert">新車</a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'myprofit:used02' %}?route=cert">中古車</a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'myprofit:service02' %}?route=cert">サービス</a></li>
-        </ul>
-      </div>
-    </li>
-
-    <li class="nav-item">
-      <div class="nav-link py-1 mt-2" data-toggle="collapse" href="#ui-basic3" aria-expanded="false" aria-controls="ui-basic">
-        <i class="typcn typcn-briefcase menu-icon mr-1"></i>
-        <span class="menu-title">発行済みの再印刷をする</span>
-      </div>
-      <div class="collapse show" id="ui-basic3">
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'myprofit:new02' %}route=mente">新車</a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'myprofit:used02' %}?route=mente">中古車</a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'myprofit:service02' %}?route=mente">サービス</a></li>
-        </ul>
-      </div>
-    </li>
-  </ul>
-  <ul class="sidebar-legend ">
-    <li>
-      <p class="sidebar-menu-title">Other</p>
-    </li>
-    <li class="nav-item">
-      <a href="{% url 'myprofit:entry_example' %}" class="nav-link">#登録画面のエラー（未）</a>
-    </li>
-  </ul>
-
-
+  {% include 'profit/side_top.html' %}
 {% endblock %}
 
 {% block mainpanel %}
