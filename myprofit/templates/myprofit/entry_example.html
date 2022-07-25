@@ -215,7 +215,7 @@
             <span class="col-3 mb-1">
               {% comment %} <div class="d-flex flex-column"> {% endcomment %}
                 <span class=""><span id="kihon_error" class="btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-                  data-content="クラス×基本3桁×商品の組み合わせNG
+                  data-content="クラス×基本3桁×商品の組み合わせNG⇒
                   " ><i class="fa fa-info-circle"></i> 基本</span>
                 </span>
                 <span id="kihon_flow1" class="btn py-0 px-2 btn-rounded btn-success" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
@@ -315,7 +315,7 @@
           <div class="d-flex flex-nowrap">
             <span class="col-3 mb-1 pr-0">
               <span class=""><span id="course_error" class="btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-                data-content="クラス×商品×コースの組み合わせNG
+                data-content="クラス×商品×コースの組み合わせNG⇒
                 " ><i class="fa fa-info-circle"></i> 入会ｺｰｽ</span>
               </span>
               <span id="course_flow1" class="btn py-0 px-2 btn-rounded btn-success" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
@@ -479,6 +479,7 @@
         $("[data-toggle=popover]").on('hover', function (e) {
           $("[data-toggle=popover]").not(this).popover('hide');
         });
+        $('#sidebar').removeClass('bg-white');//紺色に
 
       
         //はじめは非表示
