@@ -316,7 +316,7 @@
           <div class="d-flex flex-nowrap">
             <span class="col-3 mb-1 pr-0">
               <span class=""><span id="course_error" class="btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-                data-content="クラス×商品×コースの組み合わせNG<br>⇒手順は1〜4を参照
+                data-content="クラス×商品×コースの組み合わせNG<br>⇒手順は1〜3を参照
                 " ><i class="fa fa-info-circle"></i> 入会ｺｰｽ</span>
               </span>
               <span id="course_flow1" class="btn py-0 px-2 btn-rounded btn-success" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
@@ -328,9 +328,9 @@
                 <span id="course_flow3" class="btn py-0 px-2 btn-rounded btn-success" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
                 data-content="正しい車種クラスを選択して検索。<br>検索結果一覧から選択。
                 " >3</span>
-                <span id="course_flow4" class="btn py-0 px-2 btn-rounded btn-success" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                {% comment %} <span id="course_flow4" class="btn py-0 px-2 btn-rounded btn-success" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
                 data-content="検索に車両が出ない場合、<br>⇒メーカー区分「その他」<br>⇒基本3桁を削除<br>⇒メーカー区分「日産車」にして検索？？
-                " >4</span>
+                " >4</span> {% endcomment %}
             </span>
             <span class="text-primary">※</span>
             <select class="mb-1" id="course">
@@ -558,18 +558,18 @@
           $('#car_class').removeClass('blink');// 
           $('#car_search').removeClass('blink');// 
         })
-        $('#course_flow4').on('show.bs.popover', function () {
-          $('#maker').addClass('blink');// 点滅
-          $('#maker').val(2);// その他に
-          maker_change();
-          $('#base_no').addClass('blink');// 点滅
-        })
-        $('#course_flow4').on('hide.bs.popover', function () {
-          $('#maker').removeClass('blink');
-          $('#maker').val(1);// 日産車
-          maker_change();
-          $('#base_no').removeClass('blink');
-        })
+        //$('#course_flow4').on('show.bs.popover', function () {
+        //  $('#maker').addClass('blink');// 点滅
+        //  $('#maker').val(2);// その他に
+        //  maker_change();
+        //  $('#base_no').addClass('blink');// 点滅
+        //})
+        //$('#course_flow4').on('hide.bs.popover', function () {
+        //  $('#maker').removeClass('blink');
+        //  $('#maker').val(1);// 日産車
+        //  maker_change();
+        //  $('#base_no').removeClass('blink');
+        //})
         
         
         //コース
