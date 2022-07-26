@@ -28,7 +28,7 @@
       <div class="p-0 mb-2">
         <div class="col-12 bg-light p-0 mb-0">
           <div class="d-flex flex-row navbar">
-            <a href="#" class="text-dark text-decoration-none small pr-2 border border-dark border-left-0 border-top-0 border-bottom-0">販売店メニューに戻る</a>
+            <span class="text-dark text-decoration-none small pr-2 border border-dark border-left-0 border-top-0 border-bottom-0">販売店メニューに戻る</span>
           </div>
         </div>
       </div>
@@ -160,7 +160,7 @@
             <span class="col-3 mb-1">
               {% comment %} <div class="d-flex flex-column"> {% endcomment %}
                 <span class=""><span id="class_error" class="btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-                  data-content="・「基本」も黄色？<br>・「入会コース」も黄色？<br>どちらか確認
+                  data-content="・「基本」も黄色？<br>・「入会コース」も黄色？<br>どちらなのか確認して、その項目を参照
                   " ><i class="fa fa-info-circle"></i> 車名/車種ｸﾗｽ</span>
                 </span>
                 
@@ -215,7 +215,7 @@
             <span class="col-3 mb-1">
               {% comment %} <div class="d-flex flex-column"> {% endcomment %}
                 <span class=""><span id="kihon_error" class="btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-                  data-content="クラス×基本3桁×商品の組み合わせNG⇒
+                  data-content="クラス×基本3桁×商品の組み合わせNG<br>⇒手順は1〜4を参照
                   " ><i class="fa fa-info-circle"></i> 基本</span>
                 </span>
                 <span id="kihon_flow1" class="btn py-0 px-2 btn-rounded btn-success" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
@@ -241,14 +241,15 @@
             </div>
           </div>
           <div class="d-flex flex-nowrap">
-            <span class="col-3 mb-1"><span id="" class="btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-              data-content="基盤には同一地名が複数あり、選択肢によってはエラー？（この画面にも飛べない？）<br>⇒基盤を修正する<br>※基本3桁エラーなのにバグで登録番号が黄色のことあり？
+            <span class="col-3 mb-1"><span id="plate_error" class="btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+              data-content="PROFITでは同じ地名が複数あるが、選択肢によってはエラーになる<br>⇒PROFITで別の選択肢に修正後やり直す<br><span class='small'>※基本3桁エラーなのにバグで登録番号が黄色エラーになることあり？</span>
               " ><i class="fa fa-info-circle"></i> 登録番号</span>
             </span>
             <span class="text-primary">　</span>
             <select class="col-2 mb-1" id="plate_no1">
               <option value="0">選択してください</option>  
-              <option value="1">練馬</option>          
+              <option value="1">練馬</option> 
+              <option value="2"></option>          
             </select>
             <input class="col-1 mb-1" id="plate_no2">
             <input class="col-1 mb-1" id="plate_no3">
@@ -292,7 +293,7 @@
           <div class="d-flex flex-nowrap">
             <span class="col-3 mb-1">
               <span class=""><span id="product_error" class="btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-                data-content="・「基本」も黄色？<br>・「入会コース」も黄色？<br>どちらか確認
+                data-content="・「基本」も黄色？<br>・「入会コース」も黄色？<br>どちらなのか確認して、その項目を参照
                 " ><i class="fa fa-info-circle"></i> ｻｰﾋﾞｽ商品</span>
               </span>
             </span>
@@ -315,7 +316,7 @@
           <div class="d-flex flex-nowrap">
             <span class="col-3 mb-1 pr-0">
               <span class=""><span id="course_error" class="btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-                data-content="クラス×商品×コースの組み合わせNG⇒
+                data-content="クラス×商品×コースの組み合わせNG<br>⇒手順は1〜4を参照
                 " ><i class="fa fa-info-circle"></i> 入会ｺｰｽ</span>
               </span>
               <span id="course_flow1" class="btn py-0 px-2 btn-rounded btn-success" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
@@ -634,6 +635,20 @@
           $('#mail').removeClass("alert-warning");
         })
 
+        //登録番号
+        $('#plate_error').on('show.bs.popover', function () {
+          $('#plate_no1').addClass("alert-warning");
+          $('#plate_no2').addClass("alert-warning");
+          $('#plate_no3').addClass("alert-warning");
+          $('#plate_no4').addClass("alert-warning");
+        })
+        $('#plate_error').on('hide.bs.popover', function () {
+          $('#plate_no1').removeClass("alert-warning");
+          $('#plate_no2').removeClass("alert-warning");
+          $('#plate_no3').removeClass("alert-warning");
+          $('#plate_no4').removeClass("alert-warning");
+        })
+
         //車検満了日
         $('#insp_error').on('show.bs.popover', function () {
           $('#insp_year').addClass("alert-warning");
@@ -687,11 +702,15 @@
     $("#car_model").val("5BA-RV37");
     $("#base_no").val("V39");
     $('#base_no').prop('disabled', true);
+    $("#plate_no1").val(2);
+    $("#plate_no2").val("330");
+    $("#plate_no3").val("ｻ");
+    $("#plate_no4").val("9999");
     $("#frame_no1").val("RV37-130855");
     $("#payment").val(2);
     
     $('#order_no').prop('disabled', true);
-    $('#entry_div').val(3);
+    $('#entry_div').val(1);
     $('#entry_div').prop('disabled', true);
     $("#product").val("ev");
     $("#course").val("1");
