@@ -316,18 +316,21 @@
           <div class="d-flex flex-nowrap">
             <span class="col-3 mb-1 pr-0">
               <span class=""><span id="course_error" class="btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-                data-content="クラス×商品×コースの組み合わせNG<br>⇒手順は1〜3を参照
+                data-content="クラス×商品×コースの組み合わせNG<br>⇒手順は1〜4を参照
                 " ><i class="fa fa-info-circle"></i> 入会ｺｰｽ</span>
               </span>
-              <span id="course_flow1" class="btn py-0 px-2 btn-rounded btn-success" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-                data-content="サービス商品が選択されていると、車種クラス検索で商品に合致する車両しか表示されなくなる
+                <span id="course_flow0" class="btn py-0 px-2 btn-rounded btn-success" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                data-content="販社で取扱のある商品とコースか確認<br>⇒問題なければ、車種クラスを確認<br>⇒車種クラスの修正は2へ
                 " >1</span>
+                <span id="course_flow1" class="btn py-0 px-2 btn-rounded btn-success" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                data-content="サービス商品が選択されていると、車種クラス検索で商品に合致する車両しか表示されなくなる
+                " >2</span>
                 <span id="course_flow2" class="btn py-0 px-2 btn-rounded btn-success" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
                 data-content="サービス商品を「選択してください」に戻す<br>入会コースは連動して「選択して〜」になる
-                " >2</span>
-                <span id="course_flow3" class="btn py-0 px-2 btn-rounded btn-success" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-                data-content="正しい車種クラスを選択して検索。<br>検索結果一覧から選択。
                 " >3</span>
+                <span id="course_flow3" class="btn py-0 px-2 btn-rounded btn-success" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                data-content="正しい車種クラスを選択して検索し、一覧から選択する
+                " >4</span>
                 {% comment %} <span id="course_flow4" class="btn py-0 px-2 btn-rounded btn-success" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
                 data-content="検索に車両が出ない場合、<br>⇒メーカー区分「その他」<br>⇒基本3桁を削除<br>⇒メーカー区分「日産車」にして検索？？
                 " >4</span> {% endcomment %}
@@ -532,6 +535,14 @@
         
 
         //コースエラー手順１〜4
+        $('#course_flow0').on('show.bs.popover', function () {
+          $('#product').addClass('blink');// 点滅
+          $('#course').addClass('blink');// 点滅
+        })
+        $('#course_flow0').on('hide.bs.popover', function () {
+          $('#product').removeClass('blink');// 
+          $('#course').removeClass('blink');// 
+        })
         $('#course_flow1').on('show.bs.popover', function () {
           $('#car_class').addClass('blink');// 点滅
           $('#product').addClass('blink');// 点滅
