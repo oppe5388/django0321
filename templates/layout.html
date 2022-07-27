@@ -242,13 +242,11 @@
                     </li>
                 {% endif %}
                 
-                {% if request.user.id <= 4 %}
                 <li class="nav-item">
                     <a class="nav-link" href='{% url 'myprofit:profit_top' %}' target='_blank'>
                         <i class="fas fa-desktop"></i>
                         <span>PROFIT(mock)</span></a>
                 </li>
-                {% endif %}
 
             {% endwith %}
             {% endwith %}
