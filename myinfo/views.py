@@ -209,6 +209,11 @@ def edit_fbvform(request, pk, *args, **kwargs):
                 #モデルインスタンスのブラウザ通知メソッド呼び出し
                 # obj.browser_push(request)
 
+            #新しいお知らせ通知チェックだったら
+            if request.POST.get('new_info') is not None: 
+                #ブラウザ通知
+                obj.browser_push(request)
+
 
             #html除去
             obj.non_html = strip_tags(request.POST.get('body'))
