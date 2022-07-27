@@ -207,7 +207,7 @@ def edit_fbvform(request, pk, *args, **kwargs):
             else:
                 obj.is_draft = False
                 #モデルインスタンスのブラウザ通知メソッド呼び出し
-                obj.browser_push(request)
+                # obj.browser_push(request)
 
 
             #html除去
