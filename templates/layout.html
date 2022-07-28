@@ -161,7 +161,7 @@
             {% with request.resolver_match.app_name as app_name %}
             {% comment %} {% with request.resolver_match.view_name as view_name %} {% endcomment %}
                 <li class="nav-item {% if url_name == 'index' or url_name == 'add_fbvform' or url_name == 'detail' or url_name == 'update' or url_name == 'delete'%}active{% endif %}">
-                    <a class="nav-link" href='{% url "myinfo:index" %}'>
+                    <a class="nav-link py-2 py-2" href='{% url "myinfo:index" %}'>
                         <i class="fas fa-broadcast-tower"></i>
                         <span>おしらせ</span>
                         {% if midoku_info %}
@@ -171,31 +171,31 @@
                 </li>
 
                 <li class="nav-item {% if url_name == 'faqs_list' or url_name == 'faqs_tab' %}active{% endif %}">
-                    <a class="nav-link" href='{% url "myinfo:faqs_list" %}'>
+                    <a class="nav-link py-2" href='{% url "myinfo:faqs_list" %}'>
                         <i class="fas fa-question-circle"></i>
                         <span>FAQ</span></a>
                 </li>
 
                 <li class="nav-item {% if url_name == 'mysched' %}active{% endif %}">
-                    <a class="nav-link" href='{% url "mysched:mysched" %}'>
+                    <a class="nav-link py-2" href='{% url "mysched:mysched" %}'>
                         <i class="fas fa-calendar-alt"></i>
                         <span>スケジュール</span></a>
                 </li>
     
                 <li class="nav-item {% if url_name == 'contacts' %}active{% endif %}">
-                    <a class="nav-link" href='{% url "myinfo:contacts" %}'>
+                    <a class="nav-link py-2" href='{% url "myinfo:contacts" %}'>
                         <i class="fas fa-phone"></i>
                         <span>窓口</span></a>
                 </li>
 
                 <li class="nav-item {% if url_name == 'shops' %}active{% endif %}">
-                    <a class="nav-link" href='{% url "myinfo:shops" %}'>
+                    <a class="nav-link py-2" href='{% url "myinfo:shops" %}'>
                         <i class="fas fa-warehouse"></i>
                         <span>販社・店舗</span></a>
                 </li>
 
                 <li class="nav-item {% if  'note_' in url_name %}active{% endif %}">
-                    <a class="nav-link" href='{% url "myinfo:note_list" %}'>
+                    <a class="nav-link py-2" href='{% url "myinfo:note_list" %}'>
                         <i class="fas fa-pencil-alt"></i>
                         <span>{{ request.user.last_name }}'sノート</span></a>
                 </li>
@@ -207,14 +207,14 @@
                     center
                 </div>
                 <li class="nav-item {% if url_name == 'shift' %}active{% endif %}">
-                    <a class="nav-link" href='{% url "myinfo:shift" %}'>
+                    <a class="nav-link py-2" href='{% url "myinfo:shift" %}'>
                         <i class="fas fa-business-time"></i>
                         <span>シフト</span></a>
                 </li>
                 
                 {% if request.user.id <= 4 %}
                 <li class="nav-item">
-                    <a class="nav-link" href='{% url 'admin:index' %}'>
+                    <a class="nav-link py-2" href='{% url 'admin:index' %}'>
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>管理サイト</span></a>
                 </li>
@@ -231,7 +231,7 @@
                 <!-- LDか新人のみ表示 -->
                 {% if request.user.id == 13 or request.user.id == 14 or request.user.id <= 4 %}
                     <li class="nav-item {% if app_name == 'myreport' %}active{% endif %}">
-                        <a class="nav-link" href='{% url 'myreport:index' %}'>
+                        <a class="nav-link py-2" href='{% url 'myreport:index' %}'>
                             <i class="fas fa-book"></i>
                             <span>研修日報</span>
                             {% if midoku %}
@@ -243,7 +243,7 @@
                 {% endif %}
                 
                 <li class="nav-item">
-                    <a class="nav-link" href='{% url 'myprofit:profit_top' %}' target='_blank'>
+                    <a class="nav-link py-2" href='{% url 'myprofit:profit_top' %}' target='_blank'>
                         <i class="fas fa-desktop"></i>
                         <span>PROFIT(mock)</span></a>
                 </li>
