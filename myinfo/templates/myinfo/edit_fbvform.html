@@ -75,25 +75,41 @@
         <hr>
         
         <div class="btn-toolbar">
-            <div class="btn-group ml-auto" margin-left=auto;>
-            <label><input type="checkbox" name="chk" value="date_up" class="form-check-input">日時も更新する<span class="small">（一覧で上に表示＆更新の通知をする）</span></label>
+            <div class="btn-group ml-auto">
+                <label>
+                    <input type="checkbox" name="draft" value="draft" class="form-check-input" id="draft" 
+                    {% if form.is_draft.value is True %}checked{% endif %}>下書きにする
+                </label>
             </div>
             <div class="w-100"></div>
 
-            <div class="btn-group ml-auto" margin-left=auto;>
-                <label><input type="checkbox" name="chk2" value="unread" class="form-check-input">全員未読にする</label>
+            <div class="btn-group ml-auto mb-2" id="q2block">
+                <label class="form-check form-check-inline">
+                    <input type="radio" name="notifi_info" value="new_info" class="form-check-input">
+                    新しいおしらせ通知
+                </label>
+                <label class="form-check form-check-inline">
+                    <input type="radio" name="notifi_info" value="update_info" class="form-check-input">
+                    更新の通知<span class="small">（一番上に移動＆全員未読に）</span>
+                </label>
+                <label class="form-check form-check-inline">
+                    <input type="radio" name="notifi_info" value="non_info" class="form-check-input">
+                    通知しない
+                </label>
+            </div>
+            <div class="btn-group ml-auto mb-2" id="q2dummy">
+                <label class="form-check form-check-inline">　</label>
+            </div>
+
+            {% comment %} <div class="btn-group ml-auto" id="draft_block">
+                <label><input type="checkbox" name="chk" value="date_up" class="form-check-input">日時も更新する<span class="small">（一覧で上に表示＆更新の通知をする）</span></label>
             </div>
             <div class="w-100"></div>
-            
-            <div class="btn-group ml-auto" margin-left=auto;>
-                <label><input type="checkbox" name="draft" value="draft" class="form-check-input" 
-                    {% if form.is_draft.value is True %}checked{% endif %}>下書きにする</label>
-                </div>
-            <div class="w-100"></div>
-            <div class="btn-group ml-auto mb-2" margin-left=auto;>
-                <label><input type="checkbox" name="new_info" value="new_info" class="form-check-input" 
-                   >新しいおしらせの通知をする</label>
-                </div>
+
+            <div class="btn-group ml-auto">
+                <label><input type="checkbox" name="chk2" value="unread" class="form-check-input">全員未読にする</label>
+            </div> {% endcomment %}
+
             <div class="w-100"></div>
             
 
@@ -110,8 +126,33 @@
 
     </form>
 
-    <div>
-        
-    </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+
+     //下書きチェックだったら、その他チェックボックス、チェック外して非表示
+    function func_draft(){
+        if ($("#draft").prop("checked") ) {
+            $("#q2block").hide();
+            $("#q2dummy").show();
+            $('input[type="radio"]').prop('checked',false); 
+        } else {
+            $("#q2block").show();
+            $("#q2dummy").hide();
+        };
+    };
+
+    //読み込み時
+    $(function () {
+        func_draft();
+    });
+
+    //変更時
+    $("#draft").change(function() {
+        func_draft();        
+    });
+
+</script>
 {% endblock %}
 

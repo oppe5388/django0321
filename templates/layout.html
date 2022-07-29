@@ -14,6 +14,10 @@
 
     <title>VCC | {% block title %}{% endblock %}</title>
 
+    <!-- Bootstrap5 トグルスイッチのために→table内の線が消えたのでボツ -->
+    {% comment %} <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> {% endcomment %}
+    {% comment %} <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> {% endcomment %}
+
     <!-- Custom fonts for this template-->
     <!-- <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> -->
     <link href="{% static 'SBadmin2_origin/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
@@ -63,6 +67,15 @@
             margin-left: 10%;
             margin-right: 10%;
           }
+
+        /* チェックボックス大きく */
+        input[type="checkbox"]{
+        transform: scale(1.2);
+        }
+        /* ラジオボタンも大きく */
+        input[type="radio"]{
+        transform: scale(1.2);
+        }
     </style>
 
     <!-- 特定ユーザーデスクトップ通知 -->
