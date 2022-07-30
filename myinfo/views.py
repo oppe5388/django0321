@@ -195,25 +195,46 @@ def edit_fbvform(request, pk, *args, **kwargs):
             obj = form.save(commit=False)
             obj.user = request.user
 
-            #更新日時も更新するチェックだったら
-            if request.POST.get('chk') is not None: 
-                obj.updated_at = timezone.datetime.now()
-                #更新のブラウザ通知
-                obj.browser_push_update(request)
-
             #下書きチェックだったら
             if request.POST.get('draft') is not None: 
                 obj.is_draft = True
             else:
                 obj.is_draft = False
-                #モデルインスタンスのブラウザ通知メソッド呼び出し
-                # obj.browser_push(request)
 
-            #新しいお知らせ通知チェックだったら
-            if request.POST.get('new_info') is not None: 
-                #ブラウザ通知
+            # #更新日時も更新するチェックだったら→まとめに集約↓
+            # if request.POST.get('chk') is not None: 
+            #     obj.updated_at = timezone.datetime.now()
+            #     #更新のブラウザ通知
+            #     obj.browser_push_update(request)
+
+            # #新しいお知らせ通知チェックだったら→まとめに集約↓
+            # if request.POST.get('new_info') is not None: 
+            #     #ブラウザ通知
+            #     obj.browser_push(request)
+
+            # #全員未読にするチェックだったら→まとめに集約↓
+            # if request.POST.get('chk2') is not None: 
+            #     #通知：選択したユーザー
+            #     result = request.POST.getlist("tags")
+            #     for user in result:
+            #         # user_instance = User.objects.get(pk=user)#これ出来ない・
+            #         user_instance = get_object_or_404(User, pk=user)
+            #         # Notifications.objects.get_or_create(user=user_instance, information=obj)
+            #         #既読も
+            #         ReadStates.objects.get_or_create(user=user_instance, information=obj)
+
+            #通知と更新の分岐、作り直しまとめ
+            # 新しいお知らせ
+            if request.POST.get('notifi_info') == 'new_info':
                 obj.browser_push(request)
-
+            # 更新の場合
+            elif request.POST.get('notifi_info') == 'update_info':
+                obj.updated_at = timezone.datetime.now()
+                obj.browser_push_update(request)# 更新通知
+                # 全員を未読
+                for user in request.POST.getlist("tags"):
+                    user_instance = get_object_or_404(User, pk=user)
+                    ReadStates.objects.get_or_create(user=user_instance, information=obj)
 
             #html除去
             obj.non_html = strip_tags(request.POST.get('body'))
@@ -231,16 +252,6 @@ def edit_fbvform(request, pk, *args, **kwargs):
                 instance = Attachments(file_path=request.FILES['pdf_file3'] , information=obj)
                 instance.save()
 
-            #全員未読にするチェックだったら
-            if request.POST.get('chk2') is not None: 
-                #通知：選択したユーザー
-                result = request.POST.getlist("tags")
-                for user in result:
-                    # user_instance = User.objects.get(pk=user)#これ出来ない・
-                    user_instance = get_object_or_404(User, pk=user)
-                    # Notifications.objects.get_or_create(user=user_instance, information=obj)
-                    #既読も
-                    ReadStates.objects.get_or_create(user=user_instance, information=obj)
 
             request.session['form_data'] = request.POST
                 
