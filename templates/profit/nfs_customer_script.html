@@ -12,6 +12,16 @@ $(function () {
     var shaken_date = moment(new Date()).add(740, 'd');
     var entry_date = moment(new Date()).add(-2, 'd');
     var shodo_date = moment(new Date()).add(-5, 'y');
+
+    //業務メニューリンク
+    var order_no = $("#order_no").val();//注文書番号
+    if(order_no.startsWith("N")){
+        $("#end").attr("href", "{% url 'myprofit:new05' %}?route=" +route+"&cert_no="+cert_no)
+    } else if (order_no.startsWith("U")){
+        $("#end").attr("href", "{% url 'myprofit:used05' %}?route=" +route+"&cert_no="+cert_no)
+    } else {
+        $("#end").attr("href", "{% url 'myprofit:service05' %}?route=" +route+"&cert_no="+cert_no)
+    }
     
     //新車共通
     if(cert_no == '410987001' ||
