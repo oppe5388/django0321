@@ -211,3 +211,8 @@ def entry_example(request):
 
 def car(request):
     return render(request, 'myprofit/car.html')
+
+def search_example(request):
+    context = {
+    }
+    return render(request, 'myprofit/search_example.html', context)

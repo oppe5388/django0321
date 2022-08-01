@@ -41,6 +41,7 @@ urlpatterns = [
     path('entry_example', views.entry_example, name='entry_example'),
     path('car', views.car, name='car'),
 
+    path('search_example', views.search_example, name='search_example'),
 
 
 ]
