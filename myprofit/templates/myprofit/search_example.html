@@ -41,7 +41,7 @@
 
     <div class="d-flex mx-2">
 
-      <div class="col-5 pl-0">
+      <div class="col-5 pl-0 pr-1">
         <div class="d-flex flex-nowrap">
           <span class="col-3 pl-1 pr-0 mb-1">会員証No</span>
           <input class="col-6 px-0 mb-1" id="search_input" maxlength="9">
@@ -50,7 +50,7 @@
         <div class="d-flex flex-nowrap">
           <span class="col-3 pl-1 pr-0 mb-1">
             <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-            data-title="氏名カナ" data-content="・前方一致<br>・最低3文字（濁点も1文字）<br>・スペース有無不問<br>・全角も入力可（半角に自動変換される）">氏名ｶﾅ <i class="fa fa-question-circle text-info"></i></span>
+            data-title="氏名カナ" data-content="・前方一致<br>・最低3文字（濁点も1文字）<br>・スペース有無不問<br>・全角も入力可（半角に自動変換される）">氏名ｶﾅ<i class="fa fa-question-circle text-info"></i></span>
           </span>
           <input class="col-6 px-0 mb-1" id="customer_kana">
         </div>
@@ -61,13 +61,13 @@
           <input class="col-3 px-0 mb-1" id="company">
           <span class="col-3 pl-1 pr-0 mb-1">
             <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-            data-title="郵便番号" data-content="・完全一致<br>・ハイフン有無不問">郵便番号 <i class="fa fa-question-circle text-info"></i></span>
+            data-title="郵便番号" data-content="・完全一致<br>・ハイフン有無不問">郵便番号<i class="fa fa-question-circle text-info"></i></span>
           </span>
           <input class="col-3 mb-1" id="#">
         </div>
       </div>
 
-      <div class="col-6 pl-0">
+      <div class="col-6 pl-0 pr-1">
         <div class="d-flex">
           <div class="col-3 pl-1 pr-0 mb-1">ﾒﾝﾃﾅﾝｽNo</div>
           <input class="col-6 px-0 mb-1" id="#">
@@ -75,19 +75,19 @@
         <div class="d-flex flex-nowrap">
           <div class="col-3 pl-1 pr-0 mb-1">
             <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-            data-title="氏名漢字" data-content="・前方一致<br>・最低1文字<br>・大文字と小文字は区別される<br>・半角はエラーになるので全角にする<br>・スペースはエラーになるので削除する">氏名漢字 <i class="fa fa-question-circle text-info"></i></span>
+            data-title="氏名漢字" data-content="・前方一致<br>・最低1文字<br>・大文字と小文字は区別される<br>・半角はエラーになるので全角にする<br>・スペースはエラーになるので削除する">氏名漢字<i class="fa fa-question-circle text-info"></i></span>
           </div>
           <input class="col-6 px-0 mb-1" id="customer_kanji">
         </div>
         <div class="d-flex flex-nowrap">
           <span class="col-3 pl-1 pr-0 mb-1">
             <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-            data-title="電話番号" data-content="・完全一致<br>・ハイフン有無不問">電話番号 <i class="fa fa-question-circle text-info"></i></span>
+            data-title="電話番号" data-content="・完全一致<br>・ハイフン有無不問">電話番号<i class="fa fa-question-circle text-info"></i></span>
           </span>
-          <input class="col-3 px-2 mb-1" id="#">
-          <span class="col-4 pl-1 pr-0 mb-1">
+          <input class="col-4 px-2 mb-1" id="tel">
+          <span class="col-3 pl-1 pr-0 mb-1">
             <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-            data-title="登録番号" data-content="・完全一致<br>・「・・・1」は「0001」でも「1」でも可">登録番号(下4桁) <i class="fa fa-question-circle text-info"></i></span>
+            data-title="登録番号" data-content="・完全一致<br>・「・・・1」は「0001」でも「1」でも可">登録番号<i class="fa fa-question-circle text-info"></i></span>
           </span>
           <input class="col-2 px-2 mb-1 text-right" id="plate_no">
           
@@ -251,13 +251,16 @@
 <!-- タブ部分 -->
 <ul class="nav nav-tabs">
   <li class="nav-item">
-    <a href="#tab1" class="nav-link py-1 active  border-bottom-0" data-toggle="tab">個人 ／ ●●●株式会社</a>
+    <a href="#tab1" class="nav-link py-1 active  border-bottom-0" data-toggle="tab"><div class="small text-secondary">1.仕様を覚える</div>個人 ／ ●●●株式会社</a>
   </li>
   <li class="nav-item">
-    <a href="#tab2" class="nav-link py-1  border-bottom-0" data-toggle="tab">株式会社●●●</a>
+    <a href="#tab2" class="nav-link py-1  border-bottom-0" data-toggle="tab"><div class="small text-secondary">1.仕様を覚える</div>株式会社●●●</a>
   </li>
   <li class="nav-item">
-    <a href="#tab3" class="nav-link py-1  border-bottom-0" data-toggle="tab"><span class="">もっと調べる＆Check list</span></a>
+    <a href="#tab3" class="nav-link py-1  border-bottom-0" data-toggle="tab"><div class="small text-secondary">2.実際の流れをつかむ</div>個人</a>
+  </li>
+  <li class="nav-item">
+    <a href="#tab4" class="nav-link py-1  border-bottom-0" data-toggle="tab"><div class="small text-secondary">3.もっと調べる力をつける</div>Check List</a>
   </li>
 </ul>
 
@@ -266,14 +269,14 @@
   <!-- タブ1 -->
   <div id="tab1" class="tab-pane active">
 
-    <div class="bg-white mb-2 p-2">
+    <div class="bg-white p-2">
       <h4 class="h5 font-weight-bold mb-2 mt-1">Q. 契約者「ジョン スミス」さま、登録番号「・・・9」の契約はありますか？</h4>
       <div>
         <button class="next btn btn-rounded btn-primary py-1" id="n1-0">Start</button>
       </div>
     </div>
 
-    <div class="block bg-white mb-2 p-2">
+    <div class="block bg-white p-2">
       <div class="h5 font-weight-bold alert-success mb-2">Step1/4： 氏名カナ（濁点含む頭3文字）+登録番号</div>
       <button class="input btn btn-rounded btn-secondary py-1 mb-2" id="b1-1">Input</button>
       <div class="ans">
@@ -282,7 +285,7 @@
       </div>
     </div>
 
-    <div class="block bg-white mb-2 p-2">
+    <div class="block bg-white p-2">
       <div class="h5 font-weight-bold alert-success mb-2">Step2/4： 漢字（頭1文字）+登録番号</div>
       <div class="h6 font-weight-bold mb-2">漢字は「John Smith」と聞きました。</div>
       <button class="input btn btn-rounded btn-secondary py-1 mb-2" id="b1-2">Input</button>
@@ -292,7 +295,7 @@
       </div>
     </div>
 
-    <div class="block bg-white mb-2 p-2">
+    <div class="block bg-white p-2">
       <div class="h5 font-weight-bold alert-success">Step3/4： 氏名カナ（濁点含む頭3文字）+加入販売会社</div>
       <div class="h6 font-weight-bold mb-2">「P群馬」で加入と聞きました。</div>
       <button class="input btn btn-rounded btn-secondary py-1 mb-2" id="b1-3">Input</button>
@@ -302,7 +305,7 @@
       </div>
     </div>
 
-    <div class="block bg-white mb-2 p-2">
+    <div class="block bg-white p-2">
       <div class="h5 font-weight-bold alert-success">Step4/4：  漢字（頭1文字）+加入販売会社</div>
       <button class="input btn btn-rounded btn-secondary py-1 mb-2" id="b1-4">Input</button>
       <div class="ans">
@@ -313,13 +316,12 @@
       </div>
     </div>
 
-    <div class="block bg-white mb-2 p-2">
+    <div class="block bg-white p-2">
       <div class="h5 font-weight-bold">解説</div>
       <ul class="h6">
         <li>登録番号：データは変更されていないことがあります</li>
         <li>フリガナ：誤って入力されていることがあります</li>
-        <li>今回は登録番号もフリガナも誤っているケースを想定しました</li>
-        <li>実際には、漢字1文字で検索すると大量の検索結果となるので、鈴木太郎さまであれば「鈴木」「鈴木太」等で検索してください</li>
+        <li>契約者名：全角アルファベットはF9キー、大文字と小文字は区別されるので注意</li>
       </ul>
       <div class="h5 font-weight-bold"><i class="fa fa-lightbulb-o"></i>【Point】文字数はなるべく少なく</div>
     </div>
@@ -333,14 +335,14 @@
 
   <!-- タブ2 -->
   <div id="tab2" class="tab-pane">
-    <div class="bg-white mb-2 p-2">
+    <div class="bg-white p-2">
       <h4 class="h5 font-weight-bold mb-2 mt-1">Q. 契約者「株式会社アズファミリー」さま、登録番号「・・11」の契約はありますか？</h4>
       <div>
         <button class="next btn btn-rounded btn-primary py-1" id="n2-0">Start</button>
       </div>
     </div>
 
-    <div class="block bg-white mb-2 p-2">
+    <div class="block bg-white p-2">
       <div class="h5 font-weight-bold alert-success mb-2">Step1/4： 氏名カナ（法人格を除く、濁点含む頭3文字）+登録番号</div>
       <button class="input btn btn-rounded btn-secondary py-1 mb-2" id="b2-1">Input</button>
       <div class="ans">
@@ -349,7 +351,7 @@
       </div>
     </div>
 
-    <div class="block bg-white mb-2 p-2">
+    <div class="block bg-white p-2">
       <div class="h5 font-weight-bold alert-success">Step2/4： 漢字（法人格の頭1文字）+登録番号</div>
       <div class="h6 font-weight-bold mb-2">漢字は「アズはアルファベットで大文字のエーに小文字のエス、ファミリーはカタカナ」と聞きました。</div>
       <button class="input btn btn-rounded btn-secondary py-1 mb-2" id="b2-2">Input</button>
@@ -359,7 +361,7 @@
       </div>
     </div>
 
-    <div class="block bg-white mb-2 p-2">
+    <div class="block bg-white p-2">
       <div class="h5 font-weight-bold alert-success">Step3/4： 氏名カナ（濁点含む頭3文字）+加入販売会社</div>
       <div class="h6 font-weight-bold mb-2">「P群馬」で加入と聞きました。</div>
       <button class="input btn btn-rounded btn-secondary py-1 mb-2" id="b2-3">Input</button>
@@ -369,7 +371,7 @@
       </div>
     </div>
 
-    <div class="block bg-white mb-2 p-2">
+    <div class="block bg-white p-2">
       <div class="h5 font-weight-bold alert-success">Step4/4：  漢字（法人格の頭1文字）+加入販売会社</div>
       <button class="input btn btn-rounded btn-secondary py-1 mb-2" id="b2-4">Input</button>
       <div class="ans">
@@ -380,12 +382,11 @@
       </div>
     </div>
 
-    <div class="block bg-white mb-2 p-2">
+    <div class="block bg-white p-2">
       <div class="h5 font-weight-bold">解説</div>
       <ul class="h6">
         <li>登録番号：データは変更されていないことがあります</li>
         <li>フリガナ：誤って入力されていることがあります</li>
-        <li>今回は登録番号もフリガナも誤っているケースを想定しました</li>
       </ul>
       <div class="h5 font-weight-bold"><i class="fa fa-lightbulb-o"></i>【Point】カナは法人名から、漢字は法人格から</div>
     </div>
@@ -400,22 +401,23 @@
   <!-- タブ3 -->
   <div id="tab3" class="tab-pane">
 
-    <div class="bg-white mb-2 p-2">
-      <h4 class="h5 font-weight-bold mb-2 mt-1">例. 契約者「合同会社Marsh（ゴウドウガイシャ　マーシュ）」　登録番号「5555」　加入販社「N東京13300」</h4>
+    <div class="bg-white p-2">
+      <h4 class="h5 font-weight-bold mb-2 mt-1">Q. 契約者「ジョン スミス」さま、登録番号「・・・9」の契約はありますか？</h4>
       <div>
+        <button class="next btn btn-rounded btn-primary py-1" id="n1-0">Start</button>
       </div>
     </div>
 
-    <input type="checkbox" class="btn-check" id="btn-check">
-    <label class="bg-white mb-2 p-2" id="hover1" for="btn-check">
-      <div class="h5 font-weight-bold alert-success mb-2">Step1/： 氏名カナ（濁点含む頭3文字）+登録番号</div>
+    <div class="block bg-white p-2">
+      <div class="h5 font-weight-bold alert-success mb-2">Step1/4： 氏名カナ（濁点含む頭3文字）+登録番号</div>
+      <button class="input btn btn-rounded btn-secondary py-1 mb-2" id="b1-1">Input</button>
+      <div class="ans">
         <p class="h6">※もし結果が多かった場合は、4文字目、5文字目と増やして再検索します。</p>
-    </label>
+        <button class="next btn btn-rounded btn-primary py-1" id="n1-1">Next</button>
+      </div>
+    </div>
 
-
-    
-
-    <div class="block bg-white mb-2 p-2">
+    <div class="block bg-white p-2">
       <div class="h5 font-weight-bold alert-success mb-2">Step2/4： 漢字（頭1文字）+登録番号</div>
       <div class="h6 font-weight-bold mb-2">漢字は「John Smith」と聞きました。</div>
       <button class="input btn btn-rounded btn-secondary py-1 mb-2" id="b1-2">Input</button>
@@ -425,7 +427,7 @@
       </div>
     </div>
 
-    <div class="block bg-white mb-2 p-2">
+    <div class="block bg-white p-2">
       <div class="h5 font-weight-bold alert-success">Step3/4： 氏名カナ（濁点含む頭3文字）+加入販売会社</div>
       <div class="h6 font-weight-bold mb-2">「P群馬」で加入と聞きました。</div>
       <button class="input btn btn-rounded btn-secondary py-1 mb-2" id="b1-3">Input</button>
@@ -435,7 +437,7 @@
       </div>
     </div>
 
-    <div class="block bg-white mb-2 p-2">
+    <div class="block bg-white p-2">
       <div class="h5 font-weight-bold alert-success">Step4/4：  漢字（頭1文字）+加入販売会社</div>
       <button class="input btn btn-rounded btn-secondary py-1 mb-2" id="b1-4">Input</button>
       <div class="ans">
@@ -446,17 +448,102 @@
       </div>
     </div>
 
-    <div class="block bg-white mb-2 p-2">
+    <div class="block bg-white p-2">
       <div class="h5 font-weight-bold">解説</div>
       <ul class="h6">
         <li>登録番号：データは変更されていないことがあります</li>
         <li>フリガナ：誤って入力されていることがあります</li>
-        <li>今回は登録番号もフリガナも誤っているケースを想定しました</li>
-        <li>実際には、漢字1文字で検索すると大量の検索結果となるので、鈴木太郎さまであれば「鈴木」「鈴木太」等で検索してください</li>
+        <li>契約者名：全角アルファベットはF9キー、大文字と小文字は区別されるので注意</li>
       </ul>
       <div class="h5 font-weight-bold"><i class="fa fa-lightbulb-o"></i>【Point】文字数はなるべく少なく</div>
     </div>
 
+    <hr class="">
+
+    <button class="expand btn btn-rounded btn-inverse-dark p-1" id="">すべて展開</button>
+    <button class="shrink btn btn-rounded btn-inverse-dark p-1" id="">折りたたむ</button>
+  </div>
+
+
+  <!-- タブ4 -->
+  <div id="tab4" class="tab-pane">
+
+    <div class="bg-white p-2">
+      <h4 class="h5 font-weight-bold mb-2 mt-1">例. "株式会社Marsh（ゴウドウガイシャ　マーシュ）"　登録No."5555"　加入"N東京13300"　TEL"03-6775-5555"</h4>
+      <div>
+      </div>
+    </div>
+    <div class="d-flex bg-white">
+      <input type="checkbox" class="btn-check m-2" id="btn-check">
+      <label class="bg-white w-100 m-1" id="hover1" for="btn-check">
+        <div class="h5 font-weight-bold alert-success m-1">カナ + 登録番号</div>
+        <div class="h6 mx-2 my-1">前方一致、濁点含む頭3文字、法人格除く</div>
+      </label>
+    </div>
+
+    <div class="d-flex bg-white">
+      <input type="checkbox" class="btn-check m-2" id="btn-check2">
+      <label class="bg-white w-100 m-1" id="hover2" for="btn-check2">
+        <div class="h5 font-weight-bold alert-success m-1">漢字 + 登録番号</div>
+        <div class="h6 mx-2 my-1">前方一致、頭1文字、法人格あり</div>
+      </label>
+    </div>
+
+    <div class="d-flex bg-white">
+      <input type="checkbox" class="btn-check m-2" id="btn-check3">
+      <label class="bg-white w-100 m-1" id="hover3" for="btn-check3">
+        <div class="h5 font-weight-bold alert-success m-1">カナ + 加入販社</div>
+        <div class="h6 mx-2 my-1">前方一致、濁点含む頭3文字、法人格除く</div>
+      </label>
+    </div>
+
+    <div class="d-flex bg-white">
+      <input type="checkbox" class="btn-check m-2" id="btn-check4">
+      <label class="bg-white w-100 m-1" id="hover4" for="btn-check4">
+        <div class="h5 font-weight-bold alert-success m-1">漢字 + 加入販社</div>
+        <div class="h6 mx-2 my-1">前方一致、頭1文字、法人格あり</div>
+      </label>
+    </div>
+
+    <div class="h6 bg-white text-secondary mb-0 pl-2">
+      あるはずなのに該当なしだったら...and more
+    </div>
+
+    <div class="d-flex bg-white">
+      <input type="checkbox" class="btn-check m-2" id="btn-check5">
+      <label class="bg-white w-100 m-1" id="hover5" for="btn-check5">
+        <div class="h5 font-weight-bold alert-success m-1">カナ「。。。」 + 加入販社 + 登録番号</div>
+        <div class="h6 mx-2 my-1">「。。。」でブランクとして検索できる</div>
+      </label>
+    </div>
+
+    <div class="d-flex bg-white">
+      <input type="checkbox" class="btn-check m-2" id="btn-check6">
+      <label class="bg-white w-100 m-1" id="hover6" for="btn-check6">
+        <div class="h5 font-weight-bold alert-success m-1">カナ「。。。」 + TEL</div>
+        <div class="h6 mx-2 my-1">「。。。」でブランクとして検索できる、TELハイフン不問</div>
+      </label>
+    </div>
+
+    <div class="h6 bg-white text-secondary mb-0 pl-2">
+      and more??
+    </div>
+
+    <div class="d-flex bg-white">
+      <input type="checkbox" class="btn-check m-2" id="btn-check7">
+      <label class="bg-white w-100 m-1" id="hover7" for="btn-check7">
+        <div class="h5 font-weight-bold alert-success m-1">漢字「㈱」 + 登録番号</div>
+        <div class="h6 mx-2 my-1">記号の法人格、かつ、カナ誤りを想定</div>
+      </label>
+    </div>
+
+    <div class="d-flex bg-white">
+      <input type="checkbox" class="btn-check m-2" id="btn-check8">
+      <label class="bg-white w-100 m-1" id="hover8" for="btn-check8">
+        <div class="h5 font-weight-bold alert-success m-1">漢字「㈱」 + 加入販社</div>
+        <div class="h6 mx-2 my-1">記号の法人格、かつ、カナ誤りを想定</div>
+      </label>
+    </div>
     <hr class="">
 
   </div>
@@ -472,6 +559,7 @@
   //クリア関数
   function clear(){
     $('#result_kojin').hide();
+    $('#result_houjin1').hide();
     $('#result2').hide();
     $("input, textarea").val("");
     $("input, textarea").removeClass("alert-success");
@@ -624,13 +712,129 @@
   $('#hover1').hover(
     function (){
       $('#customer_kana').addClass("alert-success");
+      $('#customer_kana').val("ﾏｰｼｭ");
       $('#plate_no').addClass("alert-success");
+      $('#plate_no').val("5555");
     },
     function () {
       $('#customer_kana').removeClass("alert-success");
       $('#plate_no').removeClass("alert-success");
+      clear();
     }
   );
+
+  $('#hover2').hover(
+    function (){
+      $('#customer_kanji').addClass("alert-success");
+      $('#customer_kanji').val("株式会社Ｍ");
+      $('#plate_no').addClass("alert-success");
+      $('#plate_no').val("5555");
+    },
+    function () {
+      $('#customer_kanji').removeClass("alert-success");
+      $('#plate_no').removeClass("alert-success");
+      clear();
+    }
+  );
+
+  $('#hover3').hover(
+    function (){
+      $('#customer_kana').addClass("alert-success");
+      $('#customer_kana').val("ﾏｰｼｭ");
+      $('#company').addClass("alert-success");
+      $('#company').val("13300");
+    },
+    function () {
+      $('#customer_kana').removeClass("alert-success");
+      $('#company').removeClass("alert-success");
+      clear();
+    }
+  );
+
+  $('#hover4').hover(
+    function (){
+      $('#customer_kanji').addClass("alert-success");
+      $('#customer_kanji').val("株式会社Ｍ");
+      $('#company').addClass("alert-success");
+      $('#company').val("13300");
+    },
+    function () {
+      $('#customer_kanji').removeClass("alert-success");
+      $('#company').removeClass("alert-success");
+      clear();
+    }
+  );
+
+  $('#hover5').hover(
+    function (){
+      $('#customer_kana').addClass("alert-success");
+      $('#customer_kana').val("。。。");
+      $('#company').addClass("alert-success");
+      $('#company').val("13300");
+      $('#plate_no').addClass("alert-success");
+      $('#plate_no').val("5555");
+    },
+    function () {
+      $('#customer_kana').removeClass("alert-success");
+      $('#company').removeClass("alert-success");
+      $('#plate_no').removeClass("alert-success");
+      clear();
+    }
+  );
+
+  $('#hover6').hover(
+    function (){
+      $('#customer_kana').addClass("alert-success");
+      $('#customer_kana').val("。。。");
+      $('#tel').addClass("alert-success");
+      $('#tel').val("03-6775-5555");
+    },
+    function () {
+      $('#customer_kana').removeClass("alert-success");
+      $('#tel').removeClass("alert-success");
+      clear();
+    }
+  );
+
+  $('#hover7').hover(
+    function (){
+      $('#customer_kanji').addClass("alert-success");
+      $('#customer_kanji').val("㈱");
+      $('#plate_no').addClass("alert-success");
+      $('#plate_no').val("5555");
+    },
+    function () {
+      $('#customer_kanji').removeClass("alert-success");
+      $('#plate_no').removeClass("alert-success");
+      clear();
+    }
+  );
+
+  $('#hover8').hover(
+    function (){
+      $('#customer_kanji').addClass("alert-success");
+      $('#customer_kanji').val("㈱");
+      $('#company').addClass("alert-success");
+      $('#company').val("13300");
+    },
+    function () {
+      $('#customer_kanji').removeClass("alert-success");
+      $('#company').removeClass("alert-success");
+      clear();
+    }
+  );
+
+
+  //チェック時→右ラベルの色変更
+  $("input[type='checkbox']").change(function(){
+    if($(this).prop('checked')){
+      $(this).next().removeClass("bg-white");
+      $(this).next().addClass("bg-light");
+    }else{
+      $(this).next().removeClass("bg-light");
+      $(this).next().addClass("bg-white");
+    }
+  });
 
   
 </script>
