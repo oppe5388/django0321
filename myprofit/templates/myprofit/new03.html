@@ -145,13 +145,15 @@
         <!-- モーダル無効有効ができないので、disabledボタンを専用で用意した -->
         <button type="button" class="btn btn-outline-dark py-2" data-toggle="modal" data-target="#ModalCenterEntry" id="entry">申込</button>
         <button type="button" class="btn btn-outline-dark disabled py-2 border-white" id="dis_entry">申込</button>
+        <button type="button" class="btn btn-info btn-rounded p-1 ml-1" id="entry_pop" data-container="body" data-toggle="popover" data-html="true" data-placement="right"
+        data-content="申込済では申込ボタン不能となるが、申込直後は押せるままの状態で、重複申込ができてしまう様子">vcc
+        </button>
         <button type="button" class="btn btn-outline-dark py-2" data-toggle="modal" data-target="#ModalCenterCancel" id="cancel">申込み取消</button>
         <button type="button" class="btn btn-outline-dark disabled py-2 border-white" id="dis_cancel">申込み取消</button>
         <button type="button" class="btn btn-outline-dark py-2" data-toggle="modal" data-target="#ModalCenterCert" id="cert">会員証印刷</button>
         <button type="button" class="btn btn-outline-dark disabled py-2 border-white" id="dis_cert">会員証印刷</button>
         <button type="button" class="btn btn-info btn-rounded p-1 ml-1" id="cert_pop" data-container="body" data-toggle="popover" data-html="true" data-placement="right"
-        data-content="申込書未発行〜会員証未発行、かつ、車両基盤入力済みのみ進める
-          ">vcc
+        data-content="申込書未発行〜会員証未発行、かつ、車両基盤入力済みのみ進める">vcc
         </button>
         <a href="{% url 'myprofit:new02' %}?route={{route}}" class="ml-auto btn btn-outline-dark py-2">メニューに戻る</a>
       </div>
@@ -248,6 +250,8 @@
     $('#entry').hide();
     $('#cancel').hide();
     $('#cert').hide();
+
+    $('#entry_pop').hide();
 
     //routeが申込からと会員証からで、disのボタンも非表示に
     var route = $('#route').val();
@@ -371,10 +375,12 @@
             search_input == "N123A0006" || 
             search_input == "N123A0007") {
           $("#message").text("メンテプロ申込済です。取り消す場合は、注文書入力にてクーポンメニューコードの削除をしてくだい。");
+          $('#entry_pop').show();
         }
         //本登録→エラーメッセージ
         if (search_input == "N123A0008") {
           $("#message").text("クーポン発行済です。");
+          $('#entry_pop').show();
         }
 
       //route会員証の場合
