@@ -18,6 +18,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
   $(function () {
+    var cancel_flag = $('#cancel_flag').val()
+
     var route = $('#route').val();
     $("#nfs_menu").attr("href", "{% url 'myprofit:service05' %}?route=" +route)//お客様一覧検索
     $("#back1").attr("href", "{% url 'myprofit:service03' %}?route=" +route) //中断ボタン
@@ -65,12 +67,22 @@
       $("#insp_date").text(shaken_date.format('：YYYY年MM月DD日'));
       $("#plate_no").text("：練馬 300 ｻ 9999");
     //サービス車両あり
-    }else if(cert_no == '410987005' || cert_no == '410987020'){
+    }else if(cert_no == '410987005' || cancel_flag== 'duplicate'){
       var shodo_date = moment(new Date()).add(-5, 'y');
       $("#register_date").text(shodo_date.format('：YYYY年MM月'));
       var shaken_date = moment(new Date()).add(740, 'd');
       $("#insp_date").text(shaken_date.format('：YYYY年MM月DD日'));
-      $("#plate_no").text("：練馬 300 ｻ 0014");
+      
+
+      if(cert_no == '410987005'){
+        $("#plate_no").text("：練馬 300 ｻ 0014");
+      }else if(cert_no == '410987010' ){
+        $("#plate_no").text("：練馬 300 ｻ 0015");
+      }else if(cert_no == '410987017' ){
+        $("#plate_no").text("：練馬 300 ｻ 0016");
+      }else if(cert_no == '410987020' ){
+        $("#plate_no").text("：練馬 300 ｻ 0017");
+      }
     }
     
     //注文書No
@@ -89,7 +101,7 @@
     }else if(cert_no == '410987005' ){//サービス
       $("#order_no1").text("：502D0001");
       $("#order_no2").text("：502D0001");
-    }else if(cert_no == '410987020' ){//サービス再申込
+    }else if(cancel_flag== 'duplicate' ){//サービス再申込
       $("#order_no1").text("：502D0005");
       $("#order_no2").text("：502D0005");
     }

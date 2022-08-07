@@ -160,6 +160,7 @@ def service05entry(request):
     context = {
         'route': request.GET.get('route'),
         'cert_no': request.GET.get('cert_no'),
+        'cancel_flag': request.GET.get('cancel_flag'),
     }
     return render(request, 'myprofit/service05entry.html', context)
 

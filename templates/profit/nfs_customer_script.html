@@ -336,7 +336,7 @@ $(function () {
     }
 
     //サービス：本登録
-    if(cert_no == '410987020' ){
+    if((cert_no == '410987020') & ($('#cancel_flag').val() != "duplicate")){
 
         var hontouroku_date = entry_date
         var kigen_date = moment(hontouroku_date).add(30, 'M');
@@ -405,6 +405,18 @@ $(function () {
 
         $('#status').val("申込書未発行");
         $("#order_no").val("502D0001");
+
+        $('#entry').show();// 申込書印刷ボタン表示
+        $("#end").text("終了");//真ん中のボタンの文字
+        $("#end").attr("href", "{% url 'myprofit:service03' %}?route=" +route)
+    }
+
+    //サービス：再申し込み
+    if($('#cancel_flag').val() == "duplicate"){
+
+        $('#cert_no').val("410987021");
+        $('#status').val("申込書未発行");
+        $("#order_no").val("502D0005");
 
         $('#entry').show();// 申込書印刷ボタン表示
         $("#end").text("終了");//真ん中のボタンの文字
