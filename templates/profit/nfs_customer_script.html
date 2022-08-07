@@ -41,7 +41,7 @@ $(function () {
         $("#entry_day").val(entry_date.format('DD'));
     }
 
-    //新車車×車両あり共通
+    //新車×車両あり共通
     if(cert_no == '410987002' || 
         cert_no == '410987007' || 
         cert_no == '410987012' || 
@@ -319,10 +319,20 @@ $(function () {
         $("#plate_no1").val("練馬");
         $("#plate_no2").val("330");
         $("#plate_no3").val("ｻ");
-        $("#plate_no4").val("9999");
         $("#insp_year").val(shaken_date.format('YYYY'));
         $("#insp_month").val(shaken_date.format('MM'));
         $("#insp_day").val(shaken_date.format('DD'));
+
+        if(cert_no == '410987005'){//サービス再申込
+            $("#plate_no4").val("0014");
+        }else if(cert_no == '410987010' ){
+            $("#plate_no4").val("0015");
+        }else if(cert_no == '410987017' ){
+            $("#plate_no4").val("0016");
+        }else if(cert_no == '410987020' ){
+            $("#plate_no4").val("0017");
+        }
+
     }
 
     //サービス：本登録

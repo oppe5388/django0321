@@ -65,7 +65,7 @@
       $("#course").val("2");
       $('#course').prop('disabled', true);
       $("#price").val("85,690");
-    }else if(cert_no == '410987003' || cert_no == '410987004' || cert_no == '410987005'){//サービス18
+    }else if(cert_no == '410987005' || cert_no == '410987010'|| cert_no == '410987017'|| cert_no == '410987020'){//サービス18
       $("#course").val("2");
       $("#price").val("85,690");
     }
@@ -80,7 +80,7 @@
       $("#insp_month").val(shaken_date.format('MM'));
       $("#insp_day").val(shaken_date.format('DD'));
     //中古車サービス車両あり
-    }else if(cert_no == '410987004' || cert_no == '410987005'){
+    }else if(cert_no == '410987004' || cert_no == '410987005' || cert_no == '410987010'|| cert_no == '410987017'|| cert_no == '410987020'){
       var shodo_date = moment(new Date()).add(-5, 'y');
       $("#register_year").val(shodo_date.format('YYYY'));
       $("#register_month").val(shodo_date.format('MM'));
@@ -109,13 +109,25 @@
       $("#plate_no2").val("330");
       $("#plate_no3").val("ｻ");
       $("#plate_no4").val("9999");
-    }else if(cert_no == '410987005' ){//サービス
-      $("#order_no").val("502D0001");
+    }else if(cert_no == '410987005' || cert_no == '410987010'|| cert_no == '410987017'|| cert_no == '410987020'){//サービス 
       $("#entry_div").val(3);
       $("#plate_no1").val(1);
       $("#plate_no2").val("330");
       $("#plate_no3").val("ｻ");
-      $("#plate_no4").val("0014");
+
+      if(cert_no == '410987005'){
+        $("#order_no").val("502D0001");
+        $("#plate_no4").val("0014");
+      }else if(cert_no == '410987010' ){//サービス再申込
+        $("#order_no").val("502D0005");
+        $("#plate_no4").val("0015");
+      }else if(cert_no == '410987017' ){
+        $("#order_no").val("502D0005");
+        $("#plate_no4").val("0016");
+      }else if(cert_no == '410987020' ){
+        $("#order_no").val("502D0005");
+        $("#plate_no4").val("0017");
+      }
     }
 
   });

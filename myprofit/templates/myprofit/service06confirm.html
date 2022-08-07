@@ -31,7 +31,11 @@
 
     //コースに応じて差し込み
     var cert_no = $('#hidden_no').val();
-    $("#cert_no").text("："+cert_no);
+    if(cert_no == '410987010' || cert_no == '410987017' || cert_no == '410987020'){//サービス再申込
+      $("#cert_no").text("：410987021");
+    }else{
+      $("#cert_no").text("："+cert_no);
+    }
 
     //courseと区分：新車
     if(cert_no == '410987001' || cert_no == '410987002'){
@@ -61,7 +65,7 @@
       $("#insp_date").text(shaken_date.format('：YYYY年MM月DD日'));
       $("#plate_no").text("：練馬 300 ｻ 9999");
     //サービス車両あり
-    }else if(cert_no == '410987005'){
+    }else if(cert_no == '410987005' || cert_no == '410987020'){
       var shodo_date = moment(new Date()).add(-5, 'y');
       $("#register_date").text(shodo_date.format('：YYYY年MM月'));
       var shaken_date = moment(new Date()).add(740, 'd');
@@ -85,6 +89,9 @@
     }else if(cert_no == '410987005' ){//サービス
       $("#order_no1").text("：502D0001");
       $("#order_no2").text("：502D0001");
+    }else if(cert_no == '410987020' ){//サービス再申込
+      $("#order_no1").text("：502D0005");
+      $("#order_no2").text("：502D0005");
     }
 
     
