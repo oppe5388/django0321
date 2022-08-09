@@ -74,7 +74,7 @@
             </div>
           </div>
           <div class="d-flex flex-nowrap">
-            <span class="col-3 mb-1"><span id="kanji_error" class="btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            <span class="col-3 mb-1"><span id="kanji_error" class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
               data-content="アポストロフィーは不可<br>⇒代わりに「´」または「′」を使う
               " ><i class="fa fa-info-circle"></i> 氏名<span class="small">(漢字)</span></span>
             </span>
@@ -233,7 +233,7 @@
               {% comment %} </div> {% endcomment %}
             </span>
             <span class="text-primary">※</span>
-            <div class="d-flex flex-nowrap">
+            <div class="d-flex flex-nowrap" id="base_no_block">
               <input class="col-4 mb-1" id="base_no">
               <div class="　"></div>
               <span id="kihon_flow1pop" class="btn p-0 text-warning" data-toggle="popover" data-trigger="click" data-html="true" data-placement="right"
@@ -533,7 +533,6 @@
         $('#kihon_flow4').on('hide.bs.popover', function () {
           $('#maker').removeClass('blink');
         })
-        
 
         //コースエラー手順１〜4
         $('#course_flow0').on('show.bs.popover', function () {
@@ -585,6 +584,7 @@
         
         
         //コース
+        /*
         $('#course_error').on('show.bs.popover', function () {
           $('#product').val("ev");// メンプロEV
           $('#course').val("1");// EV30
@@ -595,9 +595,25 @@
           course_hide();
           setTimeout("course_hide()", 1000);//↑で遅れてshowされた時用
         })
+        */
+        $('#course_error, #course').hover(
+          function (){
+            $('#product').val("ev");// メンプロEV
+            $('#course').val("1");// EV30
+            course_show();
+            setTimeout("course_show()", 1000);//交互のhideで遅れてhideされた時用
+            $('#course_error').popover('show');
+          },
+          function () {
+            course_hide();
+            setTimeout("course_hide()", 1000);//↑で遅れてshowされた時用
+            $('#course_error').popover('hide');
+          }
+        );
 
         //クラスは交互
         var timer = null;
+        /*
         $('#class_error').on('show.bs.popover', function () {
           course_kihon_repeat();
           timer = setInterval("course_kihon_repeat()", 2000);
@@ -607,8 +623,24 @@
           course_hide();
           kihon_hide();
         })
+        */
+        $('#class_error, #car_class').hover(
+          function (){
+            course_kihon_repeat();
+            timer = setInterval("course_kihon_repeat()", 2000);
+            $('#class_error').popover('show');
+          },
+          function () {
+            clearInterval(timer);
+            course_hide();
+            //kihon_hide();
+            $('#class_error').popover('hide');
+          }
+        );
+
         //商品も交互
         var timer = null;
+        /*
         $('#product_error').on('show.bs.popover', function () {
           course_kihon_repeat();
           timer = setInterval("course_kihon_repeat()", 2000);
@@ -618,10 +650,24 @@
           course_hide();
           kihon_hide();
         })
+        */
+        $('#product_error, #product').hover(
+          function (){
+            course_kihon_repeat();
+            timer = setInterval("course_kihon_repeat()", 2000);
+            $('#product_error').popover('show');
+          },
+          function () {
+            clearInterval(timer);
+            course_hide();
+            //kihon_hide();
+            $('#product_error').popover('hide');
+          }
+        );
 
         //基本3桁エラー
+        /*
         $('#kihon_error').on('show.bs.popover', function () {
-          $('#base_no').val('V39');
           kihon_show();
           setTimeout("kihon_show()", 1000);//交互のhideで遅れてhideされた時用
         })
@@ -629,59 +675,99 @@
           kihon_hide();
           setTimeout("kihon_hide()", 1000);//↑で遅れてshowされた時用
         })
-
+        */
+        $('#kihon_error, #base_no_block').hover(
+          function (){
+            $('#kihon_error').popover('show');
+            kihon_show();
+          },
+          function () {
+            $('#kihon_error').popover('hide');
+            kihon_hide();
+          }
+        );
 
         //契約者名漢字
-        $('#kanji_error').on('show.bs.popover', function () {
-          $('#customer_kanji').addClass("alert-warning");
-        })
-        $('#kanji_error').on('hide.bs.popover', function () {
-          $('#customer_kanji').removeClass("alert-warning");
-        })
+        $('#kanji_error, #customer_kanji').hover(
+          function (){
+            $('#customer_kanji').addClass("alert-warning");
+            $('#kanji_error').popover('show');
+          },
+          function () {
+            $('#customer_kanji').removeClass("alert-warning");
+            $('#kanji_error').popover('hide');
+          }
+        );
 
-        //メールアドレス
+        //メールアドレス、↓で自身を含めた複数セレクタOKになる
+        /*
         $('#mail_error').on('show.bs.popover', function () {
           $('#mail').addClass("alert-warning");
         })
         $('#mail_error').on('hide.bs.popover', function () {
           $('#mail').removeClass("alert-warning");
         })
+        */
+        $('#mail_error, #mail').hover(
+          function (){
+            $('#mail').addClass("alert-warning");
+            $('#mail_error').popover('show');
+          },
+          function () {
+            $('#mail').removeClass("alert-warning");
+            $('#mail_error').popover('hide');
+          }
+        );
 
         //登録番号
-        $('#plate_error').on('show.bs.popover', function () {
-          $('#plate_no1').addClass("alert-warning");
-          $('#plate_no2').addClass("alert-warning");
-          $('#plate_no3').addClass("alert-warning");
-          $('#plate_no4').addClass("alert-warning");
-        })
-        $('#plate_error').on('hide.bs.popover', function () {
-          $('#plate_no1').removeClass("alert-warning");
-          $('#plate_no2').removeClass("alert-warning");
-          $('#plate_no3').removeClass("alert-warning");
-          $('#plate_no4').removeClass("alert-warning");
-        })
+        $('#plate_error, #plate_no1, #plate_no2, #plate_no3, #plate_no4').hover(
+          function (){
+            $('#plate_no1').addClass("alert-warning");
+            $('#plate_no2').addClass("alert-warning");
+            $('#plate_no3').addClass("alert-warning");
+            $('#plate_no4').addClass("alert-warning");
+            $('#plate_error').popover('show');
+          },
+          function () {
+            $('#plate_no1').removeClass("alert-warning");
+            $('#plate_no2').removeClass("alert-warning");
+            $('#plate_no3').removeClass("alert-warning");
+            $('#plate_no4').removeClass("alert-warning");
+            $('#plate_error').popover('hide');
+          }
+        );
 
         //車検満了日
-        $('#insp_error').on('show.bs.popover', function () {
-          $('#insp_year').addClass("alert-warning");
-          $('#insp_month').addClass("alert-warning");
-          $('#insp_day').addClass("alert-warning");
-        })
-        $('#insp_error').on('hide.bs.popover', function () {
-          $('#insp_year').removeClass("alert-warning");
-          $('#insp_month').removeClass("alert-warning");
-          $('#insp_day').removeClass("alert-warning");
-        })
+        $('#insp_error, #insp_year, #insp_month, #insp_day').hover(
+          function (){
+            $('#insp_year').addClass("alert-warning");
+            $('#insp_month').addClass("alert-warning");
+            $('#insp_day').addClass("alert-warning");
+            $('#insp_error').popover('show');
+          },
+          function () {
+            $('#insp_year').removeClass("alert-warning");
+            $('#insp_month').removeClass("alert-warning");
+            $('#insp_day').removeClass("alert-warning");
+            $('#insp_error').popover('hide');
+          }
+        );
 
         //支払金額
-        $('#price_error').on('show.bs.popover', function () {
-          $('#price').addClass("alert-warning");
-          $('#price_error2').show();
-        })
-        $('#price_error').on('hide.bs.popover', function () {
-          $('#price').removeClass("alert-warning");
-          $('#price_error2').hide();
-        })
+        $('#price_error, #price').hover(
+          function (){
+            $('#price').addClass("alert-warning");
+            $('#price_error2').show();
+            $('#price_error').popover('show');
+          },
+          function () {
+            $('#price').removeClass("alert-warning");
+            $('#price_error2').hide();
+            $('#price_error').popover('hide');
+          }
+        );
+
+
       });
     </script>
 
