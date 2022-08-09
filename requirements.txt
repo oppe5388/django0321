@@ -18,3 +18,4 @@ python-dateutil
 # django-crontab
 # django-ajax-datatable
 requests
+jpbizday
