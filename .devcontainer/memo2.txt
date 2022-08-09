@@ -1,0 +1,277 @@
+ubuntu@ip-172-26-10-134:~/django0322$ sudo docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+ubuntu@ip-172-26-10-134:~/django0322$ sudo docker volume ls
+DRIVER    VOLUME NAME
+ubuntu@ip-172-26-10-134:~/django0322$ sudo docker-compose -f docker-compose.prod.yml up
+Creating network "django0322_default" with the default driver
+Creating volume "django0322_db-data" with default driver
+Creating volume "django0322_media_volume" with default driver
+Creating volume "django0322_certs" with default driver
+Creating volume "django0322_html" with default driver
+Creating volume "django0322_vhost" with default driver
+Creating volume "django0322_acme" with default driver
+Creating db2prod ... done
+Creating django2prod ... done
+Creating nginx-proxy2prod ... done
+Creating letsencrypt2prod ... done
+Attaching to db2prod, django2prod, nginx-proxy2prod, letsencrypt2prod
+db2prod                    | The files belonging to this database system will be owned by user "postgres".
+db2prod                    | This user must also own the server process.
+db2prod                    | 
+db2prod                    | The database cluster will be initialized with locale "en_US.utf8".
+db2prod                    | The default database encoding has accordingly been set to "UTF8".
+db2prod                    | The default text search configuration will be set to "english".
+db2prod                    | 
+db2prod                    | Data page checksums are disabled.
+db2prod                    | 
+db2prod                    | fixing permissions on existing directory /var/lib/postgresql/data ... ok
+db2prod                    | creating subdirectories ... ok
+db2prod                    | selecting dynamic shared memory implementation ... posix
+db2prod                    | selecting default max_connections ... 100
+db2prod                    | selecting default shared_buffers ... 128MB
+db2prod                    | selecting default time zone ... Asia/Tokyo
+db2prod                    | creating configuration files ... ok
+db2prod                    | running bootstrap script ... ok
+db2prod                    | performing post-bootstrap initialization ... ok
+db2prod                    | syncing data to disk ... ok
+db2prod                    | 
+db2prod                    | initdb: warning: enabling "trust" authentication for local connections
+db2prod                    | You can change this by editing pg_hba.conf or using the option -A, or
+db2prod                    | --auth-local and --auth-host, the next time you run initdb.
+db2prod                    | 
+db2prod                    | Success. You can now start the database server using:
+db2prod                    | 
+db2prod                    |     pg_ctl -D /var/lib/postgresql/data -l logfile start
+db2prod                    | 
+nginx-proxy2prod           | Info: running nginx-proxy version 0.10.1-33-g46eed82
+nginx-proxy2prod           | Setting up DH Parameters..
+nginx-proxy2prod           | forego      | starting dockergen.1 on port 5000
+nginx-proxy2prod           | forego      | starting nginx.1 on port 5100
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:45 [notice] 17#17: using the "epoll" event method
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:45 [notice] 17#17: nginx/1.21.6
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:45 [notice] 17#17: built by gcc 10.2.1 20210110 (Debian 10.2.1-6) 
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:45 [notice] 17#17: OS: Linux 5.4.0-1018-aws
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:45 [notice] 17#17: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:45 [notice] 17#17: start worker processes
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:45 [notice] 17#17: start worker process 22
+letsencrypt2prod           | Info: running acme-companion version v2.2.0-1-g379639c
+nginx-proxy2prod           | dockergen.1 | 2022/08/10 01:40:45 Generated '/etc/nginx/conf.d/default.conf' from 4 containers
+nginx-proxy2prod           | dockergen.1 | 2022/08/10 01:40:45 Running 'nginx -s reload'
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:46 [notice] 17#17: signal 1 (SIGHUP) received from 24, reconfiguring
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:46 [notice] 17#17: reconfiguring
+nginx-proxy2prod           | dockergen.1 | 2022/08/10 01:40:46 Watching docker events
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:46 [notice] 17#17: using the "epoll" event method
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:46 [notice] 17#17: start worker processes
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:46 [notice] 17#17: start worker process 27
+db2prod                    | waiting for server to start....2022-08-10 01:40:46.099 JST [47] LOG:  starting PostgreSQL 13.5 (Debian 13.5-1.pgdg110+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+db2prod                    | 2022-08-10 01:40:46.108 JST [47] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+db2prod                    | 2022-08-10 01:40:46.124 JST [48] LOG:  database system was shut down at 2022-08-10 01:40:45 JST
+db2prod                    | 2022-08-10 01:40:46.135 JST [47] LOG:  database system is ready to accept connections
+nginx-proxy2prod           | dockergen.1 | 2022/08/10 01:40:46 Contents of /etc/nginx/conf.d/default.conf did not change. Skipping notification 'nginx -s reload'
+db2prod                    |  done
+db2prod                    | server started
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:46 [notice] 22#22: gracefully shutting down
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:46 [notice] 22#22: exiting
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:46 [notice] 22#22: exit
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:46 [notice] 17#17: signal 17 (SIGCHLD) received from 22
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:46 [notice] 17#17: worker process 22 exited with code 0
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:46 [notice] 17#17: signal 29 (SIGIO) received
+django2prod                | [2022-08-10 01:40:46 +0900] [1] [INFO] Starting gunicorn 20.1.0
+django2prod                | [2022-08-10 01:40:46 +0900] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+django2prod                | [2022-08-10 01:40:46 +0900] [1] [INFO] Using worker: sync
+django2prod                | [2022-08-10 01:40:46 +0900] [8] [INFO] Booting worker with pid: 8
+db2prod                    | CREATE DATABASE
+db2prod                    | 
+db2prod                    | 
+db2prod                    | /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+db2prod                    | 
+db2prod                    | 2022-08-10 01:40:46.653 JST [47] LOG:  received fast shutdown request
+db2prod                    | waiting for server to shut down....2022-08-10 01:40:46.657 JST [47] LOG:  aborting any active transactions
+db2prod                    | 2022-08-10 01:40:46.670 JST [47] LOG:  background worker "logical replication launcher" (PID 54) exited with exit code 1
+db2prod                    | 2022-08-10 01:40:46.671 JST [49] LOG:  shutting down
+db2prod                    | 2022-08-10 01:40:46.696 JST [47] LOG:  database system is shut down
+db2prod                    |  done
+db2prod                    | server stopped
+db2prod                    | 
+db2prod                    | PostgreSQL init process complete; ready for start up.
+db2prod                    | 
+db2prod                    | 2022-08-10 01:40:46.821 JST [1] LOG:  starting PostgreSQL 13.5 (Debian 13.5-1.pgdg110+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+db2prod                    | 2022-08-10 01:40:46.826 JST [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+db2prod                    | 2022-08-10 01:40:46.830 JST [1] LOG:  listening on IPv6 address "::", port 5432
+db2prod                    | 2022-08-10 01:40:46.837 JST [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+db2prod                    | 2022-08-10 01:40:46.845 JST [61] LOG:  database system was shut down at 2022-08-10 01:40:46 JST
+db2prod                    | 2022-08-10 01:40:46.853 JST [1] LOG:  database system is ready to accept connections
+letsencrypt2prod           | Generating a RSA private key
+letsencrypt2prod           | .........................................................................................................................++++
+letsencrypt2prod           | ......................................................................................++++
+letsencrypt2prod           | writing new private key to '/etc/nginx/certs/default.key.new'
+letsencrypt2prod           | -----
+letsencrypt2prod           | Reloading nginx docker-gen (using separate container nginx-reverse-proxy)...
+letsencrypt2prod           | {"message":"Cannot kill container: nginx-reverse-proxy: No such container: nginx-reverse-proxy"}
+letsencrypt2prod           | Reloading nginx (using separate container nginx-proxy2prod)...
+nginx-proxy2prod           | forego      | sending SIGTERM to dockergen.1
+nginx-proxy2prod           | forego      | sending SIGTERM to nginx.1
+nginx-proxy2prod           | dockergen.1 | 2022/08/10 01:40:49 Received signal: terminated
+nginx-proxy2prod           | dockergen.1 | 2022/08/10 01:40:49 Received signal: terminated
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:49 [notice] 27#27: signal 15 (SIGTERM) received from 1, exiting
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:49 [notice] 27#27: exiting
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:49 [notice] 27#27: exit
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:49 [notice] 17#17: signal 15 (SIGTERM) received from 1, exiting
+letsencrypt2prod           | Info: a default key and certificate have been created at /etc/nginx/certs/default.key and /etc/nginx/certs/default.crt.
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:49 [notice] 17#17: signal 17 (SIGCHLD) received from 27
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:49 [notice] 17#17: worker process 27 exited with code 0
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:49 [notice] 17#17: exit
+letsencrypt2prod           | Info: Setting up 4096 bits RFC7919 Diffie-Hellman group...
+nginx-proxy2prod           | letsencrypt2prod           | Reloading nginx docker-gen (using separate container nginx-reverse-proxy)...
+letsencrypt2prod           | {"message":"Cannot kill container: nginx-reverse-proxy: No such container: nginx-reverse-proxy"}
+letsencrypt2prod           | Reloading nginx (using separate container nginx-proxy2prod)...
+nginx-proxy2prod           | Warning: A custom dhparam.pem file was provided. Best practice is to use standardized RFC7919 DHE groups instead.
+nginx-proxy2prod           | forego      | starting dockergen.1 on port 5000
+nginx-proxy2prod           | forego      | starting nginx.1 on port 5100
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:50 [notice] 16#16: using the "epoll" event method
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:50 [notice] 16#16: nginx/1.21.6
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:50 [notice] 16#16: built by gcc 10.2.1 20210110 (Debian 10.2.1-6) 
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:50 [notice] 16#16: OS: Linux 5.4.0-1018-aws
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:50 [notice] 16#16: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:50 [notice] 16#16: start worker processes
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:50 [notice] 16#16: start worker process 21
+nginx-proxy2prod           | dockergen.1 | 2022/08/10 01:40:50 Generated '/etc/nginx/conf.d/default.conf' from 4 containers
+nginx-proxy2prod           | dockergen.1 | 2022/08/10 01:40:50 Running 'nginx -s reload'
+letsencrypt2prod           | 2022/08/09 16:40:50 Generated '/app/letsencrypt_service_data' from 4 containers
+letsencrypt2prod           | 2022/08/09 16:40:50 Running '/app/signal_le_service'
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:50 [notice] 16#16: signal 1 (SIGHUP) received from 23, reconfiguring
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:50 [notice] 16#16: reconfiguring
+nginx-proxy2prod           | dockergen.1 | 2022/08/10 01:40:50 Watching docker events
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:50 [notice] 16#16: using the "epoll" event method
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:50 [notice] 16#16: start worker processes
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:50 [notice] 16#16: start worker process 26
+letsencrypt2prod           | 2022/08/09 16:40:50 Watching docker events
+nginx-proxy2prod           | dockergen.1 | 2022/08/10 01:40:50 Contents of /etc/nginx/conf.d/default.conf did not change. Skipping notification 'nginx -s reload'
+letsencrypt2prod           | 2022/08/09 16:40:50 Contents of /app/letsencrypt_service_data did not change. Skipping notification '/app/signal_le_service'
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:50 [notice] 21#21: gracefully shutting down
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:50 [notice] 21#21: exiting
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:50 [notice] 21#21: exit
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:50 [notice] 16#16: signal 17 (SIGCHLD) received from 21
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:50 [notice] 16#16: worker process 21 exited with code 0
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:50 [notice] 16#16: signal 29 (SIGIO) received
+letsencrypt2prod           | https://github.com/acmesh-official/acme.sh
+letsencrypt2prod           | v2.9.0
+letsencrypt2prod           | [Tue Aug  9 16:40:51 UTC 2022] Create account key ok.
+letsencrypt2prod           | [Tue Aug  9 16:40:51 UTC 2022] Registering account: https://acme-v02.api.letsencrypt.org/directory
+letsencrypt2prod           | [Tue Aug  9 16:40:52 UTC 2022] Registered
+letsencrypt2prod           | [Tue Aug  9 16:40:52 UTC 2022] ACCOUNT_THUMBPRINT='ucQaSzkq9a1v9XB2T26psfSfshh3ob7IzSxVLKp0UcM'
+letsencrypt2prod           | Reloading nginx docker-gen (using separate container nginx-reverse-proxy)...
+letsencrypt2prod           | {"message":"Cannot kill container: nginx-reverse-proxy: No such container: nginx-reverse-proxy"}
+letsencrypt2prod           | Reloading nginx (using separate container nginx-proxy2prod)...
+nginx-proxy2prod           | forego      | sending SIGTERM to dockergen.1
+nginx-proxy2prod           | forego      | sending SIGTERM to nginx.1
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:52 [notice] 26#26: signal 15 (SIGTERM) received from 1, exiting
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:52 [notice] 26#26: exiting
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:52 [notice] 26#26: exit
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:52 [notice] 16#16: signal 15 (SIGTERM) received from 1, exiting
+nginx-proxy2prod           | dockergen.1 | 2022/08/10 01:40:52 Received signal: terminated
+nginx-proxy2prod           | dockergen.1 | 2022/08/10 01:40:52 Received signal: terminated
+letsencrypt2prod           | Creating/renewal vccmarsh.link certificates... (vccmarsh.link)
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:53 [notice] 16#16: signal 17 (SIGCHLD) received from 26
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:53 [notice] 16#16: worker process 26 exited with code 0
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:53 [notice] 16#16: exit
+nginx-proxy2prod           | letsencrypt2prod           | 2022/08/09 16:40:53 Received event die for container 30e344e36ac5
+letsencrypt2prod           | https://github.com/acmesh-official/acme.sh
+letsencrypt2prod           | v2.9.0
+nginx-proxy2prod exited with code 0
+letsencrypt2prod           | [Tue Aug  9 16:40:53 UTC 2022] Using CA: https://acme-v02.api.letsencrypt.org/directory
+letsencrypt2prod           | 2022/08/09 16:40:53 Received event start for container 30e344e36ac5
+nginx-proxy2prod           | forego      | starting dockergen.1 on port 5000
+nginx-proxy2prod           | forego      | starting nginx.1 on port 5100
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:54 [notice] 16#16: using the "epoll" event method
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:54 [notice] 16#16: nginx/1.21.6
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:54 [notice] 16#16: built by gcc 10.2.1 20210110 (Debian 10.2.1-6) 
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:54 [notice] 16#16: OS: Linux 5.4.0-1018-aws
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:54 [notice] 16#16: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:54 [notice] 16#16: start worker processes
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:54 [notice] 16#16: start worker process 21
+letsencrypt2prod           | [Tue Aug  9 16:40:54 UTC 2022] Creating domain key
+nginx-proxy2prod           | dockergen.1 | 2022/08/10 01:40:54 Contents of /etc/nginx/conf.d/default.conf did not change. Skipping notification 'nginx -s reload'
+nginx-proxy2prod           | dockergen.1 | 2022/08/10 01:40:54 Watching docker events
+nginx-proxy2prod           | dockergen.1 | 2022/08/10 01:40:54 Contents of /etc/nginx/conf.d/default.conf did not change. Skipping notification 'nginx -s reload'
+letsencrypt2prod           | [Tue Aug  9 16:40:54 UTC 2022] The domain key is here: /etc/acme.sh/oppe5388@yahoo.co.jp/vccmarsh.link/vccmarsh.link.key
+letsencrypt2prod           | [Tue Aug  9 16:40:54 UTC 2022] Single domain='vccmarsh.link'
+letsencrypt2prod           | [Tue Aug  9 16:40:54 UTC 2022] Getting domain auth token for each domain
+letsencrypt2prod           | [Tue Aug  9 16:40:56 UTC 2022] Getting webroot for domain='vccmarsh.link'
+letsencrypt2prod           | [Tue Aug  9 16:40:56 UTC 2022] Verifying: vccmarsh.link
+nginx-proxy2prod           | nginx.1     | vccmarsh.link 23.178.112.107 - - [10/Aug/2022:01:40:57 +0900] "GET /.well-known/acme-challenge/4yQDjksVcpsiKVTGhBdD91f8WL2wJz8m3WGG7bbQuTY HTTP/1.1" 404 153 "-" "Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)" "-"
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:57 [error] 21#21: *1 open() "/code/static/404.html" failed (2: No such file or directory), client: 23.178.112.107, server: vccmarsh.link, request: "GET /.well-known/acme-challenge/4yQDjksVcpsiKVTGhBdD91f8WL2wJz8m3WGG7bbQuTY HTTP/1.1", host: "vccmarsh.link"
+nginx-proxy2prod           | nginx.1     | vccmarsh.link 52.12.201.247 - - [10/Aug/2022:01:40:57 +0900] "GET /.well-known/acme-challenge/4yQDjksVcpsiKVTGhBdD91f8WL2wJz8m3WGG7bbQuTY HTTP/1.1" 404 153 "-" "Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)" "-"
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:57 [error] 21#21: *2 open() "/code/static/404.html" failed (2: No such file or directory), client: 52.12.201.247, server: vccmarsh.link, request: "GET /.well-known/acme-challenge/4yQDjksVcpsiKVTGhBdD91f8WL2wJz8m3WGG7bbQuTY HTTP/1.1", host: "vccmarsh.link"
+letsencrypt2prod           | 2022/08/09 16:40:58 Debounce minTimer fired
+letsencrypt2prod           | 2022/08/09 16:40:58 Contents of /app/letsencrypt_service_data did not change. Skipping notification '/app/signal_le_service'
+letsencrypt2prod           | [Tue Aug  9 16:40:59 UTC 2022] vccmarsh.link:Verify error:54.178.174.211: Invalid response from http://vccmarsh.link/.well-known/acme-challenge/4yQDjksVcpsiKVTGhBdD91f8WL2wJz8m3WGG7bbQuTY: 404
+letsencrypt2prod           | <html>
+letsencrypt2prod           | <head><title>404 Not Found</title></head>
+letsencrypt2prod           | <body>
+letsencrypt2prod           | <center><h1>404 Not Found</h1></center>
+letsencrypt2prod           | <hr><center>nginx/1.21.6</center>
+letsencrypt2prod           | </body>
+letsencrypt2prod           | </html>
+nginx-proxy2prod           | nginx.1     | vccmarsh.link 54.178.174.211 - - [10/Aug/2022:01:40:59 +0900] "GET /.well-known/acme-challenge/4yQDjksVcpsiKVTGhBdD91f8WL2wJz8m3WGG7bbQuTY HTTP/1.1" 404 153 "-" "acme.sh/2.9.0 (https://github.com/acmesh-official/acme.sh)" "-"
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:40:59 [error] 21#21: *3 open() "/code/static/404.html" failed (2: No such file or directory), client: 54.178.174.211, server: vccmarsh.link, request: "GET /.well-known/acme-challenge/4yQDjksVcpsiKVTGhBdD91f8WL2wJz8m3WGG7bbQuTY HTTP/1.1", host: "vccmarsh.link"
+letsencrypt2prod           | [Tue Aug  9 16:40:59 UTC 2022] Please check log file for more details: /dev/null
+letsencrypt2prod           | Creating/renewal vccmarsh.link certificates... (vccmarsh.link)
+letsencrypt2prod           | https://github.com/acmesh-official/acme.sh
+letsencrypt2prod           | v2.9.0
+letsencrypt2prod           | [Tue Aug  9 16:41:00 UTC 2022] Using CA: https://acme-v02.api.letsencrypt.org/directory
+letsencrypt2prod           | [Tue Aug  9 16:41:01 UTC 2022] Creating domain key
+letsencrypt2prod           | [Tue Aug  9 16:41:02 UTC 2022] The domain key is here: /etc/acme.sh/oppe5388@yahoo.co.jp/vccmarsh.link/vccmarsh.link.key
+letsencrypt2prod           | [Tue Aug  9 16:41:02 UTC 2022] Single domain='vccmarsh.link'
+letsencrypt2prod           | [Tue Aug  9 16:41:02 UTC 2022] Getting domain auth token for each domain
+letsencrypt2prod           | [Tue Aug  9 16:41:04 UTC 2022] Getting webroot for domain='vccmarsh.link'
+letsencrypt2prod           | [Tue Aug  9 16:41:04 UTC 2022] Verifying: vccmarsh.link
+nginx-proxy2prod           | nginx.1     | vccmarsh.link 52.12.201.247 - - [10/Aug/2022:01:41:05 +0900] "GET /.well-known/acme-challenge/cpKgPljrKTb-Pvw1FEqS-uKTQLihGXjE8Qh4Is50wcA HTTP/1.1" 404 153 "-" "Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)" "-"
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:41:05 [error] 21#21: *4 open() "/code/static/404.html" failed (2: No such file or directory), client: 52.12.201.247, server: vccmarsh.link, request: "GET /.well-known/acme-challenge/cpKgPljrKTb-Pvw1FEqS-uKTQLihGXjE8Qh4Is50wcA HTTP/1.1", host: "vccmarsh.link"
+nginx-proxy2prod           | nginx.1     | vccmarsh.link 23.178.112.103 - - [10/Aug/2022:01:41:05 +0900] "GET /.well-known/acme-challenge/cpKgPljrKTb-Pvw1FEqS-uKTQLihGXjE8Qh4Is50wcA HTTP/1.1" 404 153 "-" "Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)" "-"
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:41:05 [error] 21#21: *5 open() "/code/static/404.html" failed (2: No such file or directory), client: 23.178.112.103, server: vccmarsh.link, request: "GET /.well-known/acme-challenge/cpKgPljrKTb-Pvw1FEqS-uKTQLihGXjE8Qh4Is50wcA HTTP/1.1", host: "vccmarsh.link"
+nginx-proxy2prod           | nginx.1     | vccmarsh.link 18.119.103.108 - - [10/Aug/2022:01:41:05 +0900] "GET /.well-known/acme-challenge/cpKgPljrKTb-Pvw1FEqS-uKTQLihGXjE8Qh4Is50wcA HTTP/1.1" 404 153 "-" "Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)" "-"
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:41:05 [error] 21#21: *6 open() "/code/static/404.html" failed (2: No such file or directory), client: 18.119.103.108, server: vccmarsh.link, request: "GET /.well-known/acme-challenge/cpKgPljrKTb-Pvw1FEqS-uKTQLihGXjE8Qh4Is50wcA HTTP/1.1", host: "vccmarsh.link"
+nginx-proxy2prod           | nginx.1     | vccmarsh.link 35.158.93.116 - - [10/Aug/2022:01:41:05 +0900] "GET /.well-known/acme-challenge/cpKgPljrKTb-Pvw1FEqS-uKTQLihGXjE8Qh4Is50wcA HTTP/1.1" 404 153 "-" "Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)" "-"
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:41:05 [error] 21#21: *7 open() "/code/static/404.html" failed (2: No such file or directory), client: 35.158.93.116, server: vccmarsh.link, request: "GET /.well-known/acme-challenge/cpKgPljrKTb-Pvw1FEqS-uKTQLihGXjE8Qh4Is50wcA HTTP/1.1", host: "vccmarsh.link"
+letsencrypt2prod           | [Tue Aug  9 16:41:07 UTC 2022] vccmarsh.link:Verify error:54.178.174.211: Invalid response from http://vccmarsh.link/.well-known/acme-challenge/cpKgPljrKTb-Pvw1FEqS-uKTQLihGXjE8Qh4Is50wcA: 404
+nginx-proxy2prod           | nginx.1     | vccmarsh.link 54.178.174.211 - - [10/Aug/2022:01:41:07 +0900] "GET /.well-known/acme-challenge/cpKgPljrKTb-Pvw1FEqS-uKTQLihGXjE8Qh4Is50wcA HTTP/1.1" 404 153 "-" "acme.sh/2.9.0 (https://github.com/acmesh-official/acme.sh)" "-"
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:41:07 [error] 21#21: *8 open() "/code/static/404.html" failed (2: No such file or directory), client: 54.178.174.211, server: vccmarsh.link, request: "GET /.well-known/acme-challenge/cpKgPljrKTb-Pvw1FEqS-uKTQLihGXjE8Qh4Is50wcA HTTP/1.1", host: "vccmarsh.link"
+letsencrypt2prod           | <html>
+letsencrypt2prod           | <head><title>404 Not Found</title></head>
+letsencrypt2prod           | <body>
+letsencrypt2prod           | <center><h1>404 Not Found</h1></center>
+letsencrypt2prod           | <hr><center>nginx/1.21.6</center>
+letsencrypt2prod           | </body>
+letsencrypt2prod           | </html>
+letsencrypt2prod           | [Tue Aug  9 16:41:07 UTC 2022] Please check log file for more details: /dev/null
+letsencrypt2prod           | Creating/renewal vccmarsh.link certificates... (vccmarsh.link)
+letsencrypt2prod           | https://github.com/acmesh-official/acme.sh
+letsencrypt2prod           | v2.9.0
+letsencrypt2prod           | [Tue Aug  9 16:41:09 UTC 2022] Using CA: https://acme-v02.api.letsencrypt.org/directory
+letsencrypt2prod           | [Tue Aug  9 16:41:09 UTC 2022] Creating domain key
+letsencrypt2prod           | [Tue Aug  9 16:41:09 UTC 2022] The domain key is here: /etc/acme.sh/oppe5388@yahoo.co.jp/vccmarsh.link/vccmarsh.link.key
+letsencrypt2prod           | [Tue Aug  9 16:41:09 UTC 2022] Single domain='vccmarsh.link'
+letsencrypt2prod           | [Tue Aug  9 16:41:09 UTC 2022] Getting domain auth token for each domain
+letsencrypt2prod           | [Tue Aug  9 16:41:11 UTC 2022] Getting webroot for domain='vccmarsh.link'
+letsencrypt2prod           | [Tue Aug  9 16:41:11 UTC 2022] Verifying: vccmarsh.link
+nginx-proxy2prod           | nginx.1     | vccmarsh.link 52.12.201.247 - - [10/Aug/2022:01:41:12 +0900] "GET /.well-known/acme-challenge/_XzHArm9prmG2jD1aUBjMm_1FemiHMPiXR0qrHDELJM HTTP/1.1" 404 153 "-" "Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)" "-"
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:41:12 [error] 21#21: *9 open() "/code/static/404.html" failed (2: No such file or directory), client: 52.12.201.247, server: vccmarsh.link, request: "GET /.well-known/acme-challenge/_XzHArm9prmG2jD1aUBjMm_1FemiHMPiXR0qrHDELJM HTTP/1.1", host: "vccmarsh.link"
+nginx-proxy2prod           | nginx.1     | vccmarsh.link 18.119.103.108 - - [10/Aug/2022:01:41:12 +0900] "GET /.well-known/acme-challenge/_XzHArm9prmG2jD1aUBjMm_1FemiHMPiXR0qrHDELJM HTTP/1.1" 404 153 "-" "Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)" "-"
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:41:12 [error] 21#21: *10 open() "/code/static/404.html" failed (2: No such file or directory), client: 18.119.103.108, server: vccmarsh.link, request: "GET /.well-known/acme-challenge/_XzHArm9prmG2jD1aUBjMm_1FemiHMPiXR0qrHDELJM HTTP/1.1", host: "vccmarsh.link"
+nginx-proxy2prod           | nginx.1     | vccmarsh.link 23.178.112.208 - - [10/Aug/2022:01:41:12 +0900] "GET /.well-known/acme-challenge/_XzHArm9prmG2jD1aUBjMm_1FemiHMPiXR0qrHDELJM HTTP/1.1" 404 153 "-" "Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)" "-"
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:41:12 [error] 21#21: *11 open() "/code/static/404.html" failed (2: No such file or directory), client: 23.178.112.208, server: vccmarsh.link, request: "GET /.well-known/acme-challenge/_XzHArm9prmG2jD1aUBjMm_1FemiHMPiXR0qrHDELJM HTTP/1.1", host: "vccmarsh.link"
+nginx-proxy2prod           | nginx.1     | vccmarsh.link 35.158.93.116 - - [10/Aug/2022:01:41:12 +0900] "GET /.well-known/acme-challenge/_XzHArm9prmG2jD1aUBjMm_1FemiHMPiXR0qrHDELJM HTTP/1.1" 404 153 "-" "Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)" "-"
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:41:12 [error] 21#21: *12 open() "/code/static/404.html" failed (2: No such file or directory), client: 35.158.93.116, server: vccmarsh.link, request: "GET /.well-known/acme-challenge/_XzHArm9prmG2jD1aUBjMm_1FemiHMPiXR0qrHDELJM HTTP/1.1", host: "vccmarsh.link"
+letsencrypt2prod           | [Tue Aug  9 16:41:14 UTC 2022] vccmarsh.link:Verify error:54.178.174.211: Invalid response from http://vccmarsh.link/.well-known/acme-challenge/_XzHArm9prmG2jD1aUBjMm_1FemiHMPiXR0qrHDELJM: 404
+nginx-proxy2prod           | nginx.1     | vccmarsh.link 54.178.174.211 - - [10/Aug/2022:01:41:14 +0900] "GET /.well-known/acme-challenge/_XzHArm9prmG2jD1aUBjMm_1FemiHMPiXR0qrHDELJM HTTP/1.1" 404 153 "-" "acme.sh/2.9.0 (https://github.com/acmesh-official/acme.sh)" "-"
+nginx-proxy2prod           | nginx.1     | 2022/08/10 01:41:14 [error] 21#21: *13 open() "/code/static/404.html" failed (2: No such file or directory), client: 54.178.174.211, server: vccmarsh.link, request: "GET /.well-known/acme-challenge/_XzHArm9prmG2jD1aUBjMm_1FemiHMPiXR0qrHDELJM HTTP/1.1", host: "vccmarsh.link"
+letsencrypt2prod           | <html>
+letsencrypt2prod           | <head><title>404 Not Found</title></head>
+letsencrypt2prod           | <body>
+letsencrypt2prod           | <center><h1>404 Not Found</h1></center>
+letsencrypt2prod           | <hr><center>nginx/1.21.6</center>
+letsencrypt2prod           | </body>
+letsencrypt2prod           | </html>
+letsencrypt2prod           | [Tue Aug  9 16:41:14 UTC 2022] Please check log file for more details: /dev/null
+letsencrypt2prod           | Sleep for 3600s
