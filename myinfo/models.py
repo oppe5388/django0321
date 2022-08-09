@@ -307,22 +307,18 @@ class Note(models.Model):
         verbose_name_plural = "個人ノート"
 
 
-# # 発送日のための手動休日日
-# class MailHoliday(models.Model):
-#     non_mail_date = models.DateField(auto_now_add=False)
+# 発送日のための手動休日日
+class Holiday(models.Model):
+    CHOICES = [
+            ("1", "発送なし"),
+            ("2", "VCC休み"),
+            ("3", "非表示にする日"),
+        ]
+    title = models.CharField(max_length=100, choices=CHOICES, verbose_name="分類")
+    non_date = models.DateField(auto_now_add=False, verbose_name="対象日")
 
-#     def __str__(self):
-#         return self.non_mail_date
+    def __str__(self):
+        return str(self.title)
 
-#     class Meta:
-#         verbose_name_plural = "発送なし日"
-
-# # 発送日のための手動休日日
-# class VcclHoliday(models.Model):
-#     non_vcc_date = models.DateField(auto_now_add=False)
-
-#     def __str__(self):
-#         return self.non_vcc_date
-
-#     class Meta:
-#         verbose_name_plural = "VCC休(+発送日非表示)"
+    class Meta:
+        verbose_name_plural = "休業日"

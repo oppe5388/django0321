@@ -212,3 +212,20 @@ class OneSignalUserAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = OneSignalUserResource
 
 admin.site.register(OneSignalUser, OneSignalUserAdmin)
+
+
+# 休業日
+class HolidayResource(ModelResource):
+    class Meta:
+        model = Holiday
+        skip_unchanged = True
+        import_id_fields = ['id']
+
+#インポート、エクスポート
+class HolidayAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ('title','non_date')
+    ordering = ('-non_date',)
+    resource_class = HolidayResource
+    list_filter = ('title','non_date')
+
+admin.site.register(Holiday, HolidayAdmin)
