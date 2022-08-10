@@ -8,14 +8,14 @@ django-import-export==2.7.0
 django-cleanup==5.2.0
 django-imagekit==4.1.0
 Pillow==8.4.0
-psycopg2-binary
-gunicorn
-django-datatables-view
+psycopg2-binary==2.9.3
+gunicorn==20.1.0
+django-datatables-view==1.20.0
 # django-filebrowser
-django-tinymce
-django-dbbackup
-python-dateutil
+django-tinymce==3.4.0
+django-dbbackup==4.0.1
+python-dateutil==2.8.2
 # django-crontab
 # django-ajax-datatable
-requests
-jpbizday
+requests==2.28.1
+jpbizday==0.0.3
