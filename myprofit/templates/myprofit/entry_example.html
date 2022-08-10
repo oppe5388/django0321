@@ -8,6 +8,10 @@
   background: #c4dbff;
 }
 </style>
+<!-- フローチャート用-->
+<link rel="stylesheet" href="https://unpkg.com/mermaid/dist/mermaid.min.css">
+
+
 {% endblock %}
 
 {% block breadcrumb %}
@@ -18,6 +22,40 @@
 {% endblock %}
 
 {% block mainpanel %}
+
+
+<button type="button" class="btn btn-primary btn-rounded p-1 ml-1 mb-2" id="flow_disp" >まとめ</button>
+<button type="button" class="btn btn-primary btn-rounded p-1 ml-1 mb-2" id="flow_hide" >まとめ</button>
+<div id="flow_block" class="card mb-2">
+  <div class="mermaid h6">
+    graph LR;
+      A(氏名)-->B(アポストロフィーを確認);
+  </div>
+  <div class="mermaid h6 ">
+    graph LR;
+      A(メールアドレス)-->B(アットマークとドットを確認);
+  </div>
+  <div class="mermaid h6">
+    graph LR;
+      A(車種クラスとサービス商品が黄色) --> |"基本3桁も黄色"|B(基本の1から4を参照);
+      A --> |"入会コースも黄色"|C(入会コースの1から4を参照);
+  </div>
+  <div class="mermaid h6">
+    graph LR;
+      A(登録番号)-->B(PROFIT修正);
+  </div>
+  <div class="mermaid h6">
+    graph LR;
+      A(車検満了日)-->B(未来日にする);
+  </div>
+  <div class="mermaid h6 ">
+    graph LR;
+      A(金額)-->B(ブランクにする);
+  </div>
+
+</div>
+
+
   <form class="" action='#' method='get' id="view1">
     {% comment %} <input type="hidden" name="route" id="route" value="{{route}}">
     <input type="hidden" name="cert_no" id="hidden_no" value="{{cert_no}}">
@@ -75,7 +113,7 @@
           </div>
           <div class="d-flex flex-nowrap">
             <span class="col-3 mb-1"><span id="kanji_error" class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-              data-content="アポストロフィーは不可<br>⇒代わりに「´」または「′」を使う
+              data-content="アポストロフィーは不可<br>⇒代わりに「´」または「′」を使う。<br>案内方法：変換候補に[全]も[半]もない記号です
               " ><i class="fa fa-info-circle"></i> 氏名<span class="small">(漢字)</span></span>
             </span>
             <span class="text-primary">※</span>
@@ -486,6 +524,9 @@
         $('#sidebar').removeClass('bg-white');//紺色に
         $('#case_btn').hide();//Sampleボタン非表示
 
+        $('#flow_hide').hide();//非表示
+        $('#flow_block').fadeOut(200);//非表示
+
       
         //はじめは非表示
         $('#price_error2').hide();
@@ -829,6 +870,19 @@
     $("#order_no").val("N123A9999");
 
   });
+
+  //フロー表示ボタン
+  $('#flow_disp').click(function() {
+    $('#flow_block').fadeIn(500);
+    $('#flow_hide').show();
+    $('#flow_disp').hide();
+  });
+  //フロー非表示ボタン
+  $('#flow_hide').click(function() {
+    $('#flow_block').fadeOut(500);
+    $('#flow_disp').show();
+    $('#flow_hide').hide();
+  });
 </script>
 
 
@@ -839,6 +893,15 @@
     let option = 'width=360,height=440,left=100,top=100'
       let newwin = open('{% url 'myprofit:car' %}','mywindow', option);
   });
+</script>
+
+<!-- フローチャート用-->
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js" charset="UTF-8"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad:true,
+  });
+
 </script>
 
 {% endblock %}
