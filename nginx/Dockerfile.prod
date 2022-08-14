@@ -2,4 +2,5 @@ FROM jwilder/nginx-proxy
 COPY vhost.d/default /etc/nginx/vhost.d/default
 COPY custom.conf /etc/nginx/conf.d/custom.conf
 COPY OneSignalSDKWorker.js /usr/share/nginx/html/OneSignalSDKWorker.js
-COPY html/custom_pages/ /etc/nginx/html/custom_pages/
+#COPY html/custom_pages/ /etc/nginx/html/custom_pages/#これでは500エラーになってしまった
+RUN mkdir -p /etc/nginx/html/custom_pages/
