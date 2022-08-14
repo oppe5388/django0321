@@ -1,18 +1,144 @@
-{% extends 'layout.html' %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="ja">
 
-    <!-- Begin Page Content -->
-    <div class="container-fluid">
+<head>
 
-        <!-- 404 Error Text -->
-        <div class="text-center">
-            <div class="error mx-auto" data-text="404">404</div>
-            <p class="lead text-gray-800 mb-5">Page Not Found</p>
-            <p class="text-gray-500 mb-0">It looks like you found a glitch in the matrix...</p>
-            <a href="">&larr; Back to Dashboard</a>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>VCC</title>
+
+    <!-- Custom fonts for this template-->
+    <!-- <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> -->
+    <link href="../SBadmin2_origin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link rel="stylesheet" href="../SBadmin2_origin/css/sb-admin-2.css">
+
+    <!-- Custom styles for this page -->
+    <link href="../SBadmin2_origin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+   <!-- ウィジェットのcssとjs -->
+   <link href="../accordion.css" rel="stylesheet">
+   <script src="../accordion.js"></script>
+   
+   <!-- favicon -->
+    <link rel="icon" href="../icon/favicon.ico">
+
+
+    <style>
+        .modal-dialog-fluid {
+            max-width: inherit;
+            margin-left: 10%;
+            margin-right: 10%;
+          }
+
+        /* チェックボックス大きく */
+        input[type="checkbox"]{
+        transform: scale(1.2);
+        }
+        /* ラジオボタンも大きく */
+        input[type="radio"]{
+        transform: scale(1.2);
+        }
+    </style>
+
+    <!-- 特定ユーザーデスクトップ通知 -->
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    <!-- ajaxのpostなので↓ -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href='#'>
+                <div class="sidebar-brand-text mx-3">VCC MARSH</div>
+            </a>
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+            <!-- Heading -->
+            <div class="sidebar-heading">
+            </div>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- 404 Error Text -->
+                    <div class="text-center">
+                        <div class="error mx-auto" data-text="404">404</div>
+                        <p class="lead text-gray-800 mb-5">Page Not Found</p>
+                        <p class="text-gray-500 mb-0">It looks like you found a glitch in the matrix...</p>
+                        <a href="">&larr; Back to Dashboard</a>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; VccMarsh</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
         </div>
+        <!-- End of Content Wrapper -->
 
     </div>
-    <!-- /.container-fluid -->
+    <!-- End of Page Wrapper -->
 
-{% endblock %}
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="../SBadmin2_origin/vendor/jquery/jquery.min.js"></script>
+    <script src="../SBadmin2_origin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="../SBadmin2_origin/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="../SBadmin2_origin/js/sb-admin-2.js"></script>
+
+
+</body>
+
+</html>
