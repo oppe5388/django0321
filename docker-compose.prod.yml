@@ -14,7 +14,8 @@ services:
       - media_volume:/code/media
     expose:
       - 8000
-    command: gunicorn mysite.wsgi:application --bind 0.0.0.0:8000
+    # command: gunicorn mysite.wsgi:application --bind 0.0.0.0:8000 #これで運用していた
+    command: bash -c "python manage.py migrate && gunicorn mysite.wsgi:application --bind 0.0.0.0:8000"
     depends_on:
       - db
     env_file:
