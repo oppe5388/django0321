@@ -108,7 +108,7 @@ class Information(models.Model):
     #         'app_id': '6027ee57-82ec-485b-a5a5-6c976de75cb1',
     #         'included_segments': ['All'],
     #         'contents': {'en': self.title},
-    #         'headings': {'en': 'VccMarshより'},
+    #         'headings': {'en': '●●より'},
     #         'url': resolve_url('myinfo:detail', pk=self.pk),
     #     }
     #     requests.post(
