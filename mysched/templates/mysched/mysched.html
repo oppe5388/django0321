@@ -48,6 +48,7 @@
     </div>
 </div> {% endcomment %}
 
+<div class="d-flex"><!-- カード幅を幅いっぱいにしない -->
 <div class="card shadow mb-4">
     <div class="card-header align-items-center">
         <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-wallet"></i> 長得の申込できる日 
@@ -126,8 +127,10 @@
 
     </div>
 </div>
+</div>><!-- カード幅を幅いっぱいにしない終わり -->
 
-<div class="card shadow mb-4">
+<div class="d-flex flex-wrap"><!-- 幅広なら横並びになるように追加した -->
+<div class="card shadow mb-4 mr-1">
     <div class="card-header py-3 align-items-center">
         <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-file-invoice-dollar"></i> 到着〆と送金予定日</h6>
     </div>
@@ -189,8 +192,10 @@
 
     <div class="card-body">
         <div><label class="text-primary">登録日を選択
-            <span class="mb-2 ml-2 small text-secondary">検索対象：{{ first_date|date:"Y-m-d(D)" }}〜{{ last_date|date:"Y-m-d(D)" }}</span>
+
         </label></div>
+        <div class="mb-2 ml-2 small text-secondary">検索対象：{{ first_date|date:"Y-m-d(D)" }}〜{{ last_date|date:"Y-m-d(D)" }}</div>
+
 
         <form class="d-sm-inline-block form-inline mr-auto" action='{% url "mysched:mysched" %}' method='get'>
             <div class="input-group mb-2 ml-2">
@@ -214,7 +219,8 @@
     
 <!-- Ajax用 -->
     <div class="card-body pt-0" id="ajax_disp">
-        <div class="text-primary">解約・発行キャンセル<span class=" ml-2 small text-secondary">キャンセル後の再申込は、承認日の翌日から可と案内</span></div>
+        <div class="text-primary">解約・発行キャンセル</div>
+            <div class=" ml-2 small text-secondary">キャンセル後の再申込は、承認日の翌日から可と案内</div>
             <div id="ajax_result1" class="d-flex flex-row">
                 <div class="ml-2 align-self-end">
                     <button onclick="copyToClipboard('ajax_add1')" class="btn btn-outline-primary mr-1">
@@ -243,6 +249,8 @@
 
 
 </div>
+
+</div><!-- 幅広なら横並びになるように、終わり -->
 
 {% endblock %}
 
