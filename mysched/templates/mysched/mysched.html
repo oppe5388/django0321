@@ -60,34 +60,69 @@
     <div class="card-body">
         
         {% comment %} <p>現在、初度<span class="text-primary" id="ago54"></span>までの車両が申込できます。</p> {% endcomment %}
+        <div class="btn btn-sm btn-primary rounded-pill mb-2" id="now">Now</div>
 
-        <label class="form-label mb-0">初度登録</label>
-        <div class="d-flex flex-row">
-            <div class="">
-                <select id="year_select" class="form-control mb-2">
-                    <option>- 年 -</option>
-                    <option value="" id="year-6"></option>
-                    <option value="" id="year-5"></option>
-                    <option value="" id="year-4"></option>
-                    <option value="" id="year-3"></option>
-                    <option value="" id="year-2"></option>
-                    <option value="" id="year-1"></option>
-                    <option value="" id="year0"></option>
-                </select>
+        <div class="d-flex flex-row align-items-center">
+
+            <div class="col-5">
+                <label class="form-label mb-0">申込OK</label>
+                <div class="d-flex flex-row" id="entry_block">
+                    <div class="">
+                        <select id="entry_year" class="form-control mb-2">
+                            <option>- 年 -</option>
+                        </select>
+                    </div>
+                    <div class="">
+                        <select id="entry_month" class="form-control">
+                            <option>- 月 -</option>
+                            {% with ''|center:12 as range %}
+                            {% for _ in range %}
+                                <option value="{{ forloop.counter }}">{{ forloop.counter }}月1日</option>
+                            {% endfor %}
+                            {% endwith %}
+                        </select>
+                    </div>
+                </div>
             </div>
-            <div class="">
-                <select id="month_select" class="form-control">
-                    <option>- 月 -</option>
-                    {% with ''|center:12 as range %}
-                    {% for _ in range %}
-                        <option value="{{ forloop.counter }}">{{ forloop.counter }}月</option>
-                    {% endfor %}
-                    {% endwith %}
-                </select>
+
+            <div class="col-1 d-flex align-items-center">
+                <div class="mx-auto">
+                    <i class="fas fa-arrows-alt-h fa-2x"></i>
+                </div>
             </div>
+
+            <div class="col-5">
+                <label class="form-label mb-0">初度登録</label>
+                <div class="d-flex flex-row" id="shodo_block">
+                    <div class="">
+                        <select id="year_select" class="form-control mb-2">
+                            <option>- 年 -</option>
+                            <option value="" id="year-6"></option>
+                            <option value="" id="year-5"></option>
+                            <option value="" id="year-4"></option>
+                            <option value="" id="year-3"></option>
+                            <option value="" id="year-2"></option>
+                            <option value="" id="year-1"></option>
+                            <option value="" id="year0"></option>
+                        </select>
+                    </div>
+                    <div class="">
+                        <select id="month_select" class="form-control">
+                            <option>- 月 -</option>
+                            {% with ''|center:12 as range %}
+                            {% for _ in range %}
+                                <option value="{{ forloop.counter }}">{{ forloop.counter }}月</option>
+                            {% endfor %}
+                            {% endwith %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
         </div>
-        
-        <p id="target"></p>
+
+        {% comment %} <p id="target"></p> {% endcomment %}
+        {% comment %} <p id="target2"></p> {% endcomment %}
 
     </div>
 </div>
@@ -258,9 +293,8 @@ function change_to_wareki(date){
 <script>
 
     //初度プルダウンから申込年月表示の関数
-    function myfunc() {
+    function shodoToEntry() {
         var shodo_date = '';
-        var text = '';
 
         var year = document.getElementById('year_select').value;;
         var month = document.getElementById('month_select').value;;
@@ -272,11 +306,50 @@ function change_to_wareki(date){
             //+54ヶ月の和暦
             var later54 = moment(shodo_date).add(53, 'months');
             var wareki_later54 = change_to_wareki(new Date(moment(later54)));
-            var kekka = "→ <span class='text-primary'>" + later54.format("YYYY")+"年("+wareki_later54+")"+later54.format("M")+"月1日</span>から申込できます。"
-            text = kekka;
+            //var kekka = "→ <span class='text-primary'>" + later54.format("YYYY")+"年("+wareki_later54+")"+later54.format("M")+"月1日</span>から申込できます。"
+            var later54_year = later54.format("YYYY")+"年("+wareki_later54+")"
+            var later54_month = later54.format("M")
+
+            //基準：こちらが表示位置
+            $('#entry_block').hide();
+            $('#entry_year').val(later54.format("YYYY"));
+            $('#entry_month').val(later54_month);
+            $('#entry_block').slideDown();
+
         }
-        target.innerHTML = text;
+        //target.innerHTML = later54_year + later54_month;
+        
     }
+
+    //初度プルダウンから申込年月表示の関数
+    
+    function entryToShodo() {
+        var entry_date = '';
+
+        var year = document.getElementById('entry_year').value;;
+        var month = document.getElementById('entry_month').value;;
+        var entry_date = new Date(year, month, 1);
+
+        //日付だったら
+        if (entry_date.toString() !== "Invalid Date") {
+
+            //-54ヶ月の和暦
+            var ago54 = moment(entry_date).add(-55, 'months');
+            var wareki_ago54 = change_to_wareki(new Date(moment(ago54)));
+            var ago54_year = ago54.format("YYYY")+"年("+wareki_ago54+")"
+            var ago54_month = ago54.format("M")
+
+            //基準：こちらが表示位置
+            $('#shodo_block').hide();
+            $('#year_select').val(ago54.format("YYYY"));
+            $('#month_select').val(ago54_month);
+            $('#shodo_block').slideDown();
+
+        }
+        //target2.innerHTML = ago54_year + ago54_month;
+        
+    }
+    
 
 
     // ページ読み込み時
@@ -294,6 +367,12 @@ function change_to_wareki(date){
         var wareki1 = change_to_wareki(new Date(moment(year1)));
         var year12 = moment().subtract(6, 'y').endOf('year').format("YYYY-MM-DD");// 12月31日
         var wareki12 = change_to_wareki(new Date(moment(year12)));
+
+        //申込の方：年
+        var entry_year1 = moment(year1).add(54, 'months').startOf('year').format("YYYY");//
+        var entry_wareki1 = change_to_wareki(new Date(moment(entry_year1)));
+        var entry_year12 = moment(year1).add(54, 'months').endOf('year').format("YYYY-MM-DD");// 12月31日
+        var entry_wareki12 = change_to_wareki(new Date(moment(entry_year12)));
     
         for (let i = -6; i < 2; i++) {
             //value代入
@@ -319,23 +398,57 @@ function change_to_wareki(date){
 
         var ago54_year = ago54.format("YYYY");
         var ago54_month = ago54.format("M");
-        {% comment %} alert (ago54_year); {% endcomment %}
+
         //初期値を今月申込可能な年月に。
         $('#year_select').val(ago54_year);
         $('#month_select').val(ago54_month);
 
+
+        //申込の方のプルダウン：年
+        for (let i = 0; i < 7; i++) {
+            //1月と12月の和暦が違ったら併記
+            if (entry_wareki1 == entry_wareki12) {
+                var entry_year = entry_year1+"年("+entry_wareki1+")";
+            } else {
+                var entry_year = entry_year1+"年("+entry_wareki1+"/"+entry_wareki12+")";
+            };
+            
+            $('#entry_year').append($('<option>').attr({ value: entry_year1 }).text(entry_year));
+
+            var entry_year1 = moment(entry_year1).add(1, 'y').format("YYYY");// 1月1日
+            var entry_wareki1 = change_to_wareki(new Date(moment(entry_year1)));
+            var entry_year12 = moment(entry_year12).add(1, 'y').format("YYYY-MM-DD");// 12月1日
+            var entry_wareki12 = change_to_wareki(new Date(moment(entry_year12)));
+        }
+        
         //関数呼び出し
-        myfunc();
+        shodoToEntry();
 
     });
 
+    //Nowボタン
+    $('#now').click(function() {
+        var now_year = moment().format("YYYY");//
+        var now_month = moment().format("M");//
+        $('#entry_year').val(now_year);
+        $('#entry_month').val(now_month);
+        entryToShodo();
+    });
 
-    //プルダウン変更されたら
+
+    //初度プルダウン変更されたら
     let year = document.getElementById('year_select');
-    year.onchange = myfunc;
+    year.onchange = shodoToEntry;
 
     let month = document.getElementById('month_select');
-    month.onchange = myfunc;
+    month.onchange = shodoToEntry;
+
+    //申込プルダウン変更されたら：
+    let entry_year = document.getElementById('entry_year');
+    entry_year.onchange = entryToShodo;
+
+    let entry_month = document.getElementById('entry_month');
+    entry_month.onchange = entryToShodo;
 
 </script>
 
