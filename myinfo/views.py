@@ -34,6 +34,9 @@ from django.utils.html import strip_tags
 
 import requests
 
+from django.views.generic import TemplateView
+
+
 #個別ブラウザ通知のために、許可時にモデルにonesignalのidを登録
 def onegisnal_id_create(request):
     onesignal_user_id = request.POST['id']
@@ -664,7 +667,7 @@ class ContactsJsonView(BaseDatatableView):
                     )
         return qs
 
-
+# 未使用？
 class DealersJsonView(BaseDatatableView):
     # モデルの指定
     model = Dealers
@@ -765,6 +768,15 @@ class ShopsJsonView(BaseDatatableView):
                         Q(kana__icontains=part)
                     )
         return qs
+
+# 販社一覧のcontextを渡すために用意
+class Shops(TemplateView):
+    template_name = 'myinfo/shops.html'
+ 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['dealers_set'] = Dealers.objects.all().order_by('id')
+        return context
 
 # django-ajax-datatable中止
 # def contacts(request):
