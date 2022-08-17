@@ -82,7 +82,7 @@ class Information(models.Model):
     updated_at = models.DateTimeField(auto_now_add=False)#更新するしないでソートをコントロールするため
     is_draft = models.BooleanField(default=False, blank=True, help_text='下書き')
     for_search = models.CharField(max_length=100, null=True, blank=True)
-    non_html = models.CharField(max_length=2000, null=True, blank=True)
+    non_html = models.TextField(null=True, blank=True)
      
     def __str__(self):
         return self.title
@@ -276,7 +276,7 @@ class Faqs(models.Model):
     contacts = models.ManyToManyField(Contacts, blank=True)
     attachments = models.ManyToManyField(Attachments, blank=True)
     dealers = models.ManyToManyField(Dealers, blank=True)
-    non_html = models.CharField(max_length=2000, null=True, blank=True)
+    non_html = models.TextField(null=True, blank=True)
      
     def __str__(self):
         return str(self.question)
@@ -297,7 +297,7 @@ class Note(models.Model):
     body = tinymce_models.HTMLField(null=True, blank=True)
     share = models.ManyToManyField(User, blank=True)
     updated_at = models.DateTimeField(auto_now_add=False)#更新するしないでソートをコントロールするため
-    non_html = models.CharField(max_length=2000, null=True, blank=True)
+    non_html = models.TextField(null=True, blank=True)
     for_search = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
