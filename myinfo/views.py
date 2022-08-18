@@ -240,6 +240,10 @@ def edit_fbvform(request, pk, *args, **kwargs):
             # 新しいお知らせ
             if request.POST.get('notifi_info') == 'new_info':
                 obj.browser_push(request)
+                # 全員を未読
+                for user in request.POST.getlist("tags"):
+                    user_instance = get_object_or_404(User, pk=user)
+                    ReadStates.objects.get_or_create(user=user_instance, information=obj)
             # 更新の場合
             elif request.POST.get('notifi_info') == 'update_info':
                 obj.updated_at = timezone.datetime.now()

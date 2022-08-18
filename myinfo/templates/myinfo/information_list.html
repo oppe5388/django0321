@@ -107,7 +107,10 @@
                     <!-- 自分の下書きはマーク表示 -->
                     <span class="text-secondary" >
                     {% if information.is_draft is True %}※下書き※{% endif %}
-                    {% if information.to_flag == "LD共有" %}【LD共有】{% endif %}
+                    </span>
+                    <!-- LD共有 -->
+                    <span class="text-dark" >
+                        {% if information.to_flag == "LD共有" %}【LD共有】{% endif %}
                     </span>
 
                     <!-- 見る側が未読だったら -->
