@@ -25,6 +25,9 @@
 
 <!-- 他人の下書きは非表示 -->
 {% if information.is_draft is True and information.user.id != request.user.id %}
+<!-- LD共有だがOPは非表示 -->
+{% elif information.to_flag == "LD共有" and request.user.id > 4 %}
+
 {% else %}
 
 <div class="small mb-2">
@@ -43,6 +46,7 @@
             <div class="font-weight-bold text-primary lead">
                 <span class="text-secondary small" >
                     {% if information.is_draft is True %}※下書き※{% endif %}
+                    {% if information.to_flag == "LD共有" %}【LD共有】{% endif %}
                 </span>
                 {{ information.title }}
             </div>

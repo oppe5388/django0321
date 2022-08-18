@@ -47,12 +47,13 @@ class InformationForm(LoginRequiredMixin, forms.ModelForm):
         model = Information
         # fields = ['category', 'title', 'body', 'to_flag', 'filefield'] #'__all__'
         # fields = ['category', 'title', 'body']
-        fields = ['title', 'body', 'for_search']
+        fields = ['title', 'body', 'for_search', 'to_flag']
         widgets = {
             # 'body': SummernoteWidget(),
             'body': TinyMCE,   #追加
             'title': forms.TextInput(attrs={'placeholder': 'タイトルを入力してください'}),
             'for_search': forms.TextInput(attrs={'placeholder': '検索キーワード'}),
+            'to_flag': forms.TextInput(attrs={'placeholder': 'LD共有'}),
             # 'is_draft': forms.CheckboxInput(attrs={'class':''}),
         }
 
@@ -111,11 +112,12 @@ class InformationEditForm(LoginRequiredMixin, forms.ModelForm):
         model = Information
         # fields = ['category', 'title', 'body', 'to_flag', 'filefield'] #'__all__'
         # fields = ['category', 'title', 'body', 'is_draft']
-        fields = ['title', 'body', 'is_draft', 'for_search']
+        fields = ['title', 'body', 'is_draft', 'for_search', 'to_flag']
         widgets = {
             # 'body': SummernoteWidget(),
             'body': TinyMCE,   #追加
             'for_search': forms.TextInput(attrs={'placeholder': '検索キーワード'}),
+            'to_flag': forms.TextInput(attrs={'placeholder': 'LD共有'}),
         }
 
         #↑のフィールドのラッピングやめて、ここにカテゴリ等1つずつ書く

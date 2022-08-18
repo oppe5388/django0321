@@ -15,6 +15,7 @@
     <!-- <h1 class="h3 text-gray-800 flex-grow-1">おしらせの編集</h1> -->
 
     {% if form.is_draft.value is True %}※下書き{% endif %}
+    {% if information.to_flag == "LD共有" %}【LD共有】{% endif %}
 
     {% comment %} <form method="POST" enctype="multipart/form-data" action="{% url 'myinfo:update' information.id %}" class="form-group"> {% endcomment %}
     <form method="POST" enctype="multipart/form-data" action="{% url 'myinfo:update' information.id %}" class="form-group">
@@ -68,7 +69,12 @@
         <div class="mb-3"><input type="file" name="pdf_file2"></div>
         <div class="mb-3"><input type="file" name="pdf_file3"></div>
 
-        <div class="mb-1">{{ form.for_search }}</div>
+        <div class="mb-3">{{ form.for_search }}</div>
+        <!-- LD共有チェック→To_flagにLD共有と入れる  -->
+        <div class="mb-2 ml-4">
+            <label><input type="checkbox" name="ld_share" value="ld_share" class="form-check-input"
+                {% if form.to_flag.value == "LD共有" %}checked{% endif %}>LD共有<span class="small">（下書きチェックは外し、通知しないを選択してください）</span></label>
+        </div>
 
         
 

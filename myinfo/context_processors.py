@@ -55,10 +55,12 @@ def my_context_processor(request):
         #VCC休みは祝日とするでOK？祝日登録モデルを作成する
 
 
+    # 未読件数を表示
     if request.user.id is None:
         return {}
-    else:
-        # 未読件数を表示
+    # LDはLD共有も含む
+    elif request.user.id < 5 :
+        
         c_num = ReadStates.objects.filter(user=request.user, information__is_draft=False).count()
         midoku_info = ""
         if c_num > 0:
@@ -68,6 +70,16 @@ def my_context_processor(request):
             'midoku_info': midoku_info,
             'mail_date': mail_date,
             'next_mail_date': next_mail_date,
-            # 'vcc_cnt': vcc_cnt,
-            # 'date_cnt': date_cnt,
+        }
+    # OP
+    else:
+        c_num = ReadStates.objects.filter(user=request.user, information__is_draft=False, information__to_flag="").count()
+        midoku_info = ""
+        if c_num > 0:
+            midoku_info = str(c_num)        
+
+        return {
+            'midoku_info': midoku_info,
+            'mail_date': mail_date,
+            'next_mail_date': next_mail_date,
         }

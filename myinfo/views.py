@@ -69,6 +69,10 @@ def add_fbvform(request):
             if request.POST.get('draft') is not None: 
                 obj.is_draft = True
 
+            #LD共有チェックだったら
+            if request.POST.get('ld_share') is not None: 
+                obj.to_flag = "LD共有"
+
             #html除去
             obj.non_html = strip_tags(request.POST.get('body'))
 
@@ -91,17 +95,9 @@ def add_fbvform(request):
 
             # user = get_object_or_404(User, pk=request.POST["notification_user"])#これで出来た
 
-            #通知：選択したユーザー
-            result = request.POST.getlist("tags")
-            for user in result:
-                user_instance = get_object_or_404(User, pk=user)
-                # Notifications.objects.create(user=user_instance, information=obj)
-                #既読も同じでok？
-                ReadStates.objects.create(user=user_instance, information=obj)
-
-
              #ブラウザ通知：できたらmodel.pyにクラス書く→できたら、model.pyクラス外に関数化して書く
-            if request.POST.get('draft') is None: 
+             #LD共有共有は通知しない
+            if request.POST.get('draft') is None and request.POST.get('ld_share') is None:
                 #ブラウザ通知：直書き
                 # data = {
                 #     'app_id': '6027ee57-82ec-485b-a5a5-6c976de75cb1',
@@ -126,6 +122,14 @@ def add_fbvform(request):
 
                 #モデルインスタンスのブラウザ通知メソッド呼び出し
                 obj.browser_push(request)
+
+                #通知：選択したユーザー：LD共有でここに移動した
+                result = request.POST.getlist("tags")
+                for user in result:
+                    user_instance = get_object_or_404(User, pk=user)
+                    # Notifications.objects.create(user=user_instance, information=obj)
+                    #既読も同じでok？
+                    ReadStates.objects.create(user=user_instance, information=obj)
 
             return redirect('myinfo:index')
 
@@ -203,6 +207,12 @@ def edit_fbvform(request, pk, *args, **kwargs):
                 obj.is_draft = True
             else:
                 obj.is_draft = False
+
+            #LD共有チェックだったら
+            if request.POST.get('ld_share') is not None: 
+                obj.to_flag = "LD共有"
+            else:
+                obj.to_flag = ""
 
             # #更新日時も更新するチェックだったら→まとめに集約↓
             # if request.POST.get('chk') is not None: 

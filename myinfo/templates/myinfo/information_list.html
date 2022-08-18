@@ -92,6 +92,8 @@
         
         <!-- 他人の下書きは非表示 -->
         {% if information.is_draft is True and information.user.id != request.user.id %}
+        <!-- LD共有だがOPは非表示 -->
+        {% elif information.to_flag == "LD共有" and request.user.id > 4 %}
         {% else %}
 
         <!-- Dropdown Card Example -->
@@ -105,6 +107,7 @@
                     <!-- 自分の下書きはマーク表示 -->
                     <span class="text-secondary" >
                     {% if information.is_draft is True %}※下書き※{% endif %}
+                    {% if information.to_flag == "LD共有" %}【LD共有】{% endif %}
                     </span>
 
                     <!-- 見る側が未読だったら -->
