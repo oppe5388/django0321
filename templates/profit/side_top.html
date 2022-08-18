@@ -65,10 +65,8 @@
   <li class="nav-item">
     <a href="{% url 'myprofit:entry_example' %}" class="nav-link">受付申込登録のエラー</a>
   </li>
-  <!-- LDのみ表示 -->
-  {% if request.user.id <= 4 %}
   <li class="nav-item">
     <a href="{% url 'myprofit:search_example' %}" class="nav-link">お客様一覧検索の手順</a>
   </li>
-  {% endif %}
+
 </ul>
