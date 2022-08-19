@@ -839,7 +839,7 @@ def note_list(request):
         notesearchForm = NoteSearchForm()
         # note_set = Note.objects.all().order_by('-updated_at')
         note_set = Note.objects.filter(owner=request.user).order_by('-updated_at')#自分のものだけ
-        page_obj = paginate_queryset(request, note_set, 20)#ページネーション用
+        page_obj = paginate_queryset(request, note_set, 10)#ページネーション用
         context['page_obj'] = page_obj
         context['note_set'] = page_obj.object_list
         context['selected_tab'] = '自分'

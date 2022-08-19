@@ -59,9 +59,10 @@
 
 {% include './note_include.html' %}
 
+{% include "pagination.html" %}
 
     <!--  ↑ページネーションのincludeがあたってないので直書き↓  -->
-    <ul class="pagination" style="justify-content:center">
+    {% comment %} <ul class="pagination" style="justify-content:center">
     <ul class="pagination">
         <!-- 前へ の部分 -->
         {% if page_obj.has_previous %}
@@ -90,7 +91,7 @@
             </li>
         {% endif %}
     </ul>
-    </ul>
+    </ul> {% endcomment %}
 
 
     {% comment %} <div class="d-flex my-3">
