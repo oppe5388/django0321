@@ -237,25 +237,17 @@ $(document).ready(function () {
         
     });
 
+    //2つ目のテーブルテスト
     var oTable = $('#datatable2').dataTable({
-        // ...
         "processing": true,
         "serverSide": true,
         "ajax": "./shops/data2",
 
         lengthMenu: [[10, 50, 100, 200], [10, 50, 100, 200]],
         lengthChange: true,
-
         columnDefs: [
-                    {targets: 0, data: 'id'},
-                    {targets: 1, data: 'dealer__name'},
-                    {targets: 2, data: 'name'},
-                    {targets: 3, data: 'shopcode'},
-                    {targets: 4, data: 'tel'},
-                    {targets: 5, data: 'fax'},
-                    {targets: 6, data: 'homepage'},
-                    {targets: 7, data: 'memo'},
-                    {targets: 8, data: 'kana'},
+                    {targets: 0, data: 'name'},
+                    {targets: 1, data: 'domain'},
                   ],
     });
     
