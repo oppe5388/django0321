@@ -44,6 +44,7 @@ urlpatterns = [
     # path('shops', TemplateView.as_view(template_name='myinfo/shops.html'), name='shops'),
     path('shops', views.Shops.as_view(), name='shops'),#販社一覧を渡すためにこちらに
     path('shops/data', views.ShopsJsonView.as_view(), name='ShopsJson'),
+    path('shops/data2', views.ShopsJsonView2.as_view(), name='ShopsJson2'),
 
     #django-ajax-datatables中止
     # path('contacts', views.contacts, name="contacts"),
