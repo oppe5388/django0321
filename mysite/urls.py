@@ -6,6 +6,8 @@ from . import settings
 from django.contrib.staticfiles.urls import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
+from django.views.generic import TemplateView
+
 # from filebrowser.sites import site
 
 urlpatterns = [
@@ -27,6 +29,8 @@ urlpatterns = [
     # path('grappelli/', include('grappelli.urls')),
     path('tinymce/', include('tinymce.urls')),
     path('myprofit/', include('myprofit.urls')),
+
+    path('robots.txt', TemplateView.as_view(template_name='static/robots.txt', content_type='text/plain')),
 ]
 
 

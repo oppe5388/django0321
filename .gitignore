@@ -6,3 +6,4 @@ __pycache
 /backups/
 # .env.dev
 # .env.prod
+/logs/*

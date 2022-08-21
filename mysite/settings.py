@@ -200,22 +200,65 @@ SUMMERNOTE_CONFIG = {
 
 
 #とりあえずログ出力設定　https://is.gd/8GCTgJ　エラーなので一旦中止
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'console': {
+#             'level': 'DEBUG',
+#             'class': 'logging.StreamHandler',
+#         },
+#     },
+#     'loggers': {
+#         'django.db.backends': {
+#             'handlers': ['console'],
+#             'level': 'DEBUG',
+#         },
+#     },
+# }
+
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'production': {
+            'format': '\t'.join([
+                '%(asctime)s',
+                '[%(levelname)s]',
+                '%(message)s',
+                '%(pathname)s(Line:%(lineno)d)',
+            ])
+        },
+    },
     'handlers': {
-        'console': {
+        'file': {
+            # 'class': 'logging.FileHandler',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': 'logs/django.log',  #環境に合わせて変更
+            'formatter': 'production',
+            'when': 'D', # 単位は日
+            'interval': 1, # 一日おき
+            'backupCount': 7, # 世代数
             'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
         },
     },
     'loggers': {
-        'django.db.backends': {
-            'handlers': ['console'],
+        # 自作したログ出力
+        '': {
+            'handlers': ['file'],
             'level': 'DEBUG',
+            'propagate': False,
+        },
+        # Djangoの警告・エラー
+        'django': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propagate': False,
         },
     },
 }
+
 
 from django.contrib.messages import constants as messages
 
@@ -248,7 +291,8 @@ TINYMCE_DEFAULT_CONFIG = {
 # TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, "tinymce")
 # FILE_UPLOAD_MAX_MEMORY_SIZE = 2621440
 # DATA_UPLOAD_MAX_MEMORY_SIZE = 800000　#20220727時点こちら
-DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880
+DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880 #5MB #20220820時点こちら
+# DATA_UPLOAD_MAX_MEMORY_SIZE = 41943040 #40MB #createはよいがupdate時に応答なしに
 ATTACHMENT_MAX_IMAGE_UPLOAD_SIZE = 800000
 ATTACHMENT_MAX_FILE_UPLOAD_SIZE = 800000
 
