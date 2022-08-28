@@ -64,6 +64,7 @@ AXES_FAILURE_LIMIT = 5
 AXES_COOLOFF_TIME = 24 #24時間後自動解除
 AXES_RESET_ON_SUCCESS = True
 AXES_USE_USER_AGENT = True #ロック対象をIPアドレスorユーザ名で判断
+AXES_LOCKOUT_TEMPLATE = 'registration/lockout.html'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -73,8 +74,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'mysite.middleware.login_required.LoginRequiredMiddleware' # ←これを追加
-    # 'axes.middleware.AxesMiddleware',   # ミドルウェアも追加。追加すると起動しなかった
+    'mysite.middleware.login_required.LoginRequiredMiddleware', # ←これを追加
+    'axes.middleware.AxesMiddleware',   # ミドルウェアも追加。
 ]
 
 ROOT_URLCONF = 'mysite.urls'
