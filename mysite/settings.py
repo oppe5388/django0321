@@ -49,8 +49,21 @@ INSTALLED_APPS = [
     'dbbackup',  # django-dbbackup 追加
     # 'ajax_datatable',
     'myprofit',
+    'axes',
 ]
 
+#django-axes
+AUTHENTICATION_BACKENDS = [
+    'axes.backends.AxesStandaloneBackend',# ←これを先頭に追加
+    'django.contrib.auth.backends.ModelBackend',# ←djangoデフォルト
+]
+AXES_META_PRECEDENCE_ORDER = [
+    'HTTP_X_FORWARDED_FOR',# nginx等リバースプロキシ用
+]
+AXES_FAILURE_LIMIT = 5
+AXES_COOLOFF_TIME = 24 #24時間後自動解除
+AXES_RESET_ON_SUCCESS = True
+AXES_USE_USER_AGENT = True #ロック対象をIPアドレスorユーザ名で判断
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -61,6 +74,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'mysite.middleware.login_required.LoginRequiredMiddleware' # ←これを追加
+    # 'axes.middleware.AxesMiddleware',   # ミドルウェアも追加。追加すると起動しなかった
 ]
 
 ROOT_URLCONF = 'mysite.urls'

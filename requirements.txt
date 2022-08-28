@@ -19,3 +19,4 @@ python-dateutil==2.8.2
 # django-ajax-datatable
 requests==2.28.1
 jpbizday==0.0.3
+django-axes
