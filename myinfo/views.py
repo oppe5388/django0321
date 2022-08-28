@@ -239,7 +239,9 @@ def edit_fbvform(request, pk, *args, **kwargs):
             #通知と更新の分岐、作り直しまとめ
             # 新しいお知らせ
             if request.POST.get('notifi_info') == 'new_info':
-                obj.browser_push(request)
+                obj.browser_push(request)# テスト時は通知しないようコメントアウト
+                obj.created_at = timezone.datetime.now()# 作成も更新も今に
+                obj.updated_at = timezone.datetime.now()# 
                 # 全員を未読
                 for user in request.POST.getlist("tags"):
                     user_instance = get_object_or_404(User, pk=user)
