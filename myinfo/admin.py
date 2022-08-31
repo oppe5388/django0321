@@ -169,6 +169,23 @@ class ShopsAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 admin.site.register(Shops, ShopsAdmin)
 
 
+class CAsResource(ModelResource):
+    class Meta:
+        model = CAs
+        skip_unchanged = True
+        import_id_fields = ['id']
+
+#インポート、エクスポート
+class CAsAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ('dealer', 'shop', 'cacode', 'name')
+    ordering = ('id',)
+    resource_class = CAsResource
+    # formats = [base_formats.XLSX]
+    search_fields = ('cacode', 'name', 'kana')
+
+admin.site.register(CAs, CAsAdmin)
+
+
 #
 # class ContactAttachRelResource(ModelResource):
 #     class Meta:

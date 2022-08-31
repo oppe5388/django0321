@@ -245,10 +245,45 @@ $(document).ready(function () {
 
         lengthMenu: [[10, 50, 100, 200], [10, 50, 100, 200]],
         lengthChange: true,
-        columnDefs: [
-                    {targets: 0, data: 'name'},
-                    {targets: 1, data: 'domain'},
-                  ],
+        // columnDefs: [
+        //             {targets: 0, data: 'Dealer'},
+        //             {targets: 1, data: 'shop'},
+        //             {targets: 2, data: 'cacode'},
+        //             {targets: 3, data: 'name'},
+        //             {targets: 4, data: 'kana'},
+        //           ],
+
+        columns: [
+        {
+            // 1列目(id)
+            title: "&nbsp;",
+            searchable: false,
+            visible: false,
+            render: function () {
+                return "";
+            },
+        },
+        {
+            // 2列目
+            title: "販社",
+        },
+        {
+            // 3列目
+            title: "店舗",
+        },
+        {
+            // 4列目
+            title: "CAコード",
+        },
+        {
+            // 5列目
+            title: "CA",
+        },
+        {
+            // 6列目
+            title: "カナ",
+        },
+    ],
     });
     
 

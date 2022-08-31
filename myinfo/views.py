@@ -787,13 +787,21 @@ class ShopsJsonView(BaseDatatableView):
 
 # 2つ目のテーブルテスト
 class ShopsJsonView2(BaseDatatableView):
-    model = Dealers
+    model = CAs
     columns = [
+        'id',
+        'dealer__name',
+        'shop',
+        'cacode',
         'name',
-        'domain',
+        'kana',
         ]
+
     def render_column(self, row, column):
-        return super(ShopsJsonView2, self).render_column(row, column)
+        if column == 'dealer__name':
+            return row.dealer.name
+        else:
+            return super(ShopsJsonView2, self).render_column(row, column)
 
     # 複数ワード
     def filter_queryset(self, qs):
@@ -804,8 +812,8 @@ class ShopsJsonView2(BaseDatatableView):
 
                 qs = qs.filter(
                         # Q(dealer__icontains=part) | #これがあるとエラーになる
-                        Q(name__icontains=part) | #これでOK
-                        Q(domain__icontains=part)
+                        Q(cacode__icontains=part) | #これでOK
+                        Q(name__icontains=part)
                     )
         return qs
 

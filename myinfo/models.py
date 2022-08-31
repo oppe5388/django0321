@@ -245,6 +245,21 @@ class Shops(models.Model):
         verbose_name_plural = "店舗"
 
 
+class CAs(models.Model):
+    dealer = models.ForeignKey(Dealers, null=True, on_delete=models.PROTECT)
+    shop = models.CharField(max_length=50, null=True, blank=True, verbose_name="店舗")
+    shopcode = models.CharField(max_length=10, null=True, blank=True, verbose_name="店舗コード")
+    cacode = models.CharField(max_length=10, null=True, blank=True, verbose_name="CAコード")
+    name = models.CharField(max_length=50, null=True, blank=True, verbose_name="CA名")
+    kana = models.CharField(max_length=50, null=True, blank=True, verbose_name="CAカナ")
+
+    def __str__(self):
+        return self.name
+        
+    class Meta:
+        verbose_name_plural = "CA"
+
+
 class Contacts(models.Model):
     incoming = models.CharField(max_length=20, verbose_name="相手")
     name = models.TextField(max_length=100, verbose_name="窓口")
