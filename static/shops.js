@@ -48,12 +48,12 @@ $(document).ready(function () {
         // lengthMenu: １ページに表示させる件数のリスト
         // https://datatables.net/reference/option/lengthMenu
         // lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "全件"]],
-        lengthMenu: [[10, 50, 100, 200], [10, 50, 100, 200]],
+        lengthMenu: [[5, 10, 50, 100], [5, 10, 50, 100]],
         lengthChange: true,
 
         // pageLength: pageLengthの初期値
         // https://datatables.net/reference/option/pageLength
-        pageLength: 10,
+        pageLength: 5,
 
         // language: 表示メッセージのローカライズ
         // https://datatables.net/reference/option/language
@@ -67,13 +67,14 @@ $(document).ready(function () {
             "sInfoEmpty": "データ無し",
             "sInfoFiltered": "（全 _MAX_ 件より抽出）",
             "sInfoPostFix": "",
-            "sSearch": "検索:",
+            // "sSearch": "検索:",
+            "sSearch": "店舗etc...",
             "sUrl": "",
             "oPaginate": {
                 "sFirst": "<<",
                 "sPrevious": "<",
                 "sNext": ">",
-                "sLast": ">>"
+                "sLast": ">>",
             },
         },
         // rowCallback: 行の描画時に追加処理を行いたいときに使う。
@@ -243,8 +244,13 @@ $(document).ready(function () {
         "serverSide": true,
         "ajax": "./shops/data2",
 
-        lengthMenu: [[10, 50, 100, 200], [10, 50, 100, 200]],
+        lengthMenu: [[5, 10, 50, 100], [5, 10, 50, 100]],
         lengthChange: true,
+
+        language: {
+            "sSearch": "CAコードetc...",
+        },
+
         // columnDefs: [
         //             {targets: 0, data: 'Dealer'},
         //             {targets: 1, data: 'shop'},
@@ -269,11 +275,29 @@ $(document).ready(function () {
         },
         {
             // 3列目
+            title: "店舗コード",
+            // class: 'col-1',
+            // render: function (data) {
+            //     return data.replace("xxx", "");
+            // },
+            visible: false,
+            render: function () {
+                return "";
+            },
+        },
+        {
+            // 3列目
             title: "店舗",
+            render: function (data, type, row) { //typeも必要
+                return row[2].replace("xxx", "") +"　"+ data;
+            },
         },
         {
             // 4列目
             title: "CAコード",
+            render: function (data) {
+                return data.replace("xxx", "");
+            },
         },
         {
             // 5列目

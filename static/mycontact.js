@@ -40,7 +40,7 @@ $(document).ready(function () {
             "sInfoEmpty": "データ無し",
             "sInfoFiltered": "（全 _MAX_ 件より抽出）",
             "sInfoPostFix": "",
-            "sSearch": "検索:",
+            "sSearch": "窓口・業務etc...",
             "sUrl": "",
             "oPaginate": {
                 "sFirst": "<<",

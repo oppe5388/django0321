@@ -791,6 +791,7 @@ class ShopsJsonView2(BaseDatatableView):
     columns = [
         'id',
         'dealer__name',
+        'shopcode',
         'shop',
         'cacode',
         'name',
@@ -812,8 +813,12 @@ class ShopsJsonView2(BaseDatatableView):
 
                 qs = qs.filter(
                         # Q(dealer__icontains=part) | #これがあるとエラーになる
-                        Q(cacode__icontains=part) | #これでOK
-                        Q(name__icontains=part)
+                        Q(dealer__name__icontains=part) | #これでOK
+                        Q(shopcode__icontains=part) | 
+                        Q(shop__icontains=part) |
+                        Q(cacode__icontains=part) |
+                        Q(name__icontains=part) |
+                        Q(kana__icontains=part)
                     )
         return qs
 
