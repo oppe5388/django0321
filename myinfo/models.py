@@ -254,7 +254,7 @@ class CAs(models.Model):
     kana = models.CharField(max_length=50, null=True, blank=True, verbose_name="CAカナ")
 
     def __str__(self):
-        return self.name
+        return str(self.dealer)
         
     class Meta:
         verbose_name_plural = "CA"
