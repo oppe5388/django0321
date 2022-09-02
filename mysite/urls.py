@@ -30,7 +30,7 @@ urlpatterns = [
     path('tinymce/', include('tinymce.urls')),
     path('myprofit/', include('myprofit.urls')),
 
-    path('robots.txt', TemplateView.as_view(template_name='static/robots.txt', content_type='text/plain')),
+    path('robots.txt', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
 ]
 
 
