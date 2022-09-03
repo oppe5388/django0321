@@ -248,6 +248,7 @@ $(document).ready(function () {
         lengthChange: true,
 
         language: {
+            "sLengthMenu": "_MENU_ 件（2022/7/2時点データ）",
             "sSearch": "CAコードetc...",
         },
 

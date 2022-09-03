@@ -27,83 +27,65 @@
 
 {% block content %}
 
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">タイトル</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+<!-- モーダル販社一覧 -->
+<div class="row">
+  <button type="button" class="btn btn-sm btn-primary rounded-pill mb-2 ml-3" data-toggle="modal" data-target="#ModalCentercompany" id="company">販売会社一覧</button>
+
+  <div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header py-0">
+                <!-- 検索 -->
+                <input id="myInput" class="form-control col-4 my-2" placeholder="Search..">
+                <button type="button" class="close mt-0" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" >&times;</span>
+                </button>
+            </div>
+            <div class="modal-body pt-0">
+                <table class='table table-sm table-hover m-0'>
+                  <thead class="table sticky-top thead-dark m-0">
+                    <tr class="text-nowrap small">
+                      <th>NFS営業担当事務所</th>
+                      <th>販売会社</th>
+                      <th>お客様相談室</th>
+                      <th>緊急サポートダイヤル</th>
+                      <th>BC本部</th>
+                      <th>NFSメンテ</th>
+                      <th>自社メンテ</th>
+                    </tr>
+                  </thead>
+                  <tbody id="myTable">
+                    {% comment %} {% for dealer in faq.dealers.all %} {% endcomment %}
+                    {% for dealer in dealers_set %}
+                        <tr class="">
+                          <td class="align-middle pr-3 text-nowrap"><span class="small">{{ dealer.base }}</span><br>{{ dealer.base_tel }}</td>
+                          <td class="align-middle text-nowrap"><span class="small">{{ dealer.code5 }}</span><br>{{ dealer.name }}</td>
+                          <td class="align-middle text-nowrap">{{ dealer.customer_desk }}</td>
+                          <td class="align-middle text-nowrap">{{ dealer.emergency }}</td>
+                          <td class="align-middle small">{{ dealer.bc }}</td>
+                          <td class="align-middle small">{{ dealer.nfs }}</td>
+                          <td class="align-middle small">{{ dealer.in_house }}</td>
+                        </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+            </div> 
         </div>
-        <div class="modal-body">
-          
-          <input type="text" class="form-control" id="recipient-name">
-        </div>
-      </div>
     </div>
   </div>
 
-
-<!-- モーダル販社一覧 -->
-<button type="button" class="btn btn-sm btn-primary rounded-pill mb-2" data-toggle="modal" data-target="#ModalCentercompany" id="company">販売会社一覧</button>
-
-<div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg">
-      <div class="modal-content">
-          <div class="modal-header py-0">
-              <!-- 検索 -->
-              <input id="myInput" class="form-control col-4 my-2" placeholder="Search..">
-              <button type="button" class="close mt-0" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true" >&times;</span>
-              </button>
-          </div>
-          <div class="modal-body pt-0">
-              <table class='table table-sm table-hover m-0'>
-                <thead class="table sticky-top thead-dark m-0">
-                  <tr class="text-nowrap small">
-                    <th>NFS営業担当事務所</th>
-                    <th>販売会社</th>
-                    <th>お客様相談室</th>
-                    <th>緊急サポートダイヤル</th>
-                    <th>BC本部</th>
-                    <th>NFSメンテ</th>
-                    <th>自社メンテ</th>
-                  </tr>
-                </thead>
-                <tbody id="myTable">
-                  {% comment %} {% for dealer in faq.dealers.all %} {% endcomment %}
-                  {% for dealer in dealers_set %}
-                      <tr class="">
-                        <td class="align-middle pr-3 text-nowrap"><span class="small">{{ dealer.base }}</span><br>{{ dealer.base_tel }}</td>
-                        <td class="align-middle text-nowrap"><span class="small">{{ dealer.code5 }}</span><br>{{ dealer.name }}</td>
-                        <td class="align-middle text-nowrap">{{ dealer.customer_desk }}</td>
-                        <td class="align-middle text-nowrap">{{ dealer.emergency }}</td>
-                        <td class="align-middle small">{{ dealer.bc }}</td>
-                        <td class="align-middle small">{{ dealer.nfs }}</td>
-                        <td class="align-middle small">{{ dealer.in_house }}</td>
-                      </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-          </div> 
-      </div>
+  <div class="small ml-auto d-flex align-items-center">
+    販売店検索 - 日産自動車：
+    <a class="" href="https://map2.nissan.co.jp/c/f/DEALER/SEARCH/" target="_blank">
+      <i class="fas fa-external-link-alt mr-1"></i>住所/最寄駅/店名
+    </a>
+    <a class="mx-3" href="https://www3.nissan.co.jp/dealers.html" target="_blank">
+      <i class="fas fa-external-link-alt mr-1"></i>地図
+    </a>
   </div>
+  
 </div>
 
-{% comment %} <div class="nav-link small"> {% endcomment %}
-  <a class="small ml-3" href="https://map2.nissan.co.jp/c/f/DEALER/SEARCH/" target="_blank">
-    <i class="fas fa-external-link-alt mr-1"></i>販売店検索 - 日産自動車（住所/最寄駅/店名）
-    </a>
-  {% comment %} </div>
-  <div class="nav-link small"> {% endcomment %}
-    <a class="small ml-3" href="https://www3.nissan.co.jp/dealers.html" target="_blank">
-    <i class="fas fa-external-link-alt mr-1"></i>販売店検索 - 日産自動車（地図）
-    </a>
-  {% comment %} </div> {% endcomment %}
-  
-  
 <div class="card shadow p-2 mb-3">
   <div class="row">
       <div class="col-12">
