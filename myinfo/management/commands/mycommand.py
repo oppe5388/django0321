@@ -8,7 +8,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
 
         #ファイルは手動で配置
-        wb = openpyxl.load_workbook('/code/media/CAs-2022-09-03.xlsx')
+        wb = openpyxl.load_workbook('/code/CAs-2022-09-03.xlsx')
         ws = wb.worksheets[0]
         #シートの最終行を取得
         Sheet_Max_Row = ws.max_row
