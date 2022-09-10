@@ -2,10 +2,15 @@ from django.core.management.base import BaseCommand
 from myinfo.models import *
 import openpyxl
 
+import time
+
 class Command(BaseCommand):
     help = "CAエクセルインポート"
 
     def handle(self, *args, **options):
+
+        # 時間計測開始
+        time_sta = time.time()
 
         #ファイルは手動で配置
         wb = openpyxl.load_workbook('/code/CAs-2022-09-03.xlsx')
@@ -43,6 +48,12 @@ class Command(BaseCommand):
             print(j)
 
         CAs.objects.bulk_create(add_cas)  # ここで追加のクエリ1つ発行
+
+        # 時間計測終了
+        time_end = time.time()
+        # 経過時間（秒）
+        tim = time_end- time_sta
+        print(tim)
 
     # 引数を使う場合は必要
     def add_arguments(self, parser):
