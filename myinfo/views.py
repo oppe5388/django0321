@@ -987,3 +987,13 @@ def note_update(request, pk, *args, **kwargs):
     }
 
     return render(request, 'myinfo/note_create.html', context)
+
+
+#シフト表
+def fax(request):
+
+    context ={
+        '': '',   
+    }
+
+    return render(request, 'myinfo/fax.html', context)

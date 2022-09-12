@@ -1,0 +1,72 @@
+body.dragging, body.dragging * {
+  cursor: move !important;
+}
+
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+
+ul.block li{
+	cursor: move;
+	list-style: none;
+	margin: 4px 4px 4px 4px;
+	padding: 2px 4px 4px 2px;
+	font-size: 14px;
+	font-weight: bold;
+ 	line-height: 1.4;
+	word-spacing: 0.3em;
+	border: 2px solid white;
+	background-color: #7f8c8d;
+	color: White;
+	border-radius: 5px;
+	-webkit-transition: border .25s linear, color .25s linear, background-color .25s linear;
+		  transition: border .25s linear, color .25s linear, background-color .25s linear;
+
+	-webkit-font-smoothing: subpixel-antialiased;
+}
+
+ul.block li.placeholder {
+	position: relative;
+}
+ul.block li.placeholder:before {
+	position: absolute;
+  	content: "";
+	width: 0;
+	height: 0;
+	margin-top: -8px;
+	left: -8px;
+	top: -1px;
+	border: 8px solid transparent;
+	border-left-color: red;
+	border-right: none;
+	z-index: 2000;
+}
+
+/*OP*/
+.op{
+color:black;
+background-color:#e5fff2;
+font-size: 16px;
+padding-left: 5px;
+}
+
+/*係*/
+.kakari{
+color:black;
+background-color:#ffe5f2;
+padding-left: 5px;
+}
+
+/*FAX*/
+.fax{
+color:black;
+background-color:#fff2e5;
+padding-left: 5px;
+}
+
+/*ohiru*/
+.ohiru{
+background-color:#ffffad;
+}
