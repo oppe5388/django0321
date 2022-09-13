@@ -246,3 +246,17 @@ class HolidayAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_filter = ('title','non_date')
 
 admin.site.register(Holiday, HolidayAdmin)
+
+
+# FAX
+class FaxResource(ModelResource):
+    class Meta:
+        model = Fax
+        skip_unchanged = True
+        import_id_fields = ['id']
+
+#インポート、エクスポート
+class FaxAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    resource_class = FaxResource
+
+admin.site.register(Fax, FaxAdmin)

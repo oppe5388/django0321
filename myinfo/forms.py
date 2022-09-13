@@ -13,6 +13,7 @@ from .widgets import CustomCheckboxSelectMultiple
 from .widgets import AccordionCheckbox
 
 from tinymce.widgets import TinyMCE  #追加
+from datetime import date, datetime
 
 #登録
 class InformationForm(LoginRequiredMixin, forms.ModelForm):
@@ -161,4 +162,18 @@ class NoteCreateForm(LoginRequiredMixin, forms.ModelForm):
             'body': TinyMCE,   #追加
             'title': forms.TextInput(attrs={'placeholder': 'タイトルを入力してください', 'class':'form-control'}),
             'for_search': forms.TextInput(attrs={'placeholder': '検索キーワード', 'class':'form-control'}),
+        }
+
+#FAX当番登録
+class FaxCreateForm(LoginRequiredMixin, forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['date'].initial = date.today()
+
+    class Meta:
+        model = Fax
+        fields = '__all__'
+        widgets = {
+            'date': forms.DateInput(attrs={'type':'date'}),
         }

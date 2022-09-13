@@ -989,11 +989,28 @@ def note_update(request, pk, *args, **kwargs):
     return render(request, 'myinfo/note_create.html', context)
 
 
-#シフト表
+#FAX当番
 def fax(request):
+    if request.method == "POST":
+        form = FaxCreateForm(request.POST)
 
-    context ={
-        '': '',   
-    }
+        if form.is_valid(): 
+            obj = form.save(commit=False)
+            obj.save()
 
+            return redirect('myinfo:fax')
+
+    else:
+        form = FaxCreateForm
+        context ={
+            'form': form,   
+        }
+
+        faxs = Fax.objects.all().order_by('-date')
+        page_obj = paginate_queryset(request, faxs, 10)#ページネーション用
+        context['page_obj'] = page_obj
+        context['faxs'] = page_obj.object_list
+
+        
+    # return render(request, 'myinfo/fax.html', {'form': form })
     return render(request, 'myinfo/fax.html', context)

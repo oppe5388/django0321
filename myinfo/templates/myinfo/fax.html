@@ -9,28 +9,103 @@
 
 {% block content %}
 
+
+{% for fax in faxs %}
+{{ fax.date }}
+<div class="d-flex">
+	<div class="d-flex flex-column col">
+		<h5 class="row ohiru mx-auto px-1">　</h5>
+		<ul class='block px-1 result'><!-- resultはjQuery用 -->
+			{% for op in fax.op0_as_list %}
+			{{ op }}
+			{% endfor %}
+		</ul>
+	</div>
+
+	<div class="d-flex flex-column col">
+		<h5 class="row ohiru mx-auto px-1">11:40〜12:30</h5>
+		<ul class='block px-1 result'><!-- resultはjQuery用 -->
+			{% for op in fax.op1_as_list %}
+			{{ op }}
+			{% endfor %}
+		</ul>
+	</div>
+
+	<div class="d-flex flex-column col">
+		<h5 class="row ohiru mx-auto px-1">12:00〜12:50</h5>
+		<ul class='block px-1 result'><!-- resultはjQuery用 -->
+			{% for op in fax.op2_as_list %}
+			{{ op }}
+			{% endfor %}
+		</ul>
+	</div>
+
+	<div class="d-flex flex-column col">
+		<h5 class="row ohiru mx-auto px-1">12:30〜13:20</h5>
+		<ul class='block px-1 result'><!-- resultはjQuery用 -->
+			{% for op in fax.op3_as_list %}
+			{{ op }}
+			{% endfor %}
+		</ul>
+	</div>
+
+	<div class="d-flex flex-column col">
+		<h5 class="row ohiru mx-auto px-1">13:20〜14:10</h5>
+		<ul class='block px-1 result'><!-- resultはjQuery用 -->
+			{% for op in fax.op4_as_list %}
+			{{ op }}
+			{% endfor %}
+		</ul>
+	</div>
+</div>
+
+<div class="d-flex">
+	<div class="d-flex flex-column col-3">
+		<h5 class="row ohiru mx-auto px-1">LD</h5>
+		<ul class='block px-1 result'><!-- resultはjQuery用 -->
+			{% for op in fax.op5_as_list %}
+			{{ op }}
+			{% endfor %}
+		</ul>
+	</div>
+
+	<div class="d-flex flex-column col-3">
+		<h5 class="row ohiru mx-auto px-1">休</h5>
+		<ul class='block px-1 result'><!-- resultはjQuery用 -->
+			{% for op in fax.op6_as_list %}
+			{{ op }}
+			{% endfor %}
+		</ul>
+	</div>
+
+</div>
+
+{% endfor %}
+
+{% include "pagination.html" %}
+<hr>
 <div class="px-0 mx-0">
 	<div class="d-flex">
 
 		<div class="d-flex flex-column col">
 		<h5 class="row ohiru mx-auto px-1">　</h5>
-		<ul class='example block connect-area'>
+		<ul class='example block connect-area px-1'>
 
-			<li><ul class="op">坂入
-				<li><ul class="kakari">相殺</ul></li>
+			<li><ul class="op">・op坂入
+				<li><ul class="kakari">#相殺!</ul></li>
 			</ul></li>
-			<li><ul class="op">菅原</ul></li>
+			<li><ul class="op">・op菅原</ul></li>
 		</ul>
 		</div>
 
 		<div class="d-flex flex-column col">
-		<h5 class="row ohiru mx-auto px-1">11:40～12:30</h5>
-		<ul class='example block connect-area'>
-			<li><ul class="op">御園
-				<li><ul class="kakari">リスト</ul></li>
-				<li><ul class="fax">09:30～</ul></li>
-				<li><ul class="fax">12:30～</ul></li>
-				<li><ul class="fax">15:30～</ul></li>
+		<h5 class="row ohiru mx-auto px-1">11:40〜12:30</h5>
+		<ul class='example block connect-area px-1'>
+			<li><ul class="op">・op御園
+				<li><ul class="kakari">#リスト!</ul></li>
+				<li><ul class="fax">_09:30〜!</ul></li>
+				<li><ul class="fax">_12:30〜!</ul></li>
+				<li><ul class="fax">_15:30〜!</ul></li>
 			</ul></li>  
 		  
 
@@ -38,19 +113,19 @@
 		</div>
 
 		<div class="d-flex flex-column col">
-		<h5 class="row ohiru mx-auto px-1">12:00～12:50</h5>
-		<ul class='example block connect-area'>
+		<h5 class="row ohiru mx-auto px-1">12:00〜12:50</h5>
+		<ul class='example block connect-area px-1'>
 		</ul>
 		</div>
 
 		<div class="d-flex flex-column col">
-		<h5 class="row ohiru mx-auto px-1">12:30～13:20</h5>
-		<ul class='example block connect-area'>
-			<li><ul class="op">市川
-				<li><ul class="kakari">U直</ul></li>
-				<li><ul class="fax">10:30～</ul></li>
-				<li><ul class="fax">13:30～</ul></li>
-				<li><ul class="fax">17:30～</ul></li>
+		<h5 class="row ohiru mx-auto px-1">12:30〜13:20</h5>
+		<ul class='example block connect-area px-1'>
+			<li><ul class="op">・op市川
+				<li><ul class="kakari">#U直!</ul></li>
+				<li><ul class="fax">_10:30〜!</ul></li>
+				<li><ul class="fax">_13:30〜!</ul></li>
+				<li><ul class="fax">_17:30〜!</ul></li>
 			</ul></li>
 
 
@@ -58,14 +133,14 @@
 		</div>
 
 		<div class="d-flex flex-column col">
-		<h5 class="row ohiru mx-auto px-1">13:20～14:10</h5>
-		<ul class='example block connect-area'>
-			<li><ul class="op">藤岡
-				<li><ul class="kakari">名変</ul></li>
-				<li><ul class="fax">11:30～</ul></li>
-				<li><ul class="fax">14:30～</ul></li>
-				<li><ul class="fax">16:30～</ul></li>
-				<li><ul class="fax">18:30～</ul></li>
+		<h5 class="row ohiru mx-auto px-1">13:20〜14:10</h5>
+		<ul class='example block connect-area px-1'>
+			<li><ul class="op">・op藤岡
+				<li><ul class="kakari">#名変!</ul></li>
+				<li><ul class="fax">_11:30〜!</ul></li>
+				<li><ul class="fax">_14:30〜!</ul></li>
+				<li><ul class="fax">_16:30〜!</ul></li>
+				<li><ul class="fax">_18:30〜!</ul></li>
 			</ul></li>
 
 
@@ -79,40 +154,42 @@
 	<div class="d-flex">
 		<div class="d-flex flex-column col-3">
 			<h5 class="row ohiru mx-auto px-1">LD</h5>
-			<ul class='example block connect-area'>
-			<li><ul class="op">尾凪</ul></li>
+			<ul class='example block connect-area px-1'>
+			<li><ul class="op">・op尾凪</ul></li>
 			  <li>
-			  	<ul class="op">大磯
-				  	<li><ul class="kakari">U直チェック</ul></li>
-			  		<li><ul class="kakari">名変チェック</ul></li>
+			  	<ul class="op">・op大磯
+				  	<li><ul class="kakari">#U直チェック!</ul></li>
+			  		<li><ul class="kakari">#名変チェック!</ul></li>
 		  		</ul></li>
-			  <li><ul class="op">太田</ul></li>
-			  <li><ul class="op">木下</ul></li>
+			  <li><ul class="op">・op太田</ul></li>
+			  <li><ul class="op">・op木下</ul></li>
 			</ul>
 		</div>
 		<div class="d-flex flex-column col-3">
 			<h5 class="row ohiru mx-auto px-1">休</h5>
-			<ul class='example block connect-area'>
-				<li><ul class="op">福田</ul></li>
-		  		<li><ul class="op">石嶋</ul></li>
+			<ul class='example block connect-area px-1'>
+				<li><ul class="op">・op福田</ul></li>
+		  		<li><ul class="op">・op石嶋</ul></li>
 			</ul>
 		</div>
 	</div>
 
 </div>
 
-<div class="span4">
-  <ul class="limited_drop_targets vertical">
-    <li>Item 2</li>
-    <li class="" style="">Item 4</li>
-    <li class="highlight">Item 3</li>
-    <li class="highlight">Item 5</li>
-    <li>Item 6</li>
-  </ul>
-</div>
-
-<pre id="serialize_output"></pre>
-<!-- <p id="serialize_output"></p> -->
+<form method="post" id="form01" >
+	{% csrf_token %}
+	{{ form.as_p }}
+	{% comment %} <pre id="serialize_output"></pre> {% endcomment %}
+	<p class="small" id="hiru_0"></p><!-- 昼無し -->
+	<p class="small" id="hiru_1"></p>
+	<p class="small" id="hiru_2"></p>
+	<p class="small" id="hiru_3"></p>
+	<p class="small" id="hiru_4"></p>
+	<p class="small" id="hiru_5"></p><!-- LD -->
+	<p class="small" id="hiru_6"></p><!-- 休み -->
+	<div><textarea class="d-none" id="serialize_output" rows="2" cols="70"></textarea>
+	<input type="submit" value="保存">
+</form>
 
 <!-- Javascript -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -122,6 +199,21 @@
 		// $("ul.example").sortable({
 		// 	group: 'connect-area'
 		// });
+		
+		$('.result').each(function(index, element) {
+			//係のタグ追加
+			var str =$(element).text();
+			var str = str.replace(/op/g, '<li><ul class="op">');
+			var str = str.replace(/#/g, '<li><ul class="kakari">');
+			var str = str.replace(/_/g, '<li><ul class="fax">');
+			var str = str.replace(/!/g, '</ul></li>');
+			var str = str.replace(/,/g, '</ul></li></ul></li>');
+			var str = str.replace('[objectHTMLUListElement]', '');
+				
+			$(element).html(str);
+		 
+		})
+
 	});
 
 
@@ -129,13 +221,29 @@
 	var group = $("ul.example").sortable({
 	  group: 'connect-area',
 	  onDrop: function ($item, container, _super) {
-	    $('#serialize_output').text(
-	      // group.sortable("serialize").get().join("\n"));
-	      group.sortable("serialize").get().join("\n■"));
+	    $('#serialize_output').val(
+	      //group.sortable("serialize").get().join("\n"));
+	      group.sortable("serialize").get().join("区切り"));
 	    _super($item, container);
+
+		//改行やスペース削除↓
+		var str = $('#serialize_output').val().replace(/\s+/g, '');
+		//スペース削除↓
+		//str=$('#serialize_output').val().replace(/^[\x20\u3000\t]+|[\x20\u3000\t]+$/mg,'');
+		//str=str.replace(/[\x20\u3000\t]+/g,'\x20');
+		//改行を置換↓
+		//str=str.replace(/\r?\n/g, '');
+
+		var str = str.split('区切り');
+
+		$('#serialize_output').val(str);
+		//splitした文字ごとに書き出し
+		$.each(str, function(index, value) {
+			$('#id_hiru_'+index).val(value);
+		})
 	  },
 	  serialize: function (parent, children, isContainer) {
-	    return isContainer ? children.join() : parent.text();
+	    return isContainer ? children.join() : parent.text()+ "";
 	  },
 	});
 	// 作り変えるここまで
