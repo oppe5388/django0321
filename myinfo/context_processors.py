@@ -54,6 +54,9 @@ def my_context_processor(request):
 
         #VCC休みは祝日とするでOK？祝日登録モデルを作成する
 
+    # FAXリンク用に今日の日付
+    faxday = date.today().strftime('%Y-%m-%d')
+
 
     # 未読件数を表示
     if request.user.id is None:
@@ -70,6 +73,7 @@ def my_context_processor(request):
             'midoku_info': midoku_info,
             'mail_date': mail_date,
             'next_mail_date': next_mail_date,
+            'faxday': faxday,
         }
     # OP
     else:
@@ -82,4 +86,5 @@ def my_context_processor(request):
             'midoku_info': midoku_info,
             'mail_date': mail_date,
             'next_mail_date': next_mail_date,
+            'faxday': faxday,
         }

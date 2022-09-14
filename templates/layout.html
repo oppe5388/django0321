@@ -169,7 +169,7 @@
             <div class="sidebar-heading">
                 operation
             </div>
-
+            
             <!-- Nav Item - Dashboard -->
             {% with request.resolver_match.url_name as url_name %}
             {% with request.resolver_match.app_name as app_name %}
@@ -338,6 +338,11 @@
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
+
+                        <div class="d-flex">
+                            <a class="btn btn-sm btn-secondary d-flex flex-row align-items-center m-1 py-1 mr-2" href='{% url "myinfo:fax" faxday %}'>
+                                <i class="fas fa-fax fa-xs"></i>&nbsp;当番</a>
+                        </div>
                         <!-- 発送日 -->
                         {% comment %} VCC休み：{{ vcc_cnt }}<br>
                         日：{{ date_cnt }} {% endcomment %}
