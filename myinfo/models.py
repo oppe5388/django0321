@@ -341,33 +341,11 @@ class Holiday(models.Model):
 
 # FAX当番
 class Fax(models.Model):
-    date = models.DateField(auto_now_add=False)
-    hiru_0 = models.TextField(null=True, blank=True)
-    hiru_1 = models.TextField(null=True, blank=True)
-    hiru_2 = models.TextField(null=True, blank=True)
-    hiru_3 = models.TextField(null=True, blank=True)
-    hiru_4 = models.TextField(null=True, blank=True)
-    hiru_5 = models.TextField(null=True, blank=True)
-    hiru_6 = models.TextField(null=True, blank=True)
+    date = models.DateField(auto_now_add=False,primary_key=True)
+    html = models.TextField()
 
     def __str__(self):
         return str(self.date)
-
-    def op0_as_list(self):
-        return self.hiru_0.split('・')
-    def op1_as_list(self):
-        return self.hiru_1.split('・')
-    def op2_as_list(self):
-        return self.hiru_2.split('・')
-    def op3_as_list(self):
-        return self.hiru_3.split('・')
-    def op4_as_list(self):
-        return self.hiru_4.split('・')
-    def op5_as_list(self):
-        return self.hiru_5.split('・')
-    def op6_as_list(self):
-        return self.hiru_6.split('・')
-
 
     class Meta:
         verbose_name_plural = "FAX当番"

@@ -14,6 +14,7 @@ from .widgets import AccordionCheckbox
 
 from tinymce.widgets import TinyMCE  #追加
 from datetime import date, datetime
+from dateutil.relativedelta import relativedelta
 
 #登録
 class InformationForm(LoginRequiredMixin, forms.ModelForm):
@@ -169,11 +170,12 @@ class FaxCreateForm(LoginRequiredMixin, forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['date'].initial = date.today()
+        self.fields['date'].initial = date.today()+ relativedelta(days=+1)
 
     class Meta:
         model = Fax
         fields = '__all__'
         widgets = {
             'date': forms.DateInput(attrs={'type':'date'}),
+            'html': forms.Textarea(attrs={'class':'d-none'}),#非表示にするクラス追加
         }

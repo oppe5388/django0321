@@ -36,6 +36,9 @@ import requests
 
 from django.views.generic import TemplateView
 
+from datetime import date, datetime
+from dateutil.relativedelta import relativedelta
+
 
 #個別ブラウザ通知のために、許可時にモデルにonesignalのidを登録
 def onegisnal_id_create(request):
@@ -990,27 +993,54 @@ def note_update(request, pk, *args, **kwargs):
 
 
 #FAX当番
-def fax(request):
+def fax(request, p):
+
+    form = FaxCreateForm
+    fax = Fax.objects.filter(date=p).first()
+    yesterday = datetime.strptime(p, '%Y-%m-%d') + relativedelta(days=-1)
+    yesterday = yesterday.strftime('%Y-%m-%d')
+    next = datetime.strptime(p, '%Y-%m-%d') + relativedelta(days=+1)
+    next = next.strftime('%Y-%m-%d')
+    yesterday_fax = Fax.objects.filter(date=yesterday).first()
+
+    context ={
+        'form': form,
+        'fax': fax,
+        'next': next,
+        'yesterday': yesterday,
+        'disp_day': p,
+        'yesterday_fax': yesterday_fax,
+    }
+
     if request.method == "POST":
         form = FaxCreateForm(request.POST)
-
         if form.is_valid(): 
             obj = form.save(commit=False)
             obj.save()
-
-            return redirect('myinfo:fax')
-
-    else:
-        form = FaxCreateForm
-        context ={
-            'form': form,   
-        }
-
-        faxs = Fax.objects.all().order_by('-date')
-        page_obj = paginate_queryset(request, faxs, 10)#ページネーション用
-        context['page_obj'] = page_obj
-        context['faxs'] = page_obj.object_list
-
+            messages.info(request, '保存しました')
+            return redirect(request.META['HTTP_REFERER'])#元のページに戻る
         
     # return render(request, 'myinfo/fax.html', {'form': form })
     return render(request, 'myinfo/fax.html', context)
+
+
+#fax削除
+def fax_delete(request, p):
+    Fax.objects.filter(date=p).delete()
+    messages.info(request, '削除しました')
+    # return HttpResponse('success')
+    return redirect(request.META['HTTP_REFERER'])#元のページに戻る
+
+#fax削除
+def fax_del_create(request, p):
+    Fax.objects.filter(date=p).delete()
+
+    if request.method == "POST":
+        form = FaxCreateForm(request.POST)
+        if form.is_valid(): 
+            obj = form.save(commit=False)
+            obj.save()
+            messages.info(request, '更新しました')
+            return redirect(request.META['HTTP_REFERER'])#元のページに戻る
+
+    return redirect(request.META['HTTP_REFERER'])#元のページに戻る
