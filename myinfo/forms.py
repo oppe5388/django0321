@@ -176,6 +176,6 @@ class FaxCreateForm(LoginRequiredMixin, forms.ModelForm):
         model = Fax
         fields = '__all__'
         widgets = {
-            'date': forms.DateInput(attrs={'type':'date'}),
+            'date': forms.DateInput(attrs={'type':'date','class':'d-none'}),
             'html': forms.Textarea(attrs={'class':'d-none'}),#非表示にするクラス追加
         }
