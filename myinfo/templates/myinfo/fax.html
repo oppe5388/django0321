@@ -25,14 +25,19 @@
 			翌日<i class="fas fa-chevron-right"></i></a>
 
 		<button class="btn btn-secondary btn-sm mb-2 ml-auto" id="edit_expand"><i class="fas fa-edit fa-xs"></i></button>
+
+		<!-- モーダルのボタン -->
+		<button class="btn btn-secondary btn-sm mb-2 ml-auto" data-toggle="modal" data-target="#ModalCentercompany" id="gogo_rest">午後休憩</button>
 	</div>
 	<hr class="mt-0">
 	<!-- データ表示 -->
 	<div id="disp_block">
-		{% comment %} <div class="">
-			ああああ
-		</div>
-		<hr class="m-2"> {% endcomment %}
+		{% if fax.free %}
+			<div id="disp_free">
+			{{ fax.free| linebreaksbr }}
+			</div>
+			<hr class="m-2">
+		{% endif %}
 		{{ fax.html|safe }}
 	</div>
 	<!-- 編集画面：当日があれば当日編集、なければ前日を初期表示する -->
@@ -130,6 +135,8 @@
 	{% csrf_token %}
 	{{ form.date }}
 	{{ form.html }}
+	<div class="d-flex align-items-start mb-2">フリー：{{ form.free }}</div>
+	
 	
 	<div class="d-flex justify-content-between">
 		<button class="btn btn-secondary" id="cancel">キャンセル</button>
@@ -140,227 +147,227 @@
 			<input class="btn btn-primary" type="submit" value="保存">
 		{% endif %}
 	</div>
-	<p class="small mt-2">※各ボタン、確認画面なしに実行されます</p>
+	<p class="small mt-2">※各ボタン、確認画面なしに実行されます<br>
+		※変更なしの場合も、一度動かして戻してください（保存できません）</p>
+	
+
 </form>
 
 <!-- モーダル午後休の表 -->
-<div class="row">
-	<button type="button" class="btn btn-sm btn-secondary rounded-pill mb-2 ml-3" data-toggle="modal" data-target="#ModalCentercompany" id="company">午後休憩</button>
-  
-	<div class="modal" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-	  <div class="modal-dialog modal-dialog-scrollable modal-xl">
-		  <div class="modal-content">
-			  <div class="modal-header py-0">
-				<h6 class="modal-title">FAX当番は色のあるところへ</h6>
-				  <button type="button" class="close mt-0" data-dismiss="modal" aria-label="Close">
-					  <span aria-hidden="true" >&times;</span>
-				  </button>
-			  </div>
-			  <div class="modal-body pt-0">
+<div class="modal" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-scrollable modal-xl">
+		<div class="modal-content">
+			<div class="modal-header py-0">
+			<h6 class="modal-title">FAX当番は色のあるところへ</h6>
+				<button type="button" class="close mt-0" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true" >&times;</span>
+				</button>
+			</div>
+			<div class="modal-body pt-0">
 
-				<!-- 1段目 -->
-				<div class="d-flex">
-					<table class="table table-sm table-bordered m-1 col-3">
-						<thead class="thead-dark">
-							<tr>
-								<th colspan="2">3名</th>
-							</tr>
-						</thead>
-						<tbody>
+			<!-- 1段目 -->
+			<div class="d-flex">
+				<table class="table table-sm table-bordered m-1 col-3">
+					<thead class="thead-dark">
 						<tr>
-							<th>① 15:00-15:20</th>
-							<td class="table-warning">1530</td>
-						</tr>
-						<tr>
-							<th>② 15:20-15:40</th>
-							<td></td>
-						</tr>
-						<tr>
-							<th>③ 15:40-16:00</th>
-							<td class="table-warning">1430</td>
-						</tr>
-						</tbody>
-					</table>
-					
-					<table class="table table-sm table-bordered m-1 col-3">
-						<thead class="thead-dark">
-						<tr>
-							<th colspan="2">4名</th>
-						</tr>
-						</thead>
-						<tr>
-							<th>① 15:00-15:20</th>
-							<td class="table-warning">1530</td>
-						</tr>
-						<tr>
-							<th>② 15:20-15:40</th>
-							<td></td>
-						</tr>
-						<tr>
-							<th>③ 15:40-16:00</th>
-							<td rowspan="2" class="table-warning">1430</td>
-						</tr>
-						<tr>
-							<th>④ 16:00-16:20</th>
-						</tr>
-					</table>
-
-					<table class="table table-sm table-bordered m-1">
-						<thead class="thead-dark">
-						<tr>
-							<th colspan="4">5名</th>
-						</tr>
-						</thead>
-						<tr>
-							<th>① 15:00-15:20</th>
-							<td></td>
-							<td class="table-warning">1530</td>
-							<td rowspan="4" class="table-warning">1630</td>
-						</tr>
-						<tr>
-							<th>② 15:20-15:40</th>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<th>③ 15:40-16:00</th>
-							<td rowspan="3" class="table-warning">1430</td>
-							<td></td>
-						</tr>
-						<tr>
-							<th>④ 16:00-16:20</th>
-							<td></td>
-						</tr>
-						<tr>
-							<th>⑤ 16:20-16:40</th>
-							<td></td>
-							<td></td>
-						</tr>
-					</table>
-
-
-				</div> 
-				<!-- 2段目 -->
-				<div class="d-flex">
-					
-
-					<table class="table table-sm table-bordered m-1">
-						<thead class="thead-dark">
-						<tr>
-							<th colspan="4">6名</th>
-						</tr>
-						</thead>
-						<tr>
-							<th>① 15:00-15:20</th>
-							<td></td>
-							<td class="table-warning">1530</td>
-							<td rowspan="4" class="table-warning">1630</td>
-						</tr>
-						<tr>
-							<th>② 15:20-15:40</th>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<th>③ 15:40-16:00</th>
-							<td rowspan="4" class="table-warning">1430</td>
-							<td></td>
-						</tr>
-						<tr>
-							<th>④ 16:00-16:20</th>
-							<td></td>
-						</tr>
-						<tr>
-							<th>⑤ 16:20-16:40</th>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<th>⑥ 16:40-17:00</th>
-							<td class="table-warning">1530</td>
-							<td></td>
-						</tr>
-					</table>
-
-					<table class="table table-sm table-bordered m-1">
-						<thead class="thead-dark">
-						<tr>
-							<th colspan="4">6名（1445〜）</th>
+							<th colspan="2">3名</th>
 						</tr>
 					</thead>
-						<tr>
-							<th>① 14:45-15:05</th>
-							<td></td>
-							<td rowspan="2" class="table-warning">1530</td>
-							<td rowspan="5" class="table-warning">1630</td>
-						</tr>
-						<tr>
-							<th>② 15:05-15:25</th>
-							<td></td>
-						</tr>
-						<tr>
-							<th>③ 15:25-15:45</th>
-							<td rowspan="4" class="table-warning">1430</td>
-							<td></td>
-						</tr>
-						<tr>
-							<th>④ 15:45-16:05</th>
-							<td></td>
-						</tr>
-						<tr>
-							<th>⑤ 16:05-16:25</th>
-							<td></td>
-						</tr>
-						<tr>
-							<th>⑥ 16:25-16:50</th>
-							<td></td>
-							<td></td>
-						</tr>
-					</table>
-
-					<table class="table table-sm table-bordered m-1 col-3">
-						<thead class="thead-dark">
-						<tr>
-							<th colspan="2">7名（2名ずつ）</th>
-						</tr>
-						</thead>
-						<tr>
-							<th>① 15:00-15:20</th>
-							<td rowspan="2" class="table-warning">1530</td>
-						</tr>
-						<tr>
-							<th>② 15:00-15:20</th>
-						</tr>
-						<tr>
-							<th>③ 15:20-15:40</th>
-							<td></td>
-						</tr>
-						<tr>
-							<th>④ 15:20-15:40</th>
-							<td></td>
-						</tr>
-						<tr>
-							<th>⑤ 15:40-16:00</th>
-							<td rowspan="3" class="table-warning">1430</td>
-						</tr>
-						<tr>
-							<th>⑥ 15:40-16:00</th>
-						</tr>
-						<tr>
-							<th>⑦ 16:00-16:20</th>
-						</tr>
-					</table>
-				</div>
-				<!-- 3段目 -->
-				<div class="d-flex">
-
+					<tbody>
+					<tr>
+						<th>① 15:00-15:20</th>
+						<td class="table-warning">1530</td>
+					</tr>
+					<tr>
+						<th>② 15:20-15:40</th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>③ 15:40-16:00</th>
+						<td class="table-warning">1430</td>
+					</tr>
+					</tbody>
+				</table>
 				
-				</div> 
-			  </div> 
-		  </div>
-	  </div>
+				<table class="table table-sm table-bordered m-1 col-3">
+					<thead class="thead-dark">
+					<tr>
+						<th colspan="2">4名</th>
+					</tr>
+					</thead>
+					<tr>
+						<th>① 15:00-15:20</th>
+						<td class="table-warning">1530</td>
+					</tr>
+					<tr>
+						<th>② 15:20-15:40</th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>③ 15:40-16:00</th>
+						<td rowspan="2" class="table-warning">1430</td>
+					</tr>
+					<tr>
+						<th>④ 16:00-16:20</th>
+					</tr>
+				</table>
+
+				<table class="table table-sm table-bordered m-1">
+					<thead class="thead-dark">
+					<tr>
+						<th colspan="4">5名</th>
+					</tr>
+					</thead>
+					<tr>
+						<th>① 15:00-15:20</th>
+						<td></td>
+						<td class="table-warning">1530</td>
+						<td rowspan="4" class="table-warning">1630</td>
+					</tr>
+					<tr>
+						<th>② 15:20-15:40</th>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<th>③ 15:40-16:00</th>
+						<td rowspan="3" class="table-warning">1430</td>
+						<td></td>
+					</tr>
+					<tr>
+						<th>④ 16:00-16:20</th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>⑤ 16:20-16:40</th>
+						<td></td>
+						<td></td>
+					</tr>
+				</table>
+
+
+			</div> 
+			<!-- 2段目 -->
+			<div class="d-flex">
+				
+
+				<table class="table table-sm table-bordered m-1">
+					<thead class="thead-dark">
+					<tr>
+						<th colspan="4">6名</th>
+					</tr>
+					</thead>
+					<tr>
+						<th>① 15:00-15:20</th>
+						<td></td>
+						<td class="table-warning">1530</td>
+						<td rowspan="4" class="table-warning">1630</td>
+					</tr>
+					<tr>
+						<th>② 15:20-15:40</th>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<th>③ 15:40-16:00</th>
+						<td rowspan="4" class="table-warning">1430</td>
+						<td></td>
+					</tr>
+					<tr>
+						<th>④ 16:00-16:20</th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>⑤ 16:20-16:40</th>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<th>⑥ 16:40-17:00</th>
+						<td class="table-warning">1530</td>
+						<td></td>
+					</tr>
+				</table>
+
+				<table class="table table-sm table-bordered m-1">
+					<thead class="thead-dark">
+					<tr>
+						<th colspan="4">6名（1445〜）</th>
+					</tr>
+				</thead>
+					<tr>
+						<th>① 14:45-15:05</th>
+						<td></td>
+						<td rowspan="2" class="table-warning">1530</td>
+						<td rowspan="5" class="table-warning">1630</td>
+					</tr>
+					<tr>
+						<th>② 15:05-15:25</th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>③ 15:25-15:45</th>
+						<td rowspan="4" class="table-warning">1430</td>
+						<td></td>
+					</tr>
+					<tr>
+						<th>④ 15:45-16:05</th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>⑤ 16:05-16:25</th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>⑥ 16:25-16:50</th>
+						<td></td>
+						<td></td>
+					</tr>
+				</table>
+
+				<table class="table table-sm table-bordered m-1 col-3">
+					<thead class="thead-dark">
+					<tr>
+						<th colspan="2">7名（2名ずつ）</th>
+					</tr>
+					</thead>
+					<tr>
+						<th>① 15:00-15:20</th>
+						<td rowspan="2" class="table-warning">1530</td>
+					</tr>
+					<tr>
+						<th>② 15:00-15:20</th>
+					</tr>
+					<tr>
+						<th>③ 15:20-15:40</th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>④ 15:20-15:40</th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>⑤ 15:40-16:00</th>
+						<td rowspan="3" class="table-warning">1430</td>
+					</tr>
+					<tr>
+						<th>⑥ 15:40-16:00</th>
+					</tr>
+					<tr>
+						<th>⑦ 16:00-16:20</th>
+					</tr>
+				</table>
+			</div>
+			<!-- 3段目 -->
+			<div class="d-flex">
+
+			
+			</div> 
+			</div> 
+		</div>
 	</div>
 </div>
+
 
 <textarea class="d-none" id="serialize_output"></textarea>
 
@@ -375,20 +382,24 @@
 		
 		$('#edit_block').hide();//最初は非表示
 		$('#form01').hide();
+		$('#gogo_rest').hide();
 
 		//編集画面を開くボタン
 		$('#edit_expand').click(function() {
 			$(this).hide();
 			$('#disp_block').hide();
 			$('#edit_block').fadeIn(500);
+			$('#gogo_rest').fadeIn(500);
 			$('#form01').fadeIn(500);
 			$('#id_date').val($('#target_date').text());
+			$('#id_free').val($('#disp_free').html().replace(/\s+/g, '').replace(/<br>/g, '\n'));//改行やスペース削除、br置換
 		});
 
 		//編集キャンセル
 		$('#cancel').click(function() {
 			$('#edit_block').hide();
 			$('#form01').hide();
+			$('#gogo_rest').hide();
 			$('#disp_block').fadeIn(500);
 			$('#edit_expand').fadeIn(500);
 		});
@@ -426,7 +437,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
 <script>
   //販社モーダル
-  $("#company").click(function () {
+  $("#gogo_rest").click(function () {
     $('#Modal2').modal('show')
   });
 

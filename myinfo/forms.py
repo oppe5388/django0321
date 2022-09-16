@@ -178,4 +178,5 @@ class FaxCreateForm(LoginRequiredMixin, forms.ModelForm):
         widgets = {
             'date': forms.DateInput(attrs={'type':'date','class':'d-none'}),
             'html': forms.Textarea(attrs={'class':'d-none'}),#非表示にするクラス追加
+            'free': forms.Textarea(attrs={'rows':3, 'cols':50})
         }

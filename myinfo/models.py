@@ -343,6 +343,7 @@ class Holiday(models.Model):
 class Fax(models.Model):
     date = models.DateField(auto_now_add=False,primary_key=True)
     html = models.TextField()
+    free = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return str(self.date)
