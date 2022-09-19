@@ -24,10 +24,15 @@
 		<a href="{% url 'myinfo:fax' next %}" class="btn btn-secondary btn-sm mb-2">
 			翌日<i class="fas fa-chevron-right"></i></a>
 
-		<button class="btn btn-secondary btn-sm mb-2 ml-auto" id="edit_expand"><i class="fas fa-edit fa-xs"></i></button>
-
 		<!-- モーダルのボタン -->
-		<button class="btn btn-secondary btn-sm mb-2 ml-auto" data-toggle="modal" data-target="#ModalCentercompany" id="gogo_rest">午後休憩</button>
+		<button class="btn btn-secondary btn-sm mb-2 ml-auto mr-5" data-toggle="modal" data-target="#ModalCentercompany" id="gogo_rest">
+			<i class="fas fa-info-circle"></i> 午後休憩</button>
+		
+		<!-- LDのみ編集ボタン -->
+		{% if request.user.id <= 4 %}
+		<button class="btn btn-secondary btn-sm mb-2 ml-auto" id="edit_expand"><i class="fas fa-edit fa-xs"></i></button>
+		{% endif %}
+		
 	</div>
 	<hr class="mt-0">
 	<!-- データ表示 -->
