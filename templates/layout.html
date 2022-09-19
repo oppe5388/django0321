@@ -342,8 +342,8 @@
                         <!-- テストのためLDのみ -->
                         {% if request.user.id <= 4 %}
                         <div class="d-flex">
-                            <a class="btn btn-sm btn-secondary d-flex flex-row align-items-center m-1 py-1 mr-2" href='{% url "myinfo:fax" faxday %}'>
-                                <i class="fas fa-fax fa-xs"></i>&nbsp;当番</a>
+                            <a class="btn btn-sm btn-secondary d-flex flex-row align-items-center m-2 py-1" href='{% url "myinfo:fax" faxday %}'>
+                                <i class="fas fa-fax fa-xs"></i><span class="d-none d-sm-inline-block text-nowrap">&nbsp;当番</span></a>
                         </div>
                         {% endif %}
 
@@ -351,10 +351,10 @@
                         {% comment %} VCC休み：{{ vcc_cnt }}<br>
                         日：{{ date_cnt }} {% endcomment %}
                         <div class="d-flex">
-                            <div class="d-flex flex-row align-items-center m-1"><i class="fas fa-shipping-fast"></i> </div>
+                            <div class="d-flex flex-row align-items-center m-1"><span class="d-none d-lg-inline-block"><i class="fas fa-shipping-fast"></i></span></div>
                             <div class="">
-                                <div class="small" id="until17">〜17時：{{ mail_date|date:"n/j(D)" }}</div>
-                                <div class="small" id="after17">17時〜：{{ next_mail_date|date:"n/j(D)" }}</div>
+                                <div class="small text-nowrap" id="until17">〜17<span class="d-none d-md-inline-block">時</span>：{{ mail_date|date:"n/j(D)" }}</div>
+                                <div class="small text-nowrap" id="after17">17<span class="d-none d-md-inline-block">時</span>〜：{{ next_mail_date|date:"n/j(D)" }}</div>
                             </div>
                         </div>
 
@@ -394,7 +394,7 @@
                             </a>
                         </li> {% endcomment %}
 
-                        <div class="topbar-divider d-none d-sm-block"></div>
+                        <div class="topbar-divider d-none d-sm-block mx-2"></div>
 
                         <!-- Nav Item - User Information -->
                         {% comment %} <li class="text-gray-600 d-flex align-items-center small">
@@ -426,7 +426,7 @@
                             </li> {% endcomment %}
                             <li class="d-flex justify-content-end align-items-center small text-gray-600">
                                 {% if user.is_authenticated %}
-                                    <div class="d-none d-sm-inline-block">{{ user.last_name }}さん</div>
+                                    <div class="">{{ user.last_name }}さん</div>
                                     <a href='{% url "logout" %}' class="nav-link py-0 pr-0" data-toggle="tooltip" title="Logout">
                                         <i class="fas fa-sign-out-alt"></i>
                                     </a>
