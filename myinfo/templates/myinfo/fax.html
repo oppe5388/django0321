@@ -24,8 +24,12 @@
 		<a href="{% url 'myinfo:fax' next %}" class="btn btn-secondary btn-sm mb-2">
 			翌日<i class="fas fa-chevron-right"></i></a>
 
+		<!-- Excelリンク -->
+		<a href="https://1drv.ms/x/s!Aoe1CCijUYiRgUUul2Sq_Bo7f3O3?e=xPWSW1" id="excel" class="btn btn-secondary btn-sm mb-2 ml-auto mr-5" target="_blank">
+			<i class="fas fa-external-link-alt"></i> 係</a>
+
 		<!-- モーダルのボタン -->
-		<button class="btn btn-secondary btn-sm mb-2 ml-auto mr-5" data-toggle="modal" data-target="#ModalCentercompany" id="gogo_rest">
+		<button class="btn btn-secondary btn-sm mb-2 mr-auto mr-5" data-toggle="modal" data-target="#ModalCentercompany" id="gogo_rest">
 			<i class="fas fa-info-circle"></i> 午後休憩</button>
 		
 		<!-- LDのみ編集ボタン -->
@@ -153,7 +157,7 @@
 		{% endif %}
 	</div>
 	<p class="small mt-2">※各ボタン、確認画面なしに実行されます<br>
-		※変更なしの場合も、一度動かして戻してください（保存できません）</p>
+		※変更なしの場合も、一度触らないと（動かして戻す）保存できません</p>
 	
 
 </form>
@@ -388,6 +392,7 @@
 		$('#edit_block').hide();//最初は非表示
 		$('#form01').hide();
 		$('#gogo_rest').hide();
+		$('#excel').hide();
 
 		//編集画面を開くボタン
 		$('#edit_expand').click(function() {
@@ -395,6 +400,7 @@
 			$('#disp_block').hide();
 			$('#edit_block').fadeIn(500);
 			$('#gogo_rest').fadeIn(500);
+			$('#excel').fadeIn(500);
 			$('#form01').fadeIn(500);
 			$('#id_date').val($('#target_date').text());
 			$('#id_free').val($('#disp_free').html().replace(/\s+/g, '').replace(/<br>/g, '\n'));//改行やスペース削除、br置換
@@ -405,6 +411,7 @@
 			$('#edit_block').hide();
 			$('#form01').hide();
 			$('#gogo_rest').hide();
+			$('#excel').hide();
 			$('#disp_block').fadeIn(500);
 			$('#edit_expand').fadeIn(500);
 		});

@@ -339,10 +339,14 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
+                        <!-- テストのためLDのみ -->
+                        {% if request.user.id <= 4 %}
                         <div class="d-flex">
                             <a class="btn btn-sm btn-secondary d-flex flex-row align-items-center m-1 py-1 mr-2" href='{% url "myinfo:fax" faxday %}'>
                                 <i class="fas fa-fax fa-xs"></i>&nbsp;当番</a>
                         </div>
+                        {% endif %}
+
                         <!-- 発送日 -->
                         {% comment %} VCC休み：{{ vcc_cnt }}<br>
                         日：{{ date_cnt }} {% endcomment %}
