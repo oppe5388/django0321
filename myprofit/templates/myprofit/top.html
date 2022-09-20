@@ -23,120 +23,116 @@
 {% block mainpanel %}
 
 
-<div class="card p-2">
+<div class="card p-3">
 <h4 class="h3 font-weight-bold mb-3">VCC Navi<span class="h6">（契約Sample入力済のリンクを表示します）</span></h4>
 
 <!-- タブ部分 -->
 <ul class="nav nav-tabs">
   <li class="nav-item">
-    <a href="#tab1" class="nav-link py-2 active" data-toggle="tab">発行</a>
+    <a href="#tab1" class="nav-link active" data-toggle="tab">発行</a>
   </li>
   <li class="nav-item">
-    <a href="#tab2" class="nav-link py-2" data-toggle="tab">契約の取消</a>
+    <a href="#tab2" class="nav-link" data-toggle="tab">契約の取消</a>
   </li>
+
+  <a class="m-2 btn btn-rounded btn-light p-2 ml-auto" href="{% url 'myprofit:profit_top' %}">Reset</a>
+
 </ul>
 
 <!-- 内容部分 -->
-<div class="tab-content p-2 shadow-sm alert-dark">
+<div class="tab-content p-3 shadow-sm">
   <!-- タブ1 -->
   <div id="tab1" class="tab-pane active">
 
-    <div class="card mb-2">
-      <div class="card-body p-2">
-        <div class="d-flex flex-wrap justify-content-between">
-          <h4 class="h4 font-weight-bold mb-3">1. 印刷したいもの</h4>
-        </div>
+    <div class="mb-3">
+      <div class="d-flex flex-wrap justify-content-between">
+        <h4 class="h4 font-weight-bold mb-2">1. 印刷したいもの</h4>
+      </div>
 
-        <div class="btn-group btn-group-toggle" data-toggle="buttons" id="select1">
-          <label class="btn btn-sm btn-inverse-secondary">
-            <input type="radio" name="s1" id="op1_1" autocomplete="off" value="申込書">申込書（＆会員証）
-          </label>
-          <label class="btn btn-sm btn-inverse-secondary">
-            <input type="radio" name="s1" id="op1_2" autocomplete="off" value="会員証">会員証のみ
-          </label>
-        </div>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons" id="select1">
+        <label class="btn btn-sm btn-inverse-secondary">
+          <input type="radio" name="s1" id="op1_1" autocomplete="off" value="申込書">申込書（＆会員証）
+        </label>
+        <label class="btn btn-sm btn-inverse-secondary">
+          <input type="radio" name="s1" id="op1_2" autocomplete="off" value="会員証">会員証のみ
+        </label>
       </div>
     </div>
 
-    <div class="card mb-2" id="block2">
-      <div class="card-body p-2">
-        <div class="d-flex flex-wrap justify-content-between">
-          <h4 class="h4 font-weight-bold mb-3">2. ステータス</h4>
-        </div>
-
-        <!-- 縦のボタングループ版 -->
-        {% comment %} <div class="btn-group-toggle btn-group-vertical" data-toggle="buttons">
-          <label class="btn btn-sm btn-inverse-secondary">
-            <input type="radio" name="options" id="option1" autocomplete="off">
-              <div class="text-left">（申込前）</div>
-          </label>
-          <label class="btn btn-sm btn-inverse-secondary">
-            <input type="radio" name="options" id="option2" autocomplete="off">
-            <div class="text-left">申込書未発行</div>
-          </label>
-          <label class="btn btn-sm btn-inverse-secondary">
-            <input type="radio" name="options" id="option3" autocomplete="off">
-            <div class="text-left">車両情報未登録</div>
-          </label>
-          <label class="btn btn-sm btn-inverse-secondary">
-            <input type="radio" name="options" id="option3" autocomplete="off">
-            <div class="text-left">会員証未発行</div>
-          </label>
-          <label class="btn btn-sm btn-inverse-secondary">
-            <input type="radio" name="options" id="option3" autocomplete="off">
-            <div class="text-left">本登録</div>
-          </label>
-        </div> {% endcomment %}
-
-        <div class="btn-group btn-group-toggle" data-toggle="buttons" id="select2">
-          <label class="btn btn-sm btn-inverse-secondary" id="sel2_1">
-            <input type="radio" name="s2" id="op2_1" autocomplete="off" value="申込前">(申込前)
-          </label>
-          <label class="btn btn-sm btn-inverse-secondary" id="sel2_2">
-            <input type="radio" name="s2" id="op2_2" autocomplete="off" value="申込書未">申込書未発行
-            <a href="#" class="text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-              data-content="申込はした" ><i class="fa fa-question-circle colorwhite"></i></a>
-          </label>
-          <label class="btn btn-sm btn-inverse-secondary">
-            <input type="radio" name="s2" id="op2_3" autocomplete="off" value="車両未">車両情報未登録
-            <a href="#" class="text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-              data-content="登録番号や車検満了日なしで、NFS-Webの申込書印刷ボタンは押した"><i class="fa fa-question-circle colorwhite"></i></a>
-          </label>
-          <label class="btn btn-sm btn-inverse-secondary">
-            <input type="radio" name="s2" id="op2_4" autocomplete="off" value="会員証未">会員証未発行
-            <a href="#" class="text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-              data-content="登録番号や車検満了日がある状態で、NFS-Webの申込書印刷ボタンは押した"><i class="fa fa-question-circle colorwhite"></i></a>
-          </label>
-          <label class="btn btn-sm btn-inverse-secondary">
-            <input type="radio" name="s2" id="op2_5" autocomplete="off" value="本登録">本登録
-            <a href="#" class="text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-              data-content="NFS-Webの会員証印刷ボタンまで押した" ><i class="fa fa-question-circle colorwhite"></i></a>
-          </label>
-        </div>
-          
-
+    <div class="mb-3" id="block2">
+      <div class="d-flex flex-wrap justify-content-between">
+        <h4 class="h4 font-weight-bold mb-2">2. ステータス</h4>
       </div>
+
+      <!-- 縦のボタングループ版 -->
+      {% comment %} <div class="btn-group-toggle btn-group-vertical" data-toggle="buttons">
+        <label class="btn btn-sm btn-inverse-secondary">
+          <input type="radio" name="options" id="option1" autocomplete="off">
+            <div class="text-left">（申込前）</div>
+        </label>
+        <label class="btn btn-sm btn-inverse-secondary">
+          <input type="radio" name="options" id="option2" autocomplete="off">
+          <div class="text-left">申込書未発行</div>
+        </label>
+        <label class="btn btn-sm btn-inverse-secondary">
+          <input type="radio" name="options" id="option3" autocomplete="off">
+          <div class="text-left">車両情報未登録</div>
+        </label>
+        <label class="btn btn-sm btn-inverse-secondary">
+          <input type="radio" name="options" id="option3" autocomplete="off">
+          <div class="text-left">会員証未発行</div>
+        </label>
+        <label class="btn btn-sm btn-inverse-secondary">
+          <input type="radio" name="options" id="option3" autocomplete="off">
+          <div class="text-left">本登録</div>
+        </label>
+      </div> {% endcomment %}
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons" id="select2">
+        <label class="btn btn-sm btn-inverse-secondary" id="sel2_1">
+          <input type="radio" name="s2" id="op2_1" autocomplete="off" value="申込前">(申込前)
+        </label>
+        <label class="btn btn-sm btn-inverse-secondary" id="sel2_2">
+          <input type="radio" name="s2" id="op2_2" autocomplete="off" value="申込書未">申込書未発行
+          <a href="#" class="text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            data-content="申込はした" ><i class="fa fa-question-circle colorwhite"></i></a>
+        </label>
+        <label class="btn btn-sm btn-inverse-secondary">
+          <input type="radio" name="s2" id="op2_3" autocomplete="off" value="車両未">車両情報未登録
+          <a href="#" class="text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            data-content="登録番号や車検満了日なしで、NFS-Webの申込書印刷ボタンは押した"><i class="fa fa-question-circle colorwhite"></i></a>
+        </label>
+        <label class="btn btn-sm btn-inverse-secondary">
+          <input type="radio" name="s2" id="op2_4" autocomplete="off" value="会員証未">会員証未発行
+          <a href="#" class="text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            data-content="登録番号や車検満了日がある状態で、NFS-Webの申込書印刷ボタンは押した"><i class="fa fa-question-circle colorwhite"></i></a>
+        </label>
+        <label class="btn btn-sm btn-inverse-secondary">
+          <input type="radio" name="s2" id="op2_5" autocomplete="off" value="本登録">本登録
+          <a href="#" class="text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            data-content="NFS-Webの会員証印刷ボタンまで押した" ><i class="fa fa-question-circle colorwhite"></i></a>
+        </label>
+      </div>
+
     </div>
 
-    <div class="card mb-2" id="block3">
-      <div class="card-body p-2">
-        <div class="d-flex flex-wrap justify-content-between">
-          <h4 class="h4 font-weight-bold mb-3">3. 車両基盤</h4>
-        </div>
+    <div class="mb-3" id="block3">
+      <div class="d-flex flex-wrap justify-content-between">
+        <h4 class="h4 font-weight-bold mb-2">3. 車両基盤</h4>
+      </div>
 
-        <div class="btn-group btn-group-toggle" data-toggle="buttons" id="select3">
-          <label class="btn btn-sm btn-inverse-secondary" id="sel3_1">
-            <input type="radio" name="s3" id="op3_1" autocomplete="off" value="もともと">申込前に済（契約に車両情報あり）
-          </label>
-          <label class="btn btn-sm btn-inverse-secondary">
-            <input type="radio" name="s3" id="op3_2" autocomplete="off" value="入力済">申込時は未、後に入力済み
-            <a href="#" class="text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-              data-content="入力から反映までの時間は、販社により異なります"><i class="fa fa-question-circle colorwhite"></i></a>
-          </label>
-          <label class="btn btn-sm btn-inverse-secondary">
-            <input type="radio" name="s3" id="op3_3" autocomplete="off" value="まだ">まだ
-          </label>
-        </div>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons" id="select3">
+        <label class="btn btn-sm btn-inverse-secondary" id="sel3_1">
+          <input type="radio" name="s3" id="op3_1" autocomplete="off" value="もともと">申込前に済（契約に車両情報あり）
+        </label>
+        <label class="btn btn-sm btn-inverse-secondary">
+          <input type="radio" name="s3" id="op3_2" autocomplete="off" value="入力済">申込時は未、後に入力済み
+          <a href="#" class="text-info" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            data-content="入力から反映までの時間は、販社により異なります"><i class="fa fa-question-circle colorwhite"></i></a>
+        </label>
+        <label class="btn btn-sm btn-inverse-secondary">
+          <input type="radio" name="s3" id="op3_3" autocomplete="off" value="まだ">まだ
+        </label>
       </div>
     </div>
 
@@ -158,17 +154,15 @@
     </div> {% endcomment %}
 
     {% comment %} <hr class=""> {% endcomment %}
-    <i class="fa fa-arrow-down fa-lg m-2"></i>
-    <div class="card mb-2">
-      <div class="card-body p-2">
-        <div class="d-flex flex-wrap justify-content-between">
-          <h4 class="h4 font-weight-bold text-secondary">Result：</h4>
-        </div>
+    
+    <div class="mb-2">
+      <div class="d-flex ">
+        <h4 class="h4 font-weight-bold text-secondary">Result<i class="fa fa-arrow-down ml-2"></i></h4>
+      </div>
 
-        <div class="d-flex align-items-center" id="result">
-        </div>
-        <div class="d-flex align-items-center" id="result2">
-        </div>
+      <div class="d-flex align-items-center" id="result">
+      </div>
+      <div class="d-flex align-items-center" id="result2">
       </div>
     </div>
   </div>
@@ -177,10 +171,9 @@
   <!-- タブ2 -->
   <div id="tab2" class="tab-pane">
 
-    <div class="card mb-2" id="block2">
-      <div class="card-body p-2">
+    <div class="mb-3" id="block2">
         <div class="d-flex flex-wrap justify-content-between">
-          <h4 class="h4 font-weight-bold mb-3">1. ステータス</h4>
+          <h4 class="h4 font-weight-bold mb-2">1. ステータス</h4>
         </div>
 
         <div class="btn-group btn-group-toggle" data-toggle="buttons" id="select0">
@@ -209,23 +202,19 @@
           </label>
         </div>
           
-
-      </div>
     </div>
 
 
     {% comment %} <hr class=""> {% endcomment %}
-    <i class="fa fa-arrow-down fa-lg m-2"></i>
-    <div class="card mb-2">
-      <div class="card-body p-2">
-        <div class="d-flex flex-wrap justify-content-between">
-          <h4 class="h4 font-weight-bold text-secondary">Result：</h4>
-        </div>
+    
+    <div class="mb-2">
+      <div class="d-flex flex-wrap justify-content-between">
+        <h4 class="h4 font-weight-bold text-secondary">Result<i class="fa fa-arrow-down ml-2"></i></h4>
+      </div>
 
-        <div class="d-flex align-items-center" id="result3">
-        </div>
-        <div class="d-flex align-items-center" id="result4">
-        </div>
+      <div class="d-flex align-items-center" id="result3">
+      </div>
+      <div class="d-flex align-items-center" id="result4">
       </div>
     </div>
   </div>
@@ -234,169 +223,174 @@
 </div>
 <!-- タブ内容↑ここまで -->
 
-<a class="mt-2 btn btn-rounded btn-secondary py-2 mr-auto" href="{% url 'myprofit:profit_top' %}">Reset</a>
+{% comment %} <a class="mt-2 btn btn-rounded btn-light p-2 ml-auto" href="{% url 'myprofit:profit_top' %}">Reset</a> {% endcomment %}
 
 </div>
 
 <!-- メッセージのテーブル -->
-<hr class="">
-<div class="card p-2">
+{% comment %} <hr class=""> {% endcomment %}
+<div class="card p-2 mt-4">
 <div class="d-flex align-items-center mb-2">
-  <div class="font-weight-bold mr-2">表示メッセージ一覧</div>
+  <div class="font-weight-bold mr-2">メッセージ</div>
   <input id="myInput" class="form-control-sm col-6" placeholder="Search..">
 </div>
 
 <table class="table bg-white" id="sort_table">
   <thead class="table thead-dark">
   <tr class="text-nowrap small">
+    <th class="col-1"><span class="small">区分<i class="fa fa-sort"></i></span></th>
 		<th><span class="small">メッセージ<i class="fa fa-sort"></i></span></th>
-		<th><span class="small">区分<i class="fa fa-sort"></i></span></th>
-		<th><span class="small">小区分<i class="fa fa-sort"></i></span></th>
+		<th><span class="small">表示画面<i class="fa fa-sort"></i></span></th>
 		{% comment %} <th><span class="small">URL<i class="fa fa-sort"></i></span></th> {% endcomment %}
 		<th><span class="small">説明<i class="fa fa-sort"></i></span></th>
 	</tr>
   </thead>
   <tbody id="myTable" class="">
+
     <tr>
+      <td>申込</td>
       <td>車名未入力です。車両基盤を修正してください。</td>
-      <td>申込</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
+      <td>申込</td>
       <td>車両情報に誤りがあります。正しく修正してください。</td>
-      <td>申込</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
+      <td>申込</td>
       <td>フォロー担当者が未入力です。車両情報を入力してください。</td>
-      <td>申込</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
+      <td>申込</td>
       <td>メンテプロ申込済です。取り消す場合は、注文書入力にてクーポンメニューコードの削除をしてくだい。</td>
-      <td>申込</td>
-      <td>新車</td>
+      <td><span class="small">新車</span></td>
       <td></td>
     </tr>
     <tr>
+      <td>申込</td>
       <td>出庫登録が完了していないため会員証印刷は出来ません。</td>
-      <td>申込</td>
       <td></td>
       <td><span class="small">車両情報未登録での会員証印刷ボタン？</span></td>
     </tr>
     <tr>
+      <td>申込</td>
       <td>運用日が違います。</td>
-      <td>申込</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td>クーポンメニュー情報が未入力です。車両クラスが未入力です。メンテプロ情報を修正してください。</td>
       <td>申込</td>
+      <td>クーポンメニュー情報が未入力です。車両クラスが未入力です。メンテプロ情報を修正してください。</td>
       <td></td>
       <td><span class="small">車両情報未登録での会員証印刷ボタン？</span></td>
     </tr>
     <tr>
+      <td>申込</td>
       <td>指定した車両情報は存在しません。</td>
-      <td>申込</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
+      <td>申込</td>
       <td>指定した注文書番号は存在しません。</td>
-      <td>申込</td>
-      <td>新車</td>
+      <td><span class="small">新車</span></td>
       <td></td>
     </tr>
     <tr>
+      <td>申込</td>
       <td>未使用のクーポンがまだあります。新規申し込みを行うには申込みボタンを押してください。</td>
-      <td>申込</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
+      <td>申込</td>
       <td>メンテプロ申込済みです。再申込しますか？</td>
-      <td>申込</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
+      <td>精算</td>
       <td>メンテナンス商品マスタ情報の取得に失敗しました。</td>
-      <td>精算</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
+      <td>精算</td>
       <td>選択されているメンテプロクーポンは、使用できない売上区分です。</td>
-      <td>精算</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
+      <td>精算</td>
       <td>このメンテナンス番号は使用できません。</td>
-      <td>精算</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td>メンテナンス番号が入力されてますがクーポン使用の明細がありません。</td>
       <td>精算</td>
+      <td>メンテナンス番号が入力されていますがクーポン使用の明細がありません。</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
+      <td>NFSWeb</td>
       <td>該当する車名は検索できませんでした。</td>
-      <td>NFSWeb</td>
-      <td>受付申込登録の車両検索画面</td>
+      <td><span class="small">受付申込登録の車両検索画面</span></td>
       <td></td>
     </tr>
     <tr>
-      <td>この商品は登録されていません。商品をご確認のうえ、再度登録してください。</td>
       <td>NFSWeb</td>
-      <td>受付申込登録</td>
+      <td>この商品は登録されていません。<br>
+        商品をご確認のうえ、再度登録してください。</td>
+      <td><span class="small">受付申込登録</span></td>
       <td><span class="small">選択不可の商品を選択している場合、画面上部に表示される</span></td>
     </tr>
     <tr>
-      <td>※この画面以降は修正できません。修正される場合は一旦キャンセルを行い、再度申込受付登録を行ってください。（登録番号は除く）</td>
       <td>NFSWeb</td>
+      <td>※この画面以降は修正できません。<br>
+        修正される場合は一旦キャンセルを行い、再度申込受付登録を行ってください。（登録番号は除く）</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td>【お読みください】<br>1.　この段階ではまだ正式な申込みには至っていません。<br>
+      <td>NFSWeb</td>
+      <td>【お読みください】<br>
+        1.　この段階ではまだ正式な申込みには至っていません。<br>
         2.　このあとに「申込書の印刷」「会員証の印刷」があります。<br>
         3.　本日から6ヶ月以内に「会員証発行」がされないと、本申込は自動的にキャンセルとなります。その際は再度お申込をいただくことになります。ご不明な点につきましては、NFSメンテプロパックデスクまでお問い合わせください。<br>
         電話　0120-948-348</td>
-      <td>NFSWeb</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td>その他おすすめ商品が存在します。<br>おすすめ商品は「受付申込確認画面」の下段に「おすすめ商品」ボタンが表示されますのでご確認ください。</td>
       <td>NFSWeb</td>
+      <td>その他おすすめ商品が存在します。<br>
+        おすすめ商品は「受付申込確認画面」の下段に「おすすめ商品」ボタンが表示されますのでご確認ください。</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td>印刷してよろしいでしょうか？<br>印刷後は申込キャンセル出来ません、全て解約手続きとなります。よろしければ「OK」を押してください。</td>
       <td>NFSWeb</td>
+      <td>印刷してよろしいでしょうか？<br>
+        印刷後は申込キャンセル出来ません、全て解約手続きとなります。<br>
+        よろしければ「OK」を押してください。</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td>システムメンテナンス中です。</td>
       <td>PROFITからNFSWeb</td>
+      <td>システムメンテナンス中です。</td>
       <td></td>
       <td><span class="small">NFSの汎用エラーメッセージ</span></td>
     </tr>
   </tbody>
 </table>
 </div>
-
-
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -639,6 +633,21 @@
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
   });
+</script>
+
+<script>
+  //テーブル色分け
+	$("td").each(function (a, b) {
+    if ($(b).text() == "申込") {
+      $(b).addClass("table-success")
+    } else if ($(b).text() == "精算") {
+      $(b).addClass("table-warning")
+    } else if ($(b).text() == "NFSWeb") {
+      $(b).addClass("table-light")
+    } else {
+
+    }
+	});
 </script>
 
 {% endblock %}

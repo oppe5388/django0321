@@ -24,8 +24,8 @@
 {% block mainpanel %}
 
 
-<button type="button" class="btn btn-primary btn-rounded p-1 ml-1 mb-2" id="flow_disp" >まとめ</button>
-<button type="button" class="btn btn-primary btn-rounded p-1 ml-1 mb-2" id="flow_hide" >まとめ</button>
+<button type="button" class="btn btn-primary btn-rounded p-1 ml-1 mb-2" id="flow_disp" >まとめを見る</button>
+<button type="button" class="btn btn-primary btn-rounded p-1 ml-1 mb-2" id="flow_hide" style="display:none">まとめを閉じる</button>
 <div id="flow_block" class="card mb-2">
   <div class="mermaid h6">
     graph LR;
@@ -524,8 +524,8 @@
         $('#sidebar').removeClass('bg-white');//紺色に
         $('#case_btn').hide();//Sampleボタン非表示
 
-        $('#flow_hide').hide();//非表示
-        $('#flow_block').fadeOut(200);//非表示
+        //$('#flow_hide').hide();//style="display:none"
+        $('#flow_block').fadeOut(100);//非表示
 
       
         //はじめは非表示

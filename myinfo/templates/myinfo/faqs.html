@@ -112,6 +112,10 @@
             class="nav-link {% if 'すべて' in selected_tab %} active{% endif %}">すべて</a>
         </li>
         <li class="nav-item">
+            <a href="{% url 'myinfo:faqs_tab' p='未分類' %}" 
+            class="nav-link {% if '未分類' in selected_tab %} active{% endif %}">NEW(未分類)</a>
+        </li>
+        <li class="nav-item">
             <a href="{% url 'myinfo:faqs_tab' p='週報' %}" 
             class="nav-link {% if '週報' in selected_tab %} active{% endif %}">週報</a>
         </li>
@@ -127,10 +131,10 @@
             <a href="{% url 'myinfo:faqs_tab' p='商品部擦り合わせ' %}" 
             class="nav-link {% if '商品部擦り合わせ' in selected_tab %} active{% endif %}">商品部</a>
         </li>
-        <li class="nav-item">
+        {% comment %} <li class="nav-item">
             <a href="{% url 'myinfo:faqs_tab' p='エラー' %}" 
             class="nav-link {% if 'エラー' in selected_tab %} active{% endif %}">エラーMSG</a>
-        </li>
+        </li> {% endcomment %}
         <li class="nav-item">
             <a href="{% url 'myinfo:faqs_tab' p='含む含まれない' %}" 
             class="nav-link {% if '含む含まれない' in selected_tab %} active{% endif %}">含む含まれない</a>
