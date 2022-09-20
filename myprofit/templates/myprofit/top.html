@@ -23,8 +23,8 @@
 {% block mainpanel %}
 
 
-
-<h4 class="h3 font-weight-bold mb-3">VCC Navi<span class="h6">（契約Sample入力済）</span></h4>
+<div class="card p-2">
+<h4 class="h3 font-weight-bold mb-3">VCC Navi<span class="h6">（契約Sample入力済のリンクを表示します）</span></h4>
 
 <!-- タブ部分 -->
 <ul class="nav nav-tabs">
@@ -37,7 +37,7 @@
 </ul>
 
 <!-- 内容部分 -->
-<div class="tab-content p-2">
+<div class="tab-content p-2 shadow-sm alert-dark">
   <!-- タブ1 -->
   <div id="tab1" class="tab-pane active">
 
@@ -157,8 +157,9 @@
       </div>
     </div> {% endcomment %}
 
-    <hr class="">
-    <div class="card mb-2 ">
+    {% comment %} <hr class=""> {% endcomment %}
+    <i class="fa fa-arrow-down fa-lg m-2"></i>
+    <div class="card mb-2">
       <div class="card-body p-2">
         <div class="d-flex flex-wrap justify-content-between">
           <h4 class="h4 font-weight-bold text-secondary">Result：</h4>
@@ -213,8 +214,9 @@
     </div>
 
 
-    <hr class="">
-    <div class="card mb-2 ">
+    {% comment %} <hr class=""> {% endcomment %}
+    <i class="fa fa-arrow-down fa-lg m-2"></i>
+    <div class="card mb-2">
       <div class="card-body p-2">
         <div class="d-flex flex-wrap justify-content-between">
           <h4 class="h4 font-weight-bold text-secondary">Result：</h4>
@@ -232,9 +234,167 @@
 </div>
 <!-- タブ内容↑ここまで -->
 
+<a class="mt-2 btn btn-rounded btn-secondary py-2 mr-auto" href="{% url 'myprofit:profit_top' %}">Reset</a>
 
+</div>
 
-<a class="mt-3 btn btn-rounded btn-secondary py-2" href="{% url 'myprofit:profit_top' %}">Reset</a>
+<!-- メッセージのテーブル -->
+<hr class="">
+<div class="card p-2">
+<div class="d-flex align-items-center mb-2">
+  <div class="font-weight-bold mr-2">表示メッセージ一覧</div>
+  <input id="myInput" class="form-control-sm col-6" placeholder="Search..">
+</div>
+
+<table class="table bg-white" id="sort_table">
+  <thead class="table thead-dark">
+  <tr class="text-nowrap small">
+		<th><span class="small">メッセージ<i class="fa fa-sort"></i></span></th>
+		<th><span class="small">区分<i class="fa fa-sort"></i></span></th>
+		<th><span class="small">小区分<i class="fa fa-sort"></i></span></th>
+		{% comment %} <th><span class="small">URL<i class="fa fa-sort"></i></span></th> {% endcomment %}
+		<th><span class="small">説明<i class="fa fa-sort"></i></span></th>
+	</tr>
+  </thead>
+  <tbody id="myTable" class="">
+    <tr>
+      <td>車名未入力です。車両基盤を修正してください。</td>
+      <td>申込</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>車両情報に誤りがあります。正しく修正してください。</td>
+      <td>申込</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>フォロー担当者が未入力です。車両情報を入力してください。</td>
+      <td>申込</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>メンテプロ申込済です。取り消す場合は、注文書入力にてクーポンメニューコードの削除をしてくだい。</td>
+      <td>申込</td>
+      <td>新車</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>出庫登録が完了していないため会員証印刷は出来ません。</td>
+      <td>申込</td>
+      <td></td>
+      <td><span class="small">車両情報未登録での会員証印刷ボタン？</span></td>
+    </tr>
+    <tr>
+      <td>運用日が違います。</td>
+      <td>申込</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>クーポンメニュー情報が未入力です。車両クラスが未入力です。メンテプロ情報を修正してください。</td>
+      <td>申込</td>
+      <td></td>
+      <td><span class="small">車両情報未登録での会員証印刷ボタン？</span></td>
+    </tr>
+    <tr>
+      <td>指定した車両情報は存在しません。</td>
+      <td>申込</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>指定した注文書番号は存在しません。</td>
+      <td>申込</td>
+      <td>新車</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>未使用のクーポンがまだあります。新規申し込みを行うには申込みボタンを押してください。</td>
+      <td>申込</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>メンテプロ申込済みです。再申込しますか？</td>
+      <td>申込</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>メンテナンス商品マスタ情報の取得に失敗しました。</td>
+      <td>精算</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>選択されているメンテプロクーポンは、使用できない売上区分です。</td>
+      <td>精算</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>このメンテナンス番号は使用できません。</td>
+      <td>精算</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>メンテナンス番号が入力されてますがクーポン使用の明細がありません。</td>
+      <td>精算</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>該当する車名は検索できませんでした。</td>
+      <td>NFSWeb</td>
+      <td>受付申込登録の車両検索画面</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>この商品は登録されていません。商品をご確認のうえ、再度登録してください。</td>
+      <td>NFSWeb</td>
+      <td>受付申込登録</td>
+      <td><span class="small">選択不可の商品を選択している場合、画面上部に表示される</span></td>
+    </tr>
+    <tr>
+      <td>※この画面以降は修正できません。修正される場合は一旦キャンセルを行い、再度申込受付登録を行ってください。（登録番号は除く）</td>
+      <td>NFSWeb</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>【お読みください】<br>1.　この段階ではまだ正式な申込みには至っていません。<br>
+        2.　このあとに「申込書の印刷」「会員証の印刷」があります。<br>
+        3.　本日から6ヶ月以内に「会員証発行」がされないと、本申込は自動的にキャンセルとなります。その際は再度お申込をいただくことになります。ご不明な点につきましては、NFSメンテプロパックデスクまでお問い合わせください。<br>
+        電話　0120-948-348</td>
+      <td>NFSWeb</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>その他おすすめ商品が存在します。<br>おすすめ商品は「受付申込確認画面」の下段に「おすすめ商品」ボタンが表示されますのでご確認ください。</td>
+      <td>NFSWeb</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>印刷してよろしいでしょうか？<br>印刷後は申込キャンセル出来ません、全て解約手続きとなります。よろしければ「OK」を押してください。</td>
+      <td>NFSWeb</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>システムメンテナンス中です。</td>
+      <td>PROFITからNFSWeb</td>
+      <td></td>
+      <td><span class="small">NFSの汎用エラーメッセージ</span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 
 
@@ -472,7 +632,7 @@
     disp_cancel();
   });
 
-  //参考：テーブルフィルタ→不採用
+  //参考：テーブルフィルタ→不採用→メッセージで採用
   $("#myInput").on("keyup", function() {
     var value = $(this).val().toLowerCase();
     $("#myTable tr").filter(function() {

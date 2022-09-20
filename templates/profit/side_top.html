@@ -1,9 +1,9 @@
 <ul class="nav mb-3">
     
   <li class="nav-item bg-white">
-    <div class="sidebar-menu-title text-dark">VCCメニュー</div>
+    <div class="sidebar-menu-title text-dark"><span class="small">VCCメニュー（Sample未入力画面）</span></div>
   </li>
-  <div class="nav-search mt-3">
+  {% comment %} <div class="nav-search mt-3">
     <div class="input-group">
       <input type="text" class="form-control" placeholder="エラー検索（未）">
       <div class="input-group-append">
@@ -12,7 +12,7 @@
         </span>
       </div>
     </div>
-  </div>
+  </div> {% endcomment %}
 
   <li class="nav-item">
     <div class="nav-link py-1 mt-2" data-toggle="collapse" href="#ui-basic1" aria-expanded="false">
@@ -58,15 +58,16 @@
   </li>
 </ul>
 
+
 <ul class="sidebar-legend ">
   <li>
-    <p class="sidebar-menu-title">Other</p>
+    <p class="sidebar-menu-title text-light h4 font-weight-bold">Other</p>
   </li>
   <li class="nav-item">
-    <a href="{% url 'myprofit:entry_example' %}" class="nav-link">受付申込登録のエラー</a>
+    <a href="{% url 'myprofit:entry_example' %}" class="nav-link text-light">受付申込登録のエラー</a>
   </li>
   <li class="nav-item">
-    <a href="{% url 'myprofit:search_example' %}" class="nav-link">お客様一覧検索の手順</a>
+    <a href="{% url 'myprofit:search_example' %}" class="nav-link text-light">お客様一覧検索の手順</a>
   </li>
 
 </ul>
