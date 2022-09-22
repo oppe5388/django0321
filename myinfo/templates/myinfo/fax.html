@@ -396,16 +396,18 @@
 		//$('#gogo_rest').hide();
 		//$('#excel').hide();
 		
-		//編集だけ休み表示。閲覧時は休み非表示
-		$('#disp_block .yasumi').children().hide();
+		//編集だけ休み表示。閲覧時は休み非表示→d-noneで保存にした
+		//$('#disp_block .yasumi').children().hide();
 		
 		//編集画面を開くボタン
 		$('#edit_expand').click(function() {
 
 			// 変更なしでもそのまま保存できるように
+			$('#edit_block .yasumi').children().addClass('d-none');// 非表示状態で保存するために
 			var str = $('#edit_block').html();
 			str=str.replace(/\r?\n/g, '');// 改行削除
 			$('#id_html').val(str);
+			$('#edit_block .yasumi').children().removeClass('d-none');// 戻す
 
 			$(this).hide();
 			$('#disp_block').hide();
@@ -440,10 +442,12 @@
 	    _super($item, container);
 
 		// 自作
+		$('#edit_block .yasumi').children().addClass('d-none');// 非表示状態で保存するために
 		var str = $('#edit_block').html();
 		str=str.replace(/\r?\n/g, '');// 改行削除
 		//str=str.replace(/example/g, '');// sortable不可にするためクラス削除
 		$('#id_html').val(str);
+		$('#edit_block .yasumi').children().removeClass('d-none');// 戻す
 	
 	  },
 	  // 挙動おかしくなるので必要
