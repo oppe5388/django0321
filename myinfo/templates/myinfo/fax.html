@@ -125,7 +125,7 @@
 					<li><ul class="op">木下</ul></li>
 					</ul>
 				</div>
-				<div class="d-flex flex-column col-3">
+				<div class="d-flex flex-column col-3 yasumi">
 					<h5 class="row ohiru mx-auto px-1">休</h5>
 					<ul class='example block connect-area px-1'>
 						<li><ul class="op">福田</ul></li>
@@ -156,8 +156,8 @@
 			<input class="btn btn-primary" type="submit" value="保存">
 		{% endif %}
 	</div>
-	<p class="small mt-2">※各ボタン、確認画面なしに実行されます<br>
-		※変更なしの場合も、一度触らないと（動かして戻す）保存できません</p>
+	<p class="small mt-2">※各ボタン、確認画面なしに実行されます</p><br>
+		{% comment %} ※変更なしの場合も、一度触らないと（動かして戻す）保存できません</p> {% endcomment %}
 	
 
 </form>
@@ -394,9 +394,18 @@
 		//$('#form01').hide();
 		//$('#gogo_rest').hide();
 		//$('#excel').hide();
-
+		
+		//編集だけ休み表示。閲覧時は休み非表示
+		$('#disp_block .yasumi').children().hide();
+		
 		//編集画面を開くボタン
 		$('#edit_expand').click(function() {
+
+			// 変更なしでもそのまま保存できるように
+			var str = $('#edit_block').html();
+			str=str.replace(/\r?\n/g, '');// 改行削除
+			$('#id_html').val(str);
+
 			$(this).hide();
 			$('#disp_block').hide();
 			$('#edit_block').fadeIn(500);
