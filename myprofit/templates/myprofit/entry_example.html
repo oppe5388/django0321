@@ -26,7 +26,7 @@
 
 <button type="button" class="btn btn-primary btn-rounded p-1 ml-1 mb-2" id="flow_disp" >まとめを見る</button>
 <button type="button" class="btn btn-primary btn-rounded p-1 ml-1 mb-2" id="flow_hide" style="display:none">まとめを閉じる</button>
-<div id="flow_block" class="card mb-2">
+<div id="flow_block" class="card mb-2" style="display:none">
   <div class="mermaid h6">
     graph LR;
       A(氏名)-->B(アポストロフィーを確認);
@@ -871,18 +871,6 @@
 
   });
 
-  //フロー表示ボタン
-  $('#flow_disp').click(function() {
-    $('#flow_block').fadeIn(500);
-    $('#flow_hide').show();
-    $('#flow_disp').hide();
-  });
-  //フロー非表示ボタン
-  $('#flow_hide').click(function() {
-    $('#flow_block').fadeOut(500);
-    $('#flow_disp').show();
-    $('#flow_hide').hide();
-  });
 </script>
 
 
@@ -898,10 +886,27 @@
 <!-- フローチャート用-->
 <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" charset="UTF-8"></script>
 <script>
-  mermaid.initialize({
+  {% comment %} mermaid.initialize({
     startOnLoad:true,
+  }); {% endcomment %}
+  //dispay:noneに適用するにははじめfalse、その後、true→init
+  mermaid.initialize({startOnLoad:false});
+
+  //フロー表示ボタン
+  $('#flow_disp').click(function() {
+    $('#flow_block').fadeIn(500);
+    $('#flow_hide').show();
+    $('#flow_disp').hide();
+    mermaid.initialize({startOnLoad:true});
+    mermaid.init();
   });
 
+  //フロー非表示ボタン
+  $('#flow_hide').click(function() {
+    $('#flow_block').fadeOut(500);
+    $('#flow_disp').show();
+    $('#flow_hide').hide();
+  });
 </script>
 
 {% endblock %}
