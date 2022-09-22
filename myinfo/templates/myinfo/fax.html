@@ -148,7 +148,8 @@
 	
 	
 	<div class="d-flex justify-content-between">
-		<button class="btn btn-secondary" id="cancel">キャンセル</button>
+		<a href='' class="btn btn-secondary" id="cancel">キャンセル</a>
+		{% comment %} <button class="btn btn-secondary" id="cancel">キャンセル</button> {% endcomment %}
 		{% if fax.html %}
 		<a href="{% url 'myinfo:fax_delete' disp_day %}" class="btn btn-danger justify-content-between">削除</a>
 		<input class="btn btn-info" type="submit" value="更新">
