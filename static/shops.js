@@ -148,7 +148,7 @@ $(document).ready(function () {
                                 </td></tr><tr><td>BC/本部</td><td>"+row[16]+"\
                                 </td></tr><tr><td>NFSメンテ</td><td>"+row[17]+"\
                                 </td></tr><tr><td>自社メンテ</td><td>"+row[18]+"</td></tr></table>";
-                    return '<a class="" data-toggle="modal" data-target="#exampleModal" data-title="<b>' + row[12]+'</b>"\
+                    return row[10]+"　"+'<a class="" data-toggle="modal" data-target="#exampleModal" data-title="<b>' + row[12]+'</b>"\
                     data-sample="' + table1 + '">'+ data +'</a>';
                 },
 
@@ -161,15 +161,16 @@ $(document).ready(function () {
                 render: function (data, type, row) {
                     var targetStr = row[6]
                     if (targetStr.indexOf('http') != -1) {
-                        return '<a class="" target="_blank" href="' + row[6] + '">' + data + '</a>';
+                        return row[3]+"　"+'<a class="" target="_blank" href="' + row[6] + '">' + data + '</a>'+'　<span class="text-xs">（' +row[8]+'）</span>';
                     }else{
-                        return data;
+                        return row[3]+"　"+data + '</a>'+'　<span class="text-xs">（' +row[8]+'）</span>';
                     }
                 },
             },
             {
                 // 4列目
                 title: "コード",
+                visible: false,
                 // className: " all",
             },
             {
@@ -193,7 +194,8 @@ $(document).ready(function () {
             },
             {
                 // 9列目
-                title: "カナ",
+                title: "店舗カナ",
+                visible: false,
                 // visible: false,
             },
             {

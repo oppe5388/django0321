@@ -778,6 +778,7 @@ class ShopsJsonView(BaseDatatableView):
                 qs = qs.filter(
                         # Q(dealer__icontains=part) | #これがあるとエラーになる
                         Q(dealer__name__icontains=part) | #これでOK
+                        Q(dealer__code5__icontains=part) | #販社コードでもヒットするように追加
                         Q(name__icontains=part) | 
                         Q(shopcode__icontains=part) | 
                         Q(tel__icontains=part) | 
