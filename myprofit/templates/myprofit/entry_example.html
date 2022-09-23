@@ -23,9 +23,20 @@
 
 {% block mainpanel %}
 
+<div class="card mb-2 p-2">
+  <span class="font-weight-bold h5">Sample</span>
+  <div class="d-flex flex-nowrap">
+    <span class="mb-1 col-2 px-1">サービス商品：</span>
+    <span class="mb-1 col px-1">{{ form.parent_category }}</span>
+  </div>
+  <div class="d-flex flex-nowrap">
+    <span class="mb-1 col-2 px-1">入会コース：</span>
+    <span class="mb-1 col px-1">{{ form.category }}</span>
+  </div>
+</div>
 
-<button type="button" class="btn btn-primary btn-rounded p-1 ml-1 mb-2" id="flow_disp" >まとめを見る</button>
-<button type="button" class="btn btn-primary btn-rounded p-1 ml-1 mb-2" id="flow_hide" style="display:none">まとめを閉じる</button>
+<button type="button" class="btn btn-primary btn-rounded p-1 ml-1 mb-2" id="flow_disp" >エラー解消方法まとめを開く</button>
+<button type="button" class="btn btn-primary btn-rounded p-1 ml-1 mb-2" id="flow_hide" style="display:none">エラー解消方法まとめを閉じる</button>
 <div id="flow_block" class="card mb-2" style="display:none">
   <div class="mermaid h6">
     graph LR;
@@ -62,16 +73,7 @@
     <input type="hidden" name="cancel_flag" id="cancel_flag" value="{{cancel_flag}}"> {% endcomment %}
   
     <div class="card bg-white pb-3">
-  
-      <div class="p-0 mb-2">
-        <div class="col-12 bg-light p-0 mb-0">
-          <div class="d-flex flex-row navbar">
-            <span class="text-dark text-decoration-none small pr-2 border border-dark border-left-0 border-top-0 border-bottom-0">販売店メニューに戻る</span>
-          </div>
-        </div>
-      </div>
-  
-  
+    
       <div class="d-flex bg-light p-1 mx-2">■メンテプロパック　受付申込登録
       </div>
       <hr class="p-0 mt-0 border-dark mx-2 mb-2">
@@ -907,6 +909,62 @@
     $('#flow_disp').show();
     $('#flow_hide').hide();
   });
+</script>
+
+<!-- 商品とコースのプルダウン-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+  const parentCategoryElement = $('#id_parent_category');
+  const categoryElement = $('#id_category');
+  const categories = {
+      {% for parent in parentcategory_list %}
+          '{{ parent.pk }}': [
+              {% for category in parent.category_set.all %}
+                  {
+                      'pk': '{{ category.pk }}',
+                      'name': '{{ category.name }}'
+                  },
+              {% endfor %}
+          ],
+      {% endfor %}
+  };
+
+
+  const changeCategory = (select) => {
+      // 子カテゴリの選択欄を空にする。
+      categoryElement.children().remove();
+
+      // 選択した親カテゴリに紐づく子カテゴリの一覧を取得する。
+      const parentId = parentCategoryElement.val();
+      const categoryList = categories[parentId];
+
+      // 子カテゴリの選択肢を作成・追加。
+      for (const category of categoryList) {
+          const option = $('<option>');
+          option.val(category['pk']);
+          option.text(category['name']);
+          categoryElement.append(option);
+      }
+
+      // 指定があれば、そのカテゴリを選択する
+      if (select !== undefined) {
+          categoryElement.val(select);
+      }
+  };
+
+
+  $('#id_parent_category').on('change', () => {
+      changeCategory();
+  });
+
+
+  // 入力値に問題があって再表示された場合、ページ表示時点で小カテゴリが絞り込まれるようにする
+  if (parentCategoryElement.val()) {
+      const selectedCategory = categoryElement.val();
+      changeCategory(selectedCategory);
+  }
+
 </script>
 
 {% endblock %}

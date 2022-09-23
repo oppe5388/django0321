@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .forms import *
+from .models import Post
 
 def used02(request):
     context = {
@@ -206,8 +207,13 @@ def service01(request):
 
 
 def entry_example(request):
-    context = {
+
+    form = PostCreateForm # 商品とコースのプルダウン
+    context ={
+        'form': form,
     }
+
+    context['parentcategory_list'] = ParentCategory.objects.all()# 商品とコースのプルダウン
     return render(request, 'myprofit/entry_example.html', context)
 
 def car(request):
