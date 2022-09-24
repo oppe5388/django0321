@@ -23,7 +23,7 @@
 
 {% block mainpanel %}
 
-<div class="card mb-2 p-2">
+{% comment %} <div class="card mb-2 p-2">
   <span class="font-weight-bold h5">Sample</span>
   <div class="d-flex flex-nowrap">
     <span class="mb-1 col-2 px-1">サービス商品：</span>
@@ -33,7 +33,7 @@
     <span class="mb-1 col-2 px-1">入会コース：</span>
     <span class="mb-1 col px-1">{{ form.category }}</span>
   </div>
-</div>
+</div> {% endcomment %}
 
 <button type="button" class="btn btn-primary btn-rounded p-1 ml-1 mb-2" id="flow_disp" >エラー解消方法まとめを開く</button>
 <button type="button" class="btn btn-primary btn-rounded p-1 ml-1 mb-2" id="flow_hide" style="display:none">エラー解消方法まとめを閉じる</button>
@@ -338,7 +338,8 @@
               </span>
             </span>
             <span class="text-primary">※</span>
-            <select class=" mb-1 pl-1" id="product">
+            {{ form.parent_category }}
+            {% comment %} <select class=" mb-1 pl-1" id="product">
               <option value="0">選択してください
               <option value="1">メンテプロパック（乗用）
               <option value="ev">メンテプロパック（EV）
@@ -349,7 +350,7 @@
               <option value="turbo">メンテプロパックターボ（乗用）
               <option value="nismo">メンテプロパックNISMO
               <option value="evsp">メンテプロパック（EVSP）
-            </select>
+            </select> {% endcomment %}
             <span class="ml-2 px-1 alert-warning" id="course_error2-1">内容をご確認ください</span>
             <span class="ml-2 px-1 alert-warning" id="course_error2-2">この車両は選択した商品の対象外です</span>
           </div>
@@ -376,10 +377,11 @@
                 " >4</span> {% endcomment %}
             </span>
             <span class="text-primary">※</span>
-            <select class="mb-1 pl-1" id="course">
+            {{ form.category }}
+            {% comment %} <select class="mb-1 pl-1" id="course">
               <option value="0">選択してください</option>
               <option value="1" data-val="">メンテプロパック30EV</option>
-            </select>
+            </select> {% endcomment %}
             <span class="ml-2 px-1 alert-warning" id="course_error3">内容をご確認ください</span>
           </div>
           <div class="d-flex flex-nowrap">
@@ -423,24 +425,104 @@
     </div>
   
   </form>
-  
+
+
+  <div class="card bg-white p-5 m-5">
+  </div>
   
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/locale/ja.js"></script>
   
-  
+<!-- 商品とコースのプルダウン-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>  
+  const parentCategoryElement = $('#id_parent_category');
+  const categoryElement = $('#id_category');
+  //const parentCategoryElement = $('#product');
+  //const categoryElement = $('#course');
+  const categories = {
+      {% for parent in parentcategory_list %}
+          '{{ parent.pk }}': [
+              {% for category in parent.category_set.all %}
+                  {
+                      //'pk': '{{ category.pk }}',
+                      'pk': {{ category.pk }},//ソートのため数値に
+                      'name': '{{ category.name }}'
+                  },
+              {% endfor %}
+          ],
+      {% endfor %}
+  };
+
+
+  const changeCategory = (select) => {
+      // 子カテゴリの選択欄を空にする。
+      categoryElement.children().remove();
+
+      //2段目は選択してくださいにするので追加した
+      categoryElement.append('<option value="0" selected="">選択してください</option>');
+
+      // 選択した親カテゴリに紐づく子カテゴリの一覧を取得する。
+      const parentId = parentCategoryElement.val();
+      const categoryList = categories[parentId];
+
+      // ソートを追加した
+      if(categoryList != null) {
+        categoryList.sort(function(a,b){
+          if(a.pk > b.pk) {
+            return 1;
+          }
+          if(a.pk < b.pk) {
+            return -1;
+          }
+          return 0;
+        });
+
+        // 子カテゴリの選択肢を作成・追加。
+        for (const category of categoryList) {
+          const option = $('<option>');
+          option.val(category['pk']);
+          option.text(category['name']);
+          categoryElement.append(option);
+        }
+      }  
+      
+      
+      // 指定があれば、そのカテゴリを選択する
+      if (select !== undefined) {
+          categoryElement.val(select);
+      }
+  };
+
+
+  $('#id_parent_category').on('change', () => {
+      changeCategory();
+  });
+
+
+  // 入力値に問題があって再表示された場合、ページ表示時点で小カテゴリが絞り込まれるようにする
+  if (parentCategoryElement.val()) {
+      const selectedCategory = categoryElement.val();
+      changeCategory(selectedCategory);
+  }
+
+</script>
+
     <script>
 
       //クラスと商品
       function class_product_on(){
         $('#car_class').addClass("alert-warning");
-        $("#product").addClass("alert-warning");
+        //$("#product").addClass("alert-warning");
+        $("#id_parent_category").addClass("alert-warning");
       };
       function class_product_off(){
         $('#car_class').removeClass("alert-warning");
-        $("#product").removeClass("alert-warning");
+        //$("#product").removeClass("alert-warning");
+        $("#id_parent_category").removeClass("alert-warning");
       };
       function course_on(){
         $("#course").addClass("alert-warning");
@@ -528,6 +610,10 @@
 
         //$('#flow_hide').hide();//style="display:none"
         $('#flow_block').fadeOut(100);//非表示
+
+        //プルダウン連動にしたのでid変更
+        //$('#id_parent_category').attr('id', 'product');
+        //$('#id_category').attr('id', 'course');
       
         //はじめは非表示
         $('#price_error2').hide();
@@ -578,30 +664,45 @@
 
         //コースエラー手順１〜4
         $('#course_flow0').on('show.bs.popover', function () {
-          $('#product').addClass('blink');// 点滅
-          $('#course').addClass('blink');// 点滅
+          //$('#product').addClass('blink');// 点滅
+          //$('#course').addClass('blink');// 点滅
+          $('#id_parent_category').addClass('blink');// 点滅
+          $('#id_category').addClass('blink');// 点滅
         })
         $('#course_flow0').on('hide.bs.popover', function () {
-          $('#product').removeClass('blink');// 
-          $('#course').removeClass('blink');// 
+          //$('#product').removeClass('blink');// 
+          //$('#course').removeClass('blink');//
+          $('#id_parent_category').removeClass('blink');// 
+          $('#id_category').removeClass('blink');// 
         })
         $('#course_flow1').on('show.bs.popover', function () {
           $('#car_class').addClass('blink');// 点滅
-          $('#product').addClass('blink');// 点滅
-          $('#product').val("ev");// メンプロEV
-          $('#course').val("1");// EV30
+          //$('#product').addClass('blink');// 点滅
+          $('#id_parent_category').addClass('blink');// 点滅
+          //$('#product').val("ev");// メンプロEV
+          //$('#course').val("1");// EV30
+          $('#id_parent_category').val("2");// メンプロEV
+          changeCategory();
+          $('#id_category').val("27");// EV30
         })
         $('#course_flow1').on('hide.bs.popover', function () {
           $('#car_class').removeClass('blink');// 
-          $('#product').removeClass('blink');// 
+          //$('#product').removeClass('blink');// 
+          $('#id_parent_category').removeClass('blink');// 
         })
         $('#course_flow2').on('show.bs.popover', function () {
-          $('#product').addClass('blink');// 点滅
-          $('#product').val("0");// 選択してください
-          $('#course').val("0");// 選択してください
+          //$('#product').addClass('blink');// 点滅
+          $('#id_parent_category').addClass('blink');// 点滅
+          //$('#product').val("0");// 選択してください
+          //$('#course').val("0");// 選択してください
+          $('#id_parent_category option').filter(function(index){
+            return $(this).text() === '選択してください'; //選択してくださいを選択する場合
+          }).prop('selected', true);
+          $('#id_category').val("0");// 選択してください
         })
         $('#course_flow2').on('hide.bs.popover', function () {
-          $('#product').removeClass('blink');// 
+          //$('#product').removeClass('blink');//
+          $('#id_parent_category').removeClass('blink');//
         })
         $('#course_flow3').on('show.bs.popover', function () {
           $('#car_class').addClass('blink');// 点滅
@@ -611,34 +712,11 @@
           $('#car_class').removeClass('blink');// 
           $('#car_search').removeClass('blink');// 
         })
-        //$('#course_flow4').on('show.bs.popover', function () {
-        //  $('#maker').addClass('blink');// 点滅
-        //  $('#maker').val(2);// その他に
-        //  maker_change();
-        //  $('#base_no').addClass('blink');// 点滅
-        //})
-        //$('#course_flow4').on('hide.bs.popover', function () {
-        //  $('#maker').removeClass('blink');
-        //  $('#maker').val(1);// 日産車
-        //  maker_change();
-        //  $('#base_no').removeClass('blink');
-        //})
-        
+       
         
         //コース
-        /*
-        $('#course_error').on('show.bs.popover', function () {
-          $('#product').val("ev");// メンプロEV
-          $('#course').val("1");// EV30
-          course_show();
-          setTimeout("course_show()", 1000);//交互のhideで遅れてhideされた時用
-        })
-        $('#course_error').on('hide.bs.popover', function () {
-          course_hide();
-          setTimeout("course_hide()", 1000);//↑で遅れてshowされた時用
-        })
-        */
-        $('#course_error, #course').hover(
+        //$('#course_error, #course').hover(
+        $('#course_error, #id_category').hover(
           function (){
             //$('#product').val("ev");// メンプロEV
             //$('#course').val("1");// EV30
@@ -655,17 +733,6 @@
 
         //クラスは交互
         var timer = null;
-        /*
-        $('#class_error').on('show.bs.popover', function () {
-          course_kihon_repeat();
-          timer = setInterval("course_kihon_repeat()", 2000);
-        })
-        $('#class_error').on('hide.bs.popover', function () {
-          clearInterval(timer);
-          course_hide();
-          kihon_hide();
-        })
-        */
         $('#class_error, #car_class').hover(
           function (){
             course_kihon_repeat();
@@ -675,25 +742,14 @@
           function () {
             clearInterval(timer);
             course_hide();
-            //kihon_hide();
             $('#class_error').popover('hide');
           }
         );
 
         //商品も交互
         var timer = null;
-        /*
-        $('#product_error').on('show.bs.popover', function () {
-          course_kihon_repeat();
-          timer = setInterval("course_kihon_repeat()", 2000);
-        })
-        $('#product_error').on('hide.bs.popover', function () {
-          clearInterval(timer);
-          course_hide();
-          kihon_hide();
-        })
-        */
-        $('#product_error, #product').hover(
+        //$('#product_error, #product').hover(
+        $('#product_error, #id_parent_category').hover(
           function (){
             course_kihon_repeat();
             timer = setInterval("course_kihon_repeat()", 2000);
@@ -702,7 +758,6 @@
           function () {
             clearInterval(timer);
             course_hide();
-            //kihon_hide();
             $('#product_error').popover('hide');
           }
         );
@@ -852,8 +907,11 @@
     $('#order_no').prop('disabled', true);
     $('#entry_div').val(1);
     $('#entry_div').prop('disabled', true);
-    $("#product").val("ev");
-    $("#course").val("1");
+    //$("#product").val("ev");
+    //$("#course").val("1");
+    $("#id_parent_category").val("2");
+    changeCategory();
+    $("#id_category").val("27");
 
     $("#price").val("100,000");
 
@@ -908,77 +966,6 @@
     $('#flow_disp').show();
     $('#flow_hide').hide();
   });
-</script>
-
-<!-- 商品とコースのプルダウン-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-<script>  
-  const parentCategoryElement = $('#id_parent_category');
-  const categoryElement = $('#id_category');
-  const categories = {
-      {% for parent in parentcategory_list %}
-          '{{ parent.pk }}': [
-              {% for category in parent.category_set.all %}
-                  {
-                      //'pk': '{{ category.pk }}',
-                      'pk': {{ category.pk }},//ソートのため数値に
-                      'name': '{{ category.name }}'
-                  },
-              {% endfor %}
-          ],
-      {% endfor %}
-  };
-
-
-  const changeCategory = (select) => {
-      // 子カテゴリの選択欄を空にする。
-      categoryElement.children().remove();
-
-      //2段目は選択してくださいにするので追加した
-      categoryElement.append('<option value="" selected="">選択してください</option>');
-
-      // 選択した親カテゴリに紐づく子カテゴリの一覧を取得する。
-      const parentId = parentCategoryElement.val();
-      const categoryList = categories[parentId];
-
-      // ソートを追加した
-      categoryList.sort(function(a,b){
-        if(a.pk > b.pk) {
-          return 1;
-        }
-        if(a.pk < b.pk) {
-          return -1;
-        }
-        return 0;
-      });     
-      
-      // 子カテゴリの選択肢を作成・追加。
-      for (const category of categoryList) {
-          const option = $('<option>');
-          option.val(category['pk']);
-          option.text(category['name']);
-          categoryElement.append(option);
-      }
-
-      // 指定があれば、そのカテゴリを選択する
-      if (select !== undefined) {
-          categoryElement.val(select);
-      }
-  };
-
-
-  $('#id_parent_category').on('change', () => {
-      changeCategory();
-  });
-
-
-  // 入力値に問題があって再表示された場合、ページ表示時点で小カテゴリが絞り込まれるようにする
-  if (parentCategoryElement.val()) {
-      const selectedCategory = categoryElement.val();
-      changeCategory(selectedCategory);
-  }
-
 </script>
 
 {% endblock %}
