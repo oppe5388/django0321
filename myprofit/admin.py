@@ -14,6 +14,7 @@ class ParentCategoryResource(ModelResource):
         import_id_fields = ['id']
 
 class ParentCategoryAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ('id', 'name')  
     resource_class = ParentCategoryResource
 
 admin.site.register(ParentCategory, ParentCategoryAdmin)
@@ -26,6 +27,7 @@ class CategoryResource(ModelResource):
         import_id_fields = ['id']
 
 class CategoryAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ('id', 'name', 'parent')  
     resource_class = CategoryResource
 
 admin.site.register(Category, CategoryAdmin)
