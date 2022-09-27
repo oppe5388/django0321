@@ -427,13 +427,250 @@
   </form>
 
 
-  <div class="card bg-white p-5 m-5">
+
+<div class="card p-3 mt-3">
+<h4 class="h4 font-weight-bold mb-1 mt-2">車種とプルダウン</h4>
+
+<h4 class="h6 font-weight-bold mb-1 mt-2 text-secondary">車種クラス選択が特殊（乗用も商用も存在する）</h4>
+<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header p-1" id="headingOne">
+      <button class="btn btn-sm btn-link col text-left" data-toggle="collapse" data-target="#collapseOne" aria-controls="collapseOne">
+        キャラバン
+      </button>
+    </div>
+
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+        
+        <div class="d-flex flex-nowrap">
+          <span class="col-3 mb-1 text-nowrap">車名/車種ｸﾗｽ</span>
+          <input class="col mb-1 py-0 pl-1" value="NV350キャラバン">
+          <select class="col mb-1 ml-1 pl-1">
+            <option value="0">キャラバン</option>
+          </select>
+          <button type="button" class="btn btn-inverse-dark btn-sm py-1 ml-1 align-items-center">検索</button>
+          <span class="ml-2 ">※プルダウンの下から2番目</span>
+        </div>
+      
+        <div class="d-flex flex-nowrap">
+          <span class="col-3 mb-1 text-nowrap">基本</span>
+          <input class="col-2 mb-1 py-0">
+        </div>
+      
+        <div class="alert-info">
+          <span class="text-info h6 font-weight-bold">乗用・・・</span>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1 text-nowrap">サービス商品</span>
+            <select class=" mb-1">
+              <option value="0">メンテプロパック（乗用）</option>
+            </select>
+          </div>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1 text-nowrap">入会コース</span>
+            <select class=" mb-1">
+              <option value="0">メンテプロパック●●車付ベーシック</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="alert-warning">
+          <span class="text-warning h6 font-weight-bold">商用・・・</span>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1 text-nowrap">サービス商品</span>
+            <select class=" mb-1">
+              <option value="0">メンテプロパック（商用）</option>
+            </select>
+          </div>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1 text-nowrap">入会コース</span>
+            <select class=" mb-1">
+              <option value="0">メンテプロパック●●S車付ベーシック</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
+
+  <div class="card">
+    <div class="card-header p-1" id="headingTwo">
+      <h5 class="mb-0">
+        <button class="btn btn-sm btn-link col text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          NV200バネット
+        </button>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body">
+
+        <div class="d-flex flex-nowrap">
+          <span class="col-3 mb-1 text-nowrap">車名/車種ｸﾗｽ</span>
+          <input class="col mb-1 py-0 pl-1" value="NV200バネット">
+          <select class="col mb-1 ml-1 pl-1">
+            <option value="0">NV200バネット</option>
+          </select>
+          <button type="button" class="btn btn-inverse-dark btn-sm py-1 ml-1 align-items-center">検索</button>
+          <span class="ml-2 ">※プルダウンの一番下</span>
+        </div>
+      
+        <div class="d-flex flex-nowrap">
+          <span class="col-3 mb-1 text-nowrap">基本</span>
+          <input class="col-2 mb-1 py-0">
+        </div>
+      
+        <div class="alert-info">
+          <span class="text-info h6 font-weight-bold">乗用・・・</span>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1 text-nowrap">サービス商品</span>
+            <select class=" mb-1">
+              <option value="0">メンテプロパック（乗用）</option>
+            </select>
+          </div>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1 text-nowrap">入会コース</span>
+            <select class=" mb-1">
+              <option value="0">メンテプロパック●●車付ベーシック</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="alert-warning">
+          <span class="text-warning h6 font-weight-bold">商用・・・</span>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1 text-nowrap">サービス商品</span>
+            <select class=" mb-1">
+              <option value="0">メンテプロパック（商用）</option>
+            </select>
+          </div>
+          <div class="d-flex flex-nowrap">
+            <span class="col-3 mb-1 text-nowrap">入会コース</span>
+            <select class=" mb-1">
+              <option value="0">メンテプロパック●●S車付ベーシック</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% comment %} <!-- タブ部分 -->
+<h4 class="h6 font-weight-bold mb-1 mt-2 text-secondary">車種クラス選択が特殊（乗用も商用も存在する）</h4>
+<ul class="nav nav-tabs">
+<li class="nav-item">
+<a href="#tab1" class="nav-link py-1 active  border-bottom-0" data-toggle="tab">キャラバン</a>
+</li>
+<li class="nav-item">
+<a href="#tab2" class="nav-link py-1  border-bottom-0" data-toggle="tab">NV200バネット</a>
+</li>
+</ul>
+
+<!-- 内容部分 -->
+<div class="tab-content p-0">
+<!-- タブ1 キャラバン-->
+<div id="tab1" class="tab-pane active p-2">
+
+  <div class="d-flex flex-nowrap">
+    <span class="col-3 mb-1 text-nowrap">車名/車種ｸﾗｽ</span>
+    <input class="col mb-1 py-0 pl-1" value="NV350キャラバン">
+    <select class="col mb-1 ml-1 pl-1">
+      <option value="0">キャラバン</option>
+    </select>
+    <button type="button" class="btn btn-inverse-dark btn-sm py-1 ml-1 align-items-center">検索</button>
+    <span class="ml-2 ">※プルダウンの一番下？</span>
+  </div>
+
+  <div class="d-flex flex-nowrap">
+    <span class="col-3 mb-1 text-nowrap">基本</span>
+    <input class="col-2 mb-1 py-0">
+  </div>
+
+  <span class="text-info">乗用</span>
+  <div class="d-flex flex-nowrap">
+    <span class="col-3 mb-1 text-nowrap">サービス商品</span>
+    <select class=" mb-1">
+      <option value="0">メンテプロパック（乗用）</option>
+    </select>
+  </div>
+  <div class="d-flex flex-nowrap">
+    <span class="col-3 mb-1 text-nowrap">入会コース</span>
+    <select class=" mb-1">
+      <option value="0">メンテプロパック●●車付ベーシック</option>
+    </select>
+  </div>
+
+  <span class="text-warning">商用</span>
+  <div class="d-flex flex-nowrap">
+    <span class="col-3 mb-1 text-nowrap">サービス商品</span>
+    <select class=" mb-1">
+      <option value="0">メンテプロパック（商用）</option>
+    </select>
+  </div>
+  <div class="d-flex flex-nowrap">
+    <span class="col-3 mb-1 text-nowrap">入会コース</span>
+    <select class=" mb-1">
+      <option value="0">メンテプロパック●●S車付ベーシック</option>
+    </select>
+  </div>
+</div>
+
+<!-- タブ2 -->
+<div id="tab2" class="tab-pane p-2">
+  <div class="d-flex flex-nowrap">
+    <span class="col-3 mb-1 text-nowrap">車名/車種ｸﾗｽ</span>
+    <input class="col mb-1 py-0 pl-1" value="NV200バネット">
+    <select class="col mb-1 ml-1 pl-1">
+      <option value="0">NV200バネット</option>
+    </select>
+    <button type="button" class="btn btn-inverse-dark btn-sm py-1 ml-1 align-items-center">検索</button>
+    <span class="ml-2 ">※プルダウンの一番下？</span>
+  </div>
+
+  <div class="d-flex flex-nowrap">
+    <span class="col-3 mb-1 text-nowrap">基本</span>
+    <input class="col-2 mb-1 py-0">
+  </div>
+
+  <span class="text-info">乗用</span>
+  <div class="d-flex flex-nowrap">
+    <span class="col-3 mb-1 text-nowrap">サービス商品</span>
+    <select class=" mb-1">
+      <option value="0">メンテプロパック（乗用）</option>
+    </select>
+  </div>
+  <div class="d-flex flex-nowrap">
+    <span class="col-3 mb-1 text-nowrap">入会コース</span>
+    <select class=" mb-1">
+      <option value="0">メンテプロパック●●車付ベーシック</option>
+    </select>
+  </div>
+
+  <span class="text-warning">商用</span>
+  <div class="d-flex flex-nowrap">
+    <span class="col-3 mb-1 text-nowrap">サービス商品</span>
+    <select class=" mb-1">
+      <option value="0">メンテプロパック（商用）</option>
+    </select>
+  </div>
+  <div class="d-flex flex-nowrap">
+    <span class="col-3 mb-1 text-nowrap">入会コース</span>
+    <select class=" mb-1">
+      <option value="0">メンテプロパック●●S車付ベーシック</option>
+    </select>
+  </div>
+</div>
+
+
+</div> {% endcomment %}
+
   
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/locale/ja.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/locale/ja.js"></script>
   
 <!-- 商品とコースのプルダウン-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
