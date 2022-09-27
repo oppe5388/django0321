@@ -525,7 +525,8 @@
         $("#id_parent_category").removeClass("alert-warning");
       };
       function course_on(){
-        $("#course").addClass("alert-warning");
+        //$("#course").addClass("alert-warning");
+        $("#id_category").addClass("alert-warning");
         $('#course_error1').text("内容をご確認ください");
         $('#course_error1').addClass("alert-warning");
         $('#course_error2-1').show();
@@ -533,7 +534,8 @@
         $('#course_error4').html("この商品は登録されていません。<br>商品をご確認のうえ、再度登録してください。");
       };
       function course_off(){
-        $('#course').removeClass("alert-warning");
+        //$('#course').removeClass("alert-warning");
+        $('#id_category').removeClass("alert-warning");
         $('#course_error1').text("　　　　　　　　　　");
         $('#course_error1').removeClass("alert-warning");
         $('#course_error2-1').hide();
