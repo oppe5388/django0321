@@ -477,15 +477,17 @@
 
         <div class="d-flex flex-nowrap">
           <span class="col-2 mb-1 text-nowrap">入会コース</span>
-          <div class="alert-info col">
-            <select class=" mb-1">
-              <option value="0">メンテプロパック●●車付ベーシック</option>
-            </select>
+          <div class="alert-info col-5">
+            {{ form.category }}
+            {% comment %} <select class=" mb-1">
+              <option value="0">メンテプロパック54車検付きベーシック...等</option>
+            </select> {% endcomment %}
           </div>
-          <div class="alert-warning col">
-            <select class=" mb-1">
-              <option value="0">メンテプロパック●●S車付ベーシック</option>
-            </select>
+          <div class="alert-warning col-5">
+            {{ form.category }}
+            {% comment %} <select class=" mb-1">
+              <option value="0">メンテプロパック18S車検付きベーシック...等</option>
+            </select> {% endcomment %}
           </div>
         </div>
       </div>
@@ -535,15 +537,11 @@
 
         <div class="d-flex flex-nowrap">
           <span class="col-2 mb-1 text-nowrap">入会コース</span>
-          <div class="alert-info col">
-            <select class=" mb-1">
-              <option value="0">メンテプロパック●●車付ベーシック</option>
-            </select>
+          <div class="alert-info col-5">
+            {{ form.category }}
           </div>
-          <div class="alert-warning col">
-            <select class=" mb-1">
-              <option value="0">メンテプロパック●●S車付ベーシック</option>
-            </select>
+          <div class="alert-warning col-5">
+            {{ form.category }}
           </div>
         </div>
       </div>
@@ -588,10 +586,10 @@
 
         <div class="d-flex flex-nowrap">
           <span class="col-2 mb-1 text-nowrap">入会コース</span>
-          <select class=" mb-1">
-            <option value="0">メンテプロパック●●車付ベーシック</option>
-          </select>
-          <span class="ml-2 ">※ライトは存在しないため、選択してもエラー</span>
+          <div class="d-flex flex-column">
+            {{ form.category }}
+            <span class="ml-2">※ライトは存在しないため、選択してもエラー</span>
+          </div>
         </div>
       </div>
     </div>
@@ -636,126 +634,105 @@
 
         <div class="d-flex flex-nowrap">
           <span class="col-2 mb-1 text-nowrap">入会コース</span>
+          {{ form.category }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header p-1" id="headingFive">
+      <button class="btn btn-sm btn-link col text-left" data-toggle="collapse" data-target="#collapseFive" aria-controls="collapseFive">
+        リーフ（ZE1）：あんしんプラス or メンプロEV
+      </button>
+    </div>
+
+    <div id="collapseFive" class="collapse show" aria-labelledby="headingFive" data-parent="#accordionExample">
+      <div class="card-body p-3">
+        
+        <div class="d-flex flex-nowrap">
+          <span class="col-2 mb-1 text-nowrap">車名/車種ｸﾗｽ</span>
+          <input class="col mb-1 py-0 pl-1" value="リーフ（EVメンテプロ）">
+          <select class="col mb-1 ml-1 pl-1">
+            <option value="0">乗用車S</option>
+          </select>
+          <button type="button" class="btn btn-inverse-dark btn-sm py-1 ml-1 align-items-center">検索</button>
+          <span class="ml-2 ">　　　　　　　　　　</span>
+        </div>
+      
+        <div class="d-flex flex-nowrap">
+          <span class="col-2 mb-1 text-nowrap">基本</span>
+          <input class="col-2 mb-1 py-0 pl-1" value="ZE1">
+        </div>
+
+        <div class="d-flex flex-nowrap">
+          <span class="col-2 mb-1 text-nowrap">サービス商品</span>
           <select class=" mb-1">
-            <option value="0">メンテプロパック●●EV</option>
+            <option value="0">メンテプロパック（EV）</option>
           </select>
         </div>
+
+        <div class="d-flex flex-nowrap">
+          <span class="col-2 mb-1 text-nowrap">入会コース</span>
+          {{ form.category }}
+        </div>
+
+
       </div>
     </div>
   </div>
 
   <div class="card">
-    <div class="card-header p-1" id="headingTwo">
-      <button class="btn btn-sm btn-link col text-left" data-toggle="collapse" data-target="#collapseTwo" aria-controls="collapseTwo">
-        NV200バネット
+    <div class="card-header p-1" id="headingSix">
+      <button class="btn btn-sm btn-link col text-left" data-toggle="collapse" data-target="#collapseSix" aria-controls="collapseSix">
+        アリア：あんしんプラスプレミアム or メンプロEV
       </button>
     </div>
 
-    <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
+    <div id="collapseSix" class="collapse show" aria-labelledby="headingSix" data-parent="#accordionExample">
       <div class="card-body p-3">
         
         <div class="d-flex flex-nowrap">
           <span class="col-2 mb-1 text-nowrap">車名/車種ｸﾗｽ</span>
-          <input class="col mb-1 py-0 pl-1" value="NV200バネット">
+          <input class="col mb-1 py-0 pl-1" value="アリア">
           <select class="col mb-1 ml-1 pl-1">
-            <option value="0">NV200バネット</option>
+            <option value="0">ランナバウトM</option>
           </select>
           <button type="button" class="btn btn-inverse-dark btn-sm py-1 ml-1 align-items-center">検索</button>
-          <span class="ml-2 ">※プルダウンの1番下</span>
+          <span class="ml-2 ">　　　　　　　　　　</span>
         </div>
       
         <div class="d-flex flex-nowrap">
           <span class="col-2 mb-1 text-nowrap">基本</span>
-          <input class="col-2 mb-1 py-0 pl-1" value="M20">
+          <input class="col-2 mb-1 py-0 pl-1" value="FE0">
         </div>
-      
+
         <div class="d-flex flex-nowrap">
           <span class="col-2 mb-1 text-nowrap"><br>サービス商品</span>
           <div class="alert-info col">
-            <span class="text-info h6 font-weight-bold">乗用・・・</span><br>
+            <span class="text-info h6 font-weight-bold">あんしんプラスプレミアム・・・</span><br>
             <select class=" mb-1">
-              <option value="0">メンテプロパック（乗用）</option>
+              <option value="0">NISSAN EVあんしんプラスプレミアム</option>
             </select>
           </div>
           <div class="alert-warning col">
-            <span class="text-warning h6 font-weight-bold">商用・・・</span><br>
+            <span class="text-warning h6 font-weight-bold">メンプロEV・・・</span><br>
             <select class=" mb-1">
-              <option value="0">メンテプロパック（商用）</option>
+              <option value="0">メンテプロパック（EV）</option>
             </select>
           </div>
         </div>
 
         <div class="d-flex flex-nowrap">
           <span class="col-2 mb-1 text-nowrap">入会コース</span>
-          <div class="alert-info col">
-            <select class=" mb-1">
-              <option value="0">メンテプロパック●●車付ベーシック</option>
-            </select>
+          <div class="alert-info col-5">
+            {{ form.category }}
           </div>
-          <div class="alert-warning col">
-            <select class=" mb-1">
-              <option value="0">メンテプロパック●●S車付ベーシック</option>
-            </select>
+          <div class="alert-warning col-5">
+            {{ form.category }}
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header p-1" id="headingTwo">
-      <button class="btn btn-sm btn-link col text-left" data-toggle="collapse" data-target="#collapseTwo" aria-controls="collapseTwo">
-        NV200バネット
-      </button>
-    </div>
-
-    <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
-      <div class="card-body p-3">
-        
-        <div class="d-flex flex-nowrap">
-          <span class="col-2 mb-1 text-nowrap">車名/車種ｸﾗｽ</span>
-          <input class="col mb-1 py-0 pl-1" value="NV200バネット">
-          <select class="col mb-1 ml-1 pl-1">
-            <option value="0">NV200バネット</option>
-          </select>
-          <button type="button" class="btn btn-inverse-dark btn-sm py-1 ml-1 align-items-center">検索</button>
-          <span class="ml-2 ">※プルダウンの1番下</span>
         </div>
       
-        <div class="d-flex flex-nowrap">
-          <span class="col-2 mb-1 text-nowrap">基本</span>
-          <input class="col-2 mb-1 py-0 pl-1" value="M20">
-        </div>
-      
-        <div class="d-flex flex-nowrap">
-          <span class="col-2 mb-1 text-nowrap"><br>サービス商品</span>
-          <div class="alert-info col">
-            <span class="text-info h6 font-weight-bold">乗用・・・</span><br>
-            <select class=" mb-1">
-              <option value="0">メンテプロパック（乗用）</option>
-            </select>
-          </div>
-          <div class="alert-warning col">
-            <span class="text-warning h6 font-weight-bold">商用・・・</span><br>
-            <select class=" mb-1">
-              <option value="0">メンテプロパック（商用）</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="d-flex flex-nowrap">
-          <span class="col-2 mb-1 text-nowrap">入会コース</span>
-          <div class="alert-info col">
-            <select class=" mb-1">
-              <option value="0">メンテプロパック●●車付ベーシック</option>
-            </select>
-          </div>
-          <div class="alert-warning col">
-            <select class=" mb-1">
-              <option value="0">メンテプロパック●●S車付ベーシック</option>
-            </select>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -949,6 +926,82 @@
       const selectedCategory = categoryElement.val();
       changeCategory(selectedCategory);
   }
+
+  //下部のプルダウン例をそれぞれ絞り込む
+  //関数化
+  function filterForExample(categoryElement, parentId){
+    categoryElement.children().remove();
+    categoryElement.removeAttr('id');
+    const categoryList = categories[parentId];
+    // ソートを追加した
+    if(categoryList != null) {
+      categoryList.sort(function(a,b){
+        if(a.pk > b.pk) {
+          return 1;
+        }
+        if(a.pk < b.pk) {
+          return -1;
+        }
+        return 0;
+      });
+
+      // 子カテゴリの選択肢を作成・追加。
+      for (const category of categoryList) {
+        const option = $('<option>');
+        option.val(category['pk']);
+        option.text(category['name']);
+        categoryElement.append(option);
+      }
+    }  
+  };
+
+
+  $(function() {
+    //キャラバンの乗用
+    var categoryElement = $('#collapseOne .alert-info [name=category]');   
+    var parentId = 1;
+    filterForExample(categoryElement, parentId);//関数呼び出し
+
+    //キャラバンの商用
+    var categoryElement = $('#collapseOne .alert-warning [name=category]');
+    var parentId = 5;
+    filterForExample(categoryElement, parentId);//関数呼び出し
+
+    //NV200の乗用
+    var categoryElement = $('#collapseTwo .alert-info [name=category]');   
+    var parentId = 1;
+    filterForExample(categoryElement, parentId);//関数呼び出し
+
+    //NV200の商用
+    var categoryElement = $('#collapseTwo .alert-warning [name=category]');
+    var parentId = 5;
+    filterForExample(categoryElement, parentId);//関数呼び出し
+
+    //GT-R
+    var categoryElement = $('#collapseThree [name=category]');   
+    var parentId = 1;
+    filterForExample(categoryElement, parentId);//関数呼び出し
+
+    //ZE0
+    var categoryElement = $('#collapseFour [name=category]');   
+    var parentId = 2;
+    filterForExample(categoryElement, parentId);//関数呼び出し
+
+    //ZE1
+    var categoryElement = $('#collapseFive [name=category]');   
+    var parentId = 2;
+    filterForExample(categoryElement, parentId);//関数呼び出し
+
+    //アリア：あんしんプラスプレミアム
+    var categoryElement = $('#collapseSix .alert-info [name=category]');   
+    var parentId = 3;
+    filterForExample(categoryElement, parentId);//関数呼び出し
+
+    //アリアEV
+    var categoryElement = $('#collapseSix .alert-warning [name=category]');
+    var parentId = 2;
+    filterForExample(categoryElement, parentId);//関数呼び出し
+  });
 
 </script>
 
