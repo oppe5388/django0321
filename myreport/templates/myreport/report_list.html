@@ -87,7 +87,7 @@
     {% include "pagination.html" %}
 
     {% comment %} ↑ページネーションのincludeがあたってないので直書き↓ {% endcomment %}
-    <ul class="pagination" style="justify-content:center">
+    {% comment %} <ul class="pagination" style="justify-content:center">
         <ul class="pagination">
             <!-- 前へ の部分 -->
             {% if page_obj.has_previous %}
@@ -116,6 +116,6 @@
                 </li>
             {% endif %}
         </ul>
-    </ul>
+    </ul> {% endcomment %}
 
 {% endblock %}

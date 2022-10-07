@@ -243,7 +243,7 @@
                 </div>
 
                 <!-- LDか新人のみ表示 -->
-                {% if request.user.id == 13 or request.user.id == 14 or request.user.id <= 4 %}
+                {% if request.user.id >= 14 or request.user.id <= 4 %}
                     <li class="nav-item {% if app_name == 'myreport' %}active{% endif %}">
                         <a class="nav-link py-2" href='{% url 'myreport:index' %}'>
                             <i class="fas fa-book"></i>
