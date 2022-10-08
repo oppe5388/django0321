@@ -142,9 +142,10 @@
                     <option value="0">選択してください</option>
                     <option value="1">乗用車LL</option>
                   </select>
-                  <a href="" class="btn btn-inverse-dark btn-sm py-1 ml-1 align-items-center">検索</a>
+                  <a href="" id="nissan1" class="btn btn-inverse-dark btn-sm py-1 ml-1 align-items-center">検索</a>
                 </div>
-                <span class="text-primary small ml-1">車種クラス入力後、「車両検索」ボタンを押すと車名を表示します</span>
+                <span id="nissan2" class="text-primary small ml-1">車種クラス入力後、「車両検索」ボタンを押すと車名を表示します</span>
+                <span id="nissan3" class="text-primary small ml-1">　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　</span>
               </div>
             </div>
           </div>
@@ -278,5 +279,29 @@
     $(function() {
       $('[data-toggle="popover"]').popover()
       $('#confirm').hide();//最初は非表示
+
+      $('#nissan3').hide();//体裁用ダミー
+
+      //メーカー区分変更関数
+      function maker_change(){
+        if ($("#maker").val()==1) {
+          $('#car_name').prop('disabled', true);
+          $('#base_no').prop('disabled', true);
+          $('#nissan1').show();
+          $('#nissan2').show();
+          $('#nissan3').hide();//体裁用ダミー
+        } else {
+          $('#car_name').prop('disabled', false);
+          $('#base_no').prop('disabled', false);
+          $('#nissan1').hide();
+          $('#nissan2').hide();
+          $('#nissan3').show();
+        }
+      };
+
+      //日産車とその他でグレーアウトやボタン表示を変更
+      $("#maker").change(function() {
+        maker_change();
+      });
     });
   </script>
