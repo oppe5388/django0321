@@ -120,37 +120,77 @@ def report_list(request):
     context = {
         'searchForm': searchForm,
     }
+    
+    # LDと新人で一覧も検索対象も分岐
+    # LD
+    if request.user.id <=4:
+        # 検索時
+        if searchForm.is_valid():
+            queryset = DailyReport.objects.all()
+            keyword = searchForm.cleaned_data['keyword']
+            if keyword:
+                keyword = keyword.split()
+                for k in keyword:
+                    queryset = queryset.filter(
+                            Q(body1__icontains=k) | 
+                            Q(body2__icontains=k) | 
+                            Q(body3__icontains=k) | 
+                            Q(body4__icontains=k) | 
+                            Q(body5__icontains=k) | 
+                            Q(body6__icontains=k)
+                        ).order_by('-id')#
 
-    if searchForm.is_valid():
-        queryset = DailyReport.objects.all()
-        keyword = searchForm.cleaned_data['keyword']
-        if keyword:
-            keyword = keyword.split()
-            for k in keyword:
-                queryset = queryset.filter(
-                        Q(body1__icontains=k) | 
-                        Q(body2__icontains=k) | 
-                        Q(body3__icontains=k) | 
-                        Q(body4__icontains=k) | 
-                        Q(body5__icontains=k) | 
-                        Q(body6__icontains=k)
-                    ).order_by('-id')#
+                context['dailyreports'] = queryset
+        # 検索なし時
+        else:
+            searchForm = SearchForm()
+            reports = DailyReport.objects.all().order_by('-id')
+            page_obj = paginate_queryset(request, reports, 10)#ページネーション用
+            context['page_obj'] = page_obj
+            context['dailyreports'] = page_obj.object_list
 
-            context['dailyreports'] = queryset
+        check_set = CheckStates.objects.all()
+        read_set = ReportRead.objects.all()
+
+        context['check_set'] = check_set
+        context['read_set'] = read_set
+
+        return render(request, 'myreport/report_list.html', context)
+    
+    # LD以外（新人しかアクセスしない）＝自分のみにする
     else:
-        searchForm = SearchForm()
-        reports = DailyReport.objects.all().order_by('-id')
-        page_obj = paginate_queryset(request, reports, 10)#ページネーション用
-        context['page_obj'] = page_obj
-        context['dailyreports'] = page_obj.object_list
+        # 検索時
+        if searchForm.is_valid():
+            queryset = DailyReport.objects.filter(user=request.user)
+            keyword = searchForm.cleaned_data['keyword']
+            if keyword:
+                keyword = keyword.split()
+                for k in keyword:
+                    queryset = queryset.filter(
+                            Q(body1__icontains=k) | 
+                            Q(body2__icontains=k) | 
+                            Q(body3__icontains=k) | 
+                            Q(body4__icontains=k) | 
+                            Q(body5__icontains=k) | 
+                            Q(body6__icontains=k)
+                        ).order_by('-id')#
 
-    check_set = CheckStates.objects.all()
-    read_set = ReportRead.objects.all()
+                context['dailyreports'] = queryset
+        # 検索なし時
+        else:
+            searchForm = SearchForm()
+            reports = DailyReport.objects.filter(user=request.user).order_by('-id')
+            page_obj = paginate_queryset(request, reports, 10)#ページネーション用
+            context['page_obj'] = page_obj
+            context['dailyreports'] = page_obj.object_list
 
-    context['check_set'] = check_set
-    context['read_set'] = read_set
+        check_set = CheckStates.objects.all()
+        read_set = ReportRead.objects.all()
 
-    return render(request, 'myreport/report_list.html', context)
+        context['check_set'] = check_set
+        context['read_set'] = read_set
+
+        return render(request, 'myreport/report_list.html', context)
 
 
 #ページネーション
