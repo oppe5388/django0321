@@ -50,7 +50,8 @@
     
     $('#order_no').prop('disabled', true);
     $('#entry_div').prop('disabled', true);
-    $("#product").val("1");
+    //$("#product").val("1");
+    $("#id_parent_category").val("1");
     //$('#product').prop('disabled', true);
 
     //それぞれ
@@ -58,15 +59,19 @@
 
     if(cert_no == '410987001' || cert_no == '410987002'){//新車54
       $("#entry_div").val(1);
-      $("#course").val("1");
-      $('#course').prop('disabled', true);
+      //$("#course").val("1");
+      //$('#course').prop('disabled', true);
+      $("#id_category").val("19");//54車付
+      $('#id_category').prop('disabled', true);
       $("#price").val("156,920");
     }else if(cert_no == '410987003' || cert_no == '410987004'){//中古車18
-      $("#course").val("2");
+      //$("#course").val("2");
       //$('#course').prop('disabled', true);
+      $("#id_category").val("11");//18車付
       $("#price").val("85,690");
     }else if(cert_no == '410987005' || cert_no == '410987010'|| cert_no == '410987017'|| cert_no == '410987020'){//サービス18
-      $("#course").val("2");
+      //$("#course").val("2");
+      $("#id_category").val("11");//18車付
       $("#price").val("85,690");
     }
 

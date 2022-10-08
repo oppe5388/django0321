@@ -28,7 +28,9 @@ def used05entry(request):
     context = {
         'route': request.GET.get('route'),
         'cert_no': request.GET.get('cert_no'),
+        'form': PostCreateForm, # 商品とコースのプルダウン
     }
+    context['parentcategory_list'] = ParentCategory.objects.all()# 商品とコースのプルダウン
     return render(request, 'myprofit/used05entry.html', context)
 
 def used05(request):
@@ -99,7 +101,9 @@ def new05entry(request):
     context = {
         'route': request.GET.get('route'),
         'cert_no': request.GET.get('cert_no'),
+        'form': PostCreateForm, # 商品とコースのプルダウン
     }
+    context['parentcategory_list'] = ParentCategory.objects.all()# 商品とコースのプルダウン
     return render(request, 'myprofit/new05entry.html', context)
 
 def new05(request):
@@ -162,7 +166,9 @@ def service05entry(request):
         'route': request.GET.get('route'),
         'cert_no': request.GET.get('cert_no'),
         'cancel_flag': request.GET.get('cancel_flag'),
+        'form': PostCreateForm, # 商品とコースのプルダウン
     }
+    context['parentcategory_list'] = ParentCategory.objects.all()# 商品とコースのプルダウン
     return render(request, 'myprofit/service05entry.html', context)
 
 def service05(request):
@@ -212,7 +218,6 @@ def entry_example(request):
     context ={
         'form': form,
     }
-
     context['parentcategory_list'] = ParentCategory.objects.all()# 商品とコースのプルダウン
     return render(request, 'myprofit/entry_example.html', context)
 
