@@ -39,7 +39,7 @@ urlpatterns = [
     path('service01', views.service01, name='service01'),
 
     path('entry_example', views.entry_example, name='entry_example'),
-    path('car', views.car, name='car'),
+    path('car/<int:pk>/', views.car, name='car'),
 
     path('search_example', views.search_example, name='search_example'),
 

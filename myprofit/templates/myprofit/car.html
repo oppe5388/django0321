@@ -13,7 +13,6 @@
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-
     <!-- base:css -->
     <link href="{% static 'celestialAdmin/template/vendors/typicons.font/font/typicons.css' %}" rel="stylesheet">
     <link href="{% static 'celestialAdmin/template/vendors/css/vendor.bundle.base.css' %}" rel="stylesheet">
@@ -25,96 +24,45 @@
     <!-- endinject -->
     <link rel="shortcut icon" href="{% static 'celestialAdmin/template/images/favicon.png' %}" />
 
-
   </head>
   
   <body>
     <div class="container-scroller">
 
-
         <!-- partial -->
         <div class="main-panel">
 
-
             <div class="bg-white d-flex flex-column" style="width: 360px;">
 
-              <div class="bg-light p-1 mx-2">■候補車両一覧
-                <button id="ok_btn" type="button" class="btn btn-info btn-rounded p-1 ml-1 small">
-                  <span class="small">vcc：候補あり</span>
-                </button>
-                <button id="ng_btn" type="button" class="btn btn-info btn-rounded p-1 ml-1 small">
-                  <span class="small">vcc：該当なし</span>
-                </button>
-              </div>
+              <div class="bg-light p-1 mx-2">■候補車両一覧</div>
               <hr class="p-0 mt-0 border-dark mx-2">
-
-              <div id="car_ng">
-                <span class="d-flex justify-content-center text-center">
-                  該当する車名は検索できませんでした。
-                </span>
-                <div class="d-flex mb-3 justify-content-center">
-                  <button type="button" class="btn btn-inverse-dark m-2 py-2" id="close">キャンセル</button>
+              
+              <div class="text-center mb-3">車種クラス：{{carclass}}</div>
+              
+              {% if cardrop_list %}
+                <div class="mx-5">
+                  <table class="table table-bordered">
+                    <thead class="thead-light">
+                      <tr>
+                        <th class="p-1 align-middle"><span class="small font-weight-bold">車名</span></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for caardrop in cardrop_list %}
+                        <tr><td class="p-1">{{ caardrop.name }}</td></tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
                 </div>
-              </div>
-          
-              <!-- テーブル -->
-              <div id="car_ok" class="mx-5">
-                <table class="table table-bordered">
-                  <thead class="thead-light">
-                    <tr>
-                      <th class="p-1 align-middle"><span class="small font-weight-bold">車名</span></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr><td class="p-1"><span class="small">ﾌｰｶﾞ(Y51)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ﾌｰｶﾞ(Y51)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ﾌｰｶﾞ(Y51)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ﾌｰｶﾞ(Y50)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ﾌｰｶﾞ(Y50)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ﾌｰｶﾞ(Y50)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｾﾄﾞﾘｯｸ(Y34)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｾﾄﾞﾘｯｸ(Y34)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｾﾄﾞﾘｯｸ(Y34)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｾﾄﾞﾘｯｸ(Y33)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｾﾄﾞﾘｯｸ(Y33)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｾﾄﾞﾘｯｸ(Y33)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｾﾄﾞﾘｯｸ(Y32)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｾﾄﾞﾘｯｸ(Y32)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｾﾄﾞﾘｯｸ(Y32)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｾﾄﾞﾘｯｸ((Y31)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｾﾄﾞﾘｯｸ((Y31)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｾﾄﾞﾘｯｸ((Y31)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｾﾄﾞﾘｯｸ(Y30)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｾﾄﾞﾘｯｸ(Y30)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｾﾄﾞﾘｯｸ(Y30)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｽｶｲﾗｲﾝ(V37)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｽｶｲﾗｲﾝ(V37)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｽｶｲﾗｲﾝV37ﾀｰﾎﾞ  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｽｶｲﾗｲﾝ(V37)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｸﾞﾛﾘｱ(Y34)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｸﾞﾛﾘｱ(Y34)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｸﾞﾛﾘｱ(Y34)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｸﾞﾛﾘｱ(Y33)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｸﾞﾛﾘｱ(Y33)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｸﾞﾛﾘｱ(Y33)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｸﾞﾛﾘｱ(Y32)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｸﾞﾛﾘｱ(Y32)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｸﾞﾛﾘｱ(Y32)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｸﾞﾛﾘｱ(Y31)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｸﾞﾛﾘｱ(Y31)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｸﾞﾛﾘｱ(Y31)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｸﾞﾛﾘｱ(Y30)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｸﾞﾛﾘｱ(Y30)  </td></tr>
-                    <tr><td class="p-1"><span class="small">ｸﾞﾛﾘｱ(Y30)  </td></tr>
-          
-                  </tbody>
-                </table>
-
-                <div class="d-flex mb-3 justify-content-center">
-                  <button type="button" class="btn btn-inverse-dark m-2 py-2" id="close2">キャンセル</button>
+              {% else %}
+                <div>
+                  <span class="d-flex justify-content-center text-center">
+                    該当する車名は検索できませんでした。
                 </div>
+              {% endif %}
+              <div class="d-flex my-3 justify-content-center">
+                <button type="button" class="btn btn-inverse-dark m-2 py-2" id="close">キャンセル</button>
               </div>
-
             </div>
           
           
@@ -134,13 +82,6 @@
                   close();
               });
             </script>
-
-
-          {% comment %} <footer class="footer">
-            <div class="d-sm-flex justify-content-center justify-content-sm-between">
-              <span class="text-center text-sm-left d-block d-sm-inline-block">Copyright &copy; VccMarsh {% now "Y" %}</span>
-            </div>
-          </footer> {% endcomment %}
 
         </div>
         <!-- main-panel ends -->
@@ -177,22 +118,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
   $(function () {
-    $('#car_ok').hide();
-    $('#ng_btn').hide();
+
   });
 
-  //
-  $("#ok_btn").click(function () {
-    $('#car_ng').hide();
-    $('#car_ok').show();
-    $('#ok_btn').hide();
-    $('#ng_btn').show();
-  });
-
-  $("#ng_btn").click(function () {
-    $('#car_ng').show();
-    $('#car_ok').hide();
-    $('#ok_btn').show();
-    $('#ng_btn').hide();
-  });
 </script>

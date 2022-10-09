@@ -1648,11 +1648,18 @@
 
 <!-- 車両：別ウインドウ-->
 <script>
-  let button1 = document.getElementById('car_search');
+  {% comment %} let button1 = document.getElementById('car_search');
   button1.addEventListener('click', () => {
     let option = 'width=360,height=440,left=100,top=100'
       let newwin = open('{% url 'myprofit:car' %}','mywindow', option);
+  }); {% endcomment %}
+
+  $('#car_search').click(function() {
+    var url = "{% url 'myprofit:car' 9999 %}"; //エラーになるため無理やり生成
+    var url= url.replace("9999", $('#id_class_drop').val());
+    window.open(url, '車両検索', 'width=360, height=440, top=200, left=200');
   });
+  
 </script>
 
 <!-- フローチャート用-->

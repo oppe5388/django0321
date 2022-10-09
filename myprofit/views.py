@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
 from .models import Post
 
@@ -222,8 +222,15 @@ def entry_example(request):
     context['classdrop_list'] = ClassDrop.objects.all()# 車種クラスプルダウン
     return render(request, 'myprofit/entry_example.html', context)
 
-def car(request):
-    return render(request, 'myprofit/car.html')
+def car(request, pk):
+    
+    context ={
+        'cardrop_list': CarDrop.objects.filter(parent=pk).order_by('id'), #該当の車種
+        # 'carclass': get_object_or_404(ClassDrop, pk=pk), #該当のクラス
+        'carclass': ClassDrop.objects.filter(id=pk).first()#該当のクラス
+    }
+    
+    return render(request, 'myprofit/car.html', context)
 
 def search_example(request):
     context = {
