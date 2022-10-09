@@ -14,7 +14,8 @@ class ParentCategoryResource(ModelResource):
         import_id_fields = ['id']
 
 class ParentCategoryAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ('id', 'name')  
+    list_display = ('id', 'name')
+    ordering = ('id',)
     resource_class = ParentCategoryResource
 
 admin.site.register(ParentCategory, ParentCategoryAdmin)
@@ -27,7 +28,8 @@ class CategoryResource(ModelResource):
         import_id_fields = ['id']
 
 class CategoryAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ('id', 'name', 'parent')  
+    list_display = ('id', 'name', 'parent')
+    ordering = ('id',) 
     resource_class = CategoryResource
 
 admin.site.register(Category, CategoryAdmin)
@@ -44,3 +46,31 @@ class PostAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = PostResource
 
 admin.site.register(Post, PostAdmin)
+
+
+# プルダウン用車種クラス
+class ClassDropResource(ModelResource):
+    class Meta:
+        model = ClassDrop
+        skip_unchanged = True
+        import_id_fields = ['id']
+
+class ClassDropAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ('id', 'name')
+    ordering = ('id',)
+    resource_class = ClassDropResource
+
+admin.site.register(ClassDrop, ClassDropAdmin)
+
+# プルダウンに紐付いた車名
+class CarDropResource(ModelResource):
+    class Meta:
+        model = CarDrop
+        skip_unchanged = True
+        import_id_fields = ['id']
+
+class CarDropAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ('id', 'name', 'base_digit', 'parent')
+    resource_class = CarDropResource
+
+admin.site.register(CarDrop, CarDropAdmin)

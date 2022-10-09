@@ -22,9 +22,17 @@ class PostCreateForm(forms.ModelForm):
         empty_label='選択してください',
         required=False
     )
+    
+    # 車種クラスプルダウンもここに追加でよいか
+    class_drop = forms.ModelChoiceField(
+        label='車種クラス',
+        queryset=ClassDrop.objects.order_by('id'),
+        empty_label='選択してください',
+        required=False
+    )
 
     class Meta:
         model = Post
         fields = '__all__'
 
-    field_order = ('title', 'parent_category', 'category')
+    field_order = ('title', 'parent_category', 'category', 'class_drop')

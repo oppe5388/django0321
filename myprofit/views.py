@@ -219,6 +219,7 @@ def entry_example(request):
         'form': form,
     }
     context['parentcategory_list'] = ParentCategory.objects.all()# 商品とコースのプルダウン
+    context['classdrop_list'] = ClassDrop.objects.all()# 車種クラスプルダウン
     return render(request, 'myprofit/entry_example.html', context)
 
 def car(request):
