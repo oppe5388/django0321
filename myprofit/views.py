@@ -224,13 +224,25 @@ def entry_example(request):
 
 def car(request, pk):
     
+    form = CarInsertForm(request.POST)
+    
     context ={
         'cardrop_list': CarDrop.objects.filter(parent=pk).order_by('id'), #該当の車種
         # 'carclass': get_object_or_404(ClassDrop, pk=pk), #該当のクラス
-        'carclass': ClassDrop.objects.filter(id=pk).first()#該当のクラス
+        'carclass': ClassDrop.objects.filter(id=pk).first(),#該当のクラス
+        'form': form,
     }
     
+    # 元の画面に車名と3桁を差し込み（車名クリックでsubmit）
+    if form.is_valid():
+        context['car_name'] = form.cleaned_data['car']
+        context['car_digit'] = form.cleaned_data['digit']
+        context['function_name'] = 'insert_car' #JS関数名
+
+        return render(request, 'myprofit/car_close.html', context)
+    
     return render(request, 'myprofit/car.html', context)
+
 
 def search_example(request):
     context = {

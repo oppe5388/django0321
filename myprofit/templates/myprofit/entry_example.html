@@ -1659,6 +1659,13 @@
     var url= url.replace("9999", $('#id_class_drop').val());
     window.open(url, '車両検索', 'width=360, height=440, top=200, left=200');
   });
+
+  //別ウインドウ戻り→車名と基本3桁差し込みを作る
+  function insert_car(car_name, car_digit){
+    $("#car_name").val(car_name);
+    $("#base_no").val(car_digit);
+}
+
   
 </script>
 
