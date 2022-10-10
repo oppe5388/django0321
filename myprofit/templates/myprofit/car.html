@@ -38,10 +38,10 @@
               <hr class="p-0 mt-0 border-dark mx-2">
               
               <div class="text-center mb-3">車種クラス：{{carclass}}</div>
-                <form action="" method="POST">
-                  {{ form.car }}
+                {% comment %} <form action="" method="POST"> {% endcomment %}
+                  {% comment %} {{ form.car }}
                   {{ form.digit }}
-                  {% csrf_token %}
+                  {% csrf_token %} {% endcomment %}
 
                   {% if cardrop_list %}
                     <div class="mx-5">
@@ -64,7 +64,7 @@
                         該当する車名は検索できませんでした。
                     </div>
                   {% endif %}
-                </form>
+                {% comment %} </form> {% endcomment %}
               <div class="d-flex my-3 justify-content-center">
                 <button type="button" class="btn btn-inverse-dark m-2 py-2" id="close">キャンセル</button>
               </div>
@@ -126,11 +126,18 @@
 
   });
 
-  $("#sample1 td").on("click",function(){
+  {% comment %} $("#sample1 td").on("click",function(){
     $("#id_car").val($(this).text());//差し込むためにinputへ入れる
     $("#id_digit").val($(this).attr('name'));//差し込むためにinputへ入れる
     $('form').submit();
+  }) {% endcomment %}
+
+  //post不要なので、car_close.html経由必要なしだった
+  $("#sample1 td").on("click",function(){
+    var car_name = $(this).text();
+    var car_digit = $(this).attr('name');
+    window.opener.{{ 'insert_car' }}(car_name, car_digit);
+    window.close();
   })
-  
 
 </script>

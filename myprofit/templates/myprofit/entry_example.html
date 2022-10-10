@@ -1126,6 +1126,10 @@
   $('#id_category').addClass('mb-1');
   $('#id_class_drop').addClass('mb-1');
 
+  $('[name=category]').each(function(){
+    $(this).addClass('mb-1');
+  });
+
   $(function() {
     //キャラバンの乗用
     var categoryElement = $('#collapseOne .alert-info [name=category]');   

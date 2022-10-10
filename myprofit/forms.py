@@ -36,8 +36,9 @@ class PostCreateForm(forms.ModelForm):
         fields = '__all__'
 
     field_order = ('title', 'parent_category', 'category', 'class_drop')
-    
-#車名差し込み用
-class CarInsertForm(forms.Form):
-    car = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class':'d-none', }))
-    digit = forms.CharField(max_length=5, widget=forms.TextInput(attrs={'class':'d-none', }))
+
+
+# #車名差し込み用
+# class CarInsertForm(forms.Form):
+#     car = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class':'d-none', }))
+#     digit = forms.CharField(max_length=5, widget=forms.TextInput(attrs={'class':'d-none', }))
