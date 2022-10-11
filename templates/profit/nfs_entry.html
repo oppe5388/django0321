@@ -138,11 +138,13 @@
               </div>
               <div class="d-flex flex-column">
                 <div class="d-flex">
-                  <select class="col-4 mb-1 ml-1 pl-1" id="car_class">
+                  {{ form.class_drop }}
+                  {% comment %} <select class="col-4 mb-1 ml-1 pl-1" id="car_class">
                     <option value="0">選択してください</option>
                     <option value="1">乗用車LL</option>
-                  </select>
-                  <a href="" id="nissan1" class="btn btn-inverse-dark btn-sm py-1 ml-1 align-items-center">検索</a>
+                  </select> {% endcomment %}
+                  {% comment %} <a href="" id="nissan1" class="btn btn-inverse-dark btn-sm py-1 ml-1 align-items-center">検索</a> {% endcomment %}
+                  <button type="button" class="btn btn-inverse-dark btn-sm py-1 ml-1 align-items-center" id="car_search">検索</button>
                 </div>
                 <span id="nissan2" class="text-primary small ml-1">車種クラス入力後、「車両検索」ボタンを押すと車名を表示します</span>
                 <span id="nissan3" class="text-primary small ml-1">　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　</span>
@@ -289,13 +291,15 @@
         if ($("#maker").val()==1) {
           $('#car_name').prop('disabled', true);
           $('#base_no').prop('disabled', true);
-          $('#nissan1').show();
+          //$('#nissan1').show();
+          $('#car_search').show();
           $('#nissan2').show();
           $('#nissan3').hide();//体裁用ダミー
         } else {
           $('#car_name').prop('disabled', false);
           $('#base_no').prop('disabled', false);
-          $('#nissan1').hide();
+          //$('#nissan1').hide();
+          $('#car_search').hide();
           $('#nissan2').hide();
           $('#nissan3').show();
         }
@@ -411,4 +415,23 @@
   
     $('#id_parent_category').addClass('mb-1');
     $('#id_category').addClass('mb-1');
+    $('#id_class_drop').addClass('mb-1 ml-1');
   </script>
+
+<!-- 車両：別ウインドウ-->
+<script>
+    $('#car_search').click(function() {
+      //選択してください以外
+      if ($("#id_class_drop").val() != "") {
+        var url = "{% url 'myprofit:car' 9999 %}"; //エラーになるため無理やり生成
+        var url= url.replace("9999", $('#id_class_drop').val());
+        window.open(url, '車両検索', 'width=360, height=440, top=200, left=200');
+      }
+    });
+
+  //別ウインドウ戻り→車名と基本3桁差し込みを作る
+  function insert_car(car_name, car_digit){
+    $("#car_name").val(car_name);
+    $("#base_no").val(car_digit);
+}
+</script>

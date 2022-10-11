@@ -1608,7 +1608,7 @@
 
 
 
-    $("#car_class").val(1);
+    //$("#car_class").val(1);
     $("#id_class_drop").val(5);
     //$('#car_class').prop('disabled', true);
     $("#car_model").val("5BA-RV37");
@@ -1659,9 +1659,12 @@
   }); {% endcomment %}
 
   $('#car_search').click(function() {
-    var url = "{% url 'myprofit:car' 9999 %}"; //エラーになるため無理やり生成
-    var url= url.replace("9999", $('#id_class_drop').val());
-    window.open(url, '車両検索', 'width=360, height=440, top=200, left=200');
+    //選択してください以外
+    if ($("#id_class_drop").val() != "") {
+      var url = "{% url 'myprofit:car' 9999 %}"; //エラーになるため無理やり生成
+      var url= url.replace("9999", $('#id_class_drop').val());
+      window.open(url, '車両検索', 'width=360, height=440, top=200, left=200');
+    }
   });
 
   //別ウインドウ戻り→車名と基本3桁差し込みを作る
