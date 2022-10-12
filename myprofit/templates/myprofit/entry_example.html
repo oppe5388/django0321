@@ -35,8 +35,76 @@
   </div>
 </div> {% endcomment %}
 
-<button type="button" class="btn btn-primary btn-rounded p-1 ml-1 mb-2" id="flow_disp" >エラー解消方法まとめを開く</button>
-<button type="button" class="btn btn-primary btn-rounded p-1 ml-1 mb-2" id="flow_hide" style="display:none">エラー解消方法まとめを閉じる</button>
+
+<!-- モーダル車種クラス -->
+
+  <button type="button" class="btn btn-sm btn-secondary rounded-pill mb-2 " data-toggle="modal" data-target="#ModalCentercompany" id="company">車種クラス検索</button>
+
+  <div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header py-0">
+                <!-- 検索 -->
+                <input id="myInput" class="form-control col-4 my-2 rounded border-dark" placeholder="Search.. （1ワードのみ）">
+                <button type="button" class="close mt-0" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" >&times;</span>
+                </button>
+            </div>
+            <div class="modal-body pt-0">
+                <table class='table table-sm table-hover m-0'>
+                  <thead class="table sticky-top thead-dark m-0">
+                    <tr class="text-nowrap">
+                      <th class="col-1"><span class="h5">メーカー</span></th>
+                      <th class="col-3"><span class="h5">車名</span></th>
+                      <th class="col-1">
+                        <span class="h6 badge badge-info">乗用</span>
+                        <span class="h6 badge badge-warning">商用</span><br>
+                        <span class="h5">ボディ・クラス</span>
+                      </th>
+                      <th class="col-1 text-info"><span class="h5"></span></th>
+                      {% comment %} <th class="col-1 text-warning"><span class="h5">商用<br>ボディ・クラス</span></th>
+                      <th class="col-1 text-warning"><span class="h5"></span></th> {% endcomment %}
+                      <th class="col-2"><span class="h5">基本3桁</span></th>
+                      {% comment %} <th><span class="h5">コード</span></th> {% endcomment %}
+                      <th class="col-1"><span class="h5">※</span></th>
+                    </tr>
+                  </thead>
+                  <tbody id="myTable">
+                    {% for car in carforprice_list %}
+                        <tr class="">
+                          <td class="align-middle text-nowrap">{{ car.maker }}</td>
+                          <td class="align-middle">{{ car.name }}</td>
+                          <td class="align-middle text-nowrap">
+                            <span class="badge badge-info">{{ car.passenger_type|default:"" }}</span>
+                            {% if car.passenger_type %}
+                            <br><span class="badge badge-warning mt-1">{{ car.cargo_type|default:"" }}</span>
+                            {% else %}
+                            <span class="badge badge-warning">{{ car.cargo_type|default:"" }}</span>
+                            {% endif %}
+                          </td><!-- Noneは非表示 -->
+                          <td class="align-middle text-nowrap">
+                            <span class="badge badge-info ">{{ car.passenger_size|default:"" }}</span>
+                            {% if car.passenger_size %}
+                            <br><span class="badge badge-warning mt-1">{{ car.cargo_size|default:"" }}</span>
+                            {% else %}
+                            <span class="badge badge-warning">{{ car.cargo_size|default:"" }}</span>
+                            {% endif %}
+                          </td><!-- Noneは非表示 -->
+                          <td class="align-middle">{{ car.base_digit|default:"" }}</td>
+                          <td class="align-middle">{{ car.remarks|default:"" }}</td>
+
+                        </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+            </div> 
+        </div>
+    </div>
+  </div>
+
+
+<button type="button" class="btn btn-secondary btn-rounded p-1 ml-1 mb-2" id="flow_disp" >エラー解消方法まとめを開く</button>
+<button type="button" class="btn btn-secondary btn-rounded p-1 ml-1 mb-2" id="flow_hide" style="display:none">エラー解消方法まとめを閉じる</button>
 <div id="flow_block" class="card mb-2" style="display:none">
   <div class="mermaid h6">
     graph LR;
@@ -907,114 +975,8 @@
 
 </div>
 
-{% comment %} <!-- タブ部分 -->
-<h4 class="h6 font-weight-bold mb-1 mt-2 text-secondary">車種クラス選択が特殊（乗用も商用も存在する）</h4>
-<ul class="nav nav-tabs">
-<li class="nav-item">
-<a href="#tab1" class="nav-link py-1 active  border-bottom-0" data-toggle="tab">キャラバン</a>
-</li>
-<li class="nav-item">
-<a href="#tab2" class="nav-link py-1  border-bottom-0" data-toggle="tab">NV200バネット</a>
-</li>
-</ul>
 
-<!-- 内容部分 -->
-<div class="tab-content p-0">
-<!-- タブ1 キャラバン-->
-<div id="tab1" class="tab-pane active p-2">
-
-  <div class="d-flex flex-nowrap">
-    <span class="col-3 mb-1 text-nowrap">車名/車種ｸﾗｽ</span>
-    <input class="col mb-1 py-0 pl-1" value="NV350キャラバン">
-    <select class="col mb-1 ml-1 pl-1">
-      <option value="0">キャラバン</option>
-    </select>
-    <button type="button" class="btn btn-inverse-dark btn-sm py-1 ml-1 align-items-center">検索</button>
-    <span class="ml-2 ">※プルダウンの一番下？</span>
-  </div>
-
-  <div class="d-flex flex-nowrap">
-    <span class="col-3 mb-1 text-nowrap">基本</span>
-    <input class="col-2 mb-1 py-0">
-  </div>
-
-  <span class="text-info">乗用</span>
-  <div class="d-flex flex-nowrap">
-    <span class="col-3 mb-1 text-nowrap">サービス商品</span>
-    <select class=" mb-1">
-      <option value="0">メンテプロパック（乗用）</option>
-    </select>
-  </div>
-  <div class="d-flex flex-nowrap">
-    <span class="col-3 mb-1 text-nowrap">入会コース</span>
-    <select class=" mb-1">
-      <option value="0">メンテプロパック●●車付ベーシック</option>
-    </select>
-  </div>
-
-  <span class="text-warning">商用</span>
-  <div class="d-flex flex-nowrap">
-    <span class="col-3 mb-1 text-nowrap">サービス商品</span>
-    <select class=" mb-1">
-      <option value="0">メンテプロパック（商用）</option>
-    </select>
-  </div>
-  <div class="d-flex flex-nowrap">
-    <span class="col-3 mb-1 text-nowrap">入会コース</span>
-    <select class=" mb-1">
-      <option value="0">メンテプロパック●●S車付ベーシック</option>
-    </select>
-  </div>
 </div>
-
-<!-- タブ2 -->
-<div id="tab2" class="tab-pane p-2">
-  <div class="d-flex flex-nowrap">
-    <span class="col-3 mb-1 text-nowrap">車名/車種ｸﾗｽ</span>
-    <input class="col mb-1 py-0 pl-1" value="NV200バネット">
-    <select class="col mb-1 ml-1 pl-1">
-      <option value="0">NV200バネット</option>
-    </select>
-    <button type="button" class="btn btn-inverse-dark btn-sm py-1 ml-1 align-items-center">検索</button>
-    <span class="ml-2 ">※プルダウンの一番下？</span>
-  </div>
-
-  <div class="d-flex flex-nowrap">
-    <span class="col-3 mb-1 text-nowrap">基本</span>
-    <input class="col-2 mb-1 py-0">
-  </div>
-
-  <span class="text-info">乗用</span>
-  <div class="d-flex flex-nowrap">
-    <span class="col-3 mb-1 text-nowrap">サービス商品</span>
-    <select class=" mb-1">
-      <option value="0">メンテプロパック（乗用）</option>
-    </select>
-  </div>
-  <div class="d-flex flex-nowrap">
-    <span class="col-3 mb-1 text-nowrap">入会コース</span>
-    <select class=" mb-1">
-      <option value="0">メンテプロパック●●車付ベーシック</option>
-    </select>
-  </div>
-
-  <span class="text-warning">商用</span>
-  <div class="d-flex flex-nowrap">
-    <span class="col-3 mb-1 text-nowrap">サービス商品</span>
-    <select class=" mb-1">
-      <option value="0">メンテプロパック（商用）</option>
-    </select>
-  </div>
-  <div class="d-flex flex-nowrap">
-    <span class="col-3 mb-1 text-nowrap">入会コース</span>
-    <select class=" mb-1">
-      <option value="0">メンテプロパック●●S車付ベーシック</option>
-    </select>
-  </div>
-</div>{% endcomment %}
-
-
-</div> 
 
   
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
@@ -1699,6 +1661,31 @@
     $('#flow_block').fadeOut(500);
     $('#flow_disp').show();
     $('#flow_hide').hide();
+  });
+</script>
+
+<!-- モーダルのために、Jqueryの後にBootstrap読み込みが必要？-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+<script>
+
+  function hiraganaToKatagana(src) {
+    return src.replace(/[\u3041-\u3096]/g, function(match) {
+      var chr = match.charCodeAt(0) + 0x60;
+      return String.fromCharCode(chr);
+    });
+  }
+
+  //販社モーダル
+  $("#company").click(function () {
+    $('#Modal2').modal('show')
+  });
+
+  //販社テーブルのフィルタも作ろう
+  $("#myInput").on("keyup", function() {
+    var value = hiraganaToKatagana($(this).val().toLowerCase()); //入力中もカナ変換してヒットさせる
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
   });
 </script>
 

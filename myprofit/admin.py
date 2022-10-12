@@ -74,3 +74,76 @@ class CarDropAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = CarDropResource
 
 admin.site.register(CarDrop, CarDropAdmin)
+
+
+# メーカー
+class MakerResource(ModelResource):
+    class Meta:
+        model = Maker
+        skip_unchanged = True
+
+class MakerAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    resource_class = MakerResource
+
+admin.site.register(Maker, MakerAdmin)
+
+
+# 乗用ボディタイプ
+class PassengerTypeResource(ModelResource):
+    class Meta:
+        model = PassengerType
+        skip_unchanged = True
+
+class PassengerTypeAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    resource_class = PassengerTypeResource
+
+admin.site.register(PassengerType, PassengerTypeAdmin)
+
+
+# 乗用サイズ
+class PassengerSizeResource(ModelResource):
+    class Meta:
+        model = PassengerSize
+        skip_unchanged = True
+
+class PassengerSizeAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    resource_class = PassengerSizeResource
+
+admin.site.register(PassengerSize, PassengerSizeAdmin)
+
+
+# 商用ボディタイプ
+class CargoTypeResource(ModelResource):
+    class Meta:
+        model = CargoType
+        skip_unchanged = True
+
+class CargoTypeAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    resource_class = CargoTypeResource
+
+admin.site.register(CargoType, CargoTypeAdmin)
+
+
+# 商用サイズ
+class CargoSizeResource(ModelResource):
+    class Meta:
+        model = CargoSize
+        skip_unchanged = True
+
+class CargoSizeAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    resource_class = CargoSizeResource
+
+admin.site.register(CargoSize, CargoSizeAdmin)
+
+# 車名（価格用）
+class CarForPriceResource(ModelResource):
+    class Meta:
+        model = CarForPrice
+        skip_unchanged = True
+
+class CarForPriceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ('name', 'maker', 'remarks', 'base_digit', 'code',  'passenger_type', 'passenger_size', 'cargo_type', 'cargo_size')
+    ordering = ('id',)
+    resource_class = CarForPriceResource
+
+admin.site.register(CarForPrice, CarForPriceAdmin)
