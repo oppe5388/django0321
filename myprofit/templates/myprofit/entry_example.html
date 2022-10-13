@@ -38,14 +38,14 @@
 
 <!-- モーダル車種クラス -->
 
-  <button type="button" class="btn btn-sm btn-secondary rounded-pill mb-2 " data-toggle="modal" data-target="#ModalCentercompany" id="company">車種クラス検索</button>
+  <button type="button" class="btn btn-sm btn-secondary rounded-pill mb-2 " data-toggle="modal" id="modal2btn">車種クラス検索</button>
 
   <div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-lg">
         <div class="modal-content">
             <div class="modal-header py-0">
                 <!-- 検索 -->
-                <input id="myInput" class="form-control col-4 my-2 rounded border-dark" placeholder="Search.. （1ワードのみ）">
+                <input id="myInput" class="form-control col-4 my-1 p-2 border-dark" placeholder="Search.. （1ワードのみ）">
                 <button type="button" class="close mt-0" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" >&times;</span>
                 </button>
@@ -54,19 +54,16 @@
                 <table class='table table-sm table-hover m-0'>
                   <thead class="table sticky-top thead-dark m-0">
                     <tr class="text-nowrap">
-                      <th class="col-1"><span class="h5">メーカー</span></th>
-                      <th class="col-3"><span class="h5">車名</span></th>
-                      <th class="col-1">
-                        <span class="h6 badge badge-info">乗用</span>
-                        <span class="h6 badge badge-warning">商用</span><br>
-                        <span class="h5">ボディ・クラス</span>
+                      <th class="col-1 align-middle"><span class="h5 ">メーカー</span></th>
+                      <th class="col-3 align-middle"><span class="h5 ">車名</span></th>
+                      <th class="col-1 align-middle">
+                          <span class="badge badge-info p-1">乗用</span>
+                          <span class="badge badge-warning p-1">商用</span>
+                          <span class="h5">ボディ</span>
                       </th>
-                      <th class="col-1 text-info"><span class="h5"></span></th>
-                      {% comment %} <th class="col-1 text-warning"><span class="h5">商用<br>ボディ・クラス</span></th>
-                      <th class="col-1 text-warning"><span class="h5"></span></th> {% endcomment %}
-                      <th class="col-2"><span class="h5">基本3桁</span></th>
-                      {% comment %} <th><span class="h5">コード</span></th> {% endcomment %}
-                      <th class="col-1"><span class="h5">※</span></th>
+                      <th class="col-1 align-middle"><span class="h5 ">クラス</span></th>
+                      <th class="col-3 align-middle"><span class="h5 ">基本3桁</span></th>
+                      <th class="col-3 align-middle"><span class="h5 ">※</span></th>
                     </tr>
                   </thead>
                   <tbody id="myTable">
@@ -91,7 +88,7 @@
                             {% endif %}
                           </td><!-- Noneは非表示 -->
                           <td class="align-middle">{{ car.base_digit|default:"" }}</td>
-                          <td class="align-middle">{{ car.remarks|default:"" }}</td>
+                          <td class="align-middle">{{ car.remarks|default:""|safe }}</td>
 
                         </tr>
                     {% endfor %}
@@ -103,8 +100,8 @@
   </div>
 
 
-<button type="button" class="btn btn-secondary btn-rounded p-1 ml-1 mb-2" id="flow_disp" >エラー解消方法まとめを開く</button>
-<button type="button" class="btn btn-secondary btn-rounded p-1 ml-1 mb-2" id="flow_hide" style="display:none">エラー解消方法まとめを閉じる</button>
+<button type="button" class="btn btn-sm btn-secondary rounded-pill mb-2 ml-3" id="flow_disp" >エラーまとめを開く</button>
+<button type="button" class="btn btn-sm btn-secondary rounded-pill mb-2 ml-3" id="flow_hide" style="display:none">エラーまとめを閉じる</button>
 <div id="flow_block" class="card mb-2" style="display:none">
   <div class="mermaid h6">
     graph LR;
@@ -1675,12 +1672,12 @@
     });
   }
 
-  //販社モーダル
-  $("#company").click(function () {
+  //車種クラス検索モーダル
+  $("#modal2btn").click(function () {
     $('#Modal2').modal('show')
   });
 
-  //販社テーブルのフィルタも作ろう
+  //車種クラステーブルのフィルタ
   $("#myInput").on("keyup", function() {
     var value = hiraganaToKatagana($(this).val().toLowerCase()); //入力中もカナ変換してヒットさせる
     $("#myTable tr").filter(function() {

@@ -145,5 +145,6 @@ class CarForPriceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('name', 'maker', 'remarks', 'base_digit', 'code',  'passenger_type', 'passenger_size', 'cargo_type', 'cargo_size')
     ordering = ('id',)
     resource_class = CarForPriceResource
+    search_fields = ('name', 'base_digit',)
 
 admin.site.register(CarForPrice, CarForPriceAdmin)
