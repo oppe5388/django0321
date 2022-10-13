@@ -102,4 +102,10 @@
 
 {% endblock %}
 
-{% block extra_foot %}{% endblock %}
+{% block extra_foot %}
+<script>
+    $(function () {
+        $("input[type='search']").eq(1).focus();//2つ目の要素
+    });
+</script> 
+{% endblock %}

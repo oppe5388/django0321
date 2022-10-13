@@ -127,6 +127,11 @@
       });
     });
   }); {% endcomment %}
+
+
+  $(function () {
+    $("input[type='search']").eq(1).focus();//2つ目の要素
+  });
 </script>
 
 <!-- django-ajax-datatable中止 --> 
@@ -148,5 +153,7 @@
         );
     });
 </script> {% endcomment %}
+
+
 
 {% endblock %}

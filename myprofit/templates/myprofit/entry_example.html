@@ -1674,7 +1674,10 @@
 
   //車種クラス検索モーダル
   $("#modal2btn").click(function () {
-    $('#Modal2').modal('show')
+    $('#Modal2').modal('show');
+  });
+  $('#Modal2').on('shown.bs.modal', function () {
+    $('#myInput').focus();//開いた際にinputフォーカス状態
   });
 
   //車種クラステーブルのフィルタ

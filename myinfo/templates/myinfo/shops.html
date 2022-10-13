@@ -168,6 +168,14 @@
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
   });
+
+  $('#Modal2').on('shown.bs.modal', function () {
+    $('#myInput').focus();//モーダルを開いた際にinputフォーカス状態
+  });
+
+  $(function () {
+    $("input[type='search']").eq(1).focus();//2つ目の要素
+  });
 </script>
 
 {% endblock %}
