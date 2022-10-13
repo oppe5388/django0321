@@ -1681,10 +1681,14 @@
   $("#myInput").on("keyup", function() {
     if ($(this).val()!=""){//重かったのでブランク以外の分岐を追加
       var value = hiraganaToKatagana($(this).val().toLowerCase()); //入力中もカナ変換してヒットさせる
-      $("#myTable tr").filter(function() {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-      });
+    } else {
+      var value = $(this).val().toLowerCase();
     }
+
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+
   });
 </script>
 
