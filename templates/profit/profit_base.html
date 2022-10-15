@@ -68,13 +68,12 @@
     <div class="container-scroller">
       
       <!-- partial:partials/_navbar.html ←トップバー-->
-
       <nav class="navbar col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
           <a class="navbar-brand brand-logo p-0" href="{% url 'myprofit:profit_top' %}">
             <div class="h4 font-weight-bold text-black my-2 mx-1">日産プリンスMarsh株式会社</div>
           </a>
-          <button class="p-2 navbar-toggler navbar-toggler align-self-center d-none d-lg-flex" type="button" data-toggle="minimize">
+          <button class="p-2 navbar-toggler align-self-center d-none d-lg-flex" type="button" data-toggle="minimize">
             <span class="typcn typcn-th-menu"></span>
           </button>
         </div>
@@ -86,6 +85,11 @@
           </ul>
           <!-- sampleモーダル開くボタン -->
           <a href="#" data-toggle="modal" data-target="#case_modal" id="case_btn" class="btn btn-sm btn-inverse-info align-items-center justify-content-end p-1">Sample</a>
+          
+          <!-- スマホ：右上にハンバーガーメニュー -->
+          <button class="p-2 navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+            <span class="typcn typcn-th-menu"></span>
+          </button>
         </div>
       </nav>
       <!-- partial -->
