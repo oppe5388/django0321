@@ -50,6 +50,7 @@ color:black;
 background-color:#e5fff2;
 font-size: 16px;
 padding-left: 5px;
+margin: -3px -3px -3px -3px;/*上/下/左/右*/
 }
 
 /*係*/
@@ -57,6 +58,7 @@ padding-left: 5px;
 color:black;
 background-color:#ffe5f2;
 padding-left: 5px;
+margin: -3px -3px -3px -3px;/*上/下/左/右*/
 }
 
 /*FAX*/
@@ -64,6 +66,7 @@ padding-left: 5px;
 color:black;
 background-color:#fff2e5;
 padding-left: 5px;
+margin: -3px -3px -3px -3px;/*上/下/左/右*/
 }
 
 /*ohiru*/
@@ -75,5 +78,6 @@ font-size: 1.1rem;
 /*配置する背景*/
 .bg-ogirin{
 background-color:#ffffff;
-padding: 2px 5px 0px 0px;/*上/下/左/右*/
+padding: 2px 4px 0px 4px;/*上/下/左/右*/
+margin: 0px -2px 0px 0px;/*上/下/左/右*/
 }
