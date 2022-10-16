@@ -170,6 +170,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+
 # #bs4sampleで追加
 # STATICFILES_DIRS =(
 #     os.path.join(BASE_DIR,'static'),
