@@ -4,6 +4,6 @@ __pycache
 .DS_Store
 /media/uploads/
 /backups/
-# .env.dev
-# .env.prod
+.env.dev
+.env.prod
 /logs/*
