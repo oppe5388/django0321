@@ -62,10 +62,13 @@ urlpatterns = [
     #個別ブラウザ通知関数
     path('onegisnal_id_create/', views.onegisnal_id_create, name="onegisnal_id_create"), 
 
-    #FAXルール当番
+    #FAX当番
     # path('fax/', views.fax, name='fax'),
     path('fax/<p>/', views.fax, name='fax'),
     path('fax/<p>/delete/', views.fax_delete, name='fax_delete'),
     path('fax/<p>/update/', views.fax_del_create, name='fax_del_create'),
+    
+    #FAXルール
+    path('faxrule/<p>/', views.fax_rule, name='fax_rule'),
 
 ]

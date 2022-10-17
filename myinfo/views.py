@@ -1045,3 +1045,12 @@ def fax_del_create(request, p):
             return redirect(request.META['HTTP_REFERER'])#元のページに戻る
 
     return redirect(request.META['HTTP_REFERER'])#元のページに戻る
+
+
+# FAXルール
+def fax_rule(request, p):
+    context ={
+        'form': '',
+    }
+    
+    return render(request, 'myinfo/fax_rule.html', context)
