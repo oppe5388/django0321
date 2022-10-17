@@ -4,11 +4,42 @@
 
 {% block extra_head %}
 <!-- CSS -->
-
+<style>
+.vertical {
+    writing-mode: vertical-rl;
+}
+.border-2{
+    border-width:2px !important;
+    border-color: gray;
+}
+</style>
 {% endblock %}
 
 {% block content %}
-
+<table class="table-bordered small border-2">
+    <tr>
+        <th rowspan="5" class="vertical table-warning">会員︵申込人︶記入欄</th>
+        <th class="table-warning">フリガナ</th>
+        <td></td>
+        <td rowspan="2">印　(法人申込は捺印必要）</td>
+    </tr>
+    <tr>
+        <th class="table-warning">会員（申込人）名（自署）</th>
+        <td>※法人申込の場合は記名・捺印が必ず必要です。</td>
+    </tr>
+    <tr>
+        <th class="table-warning">住所</th>
+        <td colspan="2">〒　-</td>
+    </tr>
+    <tr>
+        <th class="table-warning">※会員No.（商品契約番号）</th>
+        <td colspan="2"></td>
+    </tr>
+    <tr>
+        <th class="table-warning">登録番号</th>
+        <td colspan="2"></td>
+    </tr>
+</table>
 
 
 {% endblock %}
