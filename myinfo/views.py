@@ -111,7 +111,7 @@ def add_fbvform(request):
                 # }
                 # requests.post(
                 #     "https://onesignal.com/api/v1/notifications",
-                #     headers={'Authorization': 'Basic NDQ4Y2RiZTctNTgxMy00ZTc2LWFiYzctZTRiZGMyMGYwNjJh'},  # 先頭にBasic という文字列がつく
+                #     headers={'Authorization': os.environ.get('ONESIGNAL_API_KEY')},  # 先頭にBasic という文字列がつく
                 #     json=data,
                 # )
 

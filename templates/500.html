@@ -28,9 +28,6 @@
    <!-- favicon -->
     <link rel="icon" href="/static/icon/favicon.ico">
 
-
-    <!-- 特定ユーザーデスクトップ通知 -->
-    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
     <!-- ajaxのpostなので↓ -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -107,27 +104,3 @@
 </body>
 
 </html>
-
-
-{% comment %} <!DOCTYPE html>
-<html>
-  <head>
-  <meta charset="UTF-8" />
-  </head>
-  <body>
-  <section>
-    <div class="error500">
-        <h1>500 Internal Server Error</h1>
-    </div>
-    <p>サーバー内部エラーです。</p>
-    {% if exception %}
-    <p style="color: red">{{ exception }}</p>
-    {% endif %}
-  </section>
-  <section>
-      <p><a href="javascript:history.back()">&lt; Back</a></p>
-  </section>
-
-  
-  </body>
-</html> {% endcomment %}

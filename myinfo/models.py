@@ -38,7 +38,7 @@ def browser_push(title, text, url):
     }
     requests.post(
         "https://onesignal.com/api/v1/notifications",
-        headers={'Authorization': 'Basic NDQ4Y2RiZTctNTgxMy00ZTc2LWFiYzctZTRiZGMyMGYwNjJh'},  # 先頭にBasic という文字列がつく
+        headers={'Authorization': os.environ.get('ONESIGNAL_API_KEY')},  # 先頭にBasic という文字列がつく
         json=data,
     )
 
@@ -62,7 +62,7 @@ class OneSignalUser(models.Model):
         }
         res = requests.post(
             "https://onesignal.com/api/v1/notifications",
-            headers={'Authorization': 'Basic NDQ4Y2RiZTctNTgxMy00ZTc2LWFiYzctZTRiZGMyMGYwNjJh'},
+            headers={'Authorization': os.environ.get('ONESIGNAL_API_KEY')},
             json=data,
         )
         print(res, res.text)
@@ -101,21 +101,6 @@ class Information(models.Model):
 
     def browser_push_update(self, request):
         browser_push(self.title, 'おしらせが更新されました', resolve_url('myinfo:detail', pk=self.pk))
-
-    # def browser_push(self, request):
-    #     """記事をブラウザ通知"""
-    #     data = {
-    #         'app_id': '6027ee57-82ec-485b-a5a5-6c976de75cb1',
-    #         'included_segments': ['All'],
-    #         'contents': {'en': self.title},
-    #         'headings': {'en': '●●より'},
-    #         'url': resolve_url('myinfo:detail', pk=self.pk),
-    #     }
-    #     requests.post(
-    #         "https://onesignal.com/api/v1/notifications",
-    #         headers={'Authorization': 'Basic NDQ4Y2RiZTctNTgxMy00ZTc2LWFiYzctZTRiZGMyMGYwNjJh'},  # 先頭にBasic という文字列がつく
-    #         json=data,
-    #     )
         
 
 class ReadStates(models.Model):
