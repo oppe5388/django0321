@@ -335,3 +335,28 @@ class Fax(models.Model):
 
     class Meta:
         verbose_name_plural = "FAX当番"
+
+        
+# FAXルール書式
+class FaxFormats(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "書式（FAXルール）"
+        
+
+# FAXルール説明
+class FaxExplain(models.Model):
+    field = models.CharField(max_length=100)
+    description = tinymce_models.HTMLField(null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now_add=False)
+    fax_format = models.ForeignKey(FaxFormats, on_delete=models.PROTECT)
+     
+    def __str__(self):
+        return self.field
+
+    class Meta:
+        verbose_name_plural = "FAXルール説明"

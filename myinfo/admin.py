@@ -260,3 +260,36 @@ class FaxAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = FaxResource
 
 admin.site.register(Fax, FaxAdmin)
+
+
+# FAX
+class FaxExplainResource(ModelResource):
+    class Meta:
+        model = FaxExplain
+        skip_unchanged = True
+        import_id_fields = ['id']
+
+#インポート、エクスポート
+class FaxExplainAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ('field','fax_format','id')
+    resource_class = FaxExplainResource
+    
+    # ForeignKeyをリスト出来るようにする
+    def fax_format(self, obj):
+        return obj.fax_format.name
+
+admin.site.register(FaxExplain, FaxExplainAdmin)
+
+
+# FAX
+class FaxFormatsResource(ModelResource):
+    class Meta:
+        model = FaxFormats
+        skip_unchanged = True
+        import_id_fields = ['id']
+
+#インポート、エクスポート
+class FaxFormatsAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    resource_class = FaxFormatsResource
+
+admin.site.register(FaxFormats, FaxFormatsAdmin)

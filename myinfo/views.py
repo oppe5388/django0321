@@ -1049,8 +1049,9 @@ def fax_del_create(request, p):
 
 # FAXルール
 def fax_rule(request, p):
+
     context ={
-        'form': '',
+        'kaiin_list': FaxExplain.objects.filter(fax_format__id=1).order_by('id'), 
+
     }
-    
     return render(request, 'myinfo/fax_rule.html', context)
