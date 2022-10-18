@@ -35,42 +35,14 @@ table.pop_table th{
 
 {% block content %}
 
-{% for explan in kaiin_list %}
-{{ explan.field }}
-<div id="kaiin-{{ explan.id }}" class="d-none">
-    {{ explan.description|safe }}
-</div>
-{% endfor %}
-
-<span class="fa fa-question-circle"
-                aria-hidden="true"
-                data-toggle="popover" 
-                data-placement="top"
-                data-content_div_id="kaiin-1">
-            </span>
-
 <table class=" small ex_table">
     <tr>
         <th rowspan="5" class="vertical table-warning">会員︵申込人︶記入欄</th>
         <th class="table-warning">フリガナ</th>
         <td id="hover1" class="text-center">
             <span id="pop1" class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-            title="フリガナ" 
-            data-content='
-            <table class="table table-sm pop_table">
-                <tr>
-                    <th>ブランク</th>
-                    <td>スルー</td>
-                </tr>
-                <tr>
-                    <th>誤り</th>
-                    <td>OBし、・記入誤り：再FAX・データ誤り：諸変更FAX後に設定（※解約時は不要）</td>
-                </tr>
-                <tr>
-                    <th>書き直し（訂正印なし）</th>
-                    <td>スルー</td>
-                </tr>
-            </table>'></span>
+            title="{{ kaiin_list.0.field}}" 
+            data-content="{{ kaiin_list.0.description|safe }}"></span>
         </td>
         <td rowspan="2">印　(法人申込は捺印必要）</td>
     </tr>
@@ -92,22 +64,23 @@ table.pop_table th{
     </tr>
 </table>
 
+<p></p>
 
 <script>
 $(function() {
+
+    //cssを当てるため
+    $('td').each(function() {
+        var txt = $(this).html();
+        $(this).html(
+          txt.replace("<table>", "<table class='pop_table'>")
+        );
+    });
+
     $('[data-toggle="popover"]').popover({
         sanitize: false//これでテーブル表示できた
     });
 
-    {% comment %} $("[data-toggle=popover]").popover({
-        html: true,
-        container: 'body',
-        content: function () {
-            var contentDivId = '#' + $(this).data('content_div_id');
-            return $(contentDivId).html();
-        },
-        trigger: 'hover'
-    }); {% endcomment %}
     //
     $('#hover1').hover(
         function (){
