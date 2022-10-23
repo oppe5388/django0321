@@ -15,7 +15,7 @@ table.ex_table th, table.ex_table td {
 }
 
 .popover{
-    max-width: 500px;
+    max-width: 600px;
     {% comment %} background: #c4dbff; {% endcomment %}
 }
 .popover-header {
@@ -26,6 +26,12 @@ table.ex_table th, table.ex_table td {
 
 table.pop_table th{
     background: ghostwhite;
+}
+
+table.pop_table th, table.pop_table td{
+    border-bottom: 1px solid gray;
+    padding: 5px;
+    font-size: 12px;
 }
 
 </style>
@@ -40,7 +46,7 @@ table.pop_table th{
         <th rowspan="5" class="vertical table-warning">会員︵申込人︶記入欄</th>
         <th class="table-warning">フリガナ</th>
         <td id="hover1" class="text-center">
-            <span id="pop1" class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
             title="{{ kaiin_list.0.field}}" 
             data-content="{{ kaiin_list.0.description|safe }}"></span>
         </td>
@@ -48,7 +54,10 @@ table.pop_table th{
     </tr>
     <tr>
         <th class="table-warning">会員（申込人）名（自署）</th>
-        <td>※法人申込の場合は記名・捺印が必ず必要です。</td>
+        <td><span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.1.field}}" 
+            data-content="{{ kaiin_list.1.description|safe }}"></span>
+            ※法人申込の場合は記名・捺印が必ず必要です。</td>
     </tr>
     <tr>
         <th class="table-warning">住所</th>
@@ -81,15 +90,16 @@ $(function() {
         sanitize: false//これでテーブル表示できた
     });
 
-    //
-    $('#hover1').hover(
-        function (){
-        $('#pop1').popover('show');
-        },
-        function () {
-        $('#pop1').popover('hide');
-        }
-    );
+    //hoverで子要素をポップオーバー
+    $('td').hover(function() {
+        $(this).addClass('bg-warning');
+        $(this).children('span').popover('show');
+    },function() {
+        $(this).removeClass('bg-warning');
+        $(this).children('span').popover('hide');
+    });
+
+
 });
 
 
