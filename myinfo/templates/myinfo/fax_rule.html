@@ -12,11 +12,13 @@
 table.ex_table th, table.ex_table td {
     border: 1px solid gray;
     padding: 5px;
+    font-weight: normal;
+    {% comment %} color: #333333; {% endcomment %}
 }
 
 .popover{
     max-width: 600px;
-    {% comment %} background: #c4dbff; {% endcomment %}
+    {% comment %} background: darkgray; {% endcomment %}
 }
 .popover-header {
     font-size: 12px;
@@ -24,15 +26,17 @@ table.ex_table th, table.ex_table td {
     height: 24px;
 }
 
-table.pop_table th{
-    background: ghostwhite;
-}
-
 table.pop_table th, table.pop_table td{
     border-bottom: 1px solid gray;
     padding: 5px;
     font-size: 12px;
+    background: white;
 }
+
+table.pop_table th{
+    background: lavender;
+}
+
 
 </style>
 
@@ -40,20 +44,35 @@ table.pop_table th, table.pop_table td{
 {% endblock %}
 
 {% block content %}
+<span class="h5">FAXルール</span><span class="small">：マウスオーバーで表示</span>
 
-<table class=" small ex_table">
+<div class="card shadow d-flex mb-3">
+<div class="card-header font-weight-bold p-2">会員証再発行依頼書</div>
+<div class="card-body">
+
+<div class="d-flex flex-row">
+    <div class="column">
+        <table class="small ex_table">
+            <td class="col-2">NFS-Web</td>
+        </table>
+        <table class="small ex_table mt-3">
+            <td class="col-2">欄外</td>
+        </table>
+    </div>
+
+<table class="small ex_table col-9 ml-auto">
     <tr>
-        <th rowspan="5" class="vertical table-warning">会員︵申込人︶記入欄</th>
+        <th rowspan="5" class="vertical table-warning">会員(申込人)記入欄</th>
         <th class="table-warning">フリガナ</th>
-        <td id="hover1" class="text-center">
+        <td id="hover1" class="text-center col-5">
             <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
             title="{{ kaiin_list.0.field}}" 
             data-content="{{ kaiin_list.0.description|safe }}"></span>
         </td>
-        <td rowspan="2">印　(法人申込は捺印必要）</td>
+        <td rowspan="2">印<br>　(法人申込は捺印必要）</td>
     </tr>
     <tr>
-        <th class="table-warning">会員（申込人）名（自署）</th>
+        <th class="table-warning">会員（申込人）名<br>（自署）</th>
         <td><span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
             title="{{ kaiin_list.1.field}}" 
             data-content="{{ kaiin_list.1.description|safe }}"></span>
@@ -64,7 +83,7 @@ table.pop_table th, table.pop_table td{
         <td colspan="2">〒　-</td>
     </tr>
     <tr>
-        <th class="table-warning">※会員No.（商品契約番号）</th>
+        <th class="table-warning">※会員No.<br>（商品契約番号）</th>
         <td colspan="2"></td>
     </tr>
     <tr>
@@ -72,8 +91,166 @@ table.pop_table th, table.pop_table td{
         <td colspan="2"></td>
     </tr>
 </table>
+</div>
 
-<p></p>
+<div class="d-flex justify-content-center mt-3">
+<table class="small ex_table col-8">
+    <tr>
+        <th rowspan="4" class="vertical table-info">販売会社店舗　記入欄</th>
+        <th class="table-info">販売会社名<br>店舗名<br>（ゴム印）</th>
+        <td></td>
+        <th rowspan="3" class="table-dark col-3">※再発行許可のご連絡に必要ですので必ずご記入下さい</td>
+    </tr>
+    <tr>
+        <th class="table-info">電話番号</th>
+        <td>　　　－　　　－　　　</td>
+    </tr>
+    <tr>
+        <th class="table-info">担当者</th>
+        <td></td>
+    </tr>
+    <tr>
+        <th colspan="2"  class="table-warning">【他社利用】今回、再発行と同時に他社利用を希望される場合はチェック願います。利用登録後、再発行許可を致します。</th>
+        <td>□　他社利用希望</td>
+    </tr>
+</table>
+</div>
+
+
+
+</div><!-- card-body終わり -->
+</div><!-- 会員証card終わり -->
+
+
+<div class="card shadow d-flex mb-3">
+<div class="card-header font-weight-bold p-2">諸変更届出書</div>
+<div class="card-body">
+
+<div class="d-flex flex-row">
+    <div class="column">
+        <table class="small ex_table">
+            <td class="col-2">NFS-Web</td>
+        </table>
+        <table class="small ex_table mt-3">
+            <td class="col-2">欄外</td>
+        </table>
+    </div>
+
+<table class="small ex_table col-9 ml-auto">
+    <tr>
+        <th rowspan="5" class="vertical table-info">販売会社店舗　記入欄</th>
+        <th class="table-info">取扱販売会社<br>店舗名（ゴム印）</th>
+        <td class="col-5"></td>
+        <td>印<br>（会社印）</td>
+    </tr>
+    <tr>
+        <th class="table-info">電話番号</th>
+        <td colspan="2">　　　－　　　－　　　</td>
+    </tr>
+    <tr>
+        <th class="table-info">ご担当者</th>
+        <td colspan="2"></td>
+    </tr>
+    <tr>
+        <th class="table-info">会員No<br>（商品契約番号）</th>
+        <td colspan="2"></td>
+    </tr>
+    <tr>
+        <th class="table-info">会員（申込人）名</th>
+        <td colspan="2"></td>
+    </tr>
+</table>
+</div>
+
+<table class="small ex_table mt-3 col">
+	<tr>
+		<th rowspan="2" class="table-dark text-nowrap">お客様事由</td>
+		<td>□ 希望の登録Noへの変更</td>
+		<th rowspan="2" class="table-dark text-nowrap">販売会社事由</td>
+		<td>□ 申込データ入力ミス<br>
+	    ※メンテプロパック販売会社・メンテナンス実施販社両方の訂正</td>
+		<th rowspan="2" class="table-dark text-nowrap">その他</td>
+		<td rowspan="2">□ 具体的に</td>
+	</tr>
+	<tr>
+		<td>□ 住所等変更</td>
+		<td>□ 販社担当者異動<br>
+		※メンテナンス実施販社のみの訂正</td>
+	</tr>
+</table>
+
+<table class="small ex_table mt-3 col">
+    <tr>
+        <th class="table-warning col-3">変更項目</th>
+        <th class="table-dark col-3">変更前(現在のお届け先)</th>
+        <th colspan="3" class="table-dark col-6">変更後</th>
+    </tr>
+    <tr>
+        <th class="table-warning">店舗名</th>
+        <th></th>
+        <td class="col-2"></td>
+        <th class="table-warning">店舗コード</th>
+        <td class="col-2"></td>
+    </tr>
+    <tr>
+        <th class="table-warning">担当者(フルネーム・漢字)</th>
+        <th></th>
+        <td></td>
+        <th class="table-warning">コード</th>
+        <td></td>
+    </tr>
+</table>
+
+<table class="small ex_table mt-1 col">
+	<tr>
+		<th class="table-warning col-3">登録番号</th>
+		<th class="col-3"></th>
+		<td></td>
+	</tr>
+	<tr>
+		<th class="table-warning">車検満了日</th>
+		<th></th>
+		<td>（西暦）　年　月　日</td>
+	</tr>
+	<tr>
+		<th class="table-warning">その他車両情報</th>
+		<th></th>
+		<td></td>
+	</tr>
+</table>
+
+<table class="small ex_table mt-1 col">
+	<tr>
+		<th rowspan="5" class="vertical table-info col-1">会員(申込人)情報</th>
+		<th class="table-info col-2">氏名(カナ)</th>
+		<th class="col-3"></th>
+		<td></td>
+	</tr>
+	<tr>
+		<th class="table-info">氏名(漢字)</th>
+		<th></th>
+		<td>■婚姻等によるお名前の変更の場合のみ(申込人の変更は不可)</td>
+	</tr>
+	<tr>
+		<th class="table-info">住所</th>
+		<th></th>
+		<td>〒</td>
+	</tr>
+	<tr>
+		<th class="table-info">電話番号</th>
+		<th></th>
+		<td>　　　－　　　－　　　</td>
+	</tr>
+	<tr>
+		<th class="table-info">その他</th>
+		<th></th>
+		<td></td>
+	</tr>
+</table>
+
+</div><!-- card-body終わり -->
+</div><!-- 諸変更card終わり -->
+
 
 <script>
 $(function() {
