@@ -104,11 +104,11 @@ table.pop_table th{
     </tr>
     <tr>
         <th class="table-warning">住所</th>
-        <td colspan="2">
+        <td colspan="2" class="align-top small">
             <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
             title="{{ kaiin_list.3.field}}" 
             data-content="{{ kaiin_list.3.description|safe }}"></span>
-            〒　-
+            〒　　-
         </td>
     </tr>
     <tr>
@@ -140,7 +140,7 @@ table.pop_table th{
             title="{{ kaiin_list.6.field}}" 
             data-content="{{ kaiin_list.6.description|safe }}"></span>
         </td>
-        <th rowspan="3" class="table-dark col-3">※再発行許可のご連絡に必要ですので必ずご記入下さい</td>
+        <th rowspan="3" class="table-dark col-3 small">※再発行許可のご連絡に必要ですので必ずご記入下さい</td>
     </tr>
     <tr>
         <th class="table-info">電話番号</th>
@@ -160,7 +160,7 @@ table.pop_table th{
         </td>
     </tr>
     <tr>
-        <th colspan="2"  class="table-warning">【他社利用】今回、再発行と同時に他社利用を希望される場合はチェック願います。利用登録後、再発行許可を致します。</th>
+        <th colspan="2"  class="table-warning small">【他社利用】今回、再発行と同時に他社利用を希望される場合はチェック願います。利用登録後、再発行許可を致します。</th>
         <td>
             <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
             title="{{ kaiin_list.9.field}}" 
@@ -246,14 +246,14 @@ table.pop_table th{
 	<tr>
 		<th rowspan="2" class="table-dark text-nowrap">お客様事由</th>
 		<th class="p-0 m-0">□</th>
-		<td class="px-0"><span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+		<td class="px-0 col-2"><span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
             title="{{ kaiin_list.18.field}}" 
             data-content="{{ kaiin_list.18.description|safe }}"></span>
             希望の登録Noへの変更
         </td>
 		<th rowspan="2" class="table-dark text-nowrap">販売会社事由</th>
         <th class="p-0 m-0">□</th>
-		<td class="px-0"><span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+		<td class="px-0 col-3"><span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
             title="{{ kaiin_list.18.field}}" 
             data-content="{{ kaiin_list.18.description|safe }}"></span>
             申込データ入力ミス<br>
@@ -261,7 +261,7 @@ table.pop_table th{
         </td>
 		<th rowspan="2" class="table-dark text-nowrap">その他</th>
         <th rowspan="2" class="p-0 m-0">□</th>
-		<td rowspan="2" class="align-top px-0">
+		<td rowspan="2" class="align-top px-0 col-2">
             <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
             title="{{ kaiin_list.18.field}}" 
             data-content="{{ kaiin_list.18.description|safe }}"></span>
@@ -395,45 +395,82 @@ table.pop_table th{
 		<th rowspan="5" class="vertical table-info col-1">会員(申込人)情報</th>
 		<th class="table-info col-2">氏名(カナ)</th>
 		<th class="col-3"></th>
-		<td></td>
+		<td>
+            <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.26.field}}" 
+            data-content="{{ kaiin_list.26.description|safe }}"></span>
+        </td>
 	</tr>
 	<tr>
 		<th class="table-info">氏名(漢字)</th>
 		<th></th>
-		<td>■婚姻等によるお名前の変更の場合のみ(申込人の変更は不可)</td>
+		<td class="align-bottom small">
+            <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.27.field}}" 
+            data-content="{{ kaiin_list.27.description|safe }}"></span>
+            ■婚姻等によるお名前の変更の場合のみ(申込人の変更は不可)
+        </td>
 	</tr>
 	<tr>
 		<th class="table-info">住所</th>
 		<th></th>
-		<td>〒</td>
+		<td class="align-top small">
+            <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.28.field}}" 
+            data-content="{{ kaiin_list.28.description|safe }}"></span>
+            〒
+        </td>
 	</tr>
 	<tr>
 		<th class="table-info">電話番号</th>
 		<th></th>
-		<td>　　　－　　　－　　　</td>
+		<td>
+            <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.29.field}}" 
+            data-content="{{ kaiin_list.29.description|safe }}"></span>
+            　　　－　　　－　　　
+        </td>
 	</tr>
 	<tr>
 		<th class="table-info">その他</th>
 		<th></th>
-		<td></td>
+		<td>
+            <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.30.field}}" 
+            data-content="{{ kaiin_list.30.description|safe }}"></span>
+        </td>
 	</tr>
 </table>
 <table class="small ex_table mt-1 col ml-1">
     <tr>
-        <td class="py-4">
+        <td class="py-3">
             <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-            title="{{ kaiin_list.32.field}}" 
-            data-content="{{ kaiin_list.32.description|safe }}"></span>
+            title="{{ kaiin_list.34.field}}" 
+            data-content="{{ kaiin_list.34.description|safe }}"></span>
             <span class="small">理由</span>
         </td>
     </tr>
-
+    <tr>
+        <td class="py-4">
+            <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.35.field}}" 
+            data-content="{{ kaiin_list.35.description|safe }}"></span>
+            <span class="small">理由</span>
+        </td>
+    </tr>
 </table>
 </div>
 
 </div><!-- card-body終わり -->
 </div><!-- 諸変更card終わり -->
 
+<div class="card shadow d-flex mb-3" id="section3">
+    <div class="card-header font-weight-bold p-2">精算取消依頼書</div>
+    <div class="card-body">
+
+
+</div><!-- card-body終わり -->
+</div><!-- 精算card終わり -->
 
 <script>
 $(function() {
@@ -470,12 +507,13 @@ $(function() {
 
     //スクロール
     $('#link_section1').on('click', function () {
-        var h1 = $('#section1').offset().top;
-        $('html, body').animate({scrollTop:h1}, 300);
+        $('html, body').animate({scrollTop:$('#section1').offset().top}, 300);
     });
     $('#link_section2').on('click', function () {
-        var h1 = $('#section2').offset().top;
-        $('html, body').animate({scrollTop:h1}, 300);
+        $('html, body').animate({scrollTop:$('#section2').offset().top}, 300);
+    });
+    $('#link_section3').on('click', function () {
+        $('html, body').animate({scrollTop:$('#section3').offset().top}, 300);
     });
 
 
