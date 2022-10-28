@@ -16,6 +16,14 @@ table.ex_table th, table.ex_table td {
     {% comment %} color: #333333; {% endcomment %}
 }
 
+table.ex2_table th, table.ex2_table td {
+    {% comment %} border-top: 1px solid lightgray; {% endcomment %}
+    border-bottom: 1px solid lightgray;
+    padding: 5px;
+    font-weight: normal;
+    {% comment %} color: #333333; {% endcomment %}
+}
+
 .popover{
     max-width: 600px;
     font-size: 12px;
@@ -187,7 +195,7 @@ table.pop_table th{
             <td class="col-2">NFS-Web</td>
         </table>
         <table class="small ex_table mt-3">
-            <td class="col-2">欄外</td>
+            <td class="col-2">欄外・その他</td>
         </table>
     </div>
 
@@ -325,16 +333,18 @@ table.pop_table th{
         </td>
     </tr>
 </table>
-<table class="small ex_table mt-3 col ml-1 ">
+<table class="small ex2_table mt-3 col ml-3">
     <tr>
-		<th class="">　</th>
+		<th class="py-1 small">　</th>
 	</tr>
-    <td colspan="2" class="py-4">
-        <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-        title="{{ kaiin_list.31.field}}" 
-        data-content="{{ kaiin_list.31.description|safe }}"></span>
-        <span class="small">理由</span>
-    </td>
+    <tr>
+        <td colspan="2" class="py-4 small">
+            <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.31.field}}" 
+            data-content="{{ kaiin_list.31.description|safe }}"></span>
+            理由
+        </td>
+    </tr>
 </table>
 </div>
 
@@ -369,21 +379,21 @@ table.pop_table th{
         </td>
 	</tr>
 </table>
-<table class="small ex_table mt-1 col ml-1">
+<table class="small ex2_table mt-1 col ml-3">
     <tr>
-        <td class="py-4">
+        <td class="py-4 small">
             <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
             title="{{ kaiin_list.32.field}}" 
             data-content="{{ kaiin_list.32.description|safe }}"></span>
-            <span class="small">理由</span>
+            理由
         </td>
     </tr>
     <tr>
-        <td>
+        <td class="py-2 small">
             <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
             title="{{ kaiin_list.33.field}}" 
             data-content="{{ kaiin_list.33.description|safe }}"></span>
-            <span class="small">理由</span>
+            理由
         </td>
     </tr>
 </table>
@@ -441,21 +451,21 @@ table.pop_table th{
         </td>
 	</tr>
 </table>
-<table class="small ex_table mt-1 col ml-1">
+<table class="small ex2_table mt-1 col ml-3">
     <tr>
-        <td class="py-3">
+        <td class="py-2 small">
             <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
             title="{{ kaiin_list.34.field}}" 
             data-content="{{ kaiin_list.34.description|safe }}"></span>
-            <span class="small">理由</span>
+            理由
         </td>
     </tr>
     <tr>
-        <td class="py-4">
+        <td class="py-3 small">
             <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
             title="{{ kaiin_list.35.field}}" 
             data-content="{{ kaiin_list.35.description|safe }}"></span>
-            <span class="small">理由</span>
+            理由
         </td>
     </tr>
 </table>
