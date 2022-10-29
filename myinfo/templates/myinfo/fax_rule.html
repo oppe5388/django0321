@@ -316,11 +316,13 @@ table.pop_table th{
 <div class="d-flex flex-row">
 <table class="small ex_table mt-3 col-11">
     <tr>
+        <th></th>
         <th class="table-warning col-3">変更項目</th>
         <th class="table-dark col-3">変更前(現在のお届け先)</th>
         <th colspan="3" class="table-dark col-6">変更後</th>
     </tr>
     <tr>
+        <th>☐</th>
         <th class="table-warning">店舗名</th>
         <th></th>
         <td class="col-2">
@@ -336,6 +338,7 @@ table.pop_table th{
         </td>
     </tr>
     <tr>
+        <th>☐</th>
         <th class="table-warning">担当者(フルネーム・漢字)</th>
         <th></th>
         <td>
@@ -369,15 +372,17 @@ table.pop_table th{
 <div class="d-flex flex-row">
 <table class="small ex_table mt-1 col-11">
 	<tr>
+        <th>☐</th>
 		<th class="table-warning col-3">登録番号</th>
 		<th class="col-3"></th>
-		<td>
+		<td class="col-6">
             <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
             title="{{ kaiin_list.23.field}}" 
             data-content="{{ kaiin_list.23.description|safe }}"></span>
         </td>
 	</tr>
 	<tr>
+        <th>☐</th>
 		<th class="table-warning">車検満了日</th>
 		<th></th>
 		<td>
@@ -388,6 +393,7 @@ table.pop_table th{
         </td>
 	</tr>
 	<tr>
+        <th>☐</th>
 		<th class="table-warning">その他車両情報</th>
 		<th></th>
 		<td>
@@ -420,16 +426,18 @@ table.pop_table th{
 <div class="d-flex flex-row">
 <table class="small ex_table mt-1 col-11">
 	<tr>
+        <th>☐</th>
 		<th rowspan="5" class="vertical table-info col-1">会員(申込人)情報</th>
 		<th class="table-info col-2">氏名(カナ)</th>
 		<th class="col-3"></th>
-		<td>
+		<td class="col-6">
             <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
             title="{{ kaiin_list.26.field}}" 
             data-content="{{ kaiin_list.26.description|safe }}"></span>
         </td>
 	</tr>
 	<tr>
+        <th>☐</th>
 		<th class="table-info">氏名(漢字)</th>
 		<th></th>
 		<td class="align-bottom small">
@@ -440,6 +448,7 @@ table.pop_table th{
         </td>
 	</tr>
 	<tr>
+        <th>☐</th>
 		<th class="table-info">住所</th>
 		<th></th>
 		<td class="align-top small">
@@ -450,6 +459,7 @@ table.pop_table th{
         </td>
 	</tr>
 	<tr>
+        <th>☐</th>
 		<th class="table-info">電話番号</th>
 		<th></th>
 		<td>
@@ -460,6 +470,7 @@ table.pop_table th{
         </td>
 	</tr>
 	<tr>
+        <th>☐</th>
 		<th class="table-info">その他</th>
 		<th></th>
 		<td>
@@ -493,8 +504,138 @@ table.pop_table th{
 </div><!-- 諸変更card終わり -->
 
 <div class="card shadow d-flex mb-3" id="section3">
-    <div class="card-header font-weight-bold p-2">精算取消依頼書</div>
-    <div class="card-body">
+<div class="card-header font-weight-bold p-2">精算取消依頼書</div>
+<div class="card-body">
+
+<div class="d-flex flex-row">
+    <div class="column">
+        <table class="small ex_table">
+            <td class="col-2">
+                <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.35.field}}" 
+                data-content="{{ kaiin_list.35.description|safe }}"></span>
+                NFS-Web
+            </td>
+        </table>
+        <table class="small ex_table mt-3">
+            <td class="col-2">
+                <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.36.field}}" 
+                data-content="{{ kaiin_list.36.description|safe }}"></span>
+                欄外
+            </td>
+        </table>
+    </div>
+
+<table class="small ex_table col-9 ml-auto">
+    <tr>
+        <th rowspan="3" class="vertical table-info">販売会社店舗記入欄</th>
+        <th class="table-info">取扱販売会社<br>店舗名（ゴム印）</th>
+        <td class="col-5">
+            <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.12.field}}" 
+            data-content="{{ kaiin_list.12.description|safe }}"></span>
+        </td>
+        <td><span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.15.field}}" 
+            data-content="{{ kaiin_list.15.description|safe }}"></span>
+            印<br>（会社印）
+        </td>
+    </tr>
+    <tr>
+        <th class="table-info">電話番号</th>
+        <td colspan="2">
+            <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.13.field}}" 
+            data-content="{{ kaiin_list.13.description|safe }}"></span>
+            　　　－　　　－　　　
+        </td>
+    </tr>
+    <tr>
+        <th class="table-info">ご担当者</th>
+        <td colspan="2">
+            <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.14.field}}" 
+            data-content="{{ kaiin_list.14.description|safe }}"></span>
+        </td>
+    </tr>
+</table>
+</div>
+
+<table class="small ex_table mt-3 col">
+    <tr>
+        <th class="table-info col-4">会員証番号</th>
+        <td colspan="2"></td>
+    </tr>
+    <tr>
+        <th class="table-info">フリガナ</th>
+        <td colspan="2"></td>
+    </tr>
+    <tr>
+        <th class="table-info">会員名</th>
+        <td colspan="2"></td>
+    </tr>
+    <tr>
+        <th class="table-info">有効期限</th>
+        <td class="col-4">　　　/　　　/　　　</td>
+        <th class="table-info text-danger col-4 small">※有効期限切れの場合は精算取消ができません</td>
+    </tr>
+</table>
+
+<table class="small ex_table mt-3 col">
+	<tr>
+		<td class="col-4">☐ 金額訂正</td>
+		<td class="col-4">☐ 項目選択ミス(NFS-Web)</td>
+		<td class="col-4">☐ その他(　　　　　　　　)</td>
+	</tr>
+</table>
+
+<table class="small ex_table mt-3 col">
+	<tr>
+		<th colspan="2" class="table-info col-4">精算取消項目<br><span class="small">※☐にチェックを入れてください</span></th>
+		<th class="table-info ">メンテナンス項目番号<br><span class="small">※クーポン番号(末尾3桁)</span></th>
+		<th class="table-info ">請求時オーダー番号</th>
+		<th class="table-info ">プロフィット精算日</th>
+		<th class="table-info ">NFS送金日(予定日)<br><span class="small">※NFS-Web画面の送金日</span></th>
+	</tr>
+    <tr>
+        <th>☐</th>
+        <th>6ヶ月点検</th>
+        <td colspan="4" rowspan="9"></td>
+    </tr>
+    <tr>
+        <th>☐</th>
+        <th>12ヶ月点検</th>
+    </tr>
+    <tr>
+        <th>☐</th>
+        <th>エンジンオイル交換</th>
+    </tr>
+    <tr>
+        <th>☐</th>
+        <th>エンジンオイル＋オイルフィルター交換交換</th>
+    </tr>
+    <tr>
+        <th>☐</th>
+        <th>車検</th>
+    </tr>
+    <tr>
+        <th>☐</th>
+        <th>ワイパーリフィール交換</th>
+    </tr>
+    <tr>
+        <th>☐</th>
+        <th>クリーンFプレミアム交換</th>
+    </tr>
+    <tr>
+        <th>☐</th>
+        <th>ブレーキフルード交換</th>
+    </tr>
+    <tr>
+        <th>☐</th>
+        <th>下回り洗浄</th>
+    </tr>
+</table>
 
 
 </div><!-- card-body終わり -->
