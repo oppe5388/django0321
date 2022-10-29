@@ -54,9 +54,9 @@ table.pop_table th{
 {% endblock %}
 
 {% block content %}
-<span class="h5">FAXルール</span>
+<span class="h5">FAXルール</span><span class="small">・・・再FAX/OB/スルー/etc. ・・・</span>
 
-<div>
+<div class="my-2">
 <a id="link_section1" href="javascript:void(0);" class="btn btn-sm btn-secondary mb-1 py-0 col-2"><i class="fas fa-angle-down"></i> 会員証再発行</a>
 <a id="link_section2" href="javascript:void(0);" class="btn btn-sm btn-secondary mb-1 py-0 col-2"><i class="fas fa-angle-down"></i> 諸変更</a>
 <a id="link_section3" href="javascript:void(0);" class="btn btn-sm btn-secondary mb-1 py-0 col-2"><i class="fas fa-angle-down"></i> 精算取消</a>
@@ -192,10 +192,28 @@ table.pop_table th{
 <div class="d-flex flex-row">
     <div class="column">
         <table class="small ex_table">
-            <td class="col-2">NFS-Web</td>
+            <td class="col-2">
+                <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.35.field}}" 
+                data-content="{{ kaiin_list.35.description|safe }}"></span>
+                NFS-Web
+            </td>
         </table>
         <table class="small ex_table mt-3">
-            <td class="col-2">欄外・その他</td>
+            <td class="col-2">
+                <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.36.field}}" 
+                data-content="{{ kaiin_list.36.description|safe }}"></span>
+                欄外
+            </td>
+        </table>
+        <table class="small ex_table mt-3">
+            <td class="col-2">
+                <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.37.field}}" 
+                data-content="{{ kaiin_list.37.description|safe }}"></span>
+                その他
+            </td>
         </table>
     </div>
 

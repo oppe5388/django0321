@@ -1048,7 +1048,8 @@ def fax_del_create(request, p):
 
 
 # FAXルール
-def fax_rule(request, p):
+# def fax_rule(request, p):
+def fax_rule(request):
 
     context ={
         # 'kaiin_list': FaxExplain.objects.filter(fax_format__id=1).order_by('id'),

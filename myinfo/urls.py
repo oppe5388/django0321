@@ -69,6 +69,7 @@ urlpatterns = [
     path('fax/<p>/update/', views.fax_del_create, name='fax_del_create'),
     
     #FAXルール
-    path('faxrule/<p>/', views.fax_rule, name='fax_rule'),
+    # path('faxrule/<p>/', views.fax_rule, name='fax_rule'),
+    path('faxrule/', views.fax_rule, name='fax_rule'),
 
 ]
