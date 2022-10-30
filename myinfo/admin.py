@@ -274,6 +274,7 @@ class FaxExplainAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('field','fax_format','id')
     resource_class = FaxExplainResource
     formats = [base_formats.XLSX]
+    list_filter  = ['fax_format__name', ]
     
     # ForeignKeyをリスト出来るようにする
     def fax_format(self, obj):

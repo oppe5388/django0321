@@ -24,6 +24,19 @@ table.ex2_table th, table.ex2_table td {
     {% comment %} color: #333333; {% endcomment %}
 }
 
+{% comment %} 一部ボーダーを消すため {% endcomment %}
+table.ex3_table th {
+    border: 1px solid lightgray;
+    padding: 5px;
+    font-weight: normal;
+}
+table.ex3_table td {
+    border-left: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+    padding: 5px;
+}
+
+
 .popover{
     max-width: 600px;
     font-size: 12px;
@@ -48,6 +61,38 @@ table.pop_table th{
 }
 
 
+{% comment %} 大きなカッコ用 {% endcomment %}
+.parenthesis04 {
+    position: relative;
+    width: 500px;
+    padding: 15px 20px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.parenthesis04::before,
+.parenthesis04::after {
+    position: absolute;
+    top: 0;
+    content: '';
+    width: 20px;
+    height: 100%;
+    border-top: 2px solid darkgray;
+    border-bottom: 2px solid darkgray;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.parenthesis04::before {
+    left: 0;
+    border-left: 2px solid darkgray;
+    border-radius: 8px 0 0 8px;
+}
+.parenthesis04::after {
+    right: 0;
+    border-right: 2px solid darkgray;
+    border-radius: 0 8px 8px 0;
+}
+
+
 </style>
 
 
@@ -60,230 +105,274 @@ table.pop_table th{
 <a id="link_section1" href="javascript:void(0);" class="btn btn-sm btn-secondary mb-1 py-0 col-2"><i class="fas fa-angle-down"></i> 会員証再発行</a>
 <a id="link_section2" href="javascript:void(0);" class="btn btn-sm btn-secondary mb-1 py-0 col-2"><i class="fas fa-angle-down"></i> 諸変更</a>
 <a id="link_section3" href="javascript:void(0);" class="btn btn-sm btn-secondary mb-1 py-0 col-2"><i class="fas fa-angle-down"></i> 精算取消</a>
+<a id="link_section4" href="javascript:void(0);" class="btn btn-sm btn-secondary mb-1 py-0 col-2"><i class="fas fa-angle-down"></i> 発行キャンセル</a>
+<a id="link_section5" href="javascript:void(0);" class="btn btn-sm btn-secondary mb-1 py-0 col-2"><i class="fas fa-angle-down"></i> メンテ実施</a>
 </div>
 
 {% include 'info/fax_rule_kaiin.html' %}
 {% include 'info/fax_rule_henkou.html' %}
+{% include 'info/fax_rule_seisan.html' %}
 
 
-<div class="card shadow d-flex mb-3" id="section3">
-<div class="card-header font-weight-bold p-2">精算取消依頼書</div>
+<div class="card shadow d-flex mb-3" id="section4">
+<div class="card-header font-weight-bold p-2">発行キャンセル</div>
 <div class="card-body">
 
 <div class="d-flex flex-row">
     <div class="column">
         <table class="small ex_table">
             <td class="col-2">
-                <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-                title="{{ kaiin_list.49.field}}" 
-                data-content="{{ kaiin_list.49.description|safe }}"></span>
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.64.field}}" 
+                data-content="{{ kaiin_list.64.description|safe }}"></span>
                 NFS-Web
             </td>
         </table>
         <table class="small ex_table mt-3">
             <td class="col-2">
-                <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-                title="{{ kaiin_list.50.field}}" 
-                data-content="{{ kaiin_list.50.description|safe }}"></span>
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.65.field}}" 
+                data-content="{{ kaiin_list.65.description|safe }}"></span>
                 欄外
+            </td>
+        </table>
+        <table class="small ex_table mt-3">
+            <td class="col-2">
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.66.field}}" 
+                data-content="{{ kaiin_list.66.description|safe }}"></span>                
+                会員証
             </td>
         </table>
     </div>
 
 <table class="small ex_table col-9 ml-auto">
     <tr>
-        <th rowspan="3" class="vertical table-info">販売会社店舗記入欄</th>
-        <th class="table-info">取扱販売会社<br>店舗名（ゴム印）</th>
+        <th rowspan="4" class="vertical table-info">申請<span class="text-danger">本部</span>　記入欄</th>
+        <th class="table-info">販売会社名</th>
         <td class="col-5">
-            <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-            title="{{ kaiin_list.38.field}}" 
-            data-content="{{ kaiin_list.38.description|safe }}"></span>
+            <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.52.field}}" 
+            data-content="{{ kaiin_list.52.description|safe }}"></span>            
         </td>
-        <td><span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-            title="{{ kaiin_list.41.field}}" 
-            data-content="{{ kaiin_list.41.description|safe }}"></span>
+        <td>
+            <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.53.field}}" 
+            data-content="{{ kaiin_list.53.description|safe }}"></span>
+            印<br>（会社印）
+        </td>
+    </tr>
+    <tr>
+        <th class="table-info">担当部署</th>
+        <td colspan="2">
+            <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.54.field}}" 
+            data-content="{{ kaiin_list.54.description|safe }}"></span>
+        </td>
+    </tr>
+    <tr>
+        <th class="table-info">担当者名</th>
+        <td colspan="2">
+            <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.55.field}}" 
+            data-content="{{ kaiin_list.55.description|safe }}"></span>            
+        </td>
+    </tr>
+    <tr>
+        <th class="table-info">電話番号</th>
+        <td colspan="2">
+            <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.56.field}}" 
+            data-content="{{ kaiin_list.56.description|safe }}"></span>            
+            　　　－　　　－　　　
+        </td>
+    </tr>
+</table>
+</div>
+
+<table class="small ex_table col-9 ml-auto mt-3">
+    <tr>
+        <th rowspan="5" class="vertical table-info">申請<span class="text-danger">店舗</span>　記入欄</th>
+        <th class="table-info">販売会社名</th>
+        <td class="col-5">
+            <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.57.field}}" 
+            data-content="{{ kaiin_list.57.description|safe }}"></span>
+        </td>
+        <td>
+            <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.58.field}}" 
+            data-content="{{ kaiin_list.58.description|safe }}"></span>
+            印<br>（店長印）
+        </td>
+    </tr>
+    <tr>
+        <th class="table-info">店舗名</th>
+        <td colspan="2">
+            <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.59.field}}" 
+            data-content="{{ kaiin_list.59.description|safe }}"></span>
+        </td>
+    </tr>
+    <tr>
+        <th class="table-info">担当者名</th>
+        <td colspan="2">
+            <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.55.field}}" 
+            data-content="{{ kaiin_list.55.description|safe }}"></span>
+        </td>
+    </tr>
+    <tr>
+        <th class="table-info">店長名</th>
+        <td colspan="2">
+            <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.60.field}}" 
+            data-content="{{ kaiin_list.60.description|safe }}"></span>
+        </td>
+    </tr>
+    <tr>
+        <th class="table-info">電話番号</th>
+        <td colspan="2">
+            <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.56.field}}" 
+            data-content="{{ kaiin_list.56.description|safe }}"></span>            
+            　　　－　　　－　　　
+        </td>
+    </tr>
+</table>
+
+<table class="small ex_table col mt-3">
+    <tr>
+        <th rowspan="3" class="vertical table-info col-1">申請店舗　記入欄</th>
+        <th class="table-info col-3">1. 会員No.</th>
+        <td class="col-8">
+            <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.61.field}}" 
+            data-content="{{ kaiin_list.61.description|safe }}"></span>
+        </td>
+    </tr>
+    <tr>
+        <th class="table-info">2. 会員（申込人）名</th>
+        <td>
+            <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.62.field}}" 
+            data-content="{{ kaiin_list.62.description|safe }}"></span>
+        </td>
+    </tr>
+    <tr>
+        <th class="table-info">3.発行キャンセル理由<br>（具体的にご記入ください）</th>
+        <td>
+            <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.63.field}}" 
+            data-content="{{ kaiin_list.63.description|safe }}"></span>
+            <div class="d-flex">
+                <div class="col-6">
+                    □ 商品選択ミス<br>
+                    □ 販売手順ミス（説明不足等）<br>
+                    □ 重複申込<br><br>
+                </div>
+                <div class="col-6">
+                    □ その他<br><br>
+                    <span class="parenthesis04">　　　　　　　　　</span>
+                </div>
+            </div>
+        </td>
+    </tr>
+
+</table>
+
+</div><!-- card-body終わり -->
+</div><!-- 発行キャンセルcard終わり -->
+
+
+<div class="card shadow d-flex mb-3" id="section5">
+<div class="card-header font-weight-bold p-2">メンテナンス実施販売会社変更届出書</div>
+<div class="card-body">
+
+<div class="d-flex flex-row">
+    <div class="column">
+        <table class="small ex_table">
+            <td class="col-2">
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.36.field}}" 
+                data-content="{{ kaiin_list.36.description|safe }}"></span>
+                NFS-Web
+            </td>
+        </table>
+
+    </div>
+
+<table class="small ex_table col-9 ml-auto">
+    <tr>
+        <th rowspan="5" class="vertical table-info">申請販売会社　店舗記入欄</th>
+        <th class="table-info">取扱販売会社<br>店舗名</th>
+        <td class="col-5">
+            <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.12.field}}" 
+            data-content="{{ kaiin_list.12.description|safe }}"></span>
+        </td>
+        <td><span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.15.field}}" 
+            data-content="{{ kaiin_list.15.description|safe }}"></span>
             印<br>（会社印）
         </td>
     </tr>
     <tr>
         <th class="table-info">電話番号</th>
         <td colspan="2">
-            <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-            title="{{ kaiin_list.39.field}}" 
-            data-content="{{ kaiin_list.39.description|safe }}"></span>
-            　　　－　　　－　　　
+            <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.13.field}}" 
+            data-content="{{ kaiin_list.13.description|safe }}"></span>
         </td>
     </tr>
     <tr>
-        <th class="table-info">ご担当者</th>
+        <th class="table-info">担当者</th>
         <td colspan="2">
-            <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-            title="{{ kaiin_list.40.field}}" 
-            data-content="{{ kaiin_list.40.description|safe }}"></span>
+            <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.14.field}}" 
+            data-content="{{ kaiin_list.14.description|safe }}"></span>
+        </td>
+    </tr>
+    <tr>
+        <th class="table-info">会員証番号</th>
+        <td colspan="2">
+            <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.16.field}}" 
+            data-content="{{ kaiin_list.16.description|safe }}"></span>
+        </td>
+    </tr>
+    <tr>
+        <th class="table-info">会員（申込人）名</th>
+        <td colspan="2">
+            <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+            title="{{ kaiin_list.17.field}}" 
+            data-content="{{ kaiin_list.17.description|safe }}"></span>
         </td>
     </tr>
 </table>
 </div>
 
-<table class="small ex_table mt-3 col">
+<table class="small ex3_table col mt-3">
     <tr>
-        <th class="table-info col-4">会員証番号</th>
-        <td colspan="2">
-            <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-            title="{{ kaiin_list.42.field}}" 
-            data-content="{{ kaiin_list.42.description|safe }}"></span>
-        </td>
+     <th rowspan="2" class="table-warning col-1 text-nowrap">販売会社名</th>
+     <td colspan="3" class="border-top">　</td>
+     <th rowspan="2" class="table-warning col-1 text-nowrap">店舗名</th>
+     <td colspan="3" class="border-top">　</td>
     </tr>
     <tr>
-        <th class="table-info">フリガナ</th>
-        <td colspan="2">
-            <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-            title="{{ kaiin_list.43.field}}" 
-            data-content="{{ kaiin_list.43.description|safe }}"></span>
-        </td>
-    </tr>
-    <tr>
-        <th class="table-info">会員名</th>
-        <td colspan="2">
-            <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-            title="{{ kaiin_list.44.field}}" 
-            data-content="{{ kaiin_list.44.description|safe }}"></span>
-        </td>
-    </tr>
-    <tr>
-        <th class="table-info">有効期限</th>
-        <td class="col-4">
-            <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-            title="{{ kaiin_list.45.field}}" 
-            data-content="{{ kaiin_list.45.description|safe }}"></span>
-            　　　/　　　/　　　
-        </td>
-        <th class="table-info text-danger col-4 small">※有効期限切れの場合は精算取消ができません</td>
+     <td class="border-bottom"></td>
+     <th class="table-warning noborder col-1 text-nowrap">販社コード</th>
+     <td class="border-top border-bottom"></td>
+     <td class="border-bottom"></td>
+     <th class="table-warning col-1 text-nowrap">店舗コード</th>
+     <td class="border-top border-bottom"></td>
     </tr>
 </table>
 
-<table class="small ex_table mt-3 col">
-	<tr>
-		<td class="col-4">
-            <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-            title="{{ kaiin_list.46.field}}" 
-            data-content="{{ kaiin_list.46.description|safe }}"></span>
-            ☐ 金額訂正
-        </td>
-		<td class="col-4">
-            <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-            title="{{ kaiin_list.46.field}}" 
-            data-content="{{ kaiin_list.46.description|safe }}"></span>
-            ☐ 項目選択ミス(NFS-Web)
-        </td>
-		<td class="col-4"
-        <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-            title="{{ kaiin_list.46.field}}" 
-            data-content="{{ kaiin_list.46.description|safe }}"></span>
-            ☐ その他(　　　　　　　　)
-        </td>
-	</tr>
-</table>
-
-<table class="small ex_table mt-3 col">
-	<tr>
-		<th colspan="2" class="table-info col-4">精算取消項目<br><span class="small">※☐にチェックを入れてください</span></th>
-		<th class="table-info ">メンテナンス項目番号<br><span class="small">※クーポン番号(末尾3桁)</span></th>
-		<th class="table-info ">請求時オーダー番号</th>
-		<th class="table-info ">プロフィット精算日</th>
-		<th class="table-info ">NFS送金日(予定日)<br><span class="small">※NFS-Web画面の送金日</span></th>
-	</tr>
-    <tr>
-        <td>
-            <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-            title="{{ kaiin_list.37.field}}" 
-            data-content="{{ kaiin_list.37.description|safe }}"></span>
-            ☐
-        </td>
-        <th>6ヶ月点検</th>
-        <td colspan="4" rowspan="9">
-            <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-            title="{{ kaiin_list.47.field}}" 
-            data-content="{{ kaiin_list.47.description|safe }}"></span>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-            title="{{ kaiin_list.37.field}}" 
-            data-content="{{ kaiin_list.37.description|safe }}"></span>
-            ☐
-        </td>
-        <th>12ヶ月点検</th>
-    </tr>
-    <tr>
-        <td>
-            <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-            title="{{ kaiin_list.37.field}}" 
-            data-content="{{ kaiin_list.37.description|safe }}"></span>
-            ☐
-        </td>
-        <th>エンジンオイル交換</th>
-    </tr>
-    <tr>
-        <td>
-            <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-            title="{{ kaiin_list.37.field}}" 
-            data-content="{{ kaiin_list.37.description|safe }}"></span>
-            ☐
-        </td>
-        <th>エンジンオイル＋オイルフィルター交換</th>
-    </tr>
-    <tr>
-        <td>
-            <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-            title="{{ kaiin_list.37.field}}" 
-            data-content="{{ kaiin_list.37.description|safe }}"></span>
-            ☐
-        </td>
-        <th>車検</th>
-    </tr>
-    <tr>
-        <td>
-            <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-            title="{{ kaiin_list.37.field}}" 
-            data-content="{{ kaiin_list.37.description|safe }}"></span>
-            ☐
-        </td>
-        <th>ワイパーリフィール交換</th>
-    </tr>
-    <tr>
-        <td>
-            <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-            title="{{ kaiin_list.37.field}}" 
-            data-content="{{ kaiin_list.37.description|safe }}"></span>
-            ☐
-        </td>
-        <th>クリーンFプレミアム交換</th>
-    </tr>
-    <tr>
-        <td>
-            <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-            title="{{ kaiin_list.37.field}}" 
-            data-content="{{ kaiin_list.37.description|safe }}"></span>
-            ☐
-        </td>
-        <th>ブレーキフルード交換</th>
-    </tr>
-    <tr>
-        <td>
-            <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
-            title="{{ kaiin_list.37.field}}" 
-            data-content="{{ kaiin_list.37.description|safe }}"></span>
-            ☐
-        </td>
-        <th>下回り洗浄</th>
-    </tr>
-</table>
 
 
 </div><!-- card-body終わり -->
-</div><!-- 精算card終わり -->
+</div><!-- メンテ実施card終わり -->
 
 <script>
 $(function() {
@@ -327,6 +416,12 @@ $(function() {
     });
     $('#link_section3').on('click', function () {
         $('html, body').animate({scrollTop:$('#section3').offset().top}, 300);
+    });
+    $('#link_section4').on('click', function () {
+        $('html, body').animate({scrollTop:$('#section4').offset().top}, 300);
+    });
+    $('#link_section5').on('click', function () {
+        $('html, body').animate({scrollTop:$('#section5').offset().top}, 300);
     });
 
 

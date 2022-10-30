@@ -1,0 +1,218 @@
+<div class="card shadow d-flex mb-3" id="section3">
+    <div class="card-header font-weight-bold p-2">精算取消依頼書</div>
+    <div class="card-body">
+    
+    <div class="d-flex flex-row">
+        <div class="column">
+            <table class="small ex_table">
+                <td class="col-2">
+                    <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                    title="{{ kaiin_list.50.field}}" 
+                    data-content="{{ kaiin_list.50.description|safe }}"></span>
+                    NFS-Web
+                </td>
+            </table>
+            <table class="small ex_table mt-3">
+                <td class="col-2">
+                    <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                    title="{{ kaiin_list.51.field}}" 
+                    data-content="{{ kaiin_list.51.description|safe }}"></span>
+                    欄外
+                </td>
+            </table>
+        </div>
+    
+    <table class="small ex_table col-9 ml-auto">
+        <tr>
+            <th rowspan="3" class="vertical table-info">販売会社店舗記入欄</th>
+            <th class="table-info">取扱販売会社<br>店舗名（ゴム印）</th>
+            <td class="col-5">
+                <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.39.field}}" 
+                data-content="{{ kaiin_list.39.description|safe }}"></span>
+            </td>
+            <td><span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.42.field}}" 
+                data-content="{{ kaiin_list.42.description|safe }}"></span>
+                印<br>（会社印）
+            </td>
+        </tr>
+        <tr>
+            <th class="table-info">電話番号</th>
+            <td colspan="2">
+                <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.40.field}}" 
+                data-content="{{ kaiin_list.40.description|safe }}"></span>
+                　　　－　　　－　　　
+            </td>
+        </tr>
+        <tr>
+            <th class="table-info">ご担当者</th>
+            <td colspan="2">
+                <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.41.field}}" 
+                data-content="{{ kaiin_list.41.description|safe }}"></span>
+            </td>
+        </tr>
+    </table>
+    </div>
+    
+    <table class="small ex_table mt-3 col">
+        <tr>
+            <th class="table-info col-4">会員証番号</th>
+            <td colspan="2">
+                <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.43.field}}" 
+                data-content="{{ kaiin_list.43.description|safe }}"></span>
+            </td>
+        </tr>
+        <tr>
+            <th class="table-info">フリガナ</th>
+            <td colspan="2">
+                <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.44.field}}" 
+                data-content="{{ kaiin_list.44.description|safe }}"></span>
+            </td>
+        </tr>
+        <tr>
+            <th class="table-info">会員名</th>
+            <td colspan="2">
+                <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.45.field}}" 
+                data-content="{{ kaiin_list.45.description|safe }}"></span>
+            </td>
+        </tr>
+        <tr>
+            <th class="table-info">有効期限</th>
+            <td class="col-4">
+                <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.46.field}}" 
+                data-content="{{ kaiin_list.46.description|safe }}"></span>
+                　　　/　　　/　　　
+            </td>
+            <th class="table-info text-danger col-4 small">※有効期限切れの場合は精算取消ができません</td>
+        </tr>
+    </table>
+    
+    <table class="small ex_table mt-3 col">
+        <tr>
+            <td class="col-4">
+                <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.47.field}}" 
+                data-content="{{ kaiin_list.47.description|safe }}"></span>
+                ☐ 金額訂正
+            </td>
+            <td class="col-4">
+                <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.47.field}}" 
+                data-content="{{ kaiin_list.47.description|safe }}"></span>
+                ☐ 項目選択ミス(NFS-Web)
+            </td>
+            <td class="col-4"
+            <span class=" btn p-0 text-warning" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.47.field}}" 
+                data-content="{{ kaiin_list.47.description|safe }}"></span>
+                ☐ その他(　　　　　　　　)
+            </td>
+        </tr>
+    </table>
+    
+    <table class="small ex_table mt-3 col">
+        <tr>
+            <th colspan="2" class="table-info col-4">精算取消項目<br><span class="small">※☐にチェックを入れてください</span></th>
+            <th class="table-info ">メンテナンス項目番号<br><span class="small">※クーポン番号(末尾3桁)</span></th>
+            <th class="table-info ">請求時オーダー番号</th>
+            <th class="table-info ">プロフィット精算日</th>
+            <th class="table-info ">NFS送金日(予定日)<br><span class="small">※NFS-Web画面の送金日</span></th>
+        </tr>
+        <tr>
+            <td>
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.38.field}}" 
+                data-content="{{ kaiin_list.38.description|safe }}"></span>
+                ☐
+            </td>
+            <th>6ヶ月点検</th>
+            <td colspan="4" rowspan="9">
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.48.field}}" 
+                data-content="{{ kaiin_list.48.description|safe }}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.38.field}}" 
+                data-content="{{ kaiin_list.38.description|safe }}"></span>
+                ☐
+            </td>
+            <th>12ヶ月点検</th>
+        </tr>
+        <tr>
+            <td>
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.38.field}}" 
+                data-content="{{ kaiin_list.38.description|safe }}"></span>
+                ☐
+            </td>
+            <th>エンジンオイル交換</th>
+        </tr>
+        <tr>
+            <td>
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.38.field}}" 
+                data-content="{{ kaiin_list.38.description|safe }}"></span>
+                ☐
+            </td>
+            <th>エンジンオイル＋オイルフィルター交換</th>
+        </tr>
+        <tr>
+            <td>
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.38.field}}" 
+                data-content="{{ kaiin_list.38.description|safe }}"></span>
+                ☐
+            </td>
+            <th>車検</th>
+        </tr>
+        <tr>
+            <td>
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.38.field}}" 
+                data-content="{{ kaiin_list.38.description|safe }}"></span>
+                ☐
+            </td>
+            <th>ワイパーリフィール交換</th>
+        </tr>
+        <tr>
+            <td>
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.38.field}}" 
+                data-content="{{ kaiin_list.38.description|safe }}"></span>
+                ☐
+            </td>
+            <th>クリーンFプレミアム交換</th>
+        </tr>
+        <tr>
+            <td>
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.38.field}}" 
+                data-content="{{ kaiin_list.38.description|safe }}"></span>
+                ☐
+            </td>
+            <th>ブレーキフルード交換</th>
+        </tr>
+        <tr>
+            <td>
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.38.field}}" 
+                data-content="{{ kaiin_list.38.description|safe }}"></span>
+                ☐
+            </td>
+            <th>下回り洗浄</th>
+        </tr>
+    </table>
+    
+    
+    </div><!-- card-body終わり -->
+    </div><!-- 精算card終わり -->
