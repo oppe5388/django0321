@@ -195,6 +195,25 @@
                         <span>販売会社</span></a>
                 </li>
 
+                {% if request.user.id <= 4 %}
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item {% if url_name == 'fax_rule' %}active{% endif %}">
+                    <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
+                        aria-controls="collapsePages">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>スタートキット</span>
+                    </a>
+                    <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item {% if url_name == 'fax_rule' %}active{% endif %}" href='{% url "myinfo:fax_rule" %}'>FAXルール</a>
+                            <div class="collapse-divider"></div>
+                            <h6 class="collapse-header">Other Pages:</h6>
+                        </div>
+                    </div>
+                </li>
+                {% endif %}
+
                 <li class="nav-item {% if  'note_' in url_name %}active{% endif %}">
                     <a class="nav-link py-2" href='{% url "myinfo:note_list" %}'>
                         <i class="fas fa-pencil-alt"></i>
@@ -215,7 +234,7 @@
                 
                 {% if request.user.id <= 4 %}
                 <li class="nav-item">
-                    <a class="nav-link py-2" href='{% url 'admin:index' %}'>
+                    <a class="nav-link py-2" href='{% url 'admin:index' %}' target='_blank'>
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>管理サイト</span></a>
                 </li>
