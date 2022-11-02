@@ -46,8 +46,19 @@ def add_fbvform(request):
 
     else:
         form = DailyReportForm
+        
+        context ={
+            'form': form,
+        }
+        
+        # 1つ前の目標を表示するために
+        try:
+            old_report3 = DailyReport.objects.filter(user=request.user).last()
+        except DailyReport.DoesNotExist:
+            old_report3 = None
+        context['old_report3'] = old_report3
 
-    return render(request, 'myreport/add_fbvform.html', {'form': form })
+    return render(request, 'myreport/add_fbvform.html', context)
 
 
 #Update
@@ -85,6 +96,14 @@ def edit_fbvform(request, pk, *args, **kwargs):
             'form': form,
             'dailyreport':dailyreport,
         }
+        
+        # 1つ前の目標を表示するために
+        old_report2 = DailyReport.objects.get(pk=pk)
+        try:
+            old_report3 = old_report2.get_previous_by_day(user=old_report2.user)
+        except DailyReport.DoesNotExist:
+            old_report3 = None
+        context['old_report3'] = old_report3
 
     # return render(request, 'myreport/edit_fbvform.html', context)
     return render(request, 'myreport/add_fbvform.html', context)
@@ -107,6 +126,7 @@ def detail_fbvform(request, pk):
         context = {
             "report":report,
         }
+        
     # LD以外＝自分のみにする：テンプレートでなくてviewで前と次(有無)を出しておく
     else:
         try:
@@ -131,6 +151,16 @@ def detail_fbvform(request, pk):
                 
             context['new_report'] = new_report
             context['old_report'] = old_report
+
+
+    # 1つ前の目標を表示するために
+    old_report2 = DailyReport.objects.get(pk=pk)
+    try:
+        old_report3 = old_report2.get_previous_by_day(user=old_report2.user)
+    except DailyReport.DoesNotExist:
+        old_report3 = None
+    context['old_report3'] = old_report3
+
         
     context['reportread'] = ReportRead.objects.filter(report=pk)
 
