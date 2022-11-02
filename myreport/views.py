@@ -94,17 +94,44 @@ def edit_fbvform(request, pk, *args, **kwargs):
 @login_required
 def detail_fbvform(request, pk):
     template_name = "myreport/report_detail.html"
+    
+    # 次へ前へボタンのためにLDとOPの場合でわける
+    # LD
+    if request.user.id <=4:
+        try:
+            report = DailyReport.objects.get(pk=pk)
+        except DailyReport.DoesNotExist:
+            # raise Http404("DailyReport does not exist")
+            report = None
 
-    try:
-        report = DailyReport.objects.get(pk=pk)
-    except DailyReport.DoesNotExist:
-        raise Http404("DailyReport does not exist")
-
-    context = {
-        "report":report,
-    }
-
-
+        context = {
+            "report":report,
+        }
+    # LD以外＝自分のみにする：テンプレートでなくてviewで前と次(有無)を出しておく
+    else:
+        try:
+            report = DailyReport.objects.filter(user=request.user, pk=pk).first()
+        except DailyReport.DoesNotExist:
+            report = None
+            
+        context = {
+            "report":report,
+        }
+        
+        if report:
+            try:
+                new_report = report.get_next_by_day(user=request.user)
+            except DailyReport.DoesNotExist:
+                new_report = None
+            
+            try:
+                old_report = report.get_previous_by_day(user=request.user)
+            except DailyReport.DoesNotExist:
+                old_report = None
+                
+            context['new_report'] = new_report
+            context['old_report'] = old_report
+        
     context['reportread'] = ReportRead.objects.filter(report=pk)
 
     return render(request,template_name,context)
@@ -132,6 +159,7 @@ def report_list(request):
                 keyword = keyword.split()
                 for k in keyword:
                     queryset = queryset.filter(
+                            Q(user__last_name__icontains=k) | 
                             Q(body1__icontains=k) | 
                             Q(body2__icontains=k) | 
                             Q(body3__icontains=k) | 

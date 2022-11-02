@@ -67,6 +67,47 @@
         </div>
     </div>
 
+    <!-- LDは全員の前へと次へボタン：テンプレートで前後を取得している -->
+    {% if request.user.id <= 4 %}
+        <div class="btn-toolbar">
+            <div class="btn-group ">
+                {% with next=report.get_next_by_day %}
+                    {% if next %}
+                    <a href="{% url 'myreport:detail' next.pk %}" class="btn btn-secondary btn-sm">
+                        <i class="fas fa-chevron-left"></i> New</a>
+                    {% endif %}
+                {% endwith %}
+            </div>
+
+            <div class="btn-group ml-auto">
+                {% with prev=report.get_previous_by_day %}
+                    {% if prev %}
+                        <a href="{% url 'myreport:detail' prev.pk %}" class="btn btn-secondary btn-sm">
+                        Old <i class="fas fa-chevron-right"></i></a>
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+
+    {% else %}
+        <!-- OPは自分のみの前へと次へボタン：ビューで前後を取得している -->
+        <div class="btn-toolbar">
+            <div class="btn-group ">
+                {% if new_report %}
+                <a href="{% url 'myreport:detail' new_report.pk %}" class="btn btn-secondary btn-sm">
+                    <i class="fas fa-chevron-left"></i> New</a>
+                {% endif %}
+            </div>
+
+            <div class="btn-group ml-auto">
+                {% if old_report %}
+                    <a href="{% url 'myreport:detail' old_report.pk %}" class="btn btn-secondary btn-sm">
+                    Old <i class="fas fa-chevron-right"></i></a>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+
 
     {% comment %} <!-- その日記に紐づいたコメントを取り出す -->
     <p class="m-0">コメント</p>
