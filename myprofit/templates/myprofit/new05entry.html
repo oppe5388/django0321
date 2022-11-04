@@ -57,6 +57,29 @@
     //$('#product').prop('disabled', true);
     $("#id_parent_category").prop('disabled', true);
 
+    $("#model2").prop('disabled', true);
+    $("#car_model").prop('disabled', true);
+    $("#plate_no1").prop('disabled', true);
+    $("#plate_no2").prop('disabled', true);
+    $("#plate_no3").prop('disabled', true);
+    $("#plate_no4").prop('disabled', true);
+    $("#frame_no1").prop('disabled', true);
+    $("#frame_no2").prop('disabled', true);
+    $("#register_year").prop('disabled', true);
+    $("#register_month").prop('disabled', true);
+    $("#insp_year").prop('disabled', true);
+    $("#insp_month").prop('disabled', true);
+    $("#insp_day").prop('disabled', true);
+    $("#price").prop('disabled', true);
+
+    //要素を追加
+    $('#shop').after('<button type="button" class="btn btn-info btn-rounded p-1 ml-1" data-toggle="popover" data-html="true" data-content="この画面での変更可否は不明"><span class="small">vcc</span></button>');
+    $('#tantou_code').after('<button type="button" class="btn btn-info btn-rounded p-1 ml-1" data-toggle="popover" data-html="true" data-content="この画面での変更可否は不明"><span class="small">vcc</span></button>');
+    $('#tantou_name').after('<button type="button" class="btn btn-info btn-rounded p-1 ml-1" data-toggle="popover" data-html="true" data-content="PROFITのフォロー担当者＝NFS-Webの販売担当者。<br>この画面での変更可否は不明"><span class="small">vcc</span></button>');
+
+
+    $('[data-toggle="popover"]').popover()
+
     //それぞれ
     var cert_no = $('#hidden_no').val();
 
