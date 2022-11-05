@@ -252,6 +252,29 @@
 
 </div><!-- 幅広なら横並びになるように、終わり -->
 
+
+<div class="d-flex"><!-- カード幅を幅いっぱいにしない -->
+    <div class="card shadow mb-4">
+        <div class="card-header align-items-center">
+            <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-wallet"></i> 申込書未着リスト</h6>
+        </div>
+    
+        <div class="card-body">
+
+            <table class="table">
+            {% with ''|center:12 as range %}
+                {% for _ in range %}
+                    <tr>
+                        <td>{{ forloop.counter }}月1日</td>
+                    </tr>
+                {% endfor %}
+            {% endwith %}
+            </table>
+            
+        </div>
+    </div>
+</div><!-- カード幅を幅いっぱいにしない終わり -->
+
 {% endblock %}
 
 {% block extra_foot %}

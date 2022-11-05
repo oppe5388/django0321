@@ -10,25 +10,21 @@ from django.http import JsonResponse
 
 #長得の月計算用
 from dateutil.relativedelta import relativedelta
+# 未着リスト用
+import jpbizday
 
 
 #長得をajaxで更新：あとで。
 def chotoku_calc(request):
     today = date.today()
-
     #ひとまず4年半前を表示してみる
-
     four_harf_ago = today - relativedelta(months=54)
-
     first_day = today.replace(day=1)
-
     context = {
             'today': today,
             'four_harf_ago': four_harf_ago,
         }
-
     return JsonResponse(context)
-
 
 
 #Ajax
@@ -111,6 +107,16 @@ def mysched(request):
             context['setoff_sched'] = setoff_sched
         else:
             messages.warning(request, '対象外の日付です。')
+            
+            
+            
+    # 未着リスト
+    mail_send_day = date.today(day=5) #5営業日：未作成
+    mail_deadline = mail_send_day + relativedelta(months=-1,day=10,) #前月10日（土日祝は翌日）：未作成
+    mail_pickup = mail_send_day + relativedelta(months=-1,day=1,days=-1) #前月末
+
+    
+
             
     return render(request, "mysched/mysched.html", context)
 
