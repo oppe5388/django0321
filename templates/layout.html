@@ -195,7 +195,6 @@
                         <span>販売会社</span></a>
                 </li>
 
-                {% if request.user.id <= 4 %}
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item {% if url_name == 'fax_rule' %}active{% endif %}">
                     <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
@@ -212,7 +211,6 @@
                         </div>
                     </div>
                 </li>
-                {% endif %}
 
                 <li class="nav-item {% if  'note_' in url_name %}active{% endif %}">
                     <a class="nav-link py-2" href='{% url "myinfo:note_list" %}'>
