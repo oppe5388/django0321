@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404, redirect
 from django.http import HttpResponse, Http404
 from .models import MoneyTrans
 from .forms import MoneyForm
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from django.contrib import messages
 
 from django.conf import settings
@@ -65,6 +65,24 @@ def ajax_sched(request):
 
 
 
+def next_bizday_calc(target_day):
+    # 次の平日を取得、VCC休業日は祝日と同じ扱い
+    # while jpbizday.is_bizday(mail_date) == False \
+    #     or Holiday.objects.filter(title="1", non_date=mail_date).exists() \
+    #     or Holiday.objects.filter(title="2", non_date=mail_date).exists():
+
+    while jpbizday.is_bizday(target_day) == False:
+        target_day = target_day + timedelta(1)
+    
+    return target_day
+
+
+def fifth_bizday_calc(target_year, target_month):
+    bizdays = jpbizday.month_bizdays(target_year, target_month)
+    fifth_bizday = bizdays[4]
+    return fifth_bizday
+
+
 def mysched(request):
     moneyForm = MoneyForm(request.GET)
 
@@ -111,11 +129,17 @@ def mysched(request):
             
             
     # 未着リスト
-    mail_send_day = date.today(day=5) #5営業日：未作成
+
+    #5営業日
+    this_year = int(date.today().strftime("%Y"))
+    this_month = int(date.today().strftime("%m"))
+    mail_send_day = fifth_bizday_calc(this_year, this_month)
+    
+    context['mail_send_day'] = mail_send_day
+    
     mail_deadline = mail_send_day + relativedelta(months=-1,day=10,) #前月10日（土日祝は翌日）：未作成
     mail_pickup = mail_send_day + relativedelta(months=-1,day=1,days=-1) #前月末
-
-    
+ 
 
             
     return render(request, "mysched/mysched.html", context)

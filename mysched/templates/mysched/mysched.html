@@ -256,10 +256,13 @@
 <div class="d-flex"><!-- カード幅を幅いっぱいにしない -->
     <div class="card shadow mb-4">
         <div class="card-header align-items-center">
-            <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-wallet"></i> 申込書未着リスト</h6>
+            <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-meh-rolling-eyes"></i> 申込書未着リスト</h6>
         </div>
     
         <div class="card-body">
+
+            {{mail_send_day}}
+
 
             <table class="table">
             {% with ''|center:12 as range %}
