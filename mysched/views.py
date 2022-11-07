@@ -10,8 +10,10 @@ from django.http import JsonResponse
 
 #長得の月計算用
 from dateutil.relativedelta import relativedelta
+
 # 未着リスト用
 import jpbizday
+from myinfo.models import Holiday
 
 
 #長得をajaxで更新：あとで。
@@ -79,6 +81,12 @@ def next_bizday_calc(target_day):
 
 def fifth_bizday_calc(target_year, target_month):
     bizdays = jpbizday.month_bizdays(target_year, target_month)
+    
+    # 2次休業日に登録されている日はリストから削除する
+    for data in Holiday.objects.filter(title="4"):
+        if data.non_date in bizdays:
+            bizdays.remove(data.non_date)
+    
     fifth_bizday = bizdays[4]
     return fifth_bizday
 
@@ -129,9 +137,7 @@ def mysched(request):
             
             
     # 未着リスト
-    
     list_set = [] 
-        
     for i in range(5):
         base_day = date.today() + relativedelta(months= i-2)#-2ヶ月から+2ヶ月の5ヶ月間
         start_year = int(base_day.strftime("%Y"))
@@ -146,7 +152,7 @@ def mysched(request):
         target_term1 = (base_day - relativedelta(months=4)).strftime("%-m")+'月'
         target_term2 = (base_day - relativedelta(months=3)).strftime("%-m")+'月'
         target_term3 = (base_day - relativedelta(months=2)).strftime("%-m")+'月'
-        list.append(target_term1 +" "+ target_term2 +" "+ target_term3)
+        list.append(target_term1 +"・"+ target_term2 +"・"+ target_term3)
         #前月10日（土日祝は翌日）
         mail_deadline = next_bizday_calc(base_day + relativedelta(months=-1,day=10,))
         list.append(mail_deadline)

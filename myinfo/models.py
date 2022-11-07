@@ -313,6 +313,7 @@ class Holiday(models.Model):
             ("1", "発送なし"),
             ("2", "VCC休み"),
             ("3", "非表示にする日"),
+            ("4", "未着リスト用2次休業日"),
         ]
     title = models.CharField(max_length=100, choices=CHOICES, verbose_name="分類")
     non_date = models.DateField(auto_now_add=False, verbose_name="対象日")

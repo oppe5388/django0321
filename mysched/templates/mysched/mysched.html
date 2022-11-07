@@ -256,22 +256,28 @@
 <div class="d-flex"><!-- カード幅を幅いっぱいにしない -->
     <div class="card shadow mb-4">
         <div class="card-header align-items-center">
-            <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-meh-rolling-eyes"></i> 申込書未着リスト</h6>
+            <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-meh-rolling-eyes"></i> 申込書未着リスト
+            </h6>
         </div>
     
         <div class="card-body">
-            <table class="table">
-                <tr>
-                    <th>メール送信日</th>
-                    <th>対象の会員証発行月</th>
-                    <th>送付期日</th>
-                    <th>抽出締日</th>
+            <table class="table table-sm table-hover">
+                <tr class="table-primary">
+                    <th class="px-3">送付期日<br><span class="small">時点で申込書未着の↗</span></th>
+                    <th class="px-3">会員証発行<br><span class="small">がこの月の契約を↗</span></th>
+                    <th class="px-3">抽出締日<br><span class="small">に抽出して↗</span></th>
+                    <th class="px-3">メール送信日<span class="text-xs">(第5営業日)</span><br><span class="small">に2次さんから送信する</span></th>
                 </tr>
                 {% for list in list_set %}
                     <tr>
-                        {% for li in list %}
+                        <td class="px-3">{{ list.2|date:"n/j（D）" }}</td>
+                        <td class="px-3">{{ list.1 }}</td>
+                        <td class="px-3">{{ list.3|date:"n/j（D）" }}</td>
+                        <th class="px-3 table-warning">{{ list.0|date:"n/j（D）" }}</th>
+                        
+                        {% comment %} {% for li in list %}
                             <td>{{ li }}</td>
-                        {% endfor %}
+                        {% endfor %} {% endcomment %}
                     </tr>
                 {% endfor %}
             </table>            
