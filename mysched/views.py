@@ -129,19 +129,36 @@ def mysched(request):
             
             
     # 未着リスト
-
-    #5営業日
-    this_year = int(date.today().strftime("%Y"))
-    this_month = int(date.today().strftime("%m"))
-    mail_send_day = fifth_bizday_calc(this_year, this_month)
     
-    context['mail_send_day'] = mail_send_day
+    list_set = [] 
+        
+    for i in range(5):
+        base_day = date.today() + relativedelta(months= i-2)#-2ヶ月から+2ヶ月の5ヶ月間
+        start_year = int(base_day.strftime("%Y"))
+        start_month = int(base_day.strftime("%m"))
+        
+        list = [] 
+        
+        #5営業日目
+        mail_send_day = fifth_bizday_calc(start_year, start_month)
+        list.append(mail_send_day)
+        #対象月
+        target_term1 = (base_day - relativedelta(months=4)).strftime("%-m")+'月'
+        target_term2 = (base_day - relativedelta(months=3)).strftime("%-m")+'月'
+        target_term3 = (base_day - relativedelta(months=2)).strftime("%-m")+'月'
+        list.append(target_term1 +" "+ target_term2 +" "+ target_term3)
+        #前月10日（土日祝は翌日）
+        mail_deadline = next_bizday_calc(base_day + relativedelta(months=-1,day=10,))
+        list.append(mail_deadline)
+        #前月末
+        mail_pickup = base_day + relativedelta(months=0,day=1,days=-1)
+        list.append(mail_pickup)
+        
+        list_set.append(list)
+        context['list' + str(i+1)] = list
     
-    mail_deadline = mail_send_day + relativedelta(months=-1,day=10,) #前月10日（土日祝は翌日）：未作成
-    mail_pickup = mail_send_day + relativedelta(months=-1,day=1,days=-1) #前月末
- 
+    context['list_set'] = list_set
 
-            
     return render(request, "mysched/mysched.html", context)
 
 
