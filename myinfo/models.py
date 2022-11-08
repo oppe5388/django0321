@@ -337,6 +337,17 @@ class Fax(models.Model):
     class Meta:
         verbose_name_plural = "FAX当番"
 
+# 小部屋
+class Room(models.Model):
+    date = models.DateField(auto_now_add=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.date)
+
+    class Meta:
+        verbose_name_plural = "小部屋"
+
         
 # FAXルール書式
 class FaxFormats(models.Model):

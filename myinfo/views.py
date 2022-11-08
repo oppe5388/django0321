@@ -1003,13 +1003,15 @@ def fax(request, p):
     next = datetime.strptime(p, '%Y-%m-%d') + relativedelta(days=+1)
     next = next.strftime('%Y-%m-%d')
     yesterday_fax = Fax.objects.filter(date=yesterday).first()
+    
+    disp_day = datetime.strptime(p, '%Y-%m-%d')
 
     context ={
         'form': form,
         'fax': fax,
         'next': next,
         'yesterday': yesterday,
-        'disp_day': p,
+        'disp_day': disp_day,
         'yesterday_fax': yesterday_fax,
     }
 
@@ -1045,6 +1047,18 @@ def fax_del_create(request, p):
             return redirect(request.META['HTTP_REFERER'])#元のページに戻る
 
     return redirect(request.META['HTTP_REFERER'])#元のページに戻る
+
+
+#Ajaxで小部屋希望追加
+def ajax_room_add(request, pk):
+    pass
+
+
+#Ajaxで小部屋希望削除
+def ajax_room_delete(request, pk, *args, **kwargs):
+    if request.is_ajax():
+        Room.objects.filter(user=request.user, room=pk).delete()
+        return JsonResponse({"message":"success"})
 
 
 # FAXルール

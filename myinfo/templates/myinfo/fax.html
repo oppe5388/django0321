@@ -15,12 +15,49 @@
 		{% endfor %}
 {% endif %}
 
+
+<!-- 小部屋 -->
+{% comment %} {% for read in reportread %} {% endcomment %}
+	{% comment %} {% if request.user.id == read.user.id %} {% endcomment %}
+
+		<div class="d-flex">
+			小部屋ご希望
+
+			<h5><span class="badge badge-pill badge-secondary font-weight-normal mx-1">使う人</span></h5>
+			<h5><span class="badge badge-pill badge-secondary font-weight-normal mx-1">使う人</span></h5>
+
+		</div>
+
+		<div class="">
+
+			<a href="{% url 'myinfo:ajax_room_delete' 1 %}" id="ajax_room_del{{ fax.pk }}" 
+				class="btn btn-info btn-icon-split btn-sm mb-2" data-catid="{{ fax.pk }}">
+				<span class="icon text-white-50">
+					<i class="fas fa-hand-paper"></i>
+				</span>
+				<span class="text">使いたい</span>
+			</a>
+
+			<a href="{% url 'myinfo:ajax_room_delete' 1 %}" id="ajax_room_del{{ fax.pk }}" 
+				class="btn btn-warning btn-icon-split btn-sm mb-2" data-catid="{{ fax.pk }}">
+				<span class="icon text-white-50">
+					<i class="fas fa-times-circle"></i>
+				</span>
+				<span class="text">使わない</span>
+            </a>
+		</div>
+	{% comment %} {% endif %} {% endcomment %}
+{% comment %} {% endfor %} {% endcomment %}
+
+
+
+
 <div class="card mb-1">
 	<div class="d-flex">
 		<!-- 日付と前後ボタン -->
 		<a href="{% url 'myinfo:fax' yesterday %}" class="btn btn-secondary btn-sm mb-2">
 			<i class="fas fa-chevron-left"></i>前日</a>
-		<div class="col-3 text-center" id="target_date">{{disp_day}}</div>
+		<div class="col-3 text-center" id="target_date">{{disp_day|date:"Y/n/j(D)"}}</div>
 		<a href="{% url 'myinfo:fax' next %}" class="btn btn-secondary btn-sm mb-2">
 			翌日<i class="fas fa-chevron-right"></i></a>
 
