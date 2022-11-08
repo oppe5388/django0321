@@ -295,3 +295,17 @@ class FaxFormatsAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = FaxFormatsResource
 
 admin.site.register(FaxFormats, FaxFormatsAdmin)
+
+
+# 小部屋
+class RoomResource(ModelResource):
+    class Meta:
+        model = Room
+        skip_unchanged = True
+        import_id_fields = ['id']
+
+#インポート、エクスポート
+class RoomAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    resource_class = RoomResource
+
+admin.site.register(Room, RoomAdmin)

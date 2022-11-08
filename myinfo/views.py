@@ -1005,6 +1005,7 @@ def fax(request, p):
     yesterday_fax = Fax.objects.filter(date=yesterday).first()
     
     disp_day = datetime.strptime(p, '%Y-%m-%d')
+    room_members = Room.objects.filter(date=p)
 
     context ={
         'form': form,
@@ -1013,6 +1014,9 @@ def fax(request, p):
         'yesterday': yesterday,
         'disp_day': disp_day,
         'yesterday_fax': yesterday_fax,
+        'p': p,
+        'room_members': room_members,
+        
     }
 
     if request.method == "POST":
