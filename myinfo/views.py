@@ -1061,7 +1061,7 @@ def ajax_room_add(request, pk):
 #Ajaxで小部屋希望削除
 def ajax_room_delete(request, pk, *args, **kwargs):
     if request.is_ajax():
-        Room.objects.filter(user=request.user, room=pk).delete()
+        Room.objects.filter(id=pk).delete()
         return JsonResponse({"message":"success"})
 
 

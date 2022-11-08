@@ -89,6 +89,12 @@ class ReadStatesAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('user', 'information', 'created_at')
     ordering = ('-created_at',)
     list_filter = ['user']
+    
+    # informationのソート
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "information":
+            kwargs["queryset"] = Information.objects.all().order_by('-id')
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 admin.site.register(ReadStates, ReadStatesAdmin)
 
@@ -306,6 +312,7 @@ class RoomResource(ModelResource):
 
 #インポート、エクスポート
 class RoomAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ('date','user')
     resource_class = RoomResource
 
 admin.site.register(Room, RoomAdmin)

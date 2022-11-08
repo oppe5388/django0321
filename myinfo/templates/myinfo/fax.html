@@ -23,12 +23,19 @@
 		<div class="d-flex">
 			小部屋ご希望：
 			{% for member in room_members %}
-			<h5><span class="badge badge-pill badge-primary font-weight-normal mx-1">{{ member.user }}</span></h5>
+				<h5><span class="badge badge-pill badge-primary font-weight-normal mx-1" id="member{{ member.pk }}">{{ member.user }}</span></h5>
+
+				{% if member.user == request.user %}
+				<a href="{% url 'myinfo:ajax_room_delete' member.pk %}" id="ajax_room_del{{ member.pk }}" 
+					class="link-delete btn btn-warning btn-icon-split btn-sm mb-2 mr-1" data-catid="{{ member.pk }}">
+					<span class="icon text-white-50 p-1">
+						<i class="fas fa-times-circle"></i>
+					</span>
+					<span class="text p-1">使わない</span>
+            	</a>
+				{% endif %}
+			
 			{% endfor %}
-
-		</div>
-
-		<div class="">
 
 			<a href="{% url 'myinfo:ajax_room_add' 1 %}" id="ajax_room_add" 
 				class="btn btn-info btn-icon-split btn-sm mb-2" data-catid="{{ p }}">
@@ -37,15 +44,9 @@
 				</span>
 				<span class="text">使いたい</span>
 			</a>
-			
-			<a href="{% url 'myinfo:ajax_room_delete' 1 %}" id="ajax_room_del" 
-				class="btn btn-warning btn-icon-split btn-sm mb-2" data-catid="{{ p }}">
-				<span class="icon text-white-50">
-					<i class="fas fa-times-circle"></i>
-				</span>
-				<span class="text">使わない</span>
-            </a>
 		</div>
+
+
 	{% comment %} {% endif %} {% endcomment %}
 {% comment %} {% endfor %} {% endcomment %}
 
@@ -530,25 +531,25 @@
 
 <!-- ajaxで小部屋削除 -->
 <script>
-    $("#ajax_room_del").on("click", function(e){
+    $(".link-delete").on("click", function(e){// idでなくクラス！
         e.preventDefault();
 
         var pk;
         pk = $(this).attr("data-catid"); // pk取得のために"data-catid"を追加した
         var $this = $(this);
-        // if(confirm("Sure to delete?")){
-            $.ajax({
-                url: $this.attr("href"),
-                type: "GET",
-                dataType: "json",
-                data:{ 
-                    pk: pk
-                    }, 
-                success: function(data){
-                    $('#ajax_read_del'+ pk).empty(); // ←消すidを書く
-                }
-            });
-        // }
+		$.ajax({
+			url: $this.attr("href"),
+			type: "GET",
+			dataType: "json",
+			data:{ 
+				pk: pk
+				}, 
+			success: function(data){
+				//$('#ajax_room_del'+ pk).empty(); // ←消すidを書く
+				$('#ajax_room_del'+ pk).remove(); // ←消すidを書く
+				$('#member'+ pk).remove(); // ←消すidを書く
+			}
+		});
         return false;
     });
 </script>
