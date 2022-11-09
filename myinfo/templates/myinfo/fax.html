@@ -19,30 +19,33 @@
 <!-- 小部屋 -->
 {% comment %} {% for read in reportread %} {% endcomment %}
 	{% comment %} {% if request.user.id == read.user.id %} {% endcomment %}
+	
+		<div class="d-flex">
+			小部屋ご希望：
+			<div id="room_area flex-row">
+				{% for member in room_members %}
+					<h5 class="badge badge-pill badge-primary font-weight-normal mx-1">{{ member.user }}</h5>
+					{% comment %} <span>{{ member.user }}</span> {% endcomment %}
+				{% endfor %}
+			</div>
 
-		小部屋ご希望：
-		<div class="d-flex" id="room_area">
-			
-			{% for member in room_members %}
-				{% comment %} <h5><span class="badge badge-pill badge-primary font-weight-normal mx-1" id="member_{{ member.user }}">{{ member.user }}</span></h5> {% endcomment %}
-				<span>{{ member.user }}</span>
-			{% endfor %}
+			<div class="d-flex" id="room_button_area">
+				<a href="{% url 'myinfo:ajax_room_add' fax %}" id="ajax_room_add" 
+					class="link-add d-none btn btn-info btn-icon-split btn-sm mb-2" data-catid="{{ p }}">
+					<span class="icon text-white-50">
+						<i class="fas fa-hand-paper"></i>
+					</span>
+					<span class="text">使いたい</span>
+				</a>
+				<a href="{% url 'myinfo:ajax_room_delete' fax %}" id="ajax_room_del" 
+					class="link-delete d-none btn btn-warning btn-icon-split btn-sm mb-2 mr-1" data-catid="{{ p }}">
+					<span class="icon text-white-50 p-1">
+						<i class="fas fa-times-circle"></i>
+					</span>
+					<span class="text p-1">使わない</span>
+				</a>
+			</div>
 		</div>
-
-		<a href="{% url 'myinfo:ajax_room_add' fax %}" id="ajax_room_add" 
-			class="link-add btn btn-info btn-icon-split btn-sm mb-2" data-catid="{{ p }}">
-			<span class="icon text-white-50">
-				<i class="fas fa-hand-paper"></i>
-			</span>
-			<span class="text">使いたい</span>
-		</a>
-		<a href="{% url 'myinfo:ajax_room_delete' fax %}" id="ajax_room_del" 
-			class="link-delete btn btn-warning btn-icon-split btn-sm mb-2 mr-1" data-catid="{{ p }}">
-			<span class="icon text-white-50 p-1">
-				<i class="fas fa-times-circle"></i>
-			</span>
-			<span class="text p-1">使わない</span>
-		</a>
 
 	{% comment %} {% endif %} {% endcomment %}
 {% comment %} {% endfor %} {% endcomment %}
@@ -519,9 +522,16 @@
     $('#Modal2').modal('show')
   });
 
-  //小部屋希望に含まれていたら、addボタンは非表示にする
-  $('#Modal2').modal('show')
-  
+	$(function() {
+		var user= '{{request.user}}';
+		alert($('#room_area').children().contents());
+		//小部屋希望に含まれていたら、addボタンは非表示にする
+		if($('#room_area').contents().find('Oiso').length > 0){
+			$('#ajax_room_del').removeClass('d-none')
+		} else {
+			$('#ajax_room_add').removeClass('d-none')
+		};
+	});
 </script>
 
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -549,10 +559,9 @@
 			$('#room_area').empty();
 
 			// タイトルの一覧を順に取り出す
-			alert(response.room_list)
 			for (const user of response.room_list) {
 				// <p>タイトル</p>を作成し、記事一覧に追加していく。
-				const p = $('<span>',{text: user});
+				const p = $('<h5 class="badge badge-pill badge-primary font-weight-normal mx-1">'+ user+'</h5>');
 				$('#room_area').append(p);
 			}
 			$('#ajax_room_del').addClass('d-none'); // ←消すidを書く
@@ -570,7 +579,6 @@
         var p;
         p = $(this).attr("data-catid"); // pk取得のために"data-catid"を追加した
         var $this = $(this);
-		alert(p);
 		$.ajax({
 			url: $this.attr("href"),
 			type: "GET",
@@ -583,10 +591,9 @@
 			$('#room_area').empty();
 
 			// タイトルの一覧を順に取り出す
-			alert(response.room_list)
 			for (const user of response.room_list) {
 				// <p>タイトル</p>を作成し、記事一覧に追加していく。
-				const p = $('<span>',{text: user});
+				const p = $('<h5 class="badge badge-pill badge-primary font-weight-normal mx-1">'+ user+'</h5>');
 				$('#room_area').append(p);
 			}
 			$('#ajax_room_del').removeClass('d-none'); // ←消すidを書く
