@@ -20,31 +20,29 @@
 {% comment %} {% for read in reportread %} {% endcomment %}
 	{% comment %} {% if request.user.id == read.user.id %} {% endcomment %}
 
-		<div class="d-flex">
-			小部屋ご希望：
-			{% for member in room_members %}
-				<h5><span class="badge badge-pill badge-primary font-weight-normal mx-1" id="member{{ member.pk }}">{{ member.user }}</span></h5>
-
-				{% if member.user == request.user %}
-				<a href="{% url 'myinfo:ajax_room_delete' member.pk %}" id="ajax_room_del{{ member.pk }}" 
-					class="link-delete btn btn-warning btn-icon-split btn-sm mb-2 mr-1" data-catid="{{ member.pk }}">
-					<span class="icon text-white-50 p-1">
-						<i class="fas fa-times-circle"></i>
-					</span>
-					<span class="text p-1">使わない</span>
-            	</a>
-				{% endif %}
+		小部屋ご希望：
+		<div class="d-flex" id="room_area">
 			
+			{% for member in room_members %}
+				{% comment %} <h5><span class="badge badge-pill badge-primary font-weight-normal mx-1" id="member_{{ member.user }}">{{ member.user }}</span></h5> {% endcomment %}
+				<span>{{ member.user }}</span>
 			{% endfor %}
-
-			<a href="{% url 'myinfo:ajax_room_add' 1 %}" id="ajax_room_add" 
-				class="btn btn-info btn-icon-split btn-sm mb-2" data-catid="{{ p }}">
-				<span class="icon text-white-50">
-					<i class="fas fa-hand-paper"></i>
-				</span>
-				<span class="text">使いたい</span>
-			</a>
 		</div>
+
+		<a href="{% url 'myinfo:ajax_room_add' fax %}" id="ajax_room_add" 
+			class="link-add btn btn-info btn-icon-split btn-sm mb-2" data-catid="{{ p }}">
+			<span class="icon text-white-50">
+				<i class="fas fa-hand-paper"></i>
+			</span>
+			<span class="text">使いたい</span>
+		</a>
+		<a href="{% url 'myinfo:ajax_room_delete' fax %}" id="ajax_room_del" 
+			class="link-delete btn btn-warning btn-icon-split btn-sm mb-2 mr-1" data-catid="{{ p }}">
+			<span class="icon text-white-50 p-1">
+				<i class="fas fa-times-circle"></i>
+			</span>
+			<span class="text p-1">使わない</span>
+		</a>
 
 	{% comment %} {% endif %} {% endcomment %}
 {% comment %} {% endfor %} {% endcomment %}
@@ -521,6 +519,9 @@
     $('#Modal2').modal('show')
   });
 
+  //小部屋希望に含まれていたら、addボタンは非表示にする
+  $('#Modal2').modal('show')
+  
 </script>
 
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -533,79 +534,66 @@
     $(".link-delete").on("click", function(e){// idでなくクラス！
         e.preventDefault();
 
-        var pk;
-        pk = $(this).attr("data-catid"); // pk取得のために"data-catid"を追加した
+        var p;
+        p = $(this).attr("data-catid"); // pk取得のために"data-catid"を追加した
         var $this = $(this);
 		$.ajax({
 			url: $this.attr("href"),
 			type: "GET",
 			dataType: "json",
 			data:{ 
-				pk: pk
+				p: p,
 				}, 
-			success: function(data){
-				//$('#ajax_room_del'+ pk).empty(); // ←消すidを書く
-				$('#ajax_room_del'+ pk).remove(); // ←消すidを書く
-				$('#member'+ pk).remove(); // ←消すidを書く
+		}).done( response => {
+			// 記事欄を真っ白にする。
+			$('#room_area').empty();
+
+			// タイトルの一覧を順に取り出す
+			alert(response.room_list)
+			for (const user of response.room_list) {
+				// <p>タイトル</p>を作成し、記事一覧に追加していく。
+				const p = $('<span>',{text: user});
+				$('#room_area').append(p);
 			}
+			$('#ajax_room_del').addClass('d-none'); // ←消すidを書く
+			$('#ajax_room_add').removeClass('d-none'); // ←消すidを書く
 		});
         return false;
     });
 </script>
 
-<!-- ajaxで小部屋追加を作る -->
+<!-- ajax(GET)で小部屋追加 -->
 <script>
-	function getCookie(name) {
-		var cookieValue = null;
-		if (document.cookie && document.cookie !== '') {
-			var cookies = document.cookie.split(';');
-			for (var i = 0; i < cookies.length; i++) {
-				var cookie = jQuery.trim(cookies[i]);
-				// Does this cookie string begin with the name we want?
-				if (cookie.substring(0, name.length + 1) === (name + '=')) {
-					cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-					break;
-				}
-			}
-		}
-		return cookieValue;
-	}
+    $(".link-add").on("click", function(e){// idでなくクラス！
+        e.preventDefault();
 
-	var csrftoken = getCookie('csrftoken');
-
-	function csrfSafeMethod(method) {
-		// these HTTP methods do not require CSRF protection
-		return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-	}
-
-	$.ajaxSetup({
-		beforeSend: function (xhr, settings) {
-			if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-				xhr.setRequestHeader("X-CSRFToken", csrftoken);
-			}
-		}
-	});
-
-	// 送信ボタンで呼ばれる
-	$('#ajax-add-post').on('submit', e => {
-		// デフォルトのイベントをキャンセルし、ページ遷移しないように!
-		e.preventDefault();
-
+        var p;
+        p = $(this).attr("data-catid"); // pk取得のために"data-catid"を追加した
+        var $this = $(this);
+		alert(p);
 		$.ajax({
-			'url': '{% url "app:ajax_post_add" %}',
-			'type': 'POST',
-			'data': {
-				'title': $('#id_title').val(),  // 記事タイトル
-			},
-			'dataType': 'json'
+			url: $this.attr("href"),
+			type: "GET",
+			dataType: "json",
+			data:{ 
+				p: p,
+				},
 		}).done( response => {
-			// <p>はろー</p>のような要素を作成し、それを記事一覧エリアに追加し、入力欄をクリアする。
-			const p = $('<p>', {text: response.title});
-			$('#posts').prepend(p);
-			$('#id_title').val('');
-		});
+			// 記事欄を真っ白にする。
+			$('#room_area').empty();
 
-	});
+			// タイトルの一覧を順に取り出す
+			alert(response.room_list)
+			for (const user of response.room_list) {
+				// <p>タイトル</p>を作成し、記事一覧に追加していく。
+				const p = $('<span>',{text: user});
+				$('#room_area').append(p);
+			}
+			$('#ajax_room_del').removeClass('d-none'); // ←消すidを書く
+			$('#ajax_room_add').addClass('d-none'); // ←消すidを書く
+		});
+        return false;
+    });
 </script>
 
 {% endblock %}

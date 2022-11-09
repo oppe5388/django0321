@@ -1006,6 +1006,7 @@ def fax(request, p):
     
     disp_day = datetime.strptime(p, '%Y-%m-%d')
     room_members = Room.objects.filter(date=p)
+    user_exist = Room.objects.filter(date=p,user=request.user)
 
     context ={
         'form': form,
@@ -1016,6 +1017,7 @@ def fax(request, p):
         'yesterday_fax': yesterday_fax,
         'p': p,
         'room_members': room_members,
+        'user_exist': user_exist,
         
     }
 
@@ -1054,15 +1056,31 @@ def fax_del_create(request, p):
 
 
 #Ajaxで小部屋希望追加
-def ajax_room_add(request, pk):
-    pass
+def ajax_room_add(request, p, *args, **kwargs):
+    if request.is_ajax():
+        tdatetime = datetime.strptime(p, '%Y-%m-%d')
+        Room.objects.create(user=request.user, date=tdatetime)
+        
+        room_list = [room.user.last_name for room in Room.objects.filter(date=tdatetime)]
+        d = {
+            'message':'success',
+            'room_list': room_list,
+        }
+        return JsonResponse(d)
 
 
 #Ajaxで小部屋希望削除
-def ajax_room_delete(request, pk, *args, **kwargs):
+def ajax_room_delete(request, p, *args, **kwargs):
     if request.is_ajax():
-        Room.objects.filter(id=pk).delete()
-        return JsonResponse({"message":"success"})
+        tdatetime = datetime.strptime(p, '%Y-%m-%d')
+        Room.objects.filter(user=request.user, date=tdatetime).delete()
+
+        room_list = [room.user.last_name for room in Room.objects.filter(date=tdatetime)]
+        d = {
+            'message':'success',
+            'room_list': room_list,
+        }
+        return JsonResponse(d)
 
 
 # FAXルール
