@@ -22,7 +22,7 @@
 	
 		<div class="d-flex">
 			小部屋ご希望：
-			<div id="room_area flex-row">
+			<div id="room_area">
 				{% for member in room_members %}
 					<h5 class="badge badge-pill badge-primary font-weight-normal mx-1">{{ member.user }}</h5>
 					{% comment %} <span>{{ member.user }}</span> {% endcomment %}
@@ -524,7 +524,6 @@
 
 	$(function() {
 		var user= '{{request.user}}';
-		alert($('#room_area').children().contents());
 		//小部屋希望に含まれていたら、addボタンは非表示にする
 		if($('#room_area').contents().find('Oiso').length > 0){
 			$('#ajax_room_del').removeClass('d-none')
