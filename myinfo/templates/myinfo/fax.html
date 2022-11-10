@@ -20,29 +20,29 @@
 {% comment %} {% for read in reportread %} {% endcomment %}
 	{% comment %} {% if request.user.id == read.user.id %} {% endcomment %}
 	
-		<div class="d-flex">
-			小部屋ご希望：
-			<div id="room_area">
+		<div class="d-flex align-items-center mb-2">
+			<span class="small">小部屋の希望：</span>
+			<div id="room_area" class="">
 				{% for member in room_members %}
-					<h5 class="badge badge-pill badge-primary font-weight-normal mx-1">{{ member.user }}</h5>
+					<h5 class="m-1 badge badge-pill badge-primary font-weight-normal mx-1">{{ member.user }}</h5>
 					{% comment %} <span>{{ member.user }}</span> {% endcomment %}
 				{% endfor %}
 			</div>
 
-			<div class="d-flex" id="room_button_area">
-				<a href="{% url 'myinfo:ajax_room_add' fax %}" id="ajax_room_add" 
-					class="link-add d-none btn btn-info btn-icon-split btn-sm mb-2" data-catid="{{ p }}">
-					<span class="icon text-white-50">
+			<div class="" id="room_button_area">
+				<a href="{% url 'myinfo:ajax_room_add' p %}" id="ajax_room_add" 
+					class="link-add d-none btn btn-info btn-icon-split btn-sm" data-catid="{{ p }}">
+					<span class="icon text-white-50 small">
 						<i class="fas fa-hand-paper"></i>
 					</span>
-					<span class="text">使いたい</span>
+					<span class="text small">使いたい</span>
 				</a>
-				<a href="{% url 'myinfo:ajax_room_delete' fax %}" id="ajax_room_del" 
-					class="link-delete d-none btn btn-warning btn-icon-split btn-sm mb-2 mr-1" data-catid="{{ p }}">
-					<span class="icon text-white-50 p-1">
+				<a href="{% url 'myinfo:ajax_room_delete' p %}" id="ajax_room_del" 
+					class="link-delete d-none btn btn-warning btn-icon-split btn-sm mr-1" data-catid="{{ p }}">
+					<span class="icon text-white-50 small">
 						<i class="fas fa-times-circle"></i>
 					</span>
-					<span class="text p-1">使わない</span>
+					<span class="text small">使わない</span>
 				</a>
 			</div>
 		</div>
@@ -524,8 +524,9 @@
 
 	$(function() {
 		var user= '{{request.user}}';
+		var use_user = $('#room_area').contents().text();
 		//小部屋希望に含まれていたら、addボタンは非表示にする
-		if($('#room_area').contents().find('Oiso').length > 0){
+		if(use_user.indexOf(user) >= 0){
 			$('#ajax_room_del').removeClass('d-none')
 		} else {
 			$('#ajax_room_add').removeClass('d-none')
