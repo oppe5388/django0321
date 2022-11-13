@@ -15,10 +15,9 @@
 		{% endfor %}
 {% endif %}
 
-
+{{p}}
 <!-- 小部屋 -->
 {% if request.user.id <= 4 %}
-	{% if now < disp_day %}
 	<div class="d-flex align-items-center mb-2">
 		<span class="small">小部屋の希望：</span>
 		<div id="room_area" class="">
@@ -27,27 +26,26 @@
 				{% comment %} <span>{{ member.user }}</span> {% endcomment %}
 			{% endfor %}
 		</div>
-
-		<div class="" id="room_button_area">
-			<a href="{% url 'myinfo:ajax_room_add' p %}" id="ajax_room_add" 
-				class="link-add d-none btn btn-info btn-icon-split btn-sm" data-catid="{{ p }}">
-				<span class="icon text-white-50 small">
-					<i class="fas fa-hand-paper"></i>
-				</span>
-				<span class="text small">使いたい</span>
-			</a>
-			<a href="{% url 'myinfo:ajax_room_delete' p %}" id="ajax_room_del" 
-				class="link-delete d-none btn btn-warning btn-icon-split btn-sm mr-1" data-catid="{{ p }}">
-				<span class="icon text-white-50 small">
-					<i class="fas fa-times-circle"></i>
-				</span>
-				<span class="text small">使わない</span>
-			</a>
-		</div>
+		{% if now < disp_day %}
+			<div class="" id="room_button_area">
+				<a href="{% url 'myinfo:ajax_room_add' p %}" id="ajax_room_add" 
+					class="link-add d-none btn btn-info btn-icon-split btn-sm" data-catid="{{ p }}">
+					<span class="icon text-white-50 small">
+						<i class="fas fa-hand-paper"></i>
+					</span>
+					<span class="text small">使いたい</span>
+				</a>
+				<a href="{% url 'myinfo:ajax_room_delete' p %}" id="ajax_room_del" 
+					class="link-delete d-none btn btn-warning btn-icon-split btn-sm mr-1" data-catid="{{ p }}">
+					<span class="icon text-white-50 small">
+						<i class="fas fa-times-circle"></i>
+					</span>
+					<span class="text small">使わない</span>
+				</a>
+			</div>
+		{% endif %}
 	</div>
-	{% endif %}
 {% endif %}
-
 
 <div class="card mb-1">
 	<div class="d-flex">
@@ -55,7 +53,8 @@
 		<a href="{% url 'myinfo:fax' yesterday %}" class="btn btn-secondary btn-sm mt-4">
 			<i class="fas fa-chevron-left"></i>前日</a>
 		<div class="d-flex flex-column px-2">
-			<div class="text-center mb-1" id="target_date">{{disp_day|date:"Y/n/j(D)"}}</div>
+			<div class="text-center mb-1" id="">{{disp_day|date:"Y/n/j(D)"}}</div>
+			<div class="d-none" id="target_date">{{p}}</div>
 			<input type="date" class="small mb-0" id="calender_date">
 		</div>
 		<a href="{% url 'myinfo:fax' next %}" class="btn btn-secondary btn-sm mt-4">
@@ -194,7 +193,7 @@
 
 
 <!-- 新規はurl指定なしで保存、更新はurl指定 -->
-<form method="post" id="form01" {% if fax.html %} action="{% url 'myinfo:fax_del_create' disp_day %}"{% endif %} style="display:none">
+<form method="post" id="form01" {% if fax.html %} action="{% url 'myinfo:fax_del_create' p %}"{% endif %} style="display:none">
 	{% csrf_token %}
 	{{ form.date }}
 	{{ form.html }}
@@ -205,7 +204,7 @@
 		<a href='' class="btn btn-secondary" id="cancel">キャンセル</a>
 		{% comment %} <button class="btn btn-secondary" id="cancel">キャンセル</button> {% endcomment %}
 		{% if fax.html %}
-		<a href="{% url 'myinfo:fax_delete' disp_day %}" class="btn btn-danger justify-content-between">削除</a>
+		<a href="{% url 'myinfo:fax_delete' p %}" class="btn btn-danger justify-content-between">削除</a>
 		<input class="btn btn-info" type="submit" value="更新">
 		{% else %}
 			<input class="btn btn-primary" type="submit" value="保存">
@@ -456,6 +455,9 @@
 		//編集画面を開くボタン
 		$('#edit_expand').click(function() {
 
+			//バリデーションで登録不可になるのでカレンダー消す
+			$('#calender_date').remove();
+
 			// 変更なしでもそのまま保存できるように
 			$('#edit_block .yasumi').children().addClass('d-none');// 非表示状態で保存するために
 			var str = $('#edit_block').html();
@@ -527,11 +529,6 @@
 		var date = document.getElementById("calender_date").value;
 		window.location.href = "{% url 'myinfo:fax' 123456 %}".replace(/123456/,date);
 	};
-
-  $("#calender_date").change(function() {
-	alert($this.val())
-	window.location.href = '/';
-  });
 
 	$(function() {
 		var user= '{{request.user}}';
