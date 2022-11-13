@@ -1018,6 +1018,7 @@ def fax(request, p):
         'p': p,
         'room_members': room_members,
         'user_exist': user_exist,
+        'now': datetime.now(),
         
     }
 

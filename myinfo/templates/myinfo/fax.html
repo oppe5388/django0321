@@ -18,6 +18,7 @@
 
 <!-- 小部屋 -->
 {% if request.user.id <= 4 %}
+	{% if now < disp_day %}
 	<div class="d-flex align-items-center mb-2">
 		<span class="small">小部屋の希望：</span>
 		<div id="room_area" class="">
@@ -44,6 +45,7 @@
 			</a>
 		</div>
 	</div>
+	{% endif %}
 {% endif %}
 
 
