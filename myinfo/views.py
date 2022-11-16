@@ -1082,6 +1082,25 @@ def ajax_room_delete(request, p, *args, **kwargs):
             'room_list': room_list,
         }
         return JsonResponse(d)
+    
+
+#FAX当番、Ajaxで前後移動
+def ajax_day_move(request, p, *args, **kwargs):
+    if request.is_ajax():
+        tdatetime = datetime.strptime(p, '%Y-%m-%d')
+        if Fax.objects.filter(date=tdatetime).first():
+            fax_html = Fax.objects.filter(date=tdatetime).first().html
+            fax_date = Fax.objects.filter(date=tdatetime).first().date
+        else:
+            fax_html = 'あああ'
+            fax_date = 'あああ'
+        
+        d = {
+            'message':'success',
+            'fax_html': fax_html,
+            'fax_date': fax_date,
+        }
+        return JsonResponse(d)
 
 
 # FAXルール

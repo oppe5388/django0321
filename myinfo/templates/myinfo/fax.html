@@ -58,6 +58,9 @@
 		</div>
 		<a href="{% url 'myinfo:fax' next %}" class="btn btn-secondary btn-sm mt-4">
 			翌日<i class="fas fa-chevron-right"></i></a>
+
+		<a href="{% url 'myinfo:ajax_day_move' next %}" data-catid={{next}} class="ajax_day_move btn btn-secondary btn-sm mt-4">
+			翌日ajax<i class="fas fa-chevron-right"></i></a>
 		
 
 		<!-- Excelリンク -->
@@ -605,6 +608,34 @@
 			}
 			$('#ajax_room_del').removeClass('d-none'); // ←消すidを書く
 			$('#ajax_room_add').addClass('d-none'); // ←消すidを書く
+		});
+        return false;
+    });
+</script>
+
+<!-- ajax(GET)で日付移動 -->
+<script>
+    $(".ajax_day_move").on("click", function(e){// idでなくクラス！
+        e.preventDefault();
+
+        var p;
+        p = $(this).attr("data-catid"); // pk取得のために"data-catid"を追加した
+        var $this = $(this);
+		$.ajax({
+			url: $this.attr("href"),
+			type: "GET",
+			dataType: "json",
+			data:{ 
+				p: p,
+				},
+		}).done( response => {
+			// 欄を真っ白にする。
+			$('#disp_block').empty();
+
+			// タイトルの一覧を順に取り出す
+			//alert(response.fax)
+			$('#disp_block').append(response.fax_date)
+			$('#disp_block').append(response.fax_html)
 		});
         return false;
     });
