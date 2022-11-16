@@ -69,7 +69,7 @@ urlpatterns = [
     path('fax/<p>/update/', views.fax_del_create, name='fax_del_create'),
     path('fax/<p>/ajax_room_add', views.ajax_room_add, name="ajax_room_add"), #小部屋希望追加
     path('fax/<p>/ajax_room_delete', views.ajax_room_delete, name="ajax_room_delete"), #小部屋希望削除
-    path('fax/<p>/ajax_day_move', views.ajax_day_move, name="ajax_day_move"), #ajax前後日付移動
+    path('fax/<p>/ajax_day_move/', views.ajax_day_move, name="ajax_day_move"), #ajax前後日付移動
     
     #FAXルール
     # path('faxrule/<p>/', views.fax_rule, name='fax_rule'),

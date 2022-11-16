@@ -49,17 +49,19 @@
 <div class="card mb-1">
 	<div class="d-flex">
 		<!-- 日付と前後ボタン -->
-		<a href="{% url 'myinfo:fax' yesterday %}" class="btn btn-secondary btn-sm mt-4">
-			<i class="fas fa-chevron-left"></i>前日</a>
+		{% comment %} <a href="{% url 'myinfo:fax' yesterday %}" class="btn btn-secondary btn-sm mt-4">
+			<i class="fas fa-chevron-left"></i>前日</a> {% endcomment %}
+		<a href="{% url 'myinfo:ajax_day_move' -1 %}" data-catid={{p}} id="prev_day" class="ajax_day_move btn btn-secondary btn-sm mt-4">
+			<i class="fas fa-chevron-left"></i>前日ajax</a>
 		<div class="d-flex flex-column px-2">
-			<div class="text-center mb-1" id="">{{disp_day|date:"Y/n/j(D)"}}</div>
+			<div class="text-center mb-1" id="disp">{{disp_day|date:"Y/n/j(D)"}}</div>
 			<div class="d-none" id="target_date">{{p}}</div>
 			<input type="date" class="small mb-0" id="calender_date">
 		</div>
-		<a href="{% url 'myinfo:fax' next %}" class="btn btn-secondary btn-sm mt-4">
-			翌日<i class="fas fa-chevron-right"></i></a>
+		{% comment %} <a href="{% url 'myinfo:fax' next %}" class="btn btn-secondary btn-sm mt-4">
+			翌日<i class="fas fa-chevron-right"></i></a> {% endcomment %}
 
-		<a href="{% url 'myinfo:ajax_day_move' next %}" data-catid={{next}} class="ajax_day_move btn btn-secondary btn-sm mt-4">
+		<a href="{% url 'myinfo:ajax_day_move' 1 %}" data-catid={{p}} id="next_day" class="ajax_day_move btn btn-secondary btn-sm mt-4">
 			翌日ajax<i class="fas fa-chevron-right"></i></a>
 		
 
@@ -618,24 +620,25 @@
     $(".ajax_day_move").on("click", function(e){// idでなくクラス！
         e.preventDefault();
 
-        var p;
-        p = $(this).attr("data-catid"); // pk取得のために"data-catid"を追加した
+        var dt;
+        dt = $(this).attr("data-catid"); // pk取得のために"data-catid"を追加した
         var $this = $(this);
 		$.ajax({
 			url: $this.attr("href"),
 			type: "GET",
 			dataType: "json",
 			data:{ 
-				p: p,
+				dt: dt,
 				},
 		}).done( response => {
 			// 欄を真っ白にする。
 			$('#disp_block').empty();
 
-			// タイトルの一覧を順に取り出す
-			//alert(response.fax)
-			$('#disp_block').append(response.fax_date)
-			$('#disp_block').append(response.fax_html)
+			$('#disp_block').append(response.fax_html)//当番表示
+			$('#prev_day').attr("data-catid", response.tdatetime);//前日リンク
+			$('#next_day').attr("data-catid", response.tdatetime);//翌日リンク
+			$('#disp').empty();
+			$('#disp').append(response.tdatetime)//
 		});
         return false;
     });
