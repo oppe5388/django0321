@@ -107,6 +107,7 @@ table.pop_table th{
 <a id="link_section3" href="javascript:void(0);" class="btn btn-sm btn-secondary mb-1 py-0 col-2"><i class="fas fa-angle-down"></i> 精算取消</a>
 <a id="link_section4" href="javascript:void(0);" class="btn btn-sm btn-secondary mb-1 py-0 col-2"><i class="fas fa-angle-down"></i> 発行キャンセル</a>
 <a id="link_section5" href="javascript:void(0);" class="btn btn-sm btn-secondary mb-1 py-0 col-2"><i class="fas fa-angle-down"></i> メンテ実施</a>
+<a id="link_section6" href="javascript:void(0);" class="btn btn-sm btn-secondary mb-1 py-0 col-2"><i class="fas fa-angle-down"></i> 名変</a>
 </div>
 
 {% include 'info/fax_rule_kaiin.html' %}
@@ -114,6 +115,187 @@ table.pop_table th{
 {% include 'info/fax_rule_seisan.html' %}
 {% include 'info/fax_rule_cancel.html' %}
 {% include 'info/fax_rule_mente.html' %}
+
+<div class="card shadow d-flex mb-3" id="section6">
+    <div class="card-header font-weight-bold p-2">名義変更届出書</div>
+    <div class="card-body">
+    
+    <table class="small ex_table col ">
+        <tr>
+            <th colspan="2" class="table-info col-8">現在のご契約者様</th>
+            <th class="table-info col-2">会員番号</th>
+            <th>　</th>
+        </tr>
+        <tr>
+            <th rowspan="2" class="table-info col-2">氏名（自署）</th>
+            <td rowspan="2">印</td>
+            <th class="table-info col-2">車名</th>
+            <th>　</th>
+        </tr>
+        <tr>
+            <th class="table-info col-2">登録番号</th>
+            <th>　</th>
+        </tr>
+        <tr>
+            <th class="table-info col-2">住所</th>
+            <td colspan="3">　</td>
+        </tr>
+    </table>
+
+    <table class="small ex_table col mt-3">
+        <tr>
+            <th colspan="6" class="table-warning">新しいご契約者様　（譲受人）</th>
+        </tr>
+        <tr>
+            <th class="table-warning col-2">氏名（自署）</th>
+            <td class="col-3">　印</td>
+            <th class="table-warning col-2">氏名（カナ）</th>
+            <td>　</td>
+            <th class="table-warning col-2">続柄</th>
+            <td>　</td>
+        </tr>
+        <tr>
+            <th class="table-warning col-2">住所</th>
+            <td colspan="5">　</td>
+        </tr>
+        <tr>
+            <th class="table-warning col-2">電話番号</th>
+            <td>　</td>
+            <td class="table-warning col-2">生年月日</td>
+            <td colspan="3">西暦　　年　　月　　日</td>
+        </tr>
+        <tr>
+            <th class="table-warning col-2">登録番号</th>
+            <td colspan="2">　</td>
+            <th class="table-warning col-2">性別</th>
+            <td colspan="2">　</td>
+        </tr>
+    </table>
+
+    <table class="small ex_table col mt-3">
+        <tr>
+            <th class="table-info col-2">名義変更届出事由</th>
+            <td colspan="2">　</td>
+        </tr>
+    </table>
+    <div class="small mt-3">【会員証紛失届】</div>
+    <table class="small ex_table col">
+        <tr>
+            <td colspan="2">署名　印</td>
+        </tr>
+    </table>
+
+    <div class="d-flex flex-row">
+        <div class="small mt-3 col">①メンテナンス内容</div>
+        <div class="small mt-3 col">②メンテプロパック有効期限</div>
+    </div>  
+
+    <div class="d-flex flex-row align-items-start">
+        <table class="small ex_table col mr-2">
+            <tr>
+                <th>メンテナンス項目</th>
+                <th>計</th>
+            </tr>
+            <tr>
+                <td>　</td>
+                <td>　</td>
+            </tr>
+            <tr>
+                <td>合計</td>
+                <td>　</td>
+            </tr>
+        </table>
+
+        <table class="small ex_table col ml-1">
+            <tr>
+                <td rowspan="1">　</td>
+            </tr>
+        </table>
+    </div>
+
+    <hr>
+
+    <div class="small mt-3">自動車検査証記録事項</div>
+    <table class="small ex_table col mt-3">
+        <tr>
+            <td colspan="8">１.基本情報</td>
+        </tr>
+        <tr>
+            <td colspan="2">自動車登録番号又は車両番号</td>
+            <td colspan="6">札幌　３００　お　９９９９</td>
+        </tr>
+        <tr>
+            <td>車台番号</td>
+            <td colspan="7">Ｒ３５－ＤＳＧ－００００１</td>
+        </tr>
+        <tr>
+            <td colspan="2">登録年月日／交付年月日</td>
+            <td>令和 3 年    5月   10 日</td>
+            <td>初度登録年月</td>
+            <td>令和3年5月</td>
+            <td colspan="2">有効期間の満了する日</td>
+        </tr>
+        <tr>
+            <td colspan="8">２.所有者・使用者情報</td>
+        </tr>
+        <tr>
+            <td colspan="2">所有者の氏名又は名称</td>
+            <td colspan="6">運輸   太郎</td>
+        </tr>
+        <tr>
+            <td colspan="2">所有者の住所</td>
+            <td colspan="6">北海道札幌市東区北３６条東〇丁目△△ △                           [50007 0331]</td>
+        </tr>
+        <tr>
+            <td colspan="2">使用者の氏名又は名称</td>
+            <td>＊＊＊</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="2">使用者の住所</td>
+            <td colspan="6">＊＊＊</td>
+        </tr>
+        <tr>
+            <td colspan="2">使用の本拠の位置</td>
+            <td colspan="6">＊＊＊</td>
+        </tr>
+        <tr>
+            <td colspan="8">３.車両詳細情報</td>
+        </tr>
+        <tr>
+            <td>車名</td>
+            <td colspan="7">ニッサン                                                                                   [213]</td>
+        </tr>
+        <tr>
+            <td>型式</td>
+            <td colspan="3">ＣＢＡ－Ｒ３５</td>
+            <td>原動機の型式</td>
+            <td colspan="3">ＶＲ３８</td>
+        </tr>
+        <tr>
+            <td>自動車の種別</td>
+            <td>普通</td>
+            <td>用途</td>
+            <td>乗用</td>
+            <td colspan="2">自家用・事業用の別</td>
+            <td colspan="2">自家用</td>
+        </tr>
+        <tr>
+            <td>車体の形状</td>
+            <td colspan="3">箱型                             [001]</td>
+            <td>乗車定員</td>
+            <td>4 人</td>
+            <td>最大積載量</td>
+        </tr>
+    </table>
+        
+    
+    
+    </div><!-- card-body終わり -->
+    </div><!-- メンテ実施card終わり -->
 
 
 
@@ -165,6 +347,9 @@ $(function() {
     });
     $('#link_section5').on('click', function () {
         $('html, body').animate({scrollTop:$('#section5').offset().top}, 300);
+    });
+    $('#link_section6').on('click', function () {
+        $('html, body').animate({scrollTop:$('#section6').offset().top}, 300);
     });
 
 
