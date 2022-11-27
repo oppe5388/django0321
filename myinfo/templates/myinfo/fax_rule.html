@@ -117,7 +117,7 @@ table.pop_table th{
 {% include 'info/fax_rule_mente.html' %}
 
 <div class="card shadow d-flex mb-3" id="section6">
-    <div class="card-header font-weight-bold p-2">名義変更届出書</div>
+    <div class="card-header font-weight-bold p-2">名義変更届出書（未作成）</div>
     <div class="card-body">
     
     <table class="small ex_table col ">
@@ -128,7 +128,7 @@ table.pop_table th{
         </tr>
         <tr>
             <th rowspan="2" class="table-info col-2">氏名（自署）</th>
-            <td rowspan="2">印</td>
+            <td rowspan="2" class="text-right pr-5">印</td>
             <th class="table-info col-2">車名</th>
             <th>　</th>
         </tr>
@@ -148,7 +148,7 @@ table.pop_table th{
         </tr>
         <tr>
             <th class="table-warning col-2">氏名（自署）</th>
-            <td class="col-3">　印</td>
+            <td class="col-3 text-right pr-5">印</td>
             <th class="table-warning col-2">氏名（カナ）</th>
             <td>　</td>
             <th class="table-warning col-2">続柄</th>
@@ -181,7 +181,7 @@ table.pop_table th{
     <div class="small mt-3">【会員証紛失届】</div>
     <table class="small ex_table col">
         <tr>
-            <td colspan="2">署名　印</td>
+            <td colspan="2" class="text-right pr-5"><u>署名　　　　　　　　　　　印</u></td>
         </tr>
     </table>
 
@@ -218,78 +218,92 @@ table.pop_table th{
     <div class="small mt-3">自動車検査証記録事項</div>
     <table class="small ex_table col mt-3">
         <tr>
-            <td colspan="8">１.基本情報</td>
+            <th colspan="8" class="table-dark">１.基本情報</th>
         </tr>
         <tr>
-            <td colspan="2">自動車登録番号又は車両番号</td>
+            <th colspan="2" class="table-dark">自動車登録番号又は車両番号</th>
             <td colspan="6">札幌　３００　お　９９９９</td>
         </tr>
         <tr>
-            <td>車台番号</td>
+            <th class="table-dark">車台番号</th>
             <td colspan="7">Ｒ３５－ＤＳＧ－００００１</td>
         </tr>
         <tr>
-            <td colspan="2">登録年月日／交付年月日</td>
-            <td>令和 3 年    5月   10 日</td>
-            <td>初度登録年月</td>
+            <th colspan="2" class="table-dark">登録年月日／交付年月日</th>
+            <th class="text-gray-400">令和3年5月10日</th>
+            <th class="table-dark">初度登録年月</th>
             <td>令和3年5月</td>
-            <td colspan="2">有効期間の満了する日</td>
+            <th colspan="2" class="table-dark">有効期間の満了する日</th>
+            <th class="text-gray-400">令和6年5月9日</th>
         </tr>
         <tr>
-            <td colspan="8">２.所有者・使用者情報</td>
+            <th colspan="8" class="table-dark">２.所有者・使用者情報</th>
         </tr>
         <tr>
-            <td colspan="2">所有者の氏名又は名称</td>
+            <th colspan="2" class="table-dark">所有者の氏名又は名称</th>
             <td colspan="6">運輸   太郎</td>
         </tr>
         <tr>
-            <td colspan="2">所有者の住所</td>
-            <td colspan="6">北海道札幌市東区北３６条東〇丁目△△ △                           [50007 0331]</td>
+            <th colspan="2" class="table-dark">所有者の住所</th>
+            <th colspan="6" class="text-gray-400">
+                <div class="d-flex">
+                    <span class="mr-auto">北海道札幌市東区北３６条東〇丁目△△ △</span>
+                    <span>[50007 0331]</span>
+                </div>
+            </th>
         </tr>
         <tr>
-            <td colspan="2">使用者の氏名又は名称</td>
-            <td>＊＊＊</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="2">使用者の住所</td>
+            <th colspan="2" class="table-dark">使用者の氏名又は名称</th>
             <td colspan="6">＊＊＊</td>
         </tr>
         <tr>
-            <td colspan="2">使用の本拠の位置</td>
-            <td colspan="6">＊＊＊</td>
+            <th colspan="2" class="table-dark">使用者の住所</th>
+            <th colspan="6" class="text-gray-400">＊＊＊</th>
         </tr>
         <tr>
-            <td colspan="8">３.車両詳細情報</td>
+            <th colspan="2" class="table-dark">使用の本拠の位置</th>
+            <th colspan="6" class="text-gray-400">＊＊＊</th>
         </tr>
         <tr>
-            <td>車名</td>
-            <td colspan="7">ニッサン                                                                                   [213]</td>
+            <th colspan="8" class="table-dark">３.車両詳細情報</th>
         </tr>
         <tr>
-            <td>型式</td>
-            <td colspan="3">ＣＢＡ－Ｒ３５</td>
-            <td>原動機の型式</td>
-            <td colspan="3">ＶＲ３８</td>
+            <th class="table-dark">車名</th>
+            <th colspan="7" class="text-gray-400">
+                <div class="d-flex">
+                    <span class="mr-auto">ニッサン</span>
+                    <span>[213]</span>
+                </div>
+            </th>
         </tr>
         <tr>
-            <td>自動車の種別</td>
-            <td>普通</td>
-            <td>用途</td>
+            <th class="table-dark">型式</th>
+            <th colspan="3" class="text-gray-400">ＣＢＡ－Ｒ３５</th>
+            <th class="table-dark">原動機の型式</th>
+            <th colspan="3" class="text-gray-400">ＶＲ３８</th>
+        </tr>
+        <tr>
+            <th class="table-dark">自動車の種別</th>
+            <th class="text-gray-400">普通</th>
+            <th class="table-dark">用途</th>
             <td>乗用</td>
-            <td colspan="2">自家用・事業用の別</td>
+            <th colspan="2" class="table-dark">自家用・事業用の別</th>
             <td colspan="2">自家用</td>
         </tr>
         <tr>
-            <td>車体の形状</td>
-            <td colspan="3">箱型                             [001]</td>
-            <td>乗車定員</td>
-            <td>4 人</td>
-            <td>最大積載量</td>
+            <th class="table-dark">車体の形状</th>
+            <th colspan="3" class="text-gray-400">
+                <div class="d-flex">
+                    <span class="mr-auto">箱型</span>
+                    <span>[001]</span>
+                </div>
+            </th>
+            <th class="table-dark">乗車定員</th>
+            <th class="text-gray-400">4 人</th>
+            <th class="table-dark">最大積載量</th>
+            <th class="text-gray-400">- kg</th>
         </tr>
+        <tr><th colspan="8">・・・以下略・・・</th></tr>
     </table>
         
     
