@@ -16,7 +16,7 @@
 {% endif %}
 
 <!-- 小部屋 -->
-{% if request.user.id <= 4 %}
+{% comment %} {% if request.user.id <= 4 %} {% endcomment %}
 	<div class="d-flex align-items-center mb-2">
 		<span class="small">小部屋の希望：</span>
 		<div id="room_area" class="">
@@ -44,7 +44,7 @@
 			</div>
 		{% endif %}
 	</div>
-{% endif %}
+{% comment %} {% endif %} {% endcomment %}
 
 <div class="card mb-1">
 	<div class="d-flex">
@@ -72,8 +72,8 @@
 		<button class="btn btn-secondary btn-sm mb-2 mr-auto mr-5" data-toggle="modal" data-target="#ModalCentercompany" id="gogo_rest" style="display:none">
 			<i class="fas fa-info-circle"></i> 午後休憩</button>
 		
-		<!-- LDのみ編集ボタン -->
-		{% if request.user.id <= 4 %}
+		<!-- LD+misono編集ボタン -->
+		{% if request.user.id == 10 or request.user.id <= 4 %}
 		<button class="btn btn-secondary btn-sm mb-2 ml-auto" id="edit_expand"><i class="fas fa-edit fa-xs"></i></button>
 		{% endif %}
 		
