@@ -17,25 +17,19 @@
 
 <!-- 小部屋 -->
 {% comment %} {% if request.user.id <= 4 %} {% endcomment %}
-	<div class="d-flex align-items-center mb-2">
-		<span class="small">小部屋の希望：</span>
-		<div id="room_area" class="">
-			{% for member in room_members %}
-				<h5 class="m-1 badge badge-pill badge-primary font-weight-normal mx-1">{{ member.user }}</h5>
-				{% comment %} <span>{{ member.user }}</span> {% endcomment %}
-			{% endfor %}
-		</div>
+	<div class="d-flex align-items-center">
+		<div class="small">小部屋：</div>
 		{% if now < disp_day %}
-			<div class="" id="room_button_area">
+			<div class=" mb-2" id="room_button_area">
 				<a href="{% url 'myinfo:ajax_room_add' p %}" id="ajax_room_add" 
-					class="link-add d-none btn btn-info btn-icon-split btn-sm" data-catid="{{ p }}">
+					class="link-add btn btn-info btn-icon-split btn-sm disabled btn-light" data-catid="{{ p }}">
 					<span class="icon text-white-50 small">
 						<i class="fas fa-hand-paper"></i>
 					</span>
 					<span class="text small">使いたい</span>
 				</a>
 				<a href="{% url 'myinfo:ajax_room_delete' p %}" id="ajax_room_del" 
-					class="link-delete d-none btn btn-warning btn-icon-split btn-sm mr-1" data-catid="{{ p }}">
+					class="link-delete btn btn-warning btn-icon-split btn-sm disabled btn-light" data-catid="{{ p }}">
 					<span class="icon text-white-50 small">
 						<i class="fas fa-times-circle"></i>
 					</span>
@@ -43,7 +37,16 @@
 				</a>
 			</div>
 		{% endif %}
+
+		<div id="room_area" class="">
+			{% for member in room_members %}
+				<h5 class=" badge badge-pill badge-primary font-weight-normal mx-1">{{ member.user }}</h5>
+				{% comment %} <span>{{ member.user }}</span> {% endcomment %}
+			{% endfor %}
+		</div>
 	</div>
+
+	
 {% comment %} {% endif %} {% endcomment %}
 
 <div class="card mb-1">
@@ -541,9 +544,11 @@
 		var use_user = $('#room_area').contents().text();
 		//小部屋希望に含まれていたら、addボタンは非表示にする
 		if(use_user.indexOf(user) >= 0){
-			$('#ajax_room_del').removeClass('d-none')
+			//$('#ajax_room_del').removeClass('d-none')
+			$('#ajax_room_del').removeClass('disabled btn-light')
 		} else {
-			$('#ajax_room_add').removeClass('d-none')
+			//$('#ajax_room_add').removeClass('d-none')
+			$('#ajax_room_add').removeClass('disabled btn-light')
 		};
 	});
 </script>
@@ -578,8 +583,10 @@
 				const p = $('<h5 class="badge badge-pill badge-primary font-weight-normal mx-1">'+ user+'</h5>');
 				$('#room_area').append(p);
 			}
-			$('#ajax_room_del').addClass('d-none'); // ←消すidを書く
-			$('#ajax_room_add').removeClass('d-none'); // ←消すidを書く
+			//$('#ajax_room_del').addClass('d-none'); // ←消すidを書く
+			//$('#ajax_room_add').removeClass('d-none'); // ←表示idを書く
+			$('#ajax_room_del').addClass('disabled btn-light'); // ←消すidを書く
+			$('#ajax_room_add').removeClass('disabled btn-light'); // ←表示idを書く
 		});
         return false;
     });
@@ -610,8 +617,10 @@
 				const p = $('<h5 class="badge badge-pill badge-primary font-weight-normal mx-1">'+ user+'</h5>');
 				$('#room_area').append(p);
 			}
-			$('#ajax_room_del').removeClass('d-none'); // ←消すidを書く
-			$('#ajax_room_add').addClass('d-none'); // ←消すidを書く
+			//$('#ajax_room_del').removeClass('d-none'); // ←表示idを書く
+			//$('#ajax_room_add').addClass('d-none'); // ←消すidを書く
+			$('#ajax_room_del').removeClass('disabled btn-light'); // ←表示idを書く
+			$('#ajax_room_add').addClass('disabled btn-light'); // ←消すidを書く
 		});
         return false;
     });
