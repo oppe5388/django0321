@@ -15,13 +15,14 @@
 		{% endfor %}
 {% endif %}
 
+
 <!-- 小部屋 -->
 {% comment %} {% if request.user.id <= 4 %} {% endcomment %}
 	<div class="d-flex align-items-center">
-		<div class="small">小部屋希望者：</div>
+		<div class="small my-1">小部屋希望者：</div>
 		<div id="room_area" class="">
 			{% for member in room_members %}
-				<h5 class=" badge badge-pill badge-primary font-weight-normal mx-1">{{ member.user }}</h5>
+				<h5 class=" badge badge-pill badge-primary font-weight-normal mx-1 my-0">{{ member.user }}</h5>
 				{% comment %} <span>{{ member.user }}</span> {% endcomment %}
 			{% endfor %}
 		</div>
@@ -584,7 +585,7 @@
 			// タイトルの一覧を順に取り出す
 			for (const user of response.room_list) {
 				// <p>タイトル</p>を作成し、記事一覧に追加していく。
-				const p = $('<h5 class="badge badge-pill badge-primary font-weight-normal mx-1">'+ user+'</h5>');
+				const p = $('<h5 class="badge badge-pill badge-primary font-weight-normal mx-1 my-0">'+ user+'</h5>');
 				$('#room_area').append(p);
 			}
 			$('#ajax_room_del').addClass('d-none'); // ←消すidを書く
@@ -619,7 +620,7 @@
 			// タイトルの一覧を順に取り出す
 			for (const user of response.room_list) {
 				// <p>タイトル</p>を作成し、記事一覧に追加していく。
-				const p = $('<h5 class="badge badge-pill badge-primary font-weight-normal mx-1">'+ user+'</h5>');
+				const p = $('<h5 class="badge badge-pill badge-primary font-weight-normal mx-1 my-0">'+ user+'</h5>');
 				$('#room_area').append(p);
 			}
 			$('#ajax_room_del').removeClass('d-none'); // ←表示idを書く
@@ -671,7 +672,7 @@
 			// 一覧を順に取り出す
 			for (const user of response.room_list) {
 				// 追加していく。
-				const p = $('<h5 class="badge badge-pill badge-primary font-weight-normal mx-1">'+ user+'</h5>');
+				const p = $('<h5 class="badge badge-pill badge-primary font-weight-normal mx-1 my-0">'+ user+'</h5>');
 				$('#room_area').append(p);
 			}
 
