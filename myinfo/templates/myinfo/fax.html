@@ -19,7 +19,7 @@
 {% comment %} {% if request.user.id <= 4 %} {% endcomment %}
 	<div class="d-flex align-items-center">
 		<div class="small">小部屋：</div>
-		{% if now < disp_day %}
+		{% comment %} {% if now < disp_day %} {% endcomment %}
 			<div class=" mb-2" id="room_button_area">
 				<a href="{% url 'myinfo:ajax_room_add' p %}" id="ajax_room_add" 
 					class="link-add btn btn-info btn-icon-split btn-sm disabled btn-light" data-catid="{{ p }}">
@@ -36,7 +36,7 @@
 					<span class="text small">使わない</span>
 				</a>
 			</div>
-		{% endif %}
+		{% comment %} {% endif %} {% endcomment %}
 
 		<div id="room_area" class="">
 			{% for member in room_members %}
@@ -567,14 +567,15 @@
         p = $(this).attr("data-catid"); // pk取得のために"data-catid"を追加した
         var $this = $(this);
 		$.ajax({
-			url: $this.attr("href"),
+			//url: $this.attr("href"),
+			url: '{% url 'myinfo:ajax_room_delete' p %}',
 			type: "GET",
 			dataType: "json",
 			data:{ 
 				p: p,
 				}, 
 		}).done( response => {
-			// 記事欄を真っ白にする。
+			// 小部屋を真っ白にする。
 			$('#room_area').empty();
 
 			// タイトルの一覧を順に取り出す
@@ -583,8 +584,6 @@
 				const p = $('<h5 class="badge badge-pill badge-primary font-weight-normal mx-1">'+ user+'</h5>');
 				$('#room_area').append(p);
 			}
-			//$('#ajax_room_del').addClass('d-none'); // ←消すidを書く
-			//$('#ajax_room_add').removeClass('d-none'); // ←表示idを書く
 			$('#ajax_room_del').addClass('disabled btn-light'); // ←消すidを書く
 			$('#ajax_room_add').removeClass('disabled btn-light'); // ←表示idを書く
 		});
@@ -601,14 +600,15 @@
         p = $(this).attr("data-catid"); // pk取得のために"data-catid"を追加した
         var $this = $(this);
 		$.ajax({
-			url: $this.attr("href"),
+			//url: $this.attr("href"),
+			url: '{% url 'myinfo:ajax_room_add' p %}',
 			type: "GET",
 			dataType: "json",
 			data:{ 
 				p: p,
 				},
 		}).done( response => {
-			// 記事欄を真っ白にする。
+			// 小部屋を真っ白にする。
 			$('#room_area').empty();
 
 			// タイトルの一覧を順に取り出す
@@ -645,11 +645,45 @@
 			// 欄を真っ白にする。
 			$('#disp_block').empty();
 
+			//フリー欄、改行を生かして表示
+			var strArray2 = response.fax_free.split(/\r\n|\r|\n/);
+			//console.log(strArray2);
+			var result2 = "";
+			for (var i = 0; i <= strArray2.length -1; i++) {
+				result2 += strArray2[i]+'<br>';
+			}
+			$('#disp_block').html(result2);
 			$('#disp_block').append(response.fax_html)//当番表示
-			$('#prev_day').attr("data-catid", response.tdatetime);//前日リンク
-			$('#next_day').attr("data-catid", response.tdatetime);//翌日リンク
+			$('#prev_day').attr("data-catid", response.keydate);//前日リンク
+			$('#next_day').attr("data-catid", response.keydate);//翌日リンク
+			$('#ajax_room_add').attr("data-catid", response.keydate);//使いたいボタン
+			$('#ajax_room_del').attr("data-catid", response.keydate);//使わないボタン
 			$('#disp').empty();
 			$('#disp').append(response.youbidate)//
+
+			// 小部屋を真っ白にする。
+			$('#room_area').empty();
+			// 一覧を順に取り出す
+			for (const user of response.room_list) {
+				// 追加していく。
+				const p = $('<h5 class="badge badge-pill badge-primary font-weight-normal mx-1">'+ user+'</h5>');
+				$('#room_area').append(p);
+			}
+
+			// 小部屋ボタン切り替え
+			var user= '{{request.user}}';
+			var use_user = $('#room_area').contents().text();
+			
+			//小部屋希望に含まれていたら、addボタンは非表示にする
+			if(use_user.indexOf(user) >= 0){
+				//$('#ajax_room_del').removeClass('d-none')
+				$('#ajax_room_del').removeClass('disabled btn-light')
+				$('#ajax_room_add').addClass('disabled btn-light'); // ←消すidを書く
+			} else {
+				//$('#ajax_room_add').removeClass('d-none')
+				$('#ajax_room_add').removeClass('disabled btn-light')
+				$('#ajax_room_del').addClass('disabled btn-light'); // ←消すidを書く
+			};
 		});
         return false;
     });

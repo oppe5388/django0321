@@ -1091,28 +1091,33 @@ def ajax_day_move(request, p, *args, **kwargs):
         dt = request.GET.get('dt')
         tdatetime = datetime.strptime(dt, '%Y-%m-%d') + relativedelta(days=int(p))
         
-        weekdays = ["月","火","水","木","金","土","日"]
+        weekdays = ['月','火','水','木','金','土','日']
         weekday_value = weekdays[tdatetime.weekday()]
         youbidate = tdatetime.strftime('%Y/%m/%d') + '('+ weekday_value + ')'
         
-        tdatetime = tdatetime.strftime('%Y-%m-%d')
+        keydate = tdatetime.strftime('%Y-%m-%d')
         
+        # 小部屋
+        room_list = [room.user.last_name for room in Room.objects.filter(date=tdatetime)]
+        
+        # 当番
         if Fax.objects.filter(date=tdatetime):
             fax_html = Fax.objects.filter(date=tdatetime).first().html
             fax_free = Fax.objects.filter(date=tdatetime).first().free
-            fax_date = Fax.objects.filter(date=tdatetime).first().date
+            # fax_date = Fax.objects.filter(date=tdatetime).first().date
         else:
-            fax_html = '未作成'
-            fax_date = 'あああ'
-            fax_free = '特記なし'
+            fax_html = ''
+            # fax_date = 'あああ'
+            fax_free = ''
         
         d = {
             'message':'success',
             'fax_html': fax_html,
-            'fax_date': fax_date,
-            'tdatetime': tdatetime,
+            # 'fax_date': fax_date,
+            'keydate': keydate,
             'fax_free': fax_free,
             'youbidate': youbidate,
+            'room_list': room_list,
         }
         return JsonResponse(d)
 
