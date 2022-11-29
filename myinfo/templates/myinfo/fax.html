@@ -54,8 +54,8 @@
 		<!-- 日付と前後ボタン -->
 		<a href="{% url 'myinfo:fax' yesterday %}" class="btn btn-secondary btn-sm mt-4">
 			<i class="fas fa-chevron-left"></i>前日</a>
-		{% comment %} <a href="{% url 'myinfo:ajax_day_move' -1 %}" data-catid={{p}} id="prev_day" class="ajax_day_move btn btn-secondary btn-sm mt-4">
-			<i class="fas fa-chevron-left"></i>前日ajax</a> {% endcomment %}
+		<a href="{% url 'myinfo:ajax_day_move' -1 %}" data-catid={{p}} id="prev_day" class="ajax_day_move btn btn-secondary btn-sm mt-4">
+			<i class="fas fa-chevron-left"></i>前日ajax</a>
 		<div class="d-flex flex-column px-2">
 			<div class="text-center mb-1" id="disp">{{disp_day|date:"Y/n/j(D)"}}</div>
 			<div class="d-none" id="target_date">{{p}}</div>
@@ -63,8 +63,8 @@
 		</div>
 		<a href="{% url 'myinfo:fax' next %}" class="btn btn-secondary btn-sm mt-4">
 			翌日<i class="fas fa-chevron-right"></i></a>
-		{% comment %} <a href="{% url 'myinfo:ajax_day_move' 1 %}" data-catid={{p}} id="next_day" class="ajax_day_move btn btn-secondary btn-sm mt-4">
-			翌日ajax<i class="fas fa-chevron-right"></i></a> {% endcomment %}
+		<a href="{% url 'myinfo:ajax_day_move' 1 %}" data-catid={{p}} id="next_day" class="ajax_day_move btn btn-secondary btn-sm mt-4">
+			翌日ajax<i class="fas fa-chevron-right"></i></a>
 		
 
 		<!-- Excelリンク -->
@@ -649,7 +649,7 @@
 			$('#prev_day').attr("data-catid", response.tdatetime);//前日リンク
 			$('#next_day').attr("data-catid", response.tdatetime);//翌日リンク
 			$('#disp').empty();
-			$('#disp').append(response.tdatetime)//
+			$('#disp').append(response.youbidate)//
 		});
         return false;
     });
