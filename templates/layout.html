@@ -510,7 +510,8 @@
     <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script> {% endcomment %}
 
     <!-- Bootstrap core JavaScript-->
-    <script src="{% static 'SBadmin2_origin/vendor/jquery/jquery.min.js' %}"></script>
+    <!-- ↓2022/11/30コメントアウト（当番のjquery-sortableのajaxが効かなかったため）-->
+    {% comment %} <script src="{% static 'SBadmin2_origin/vendor/jquery/jquery.min.js' %}"></script> {% endcomment %}
     <script src="{% static 'SBadmin2_origin/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
     <!-- Core plugin JavaScript-->
