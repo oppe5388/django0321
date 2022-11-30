@@ -56,8 +56,8 @@
 <div class="card mb-1">
 	<div class="d-flex">
 		<!-- 日付と前後ボタン -->
-		<a href="{% url 'myinfo:fax' yesterday %}" class="btn btn-secondary btn-sm mt-4">
-			<i class="fas fa-chevron-left"></i>前日</a>
+		{% comment %} <a href="{% url 'myinfo:fax' yesterday %}" class="btn btn-secondary btn-sm mt-4">
+			<i class="fas fa-chevron-left"></i>前日</a> {% endcomment %}
 		<a href="{% url 'myinfo:ajax_day_move' -1 %}" data-catid={{p}} id="prev_day" class="ajax_day_move btn btn-secondary btn-sm mt-4">
 			<i class="fas fa-chevron-left"></i>前日ajax</a>
 		<div class="d-flex flex-column px-2">
@@ -65,8 +65,8 @@
 			<div class="d-none" id="target_date">{{p}}</div>
 			<input type="date" class="small mb-0" id="calender_date">
 		</div>
-		<a href="{% url 'myinfo:fax' next %}" class="btn btn-secondary btn-sm mt-4">
-			翌日<i class="fas fa-chevron-right"></i></a>
+		{% comment %} <a href="{% url 'myinfo:fax' next %}" class="btn btn-secondary btn-sm mt-4">
+			翌日<i class="fas fa-chevron-right"></i></a> {% endcomment %}
 		<a href="{% url 'myinfo:ajax_day_move' 1 %}" data-catid={{p}} id="next_day" class="ajax_day_move btn btn-secondary btn-sm mt-4">
 			翌日ajax<i class="fas fa-chevron-right"></i></a>
 		
@@ -82,6 +82,8 @@
 		<!-- LD+misono編集ボタン -->
 		{% if request.user.id == 10 or request.user.id <= 4 %}
 		<button class="btn btn-secondary btn-sm mb-2 ml-auto" id="edit_expand"><i class="fas fa-edit fa-xs"></i></button>
+		<a href="" data-catid={{p}} id="edit_expand2" class="ajax_edit btn btn-secondary btn-sm mb-2 ml-auto">
+			<i class="fas fa-edit fa-xs"></i>ajax</a>
 		{% endif %}
 		
 	</div>
@@ -98,13 +100,13 @@
 	</div>
 	<!-- 編集画面：当日があれば当日編集、なければ前日を初期表示する -->
 	<div class="bg-gray-300" id="edit_block" style="display:none">
-		{% if fax.html %}
+		{% comment %} {% if fax.html %} {% endcomment %}
 			{% comment %} {{ disp_day}}の編集 {% endcomment %}
 			{{ fax.html|safe }}
-		{% elif yesterday_fax.html %}
+		{% comment %} {% elif yesterday_fax.html %} {% endcomment %}
 			{% comment %} {{ yesterday }}を元に新規作成 {% endcomment %}
 			{{ yesterday_fax.html|safe }}
-		{% else %}
+		{% comment %} {% else %} {% endcomment %}
 			{% comment %} 新規作成 {% endcomment %}
 			<div class="d-flex flex-wrap">
 				<div class="d-flex flex-column col">
@@ -199,7 +201,7 @@
 					</ul>
 				</div>
 			</div>
-		{% endif %}
+		{% comment %} {% endif %} {% endcomment %}
 	</div>
 </div>
 
@@ -486,16 +488,19 @@
 			$('#form01').fadeIn(500);
 			$('#id_date').val($('#target_date').text());
 			$('#id_free').val($('#disp_free').html().replace(/\s+/g, '').replace(/<br>/g, '\n'));//改行やスペース削除、br置換
+
 		});
 
 		//編集キャンセル
-		$('#cancel').click(function() {
+		$('#cancel').click(function(e) {
+			e.preventDefault();
 			$('#edit_block').hide();
 			$('#form01').hide();
 			$('#gogo_rest').hide();
 			$('#excel').hide();
 			$('#disp_block').fadeIn(500);
 			$('#edit_expand').fadeIn(500);
+
 		});
 
 	});
@@ -691,6 +696,19 @@
 				$('#ajax_room_del').addClass('d-none')
 				//$('#ajax_room_add').removeClass('disabled btn-light')
 				//$('#ajax_room_del').addClass('disabled btn-light'); // ←消すidを書く
+			};
+			console.log(response.yesterday_free)
+			
+			// 当日入力あり→当日
+			if(response.fax_html !== ''){
+				$('#edit_block').empty();// edit欄を真っ白に。
+				$('#edit_block').append(response.fax_html)//当番表示
+				$('#id_free').val(response.fax_free);
+			// 前日入力あり→前日
+			} else if(response.yesterday_html !== ''){
+				$('#edit_block').empty();// edit欄を真っ白に。
+				$('#edit_block').append(response.yesterday_html)//当番表示
+				$('#id_free').val('');
 			};
 		});
         return false;

@@ -1097,6 +1097,9 @@ def ajax_day_move(request, p, *args, **kwargs):
         
         keydate = tdatetime.strftime('%Y-%m-%d')
         
+        yesterday = tdatetime + relativedelta(days=-1)
+        yesterday = yesterday.strftime('%Y-%m-%d')
+        
         # 小部屋
         room_list = [room.user.last_name for room in Room.objects.filter(date=tdatetime)]
         
@@ -1104,20 +1107,27 @@ def ajax_day_move(request, p, *args, **kwargs):
         if Fax.objects.filter(date=tdatetime):
             fax_html = Fax.objects.filter(date=tdatetime).first().html
             fax_free = Fax.objects.filter(date=tdatetime).first().free
-            # fax_date = Fax.objects.filter(date=tdatetime).first().date
         else:
             fax_html = ''
-            # fax_date = 'あああ'
             fax_free = ''
+            
+        # 前日
+        if Fax.objects.filter(date=yesterday):
+            yesterday_html = Fax.objects.filter(date=yesterday).first().html
+            yesterday_free = Fax.objects.filter(date=yesterday).first().free
+        else:
+            yesterday_html = ''
+            yesterday_free = ''
         
         d = {
             'message':'success',
             'fax_html': fax_html,
-            # 'fax_date': fax_date,
-            'keydate': keydate,
             'fax_free': fax_free,
+            'keydate': keydate,
             'youbidate': youbidate,
             'room_list': room_list,
+            'yesterday_html': yesterday_html,
+            'yesterday_free': yesterday_free,
         }
         return JsonResponse(d)
 
