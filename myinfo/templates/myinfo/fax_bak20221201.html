@@ -71,7 +71,7 @@
 		<a href="{% url 'myinfo:ajax_day_move' -1 %}" data-catid={{p}} id="prev_day" class="ajax_day_move btn btn-secondary btn-sm">
 			<i class="fas fa-chevron-left"></i>前日</a>
 			<div class="text-center d-flex mx-2" id="disp">{{disp_day|date:"Y/n/j(D)"}}</div>
-			<div class="d-none" id="target_date">{{p}}</div>
+			<div class="" id="target_date">{{p}}</div>
 		<a href="{% url 'myinfo:ajax_day_move' 1 %}" data-catid={{p}} id="next_day" class="ajax_day_move btn btn-secondary btn-sm">
 			翌日<i class="fas fa-chevron-right"></i></a>
 
@@ -83,11 +83,9 @@
 		<button class="btn btn-secondary btn-sm mb-2 mr-auto mr-5" data-toggle="modal" data-target="#ModalCentercompany" id="gogo_rest" style="display:none">
 			<i class="fas fa-info-circle"></i> 午後休憩</button>
 		
-		<!-- LD+misono編集ページリンク -->
+		<!-- LD+misono編集ボタン -->
 		{% if request.user.id == 10 or request.user.id <= 4 %}
-			{% comment %} <button class="btn btn-secondary btn-sm ml-auto" id="edit_expand"><i class="fas fa-edit fa-xs"></i></button> {% endcomment %}
-			<a href="{% url 'myinfo:fax_edit' p %}" id="editlink" data-catid={{p}} class="btn btn-secondary btn-sm ml-auto">
-				<i class="fas fa-edit fa-xs"></i></a>
+			<button class="btn btn-secondary btn-sm ml-auto" id="edit_expand"><i class="fas fa-edit fa-xs"></i></button>
 		{% endif %}
 		
 	</div>
@@ -459,9 +457,9 @@
 <script type="text/javascript" src='{% static 'jquery-sortable.js' %}'></script>
 <script type="text/javascript">
 	$(function() {
-		//$("ul.example").sortable({
-		//	group: 'connect-area'
-		//});
+		// $("ul.example").sortable({
+		// 	group: 'connect-area'
+		// });
 		
 		//style="display:none"にした
 		//$('#edit_block').hide();
@@ -498,6 +496,7 @@
 
 			$('.ajax_day_move').hide();
 
+			
 		});
 
 		//編集キャンセル
@@ -513,7 +512,7 @@
 			
 		});
 
-		// 作り変え　https://www.catch.jp/program/jquery-sortable/
+		{% comment %} // 作り変え　https://www.catch.jp/program/jquery-sortable/
 		var group = $("ul.example").sortable({
 			group: 'connect-area',
 			onDrop: function ($item, container, _super) {
@@ -536,7 +535,7 @@
 			return isContainer ? children.join() : parent.text();
 			},
 		});
-		// 作り変えここまで
+		// 作り変えここまで {% endcomment %}
 		
 
 	});
@@ -715,9 +714,6 @@
 
 			$('#target_date').text(response.keydate)
 			$('#id_date').val($('#target_date').text());
-
-			var url3 ="{% url 'myinfo:fax_edit' 123456 %}".replace(/123456/,response.keydate);
-			$("#editlink").attr("href", url3)
 
 		});
         return false;

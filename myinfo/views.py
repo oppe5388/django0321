@@ -1039,9 +1039,35 @@ def fax_delete(request, p):
     Fax.objects.filter(date=p).delete()
     messages.info(request, '削除しました')
     # return HttpResponse('success')
-    return redirect(request.META['HTTP_REFERER'])#元のページに戻る
+    # return redirect(request.META['HTTP_REFERER'])#元のページに戻る
+    
+    fax = Fax.objects.filter(date=p).first()
+    yesterday = datetime.strptime(p, '%Y-%m-%d') + relativedelta(days=-1)
+    yesterday = yesterday.strftime('%Y-%m-%d')
+    next = datetime.strptime(p, '%Y-%m-%d') + relativedelta(days=+1)
+    next = next.strftime('%Y-%m-%d')
+    yesterday_fax = Fax.objects.filter(date=yesterday).first()
+    
+    disp_day = datetime.strptime(p, '%Y-%m-%d')
+    room_members = Room.objects.filter(date=p)
+    user_exist = Room.objects.filter(date=p,user=request.user)
 
-#fax削除
+    context ={
+        'fax': fax,
+        'next': next,
+        'yesterday': yesterday,
+        'disp_day': disp_day,
+        'yesterday_fax': yesterday_fax,
+        'p': p,
+        'room_members': room_members,
+        'user_exist': user_exist,
+        'now': datetime.now(),
+    }
+    
+    return render(request, 'myinfo/fax.html', context)
+
+
+#fax更新（削除と作成）
 def fax_del_create(request, p):
     Fax.objects.filter(date=p).delete()
 
@@ -1051,7 +1077,32 @@ def fax_del_create(request, p):
             obj = form.save(commit=False)
             obj.save()
             messages.info(request, '更新しました')
-            return redirect(request.META['HTTP_REFERER'])#元のページに戻る
+            # return redirect(request.META['HTTP_REFERER'])#元のページに戻る
+            
+            fax = Fax.objects.filter(date=p).first()
+            yesterday = datetime.strptime(p, '%Y-%m-%d') + relativedelta(days=-1)
+            yesterday = yesterday.strftime('%Y-%m-%d')
+            next = datetime.strptime(p, '%Y-%m-%d') + relativedelta(days=+1)
+            next = next.strftime('%Y-%m-%d')
+            yesterday_fax = Fax.objects.filter(date=yesterday).first()
+            
+            disp_day = datetime.strptime(p, '%Y-%m-%d')
+            room_members = Room.objects.filter(date=p)
+            user_exist = Room.objects.filter(date=p,user=request.user)
+
+            context ={
+                'fax': fax,
+                'next': next,
+                'yesterday': yesterday,
+                'disp_day': disp_day,
+                'yesterday_fax': yesterday_fax,
+                'p': p,
+                'room_members': room_members,
+                'user_exist': user_exist,
+                'now': datetime.now(),
+            }
+            
+            return render(request, 'myinfo/fax.html', context)
 
     return redirect(request.META['HTTP_REFERER'])#元のページに戻る
 
@@ -1130,6 +1181,71 @@ def ajax_day_move(request, p, *args, **kwargs):
             'yesterday_free': yesterday_free,
         }
         return JsonResponse(d)
+    
+    
+#FAX当番
+def fax_edit(request, p):
+
+    form = FaxCreateForm
+    fax = Fax.objects.filter(date=p).first()
+    yesterday = datetime.strptime(p, '%Y-%m-%d') + relativedelta(days=-1)
+    yesterday = yesterday.strftime('%Y-%m-%d')
+    next = datetime.strptime(p, '%Y-%m-%d') + relativedelta(days=+1)
+    next = next.strftime('%Y-%m-%d')
+    yesterday_fax = Fax.objects.filter(date=yesterday).first()
+    
+    disp_day = datetime.strptime(p, '%Y-%m-%d')
+    room_members = Room.objects.filter(date=p)
+    user_exist = Room.objects.filter(date=p,user=request.user)
+
+    context ={
+        'form': form,
+        'fax': fax,
+        'next': next,
+        'yesterday': yesterday,
+        'disp_day': disp_day,
+        'yesterday_fax': yesterday_fax,
+        'p': p,
+        'room_members': room_members,
+        'user_exist': user_exist,
+        'now': datetime.now(),
+        
+    }
+
+    if request.method == "POST":
+        form = FaxCreateForm(request.POST)
+        if form.is_valid(): 
+            obj = form.save(commit=False)
+            obj.save()
+            messages.info(request, '保存しました')
+            # return redirect(request.META['HTTP_REFERER'])#元のページに戻る
+            
+            fax = Fax.objects.filter(date=p).first()
+            yesterday = datetime.strptime(p, '%Y-%m-%d') + relativedelta(days=-1)
+            yesterday = yesterday.strftime('%Y-%m-%d')
+            next = datetime.strptime(p, '%Y-%m-%d') + relativedelta(days=+1)
+            next = next.strftime('%Y-%m-%d')
+            yesterday_fax = Fax.objects.filter(date=yesterday).first()
+            
+            disp_day = datetime.strptime(p, '%Y-%m-%d')
+            room_members = Room.objects.filter(date=p)
+            user_exist = Room.objects.filter(date=p,user=request.user)
+
+            context ={
+                'fax': fax,
+                'next': next,
+                'yesterday': yesterday,
+                'disp_day': disp_day,
+                'yesterday_fax': yesterday_fax,
+                'p': p,
+                'room_members': room_members,
+                'user_exist': user_exist,
+                'now': datetime.now(),
+            }
+            
+            return render(request, 'myinfo/fax.html', context)
+        
+    return render(request, 'myinfo/fax_edit.html', context)
 
 
 # FAXルール
