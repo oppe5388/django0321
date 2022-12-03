@@ -714,6 +714,9 @@
 			var url3 ="{% url 'myinfo:fax_edit' 123456 %}".replace(/123456/,response.keydate);
 			$("#editlink").attr("href", url3)
 
+			// メッセージ消す
+			$(".alert").remove()
+
 		});
         return false;
     });
