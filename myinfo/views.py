@@ -1197,6 +1197,9 @@ def fax_edit(request, p):
     disp_day = datetime.strptime(p, '%Y-%m-%d')
     room_members = Room.objects.filter(date=p)
     user_exist = Room.objects.filter(date=p,user=request.user)
+    
+    # シフト表
+    workshifts = WorkShifts.objects.all().order_by('-created_at')
 
     context ={
         'form': form,
@@ -1209,7 +1212,7 @@ def fax_edit(request, p):
         'room_members': room_members,
         'user_exist': user_exist,
         'now': datetime.now(),
-        
+        'workshifts':workshifts,
     }
 
     if request.method == "POST":

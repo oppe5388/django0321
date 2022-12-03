@@ -5,6 +5,14 @@
 {% block extra_head %}
 <!-- CSS -->
 <link href="{% static 'jquery-sortable.v2.css' %}" rel="stylesheet" type="text/css">
+
+<style>
+    iframe[src$=".pdf"]{
+        width:100%;
+        {% comment %} height:70vh; {% endcomment %}
+        height:60vw;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
@@ -171,9 +179,20 @@
 			<input class="btn btn-primary" type="submit" value="保存">
 		{% endif %}
 	</div>
-	<p class="small mt-2">※各ボタン、確認画面なしに実行されます</p><br>
+	<p class="small mt-2">※各ボタン、確認画面なしに実行されます</p>
 
 </form>
+
+<hr class="my-0">
+<!--  シフト表 -->
+{% for shift in workshifts %}
+	<a href="{{ shift.file_path.url }}" target="_blank" class="small">
+	<i class="fas fa-paperclip"></i>{{ shift.file_name }}</a>
+	<iframe src="{{ shift.file_path.url }}">
+		<p><b>表示されない時の表示</b>: <a href="{{ shift.file_path.url }}">ダウンロード</a>.</p>
+	</iframe>
+	<hr>
+{% endfor %}
 
 <!-- モーダル午後休の表 -->
 <div class="modal" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
