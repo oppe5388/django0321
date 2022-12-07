@@ -107,7 +107,7 @@ table.pop_table th{
 <a id="link_section3" href="javascript:void(0);" class="btn btn-sm btn-secondary mb-1 py-0 col-2"><i class="fas fa-angle-down"></i> 精算取消</a>
 <a id="link_section4" href="javascript:void(0);" class="btn btn-sm btn-secondary mb-1 py-0 col-2"><i class="fas fa-angle-down"></i> 発行キャンセル</a>
 <a id="link_section5" href="javascript:void(0);" class="btn btn-sm btn-secondary mb-1 py-0 col-2"><i class="fas fa-angle-down"></i> メンテ実施</a>
-<a id="link_section6" href="javascript:void(0);" class="btn btn-sm btn-secondary mb-1 py-0 col-2"><i class="fas fa-angle-down"></i> 名変</a>
+<a id="link_section6" href="javascript:void(0);" class="btn btn-sm btn-secondary mb-1 py-0 col-2"><i class="fas fa-angle-down"></i> 名義変更</a>
 </div>
 
 {% include 'info/fax_rule_kaiin.html' %}
@@ -117,10 +117,45 @@ table.pop_table th{
 {% include 'info/fax_rule_mente.html' %}
 
 <div class="card shadow d-flex mb-3" id="section6">
-    <div class="card-header font-weight-bold p-2">名義変更届出書（未作成）</div>
+    <div class="card-header font-weight-bold p-2">名義変更届出書</div>
     <div class="card-body">
+
+    <div class="d-flex flex-row">
+        <table class="small ex_table mb-2">
+            <td class="col-2">
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.99.field}}" 
+                data-content="{{ kaiin_list.99.description|safe }}"></span>
+                NFS-web
+            </td>
+        </table>
+        <table class="small ex_table ml-2 mb-2">
+            <td class="col-2">
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.86.field}}" 
+                data-content="{{ kaiin_list.86.description|safe }}"></span>
+                届出書
+            </td>
+        </table>
+        <table class="small ex_table ml-2 mb-2">
+            <td class="col-2">
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.109.field}}" 
+                data-content="{{ kaiin_list.109.description|safe }}"></span>                
+                会員証
+            </td>
+        </table>
+        <table class="small ex_table ml-2 mb-2">
+            <td class="col-2">
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.110.field}}" 
+                data-content="{{ kaiin_list.110.description|safe }}"></span>                
+                その他同封物
+            </td>
+        </table>
+    </div>
     
-    <table class="small ex_table col ">
+    <table class="small ex_table col ml-auto">
         <tr>
             <th colspan="3" class="table-info col-8">現在のご契約者様</th>
             <th class="table-info col-2">会員番号</th>
@@ -128,8 +163,15 @@ table.pop_table th{
         </tr>
         <tr>
             <th rowspan="2" class="table-info col-2">氏名（自署）</th>
-            <td rowspan="2" class="col-5"></td>
-            <td rowspan="2" class="text-center">印</td>
+            <td rowspan="2" class="col-5">
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                    title="{{ kaiin_list.87.field}}" 
+                    data-content="{{ kaiin_list.87.description|safe }}"></span>
+            </td>
+            <td rowspan="2" class="text-center">
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.88.field}}" 
+                data-content="{{ kaiin_list.88.description|safe }}"></span>印</td>
             <th class="table-info col-2">車名</th>
             <th>　</th>
         </tr>
@@ -139,9 +181,15 @@ table.pop_table th{
         </tr>
         <tr>
             <th class="table-info col-2">住所</th>
-            <td colspan="4">　</td>
+            <td colspan="4">
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.89.field}}" 
+                data-content="{{ kaiin_list.89.description|safe }}"></span>
+            </td>
         </tr>
     </table>
+
+
 
     <table class="small ex_table col mt-3">
         <tr>
@@ -149,41 +197,86 @@ table.pop_table th{
         </tr>
         <tr>
             <th class="table-warning col-2">氏名（自署）</th>
-            <td class=""></td>
-            <td class="text-center col-1">印</td>
+            <td class="">
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.90.field}}" 
+                data-content="{{ kaiin_list.90.description|safe }}"></span>
+            </td>
+            <td class="text-center col-1">
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.91.field}}" 
+                data-content="{{ kaiin_list.91.description|safe }}"></span>
+                印
+            </td>
             <th class="table-warning text-nowrap col-1">氏名（カナ）</th>
-            <td class="col-2">　</td>
+            <td class="col-2">
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.92.field}}" 
+                data-content="{{ kaiin_list.92.description|safe }}"></span>
+            </td>
             <th class="table-warning text-nowrap col-1">続柄</th>
-            <td class="col-2">　</td>
+            <td class="col-2">
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.93.field}}" 
+                data-content="{{ kaiin_list.93.description|safe }}"></span>
+            </td>
         </tr>
         <tr>
             <th class="table-warning col-2">住所</th>
-            <td colspan="6">　</td>
+            <td colspan="6">
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.94.field}}" 
+                data-content="{{ kaiin_list.94.description|safe }}"></span>
+            </td>
         </tr>
         <tr>
             <th class="table-warning col-2">電話番号</th>
-            <td colspan="3" class="col-4">　</td>
-            <td class="table-warning col-2">生年月日</td>
-            <td colspan="3">西暦　　　年　　月　　日</td>
+            <td colspan="3" class="col-4">
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.95.field}}" 
+                data-content="{{ kaiin_list.95.description|safe }}"></span>
+            </td>
+            <th class="table-warning col-2">生年月日</th>
+            <td colspan="3">
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.96.field}}" 
+                data-content="{{ kaiin_list.96.description|safe }}"></span>
+                西暦　　　年　　月　　日
+            </td>
         </tr>
         <tr>
             <th class="table-warning col-2">登録番号</th>
-            <td colspan="4">　</td>
+            <td colspan="4"><span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.97.field}}" 
+                data-content="{{ kaiin_list.97.description|safe }}"></span>
+            </td>
             <th class="table-warning col-2">性別</th>
-            <td colspan="2">　</td>
+            <td colspan="2">
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.98.field}}" 
+                data-content="{{ kaiin_list.98.description|safe }}"></span>
+            </td>
         </tr>
     </table>
 
     <table class="small ex_table col mt-3">
         <tr>
             <th class="table-info col-2">名義変更届出事由</th>
-            <td colspan="2">　</td>
+            <td colspan="2"><span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.100.field}}" 
+                data-content="{{ kaiin_list.100.description|safe }}"></span>
+            </td>
         </tr>
     </table>
     <div class="small mt-3">【会員証紛失届】</div>
     <table class="small ex_table col">
         <tr>
-            <td colspan="2" class="text-right pr-5"><u>署名　　　　　　　　　　　印</u></td>
+            <td colspan="2" class="text-right pr-5">
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.101.field}}" 
+                data-content="{{ kaiin_list.101.description|safe }}"></span>
+                <u>署名　　　　　　　　　　　印</u>
+            </td>
         </tr>
     </table>
 
@@ -195,46 +288,71 @@ table.pop_table th{
     <div class="d-flex flex-row align-items-start">
         <table class="small ex_table col mr-2">
             <tr>
-                <th>メンテナンス項目</th>
-                <th>計</th>
-            </tr>
-            <tr>
-                <td>　</td>
-                <td>　</td>
-            </tr>
-            <tr>
-                <td>合計</td>
-                <td>　</td>
+                <td colspan="2">
+                    <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                    title="{{ kaiin_list.102.field}}" 
+                    data-content="{{ kaiin_list.102.description|safe }}"></span>　
+                </td>
             </tr>
         </table>
 
         <table class="small ex_table col ml-1">
             <tr>
-                <td rowspan="1">　</td>
+                <td rowspan="1">
+                    <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                    title="{{ kaiin_list.103.field}}" 
+                    data-content="{{ kaiin_list.103.description|safe }}"></span>　
+                </td>
             </tr>
         </table>
     </div>
 
     <hr>
 
-    <div class="small mt-3">自動車検査証記録事項</div>
+    <div class="d-flex flex-row  bg-light">
+        <div class="small my-2">自動車検査証記録事項</div>
+        <table class="small ex_table ml-2 mb-2 bg-white">
+            <td class="col-2">
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.103.field}}" 
+                data-content="{{ kaiin_list.103.description|safe }}"></span>                
+                用紙
+            </td>
+        </table>
+    </div>
+    
     <table class="small ex_table col mt-3">
         <tr>
             <th colspan="8" class="table-dark">１.基本情報</th>
         </tr>
         <tr>
             <th colspan="2" class="table-dark">自動車登録番号又は車両番号</th>
-            <td colspan="6">札幌　３００　お　９９９９</td>
+            <td colspan="6">
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.104.field}}" 
+                data-content="{{ kaiin_list.104.description|safe }}"></span> 
+                札幌　３００　お　９９９９
+            </td>
         </tr>
         <tr>
             <th class="table-dark">車台番号</th>
-            <td colspan="7">Ｒ３５－ＤＳＧ－００００１</td>
+            <td colspan="7">
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.107.field}}" 
+                data-content="{{ kaiin_list.107.description|safe }}"></span> 
+                Ｒ３５－ＤＳＧ－００００１
+            </td>
         </tr>
         <tr>
             <th colspan="2" class="table-dark">登録年月日／交付年月日</th>
             <th class="text-gray-400">令和3年5月10日</th>
             <th class="table-dark">初度登録年月</th>
-            <td>令和3年5月</td>
+            <td>
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.105.field}}" 
+                data-content="{{ kaiin_list.105.description|safe }}"></span> 
+                令和3年5月
+            </td>
             <th colspan="2" class="table-dark">有効期間の満了する日</th>
             <th class="text-gray-400">令和6年5月9日</th>
         </tr>
@@ -243,7 +361,12 @@ table.pop_table th{
         </tr>
         <tr>
             <th colspan="2" class="table-dark">所有者の氏名又は名称</th>
-            <td colspan="6">運輸   太郎</td>
+            <td colspan="6">
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.108.field}}" 
+                data-content="{{ kaiin_list.108.description|safe }}"></span> 
+                運輸   太郎
+            </td>
         </tr>
         <tr>
             <th colspan="2" class="table-dark">所有者の住所</th>
@@ -256,7 +379,12 @@ table.pop_table th{
         </tr>
         <tr>
             <th colspan="2" class="table-dark">使用者の氏名又は名称</th>
-            <td colspan="6">＊＊＊</td>
+            <td colspan="6">
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.108.field}}" 
+                data-content="{{ kaiin_list.108.description|safe }}"></span> 
+                ＊＊＊
+            </td>
         </tr>
         <tr>
             <th colspan="2" class="table-dark">使用者の住所</th>
@@ -288,9 +416,14 @@ table.pop_table th{
             <th class="table-dark">自動車の種別</th>
             <th class="text-gray-400">普通</th>
             <th class="table-dark">用途</th>
-            <td>乗用</td>
+            <th class="text-gray-400">乗用</th>
             <th colspan="2" class="table-dark">自家用・事業用の別</th>
-            <td colspan="2">自家用</td>
+            <td colspan="2">
+                <span class="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom"
+                title="{{ kaiin_list.106.field}}" 
+                data-content="{{ kaiin_list.106.description|safe }}"></span> 
+                自家用
+            </td>
         </tr>
         <tr>
             <th class="table-dark">車体の形状</th>
