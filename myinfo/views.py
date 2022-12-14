@@ -36,8 +36,10 @@ import requests
 
 from django.views.generic import TemplateView
 
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from dateutil.relativedelta import relativedelta
+
+import jpbizday
 
 
 #個別ブラウザ通知のために、許可時にモデルにonesignalのidを登録
@@ -1200,6 +1202,50 @@ def fax_edit(request, p):
     
     # シフト表
     workshifts = WorkShifts.objects.all().order_by('-created_at')
+    
+    
+    # 発送日をつくる
+    nowadays = datetime.strptime(p, '%Y-%m-%d') #その日
+    tomorrow = nowadays + timedelta(1) #翌日
+    # 表示しない日に設定したら、表示しない
+    if Holiday.objects.filter(title="3", non_date=nowadays).exists():
+        mail_on_fax=""
+        next_mail_on_fax=""
+        pass
+    # それ以外
+    else:
+        mail_on_fax = tomorrow
+        # 次の平日を取得、VCC休業日は祝日と同じ扱い
+        while jpbizday.is_bizday(mail_on_fax) == False \
+            or Holiday.objects.filter(title="1", non_date=mail_on_fax).exists() \
+            or Holiday.objects.filter(title="2", non_date=mail_on_fax).exists():
+
+            mail_on_fax = mail_on_fax + timedelta(1)
+
+        #次の平日まで何日あるか
+        vcc_cnt = Holiday.objects.filter(title="2", non_date__range=[tomorrow, mail_on_fax]).count()
+        date_cnt = (mail_on_fax - nowadays) / timedelta(days=1) #整数に
+
+        if date_cnt >= 2:
+            if vcc_cnt +1 >= date_cnt:
+                # 次の平日の次の平日を取得：下とコード重複してるけど分岐を書き直してない
+                next_mail_on_fax = mail_on_fax + timedelta(1)
+                while jpbizday.is_bizday(next_mail_on_fax) == False \
+                    or Holiday.objects.filter(title="1", non_date=next_mail_on_fax).exists() \
+                    or Holiday.objects.filter(title="2", non_date=next_mail_on_fax).exists():
+                
+                    next_mail_on_fax = next_mail_on_fax + timedelta(1)
+            else:
+                next_mail_on_fax = mail_on_fax
+        else:
+            # 次の平日の次の平日を取得：上とコード重複してるけど分岐を書き直してない
+            next_mail_on_fax = mail_on_fax + timedelta(1)
+            while jpbizday.is_bizday(next_mail_on_fax) == False \
+                or Holiday.objects.filter(title="1", non_date=next_mail_on_fax).exists() \
+                or Holiday.objects.filter(title="2", non_date=next_mail_on_fax).exists():
+                
+                next_mail_on_fax = next_mail_on_fax + timedelta(1)
+        #VCC休みは祝日とするでOK？祝日登録モデルを作成する
 
     context ={
         'form': form,
@@ -1213,6 +1259,8 @@ def fax_edit(request, p):
         'user_exist': user_exist,
         'now': datetime.now(),
         'workshifts':workshifts,
+        'mail_on_fax':mail_on_fax,
+        'next_mail_on_fax':next_mail_on_fax,
     }
 
     if request.method == "POST":
