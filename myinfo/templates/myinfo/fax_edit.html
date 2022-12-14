@@ -451,6 +451,11 @@
 			},
 		});
 		// 作り変えここまで
+
+		//フリー欄
+		var free = '{{ fax.free| linebreaksbr }}'.replace(/<br>/g, '\n');
+		$('#id_free').val(free);
+
 	});
 
 	//販社モーダル
