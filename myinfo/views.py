@@ -407,7 +407,7 @@ def read_delete(request, pk):
     return redirect(request.META['HTTP_REFERER'])#元のページに戻る
 
 
-#シフト表
+#シフト表：下の2に変更？
 def shift(request):
 
     workshifts = WorkShifts.objects.all().order_by('-created_at')
@@ -416,6 +416,11 @@ def shift(request):
     }
 
     return render(request, 'myinfo/shift.html', context)
+
+#シフト表2
+def shift2(request):
+    today = datetime.today().strftime("%Y-%m-%d")
+    return redirect('myinfo:fax', today)
 
 
 #FAQリスト
@@ -1009,6 +1014,9 @@ def fax(request, p):
     disp_day = datetime.strptime(p, '%Y-%m-%d')
     room_members = Room.objects.filter(date=p)
     user_exist = Room.objects.filter(date=p,user=request.user)
+    
+    # シフト表
+    workshifts = WorkShifts.objects.all().order_by('-created_at')
 
     context ={
         'form': form,
@@ -1021,6 +1029,7 @@ def fax(request, p):
         'room_members': room_members,
         'user_exist': user_exist,
         'now': datetime.now(),
+        'workshifts': workshifts,
         
     }
 

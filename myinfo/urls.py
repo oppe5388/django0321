@@ -26,7 +26,8 @@ urlpatterns = [
     path('<int:pk>/ajax_read_delete', views.ajax_read_delete, name="ajax_read_delete"), 
 
     #シフト表
-    path('shift/', views.shift, name='shift'),  
+    path('shift/', views.shift, name='shift'),
+    # path('shift/', views.shift2, name='shift2'),  
 
     #FAQ
     path('faq/', views.faqs_list, name='faqs_list'),
