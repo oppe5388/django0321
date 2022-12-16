@@ -70,6 +70,13 @@
     $("#insp_day").prop('disabled', true);
     $("#price").prop('disabled', true);
 
+    //要素を追加
+    $('#shop').after('<button type="button" class="btn btn-info btn-rounded p-1 ml-1" data-toggle="popover" data-html="true" data-content="この画面で変更しても、会員証印刷ボタンから入り直した場合、基盤の内容で上書きされてしまう"><span class="small">vcc</span></button>');
+    $('#tantou_code').after('<button type="button" class="btn btn-info btn-rounded p-1 ml-1" data-toggle="popover" data-html="true" data-content="この画面で変更しても、会員証印刷ボタンから入り直した場合、基盤の内容で上書きされてしまう"><span class="small">vcc</span></button>');
+    $('#tantou_name').after('<button type="button" class="btn btn-info btn-rounded p-1 ml-1" data-toggle="popover" data-html="true" data-content="PROFITのフォロー担当者＝NFS-Webの販売担当者。<br>この画面で変更しても、会員証印刷ボタンから入り直した場合、基盤の内容で上書きされてしまう"><span class="small">vcc</span></button>');
+
+    $('[data-toggle="popover"]').popover()
+
     //それぞれ
     var cert_no = $('#hidden_no').val();
 

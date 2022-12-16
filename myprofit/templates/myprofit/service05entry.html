@@ -55,6 +55,10 @@
     $("#id_parent_category").val("1");
     //$('#product').prop('disabled', true);
 
+    $('#tantou_name').after('<button type="button" class="btn btn-info btn-rounded p-1 ml-1" data-toggle="popover" data-html="true" data-content="PROFITのフォロー担当者＝NFS-Webの販売担当者"><span class="small">vcc</span></button>');
+
+    $('[data-toggle="popover"]').popover()
+
     //それぞれ
     var cert_no = $('#hidden_no').val();
 
