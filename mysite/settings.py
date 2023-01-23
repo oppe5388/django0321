@@ -325,7 +325,7 @@ DBBACKUP_CLEANUP_KEEP_MEDIA = 6
 # メールサーバーへの接続設定
 EMAIL_HOST = 'smtp.office365.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'fax.vcc@outlook.jp'
-EMAIL_HOST_PASSWORD = 'Vcc44407'
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'fax.vcc@outlook.jp'
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL")
