@@ -66,11 +66,11 @@ def email_push(title):
     subject = 'ノートがシェアされました：' + title 
     message = '本文'
 
-    from_email = settings.DEFAULT_FROM_EMAIL
+    from_email = [settings.DEFAULT_FROM_EMAIL]
     # bcc = [settings.DEFAULT_FROM_EMAIL]
-    recipient_list = ['oppe5388@yahoo.co.jp']
-    # for mail_push in User.objects.filter(is_active=True):
-    #     recipient_list.append(mail_push.email)
+    recipient_list= []
+    for mail_push in User.objects.filter(is_active=True, email__icontains='@'):
+        recipient_list.append(mail_push.email)
     email = EmailMessage(subject, message, from_email, recipient_list, [])
     email.send()
 
