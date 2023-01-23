@@ -320,3 +320,12 @@ DBBACKUP_STORAGE_OPTIONS = {'location': os.path.join(BASE_DIR, 'backups')}
 DBBACKUP_CLEANUP_KEEP = 6
 # メディアのバックアップファイルも同様の設定
 DBBACKUP_CLEANUP_KEEP_MEDIA = 6
+
+
+# メールサーバーへの接続設定
+EMAIL_HOST = 'smtp.office365.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'fax.vcc@outlook.jp'
+EMAIL_HOST_PASSWORD = 'Vcc44407'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'fax.vcc@outlook.jp'

@@ -41,6 +41,9 @@ from dateutil.relativedelta import relativedelta
 
 import jpbizday
 
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
+
 
 #個別ブラウザ通知のために、許可時にモデルにonesignalのidを登録
 def onegisnal_id_create(request):
@@ -50,6 +53,26 @@ def onegisnal_id_create(request):
         user=request.user,
         )
     return HttpResponse('ok')
+
+
+#ブラウザpushが会社PCで通知されないので、メール通知を作る
+def email_push(title):
+    """記事をメールで通知"""
+    # context = {
+    #     'post': self,
+    # }
+    # subject = render_to_string('blog/notify_subject.txt', context, request)
+    # message = render_to_string('blog/notify_message.txt', context, request)
+    subject = 'ノートがシェアされました：' + title 
+    message = '本文'
+
+    from_email = settings.DEFAULT_FROM_EMAIL
+    # bcc = [settings.DEFAULT_FROM_EMAIL]
+    recipient_list = ['oppe5388@yahoo.co.jp']
+    # for mail_push in User.objects.filter(is_active=True):
+    #     recipient_list.append(mail_push.email)
+    email = EmailMessage(subject, message, from_email, recipient_list, [])
+    email.send()
 
 
 #Ajaxで未読削除
@@ -938,6 +961,8 @@ def note_create(request):
                         OneSignalUser.push(one,title=str(obj.owner)+'さんからノートがシェアされました', 
                         text=obj.title, url=resolve_url('myinfo:note_tab', p='シェア'))
 
+            email_push(obj.title)
+            
             return redirect('myinfo:note_list')
 
     else:
