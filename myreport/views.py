@@ -19,6 +19,27 @@ from myinfo.models import OneSignalUser
 from django.shortcuts import resolve_url
 from django.shortcuts import get_list_or_404
 
+from django.core.mail import EmailMultiAlternatives
+from django.conf import settings
+
+#ブラウザpushが会社PCで通知されないので、メール通知を作る
+def ld_email_push(title, url):
+    """記事をメールで通知"""
+    subject = title 
+    message = url
+    from_email = settings.DEFAULT_FROM_EMAIL
+    # recipient_list= []
+    # IDが1から4までのユーザーを取得
+    users = User.objects.filter(id__in=[1, 2, 3, 4])
+    # ユーザーのメールアドレスを取得
+    recipient_list= [user.email for user in users]
+
+    html_content = '<a href="' + url +'">'+ url +'</a>'
+    msg = EmailMultiAlternatives(subject, message, from_email, recipient_list)
+    msg.attach_alternative(html_content, "text/html")
+    msg.send()
+    
+
 #Create
 @login_required
 def add_fbvform(request):
@@ -42,6 +63,11 @@ def add_fbvform(request):
                     for one in onesignals:
                         OneSignalUser.push(one,title='日報が作成されました', text=str(obj.day), url=resolve_url('myreport:index'))
 
+            #LDメール通知
+            title1= '日報が作成されました：'+ str(obj.day)
+            url1 = resolve_url('myreport:index')
+            ld_email_push(title1, url1)
+                
             return redirect('myreport:index')
 
     else:
