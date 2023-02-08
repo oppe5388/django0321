@@ -150,8 +150,13 @@ def add_fbvform(request):
 
                 #モデルインスタンスのブラウザ通知メソッド呼び出し
                 obj.browser_push(request)
+                
+                #メール通知
+                title1= 'お知らせが作成されました：'+ obj.title
+                url1 = resolve_url('myinfo:detail', pk=obj.pk)
+                email_push(title1, url1)
 
-                #通知：選択したユーザー：LD共有でここに移動した
+                #未読の追加
                 result = request.POST.getlist("tags")
                 for user in result:
                     user_instance = get_object_or_404(User, pk=user)
@@ -269,15 +274,28 @@ def edit_fbvform(request, pk, *args, **kwargs):
             if request.POST.get('notifi_info') == 'new_info':
                 obj.browser_push(request)# テスト時は通知しないようコメントアウト
                 obj.created_at = timezone.datetime.now()# 作成も更新も今に
-                obj.updated_at = timezone.datetime.now()# 
+                obj.updated_at = timezone.datetime.now()#
+                
+                #メール通知
+                title1= 'お知らせが作成されました：'+ obj.title
+                url1 = resolve_url('myinfo:detail', pk=obj.pk)
+                email_push(title1, url1)
+                
                 # 全員を未読
                 for user in request.POST.getlist("tags"):
                     user_instance = get_object_or_404(User, pk=user)
                     ReadStates.objects.get_or_create(user=user_instance, information=obj)
+                    
             # 更新の場合
             elif request.POST.get('notifi_info') == 'update_info':
                 obj.updated_at = timezone.datetime.now()
                 obj.browser_push_update(request)# 更新通知
+                
+                #メール通知
+                title1= 'お知らせが更新されました：'+ obj.title
+                url1 = resolve_url('myinfo:detail', pk=obj.pk)
+                email_push(title1, url1)
+                
                 # 全員を未読
                 for user in request.POST.getlist("tags"):
                     user_instance = get_object_or_404(User, pk=user)
