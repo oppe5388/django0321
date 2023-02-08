@@ -57,15 +57,15 @@ def onegisnal_id_create(request):
 
 
 #ブラウザpushが会社PCで通知されないので、メール通知を作る
-def email_push(title,url):
+def email_push(title, url, recipient_list):
     """記事をメールで通知"""
     subject = title 
     message = url
     from_email = settings.DEFAULT_FROM_EMAIL
     # bcc = [settings.DEFAULT_FROM_EMAIL]
-    recipient_list= []
-    for mail_push in User.objects.filter(is_active=True, email__icontains='@'):
-        recipient_list.append(mail_push.email)
+    # recipient_list= []
+    # for mail_push in User.objects.filter(is_active=True, email__icontains='@'):
+    #     recipient_list.append(mail_push.email)
     # email = EmailMessage(subject, message, from_email, recipient_list, [])
     # email.send()
     
@@ -154,7 +154,10 @@ def add_fbvform(request):
                 #メール通知
                 title1= 'お知らせが作成されました：'+ obj.title
                 url1 = resolve_url('myinfo:detail', pk=obj.pk)
-                email_push(title1, url1)
+                recipient_list= []
+                for mail_push in User.objects.filter(is_active=True, email__icontains='@'):
+                    recipient_list.append(mail_push.email)
+                email_push(title1, url1, recipient_list)
 
                 #未読の追加
                 result = request.POST.getlist("tags")
@@ -270,7 +273,14 @@ def edit_fbvform(request, pk, *args, **kwargs):
             #         ReadStates.objects.get_or_create(user=user_instance, information=obj)
 
             #通知と更新の分岐、作り直しまとめ
-            # 新しいお知らせ
+            
+            #メール通知用
+            recipient_list= []
+            for mail_push in User.objects.filter(is_active=True, email__icontains='@'):
+                recipient_list.append(mail_push.email)
+            url1 = resolve_url('myinfo:detail', pk=obj.pk)
+            
+            # 新しいお知らせ    
             if request.POST.get('notifi_info') == 'new_info':
                 obj.browser_push(request)# テスト時は通知しないようコメントアウト
                 obj.created_at = timezone.datetime.now()# 作成も更新も今に
@@ -278,8 +288,7 @@ def edit_fbvform(request, pk, *args, **kwargs):
                 
                 #メール通知
                 title1= 'お知らせが作成されました：'+ obj.title
-                url1 = resolve_url('myinfo:detail', pk=obj.pk)
-                email_push(title1, url1)
+                email_push(title1, url1, recipient_list)
                 
                 # 全員を未読
                 for user in request.POST.getlist("tags"):
@@ -293,8 +302,7 @@ def edit_fbvform(request, pk, *args, **kwargs):
                 
                 #メール通知
                 title1= 'お知らせが更新されました：'+ obj.title
-                url1 = resolve_url('myinfo:detail', pk=obj.pk)
-                email_push(title1, url1)
+                email_push(title1, url1, recipient_list)
                 
                 # 全員を未読
                 for user in request.POST.getlist("tags"):
@@ -980,9 +988,12 @@ def note_create(request):
                         text=obj.title, url=resolve_url('myinfo:note_tab', p='シェア'))
 
             #メール通知
+            users = obj.share.all()
+            # ユーザーのメールアドレスを取得
+            recipient_list= [user.email for user in users]
             title1= 'ノートがシェアされました：'+obj.title
             url1 = resolve_url('myinfo:note_tab', p='シェア')
-            email_push(title1, url1)
+            email_push(title1, url1, recipient_list)
             
             return redirect('myinfo:note_list')
 
