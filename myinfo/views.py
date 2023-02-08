@@ -41,7 +41,8 @@ from dateutil.relativedelta import relativedelta
 
 import jpbizday
 
-from django.core.mail import EmailMessage
+# from django.core.mail import EmailMessage
+from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 
 
@@ -56,23 +57,22 @@ def onegisnal_id_create(request):
 
 
 #ブラウザpushが会社PCで通知されないので、メール通知を作る
-def email_push(title):
+def email_push(title,url):
     """記事をメールで通知"""
-    # context = {
-    #     'post': self,
-    # }
-    # subject = render_to_string('blog/notify_subject.txt', context, request)
-    # message = render_to_string('blog/notify_message.txt', context, request)
-    subject = 'ノートがシェアされました：' + title 
-    message = '本文'
-
-    from_email = [settings.DEFAULT_FROM_EMAIL]
+    subject = title 
+    message = url
+    from_email = settings.DEFAULT_FROM_EMAIL
     # bcc = [settings.DEFAULT_FROM_EMAIL]
     recipient_list= []
     for mail_push in User.objects.filter(is_active=True, email__icontains='@'):
         recipient_list.append(mail_push.email)
-    email = EmailMessage(subject, message, from_email, recipient_list, [])
-    email.send()
+    # email = EmailMessage(subject, message, from_email, recipient_list, [])
+    # email.send()
+    
+    html_content = '<a href="' + url +'">'+ url +'</a>'
+    msg = EmailMultiAlternatives(subject, message, from_email, recipient_list)
+    msg.attach_alternative(html_content, "text/html")
+    msg.send()
 
 
 #Ajaxで未読削除
@@ -961,7 +961,10 @@ def note_create(request):
                         OneSignalUser.push(one,title=str(obj.owner)+'さんからノートがシェアされました', 
                         text=obj.title, url=resolve_url('myinfo:note_tab', p='シェア'))
 
-            email_push(obj.title)
+            #メール通知
+            title1= 'ノートがシェアされました：'+obj.title
+            url1 = resolve_url('myinfo:note_tab', p='シェア')
+            email_push(title1, url1)
             
             return redirect('myinfo:note_list')
 
@@ -1007,6 +1010,11 @@ def note_update(request, pk, *args, **kwargs):
                         text=obj.title, url=resolve_url('myinfo:note_tab', p='シェア'))
 
             messages.success(request, '更新しました！')
+            #メール通知
+            title1= 'ノートが更新されました：'+obj.title
+            url1 = resolve_url('myinfo:note_tab', p='シェア')
+            email_push(title1, url1)
+            
             return redirect('myinfo:note_list')
 
         else:
