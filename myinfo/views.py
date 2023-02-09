@@ -45,6 +45,8 @@ import jpbizday
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 
+from django.shortcuts import resolve_url
+
 
 #個別ブラウザ通知のために、許可時にモデルにonesignalのidを登録
 def onegisnal_id_create(request):
@@ -153,7 +155,12 @@ def add_fbvform(request):
                 
                 #メール通知
                 title1= 'お知らせが作成されました：'+ obj.title
-                url1 = resolve_url('myinfo:detail', pk=obj.pk)
+                # url1 = resolve_url('myinfo:detail', pk=obj.pk)
+                url1 = '{0}://{1}{2}'.format(
+                    request.scheme,
+                    request.get_host(),
+                    resolve_url('myinfo:detail', pk=obj.pk),
+                )
                 recipient_list= []
                 for mail_push in User.objects.filter(is_active=True, email__icontains='@'):
                     recipient_list.append(mail_push.email)
@@ -278,7 +285,12 @@ def edit_fbvform(request, pk, *args, **kwargs):
             recipient_list= []
             for mail_push in User.objects.filter(is_active=True, email__icontains='@'):
                 recipient_list.append(mail_push.email)
-            url1 = resolve_url('myinfo:detail', pk=obj.pk)
+            # url1 = resolve_url('myinfo:detail', pk=obj.pk)
+            url1 = '{0}://{1}{2}'.format(
+                request.scheme,
+                request.get_host(),
+                resolve_url('myinfo:detail', pk=obj.pk),
+            )
             
             # 新しいお知らせ    
             if request.POST.get('notifi_info') == 'new_info':
@@ -992,7 +1004,12 @@ def note_create(request):
             # ユーザーのメールアドレスを取得
             recipient_list= [user.email for user in users]
             title1= 'ノートがシェアされました：'+obj.title
-            url1 = resolve_url('myinfo:note_tab', p='シェア')
+            # url1 = resolve_url('myinfo:note_tab', p='シェア')
+            url1 = '{0}://{1}{2}'.format(
+                request.scheme,
+                request.get_host(),
+                resolve_url('myinfo:note_tab', p='シェア'),
+            )
             email_push(title1, url1, recipient_list)
             
             return redirect('myinfo:note_list')
@@ -1041,7 +1058,12 @@ def note_update(request, pk, *args, **kwargs):
             messages.success(request, '更新しました！')
             #メール通知
             title1= 'ノートが更新されました：'+obj.title
-            url1 = resolve_url('myinfo:note_tab', p='シェア')
+            # url1 = resolve_url('myinfo:note_tab', p='シェア')
+            url1 = '{0}://{1}{2}'.format(
+                request.scheme,
+                request.get_host(),
+                resolve_url('myinfo:note_tab', p='シェア'),
+            )
             email_push(title1, url1)
             
             return redirect('myinfo:note_list')

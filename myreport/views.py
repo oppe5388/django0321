@@ -65,7 +65,12 @@ def add_fbvform(request):
 
             #LDメール通知
             title1= '日報が作成されました：'+ str(obj.day)
-            url1 = resolve_url('myreport:index')
+            # url1 = resolve_url('myreport:index')
+            url1 = '{0}://{1}{2}'.format(
+                request.scheme,
+                request.get_host(),
+                resolve_url('myreport:index'),
+            )
             ld_email_push(title1, url1)
                 
             return redirect('myreport:index')
