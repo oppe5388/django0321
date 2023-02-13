@@ -72,7 +72,7 @@ def email_push(title, url, recipient_list):
     # email.send()
     
     html_content = '<a href="' + url +'">'+ url +'</a>'
-    msg = EmailMultiAlternatives(subject, message, from_email, recipient_list)
+    msg = EmailMultiAlternatives(subject, message, from_email, [], bcc=recipient_list)
     msg.attach_alternative(html_content, "text/html")
     msg.send()
 
