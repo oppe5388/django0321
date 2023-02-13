@@ -1064,7 +1064,7 @@ def note_update(request, pk, *args, **kwargs):
                 request.get_host(),
                 resolve_url('myinfo:note_tab', p='シェア'),
             )
-            email_push(title1, url1)
+            email_push(title1, url1, recipient_list)
             
             return redirect('myinfo:note_list')
 
