@@ -1056,9 +1056,12 @@ def note_update(request, pk, *args, **kwargs):
                         text=obj.title, url=resolve_url('myinfo:note_tab', p='シェア'))
 
             messages.success(request, '更新しました！')
+            
             #メール通知
+            users = obj.share.all()
+            # ユーザーのメールアドレスを取得
+            recipient_list= [user.email for user in users]
             title1= 'ノートが更新されました：'+obj.title
-            # url1 = resolve_url('myinfo:note_tab', p='シェア')
             url1 = '{0}://{1}{2}'.format(
                 request.scheme,
                 request.get_host(),
