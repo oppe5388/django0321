@@ -65,7 +65,8 @@ urlpatterns = [
 
     #FAX当番
     # path('fax/', views.fax, name='fax'),
-    path('fax/<p>/', views.fax, name='fax'),
+    # path('fax/<p>/', views.fax, name='fax'),
+    path('fax/<str:p>/', views.fax, name='fax'),
     path('fax/<p>/delete/', views.fax_delete, name='fax_delete'),
     path('fax/<p>/update/', views.fax_del_create, name='fax_del_create'),
     path('fax/<p>/ajax_room_add', views.ajax_room_add, name="ajax_room_add"), #小部屋希望追加

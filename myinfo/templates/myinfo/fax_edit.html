@@ -65,8 +65,11 @@
 	<div class="bg-gray-300" id="edit_block">
 		{% if fax.html %}
 			{{ fax.html|safe }}
-		{% elif yesterday_fax.html %}
+		{% comment %} {% elif yesterday_fax.html %}
 			{{ yesterday_fax.html|safe }}
+		{% else %} {% endcomment %}
+		{% elif prev_fax.html %}
+			{{ prev_fax.html|safe }}
 		{% else %}
 			<div class="d-flex flex-wrap">
 				<div class="d-flex flex-column">
@@ -104,7 +107,7 @@
 				<h5 class="row ohiru mx-auto">12:30〜13:20</h5>
 				<ul class='example block connect-area px-1'>
 					<li><ul class="bg-ogirin">
-						<li><ul class="op">市川</ul></li>
+						<li><ul class="op">北條</ul></li>
 						<li><ul class="kakari">U直</ul></li>
 						<li><ul class="fax">10:30〜</ul></li>
 						<li><ul class="fax">13:30〜</ul></li>
@@ -156,9 +159,6 @@
 						</ul></li>
 						<li><ul class="bg-ogirin">
 							<li><ul class="op">石嶋</ul></li>
-						</ul></li>
-						<li><ul class="bg-ogirin">
-							<li><ul class="op">北條</ul></li>
 						</ul></li>
 						<li><ul class="fax">小部屋</ul></li>
 						<li><ul class="fax">小部屋</ul></li>
