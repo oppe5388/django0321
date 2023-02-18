@@ -60,7 +60,11 @@ def my_context_processor(request):
 
     # 未読件数を表示
     if request.user.id is None:
-        return {}
+        return {
+            'mail_date': mail_date,
+            'next_mail_date': next_mail_date,
+            'faxday': faxday,
+        }
     # LDはLD共有も含む
     elif request.user.id < 5 :
         
