@@ -651,6 +651,7 @@ def all_search(request):
 
 
     #自分のノート検索
+    note_cnt = 0
     keyword = request.GET.get('all_search')
     if keyword:
         keyword = keyword.split()
@@ -662,7 +663,7 @@ def all_search(request):
                 ).order_by('-updated_at')#
 
         context['note_set'] = queryset
-        note_cnt = queryset.count()
+        note_cnt = note_cnt + queryset.count()
 
     #シェアのノートも検索
     keyword = request.GET.get('all_search')

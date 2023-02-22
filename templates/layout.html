@@ -326,11 +326,11 @@
                     {% comment %} {% if allsearchForm %} {% endcomment %}
                     <form
                     class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-                    action='{% url "myinfo:all_search" %}' method='get'>
+                    action='{% url "myinfo:all_search" %}' method='get' id="search-form1">
                     <div class="input-group">
                             {% comment %} {{ allsearchForm.all_search_keyword }} {% endcomment %}
                             <input type="search" name="all_search" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
+                                aria-label="Search" aria-describedby="basic-addon2" id="search-input1">
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="submit">
                                 <i class="fas fa-search fa-sm"></i>
@@ -370,11 +370,11 @@
                         <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                             aria-labelledby="searchDropdown">
                             <form class="form-inline mr-auto w-100 navbar-search"
-                            action='{% url "myinfo:all_search" %}' method='get'>
+                            action='{% url "myinfo:all_search" %}' method='get' id="search-form2">
                                 <div class="input-group">
                                     <input type="text" name="all_search" class="form-control bg-light border-0 small"
                                         placeholder="Search for..." aria-label="Search"
-                                        aria-describedby="basic-addon2">
+                                        aria-describedby="basic-addon2"  id="search-input2">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="submit">
                                             <i class="fas fa-search fa-sm"></i>
@@ -524,6 +524,38 @@
     <script>
         $('[data-toggle="tooltip"]').tooltip();
     </script>
+
+    <!-- JavaScript -->
+    <script>
+    // 検索フォームの値をローカルストレージに保存する
+    document.getElementById('search-form1').addEventListener('submit', function(event) {
+      event.preventDefault();
+      var query = document.getElementById('search-input1').value;
+      localStorage.setItem('query', query);
+      this.submit();
+    });
+  
+    // ローカルストレージから検索フォームの値を取得してセットする
+    var query = localStorage.getItem('query');
+    if (query) {
+      document.getElementById('search-input1').value = query;
+    }
+
+
+    // 検索フォームの値をローカルストレージに保存する
+    document.getElementById('search-form2').addEventListener('submit', function(event) {
+      event.preventDefault();
+      var query = document.getElementById('search-input2').value;
+      localStorage.setItem('query', query);
+      this.submit();
+    });
+  
+    // ローカルストレージから検索フォームの値を取得してセットする
+    var query = localStorage.getItem('query');
+    if (query) {
+      document.getElementById('search-input2').value = query;
+    }
+  </script>
 
 {% block extra_foot %}{% endblock %}
 

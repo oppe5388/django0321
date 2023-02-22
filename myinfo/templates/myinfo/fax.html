@@ -73,7 +73,7 @@
 		<!-- ajax -->
 		<a href="{% url 'myinfo:ajax_day_move' -1 %}" data-catid={{p}} id="prev_day" class="ajax_day_move btn btn-secondary btn-sm">
 			<i class="fas fa-chevron-left"></i>前日</a>
-			<div class="text-center d-flex mx-2" id="disp">{{disp_day|date:"Y/n/j(D)"}}</div>
+			<div class="text-center d-flex mx-2" id="disp">{{disp_day|date:"Y/m/d(D)"}}</div>
 			<div class="d-none" id="target_date">{{p}}</div>
 		<a href="{% url 'myinfo:ajax_day_move' 1 %}" data-catid={{p}} id="next_day" class="ajax_day_move btn btn-secondary btn-sm">
 			翌日<i class="fas fa-chevron-right"></i></a>
