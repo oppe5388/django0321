@@ -526,36 +526,80 @@
     </script>
 
     <!-- JavaScript -->
-    <script>
-    // 検索フォームの値をローカルストレージに保存する
+    {% comment %} <script>
+    // 検索フォーム1の値をローカルストレージに保存する
     document.getElementById('search-form1').addEventListener('submit', function(event) {
-      event.preventDefault();
-      var query = document.getElementById('search-input1').value;
-      localStorage.setItem('query', query);
-      this.submit();
+        event.preventDefault();
+        var query = document.getElementById('search-input1').value;
+        localStorage.setItem('query1', query);
+        this.submit();
     });
   
-    // ローカルストレージから検索フォームの値を取得してセットする
-    var query = localStorage.getItem('query');
-    if (query) {
-      document.getElementById('search-input1').value = query;
+    // ローカルストレージから検索フォーム1の値を取得してセットする
+    var query1 = localStorage.getItem('query1');
+    if (query1) {
+        document.getElementById('search-input1').value = query1;
     }
-
-
-    // 検索フォームの値をローカルストレージに保存する
+  
+  
+    // 検索フォーム2の値をローカルストレージに保存する
     document.getElementById('search-form2').addEventListener('submit', function(event) {
-      event.preventDefault();
-      var query = document.getElementById('search-input2').value;
-      localStorage.setItem('query', query);
-      this.submit();
+        event.preventDefault();
+        var query = document.getElementById('search-input2').value;
+        localStorage.setItem('query2', query);
+        this.submit();
     });
   
-    // ローカルストレージから検索フォームの値を取得してセットする
-    var query = localStorage.getItem('query');
-    if (query) {
-      document.getElementById('search-input2').value = query;
+    // ローカルストレージから検索フォーム2の値を取得してセットする
+    var query2 = localStorage.getItem('query2');
+    if (query2) {
+        document.getElementById('search-input2').value = query2;
     }
-  </script>
+
+    // 別のページに遷移した際にlocalStorageから値を削除する
+    window.addEventListener('beforeunload', () => {
+        localStorage.removeItem('query1');
+        localStorage.removeItem('query2');
+    });
+    </script> {% endcomment %}
+
+    <script>
+
+    // 現在のURLに「search_result」が含まれていない場合にセッションストレージを削除
+    if (window.location.href.indexOf('search_result') === -1) {
+        sessionStorage.removeItem('query1');
+        sessionStorage.removeItem('query2');
+    }
+
+    // 検索フォーム1の値をセッションストレージに保存する
+    document.getElementById('search-form1').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var query = document.getElementById('search-input1').value;
+        sessionStorage.setItem('query1', query);
+        this.submit();
+    });
+    
+    // ページ読み込み時にセッションストレージから検索フォーム1の値を取得してセットする
+    var query1 = sessionStorage.getItem('query1');
+    if (query1) {
+        document.getElementById('search-input1').value = query1;
+    }
+    
+    
+    // 検索フォーム2の値をセッションストレージに保存する
+    document.getElementById('search-form2').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var query = document.getElementById('search-input2').value;
+        sessionStorage.setItem('query2', query);
+        this.submit();
+    });
+    
+    // ページ読み込み時にセッションストレージから検索フォーム2の値を取得してセットする
+    var query2 = sessionStorage.getItem('query2');
+    if (query2) {
+        document.getElementById('search-input2').value = query2;
+    }
+    </script>
 
 {% block extra_foot %}{% endblock %}
 
