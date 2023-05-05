@@ -321,6 +321,15 @@
                     }, 
                 success: function(data){
                     $('#ajax_read_del'+ pk).empty(); // ←消すidを書く
+                    
+                    // Layout.htmlの未読件数表示をマイナスする
+                    var count = parseInt($('#unread_count').text()); // ←未読件数表示のidを書く
+                    count -= 1;
+                    if (count == 0) {
+                        $('#unread_count').hide(); // ←未読アイコンのidを書く
+                    } else {
+                        $('#unread_count').text(count);
+                    }
                 }
             });
         // }
