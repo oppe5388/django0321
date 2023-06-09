@@ -17,22 +17,24 @@ class TaskResource(ModelResource):
 
 #インポート、エクスポート
 class TaskAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    # list_display = ('id', 'created_at', 'request_content', 'is_completed', 'response_content', 'release_date')
-    list_display = ('id', 'created_at', 'short_request_content', 'is_completed', 'short_response_content', 'release_date')
+    list_display = ('id', 'created_at', 'request_content', 'is_completed', 'response_content', 'release_date')
+    # list_display = ('id', 'created_at', 'short_request_content', 'is_completed', 'short_response_content', 'release_date')
     resource_class = TaskResource
-    list_filter = ('created_at', 'is_completed', 'release_date')
+    list_filter = ('is_completed', 'release_date')
     search_fields = ('request_content', 'response_content', 'notes')
     ordering = ('id',)
+    list_editable = ('created_at', 'request_content', 'is_completed', 'response_content', 'release_date') # 追記箇所
     
     
+    # 未使用
     def short_request_content(self, obj):
         no_html = strip_tags(obj.request_content)
-        return no_html[:30]
+        return no_html[:50]
     short_request_content.short_description = 'Short Request Content'
 
     def short_response_content(self, obj):
         no_html = strip_tags(obj.response_content)
-        return no_html[:30]
+        return no_html[:50]
     short_response_content.short_description = 'Short Response Content'
 
 
