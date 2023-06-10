@@ -19,5 +19,6 @@ class MoneyTransAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('id', 'transfer', 'deadline', 'entry', 'fix', 'setoff')
     resource_class = MoneyTransResource
     formats = [base_formats.XLSX]
+    list_editable = ('transfer', 'deadline', 'entry', 'fix', 'setoff')
 
 admin.site.register(MoneyTrans, MoneyTransAdmin)

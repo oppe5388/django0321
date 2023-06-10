@@ -166,11 +166,14 @@ class ShopsResource(ModelResource):
 
 #インポート、エクスポート
 class ShopsAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ('dealer','name','shopcode', 'tel')
+    # list_display = ('dealer','name','shopcode', 'tel')
+    list_display = ('dealer','name','shopcode','tel','fax','homepage','kana')
     ordering = ('id',)
     resource_class = ShopsResource
     # formats = [base_formats.XLSX]
     search_fields = ['name']
+    list_editable = ('name','shopcode','tel','fax','homepage','kana')
+    list_display_links = ('dealer', )#editableでないものをリンクとして指定
 
 admin.site.register(Shops, ShopsAdmin)
 
@@ -246,10 +249,11 @@ class HolidayResource(ModelResource):
 
 #インポート、エクスポート
 class HolidayAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ('title','non_date')
+    list_display = ('id','title','non_date')
     ordering = ('-non_date',)
     resource_class = HolidayResource
     list_filter = ('title','non_date')
+    list_editable = ('title','non_date')
 
 admin.site.register(Holiday, HolidayAdmin)
 
@@ -264,6 +268,8 @@ class FaxResource(ModelResource):
 #インポート、エクスポート
 class FaxAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = FaxResource
+    list_display = ('date','free',)
+    list_editable = ('free',)
 
 admin.site.register(Fax, FaxAdmin)
 
