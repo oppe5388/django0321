@@ -493,7 +493,6 @@ function change_to_wareki(date){
 
 </script>
 
-
 <script>
 // コピーボタン
     function copyToClipboard(id) {
@@ -542,7 +541,8 @@ function change_to_wareki(date){
       var hash = document.location.hash;
       if (hash) {
         console.log(hash);
-        $('.nav-tabs a[href=\\'+hash+']').tab('show');
+        //$('.nav-tabs a[href=\\'+hash+']').tab('show');
+        $('.nav-tabs a[href="' + hash + '"]').tab('show');
       }
 
       // Change hash for page-reload
@@ -558,7 +558,7 @@ function change_to_wareki(date){
 
 
 <!-- 送金スケajax -->
-<script>
+{% comment %} <script>
     //
     var $date = $('input[type="date"][name="input_date"]')
     $date.on('change', function () {
@@ -601,6 +601,44 @@ function change_to_wareki(date){
     });
 
 
+</script> {% endcomment %}
+
+<!-- 送金スケajax -->
+<script>
+    $('#input_date').on('change', function() {
+        var input_date = $(this).val();
+
+        $.ajax({
+            url: "/mysched/ajax_sched/",
+            type: "GET",
+            dataType: "json",
+            data: { 
+                input_date: input_date
+            },
+        }).done(function(data) {
+            console.log(data);
+            $('#ajax_add1, #ajax_add2, #ajax_add0').remove();
+
+            if (data.input_date == 'インプットなし') {
+                $('#ajax_noinput').prepend(
+                    `<div id="ajax_add0" class="alert alert-warning">日付を選択してください</div>`
+                );
+            } else {
+                $('#ajax_disp').show();
+                $('#ajax_result1').prepend(
+                    `<div><textarea id="ajax_add1" rows="3" class="border-0 p-0 ml-2">登録：${data.input_date}\r\n→承認：${data.past_fix}\r\n→送金：${data.past_transfer}</textarea></div>`
+                );
+                $('#ajax_result2').prepend(
+                    `<div><textarea id="ajax_add2" rows="2" class="border-0 p-0 ml-2">登録：${data.input_date}\r\n→送金：${data.setoff_transfer}</textarea></div>`
+                );
+            }
+        }).fail(function(data) {
+            console.log("エラーのほう");
+            $('#ajax_disp').hide();
+        });
+
+        return false;
+    });
 </script>
 
 

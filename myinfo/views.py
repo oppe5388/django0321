@@ -607,9 +607,6 @@ def all_search(request):
                     Q(for_search__icontains=k)
                 ).order_by('-updated_at')#
 
-        # context = {
-        #     'informations': queryset,
-        # }
         context['informations'] = queryset
 
 
@@ -691,7 +688,6 @@ class ContactsJsonView(BaseDatatableView):
     # モデルの指定
     model = Contacts
     # 表示するフィールドの指定
-    # columns = ['id', 'incoming', 'name', 'tel', 'hours', 'title', 'job', 'searchwords', 'attachments']
     columns = ['id', 'incoming', 'name', 'tel', 'hours', 'title', 'job', 'for_search', 'attachments']
 
     # ↓FKey(M2Mの中間テーブル)でやってみる
@@ -794,36 +790,28 @@ class ShopsJsonView(BaseDatatableView):
         'dealer__base',
         'dealer__base_tel',
         ]
+        
     def render_column(self, row, column):
-        if column == 'dealer__name':
-            return row.dealer.name
-            # return row.dealer.pk #pkも返せる
-        elif column == 'dealer__pk':
-            return row.dealer.pk
-        elif column == 'dealer__code5':
-            return row.dealer.code5
-        elif column == 'dealer__code4':
-            return row.dealer.code4
-        elif column == 'dealer__full_name':
-            return row.dealer.full_name
-        elif column == 'dealer__domain':
-            return row.dealer.domain
-        elif column == 'dealer__customer_desk':
-            return row.dealer.customer_desk
-        elif column == 'dealer__emergency':
-            return row.dealer.emergency
-        elif column == 'dealer__bc':
-            return row.dealer.bc
-        elif column == 'dealer__nfs':
-            return row.dealer.nfs
-        elif column == 'dealer__in_house':
-            return row.dealer.in_house
-        elif column == 'dealer__base':
-            return row.dealer.base
-        elif column == 'dealer__base_tel':
-            return row.dealer.base_tel
-        else:
-            return super(ShopsJsonView, self).render_column(row, column)
+        dealer_attributes = {
+            'dealer__name': 'name',
+            'dealer__pk': 'pk',
+            'dealer__code5': 'code5',
+            'dealer__code4': 'code4',
+            'dealer__full_name': 'full_name',
+            'dealer__domain': 'domain',
+            'dealer__customer_desk': 'customer_desk',
+            'dealer__emergency': 'emergency',
+            'dealer__bc': 'bc',
+            'dealer__nfs': 'nfs',
+            'dealer__in_house': 'in_house',
+            'dealer__base': 'base',
+            'dealer__base_tel': 'base_tel',
+        }
+
+        if column in dealer_attributes:
+            return getattr(row.dealer, dealer_attributes[column])
+
+        return super(ShopsJsonView, self).render_column(row, column)
 
     # https://pypi.org/project/django-datatables-view/1.20.0/
     # 動作OK
@@ -903,10 +891,6 @@ class Shops(TemplateView):
         context = super().get_context_data(**kwargs)
         context['dealers_set'] = Dealers.objects.all().order_by('id')
         return context
-
-# django-ajax-datatable中止
-# def contacts(request):
-#     return render(request, 'myinfo/contacts_list.html', {})
 
 
 #ノートlist
@@ -1090,35 +1074,9 @@ def note_update(request, pk, *args, **kwargs):
 
 #FAX当番
 def fax(request, p):
-
-    # form = FaxCreateForm()
-    # fax = Fax.objects.filter(date=p).first()
-    # yesterday = datetime.strptime(p, '%Y-%m-%d') + relativedelta(days=-1)
-    # yesterday = yesterday.strftime('%Y-%m-%d')
-    # next = datetime.strptime(p, '%Y-%m-%d') + relativedelta(days=+1)
-    # next = next.strftime('%Y-%m-%d')
-    # yesterday_fax = Fax.objects.filter(date=yesterday).first()
-    
-    # disp_day = datetime.strptime(p, '%Y-%m-%d')
-    # room_members = Room.objects.filter(date=p)
-    # user_exist = Room.objects.filter(date=p,user=request.user)
     
     # シフト表
     workshifts = WorkShifts.objects.all().order_by('-created_at')
-
-    # context ={
-    #     'form': form,
-    #     'fax': fax,
-    #     'next': next,
-    #     'yesterday': yesterday,
-    #     'disp_day': disp_day,
-    #     'yesterday_fax': yesterday_fax,
-    #     'p': p,
-    #     'room_members': room_members,
-    #     'user_exist': user_exist,
-    #     'now': datetime.now(),
-    #     'workshifts': workshifts,
-    # }
     
     form = FaxCreateForm()
 
@@ -1127,9 +1085,6 @@ def fax(request, p):
     prev_day = datetime.strptime(p, '%Y-%m-%d') + relativedelta(days=-1)
     prev_day = prev_day.strftime('%Y-%m-%d')
     prev_fax = Fax.objects.filter(date=prev_day).first()
-
-    # next_day = datetime.strptime(p, '%Y-%m-%d') + relativedelta(days=+1)
-    # next_day = next_day.strftime('%Y-%m-%d')
 
     disp_day = datetime.strptime(p, '%Y-%m-%d')
 
@@ -1140,14 +1095,11 @@ def fax(request, p):
     context ={
         'form': form,
         'fax': fax,
-        # 'next_day': next_day,
-        # 'prev_day': prev_day,
         'disp_day': disp_day,
         'prev_fax': prev_fax,
         'p': p,
         'room_members': room_members,
         'user_exist': user_exist,
-        # 'now': datetime.now(),
         'workshifts': workshifts,
     }
 
@@ -1157,10 +1109,8 @@ def fax(request, p):
             obj = form.save(commit=False)
             obj.save()
             messages.info(request, '保存しました')
-            # return redirect(request.META['HTTP_REFERER'])#元のページに戻る
             return redirect('myinfo:fax', p=p)
         
-    # return render(request, 'myinfo/fax.html', {'form': form })
     return render(request, 'myinfo/fax.html', context)
 
 
@@ -1168,32 +1118,7 @@ def fax(request, p):
 def fax_delete(request, p):
     Fax.objects.filter(date=p).delete()
     messages.info(request, '削除しました')
-    # return HttpResponse('success')
-    # return redirect(request.META['HTTP_REFERER'])#元のページに戻る
 
-
-    # fax = Fax.objects.filter(date=p).first()
-
-    # prev_day = datetime.strptime(p, '%Y-%m-%d') + relativedelta(days=-1)
-    # prev_day = prev_day.strftime('%Y-%m-%d')
-    # prev_fax = Fax.objects.filter(date=prev_day).first()
-
-    # disp_day = datetime.strptime(p, '%Y-%m-%d')
-
-    # room_members = Room.objects.filter(date=p)
-    # user_exist = Room.objects.filter(date=p, user=request.user)
-    
-    # context ={
-    #     'form': form,
-    #     'fax': fax,
-    #     'disp_day': disp_day,
-    #     'prev_fax': prev_fax,
-    #     'p': p,
-    #     'room_members': room_members,
-    #     'user_exist': user_exist,
-    # }
-    
-    # return render(request, 'myinfo/fax.html', context)
     return redirect('myinfo:fax', p=p)
 
 
@@ -1207,33 +1132,9 @@ def fax_del_create(request, p):
             obj = form.save(commit=False)
             obj.save()
             messages.info(request, '更新しました')
-            # return redirect(request.META['HTTP_REFERER'])#元のページに戻る           
 
-            # fax = Fax.objects.filter(date=p).first()
-
-            # prev_day = datetime.strptime(p, '%Y-%m-%d') + relativedelta(days=-1)
-            # prev_day = prev_day.strftime('%Y-%m-%d')
-            # prev_fax = Fax.objects.filter(date=prev_day).first()
-
-            # disp_day = datetime.strptime(p, '%Y-%m-%d')
-
-            # room_members = Room.objects.filter(date=p)
-            # user_exist = Room.objects.filter(date=p, user=request.user)
-            
-            # context ={
-            #     'form': form,
-            #     'fax': fax,
-            #     'disp_day': disp_day,
-            #     'prev_fax': prev_fax,
-            #     'p': p,
-            #     'room_members': room_members,
-            #     'user_exist': user_exist,
-            # }
-            
-            # return render(request, 'myinfo/fax.html', context)
             return redirect('myinfo:fax', p=p)
 
-    # return redirect(request.META['HTTP_REFERER'])#元のページに戻る
     return render(request, 'myinfo/fax.html', context)
 
 
@@ -1399,29 +1300,7 @@ def fax_edit(request, p):
             obj = form.save(commit=False)
             obj.save()
             messages.info(request, '保存しました')
-            # return redirect(request.META['HTTP_REFERER'])#元のページに戻る
-            
-            # fax = Fax.objects.filter(date=p).first()
 
-            # prev_day = datetime.strptime(p, '%Y-%m-%d') + relativedelta(days=-1)
-            # prev_day = prev_day.strftime('%Y-%m-%d')
-            # prev_fax = Fax.objects.filter(date=prev_day).first()
-
-            # disp_day = datetime.strptime(p, '%Y-%m-%d')
-
-            # room_members = Room.objects.filter(date=p)
-            # user_exist = Room.objects.filter(date=p, user=request.user)
-
-            # context ={
-            #     'fax': fax,
-            #     'disp_day': disp_day,
-            #     'prev_fax': prev_fax,
-            #     'p': p,
-            #     'room_members': room_members,
-            #     'user_exist': user_exist,
-            # }
-            
-            # return render(request, 'myinfo/fax.html', context)
             return redirect('myinfo:fax', p=p)
         
     return render(request, 'myinfo/fax_edit.html', context)
@@ -1432,7 +1311,6 @@ def fax_edit(request, p):
 def fax_rule(request):
 
     context ={
-        # 'kaiin_list': FaxExplain.objects.filter(fax_format__id=1).order_by('id'),
         'kaiin_list': FaxExplain.objects.order_by('id'),
     }
  

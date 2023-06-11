@@ -434,7 +434,8 @@
 
 <!-- Javascript -->
 {% comment %} <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> {% endcomment %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+{% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script type="text/javascript" src='{% static 'jquery-sortable.js' %}'></script>
 <script type="text/javascript">
 	$(function() {
@@ -483,6 +484,46 @@
 	$("#gogo_rest").click(function () {
 		$('#Modal2').modal('show')
 	});
+</script> {% endcomment %}
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script type="text/javascript" src='{% static 'jquery-sortable.js' %}'></script>
+<script>
+	$(function() {
+		$('#id_date').val($('#target_date').text());
+
+		// 変更なしでもそのまま保存できるように
+		$('#edit_block .yasumi').children().addClass('d-none');
+		var str = $('#edit_block').html().replace(/\r?\n/g, '');
+		$('#id_html').val(str);
+		$('#edit_block .yasumi').children().removeClass('d-none');
+	
+		var group = $("ul.example").sortable({
+			group: 'connect-area',
+			onDrop: function ($item, container, _super) {
+				$('#serialize_output').val(group.sortable("serialize").get().join("\n"));
+				_super($item, container);
+	
+				$('#edit_block .yasumi').children().addClass('d-none');
+				var str = $('#edit_block').html().replace(/\r?\n/g, '');
+				$('#id_html').val(str);
+				$('#edit_block .yasumi').children().removeClass('d-none');
+			},
+			serialize: function (parent, children, isContainer) {
+				return isContainer ? children.join() : parent.text();
+			},
+		});
+
+		var free = '{{ fax.free| linebreaksbr }}'.replace(/<br>/g, '\n');
+		$('#id_free').val(free);
+	});
+
+	// 販社モーダル
+	$(document).on('click', '#gogo_rest', function () {
+		$('#Modal2').modal('show');
+	});
 </script>
+
 
 {% endblock %}
