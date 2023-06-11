@@ -22,6 +22,8 @@ from django.shortcuts import get_list_or_404
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
 
+from django.views.decorators.csrf import csrf_protect
+
 #ブラウザpushが会社PCで通知されないので、メール通知を作る
 def ld_email_push(title, url):
     """記事をメールで通知"""
@@ -42,6 +44,7 @@ def ld_email_push(title, url):
 
 #Create
 @login_required
+@csrf_protect #二重submit防止
 def add_fbvform(request):
     if request.method == "POST":
         form = DailyReportForm(request.POST)
@@ -62,7 +65,7 @@ def add_fbvform(request):
                 if onesignals:
                     for one in onesignals:
                         OneSignalUser.push(one,title='日報が作成されました', text=str(obj.day), url=resolve_url('myreport:index'))
-
+                        
             #LDメール通知
             title1= '日報が作成されました：'+ str(obj.day)
             # url1 = resolve_url('myreport:index')
@@ -94,6 +97,7 @@ def add_fbvform(request):
 
 #Update
 @login_required
+@csrf_protect #二重submit防止
 def edit_fbvform(request, pk, *args, **kwargs):
 
     dailyreport = get_object_or_404(DailyReport, pk=pk)
