@@ -344,9 +344,16 @@
                     <ul class="navbar-nav ml-auto">
 
                         <!-- FAX当番 -->
-                        <div class="d-flex">
+                        {% comment %} <div class="d-flex">
                             <a class="btn btn-sm btn-secondary d-flex flex-row align-items-center m-2 py-1" href='{% url "myinfo:fax" faxday %}'>
                                 <i class="fas fa-fax fa-xs"></i><span class="d-none d-sm-inline-block text-nowrap">&nbsp;当番</span></a>
+                        </div> {% endcomment %}
+
+                        <!-- FAX当番：jsで当日のリンクに -->
+                        <div class="d-flex">
+                            <a id="fax-link" class="btn btn-sm btn-secondary d-flex flex-row align-items-center m-2 py-1" href='{% url "myinfo:fax" 987654 %}'>
+                                <i class="fas fa-fax fa-xs"></i><span class="d-none d-sm-inline-block text-nowrap"> 当番</span>
+                            </a>
                         </div>
 
                         <!-- 発送日 -->
@@ -599,6 +606,17 @@
     if (query2) {
         document.getElementById('search-input2').value = query2;
     }
+    </script>
+
+    <script>
+    // FAX当番リンクはクリック時に今日を取得してリンクする
+    document.querySelector('#fax-link').addEventListener('click', function(event) {
+        event.preventDefault();
+        let today = new Date();
+        let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        let url = this.getAttribute('href').replace('987654', date);
+        window.location.href = url;
+    });        
     </script>
 
 {% block extra_foot %}{% endblock %}
