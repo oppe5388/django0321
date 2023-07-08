@@ -182,6 +182,7 @@ class Attachments(models.Model):
 class WorkShifts(models.Model):
     file_path = models.FileField(upload_to = 'uploads/')
     created_at = models.DateTimeField(auto_now_add=False)
+    sort_no = models.IntegerField(blank=True, null=True)  # 追加
 
     """ -----file_name属性として作成----- """
     def file_name(self):

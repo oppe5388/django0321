@@ -471,7 +471,8 @@ def read_delete(request, pk):
 #シフト表：下の2に変更？
 def shift(request):
 
-    workshifts = WorkShifts.objects.all().order_by('-created_at')
+    # workshifts = WorkShifts.objects.all().order_by('-created_at')
+    workshifts = WorkShifts.objects.filter(sort_no__isnull=False).order_by('sort_no')
     context = {
         "workshifts":workshifts,
     }
@@ -1076,7 +1077,9 @@ def note_update(request, pk, *args, **kwargs):
 def fax(request, p):
     
     # シフト表
-    workshifts = WorkShifts.objects.all().order_by('-created_at')
+    # workshifts = WorkShifts.objects.all().order_by('-created_at')
+    workshifts = WorkShifts.objects.filter(sort_no__isnull=False).order_by('sort_no')
+
     
     form = FaxCreateForm()
 

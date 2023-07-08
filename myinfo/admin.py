@@ -100,8 +100,9 @@ admin.site.register(ReadStates, ReadStatesAdmin)
 
 
 class WorkShiftsAdmin(admin.ModelAdmin):
-    list_display = ('id', 'file_path', 'created_at')
+    list_display = ('id', 'sort_no', 'file_path', 'created_at')
     ordering = ('-created_at',)
+    list_editable = ('sort_no', 'created_at')
 
 admin.site.register(WorkShifts, WorkShiftsAdmin)
 
