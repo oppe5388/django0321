@@ -1234,7 +1234,8 @@ def fax_edit(request, p):
     user_exist = Room.objects.filter(date=p, user=request.user)
     
     # シフト表
-    workshifts = WorkShifts.objects.all().order_by('-created_at')
+    # workshifts = WorkShifts.objects.all().order_by('-created_at')
+    workshifts = WorkShifts.objects.filter(sort_no__isnull=False).order_by('sort_no')
     
     
     # 発送日をつくる
