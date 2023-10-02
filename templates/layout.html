@@ -610,7 +610,9 @@
         let url = this.getAttribute('href').replace('987654', date);
         window.location.href = url;
     }); {% endcomment %}
-    document.querySelector('#my-link').addEventListener('click', function(event) {
+
+    // ↓my-linkを置いていなかったので中止20231002
+    {% comment %} document.querySelector('#my-link').addEventListener('click', function(event) {
         event.preventDefault();
         let today = new Date();
         let month = String(today.getMonth() + 1).padStart(2, '0');
@@ -619,7 +621,7 @@
         parts[parts.length - 2] = date;
         let url = parts.join('/');
         window.location.href = url;
-    });    
+    });     {% endcomment %}
     </script>
 
 {% block extra_foot %}{% endblock %}
