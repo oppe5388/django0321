@@ -120,11 +120,18 @@
                             <i class="fas fa-check"></i> 既読にする
                         </a> {% endcomment %}
                         
-                        <!-- ajaxで既読に -->
+                        {% comment %} <!-- ajaxで既読に -->
                         <a href="{% url 'myinfo:ajax_read_delete' information.pk %}" id="ajax_read_del{{ information.pk }}" 
                         class="link-delete btn-info badge mr-2" data-catid="{{ information.pk }}">
                             <i class="fas fa-check"></i> 既読にする
+                        </a> {% endcomment %}
+
+                        <!-- ajaxで既読に：はじめは非表示、読み込み後表示用 -->
+                        <a href="{% url 'myinfo:ajax_read_delete' information.pk %}" id="ajax_read_del{{ information.pk }}" 
+                        class="link-delete btn-info badge mr-2" data-catid="{{ information.pk }}" style="display: none;">
+                            <i class="fas fa-check"></i> 既読にする
                         </a>
+
                         {% endif %}
                     {% endfor %}
 
@@ -320,8 +327,9 @@
                     pk: pk
                     }, 
                 success: function(data){
-                    $('#ajax_read_del'+ pk).empty(); // ←消すidを書く
-                    
+                    //$('#ajax_read_del'+ pk).empty(); // ←消すidを書く
+                    $('#ajax_read_del'+ pk).hide();
+
                     // Layout.htmlの未読件数表示をマイナスする
                     var count = parseInt($('#unread_count').text()); // ←未読件数表示のidを書く
                     count -= 1;
@@ -341,6 +349,14 @@
     $(function () {
         $("input[type='search']").eq(1).focus();//2つ目の要素
     });
+
+    //既読にするボタンはページ読み込み後に表示
+    window.onload = function() {
+        var buttons = document.querySelectorAll(".link-delete");
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].style.display = "inline-block";
+        }
+    };
 </script> 
 
 {% endblock %}

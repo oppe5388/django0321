@@ -10,6 +10,8 @@ from django.views.generic import TemplateView
 
 # from filebrowser.sites import site
 
+# from two_factor.urls import urlpatterns as tf_urls
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
@@ -17,7 +19,11 @@ urlpatterns = [
     path('summernote/', include('django_summernote.urls')),
 
     path('myinfo/', include('myinfo.urls')),
+    
     path('', RedirectView.as_view(url='/myinfo/')),
+    # path('', include(tf_urls)),
+    # # path('accounts/', include('two_factor.urls', namespace='two_factor')),
+    
     # path('', include('myinfo.urls')),
 
     path('mysched/', include('mysched.urls')),

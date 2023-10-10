@@ -51,12 +51,22 @@ INSTALLED_APPS = [
     'myprofit',
     'axes',
     'mystell',
+    # 'django_otp',
+    # 'django_otp.plugins.otp_static',
+    # 'django_otp.plugins.otp_totp',
+    # 'django_otp.plugins.otp_email'
+    # 'two_factor',
 ]
 
 #django-axes
 AUTHENTICATION_BACKENDS = [
     'axes.backends.AxesStandaloneBackend',# ←これを先頭に追加
     'django.contrib.auth.backends.ModelBackend',# ←djangoデフォルト
+    # 'two_factor.auth_backends.TwoFactorAuthBackend'
+    # # 'django.contrib.auth.middleware.AuthenticationMiddleware',
+    # # 'django_otp.middleware.OTPMiddleware',
+    # # 'accounts.otp_backend.EmailOTPBackend',# two_factor用に追加
+    # # 'accounts.views.EmailOTPBackend',# two_factor用に追加
 ]
 AXES_META_PRECEDENCE_ORDER = [
     'HTTP_X_FORWARDED_FOR',# nginx等リバースプロキシ用
@@ -77,6 +87,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'mysite.middleware.login_required.LoginRequiredMiddleware', # ←これを追加
     'axes.middleware.AxesMiddleware',   # ミドルウェアも追加。
+    # 'django_otp.middleware.OTPMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -182,6 +193,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/'
+# LOGIN_URL = 'two_factor:login'
+# # LOGIN_REDIRECT_URL = '/accounts/send-otp/'
+# # LOGIN_URL = 'login'
 
 SUMMERNOTE_THEME = 'bs4'
 X_FRAME_OPTOPNS = 'SAMEORIGIN'

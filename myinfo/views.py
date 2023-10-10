@@ -82,6 +82,8 @@ def ajax_read_delete(request, pk, *args, **kwargs):
     if request.is_ajax():
         ReadStates.objects.filter(user=request.user, information=pk).delete()
         return JsonResponse({"message":"success"})
+    else:
+        return JsonResponse({"message":"error"}, status=400)
 
 
 #関数ビューで通知の中間テーブルCreateを作ってみる
@@ -1144,7 +1146,14 @@ def fax_del_create(request, p):
 #Ajaxで小部屋希望追加
 def ajax_room_add(request, p, *args, **kwargs):
     if request.is_ajax():
-        tdatetime = datetime.strptime(p, '%Y-%m-%d')
+        try:
+            tdatetime = datetime.strptime(p, '%Y-%m-%d')
+        except ValueError:
+            return JsonResponse({'message': 'Invalid date format'})
+
+        if not request.user.is_authenticated:
+            return JsonResponse({'message': 'User not authenticated'})
+
         Room.objects.create(user=request.user, date=tdatetime)
         
         room_list = [room.user.last_name for room in Room.objects.filter(date=tdatetime)]
@@ -1153,12 +1162,21 @@ def ajax_room_add(request, p, *args, **kwargs):
             'room_list': room_list,
         }
         return JsonResponse(d)
+    else:
+        return JsonResponse({'message': 'Not an AJAX request'})
 
 
 #Ajaxで小部屋希望削除
 def ajax_room_delete(request, p, *args, **kwargs):
     if request.is_ajax():
-        tdatetime = datetime.strptime(p, '%Y-%m-%d')
+        try:
+            tdatetime = datetime.strptime(p, '%Y-%m-%d')
+        except ValueError:
+            return JsonResponse({'message': 'Invalid date format'})
+
+        if not request.user.is_authenticated:
+            return JsonResponse({'message': 'User not authenticated'})
+
         Room.objects.filter(user=request.user, date=tdatetime).delete()
 
         room_list = [room.user.last_name for room in Room.objects.filter(date=tdatetime)]
@@ -1167,15 +1185,22 @@ def ajax_room_delete(request, p, *args, **kwargs):
             'room_list': room_list,
         }
         return JsonResponse(d)
+    else:
+        return JsonResponse({'message': 'Not an AJAX request'})
     
 
 #FAX当番、Ajaxで前後移動
 def ajax_day_move(request, p, *args, **kwargs):
     if request.is_ajax():
-        # tdatetime = datetime.strptime(p, '%Y-%m-%d')
         dt = request.GET.get('dt')
-        tdatetime = datetime.strptime(dt, '%Y-%m-%d') + relativedelta(days=int(p))
-        
+        try:
+            tdatetime = datetime.strptime(dt, '%Y-%m-%d') + relativedelta(days=int(p))
+        except ValueError:
+            return JsonResponse({'message': 'Invalid date format'})
+
+        if not request.user.is_authenticated:
+            return JsonResponse({'message': 'User not authenticated'})
+
         weekdays = ['月','火','水','木','金','土','日']
         weekday_value = weekdays[tdatetime.weekday()]
         youbidate = tdatetime.strftime('%Y/%m/%d') + '('+ weekday_value + ')'
@@ -1189,17 +1214,19 @@ def ajax_day_move(request, p, *args, **kwargs):
         room_list = [room.user.last_name for room in Room.objects.filter(date=tdatetime)]
         
         # 当番
-        if Fax.objects.filter(date=tdatetime):
-            fax_html = Fax.objects.filter(date=tdatetime).first().html
-            fax_free = Fax.objects.filter(date=tdatetime).first().free
+        fax = Fax.objects.filter(date=tdatetime).first()
+        if fax:
+            fax_html = fax.html
+            fax_free = fax.free
         else:
             fax_html = ''
             fax_free = ''
             
         # 前日
-        if Fax.objects.filter(date=yesterday):
-            yesterday_html = Fax.objects.filter(date=yesterday).first().html
-            yesterday_free = Fax.objects.filter(date=yesterday).first().free
+        yesterday_fax = Fax.objects.filter(date=yesterday).first()
+        if yesterday_fax:
+            yesterday_html = yesterday_fax.html
+            yesterday_free = yesterday_fax.free
         else:
             yesterday_html = ''
             yesterday_free = ''
@@ -1215,6 +1242,8 @@ def ajax_day_move(request, p, *args, **kwargs):
             'yesterday_free': yesterday_free,
         }
         return JsonResponse(d)
+    else:
+        return JsonResponse({'message': 'Not an AJAX request'})
     
     
 #FAX当番

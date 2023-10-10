@@ -21,3 +21,4 @@ requests==2.28.1
 jpbizday==0.0.3
 django-axes
 openpyxl
+# django-two-factor-auth==1.15.5
