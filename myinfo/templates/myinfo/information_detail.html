@@ -23,6 +23,26 @@
 		{% endfor %}
 {% endif %}
 
+<div class="btn-toolbar mb-3">
+    <div class="btn-group ">
+        {% with next=information.get_next_by_updated_at %}
+            {% if next %}
+            <a href="{% url 'myinfo:detail' next.pk %}" class="btn btn-secondary btn-sm">
+                <i class="fas fa-chevron-left"></i> New</a>
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <div class="btn-group ml-auto">
+        {% with prev=information.get_previous_by_updated_at %}
+            {% if prev %}
+                <a href="{% url 'myinfo:detail' prev.pk %}" class="btn btn-secondary btn-sm">
+                Old <i class="fas fa-chevron-right"></i></a>
+            {% endif %}
+        {% endwith %}
+    </div>
+</div>
+
 <!-- 他人の下書きは非表示 -->
 {% if information.is_draft is True and information.user.id != request.user.id %}
 <!-- LD共有だがOPは非表示 -->
@@ -30,9 +50,8 @@
 
 {% else %}
 
-<div class="small mb-2">
+<div class="small mb-1 ml-2">
 {{ information.created_at }}　
-{% comment %} <i class="fas fa-folder-open mr-1"></i>{{ information.category }}　 {% endcomment %}
 {% if information.created_at|date:"Y-m-d" != information.updated_at|date:"Y-m-d" %}
 <i class="fas fa-history"></i>{{ information.updated_at }}　
 {% endif %}
@@ -120,26 +139,6 @@
                     {% endif %}
                 {% endwith %}
             {% endfor %}
-        </div>
-    </div>
-
-    <div class="btn-toolbar">
-        <div class="btn-group ">
-            {% with next=information.get_next_by_updated_at %}
-                {% if next %}
-                <a href="{% url 'myinfo:detail' next.pk %}" class="btn btn-secondary btn-sm">
-                    <i class="fas fa-chevron-left"></i> New</a>
-                {% endif %}
-            {% endwith %}
-        </div>
-
-        <div class="btn-group ml-auto">
-            {% with prev=information.get_previous_by_updated_at %}
-                {% if prev %}
-                    <a href="{% url 'myinfo:detail' prev.pk %}" class="btn btn-secondary btn-sm">
-                    Old <i class="fas fa-chevron-right"></i></a>
-                {% endif %}
-            {% endwith %}
         </div>
     </div>
 
