@@ -66,13 +66,12 @@ def add_fbvform(request):
             for user_instance in staff_users:
                 ReportRead.objects.get_or_create(user=user_instance, report=obj)
 
-                #LDへ通知を作る
-                # onesignals = get_list_or_404(OneSignalUser, user=num)
-                # onesignals = OneSignalUser.objects.filter(user=num)
-                onesignals = OneSignalUser.objects.filter(user=user_instance)
-                if onesignals:
-                    for one in onesignals:
-                        OneSignalUser.push(one,title='日報が作成されました', text=str(obj.day), url=resolve_url('myreport:index'))    
+                # #LDへ通知を作る→届かないPC環境なのでスタッフ権限にした際に中止に
+                # # onesignals = OneSignalUser.objects.filter(user=num)
+                # onesignals = OneSignalUser.objects.filter(user=user_instance)
+                # if onesignals:
+                #     for one in onesignals:
+                #         OneSignalUser.push(one,title='日報が作成されました', text=str(obj.day), url=resolve_url('myreport:index'))    
 
                         
             #LDメール通知
