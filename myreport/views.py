@@ -27,20 +27,21 @@ from django.views.decorators.csrf import csrf_protect
 #ブラウザpushが会社PCで通知されないので、メール通知を作る
 def ld_email_push(title, url):
     """記事をメールで通知"""
-    subject = title 
+    subject = title
     message = url
     from_email = settings.DEFAULT_FROM_EMAIL
-    # recipient_list= []
-    # IDが1から4までのユーザーを取得
-    # users = User.objects.filter(id__in=[1, 2, 3, 4])
     users = User.objects.filter(is_staff=True)
-    # ユーザーのメールアドレスを取得
-    recipient_list= [user.email for user in users]
+    # メールアドレスが存在するユーザーのみを対象にする
+    recipient_list = [user.email for user in users if user.email]
 
-    html_content = '<a href="' + url +'">'+ url +'</a>'
-    msg = EmailMultiAlternatives(subject, message, from_email, recipient_list)
-    msg.attach_alternative(html_content, "text/html")
-    msg.send()
+    if recipient_list:  # 受信者リストが空でない場合のみメールを送信
+        html_content = '<a href="' + url + '">' + url + '</a>'
+        msg = EmailMultiAlternatives(subject, message, from_email, recipient_list)
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
+    else:
+        # メールアドレスが存在しない場合の処理（ログ記録、エラーメッセージ表示など）
+        pass
     
 
 #Create
@@ -65,20 +66,13 @@ def add_fbvform(request):
             for user_instance in staff_users:
                 ReportRead.objects.get_or_create(user=user_instance, report=obj)
 
-                # #LDへ通知を作る
-                # # onesignals = get_list_or_404(OneSignalUser, user=num)
+                #LDへ通知を作る
+                # onesignals = get_list_or_404(OneSignalUser, user=num)
                 # onesignals = OneSignalUser.objects.filter(user=num)
-                # if onesignals:
-                #     for one in onesignals:
-                #         OneSignalUser.push(one,title='日報が作成されました', text=str(obj.day), url=resolve_url('myreport:index'))
-                        
-                # LDへ通知を作る
-                staff_users = User.objects.filter(is_staff=True)
-                for user_instance in staff_users:
-                    onesignals = OneSignalUser.objects.filter(user=user_instance)
-                    if onesignals:
-                        for one in onesignals:
-                            OneSignalUser.push(one, title='日報が作成されました', text=str(obj.day), url=resolve_url('myreport:index'))
+                onesignals = OneSignalUser.objects.filter(user=user_instance)
+                if onesignals:
+                    for one in onesignals:
+                        OneSignalUser.push(one,title='日報が作成されました', text=str(obj.day), url=resolve_url('myreport:index'))    
 
                         
             #LDメール通知
