@@ -87,7 +87,8 @@
 			<i class="fas fa-info-circle"></i> 午後休憩</button>
 		
 		<!-- LD+misono編集ページリンク -->
-		{% if request.user.id == 10 or request.user.id <= 4 %}
+		{% comment %} {% if request.user.id == 10 or request.user.id <= 4 %} {% endcomment %}
+		{% if request.user.is_staff %}
 			{% comment %} <button class="btn btn-secondary btn-sm ml-auto" id="edit_expand"><i class="fas fa-edit fa-xs"></i></button> {% endcomment %}
 			<a href="{% url 'myinfo:fax_edit' p %}" id="editlink" data-catid={{p}} class="btn btn-secondary btn-sm ml-auto">
 				<i class="fas fa-edit fa-xs"></i></a>

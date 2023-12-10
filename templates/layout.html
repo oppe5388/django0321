@@ -230,7 +230,8 @@
                         <span>シフト</span></a>
                 </li>
                 
-                {% if request.user.id <= 4 %}
+                {% comment %} {% if request.user.id <= 4 %} {% endcomment %}
+                {% if request.user.is_staff %}
                 <li class="nav-item">
                     <a class="nav-link py-2" href='{% url 'admin:index' %}' target='_blank'>
                         <i class="fas fa-fw fa-tachometer-alt"></i>

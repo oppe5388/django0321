@@ -32,7 +32,8 @@ def ld_email_push(title, url):
     from_email = settings.DEFAULT_FROM_EMAIL
     # recipient_list= []
     # IDが1から4までのユーザーを取得
-    users = User.objects.filter(id__in=[1, 2, 3, 4])
+    # users = User.objects.filter(id__in=[1, 2, 3, 4])
+    users = User.objects.filter(is_staff=True)
     # ユーザーのメールアドレスを取得
     recipient_list= [user.email for user in users]
 
@@ -54,17 +55,31 @@ def add_fbvform(request):
             obj.user = request.user
             obj.save()
 
-            #ReportReadに追加
-            for num in range(1, 5):
-                user_instance = get_object_or_404(User, pk=num)
+            # #ReportReadに追加
+            # for num in range(1, 5):
+            #     user_instance = get_object_or_404(User, pk=num)
+            #     ReportRead.objects.get_or_create(user=user_instance, report=obj)
+                
+            # ReportReadにスタッフ権限のあるユーザーを追加
+            staff_users = User.objects.filter(is_staff=True)
+            for user_instance in staff_users:
                 ReportRead.objects.get_or_create(user=user_instance, report=obj)
 
-                #LDへ通知を作る
-                # onesignals = get_list_or_404(OneSignalUser, user=num)
-                onesignals = OneSignalUser.objects.filter(user=num)
-                if onesignals:
-                    for one in onesignals:
-                        OneSignalUser.push(one,title='日報が作成されました', text=str(obj.day), url=resolve_url('myreport:index'))
+                # #LDへ通知を作る
+                # # onesignals = get_list_or_404(OneSignalUser, user=num)
+                # onesignals = OneSignalUser.objects.filter(user=num)
+                # if onesignals:
+                #     for one in onesignals:
+                #         OneSignalUser.push(one,title='日報が作成されました', text=str(obj.day), url=resolve_url('myreport:index'))
+                        
+                # LDへ通知を作る
+                staff_users = User.objects.filter(is_staff=True)
+                for user_instance in staff_users:
+                    onesignals = OneSignalUser.objects.filter(user=user_instance)
+                    if onesignals:
+                        for one in onesignals:
+                            OneSignalUser.push(one, title='日報が作成されました', text=str(obj.day), url=resolve_url('myreport:index'))
+
                         
             #LDメール通知
             title1= '日報が作成されました：'+ str(obj.day)
@@ -110,9 +125,14 @@ def edit_fbvform(request, pk, *args, **kwargs):
             obj.user = request.user
             obj.save()
 
-            #ReportReadに追加
-            for num in range(1, 5):
-                user_instance = get_object_or_404(User, pk=num)
+            # #ReportReadに追加
+            # for num in range(1, 5):
+            #     user_instance = get_object_or_404(User, pk=num)
+            #     ReportRead.objects.get_or_create(user=user_instance, report=obj)
+                
+            # ReportReadにスタッフ権限のあるユーザーを追加
+            staff_users = User.objects.filter(is_staff=True)
+            for user_instance in staff_users:
                 ReportRead.objects.get_or_create(user=user_instance, report=obj)
 
             #LDチェック済みを削除
@@ -151,7 +171,8 @@ def detail_fbvform(request, pk):
     
     # 次へ前へボタンのためにLDとOPの場合でわける
     # LD
-    if request.user.id <=4:
+    # if request.user.id <=4:
+    if request.user.is_staff:
         try:
             report = DailyReport.objects.get(pk=pk)
         except DailyReport.DoesNotExist:
@@ -215,7 +236,8 @@ def report_list(request):
     
     # LDと新人で一覧も検索対象も分岐
     # LD
-    if request.user.id <=4:
+    # if request.user.id <=4:
+    if request.user.is_staff:
         # 検索時
         if searchForm.is_valid():
             queryset = DailyReport.objects.all()

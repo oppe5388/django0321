@@ -16,7 +16,8 @@
 {% endif %}
 
 <!-- LDは全員の前へと次へボタン：テンプレートで前後を取得している -->
-{% if request.user.id <= 4 %}
+{% comment %} {% if request.user.id <= 4 %} {% endcomment %}
+{% if request.user.is_staff %}
     <div class="btn-toolbar">
         <div class="btn-group ">
             {% with next=report.get_next_by_day %}
@@ -63,7 +64,8 @@
     </div>
 
     <!-- LDのみ表示 -->
-    {% if request.user.id <= 4 %}
+    {% comment %} {% if request.user.id <= 4 %} {% endcomment %}
+    {% if request.user.is_staff %}
         <!-- 未チェックだったら -->
         {% for read in reportread %}
             {% if request.user.id == read.user.id %}

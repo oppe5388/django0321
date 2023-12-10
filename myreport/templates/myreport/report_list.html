@@ -42,7 +42,8 @@
     {% for report in dailyreports %}
 
         <!-- 本人またはLDのみ -->
-        {% if request.user.id == report.user.id or request.user.id <= 4 %}
+        {% comment %} {% if request.user.id == report.user.id or request.user.id <= 4 %} {% endcomment %}
+        {% if request.user.id == report.user.id or request.user.is_staff %}
             
             <!-- Dropdown Card Example -->
             <div class="card shadow mb-3">
@@ -52,7 +53,8 @@
                     <!-- タイトル -->
                     <h6 class="m-0 font-weight-bold text-primary mr-auto">
                         <!-- LDのみ見る側が未読だったら -->
-                        {% if request.user.id <= 4 %}
+                        {% comment %} {% if request.user.id <= 4 %} {% endcomment %}
+                        {% if request.user.is_staff %}
                             {% for read in read_set %}
                                 {% if report == read.report and request.user.id == read.user.id %}
                                 <div class="badge badge-warning">未読</div>
