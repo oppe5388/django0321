@@ -6,7 +6,6 @@ services:
       context: .
       dockerfile: Dockerfile.prod
     container_name: django2prod
-    restart: unless-stopped
     volumes:
       # - ./:/code:cached
       - ./:/code:consistent
@@ -16,7 +15,7 @@ services:
     expose:
       - 8000
     # command: gunicorn mysite.wsgi:application --bind 0.0.0.0:8000 #これで運用していた
-    command: bash -c "python manage.py migrate && gunicorn mysite.wsgi:application --bind 0.0.0.0:8000 --workers 2 --threads 4 --worker-class gthread --timeout 60 --max-requests 500 --max-requests-jitter 50"
+    command: bash -c "python manage.py migrate && gunicorn mysite.wsgi:application --bind 0.0.0.0:8000"
     depends_on:
       - db
     env_file:
@@ -27,7 +26,6 @@ services:
   db:
     image: postgres:13.5
     container_name: db2prod
-    restart: unless-stopped
     volumes:
       - db-data:/var/lib/postgresql/data
     env_file:
@@ -62,7 +60,6 @@ services:
     # image: jrcs/letsencrypt-nginx-proxy-companion
     image: nginxproxy/acme-companion
     container_name: letsencrypt2prod
-    restart: unless-stopped
     env_file:
       - .env.prod
     volumes:
