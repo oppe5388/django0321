@@ -8,3 +8,4 @@ __pycache
 .env.prod
 /logs/*
 /tmp/
+docker-compose.prod.yml.bak
